@@ -3,4 +3,5 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 
 Current Extensions:
 - [Spanish](./code-spell-checker-spanish)
+- [Medical Terms](./code-spell-checker-medical-terms)
 
