@@ -18,8 +18,7 @@
     ],
     "qna": "marketplace",
     "main": "./out/src/extension",
-    "contributes": {
-    },
+    "contributes": {},
     "extensionDependencies": [
         "streetsidesoftware.code-spell-checker"
     ],
