@@ -8,18 +8,16 @@ After this extension is installed, it is necessary to tell the spell checker to 
 
 ### Enable Dictionary
 
-Commands:
-`F1` `Enable Spanish Spell Checker Dictionary`
-or
-`F1` `Enable Spanish Spell Checker Dictionary in Workspace`
+Commands (use `F1` or *View -> Command Palette...*):
+- `Enable Spanish Spell Checker Dictionary`
+- `Enable Spanish Spell Checker Dictionary in Workspace`
 
 
 ### Disable Dictionary
 
-Commands:
-`F1` `Disable Spanish Spell Checker Dictionary`
-or
-`F1` `Disable Spanish Spell Checker Dictionary in Workspace`
+Commands (use `F1` or *View -> Command Palette...*):
+- `Disable Spanish Spell Checker Dictionary`
+- `Disable Spanish Spell Checker Dictionary in Workspace`
 
 ### Manual Settings
 
