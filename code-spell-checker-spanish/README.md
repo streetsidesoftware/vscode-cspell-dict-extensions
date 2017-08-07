@@ -4,7 +4,26 @@ Imports the Spanish spell checking dictionary for [Code Spell Checker](https://m
 
 ## Installation
 
-After this extension is installed, it is necessary to tell the spell checker to use it. This is done with the `language` setting.
+After this extension is installed, it is necessary to tell the spell checker to use it.
+
+### Enable Dictionary
+
+Commands:
+`F1` `Enable Spanish Spell Checker Dictionary`
+or
+`F1` `Enable Spanish Spell Checker Dictionary in Workspace`
+
+
+### Disable Dictionary
+
+Commands:
+`F1` `Disable Spanish Spell Checker Dictionary`
+or
+`F1` `Disable Spanish Spell Checker Dictionary in Workspace`
+
+### Manual Settings
+
+This is done with the `language` setting.
 
 *Preferences* -> *Settings*
 

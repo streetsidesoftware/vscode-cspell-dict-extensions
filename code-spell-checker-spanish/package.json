@@ -18,7 +18,26 @@
     ],
     "qna": "marketplace",
     "main": "./out/src/extension",
-    "contributes": {},
+    "contributes": {
+        "commands": [
+            {
+                "command": "cSpell.enableSpanish",
+                "title": "Enable Spanish Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpell.disableSpanish",
+                "title": "Disable Spanish Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpell.enableSpanishWorkspace",
+                "title": "Enable Spanish Spell Checker Dictionary in Workspace"
+            },
+            {
+                "command": "cSpell.disableSpanishWorkspace",
+                "title": "Disable Spanish Spell Checker Dictionary in Workspace"
+            }
+        ]
+    },
     "extensionDependencies": [
         "streetsidesoftware.code-spell-checker"
     ],

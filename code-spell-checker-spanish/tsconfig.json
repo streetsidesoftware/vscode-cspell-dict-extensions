@@ -1,15 +1,24 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es6",
         "outDir": "out",
-        "lib": [
-            "es6"
-        ],
         "sourceMap": true,
-        "rootDir": "."
+        "rootDir": ".",
+		"target": "es2015",
+		"moduleResolution": "node",
+		"alwaysStrict": true,
+        "declaration": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"strictNullChecks": true,
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"lib": ["es2015"],
+		"forceConsistentCasingInFileNames": true
     },
     "exclude": [
+        "out",
         "node_modules",
         ".vscode-test"
     ]
