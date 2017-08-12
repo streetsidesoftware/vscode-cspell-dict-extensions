@@ -13,6 +13,13 @@
         "Linters",
         "Other"
     ],
+    "keywords": [
+        "<%= friendlyName %>",
+        "VS Code Extension",
+        "Spelling Checker",
+        "dictionary",
+        "spelling"
+    ],
     "activationEvents": [
         "*"
     ],
