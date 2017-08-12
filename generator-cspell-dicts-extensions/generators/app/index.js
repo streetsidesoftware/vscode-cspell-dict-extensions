@@ -63,7 +63,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'commandName',
         message: 'Base Name for Commands',
-        default: props => title(props.name),
+        default: props => title(props.name).replace(/[^a-z0-9]/gi, '_'),
         when: props => props.addCommands
       },
       {
