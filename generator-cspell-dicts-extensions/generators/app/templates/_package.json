@@ -19,6 +19,26 @@
     "qna": "marketplace",
     "main": "./out/src/extension",
     "contributes": {
+        <% if (addCommands) { %>
+        "commands": [
+            {
+                "command": "cSpellExt_<%= name %>.enable<%= commandName %>",
+                "title": "Enable <%= commandName %> Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_<%= name %>.disable<%= commandName %>",
+                "title": "Disable <%= commandName %> Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_<%= name %>.enable<%= commandName %>Workspace",
+                "title": "Enable <%= commandName %> Spell Checker Dictionary in Workspace"
+            },
+            {
+                "command": "cSpellExt_<%= name %>.disable<%= commandName %>Workspace",
+                "title": "Disable <%= commandName %> Spell Checker Dictionary in Workspace"
+            }
+        ]
+        <% } %>
     },
     "extensionDependencies": [
         "streetsidesoftware.code-spell-checker"

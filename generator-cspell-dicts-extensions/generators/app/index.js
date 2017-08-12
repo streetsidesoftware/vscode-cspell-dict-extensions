@@ -26,7 +26,8 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'name',
         message: 'Your extension dictionary name (i.e. medicalterms)',
-        default: this.options.name || this.appname // Default to current folder name
+        default: this.options.name || this.appname, // Default to current folder name
+        filter: name => name.toLowerCase().replace(/[^a-z0-9-]/g, '-')
       },
       {
         type: 'input',
@@ -53,6 +54,26 @@ module.exports = class extends Generator {
         default: props => `cspell-dict-${props.name}`
       },
       {
+        type: 'confirm',
+        name: 'addCommands',
+        message: 'Add Enable / Disable Commands?',
+        default: false
+      },
+      {
+        type: 'input',
+        name: 'commandName',
+        message: 'Base Name for Commands',
+        default: props => title(props.name),
+        when: props => props.addCommands
+      },
+      {
+        type: 'input',
+        name: 'local',
+        message: 'Language Local (i.e. "en" for English or "fr" for French',
+        default: props => props.dictionarySrc.split('-').pop().slice(0, 2),
+        when: props => props.addCommands
+      },
+      {
         type: 'input',
         name: 'target',
         message: 'Target Directory',
@@ -62,7 +83,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'fullPackageName',
         message: 'NPM Package Name',
-        default: props => `code-spell-checker-${props.name.toLowerCase().replace(/[^a-z0-9-]/g, '-')}`
+        default: props => `code-spell-checker-${props.name}`
       }
     ];
 
