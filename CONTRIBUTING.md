@@ -26,8 +26,12 @@ cd ..
 In the `cspell-dicts` repository root.
 
 ```sh
-yo cspell-dicts <name> <path/to/source/words>
+yo cspell-dicts <name> 
 ```
+
+##### Example
+
+
 
 Yeoman will ask you a series of questions:
 
