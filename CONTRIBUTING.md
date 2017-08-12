@@ -44,7 +44,7 @@ friendly name | this is the friendly name, like `Swedish`
 display name | this is the name shown on the VS Code Extensions page.
 description | short description of the extension.
 Source Dictionary | This is the NPM install name of the source dictionary
-Add Enable / Disable Commands | This is used for adding helper commands for human language locals like `fr` for French.
+Add Enable / Disable Commands | This is used for adding helper commands for human language locals like `fr` for French. This option is not necessary for word lists like `companies` or programming languages.
 Base Name For Commands | This is added as a suffix onto the command names.
 Language Local | This is the two letter language code supported by the dictionary included in the `Source Dictionary` step.
 Target Directory | Where to create the extension
