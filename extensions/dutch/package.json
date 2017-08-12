@@ -1,0 +1,78 @@
+{
+    "name": "code-spell-checker-dutch",
+    "description": "Dutch / Nederlands dictionary extension for VS Code.",
+    "version": "0.1.0",
+    "displayName": "Dutch - Code Spell Checker",
+    "icon": "images/SpellCheck.png",
+    "preview": true,
+    "publisher": "streetsidesoftware",
+    "engines": {
+        "vscode": "^1.14.0"
+    },
+    "categories": [
+        "Linters",
+        "Other"
+    ],
+    "keywords": [
+        "Dutch",
+        "Nederlands",
+        "dictionary",
+        "spelling"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "qna": "marketplace",
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "cSpellExt_dutch.enableDutch",
+                "title": "Enable Dutch Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_dutch.disableDutch",
+                "title": "Disable Dutch Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_dutch.enableDutchWorkspace",
+                "title": "Enable Dutch Spell Checker Dictionary in Workspace"
+            },
+            {
+                "command": "cSpellExt_dutch.disableDutchWorkspace",
+                "title": "Disable Dutch Spell Checker Dictionary in Workspace"
+            }
+        ]
+    },
+    "extensionDependencies": [
+        "streetsidesoftware.code-spell-checker"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions"
+    },
+    "bugs": {
+        "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions/issues"
+    },
+    "license": "MIT",
+    "scripts": {
+        "clean": "rimraf out",
+        "clean-build": "npm run clean && npm run build",
+        "vscode:prepublish": "npm run build",
+        "build": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.32",
+        "@types/node": "^6.0.40",
+        "mocha": "^3.5.0",
+        "rimraf": "^2.6.1",
+        "typescript": "^2.4.2",
+        "vscode": "^1.1.4"
+    },
+    "dependencies": {
+        "cspell-dict-nl-nl": "^1.0.8"
+    }
+}
