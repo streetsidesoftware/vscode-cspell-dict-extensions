@@ -51,14 +51,24 @@ module.exports = class extends Generator {
         name: 'dictionarySrc',
         message: 'Source cspell-dicts Dictionary NPM name. To be installed.',
         default: props => `cspell-dict-${props.name}`
+      },
+      {
+        type: 'input',
+        name: 'target',
+        message: 'Target Directory',
+        default: props => `extensions/${props.name}`
+      },
+      {
+        type: 'input',
+        name: 'fullPackageName',
+        message: 'NPM Package Name',
+        default: props => `code-spell-checker-${props.name.toLowerCase().replace(/[^a-z0-9-]/g, '-')}`
       }
     ];
 
     return this.prompt(prompts).then(props => {
-      props.packageName = props.name.toLowerCase().replace(/[^a-z0-9-]/g, '-');
-      props.fullPackageName = 'code-spell-checker-' + props.packageName;
-
-      this.props = Object.assign({}, props);
+      this.props = props;
+      return props;
     });
   }
 
@@ -71,10 +81,10 @@ module.exports = class extends Generator {
       'LICENSE'
     ];
     const filesToCopy = [
-      ['.vscode/**', '.vscode'],
+      ['.vscode', '.vscode'],
       ['.vscode-test', '.vscode-test'],
-      ['images/**', 'images'],
-      ['test/**', 'test'],
+      ['images', 'images'],
+      ['test', 'test'],
       '.gitignore',
       '.vscodeignore',
       'tsconfig.json',
@@ -102,7 +112,7 @@ module.exports = class extends Generator {
   }
 
   default() {
-    const dstDir = path.join('extensions', this.props.name);
+    const dstDir = this.props.target;
     if (path.basename(this.destinationPath()) !== this.props.name) {
       this.log(
         'Creating Folder: ' + this.props.name
@@ -113,14 +123,14 @@ module.exports = class extends Generator {
   }
 
   install() {
+    if (this.props.dictionarySrc) {
+      this.npmInstall(this.props.dictionarySrc, {save: true});
+    }
     this.installDependencies({
       npm: true,
       bower: false,
       yarn: false,
       callback: () => {
-        if (this.props.dictionarySrc) {
-          this.spawnCommand('npm', ['install', '-S', this.props.dictionarySrc]);
-        }
         this.spawnCommand('npm', ['run', 'build']);
       }
     });
