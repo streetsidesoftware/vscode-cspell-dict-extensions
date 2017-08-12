@@ -69,7 +69,7 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'local',
-        message: 'Language Local (i.e. "en" for English or "fr" for French',
+        message: 'Language Local (i.e. "en" for English or "fr" for French)',
         default: props => props.dictionarySrc.split('-').pop().slice(0, 2),
         when: props => props.addCommands
       },
