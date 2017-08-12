@@ -30,6 +30,7 @@
     "bugs": {
         "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions/issues"
     },
+    "license": "MIT",
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
