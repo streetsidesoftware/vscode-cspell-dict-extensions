@@ -29,7 +29,7 @@ This is done with the `language` setting.
 
 *Preferences* -> *Settings*
 
-Adding `ru` to the `cSpell.language` setting, will enable the Spanish dictionary.
+Adding `ru` to the `cSpell.language` setting, will enable the Russian dictionary.
 Example using both English and Russian dictionaries:
 ```javascript
 "cSpell.language": "en,ru",
