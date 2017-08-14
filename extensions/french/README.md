@@ -29,7 +29,7 @@ This is done with the `language` setting.
 
 *Preferences* -> *Settings*
 
-Adding `fr` to the `cSpell.language` setting, will enable the Spanish dictionary.
+Adding `fr` to the `cSpell.language` setting, will enable the French dictionary.
 Example using both English and French dictionaries:
 ```javascript
 "cSpell.language": "en,fr",
