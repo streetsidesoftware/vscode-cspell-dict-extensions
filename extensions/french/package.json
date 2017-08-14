@@ -67,6 +67,6 @@
         "vscode": "^1.1.4"
     },
     "dependencies": {
-        "cspell-dict-fr-fr": "^1.0.6"
+        "cspell-dict-fr-fr": "^1.0.7"
     }
 }
