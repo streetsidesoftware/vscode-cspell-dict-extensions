@@ -1,5 +1,5 @@
 # Change Log
-All notable changes to the "code-spell-checker-spanish" extension will be documented in this file.
+All notable changes to the "code-spell-checker-dutch" extension will be documented in this file.
 
 ## [Unreleased]
 - Initial release

@@ -29,8 +29,8 @@ This is done with the `language` setting.
 
 *Preferences* -> *Settings*
 
-Adding `nl` to the `cSpell.language` setting, will enable the Spanish dictionary.
-Example using both English and Dutch / Nederlands dictionaries:
+Adding `nl` to the `cSpell.language` setting, will enable the Dutch dictionary.
+Example using both English and Dutch dictionaries:
 ```javascript
 "cSpell.language": "en,nl",
 ```
