@@ -29,7 +29,7 @@ This is done with the `language` setting.
 
 *Preferences* -> *Settings*
 
-Adding `sv` to the `cSpell.language` setting, will enable the Spanish dictionary.
+Adding `sv` to the `cSpell.language` setting, will enable the Swedish dictionary.
 Example using both English and Swedish dictionaries:
 ```javascript
 "cSpell.language": "en,sv",
