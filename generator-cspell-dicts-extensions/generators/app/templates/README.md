@@ -29,7 +29,7 @@ This is done with the `language` setting.
 
 *Preferences* -> *Settings*
 
-Adding `<%= local %>` to the `cSpell.language` setting, will enable the Spanish dictionary.
+Adding `<%= local %>` to the `cSpell.language` setting, will enable the <%= commandName %> dictionary.
 Example using both English and <%= friendlyName %> dictionaries:
 ```javascript
 "cSpell.language": "en,<%= local %>",
