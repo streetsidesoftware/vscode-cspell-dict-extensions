@@ -26,7 +26,7 @@ cd ..
 In the `vscode-cspell-dict-extensions` repository root.
 
 ```sh
-yo cspell-dicts-extensions <name>
+yo cspell-dict-extensions <name>
 ```
 
 ##### Example Answers for Swedish
