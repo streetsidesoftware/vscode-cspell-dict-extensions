@@ -1,7 +1,7 @@
 {
     "name": "code-spell-checker-russian",
     "description": "Russian dictionary extension for VS Code.",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "displayName": "Russian - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "preview": true,
@@ -67,6 +67,6 @@
         "vscode": "^1.1.4"
     },
     "dependencies": {
-        "cspell-dict-ru_ru": "^1.1.2"
+        "cspell-dict-russian": "^1.1.3"
     }
 }

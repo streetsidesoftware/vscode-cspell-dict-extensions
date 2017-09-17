@@ -2,7 +2,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import * as dict from 'cspell-dict-ru_ru';
+import * as dict from 'cspell-dict-russian';
 
 interface CodeSpellCheckerExtension {
     registerConfig(path: string): Promise<void>;
@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
         });
     }
 
-    
+
     function enableRussian(isGlobal: boolean) {
         extension && extension.activate().then(ext => {
             ext && ext.enableLocal && ext.enableLocal(isGlobal, local);
@@ -51,7 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_russian.enableRussianWorkspace', () => enableRussian(false)),
         vscode.commands.registerCommand('cSpellExt_russian.disableRussianWorkspace', () => disableRussian(false)),
     );
-    
+
 }
 
 // this method is called when your extension is deactivated
