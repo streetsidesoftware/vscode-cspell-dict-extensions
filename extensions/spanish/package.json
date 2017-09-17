@@ -3,7 +3,7 @@
     "displayName": "Spanish - Code Spell Checker",
     "description": "Spanish Add-On for Code Spell Checker",
     "icon": "images/SpellCheck.png",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "preview": false,
     "publisher": "streetsidesoftware",
     "engines": {
@@ -58,14 +58,14 @@
         "test": "node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.40",
-        "mocha": "^3.5.0",
-        "rimraf": "^2.6.1",
-        "typescript": "^2.4.2",
-        "vscode": "^1.1.4"
+        "@types/mocha": "^2.2.43",
+        "@types/node": "^6.0.88",
+        "mocha": "^3.5.3",
+        "rimraf": "^2.6.2",
+        "typescript": "^2.5.2",
+        "vscode": "^1.1.5"
     },
     "dependencies": {
-        "cspell-dict-es-es": "^1.0.4"
+        "cspell-dict-es-es": "^1.0.5"
     }
 }
