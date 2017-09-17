@@ -67,6 +67,7 @@
         "vscode": "^1.1.4"
     },
     "dependencies": {
+        "cspell-dict-ru_ru": "^1.1.3",
         "cspell-dict-russian": "^1.1.3"
     }
 }
