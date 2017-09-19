@@ -27,9 +27,10 @@ export function activate(context: vscode.ExtensionContext) {
         extension.activate().then(ext => {
             const path = dict.getConfigLocation();
             // We need to register the dictionary configuration with the Code Spell Checker Extension
-            ext && ext.registerConfig
-            && ext.registerConfig(path)
-            && ext.registerConfig(dictRussian.getConfigLocation());
+            if (ext && ext.registerConfig) {
+                ext.registerConfig(path);
+                ext.registerConfig(dictRussian.getConfigLocation());
+            }
         });
     }
 
