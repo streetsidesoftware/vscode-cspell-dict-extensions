@@ -13,15 +13,16 @@ After this extension is installed, it is necessary to tell the spell checker to 
 ### Enable Dictionary
 
 Commands (use `F1` or *View -> Command Palette...*):
-- `Enable French Spell Checker Dictionary`
-- `Enable French Spell Checker Dictionary in Workspace`
-
+- `F1` `Show Spell Checker Configuration Info`
+- Select the `Language` tab.
+- Enable the language Globally or in just the Workspace.
 
 ### Disable Dictionary
 
 Commands (use `F1` or *View -> Command Palette...*):
-- `Disable French Spell Checker Dictionary`
-- `Disable French Spell Checker Dictionary in Workspace`
+- `F1` `Show Spell Checker Configuration Info`
+- Select the `Language` tab.
+- Disable the language Globally or in just the Workspace.
 
 ### Manual Settings
 
