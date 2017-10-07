@@ -1,7 +1,7 @@
 {
     "name": "code-spell-checker-dutch",
     "description": "Dutch / Nederlands dictionary extension for VS Code.",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "displayName": "Dutch - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "preview": true,
@@ -66,13 +66,13 @@
     },
     "devDependencies": {
         "@types/mocha": "^2.2.43",
-        "@types/node": "^6.0.88",
+        "@types/node": "^6.0.89",
         "mocha": "^3.5.3",
         "rimraf": "^2.6.2",
         "typescript": "^2.5.3",
         "vscode": "^1.1.5"
     },
     "dependencies": {
-        "cspell-dict-nl-nl": "^1.0.9"
+        "cspell-dict-nl-nl": "^1.0.10"
     }
 }
