@@ -8,7 +8,6 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [French](./extensions/french)
 - [Russian](./extensions/russian)
 - [Swedish](./extensions/swedish)
+- [Catalan](./extensions/catalan)
 
 ## Contributing
-
-
