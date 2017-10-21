@@ -5,7 +5,6 @@ Catalan dictionary extension for VS Code.
 Imports the Catalan spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 
-
 ## Installation
 
 After this extension is installed, it is necessary to tell the spell checker to use it.
@@ -36,7 +35,9 @@ Example using both English and Catalan dictionaries:
 "cSpell.language": "en,ca",
 ```
 
-
-
 ## Requirements
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+## Contributors
+
+- [Jordi Olivares Provencio](https://github.com/jordiolivares)

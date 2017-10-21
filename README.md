@@ -11,3 +11,8 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Catalan](./extensions/catalan)
 
 ## Contributing
+See [CONTRIBUTING.MD](CONTRIBUTING.MD)
+
+## Contributors
+
+- *Catalan* [Jordi Olivares Provencio](https://github.com/jordiolivares)

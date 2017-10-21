@@ -33,8 +33,6 @@ yo cspell-dict-extensions <name>
 
 ![Swedish Generation Example](./images/example-yo.png)
 
-
-
 Yeoman will ask you a series of questions:
 
 Field | Description
