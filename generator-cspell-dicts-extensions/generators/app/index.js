@@ -103,7 +103,6 @@ module.exports = class extends Generator {
     ];
     const filesToCopy = [
       ['.vscode', '.vscode'],
-      ['.vscode-test', '.vscode-test'],
       ['images', 'images'],
       ['test', 'test'],
       '.gitignore',
