@@ -15,4 +15,4 @@ See [CONTRIBUTING.MD](CONTRIBUTING.md)
 
 ## Contributors
 
-- *Catalan* [Jordi Olivares Provencio](https://github.com/jordiolivares)
+- *Catalan* - [Jordi Olivares Provencio](https://github.com/jordiolivares)
