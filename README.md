@@ -9,6 +9,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Russian](./extensions/russian)
 - [Swedish](./extensions/swedish)
 - [Catalan](./extensions/catalan)
+- [Czech](./extensions/czech)
 
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md)
@@ -16,3 +17,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 ## Contributors
 
 - *Catalan* - [Jordi Olivares Provencio](https://github.com/jordiolivares)
+- *Czech* - [Zereges](https://github.com/Zereges)
