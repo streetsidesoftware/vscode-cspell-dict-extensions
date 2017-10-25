@@ -4,8 +4,6 @@ Czech dictionary extension for VS Code.
 
 Imports the Czech spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
-
-
 ## Installation
 
 After this extension is installed, it is necessary to tell the spell checker to use it.
@@ -36,7 +34,9 @@ Example using both English and Czech dictionaries:
 "cSpell.language": "en,cs",
 ```
 
-
-
 ## Requirements
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+## Contributors
+- [Zereges](https://github.com/Zereges)
+
