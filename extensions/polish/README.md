@@ -4,8 +4,6 @@ Polish dictionary extension for VS Code.
 
 Imports the Polish spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
-
-
 ## Installation
 
 After this extension is installed, it is necessary to tell the spell checker to use it.
@@ -35,8 +33,6 @@ Example using both English and Polish dictionaries:
 ```javascript
 "cSpell.language": "en,pl",
 ```
-
-
 
 ## Requirements
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
