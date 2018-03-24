@@ -36,7 +36,9 @@ Example using both English and Ukrainian dictionaries:
 "cSpell.language": "en,uk",
 ```
 
-
-
 ## Requirements
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+## Contributors
+
+- [Ihor Oleksandrov](https://github.com/ihodev)
