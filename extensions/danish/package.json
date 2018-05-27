@@ -74,6 +74,6 @@
         "vscode": "^1.1.18"
     },
     "dependencies": {
-        "cspell-dict-da-dk": "^1.0.4"
+        "cspell-dict-da-dk": "^1.0.5"
     }
 }

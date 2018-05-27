@@ -11,6 +11,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Catalan](./extensions/catalan)
 - [Czech](./extensions/czech)
 - [Polish](./extensions/polish)
+- [Danish](./extensions/danish)
 
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md)
@@ -20,3 +21,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - *Catalan* - [Jordi Olivares Provencio](https://github.com/jordiolivares)
 - *Czech* - [Zereges](https://github.com/Zereges)
 - *Polish* - [Jackens](https://github.com/jackens)
+- *Danish* - [viktorstrate](https://github.com/viktorstrate)
