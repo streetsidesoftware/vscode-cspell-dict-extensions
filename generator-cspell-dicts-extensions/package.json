@@ -19,8 +19,8 @@
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-xo-space": "^0.18.0",
-    "jest": "^22.4.4",
-    "jest-cli": "^22.4.4",
+    "jest": "^23.0.0",
+    "jest-cli": "^23.0.0",
     "nsp": "^3.2.1",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^1.7.2"
