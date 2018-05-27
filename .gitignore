@@ -58,3 +58,6 @@ typings/
 .env
 
 **/.vscode-test
+
+# Mac
+.DS_Store
