@@ -1,0 +1,79 @@
+{
+    "name": "code-spell-checker-hebrew",
+    "description": "Hebrew dictionary extension for VS Code.",
+    "version": "0.1.0",
+    "displayName": "Hebrew - Code Spell Checker",
+    "icon": "images/SpellCheck.png",
+    "preview": true,
+    "publisher": "streetsidesoftware",
+    "engines": {
+        "vscode": "^1.14.0"
+    },
+    "categories": [
+        "Linters",
+        "Other"
+    ],
+    "keywords": [
+        "Hebrew",
+        "VS Code Extension",
+        "Spelling Checker",
+        "dictionary",
+        "spelling"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "qna": "marketplace",
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "cSpellExt_hebrew.enableHebrew",
+                "title": "Enable Hebrew Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_hebrew.disableHebrew",
+                "title": "Disable Hebrew Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_hebrew.enableHebrewWorkspace",
+                "title": "Enable Hebrew Spell Checker Dictionary in Workspace"
+            },
+            {
+                "command": "cSpellExt_hebrew.disableHebrewWorkspace",
+                "title": "Disable Hebrew Spell Checker Dictionary in Workspace"
+            }
+        ]
+    },
+    "extensionDependencies": [
+        "streetsidesoftware.code-spell-checker"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions"
+    },
+    "bugs": {
+        "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions/issues"
+    },
+    "license": "MIT",
+    "scripts": {
+        "clean": "rimraf out",
+        "clean-build": "npm run clean && npm run build",
+        "vscode:prepublish": "npm run build",
+        "build": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^5.2.0",
+        "@types/node": "^8.10.17",
+        "mocha": "^5.2.0",
+        "rimraf": "^2.6.1",
+        "typescript": "^2.8.3",
+        "vscode": "^1.1.18"
+    },
+    "dependencies": {
+        "cspell-dict-he": "^1.0.0"
+    }
+}
