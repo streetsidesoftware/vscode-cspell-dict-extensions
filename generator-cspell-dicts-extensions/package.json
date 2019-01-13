@@ -17,18 +17,12 @@
     "yeoman-generator"
   ],
   "devDependencies": {
-    "eslint": "^4.19.1",
-    "eslint-config-xo-space": "^0.18.0",
-    "jest": "^23.0.0",
-    "jest-cli": "^23.0.0",
-    "nsp": "^3.2.1",
-    "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^1.7.2"
+    "jest": "^23.6.0"
   },
   "dependencies": {
-    "chalk": "^2.4.1",
+    "chalk": "^2.4.2",
     "mkdirp": "^0.5.1",
-    "yeoman-generator": "^2.0.5",
+    "yeoman-generator": "^3.2.0",
     "yosay": "^2.0.2"
   },
   "jest": {
