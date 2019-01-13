@@ -1,0 +1,72 @@
+{
+  "name": "code-spell-checker-fullstack",
+  "displayName": "Fullstack - Code Spell Checker",
+  "description": "Fullstack dictionary extension for VS Code.",
+  "icon": "images/SpellCheck.png",
+  "publisher": "rbalet",
+  "author": "Raphaël Balet (ultrastark.ch)",
+  "version": "0.0.4",
+  "engines": {
+    "vscode": "^1.30.0"
+  },
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_fullstack.enableFullstack",
+        "title": "Enable Fullstack Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_fullstack.disableFullstack",
+        "title": "Disable Fullstack Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_fullstack.enableFullstackWorkspace",
+        "title": "Enable Fullstack Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_fullstack.disableFullstackWorkspace",
+        "title": "Disable Fullstack Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^6.0.88",
+    "mocha": "^5.2.0",
+    "rimraf": "^2.6.2",
+    "typescript": "^2.5.3",
+    "vscode": "^1.1.5"
+  },
+  "dependencies": {
+    "cspell-dict-fullstack": "^1.0.3"
+  }
+}
