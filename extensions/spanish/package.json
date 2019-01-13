@@ -59,13 +59,13 @@
     },
     "devDependencies": {
         "@types/mocha": "^5.2.5",
-        "@types/node": "^8.10.21",
+        "@types/node": "^8.10.39",
         "mocha": "^5.2.0",
-        "rimraf": "^2.6.2",
-        "typescript": "^2.9.2",
-        "vscode": "^1.1.18"
+        "rimraf": "^2.6.3",
+        "typescript": "^3.2.2",
+        "vscode": "^1.1.26"
     },
     "dependencies": {
-        "cspell-dict-es-es": "^1.0.5"
+        "cspell-dict-es-es": "^1.0.10"
     }
 }
