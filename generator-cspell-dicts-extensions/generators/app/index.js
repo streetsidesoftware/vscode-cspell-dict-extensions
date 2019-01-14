@@ -95,7 +95,7 @@ module.exports = class extends Generator {
 
   writing() {
     const files = [
-      ['_package.json', 'package.json'],
+      'package.json',
       'README.md',
       'CHANGELOG.md',
       'src/extension.ts',
@@ -146,6 +146,7 @@ module.exports = class extends Generator {
     if (this.props.dictionarySrc) {
       this.npmInstall(this.props.dictionarySrc, {save: true});
     }
+
     this.installDependencies({
       npm: true,
       bower: false,
