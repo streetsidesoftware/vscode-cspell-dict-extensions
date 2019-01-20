@@ -5,7 +5,7 @@
   "icon": "images/SpellCheck.png",
   "publisher": "rbalet",
   "author": "Raphaël Balet (ultrastark.ch)",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.30.0"
   },
@@ -67,6 +67,6 @@
     "vscode": "^1.1.5"
   },
   "dependencies": {
-    "cspell-dict-fullstack": "^1.0.3"
+    "cspell-dict-fullstack": "^1.0.4"
   }
 }

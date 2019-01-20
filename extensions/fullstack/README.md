@@ -1,8 +1,8 @@
-# French - Code Spell Checker
+# Fullstack - Code Spell Checker
 
-fullstack ipsum dictionary extension for VS Code.
+fullstack dictionary extension for VS Code.
 
-Imports the fullstack ipsum spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the fullstack spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
