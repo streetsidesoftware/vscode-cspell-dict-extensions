@@ -1,6 +1,11 @@
 {
+	"private": true,
+	"scripts": {
+		"test": "npx lerna run --concurrency 1 test",
+		"build": "npx lerna run build"
+	},
 	"devDependencies": {
-		"lerna": "^3.10.5"
+		"lerna": "^3.11.0"
 	},
 	"name": "vscode-cspell-dict-extensions"
 }

@@ -43,8 +43,8 @@
         "@types/node": "^8.10.39",
         "mocha": "^5.2.0",
         "rimraf": "^2.6.3",
-        "typescript": "^3.2.2",
-        "vscode": "^1.1.26"
+        "typescript": "^3.3.3",
+        "vscode": "^1.1.29"
     },
     "dependencies": {
         "cspell-dict-medicalterms": "^1.0.8"
