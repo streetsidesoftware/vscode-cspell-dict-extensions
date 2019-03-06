@@ -1,4 +1,4 @@
-# French - Code Spell Checker
+# Lorem ipsum - Code Spell Checker
 
 Lorem ipsum dictionary extension for VS Code.
 
@@ -35,6 +35,7 @@ Example using both English and Lorem ipsum dictionaries:
 
 ```javascript
 "cSpell.language": "en,lorem",
+  "cSpell.languageSettings": [{ "languageId": "*", "dictionaries": ["lorem"] }],
 ```
 
 ## Requirements

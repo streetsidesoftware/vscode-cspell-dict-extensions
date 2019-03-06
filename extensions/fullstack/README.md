@@ -35,6 +35,7 @@ Example using both English and fullstack ipsum dictionaries:
 
 ```javascript
 "cSpell.language": "en,fullstack",
+  "cSpell.languageSettings": [{ "languageId": "*", "dictionaries": ["fullstack"] }],
 ```
 
 ## Requirements

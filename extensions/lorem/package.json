@@ -5,7 +5,7 @@
   "icon": "images/SpellCheck.png",
   "publisher": "rbalet",
   "author": "Raphaël Balet (ultrastark.ch)",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "engines": {
     "vscode": "^1.30.0"
   },
@@ -64,7 +64,7 @@
     "mocha": "^5.2.0",
     "rimraf": "^2.6.2",
     "typescript": "^2.5.3",
-    "vscode": "^1.1.5"
+    "vscode": "^1.1.29"
   },
   "dependencies": {
     "cspell-dict-lorem-ipsum": "^1.0.4"

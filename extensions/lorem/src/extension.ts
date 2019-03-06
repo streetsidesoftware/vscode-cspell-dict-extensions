@@ -1,26 +1,60 @@
+'use strict'
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as dict from 'cspell-dict-lorem-ipsum'
+import * as vscode from 'vscode'
+
+interface CodeSpellCheckerExtension {
+  registerConfig(path: string): Promise<void>
+  enableLocal(isGlobal: boolean, local: string): Promise<void>
+  disableLocal(isGlobal: boolean, local: string): Promise<void>
+}
+
+const local = 'lorem'
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
+  const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker'
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-		console.log('Congratulations, your extension "code-spell-checker-lorem" is now active!');
+  const extension = vscode.extensions.getExtension<CodeSpellCheckerExtension>(
+    vscodeSpellCheckerExtension,
+  )
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
+  if (extension) {
+    extension.activate().then((ext) => {
+      const path = dict.getConfigLocation()
+      // We need to register the dictionary configuration with the Code Spell Checker Extension
+      ext && ext.registerConfig && ext.registerConfig(path)
+    })
+  }
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
-	});
+  function enableLorem(isGlobal: boolean) {
+    extension &&
+      extension.activate().then((ext) => {
+        ext && ext.enableLocal && ext.enableLocal(isGlobal, local)
+      })
+  }
 
-	context.subscriptions.push(disposable);
+  function disableLorem(isGlobal: boolean) {
+    extension &&
+      extension.activate().then((ext) => {
+        ext && ext.disableLocal && ext.disableLocal(isGlobal, local)
+      })
+  }
+
+  // Push the disposable to the context's subscriptions so that the
+  // client can be deactivated on extension deactivation
+  context.subscriptions.push(
+    vscode.commands.registerCommand('cSpellExt_lorem.enableLorem', () => enableLorem(true)),
+    vscode.commands.registerCommand('cSpellExt_lorem.disableLorem', () => disableLorem(true)),
+    vscode.commands.registerCommand('cSpellExt_lorem.enableLoremWorkspace', () =>
+      enableLorem(false),
+    ),
+    vscode.commands.registerCommand('cSpellExt_lorem.disableLoremWorkspace', () =>
+      disableLorem(false),
+    ),
+  )
 }
 
 // this method is called when your extension is deactivated
