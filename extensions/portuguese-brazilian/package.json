@@ -65,14 +65,6 @@
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
     },
-    "devDependencies": {
-        "@types/mocha": "^5.2.5",
-        "@types/node": "^8.10.39",
-        "mocha": "^5.2.0",
-        "rimraf": "^2.6.3",
-        "typescript": "^3.3.3",
-        "vscode": "^1.1.29"
-    },
     "dependencies": {
         "cspell-dict-pt-br": "^1.0.7"
     }
