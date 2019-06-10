@@ -1,9 +1,9 @@
 {
 	"private": true,
 	"scripts": {
-		"test": "npx lerna run --concurrency 1 test",
+		"test": "lerna run --concurrency 1 test",
 		"postinstall": "node ./node_modules/vscode/bin/install && lerna bootstrap",
-		"build": "npx lerna run build"
+		"build": "lerna run build"
 	},
 	"engines": {
 		"vscode": "^1.33.0"
@@ -11,28 +11,12 @@
 	"devDependencies": {
 		"@types/mocha": "^5.2.5",
 		"@types/node": "^10.14.8",
-		"lerna": "^3.14.1",
+		"lerna": "^3.15.0",
 		"mocha": "^6.1.4",
 		"rimraf": "^2.6.3",
 		"typescript": "^3.5.1",
 		"vscode": "^1.1.34"
 	},
 	"name": "vscode-cspell-dict-extensions",
-	"dependencies": {
-		"code-spell-checker-catalan": "file:extensions/catalan",
-		"code-spell-checker-czech": "file:extensions/czech",
-		"code-spell-checker-danish": "file:extensions/danish",
-		"code-spell-checker-dutch": "file:extensions/dutch",
-		"code-spell-checker-french": "file:extensions/french",
-		"code-spell-checker-german": "file:extensions/german",
-		"code-spell-checker-medical-terms": "file:extensions/medical-terms",
-		"code-spell-checker-polish": "file:extensions/polish",
-		"code-spell-checker-portuguese": "file:extensions/portuguese",
-		"code-spell-checker-portuguese-brazilian": "file:extensions/portuguese-brazilian",
-		"code-spell-checker-russian": "file:extensions/russian",
-		"code-spell-checker-spanish": "file:extensions/spanish",
-		"code-spell-checker-swedish": "file:extensions/swedish",
-		"code-spell-checker-turkish": "file:extensions/turkish",
-		"code-spell-checker-ukrainian": "file:extensions/ukrainian"
-	}
+	"dependencies": {}
 }
