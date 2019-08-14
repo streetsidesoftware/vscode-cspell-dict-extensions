@@ -1,8 +1,9 @@
 {
+	"name": "vscode-cspell-dict-extensions",
 	"private": true,
 	"scripts": {
 		"test": "lerna run --concurrency 1 test",
-		"postinstall": "node ./node_modules/vscode/bin/install && lerna bootstrap",
+		"postinstall": "lerna bootstrap",
 		"build": "lerna run build"
 	},
 	"engines": {
@@ -11,12 +12,11 @@
 	"devDependencies": {
 		"@types/mocha": "^5.2.5",
 		"@types/node": "^10.14.15",
+		"@types/vscode": "^1.37.0",
 		"lerna": "^3.16.4",
 		"mocha": "^6.2.0",
 		"rimraf": "^2.7.0",
-		"typescript": "^3.5.3",
-		"vscode": "^1.1.36"
+		"typescript": "^3.5.3"
 	},
-	"name": "vscode-cspell-dict-extensions",
 	"dependencies": {}
 }
