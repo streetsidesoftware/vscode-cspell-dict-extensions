@@ -66,6 +66,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-de-de": "^1.1.12"
+        "cspell-dict-de-de": "^1.1.16"
     }
 }
