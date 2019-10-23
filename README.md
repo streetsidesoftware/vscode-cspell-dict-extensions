@@ -12,6 +12,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Czech](./extensions/czech)
 - [Polish](./extensions/polish)
 - [Danish](./extensions/danish)
+- [Italian](./extensions/italian)
 
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md)
