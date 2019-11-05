@@ -1,7 +1,7 @@
 {
     "name": "code-spell-checker-danish",
     "description": "Danish dictionary extension for VS Code.",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "displayName": "Danish - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "preview": true,
@@ -66,6 +66,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-da-dk": "^1.0.13"
+        "cspell-dict-da-dk": "^1.0.16"
     }
 }
