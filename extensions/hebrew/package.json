@@ -1,7 +1,7 @@
 {
     "name": "code-spell-checker-hebrew",
     "description": "Hebrew dictionary extension for VS Code.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "displayName": "Hebrew - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "preview": true,
@@ -10,7 +10,9 @@
     "engines": {
         "vscode": "^1.41.0"
     },
-    "extensionKind": ["workspace"],
+    "extensionKind": [
+        "workspace"
+    ],
     "categories": [
         "Linters",
         "Other"
@@ -67,7 +69,6 @@
         "watch": "tsc -watch -p ./",
         "test": "node ../../node_modules/vscode/bin/test"
     },
-    "devDependencies": {},
     "dependencies": {
         "cspell-dict-he": "^1.0.11"
     }
