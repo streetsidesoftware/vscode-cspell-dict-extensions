@@ -33,6 +33,10 @@
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
+        "preversion": "echo preversion",
+        "postversion": "echo postversion",
+        "prepublishOnly": "echo prepublishOnly",
+        "postpack": "echo postpack",
         "vscode:prepublish": "npm run build",
         "build": "tsc -p ./",
         "prepare": "npm run build",
