@@ -1,9 +1,10 @@
 {
     "name": "code-spell-checker-portuguese",
     "description": "Portuguese dictionary extension for VS Code.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "displayName": "Portuguese - Code Spell Checker",
     "icon": "images/SpellCheck.png",
+    "private": true,
     "preview": true,
     "publisher": "streetsidesoftware",
     "engines": {

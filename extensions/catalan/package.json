@@ -1,10 +1,11 @@
 {
   "name": "code-spell-checker-catalan",
   "description": "Catalan dictionary extension for VS Code.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "Catalan - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": true,
+  "private": true,
   "publisher": "streetsidesoftware",
   "engines": {
     "vscode": "^1.14.0"

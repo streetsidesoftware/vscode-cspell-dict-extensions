@@ -3,7 +3,8 @@
     "displayName": "Medical Terms - Code Spell Checker",
     "description": "Medical Terms Add-On for Code Spell Checker",
     "icon": "images/SpellCheck.png",
-    "version": "1.0.3",
+    "version": "1.0.4",
+    "private": true,
     "preview": false,
     "publisher": "streetsidesoftware",
     "engines": {
@@ -32,6 +33,10 @@
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
+        "preversion": "echo preversion",
+        "postversion": "echo postversion",
+        "prepublishOnly": "echo prepublishOnly",
+        "postpack": "echo postpack",
         "vscode:prepublish": "npm run build",
         "build": "tsc -p ./",
         "prepare": "npm run build",
