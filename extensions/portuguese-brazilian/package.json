@@ -67,6 +67,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-pt-br": "^1.0.11"
+        "cspell-dict-pt-br": "^1.0.15"
     }
 }
