@@ -1,15 +1,18 @@
 {
     "name": "code-spell-checker-italian",
     "description": "Italian dictionary extension for VS Code.",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "displayName": "Italian - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "preview": true,
     "private": true,
     "publisher": "streetsidesoftware",
     "engines": {
-        "vscode": "^1.33.0"
+        "vscode": "^1.41.0"
     },
+    "extensionKind": [
+        "workspace"
+    ],
     "categories": [
         "Linters",
         "Other"
@@ -60,6 +63,7 @@
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
+        "publish-extension": "vsce publish",
         "vscode:prepublish": "npm run build",
         "build": "tsc -p ./",
         "prepare": "npm run build",
@@ -67,6 +71,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-it-it": "^1.0.1"
+        "cspell-dict-it-it": "^1.0.5"
     }
 }

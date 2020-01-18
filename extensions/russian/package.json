@@ -1,15 +1,18 @@
 {
     "name": "code-spell-checker-russian",
     "description": "Russian dictionary extension for VS Code.",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "displayName": "Russian - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "private": true,
     "preview": true,
     "publisher": "streetsidesoftware",
     "engines": {
-        "vscode": "^1.14.0"
+        "vscode": "^1.41.0"
     },
+    "extensionKind": [
+        "workspace"
+    ],
     "categories": [
         "Linters",
         "Other"
@@ -53,6 +56,7 @@
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
+        "publish-extension": "vsce publish",
         "vscode:prepublish": "npm run build",
         "build": "tsc -p ./",
         "prepare": "npm run build",
@@ -60,7 +64,7 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-ru_ru": "^1.1.12",
-        "cspell-dict-russian": "^1.1.13"
+        "cspell-dict-ru_ru": "^1.1.15",
+        "cspell-dict-russian": "^1.1.17"
     }
 }

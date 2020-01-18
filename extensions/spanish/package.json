@@ -3,13 +3,16 @@
     "displayName": "Spanish - Code Spell Checker",
     "description": "Spanish Add-On for Code Spell Checker",
     "icon": "images/SpellCheck.png",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "private": true,
     "preview": false,
     "publisher": "streetsidesoftware",
     "engines": {
-        "vscode": "^1.14.0"
+        "vscode": "^1.41.0"
     },
+    "extensionKind": [
+        "workspace"
+    ],
     "categories": [
         "Linters",
         "Other"
@@ -52,6 +55,7 @@
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
+        "publish-extension": "vsce publish",
         "vscode:prepublish": "npm run build",
         "build": "tsc -p ./",
         "prepare": "npm run build",
@@ -59,6 +63,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-es-es": "^1.0.14"
+        "cspell-dict-es-es": "^1.0.18"
     }
 }
