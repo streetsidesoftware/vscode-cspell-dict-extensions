@@ -4,6 +4,7 @@
     "version": "0.2.1",
     "displayName": "Danish - Code Spell Checker",
     "icon": "images/SpellCheck.png",
+    "private": true,
     "preview": true,
     "publisher": "streetsidesoftware",
     "engines": {

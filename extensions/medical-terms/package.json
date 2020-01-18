@@ -4,6 +4,7 @@
     "description": "Medical Terms Add-On for Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "version": "1.0.3",
+    "private": true,
     "preview": false,
     "publisher": "streetsidesoftware",
     "engines": {

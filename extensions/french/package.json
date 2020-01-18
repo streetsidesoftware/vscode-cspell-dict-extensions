@@ -5,6 +5,7 @@
     "displayName": "French - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "preview": true,
+    "private": true,
     "publisher": "streetsidesoftware",
     "engines": {
         "vscode": "^1.14.0"

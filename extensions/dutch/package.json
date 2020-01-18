@@ -4,6 +4,7 @@
     "version": "0.2.0",
     "displayName": "Dutch - Code Spell Checker",
     "icon": "images/SpellCheck.png",
+    "private": true,
     "preview": true,
     "publisher": "streetsidesoftware",
     "engines": {

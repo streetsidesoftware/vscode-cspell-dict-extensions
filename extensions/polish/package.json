@@ -4,6 +4,7 @@
     "version": "1.0.0",
     "displayName": "Polish - Code Spell Checker",
     "icon": "images/SpellCheck.png",
+    "private": true,
     "preview": true,
     "publisher": "streetsidesoftware",
     "engines": {
