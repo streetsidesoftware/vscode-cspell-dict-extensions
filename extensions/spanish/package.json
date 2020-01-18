@@ -8,8 +8,9 @@
     "preview": false,
     "publisher": "streetsidesoftware",
     "engines": {
-        "vscode": "^1.14.0"
+        "vscode": "^1.41.0"
     },
+    "extensionKind": ["workspace"],
     "categories": [
         "Linters",
         "Other"
@@ -52,6 +53,7 @@
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
+        "publish-extension": "vsce publish",
         "vscode:prepublish": "npm run build",
         "build": "tsc -p ./",
         "prepare": "npm run build",

@@ -8,8 +8,9 @@
     "preview": false,
     "publisher": "streetsidesoftware",
     "engines": {
-        "vscode": "^1.14.0"
+        "vscode": "^1.41.0"
     },
+    "extensionKind": ["workspace"],
     "categories": [
         "Linters",
         "Other"
@@ -37,6 +38,7 @@
         "postversion": "echo postversion",
         "prepublishOnly": "echo prepublishOnly",
         "postpack": "echo postpack",
+        "publish-extension": "vsce publish",
         "vscode:prepublish": "npm run build",
         "build": "tsc -p ./",
         "prepare": "npm run build",
