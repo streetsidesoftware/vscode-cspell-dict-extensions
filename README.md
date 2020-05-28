@@ -10,6 +10,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Danish](./extensions/danish)
 - [Dutch](./extensions/dutch)
 - [French](./extensions/french)
+- [Esperanto](./extensions/esperanto)
 - [German](./extensions/german)
 - [Greek](./extensions/greek)
 - [Italian](./extensions/italian)
