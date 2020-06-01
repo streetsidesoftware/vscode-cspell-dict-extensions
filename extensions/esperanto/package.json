@@ -10,7 +10,9 @@
     "engines": {
         "vscode": "^1.41.0"
     },
-    "extensionKind": ["workspace"],
+    "extensionKind": [
+        "workspace"
+    ],
     "categories": [
         "Linters",
         "Other"
@@ -28,7 +30,6 @@
     "qna": "marketplace",
     "main": "./out/src/extension",
     "contributes": {
-        
         "commands": [
             {
                 "command": "cSpellExt_esperanto.enableEsperanto",
@@ -47,7 +48,6 @@
                 "title": "Disable Esperanto Spell Checker Dictionary in Workspace"
             }
         ]
-        
     },
     "extensionDependencies": [
         "streetsidesoftware.code-spell-checker"
@@ -69,5 +69,8 @@
         "prepare": "npm run build",
         "watch": "tsc -watch -p ./",
         "test": "node ../../node_modules/vscode/bin/test"
+    },
+    "dependencies": {
+        "cspell-dict-eo": "^1.0.1"
     }
 }
