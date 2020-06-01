@@ -1,0 +1,73 @@
+{
+    "name": "code-spell-checker-esperanto",
+    "description": "Esperanto dictionary extension for VS Code.",
+    "version": "0.1.0",
+    "displayName": "Esperanto - Code Spell Checker",
+    "icon": "images/SpellCheck.png",
+    "preview": true,
+    "private": true,
+    "publisher": "streetsidesoftware",
+    "engines": {
+        "vscode": "^1.41.0"
+    },
+    "extensionKind": ["workspace"],
+    "categories": [
+        "Linters",
+        "Other"
+    ],
+    "keywords": [
+        "Esperanto",
+        "VS Code Extension",
+        "Spelling Checker",
+        "dictionary",
+        "spelling"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "qna": "marketplace",
+    "main": "./out/src/extension",
+    "contributes": {
+        
+        "commands": [
+            {
+                "command": "cSpellExt_esperanto.enableEsperanto",
+                "title": "Enable Esperanto Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_esperanto.disableEsperanto",
+                "title": "Disable Esperanto Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_esperanto.enableEsperantoWorkspace",
+                "title": "Enable Esperanto Spell Checker Dictionary in Workspace"
+            },
+            {
+                "command": "cSpellExt_esperanto.disableEsperantoWorkspace",
+                "title": "Disable Esperanto Spell Checker Dictionary in Workspace"
+            }
+        ]
+        
+    },
+    "extensionDependencies": [
+        "streetsidesoftware.code-spell-checker"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions"
+    },
+    "bugs": {
+        "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions/issues"
+    },
+    "license": "GPL-2.0-or-later",
+    "scripts": {
+        "clean": "rimraf out",
+        "clean-build": "npm run clean && npm run build",
+        "publish-extension": "vsce publish",
+        "vscode:prepublish": "npm run build",
+        "build": "tsc -p ./",
+        "prepare": "npm run build",
+        "watch": "tsc -watch -p ./",
+        "test": "node ../../node_modules/vscode/bin/test"
+    }
+}
