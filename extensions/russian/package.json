@@ -64,7 +64,7 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-ru_ru": "^1.2.0",
-        "cspell-dict-russian": "^1.1.19"
-    }
+        "cspell-dict-ru_ru": "^1.2.0"
+    },
+    "devDependencies": {}
 }
