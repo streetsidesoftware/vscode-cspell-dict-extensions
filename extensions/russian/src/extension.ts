@@ -2,7 +2,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import * as dictRussian from 'cspell-dict-russian';
 import * as dict from 'cspell-dict-ru_ru';
 
 interface CodeSpellCheckerExtension {
@@ -27,10 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
         extension.activate().then(ext => {
             const path = dict.getConfigLocation();
             // We need to register the dictionary configuration with the Code Spell Checker Extension
-            if (ext && ext.registerConfig) {
-                ext.registerConfig(path);
-                ext.registerConfig(dictRussian.getConfigLocation());
-            }
+            ext.registerConfig(path);
         });
     }
 
