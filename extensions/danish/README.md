@@ -30,10 +30,10 @@ This is done with the `language` setting.
 
 *Preferences* -> *Settings*
 
-Adding `dk` to the `cSpell.language` setting, will enable the Danish dictionary.
+Adding `da` to the `cSpell.language` setting, will enable the Danish dictionary.
 Example using both English and Danish dictionaries:
 ```javascript
-"cSpell.language": "en,dk",
+"cSpell.language": "en,da",
 ```
 
 
