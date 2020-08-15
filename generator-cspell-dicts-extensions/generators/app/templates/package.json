@@ -8,7 +8,7 @@
     "private": true,
     "publisher": "streetsidesoftware",
     "engines": {
-        "vscode": "^1.41.0"
+        "vscode": "^1.48.0"
     },
     "extensionKind": ["workspace"],
     "categories": [
