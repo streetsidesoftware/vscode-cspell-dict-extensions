@@ -10,14 +10,14 @@
 		"vscode": "^1.41.0"
 	},
 	"devDependencies": {
-		"@types/mocha": "^5.2.5",
-		"@types/node": "^10.17.13",
-		"@types/vscode": "^1.41.0",
-		"lerna": "^3.20.2",
-		"mocha": "^6.2.2",
-		"rimraf": "^3.0.0",
-		"typescript": "^3.7.5",
-		"vsce": "^1.71.0"
+		"@types/mocha": "^8.0.2",
+		"@types/node": "^10.17.28",
+		"@types/vscode": "^1.48.0",
+		"lerna": "^3.22.1",
+		"mocha": "^8.1.1",
+		"rimraf": "^3.0.2",
+		"typescript": "^3.9.7",
+		"vsce": "^1.78.0"
 	},
 	"dependencies": {}
 }
