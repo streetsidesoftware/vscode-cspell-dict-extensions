@@ -7,7 +7,7 @@
 		"build": "lerna run build"
 	},
 	"engines": {
-		"vscode": "^1.41.0"
+		"vscode": "^1.48.0"
 	},
 	"devDependencies": {
 		"@types/mocha": "^8.0.2",
