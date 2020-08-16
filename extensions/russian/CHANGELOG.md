@@ -9,10 +9,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * update dictionaries ([06f6b0c](https://github.com/Jason3S/vscode-cspell-dict-extensions/commit/06f6b0cd9c011d55de841aa75591422a18d8a8f6))
-* use Combined Russina dictionary instead of two ([85119f5](https://github.com/Jason3S/vscode-cspell-dict-extensions/commit/85119f590946fe2af2ad726cf51a7b3d96cf4149))
-
-
-
+* use Combined Russian dictionary instead of two ([85119f5](https://github.com/Jason3S/vscode-cspell-dict-extensions/commit/85119f590946fe2af2ad726cf51a7b3d96cf4149))
 
 
 # Change Log
