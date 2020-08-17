@@ -54,10 +54,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions"
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
   },
   "bugs": {
-    "url": "https://github.com/Jason3S/vscode-cspell-dict-extensions/issues"
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
   "license": "MIT",
   "scripts": {
