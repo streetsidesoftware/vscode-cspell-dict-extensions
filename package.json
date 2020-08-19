@@ -4,6 +4,7 @@
 	"scripts": {
 		"test": "lerna run --concurrency 1 test",
 		"postinstall": "lerna bootstrap",
+		"publish-all": "lerna exec --no-bail \"vsce publish\"",
 		"build": "lerna run build"
 	},
 	"engines": {
