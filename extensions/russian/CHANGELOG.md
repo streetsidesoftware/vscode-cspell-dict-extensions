@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-russian@0.2.5...code-spell-checker-russian@0.2.6) (2020-08-19)
+
+
+### Bug Fixes
+
+* remove old russian dictionary ([3db4970](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3db4970fea291d31e5318270239c4fd2689738cc))
+
+
+
+
+
 ## [0.2.5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-russian@0.2.4...code-spell-checker-russian@0.2.5) (2020-08-15)
 
 
