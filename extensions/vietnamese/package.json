@@ -1,0 +1,79 @@
+{
+    "name": "code-spell-checker-vietnamese",
+    "description": "Vietnamese dictionary extension for VS Code.",
+    "version": "0.1.0",
+    "displayName": "Vietnamese - Code Spell Checker",
+    "icon": "images/SpellCheck.png",
+    "preview": true,
+    "private": true,
+    "publisher": "streetsidesoftware",
+    "engines": {
+        "vscode": "^1.48.0"
+    },
+    "extensionKind": [
+        "workspace"
+    ],
+    "categories": [
+        "Linters",
+        "Other"
+    ],
+    "keywords": [
+        "Vietnamese",
+        "VS Code Extension",
+        "Spelling Checker",
+        "dictionary",
+        "spelling"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "qna": "marketplace",
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "cSpellExt_vietnamese.enableVietnamese",
+                "title": "Enable Vietnamese Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_vietnamese.disableVietnamese",
+                "title": "Disable Vietnamese Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_vietnamese.enableVietnameseWorkspace",
+                "title": "Enable Vietnamese Spell Checker Dictionary in Workspace"
+            },
+            {
+                "command": "cSpellExt_vietnamese.disableVietnameseWorkspace",
+                "title": "Disable Vietnamese Spell Checker Dictionary in Workspace"
+            }
+        ]
+    },
+    "extensionDependencies": [
+        "streetsidesoftware.code-spell-checker"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+    },
+    "bugs": {
+        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+    },
+    "license": "MIT",
+    "scripts": {
+        "clean": "rimraf out",
+        "clean-build": "npm run clean && npm run build",
+        "publish-extension": "vsce publish",
+        "vscode:prepublish": "npm run build",
+        "build": "tsc -p ./",
+        "prepare": "npm run build",
+        "watch": "tsc -watch -p ./",
+        "test": "node ../../node_modules/vscode/bin/test"
+    },
+    "dependencies": {
+        "cspell-dict-vi-vn": "^1.0.12"
+    },
+    "devDependencies": {
+        "typescript": "^4.0.3"
+    }
+}
