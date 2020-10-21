@@ -5,7 +5,8 @@
 		"test": "lerna run --concurrency 1 test",
 		"postinstall": "lerna bootstrap",
 		"publish-all": "lerna exec --no-bail \"vsce publish\"",
-		"build": "lerna run build"
+		"build": "lerna run build",
+		"update-packages": "lerna exec \"npm update -S && rm -rf node_modules package-lock.json && npm i\" && lerna bootstrap"
 	},
 	"engines": {
 		"vscode": "^1.48.0"
