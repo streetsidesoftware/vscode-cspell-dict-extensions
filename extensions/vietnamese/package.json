@@ -73,7 +73,5 @@
     "dependencies": {
         "cspell-dict-vi-vn": "^1.0.13"
     },
-    "devDependencies": {
-        "typescript": "^4.0.3"
-    }
+    "devDependencies": {}
 }
