@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-dutch@0.2.5...code-spell-checker-dutch@0.2.6) (2020-11-08)
+
+
+### Bug Fixes
+
+* Update dictionaries to speed load times ([#56](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/56)) ([85c7a1f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/85c7a1f3363945594f6d86dbb7dae7f4c95a76e7))
+
+
+
+
+
 ## [0.2.5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-dutch@0.2.4...code-spell-checker-dutch@0.2.5) (2020-10-21)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@1.0.8...code-spell-checker-medical-terms@1.0.9) (2020-11-08)
+
+
+### Bug Fixes
+
+* Update dictionaries to speed load times ([#56](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/56)) ([85c7a1f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/85c7a1f3363945594f6d86dbb7dae7f4c95a76e7))
+
+
+
+
+
 ## [1.0.8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@1.0.7...code-spell-checker-medical-terms@1.0.8) (2020-10-21)
 
 

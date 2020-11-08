@@ -1,7 +1,7 @@
 {
     "name": "code-spell-checker-french-reforme",
     "description": "French Réforme 90 dictionary extension for VS Code.",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "displayName": "French Réforme 90 - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "preview": true,
