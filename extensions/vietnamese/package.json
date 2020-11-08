@@ -71,6 +71,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-vi-vn": "^1.0.13"
+        "cspell-dict-vi-vn": "^1.0.17"
     }
 }
