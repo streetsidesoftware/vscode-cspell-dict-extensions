@@ -28,5 +28,7 @@
 		{"path": "generator-cspell-dicts-extensions"}
 
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.words": ["reforme", "ovsx"]
+	}
 }

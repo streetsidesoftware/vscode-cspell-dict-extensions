@@ -6,6 +6,7 @@
 		"postinstall": "lerna bootstrap",
 		"pub-version": "lerna version --conventional-commits",
 		"publish-all": "lerna exec --no-bail \"vsce publish\"",
+		"publish-all-ovsx": "lerna exec --no-bail \"ovsx publish\"",
 		"build": "lerna run build",
 		"update-packages": "lerna exec \"npm update -S && rm -rf node_modules package-lock.json && npm i\" && lerna bootstrap"
 	},
@@ -18,6 +19,7 @@
 		"@types/vscode": "^1.50.0",
 		"lerna": "^3.22.1",
 		"mocha": "^8.2.0",
+		"ovsx": "0.1.0-next.e000fdb",
 		"rimraf": "^3.0.2",
 		"typescript": "^4.0.5",
 		"vsce": "^1.81.1"
