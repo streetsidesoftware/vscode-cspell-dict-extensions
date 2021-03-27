@@ -8,7 +8,7 @@
     "preview": false,
     "publisher": "streetsidesoftware",
     "engines": {
-        "vscode": "^1.48.0"
+        "vscode": "^1.54.0"
     },
     "extensionKind": [
         "workspace"
@@ -48,6 +48,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-medicalterms": "^1.0.22"
+        "cspell-dict-medicalterms": "^1.1.2"
     }
 }
