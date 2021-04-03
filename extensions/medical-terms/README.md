@@ -10,8 +10,8 @@ Source: https://github.com/Glutanimate/wordlist-medicalterms-en
 
 This is a simple list of English medical terms formatted as a UTF8-encoded text file. It is based on two prominent medical dictionary projects:
 
- - [OpenMedSpel](http://www.e-medtools.com/openmedspel.html) by e-MedTools
- - [Raj&Co-Med-Spel-Chek by Rajasekharan N. of Raj&Co](http://rajn.co/free-medical-spell-checker-for-microsoft-word-custom-dictionary/)
+- [OpenMedSpel](http://www.e-medtools.com/openmedspel.html) by e-MedTools
+- [Raj&Co-Med-Spel-Chek by Rajasekharan N. of Raj&Co](http://rajn.co/free-medical-spell-checker-for-microsoft-word-custom-dictionary/)
 
 The two sources have been merged, deduplicated, corrected and formatted as a text file that should be compatible with Android dictionary managers, LibreOffice, and Word.
 
@@ -30,6 +30,10 @@ The two sources have been merged, deduplicated, corrected and formatted as a tex
                           <http://mtherald.com/free-medical-spell-checker-for-microsoft-word-custom-dictionary/>
     License:            GNU GPL v3 (see LICENSEs for more information)
 
-
 ## Requirements
+
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+<!---
+cspell:words Aristotelis OpenMedSpel Rajasekharan Med-Spel-Chek e-medtools
+--->

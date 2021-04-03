@@ -8,21 +8,24 @@
 		"publish-all": "lerna exec --no-bail \"vsce publish\"",
 		"publish-all-ovsx": "lerna exec --no-bail \"ovsx publish\"",
 		"build": "lerna run build",
+		"cspell": "npx cspell \"**/*\" \".*/**/*\"",
+		"lint": "npm run cspell",
 		"update-packages": "lerna exec \"npm update -S && rm -rf node_modules package-lock.json && npm i\" && lerna bootstrap"
 	},
 	"engines": {
-		"vscode": "^1.48.0"
+		"vscode": "^1.54.0"
 	},
 	"devDependencies": {
-		"@types/mocha": "^8.0.3",
-		"@types/node": "^12.19.3",
-		"@types/vscode": "^1.50.0",
+		"@types/mocha": "^8.2.2",
+		"@types/node": "^12.20.6",
+		"@types/vscode": "^1.54.0",
 		"lerna": "^3.22.1",
-		"mocha": "^8.2.0",
+		"mocha": "^8.3.2",
 		"ovsx": "0.1.0-next.a9154dc",
 		"rimraf": "^3.0.2",
-		"typescript": "^4.0.5",
-		"vsce": "^1.81.1"
+		"typescript": "^4.2.3",
+		"vsce": "^1.87.0",
+		"vscode-test": "^1.5.1"
 	},
 	"dependencies": {}
 }

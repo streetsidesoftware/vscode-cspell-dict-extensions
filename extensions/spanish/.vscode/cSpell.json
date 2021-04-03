@@ -14,5 +14,9 @@
     // For example "hte" should be "the"
     "flagWords": [
         "hte"
+    ],
+    "import": [
+        "cspell-dict-es-es/cspell-ext.json",
+        "../../../cspell.json"
     ]
 }

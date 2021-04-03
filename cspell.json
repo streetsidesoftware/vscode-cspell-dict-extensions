@@ -1,0 +1,20 @@
+{
+    "version": "0.2",
+    "dictionaryDefinitions": [
+        {
+            "name": "workspace",
+            "path": "./custom-words.txt",
+            "description": "Workspace level words",
+            "addWords": true
+        }
+    ],
+    "ignorePaths": [
+        ".git",
+        "node_modules",
+        "package-lock.json",
+        "*.vsix"
+    ],
+    "dictionaries": [
+        "workspace"
+    ]
+}

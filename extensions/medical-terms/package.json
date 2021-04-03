@@ -8,7 +8,7 @@
     "preview": false,
     "publisher": "streetsidesoftware",
     "engines": {
-        "vscode": "^1.48.0"
+        "vscode": "^1.54.0"
     },
     "extensionKind": [
         "workspace"
@@ -36,10 +36,7 @@
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
-        "preversion": "echo preversion",
-        "postversion": "echo postversion",
         "prepublishOnly": "echo prepublishOnly",
-        "postpack": "echo postpack",
         "publish-extension": "vsce publish",
         "vscode:prepublish": "npm run build",
         "build": "tsc -p ./",
@@ -48,6 +45,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-medicalterms": "^1.0.22"
+        "cspell-dict-medicalterms": "^1.1.2"
     }
 }

@@ -1,0 +1,8 @@
+.vscode/
+CHANGELOG.md
+cspell.json
+**/dist/
+lerna.json
+tsconfig*.json
+packages/*/dist/
+package-lock.json
