@@ -3,7 +3,7 @@
     // Version of the setting file.  Always 0.1
     "version": "0.1",
     // language - current active spelling language
-    "language": "en",
+    "language": "en,nl",
     // words - list of words to be always considered correct
     "words": [
         "Changelog",
@@ -16,15 +16,7 @@
         "hte"
     ],
     "import": [
-        "../../../cspell.json",
-        "cspell-dict-medicalterms/cspell-ext.json"
-    ],
-    "overrides": [
-        {
-            "filename": "test/*",
-            "dictionaries": [
-                "medical terms"
-            ]
-        }
+        "../../cspell.json",
+        "cspell-dict-nl-nl/cspell-ext.json"
     ]
 }

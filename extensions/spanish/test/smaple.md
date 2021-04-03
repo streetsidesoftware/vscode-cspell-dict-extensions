@@ -7,4 +7,7 @@ de 'ellos y nosotros' cuando se le pregunta por los contrastes que se viven en p
 edición de las Carreras de Caballos. El ambiente del lujo y la exclusividad que mueve este clásico deporte se cita en estos días,
 juntos pero no revueltos, con la segunda ciudad más pobre de España.
 
-<!-- cspell:language en,es -->
+<!--
+cspell:language en,es
+cspell:words sanluqueña
+-->

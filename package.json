@@ -8,6 +8,8 @@
 		"publish-all": "lerna exec --no-bail \"vsce publish\"",
 		"publish-all-ovsx": "lerna exec --no-bail \"ovsx publish\"",
 		"build": "lerna run build",
+		"cspell": "npx cspell \"**/*\" \".*/**/*\"",
+		"lint": "npm run cspell",
 		"update-packages": "lerna exec \"npm update -S && rm -rf node_modules package-lock.json && npm i\" && lerna bootstrap"
 	},
 	"engines": {

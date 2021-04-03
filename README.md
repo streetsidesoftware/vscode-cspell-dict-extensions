@@ -32,7 +32,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Contributors
 
-- *Catalan* - [Jordi Olivares Provencio](https://github.com/jordiolivares)
-- *Czech* - [Zereges](https://github.com/Zereges)
-- *Polish* - [Jackens](https://github.com/jackens)
-- *Danish* - [viktorstrate](https://github.com/viktorstrate)
+- _Catalan_ - [Jordi Olivares Provencio](https://github.com/jordiolivares)
+- _Czech_ - [Zereges](https://github.com/Zereges)
+- _Polish_ - [Jackens](https://github.com/jackens)
+- _Danish_ - [viktorstrate](https://github.com/viktorstrate)
+
+<!---
+cspell:words Jordi Olivares Provencio
+cspell:words Zereges
+cspell:words Jackens
+cspell:words viktorstrate
+--->

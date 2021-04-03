@@ -3,32 +3,79 @@
 		{
 			"path": "."
 		},
-		{"path": "extensions/catalan"},
-		{"path": "extensions/czech"},
-		{"path": "extensions/danish"},
-		{"path": "extensions/dutch"},
-		{"path": "extensions/esperanto"},
-		{"path": "extensions/french"},
-		{"path": "extensions/french-reforme"},
-		{"path": "extensions/german"},
-		{"path": "extensions/greek"},
-		{"path": "extensions/hebrew"},
-		{"path": "extensions/italian"},
-		{"path": "extensions/medical-terms"},
-		{"path": "extensions/persian"},
-		{"path": "extensions/polish"},
-		{"path": "extensions/portuguese"},
-		{"path": "extensions/portuguese-brazilian"},
-		{"path": "extensions/russian"},
-		{"path": "extensions/spanish"},
-		{"path": "extensions/swedish"},
-		{"path": "extensions/turkish"},
-		{"path": "extensions/ukrainian"},
-		{"path": "extensions/vietnamese"},
-		{"path": "generator-cspell-dicts-extensions"}
-
+		{
+			"path": "extensions/catalan"
+		},
+		{
+			"path": "extensions/czech"
+		},
+		{
+			"path": "extensions/danish"
+		},
+		{
+			"path": "extensions/dutch"
+		},
+		{
+			"path": "extensions/esperanto"
+		},
+		{
+			"path": "extensions/french"
+		},
+		{
+			"path": "extensions/french-reforme"
+		},
+		{
+			"path": "extensions/german"
+		},
+		{
+			"path": "extensions/greek"
+		},
+		{
+			"path": "extensions/hebrew"
+		},
+		{
+			"path": "extensions/italian"
+		},
+		{
+			"path": "extensions/medical-terms"
+		},
+		{
+			"path": "extensions/persian"
+		},
+		{
+			"path": "extensions/polish"
+		},
+		{
+			"path": "extensions/portuguese"
+		},
+		{
+			"path": "extensions/portuguese-brazilian"
+		},
+		{
+			"path": "extensions/russian"
+		},
+		{
+			"path": "extensions/spanish"
+		},
+		{
+			"path": "extensions/swedish"
+		},
+		{
+			"path": "extensions/turkish"
+		},
+		{
+			"path": "extensions/ukrainian"
+		},
+		{
+			"path": "extensions/vietnamese"
+		},
+		{
+			"path": "generator-cspell-dicts-extensions"
+		}
 	],
 	"settings": {
-		"cSpell.words": ["reforme", "ovsx"]
+		"cSpell.customWorkspaceDictionaries": [
+			"workspace"
+		]
 	}
 }

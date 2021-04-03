@@ -11,6 +11,7 @@ describe('generator-cspell-dicts:app', () => {
 
   it('creates files', () => {
     assert.file([
+      // cspell:ignore dummyfile
       'dummyfile.txt'
     ]);
   });

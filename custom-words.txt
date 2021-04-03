@@ -1,0 +1,15 @@
+Dependabot
+Gnomovision
+Yoyodyne
+appname
+deduplicated
+medicalterms
+mkdir
+ovsx
+reforme
+streetsidesoftware
+testrunner
+uncommenting
+vscodeignore
+vsix
+yosay
