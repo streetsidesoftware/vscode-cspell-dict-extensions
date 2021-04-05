@@ -4,6 +4,8 @@ const yosay = require('yosay');
 const path = require('path');
 const mkdirp = require('mkdirp');
 
+const genName = 'generator-cspell-dicts-extensions';
+
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
@@ -15,7 +17,14 @@ module.exports = class extends Generator {
     });
   }
 
-  prompting() {
+  async initializing() {
+    if (path.basename(this.destinationPath()) === genName) {
+      this.destinationRoot('..');
+      this.appname = '';
+    }
+  }
+
+  async prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to the VS Code Spelling Dictionary Extension generator!'
@@ -26,14 +35,14 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'name',
         message: 'Your extension dictionary name (i.e. medicalterms)',
-        default: this.options.name || this.appname, // Default to current folder name
+        default: this.options.name,
         filter: name => name.toLowerCase().replace(/[^a-z0-9-]/g, '-')
       },
       {
         type: 'input',
         name: 'friendlyName',
         message: 'Friendly Name',
-        default: props => title(props.name) || this.options.name // Default to current folder name
+        default: props => title(props.name)
       },
       {
         type: 'input',
@@ -57,7 +66,7 @@ module.exports = class extends Generator {
         type: 'confirm',
         name: 'addCommands',
         message: 'Add Enable / Disable Commands?',
-        default: false
+        default: true
       },
       {
         type: 'input',
@@ -87,10 +96,7 @@ module.exports = class extends Generator {
       }
     ];
 
-    return this.prompt(prompts).then(props => {
-      this.props = props;
-      return props;
-    });
+    this.props = await this.prompt(prompts);
   }
 
   writing() {
@@ -161,4 +167,3 @@ module.exports = class extends Generator {
 function title(s) {
   return s[0].toUpperCase() + s.slice(1);
 }
-
