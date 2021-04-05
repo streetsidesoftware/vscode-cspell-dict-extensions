@@ -17,10 +17,12 @@
     "VS Code spelling dictionary extension generator",
     "yeoman-generator"
   ],
-  "devDependencies": {},
+  "peerDependency": {
+    "yo": "^3.1.1"
+  },
   "dependencies": {
-    "chalk": "^2.4.2",
-    "mkdirp": "^0.5.1",
+    "chalk": "^4.1.0",
+    "mkdirp": "^1.0.4",
     "yeoman-generator": "^4.13.0",
     "yosay": "^2.0.2"
   },
