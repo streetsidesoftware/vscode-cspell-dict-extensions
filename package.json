@@ -21,7 +21,7 @@
 		"@types/vscode": "^1.54.0",
 		"lerna": "^4.0.0",
 		"mocha": "^8.3.2",
-		"ovsx": "0.1.0-next.a9154dc",
+		"ovsx": "0.1.0",
 		"rimraf": "^3.0.2",
 		"typescript": "^4.2.3",
 		"vsce": "^1.87.0",
