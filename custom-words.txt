@@ -1,8 +1,12 @@
+Affero
 Dependabot
 Gnomovision
+Sublicensing
+WIPO
 Yoyodyne
 appname
 deduplicated
+lgpl
 medicalterms
 mkdir
 ovsx
