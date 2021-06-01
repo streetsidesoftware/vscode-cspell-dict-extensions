@@ -7,6 +7,7 @@
     "preview": true,
     "private": true,
     "publisher": "streetsidesoftware",
+    "license": "GPL-3.0-or-later",
     "engines": {
         "vscode": "^1.54.0"
     },
@@ -62,7 +63,6 @@
     "bugs": {
         "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
     },
-    "license": "MIT",
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
