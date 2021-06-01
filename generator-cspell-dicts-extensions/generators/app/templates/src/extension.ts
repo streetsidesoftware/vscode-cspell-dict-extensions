@@ -2,7 +2,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-const configLocation = require.resolve('../cspell-ext.json');
 interface CodeSpellCheckerExtension {
     registerConfig(path: string): Promise<void>;
     enableLocal(isGlobal: boolean, local: string): Promise<void>;
@@ -18,6 +17,7 @@ const local = '<%= local %>';
 export function activate(<% if (addCommands) { %>context: vscode.ExtensionContext<% } %>) {
 
     const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
+    const configLocation = context.asAbsolutePath('./cspell-ext.json');
 
     const extension = vscode.extensions.getExtension<CodeSpellCheckerExtension>(vscodeSpellCheckerExtension);
 

@@ -104,6 +104,7 @@ module.exports = class extends Generator {
       'package.json',
       'README.md',
       'CHANGELOG.md',
+      'cspell-ext.json',
       'src/extension.ts',
       'LICENSE'
     ];

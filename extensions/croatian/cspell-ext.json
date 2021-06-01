@@ -1,0 +1,5 @@
+{
+    "import": [
+        "@cspell/dict-hr-hr/cspell-ext.json"
+    ]
+}
