@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.10](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@1.0.9...code-spell-checker-medical-terms@1.0.10) (2021-06-01)
+
+
+### Bug Fixes
+
+* Medical Terms extension should use GPL3 License ([#91](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/91)) ([10d586d](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/10d586dfc735a7f6aa87c6dbf7e3e597d612d357))
+
+
+
+
+
 ## [1.0.9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@1.0.8...code-spell-checker-medical-terms@1.0.9) (2020-11-08)
 
 
