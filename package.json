@@ -1,31 +1,32 @@
 {
-	"name": "vscode-cspell-dict-extensions",
-	"private": true,
-	"scripts": {
-		"test": "lerna run --concurrency 1 test",
-		"postinstall": "lerna bootstrap",
-		"pub-version": "lerna version --conventional-commits",
-		"publish-all": "lerna exec --no-bail \"vsce publish\"",
-		"publish-all-ovsx": "lerna exec --no-bail \"ovsx publish\"",
-		"build": "lerna run build",
-		"cspell": "npx cspell \"**/*\" \".*/**/*\"",
-		"lint": "npm run cspell",
-		"update-packages": "lerna exec \"npm update -S && rm -rf node_modules package-lock.json && npm i\" && lerna bootstrap"
-	},
-	"engines": {
-		"vscode": "^1.54.0"
-	},
-	"devDependencies": {
-		"@types/mocha": "^8.2.2",
-		"@types/node": "^14.14.37",
-		"@types/vscode": "^1.54.0",
-		"lerna": "^4.0.0",
-		"mocha": "^8.4.0",
-		"ovsx": "^0.1.0",
-		"rimraf": "^3.0.2",
-		"typescript": "^4.3.2",
-		"vsce": "^1.91.0",
-		"vscode-test": "^1.5.2"
-	},
-	"dependencies": {}
+    "name": "vscode-cspell-dict-extensions",
+    "private": true,
+    "scripts": {
+        "test": "lerna run --concurrency 1 test",
+        "postinstall": "lerna bootstrap",
+        "pub-version": "lerna version --conventional-commits",
+        "publish-all": "lerna exec --no-bail \"vsce publish\"",
+        "publish-all-ovsx": "lerna exec --no-bail \"ovsx publish --pat \\$OVSX_TOKEN\"",
+        "echo": "echo $OVSX_TOKEN",
+        "build": "lerna run build",
+        "cspell": "npx cspell \"**/*\" \".*/**/*\"",
+        "lint": "npm run cspell",
+        "update-packages": "lerna exec \"npm update -S && rm -rf node_modules package-lock.json && npm i\" && lerna bootstrap"
+    },
+    "engines": {
+        "vscode": "^1.54.0"
+    },
+    "devDependencies": {
+        "@types/mocha": "^8.2.2",
+        "@types/node": "^14.14.37",
+        "@types/vscode": "^1.54.0",
+        "lerna": "^4.0.0",
+        "mocha": "^8.4.0",
+        "ovsx": "^0.1.0",
+        "rimraf": "^3.0.2",
+        "typescript": "^4.3.2",
+        "vsce": "^1.91.0",
+        "vscode-test": "^1.5.2"
+    },
+    "dependencies": {}
 }
