@@ -59,8 +59,8 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'dictionarySrc',
-        message: 'Source cspell-dicts Dictionary NPM name. To be installed.',
-        default: props => `cspell-dict-${props.name}`
+        message: 'Source cspell-dicts Dictionary NPM name. To be installed. i.e. @cspell/dict-name',
+        default: props => `@cspell/dict-${props.name}`
       },
       {
         type: 'confirm',
@@ -104,6 +104,7 @@ module.exports = class extends Generator {
       'package.json',
       'README.md',
       'CHANGELOG.md',
+      'cspell-ext.json',
       'src/extension.ts',
       'LICENSE'
     ];
