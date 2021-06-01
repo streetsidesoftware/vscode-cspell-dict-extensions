@@ -9,13 +9,13 @@ interface CodeSpellCheckerExtension {
     disableLocal(isGlobal: boolean, local: string): Promise<void>;
 }
 
-<% if (addCommands) { %>
-const local = '<%= local %>';
-<% } %>
+
+const local = 'hr';
+
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(<% if (addCommands) { %>context: vscode.ExtensionContext<% } %>) {
+export function activate(context: vscode.ExtensionContext) {
 
     const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
 
@@ -28,14 +28,14 @@ export function activate(<% if (addCommands) { %>context: vscode.ExtensionContex
         });
     }
 
-    <% if (addCommands) { %>
-    function enable<%= commandName %>(isGlobal: boolean) {
+    
+    function enableCroatian(isGlobal: boolean) {
         extension && extension.activate().then(ext => {
             ext?.enableLocal?.(isGlobal, local);
         });
     }
 
-    function disable<%= commandName %>(isGlobal: boolean) {
+    function disableCroatian(isGlobal: boolean) {
         extension && extension.activate().then(ext => {
             ext?.disableLocal?.(isGlobal, local);
         });
@@ -44,12 +44,12 @@ export function activate(<% if (addCommands) { %>context: vscode.ExtensionContex
     // Push the disposable to the context's subscriptions so that the
     // client can be deactivated on extension deactivation
     context.subscriptions.push(
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.enable<%= commandName %>', () => enable<%= commandName %>(true)),
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.disable<%= commandName %>', () => disable<%= commandName %>(true)),
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.enable<%= commandName %>Workspace', () => enable<%= commandName %>(false)),
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.disable<%= commandName %>Workspace', () => disable<%= commandName %>(false)),
+        vscode.commands.registerCommand('cSpellExt_croatian.enableCroatian', () => enableCroatian(true)),
+        vscode.commands.registerCommand('cSpellExt_croatian.disableCroatian', () => disableCroatian(true)),
+        vscode.commands.registerCommand('cSpellExt_croatian.enableCroatianWorkspace', () => enableCroatian(false)),
+        vscode.commands.registerCommand('cSpellExt_croatian.disableCroatianWorkspace', () => disableCroatian(false)),
     );
-    <% } %>
+    
 }
 
 // this method is called when your extension is deactivated
