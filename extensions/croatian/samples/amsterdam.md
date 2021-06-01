@@ -4,4 +4,7 @@ Amsterdam je glavni grad i važno gospodarsko i kulturno središte Nizozemske. S
 
 Stariji dijelovi grada ispresjecani su kanalima (nizozemski: gracht), na kojima su brojne stare građanske kuće. Ima oko 160 kanala koji dijele grad na oko 90 otočića. Po tome se uz njega često veže naziv "Venecija sjeverne Europe". Amsterdamski kanali iz 17. stoljeća su upisani na UNESCO-v popis mjesta svjetske baštine u Europi, kao i obrambena linija Amsterdama (1880.-1920.).
 
-<!--- cspell:locale hr,en -->
+<!---
+cspell:locale hr,en
+cspell:ignore Amstel Randstadom gracht ispresjecani
+-->
