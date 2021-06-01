@@ -45,6 +45,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-medicalterms": "^1.1.2"
+        "cspell-dict-medicalterms": "^1.1.3"
     }
 }
