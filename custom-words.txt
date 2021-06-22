@@ -1,6 +1,7 @@
 Affero
 Dependabot
 Gnomovision
+Réforme
 Sublicensing
 WIPO
 Yoyodyne
