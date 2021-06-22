@@ -9,5 +9,5 @@ juntos pero no revueltos, con la segunda ciudad más pobre de España.
 
 <!--
 cspell:language en,es
-cspell:words sanluqueña
+cspell:words sanluqueña Roldán
 -->
