@@ -151,17 +151,12 @@ module.exports = class extends Generator {
 
   install() {
     if (this.props.dictionarySrc) {
-      this.npmInstall(this.props.dictionarySrc, {save: true});
+        this.spawnCommand('npm', ['install', '-S', this.props.dictionarySrc]);
     }
+  }
 
-    this.installDependencies({
-      npm: true,
-      bower: false,
-      yarn: false,
-      callback: () => {
-        this.spawnCommand('npm', ['run', 'build']);
-      }
-    });
+  end() {
+    this.spawnCommand('npm', ['install']);
   }
 };
 

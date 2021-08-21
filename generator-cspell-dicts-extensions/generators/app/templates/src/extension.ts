@@ -14,7 +14,7 @@ const locale = '<%= locale %>';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(<% if (addCommands) { %>context: vscode.ExtensionContext<% } %>) {
+export function activate(context: vscode.ExtensionContext) {
 
     const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
     const configLocation = context.asAbsolutePath('./cspell-ext.json');
