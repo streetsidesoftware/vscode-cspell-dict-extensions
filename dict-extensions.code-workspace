@@ -4,6 +4,9 @@
             "path": "."
         },
         {
+            "path": "extensions/bulgarian"
+        },
+        {
             "path": "extensions/catalan"
         },
         {
@@ -55,6 +58,9 @@
             "path": "extensions/russian"
         },
         {
+            "path": "extensions/scientific-terms"
+        },
+        {
             "path": "extensions/spanish"
         },
         {
@@ -71,9 +77,6 @@
         },
         {
             "path": "generator-cspell-dicts-extensions"
-        },
-        {
-            "path": "extensions/scientific-terms"
         }
     ],
     "settings": {}

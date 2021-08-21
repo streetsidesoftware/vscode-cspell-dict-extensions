@@ -1,0 +1,76 @@
+{
+    "name": "code-spell-checker-bulgarian",
+    "description": "Bulgarian dictionary extension for VS Code.",
+    "version": "0.1.0",
+    "displayName": "Bulgarian - Code Spell Checker",
+    "icon": "images/SpellCheck.png",
+    "preview": true,
+    "private": true,
+    "publisher": "streetsidesoftware",
+    "license": "GPL-3.0-or-later",
+    "engines": {
+        "vscode": "^1.54.0"
+    },
+    "extensionKind": [
+        "workspace"
+    ],
+    "categories": [
+        "Linters",
+        "Other"
+    ],
+    "keywords": [
+        "Bulgarian",
+        "VS Code Extension",
+        "Spelling Checker",
+        "dictionary",
+        "spelling"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "qna": "marketplace",
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "cSpellExt_bulgarian.enableBulgarian",
+                "title": "Enable Bulgarian Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_bulgarian.disableBulgarian",
+                "title": "Disable Bulgarian Spell Checker Dictionary"
+            },
+            {
+                "command": "cSpellExt_bulgarian.enableBulgarianWorkspace",
+                "title": "Enable Bulgarian Spell Checker Dictionary in Workspace"
+            },
+            {
+                "command": "cSpellExt_bulgarian.disableBulgarianWorkspace",
+                "title": "Disable Bulgarian Spell Checker Dictionary in Workspace"
+            }
+        ]
+    },
+    "extensionDependencies": [
+        "streetsidesoftware.code-spell-checker"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+    },
+    "bugs": {
+        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+    },
+    "scripts": {
+        "clean": "rimraf out",
+        "clean-build": "npm run clean && npm run build",
+        "publish-extension": "vsce publish",
+        "vscode:prepublish": "npm run build",
+        "build": "tsc -p ./",
+        "prepare": "npm run build",
+        "watch": "tsc -watch -p ./",
+        "test": "node ../../node_modules/vscode/bin/test"
+    },
+    "dependencies": {
+        "@cspell/dict-bg-bg": "^1.0.15"
+    }
+}

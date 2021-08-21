@@ -16,9 +16,7 @@ Then generate an extension project:
 Example for **monkey** language:
 
 ```bash
-mkdir monkey
-yo cspell-dict-extensions
-
+yo cspell-dict-extensions <name>
 ```
 
 ## Getting To Know Yeoman

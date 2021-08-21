@@ -8,13 +8,13 @@ interface CodeSpellCheckerExtension {
     disableLocal(isGlobal: boolean, locale: string): Promise<void>;
 }
 
-<% if (addCommands) { %>
-const locale = '<%= locale %>';
-<% } %>
+
+const locale = 'bg_BG';
+
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-export function activate(<% if (addCommands) { %>context: vscode.ExtensionContext<% } %>) {
+export function activate(context: vscode.ExtensionContext) {
 
     const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
     const configLocation = context.asAbsolutePath('./cspell-ext.json');
@@ -28,14 +28,14 @@ export function activate(<% if (addCommands) { %>context: vscode.ExtensionContex
         });
     }
 
-    <% if (addCommands) { %>
-    function enable<%= commandName %>(isGlobal: boolean) {
+    
+    function enableBulgarian(isGlobal: boolean) {
         extension && extension.activate().then(ext => {
             ext?.enableLocal?.(isGlobal, locale);
         });
     }
 
-    function disable<%= commandName %>(isGlobal: boolean) {
+    function disableBulgarian(isGlobal: boolean) {
         extension && extension.activate().then(ext => {
             ext?.disableLocal?.(isGlobal, locale);
         });
@@ -44,12 +44,12 @@ export function activate(<% if (addCommands) { %>context: vscode.ExtensionContex
     // Push the disposable to the context's subscriptions so that the
     // client can be deactivated on extension deactivation
     context.subscriptions.push(
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.enable<%= commandName %>', () => enable<%= commandName %>(true)),
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.disable<%= commandName %>', () => disable<%= commandName %>(true)),
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.enable<%= commandName %>Workspace', () => enable<%= commandName %>(false)),
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.disable<%= commandName %>Workspace', () => disable<%= commandName %>(false)),
+        vscode.commands.registerCommand('cSpellExt_bulgarian.enableBulgarian', () => enableBulgarian(true)),
+        vscode.commands.registerCommand('cSpellExt_bulgarian.disableBulgarian', () => disableBulgarian(true)),
+        vscode.commands.registerCommand('cSpellExt_bulgarian.enableBulgarianWorkspace', () => enableBulgarian(false)),
+        vscode.commands.registerCommand('cSpellExt_bulgarian.disableBulgarianWorkspace', () => disableBulgarian(false)),
     );
-    <% } %>
+    
 }
 
 // this method is called when your extension is deactivated
