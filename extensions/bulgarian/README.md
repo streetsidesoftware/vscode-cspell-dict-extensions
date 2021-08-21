@@ -1,10 +1,10 @@
-# <%= displayName %>
+# Bulgarian - Code Spell Checker
 
-<%= description %>
+Bulgarian dictionary extension for VS Code.
 
-Imports the <%= friendlyName %> spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Bulgarian spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
-<% if (addCommands) { %>
+
 
 ## Installation
 
@@ -30,15 +30,13 @@ This is done with the `language` setting.
 
 *Preferences* -> *Settings*
 
-Adding `<%= locale %>` to the `cSpell.language` setting, will enable the <%= commandName %> dictionary.
-Example using both English and <%= friendlyName %> dictionaries:
+Adding `bg_BG` to the `cSpell.language` setting, will enable the Bulgarian dictionary.
+Example using both English and Bulgarian dictionaries:
 ```javascript
-"cSpell.language": "en,<%= locale %>",
+"cSpell.language": "en,bg_BG",
 ```
 
-<% } else { %>
 
-<% } %>
 
 ## Requirements
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.

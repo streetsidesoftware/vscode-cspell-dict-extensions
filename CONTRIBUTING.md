@@ -45,7 +45,7 @@ Yeoman will ask you a series of questions:
 | Source Dictionary             | This is the NPM install name of the source dictionary                                                                                                                                                            |
 | Add Enable / Disable Commands | This is used for adding helper commands for human language locals like `fr` for French or `fr,fr_CA` for Canadian French. This option is not necessary for word lists like `companies` or programming languages. |
 | Base Name For Commands        | This is added as a suffix onto the command names.                                                                                                                                                                |
-| Language Local                | This is the two letter language code supported by the dictionary included in the `Source Dictionary` step.                                                                                                       |
+| Language Locale               | This is the two letter language code supported by the dictionary included in the `Source Dictionary` step.                                                                                                       |
 | Target Directory              | Where to create the extension                                                                                                                                                                                    |
 | NPM Package Name              | name added to the `package.json`                                                                                                                                                                                 |
 
