@@ -7,10 +7,6 @@
             "label": "npm: build",
             "type": "npm",
             "script": "build",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
             "problemMatcher": "$tsc"
         },
         {

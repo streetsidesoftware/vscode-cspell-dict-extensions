@@ -1,0 +1,59 @@
+{
+    "name": "code-spell-checker-scientific-terms",
+    "description": "Scientific Terms dictionary extension for VS Code.",
+    "version": "0.1.0",
+    "displayName": "Scientific Terms - Code Spell Checker",
+    "icon": "images/SpellCheck.png",
+    "preview": true,
+    "private": true,
+    "publisher": "streetsidesoftware",
+    "license": "GPL-3.0-or-later",
+    "engines": {
+        "vscode": "^1.54.0"
+    },
+    "extensionKind": [
+        "workspace"
+    ],
+    "categories": [
+        "Linters",
+        "Other"
+    ],
+    "keywords": [
+        "Scientific Terms",
+        "VS Code Extension",
+        "Spelling Checker",
+        "dictionary",
+        "spelling"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "qna": "marketplace",
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": []
+    },
+    "extensionDependencies": [
+        "streetsidesoftware.code-spell-checker"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+    },
+    "bugs": {
+        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+    },
+    "scripts": {
+        "clean": "rimraf out",
+        "clean-build": "npm run clean && npm run build",
+        "publish-extension": "vsce publish",
+        "vscode:prepublish": "npm run build",
+        "build": "tsc -p ./",
+        "prepare": "npm run build",
+        "watch": "tsc -watch -p ./",
+        "test": "node ../../node_modules/vscode/bin/test"
+    },
+    "dependencies": {
+        "@cspell/dict-scientific-terms-us": "^1.0.21"
+    }
+}
