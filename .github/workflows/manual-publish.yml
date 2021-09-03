@@ -1,0 +1,33 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual Publish
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: The branch, tag or SHA to checkout. When checking out the repository that
+          triggered a workflow, this defaults to the reference or SHA for that event.
+          Otherwise, uses the default branch.
+        required: true
+        default: main
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.3.4
+        with:
+          ref: ${{ github.event.inputs.ref }}
+      - name: Install
+        run: npm install
+      - name: Build Extension .vsix
+      - name: Publish VSCE
+        run: npx lerna exec --no-bail \"vsce publish -p ${{ secrets.VSCE_TOKEN }} || echo skipped\"
+      - name: Publish OVSX
+        run: npx lerna exec --no-bail \"ovsx publish -p ${{ secrets.OVSX_TOKEN }} || echo skipped\"
+# cspell:ignore vsix xargs OVSX
