@@ -3,7 +3,7 @@
     "displayName": "Medical Terms - Code Spell Checker",
     "description": "Medical Terms Add-On for Code Spell Checker",
     "icon": "images/SpellCheck.png",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "private": true,
     "preview": false,
     "publisher": "streetsidesoftware",

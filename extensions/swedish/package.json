@@ -1,7 +1,7 @@
 {
     "name": "code-spell-checker-swedish",
     "description": "Swedish dictionary extension for VS Code.",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "displayName": "Swedish - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "private": true,

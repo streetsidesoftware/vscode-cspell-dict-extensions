@@ -3,7 +3,7 @@
     "displayName": "Spanish - Code Spell Checker",
     "description": "Spanish Add-On for Code Spell Checker",
     "icon": "images/SpellCheck.png",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "private": true,
     "preview": false,
     "publisher": "streetsidesoftware",
@@ -64,6 +64,5 @@
     },
     "dependencies": {
         "@cspell/dict-es-es": "^2.0.1"
-    },
-    "devDependencies": {}
+    }
 }
