@@ -33,19 +33,19 @@
         "commands": [
             {
                 "command": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilian",
-                "title": "Enable Portuguese_brazilian Spell Checker Dictionary"
+                "title": "Enable Portuguese Brazilian Spell Checker Dictionary"
             },
             {
                 "command": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilian",
-                "title": "Disable Portuguese_brazilian Spell Checker Dictionary"
+                "title": "Disable Portuguese Brazilian Spell Checker Dictionary"
             },
             {
                 "command": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilianWorkspace",
-                "title": "Enable Portuguese_brazilian Spell Checker Dictionary in Workspace"
+                "title": "Enable Portuguese Brazilian Spell Checker Dictionary in Workspace"
             },
             {
                 "command": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilianWorkspace",
-                "title": "Disable Portuguese_brazilian Spell Checker Dictionary in Workspace"
+                "title": "Disable Portuguese Brazilian Spell Checker Dictionary in Workspace"
             }
         ]
     },
