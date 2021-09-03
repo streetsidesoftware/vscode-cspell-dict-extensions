@@ -1,0 +1,18 @@
+{
+    "language": "en,es-ES",
+    "import": [
+        "../cspell-ext.json"
+    ],
+    "languageSettings": [
+        {
+            "languageId": "markdown",
+            "caseSensitive": true
+        }
+    ],
+    "overrides": [
+        {
+            "filename": "example-es.ts",
+            "caseSensitive": false
+        }
+    ]
+}
