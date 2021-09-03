@@ -25,7 +25,6 @@ jobs:
           ref: ${{ github.event.inputs.ref }}
       - name: Install
         run: npm install
-      - name: Build Extension .vsix
       - name: Publish VSCE
         run: npx lerna exec --no-bail \"vsce publish -p ${{ secrets.VSCE_TOKEN }} || echo skipped\"
       - name: Publish OVSX
