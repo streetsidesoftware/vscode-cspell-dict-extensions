@@ -1,7 +1,7 @@
 {
     "name": "code-spell-checker-portuguese-brazilian",
     "description": "Brazilian Portuguese dictionary extension for VS Code.",
-    "version": "0.1.8",
+    "version": "2.0.0",
     "displayName": "Brazilian Portuguese - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "private": true,
@@ -33,19 +33,19 @@
         "commands": [
             {
                 "command": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilian",
-                "title": "Enable Portuguese_brazilian Spell Checker Dictionary"
+                "title": "Enable Portuguese Brazilian Spell Checker Dictionary"
             },
             {
                 "command": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilian",
-                "title": "Disable Portuguese_brazilian Spell Checker Dictionary"
+                "title": "Disable Portuguese Brazilian Spell Checker Dictionary"
             },
             {
                 "command": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilianWorkspace",
-                "title": "Enable Portuguese_brazilian Spell Checker Dictionary in Workspace"
+                "title": "Enable Portuguese Brazilian Spell Checker Dictionary in Workspace"
             },
             {
                 "command": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilianWorkspace",
-                "title": "Disable Portuguese_brazilian Spell Checker Dictionary in Workspace"
+                "title": "Disable Portuguese Brazilian Spell Checker Dictionary in Workspace"
             }
         ]
     },
@@ -59,7 +59,7 @@
     "bugs": {
         "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
     },
-    "license": "MIT",
+    "license": "GPL-3.0-or-later",
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
@@ -71,6 +71,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-pt-br": "^1.1.1"
+        "@cspell/dict-pt-br": "^2.0.1"
     }
 }
