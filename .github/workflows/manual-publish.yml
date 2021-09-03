@@ -30,4 +30,5 @@ jobs:
         run: npx lerna exec --no-bail \"vsce publish -p ${{ secrets.VSCE_TOKEN }} || echo skipped\"
       - name: Publish OVSX
         run: npx lerna exec --no-bail \"ovsx publish -p ${{ secrets.OVSX_TOKEN }} || echo skipped\"
+        
 # cspell:ignore vsix xargs OVSX
