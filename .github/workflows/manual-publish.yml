@@ -26,8 +26,7 @@ jobs:
       - name: Install
         run: npm install
       - name: Publish VSCE
-        run: npx lerna exec --no-bail \"vsce publish -p ${{ secrets.VSCE_TOKEN }} || echo skipped\"
+        run: npx lerna exec --no-bail "vsce publish -p ${{ secrets.VSCE_TOKEN }}"
       - name: Publish OVSX
-        run: npx lerna exec --no-bail \"ovsx publish -p ${{ secrets.OVSX_TOKEN }} || echo skipped\"
-        
+        run: npx lerna exec --no-bail "ovsx publish -p ${{ secrets.OVSX_TOKEN }}"
 # cspell:ignore vsix xargs OVSX
