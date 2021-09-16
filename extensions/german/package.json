@@ -1,76 +1,75 @@
 {
-    "name": "code-spell-checker-german",
-    "description": "German dictionary extension for VS Code.",
-    "version": "0.1.10",
-    "displayName": "German - Code Spell Checker",
-    "icon": "images/SpellCheck.png",
-    "private": true,
-    "preview": true,
-    "publisher": "streetsidesoftware",
-    "engines": {
-        "vscode": "^1.54.0"
-    },
-    "extensionKind": [
-        "workspace"
-    ],
-    "categories": [
-        "Linters",
-        "Other"
-    ],
-    "keywords": [
-        "German",
-        "VS Code Extension",
-        "Spelling Checker",
-        "dictionary",
-        "spelling"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "qna": "marketplace",
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "cSpellExt_german.enableGerman",
-                "title": "Enable German Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpellExt_german.disableGerman",
-                "title": "Disable German Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpellExt_german.enableGermanWorkspace",
-                "title": "Enable German Spell Checker Dictionary in Workspace"
-            },
-            {
-                "command": "cSpellExt_german.disableGermanWorkspace",
-                "title": "Disable German Spell Checker Dictionary in Workspace"
-            }
-        ]
-    },
-    "extensionDependencies": [
-        "streetsidesoftware.code-spell-checker"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
-    },
-    "bugs": {
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
-    },
-    "license": "MIT",
-    "scripts": {
-        "clean": "rimraf out",
-        "clean-build": "npm run clean && npm run build",
-        "publish-extension": "vsce publish",
-        "vscode:prepublish": "npm run build",
-        "build": "tsc -p ./",
-        "prepare": "npm run build",
-        "watch": "tsc -watch -p ./",
-        "test": "node ../../node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "cspell-dict-de-de": "^1.2.3"
-    }
+  "name": "code-spell-checker-german",
+  "description": "German dictionary extension for VS Code.",
+  "version": "2.0.0",
+  "displayName": "German - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "German",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_german.enableGerman",
+        "title": "Enable German Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_german.disableGerman",
+        "title": "Disable German Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_german.enableGermanWorkspace",
+        "title": "Enable German Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_german.disableGermanWorkspace",
+        "title": "Disable German Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "prepare": "npm run build",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "@cspell/dict-de-de": "^2.0.2"
+  }
 }
