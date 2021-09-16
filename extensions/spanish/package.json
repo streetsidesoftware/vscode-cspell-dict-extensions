@@ -63,6 +63,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "@cspell/dict-es-es": "^2.0.1"
+        "@cspell/dict-es-es": "^2.0.2"
     }
 }
