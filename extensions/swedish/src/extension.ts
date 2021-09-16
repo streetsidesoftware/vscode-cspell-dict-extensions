@@ -8,12 +8,14 @@ interface CodeSpellCheckerExtension {
     disableLocal(isGlobal: boolean, locale: string): Promise<void>;
 }
 
+const extName = 'cSpellExt_swedish';
+const language = 'Swedish';
 const localeEnable = 'sv_SE';
 const localeDisable = 'sv_SE';
-const commandEnable = 'cSpellExt_swedish.enableSwedish';
-const commandDisable = 'cSpellExt_swedish.disableSwedish';
-const commandEnableWorkspace = 'cSpellExt_swedish.enableSwedishWorkspace';
-const commandDisableWorkspace = 'cSpellExt_swedish.disableSwedishWorkspace';
+const commandEnable = `${extName}.enable${language}`;
+const commandDisable = `${extName}.disable${language}`;
+const commandEnableWorkspace = `${extName}.enable${language}Workspace`;
+const commandDisableWorkspace = `${extName}.disable${language}Workspace`;
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
