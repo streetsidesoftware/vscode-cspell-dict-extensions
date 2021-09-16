@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-german@0.1.10...code-spell-checker-german@2.0.1) (2021-09-16)
+
+
+### Bug Fixes
+
+* Update German Dictionary ([8633373](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/8633373cafc5a9e9b3b6b2c35617a3a58b823cb1))
+
+
+
+
+
 ## [0.1.10](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-german@0.1.9...code-spell-checker-german@0.1.10) (2021-09-03)
 
 **Note:** Version bump only for package code-spell-checker-german
