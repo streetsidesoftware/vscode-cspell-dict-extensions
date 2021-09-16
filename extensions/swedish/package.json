@@ -1,14 +1,13 @@
 {
     "name": "code-spell-checker-swedish",
     "description": "Swedish dictionary extension for VS Code.",
-    "version": "0.1.9",
+    "version": "1.0.0",
     "displayName": "Swedish - Code Spell Checker",
     "icon": "images/SpellCheck.png",
     "private": true,
-    "preview": true,
     "publisher": "streetsidesoftware",
     "engines": {
-        "vscode": "^1.54.0"
+        "vscode": "^1.60.0"
     },
     "extensionKind": [
         "workspace"
@@ -59,7 +58,7 @@
     "bugs": {
         "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
     },
-    "license": "MIT",
+    "license": "GPL-3.0-or-later",
     "scripts": {
         "clean": "rimraf out",
         "clean-build": "npm run clean && npm run build",
@@ -71,6 +70,6 @@
         "test": "node ../../node_modules/vscode/bin/test"
     },
     "dependencies": {
-        "cspell-dict-sv": "^1.1.1"
+        "@cspell/dict-sv": "^2.0.2"
     }
 }
