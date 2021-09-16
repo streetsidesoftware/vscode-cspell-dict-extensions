@@ -1,59 +1,58 @@
-'use strict';
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import * as dict from 'cspell-dict-sv';
 
 interface CodeSpellCheckerExtension {
     registerConfig(path: string): Promise<void>;
-    enableLocal(isGlobal: boolean, local: string): Promise<void>;
-    disableLocal(isGlobal: boolean, local: string): Promise<void>;
+    enableLocal(isGlobal: boolean, locale: string): Promise<void>;
+    disableLocal(isGlobal: boolean, locale: string): Promise<void>;
 }
 
-
-const local = 'sv';
-
+const localeEnable = 'sv_SE';
+const localeDisable = 'sv_SE';
+const commandEnable = 'cSpellExt_swedish.enableSwedish';
+const commandDisable = 'cSpellExt_swedish.disableSwedish';
+const commandEnableWorkspace = 'cSpellExt_swedish.enableSwedishWorkspace';
+const commandDisableWorkspace = 'cSpellExt_swedish.disableSwedishWorkspace';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
     const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
+    const configLocation = context.asAbsolutePath('./cspell-ext.json');
 
     const extension = vscode.extensions.getExtension<CodeSpellCheckerExtension>(vscodeSpellCheckerExtension);
 
     if (extension) {
-        extension.activate().then(ext => {
-            const path = dict.getConfigLocation();
+        extension.activate().then((ext) => {
             // We need to register the dictionary configuration with the Code Spell Checker Extension
-            ext && ext.registerConfig && ext.registerConfig(path);
+            ext?.registerConfig?.(configLocation);
         });
     }
 
-    
-    function enableSwedish(isGlobal: boolean) {
-        extension && extension.activate().then(ext => {
-            ext && ext.enableLocal && ext.enableLocal(isGlobal, local);
-        });
+    function enable(isGlobal: boolean) {
+        extension &&
+            extension.activate().then((ext) => {
+                ext?.enableLocal?.(isGlobal, localeEnable);
+            });
     }
 
-    function disableSwedish(isGlobal: boolean) {
-        extension && extension.activate().then(ext => {
-            ext && ext.disableLocal && ext.disableLocal(isGlobal, local);
-        });
+    function disable(isGlobal: boolean) {
+        extension &&
+            extension.activate().then((ext) => {
+                ext?.disableLocal?.(isGlobal, localeDisable);
+            });
     }
 
     // Push the disposable to the context's subscriptions so that the
     // client can be deactivated on extension deactivation
     context.subscriptions.push(
-        vscode.commands.registerCommand('cSpellExt_swedish.enableSwedish', () => enableSwedish(true)),
-        vscode.commands.registerCommand('cSpellExt_swedish.disableSwedish', () => disableSwedish(true)),
-        vscode.commands.registerCommand('cSpellExt_swedish.enableSwedishWorkspace', () => enableSwedish(false)),
-        vscode.commands.registerCommand('cSpellExt_swedish.disableSwedishWorkspace', () => disableSwedish(false)),
+        vscode.commands.registerCommand(commandEnable, () => enable(true)),
+        vscode.commands.registerCommand(commandDisable, () => disable(true)),
+        vscode.commands.registerCommand(commandEnableWorkspace, () => enable(false)),
+        vscode.commands.registerCommand(commandDisableWorkspace, () => disable(false))
     );
-    
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {
-}
+export function deactivate() {}
