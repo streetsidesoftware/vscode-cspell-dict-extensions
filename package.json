@@ -10,6 +10,8 @@
     "echo": "echo $OVSX_TOKEN",
     "build": "lerna run build",
     "cspell": "npx cspell \"**/*\" \".*/**/*\"",
+    "X-lint": "eslint . --fix --cache && prettier -w \"**/*.{md,yaml,yml,json}\"",
+    "X-lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
     "lint": "npm run cspell",
     "update-packages": "lerna exec \"npm update -S && rm -rf node_modules package-lock.json && npm i\" && lerna bootstrap"
   },
@@ -23,6 +25,7 @@
     "lerna": "^4.0.0",
     "mocha": "^9.1.0",
     "ovsx": "^0.2.0",
+    "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.3.5",
     "vsce": "^1.96.1",

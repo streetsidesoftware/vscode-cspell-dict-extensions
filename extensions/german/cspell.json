@@ -1,0 +1,5 @@
+{
+    "version": "0.2",
+    "ignorePaths": ["/out", "samples/**"],
+    "import": ["./cspell-ext.json"]
+}
