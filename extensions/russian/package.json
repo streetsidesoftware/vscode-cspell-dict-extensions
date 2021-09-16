@@ -1,69 +1,68 @@
 {
-    "name": "code-spell-checker-russian",
-    "description": "Russian dictionary extension for VS Code.",
-    "version": "0.2.11",
-    "displayName": "Russian - Code Spell Checker",
-    "icon": "images/SpellCheck.png",
-    "private": true,
-    "preview": true,
-    "publisher": "streetsidesoftware",
-    "engines": {
-        "vscode": "^1.54.0"
-    },
-    "extensionKind": [
-        "workspace"
-    ],
-    "categories": [
-        "Linters",
-        "Other"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "qna": "marketplace",
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "cSpellExt_russian.enableRussian",
-                "title": "Enable Russian Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpellExt_russian.disableRussian",
-                "title": "Disable Russian Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpellExt_russian.enableRussianWorkspace",
-                "title": "Enable Russian Spell Checker Dictionary in Workspace"
-            },
-            {
-                "command": "cSpellExt_russian.disableRussianWorkspace",
-                "title": "Disable Russian Spell Checker Dictionary in Workspace"
-            }
-        ]
-    },
-    "extensionDependencies": [
-        "streetsidesoftware.code-spell-checker"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
-    },
-    "bugs": {
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
-    },
-    "license": "MIT",
-    "scripts": {
-        "clean": "rimraf out",
-        "clean-build": "npm run clean && npm run build",
-        "publish-extension": "vsce publish",
-        "vscode:prepublish": "npm run build",
-        "build": "tsc -p ./",
-        "prepare": "npm run build",
-        "watch": "tsc -watch -p ./",
-        "test": "node ../../node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "cspell-dict-ru_ru": "^1.4.0"
-    }
+  "name": "code-spell-checker-russian",
+  "description": "Russian dictionary extension for VS Code.",
+  "version": "2.0.0",
+  "displayName": "Russian - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_russian.enableRussian",
+        "title": "Enable Russian Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_russian.disableRussian",
+        "title": "Disable Russian Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_russian.enableRussianWorkspace",
+        "title": "Enable Russian Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_russian.disableRussianWorkspace",
+        "title": "Disable Russian Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "prepare": "npm run build",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "@cspell/dict-ru_ru": "^2.0.2"
+  }
 }
