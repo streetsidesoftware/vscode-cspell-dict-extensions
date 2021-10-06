@@ -1,0 +1,14 @@
+{
+    "version": "0.2",
+    "ignorePaths": ["/out"],
+    "language": "en,fr",
+    "noConfigSearch": true,
+    "import": ["./cspell-ext.json"],
+    "overrides": [
+        {
+            "filename": "*.md",
+            "caseSensitive": true
+        }
+    ],
+    "words": ["testrunner", "uncommenting"]
+}
