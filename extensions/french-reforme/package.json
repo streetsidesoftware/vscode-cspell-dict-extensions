@@ -1,76 +1,76 @@
 {
-    "name": "code-spell-checker-french-reforme",
-    "description": "French Réforme 90 dictionary extension for VS Code.",
-    "version": "0.1.9",
-    "displayName": "French Réforme 90 - Code Spell Checker",
-    "icon": "images/SpellCheck.png",
-    "preview": true,
-    "private": true,
-    "publisher": "streetsidesoftware",
-    "engines": {
-        "vscode": "^1.54.0"
-    },
-    "extensionKind": [
-        "workspace"
-    ],
-    "categories": [
-        "Linters",
-        "Other"
-    ],
-    "keywords": [
-        "French Réforme 90",
-        "VS Code Extension",
-        "Spelling Checker",
-        "dictionary",
-        "spelling"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "qna": "marketplace",
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "cSpellExt_french-reforme.enableFrench_reforme",
-                "title": "Enable French_reforme Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpellExt_french-reforme.disableFrench_reforme",
-                "title": "Disable French_reforme Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpellExt_french-reforme.enableFrench_reformeWorkspace",
-                "title": "Enable French_reforme Spell Checker Dictionary in Workspace"
-            },
-            {
-                "command": "cSpellExt_french-reforme.disableFrench_reformeWorkspace",
-                "title": "Disable French_reforme Spell Checker Dictionary in Workspace"
-            }
-        ]
-    },
-    "extensionDependencies": [
-        "streetsidesoftware.code-spell-checker"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
-    },
-    "bugs": {
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
-    },
-    "license": "MIT",
-    "scripts": {
-        "clean": "rimraf out",
-        "clean-build": "npm run clean && npm run build",
-        "publish-extension": "vsce publish",
-        "vscode:prepublish": "npm run build",
-        "build": "tsc -p ./",
-        "prepare": "npm run build",
-        "watch": "tsc -watch -p ./",
-        "test": "node ../../node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "cspell-dict-fr-reforme": "^1.1.1"
-    }
+  "name": "code-spell-checker-french-reforme",
+  "description": "French Réforme 90 dictionary extension for VS Code.",
+  "version": "2.0.0",
+  "displayName": "French Réforme 90 - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "preview": true,
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "French Réforme 90",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_french-reforme.enableFrench",
+        "title": "Enable French Reforme Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_french-reforme.disableFrench",
+        "title": "Disable French Reforme Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_french-reforme.enableFrenchWorkspace",
+        "title": "Enable French Reforme Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_french-reforme.disableFrenchWorkspace",
+        "title": "Disable French Reforme Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "prepare": "npm run build",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "@cspell/dict-fr-reforme": "^2.0.1"
+  }
 }
