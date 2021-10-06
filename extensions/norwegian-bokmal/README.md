@@ -30,7 +30,7 @@ This is done with the `language` setting.
 
 *Preferences* -> *Settings*
 
-Adding `nb` to the `cSpell.language` setting, will enable the Norwegian_bokmal dictionary.
+Adding `nb` to the `cSpell.language` setting, will enable the Norwegian Bokmål dictionary.
 Example using both English and Norwegian Bokmål dictionaries:
 ```javascript
 "cSpell.language": "en,nb",
@@ -40,3 +40,7 @@ Example using both English and Norwegian Bokmål dictionaries:
 
 ## Requirements
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+<!---
+cspell:ignore bokmal Bokmål
+--->
