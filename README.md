@@ -17,6 +17,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Hebrew](./extensions/Hebrew)
 - [Italian](./extensions/italian)
 - [Medical Terms](./extensions/medical-terms)
+- [Norwegian Bokmål](./extensions/norwegian-bokmal)
 - [Persian](./extensions/persian)
 - [Polish](./extensions/polish)
 - [Portuguese](./extensions/portuguese)
