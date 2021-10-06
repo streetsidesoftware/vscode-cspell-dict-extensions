@@ -43,4 +43,5 @@ cspell:words Jordi Olivares Provencio
 cspell:words Zereges
 cspell:words Jackens
 cspell:words viktorstrate
+cspell:words Bokmål bokmal
 --->
