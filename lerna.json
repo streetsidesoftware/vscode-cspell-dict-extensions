@@ -2,5 +2,14 @@
   "packages": [
     "extensions/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "*.md",
+        "package-lock.json",
+        "cspell.json"
+      ]
+    }
+  }
 }

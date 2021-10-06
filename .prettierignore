@@ -1,8 +1,9 @@
-.vscode/
+.vscode/**
+**/dist/**
 CHANGELOG.md
 cspell.json
-**/dist/
+generator-cspell-dicts-extensions/generators/app/templates
 lerna.json
-tsconfig*.json
-packages/*/dist/
 package-lock.json
+packages/*/dist/**
+tsconfig*.json
