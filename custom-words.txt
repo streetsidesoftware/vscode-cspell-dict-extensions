@@ -1,6 +1,5 @@
 Affero
 appname
-bokmal
 deduplicated
 Dependabot
 Gnomovision
