@@ -43,6 +43,9 @@
             "path": "extensions/medical-terms"
         },
         {
+            "path": "extensions/norwegian-bokmal"
+        },
+        {
             "path": "extensions/persian"
         },
         {

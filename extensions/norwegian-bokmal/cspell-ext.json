@@ -1,5 +1,3 @@
 {
-    "import": [
-        "@cspell/dict-no-nb/cspell-ext.json"
-    ]
+    "import": ["@cspell/dict-nb-no/cspell-ext.json"]
 }

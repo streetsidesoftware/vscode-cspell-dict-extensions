@@ -8,50 +8,46 @@ interface CodeSpellCheckerExtension {
     disableLocal(isGlobal: boolean, locale: string): Promise<void>;
 }
 
-
 const locale = 'nb';
-
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
     const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
     const configLocation = context.asAbsolutePath('./cspell-ext.json');
 
     const extension = vscode.extensions.getExtension<CodeSpellCheckerExtension>(vscodeSpellCheckerExtension);
 
     if (extension) {
-        extension.activate().then(ext => {
+        extension.activate().then((ext) => {
             // We need to register the dictionary configuration with the Code Spell Checker Extension
             ext?.registerConfig?.(configLocation);
         });
     }
 
-    
-    function enableNorwegian_bokmal(isGlobal: boolean) {
-        extension && extension.activate().then(ext => {
-            ext?.enableLocal?.(isGlobal, locale);
-        });
+    function enable(isGlobal: boolean) {
+        extension &&
+            extension.activate().then((ext) => {
+                ext?.enableLocal?.(isGlobal, locale);
+            });
     }
 
-    function disableNorwegian_bokmal(isGlobal: boolean) {
-        extension && extension.activate().then(ext => {
-            ext?.disableLocal?.(isGlobal, locale);
-        });
+    function disable(isGlobal: boolean) {
+        extension &&
+            extension.activate().then((ext) => {
+                ext?.disableLocal?.(isGlobal, locale);
+            });
     }
 
     // Push the disposable to the context's subscriptions so that the
     // client can be deactivated on extension deactivation
     context.subscriptions.push(
-        vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.enableNorwegian_bokmal', () => enableNorwegian_bokmal(true)),
-        vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.disableNorwegian_bokmal', () => disableNorwegian_bokmal(true)),
-        vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.enableNorwegian_bokmalWorkspace', () => enableNorwegian_bokmal(false)),
-        vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.disableNorwegian_bokmalWorkspace', () => disableNorwegian_bokmal(false)),
+        vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.enable', () => enable(true)),
+        vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.disable', () => disable(true)),
+        vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.enableWorkspace', () => enable(false)),
+        vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.disableWorkspace', () => disable(false))
     );
-    
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {
-}
+export function deactivate() {}
