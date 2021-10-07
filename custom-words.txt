@@ -1,5 +1,6 @@
 Affero
 appname
+Bokmål
 deduplicated
 Dependabot
 Gnomovision

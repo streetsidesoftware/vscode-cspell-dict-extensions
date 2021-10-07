@@ -14,18 +14,9 @@
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "lib": [
-            "es2015"
-        ],
+        "lib": ["es2015"],
         "forceConsistentCasingInFileNames": true
     },
-    "include": [
-        "src",
-        "test"
-    ],
-    "exclude": [
-        "out",
-        "node_modules",
-        ".vscode-test"
-    ]
+    "include": ["src", "test"],
+    "exclude": ["out", "node_modules", ".vscode-test"]
 }
