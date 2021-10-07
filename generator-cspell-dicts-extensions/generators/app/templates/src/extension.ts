@@ -8,9 +8,9 @@ interface CodeSpellCheckerExtension {
     disableLocal(isGlobal: boolean, locale: string): Promise<void>;
 }
 
-<% if (addCommands) { %>
+// <% if (addCommands) { %>
 const locale = '<%= locale %>';
-<% } %>
+// <% } %>
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -28,14 +28,14 @@ export function activate(context: vscode.ExtensionContext) {
         });
     }
 
-    <% if (addCommands) { %>
-    function enable<%= commandName %>(isGlobal: boolean) {
+    // <% if (addCommands) { %>
+    function enable(isGlobal: boolean) {
         extension && extension.activate().then(ext => {
             ext?.enableLocal?.(isGlobal, locale);
         });
     }
 
-    function disable<%= commandName %>(isGlobal: boolean) {
+    function disable(isGlobal: boolean) {
         extension && extension.activate().then(ext => {
             ext?.disableLocal?.(isGlobal, locale);
         });
@@ -44,12 +44,12 @@ export function activate(context: vscode.ExtensionContext) {
     // Push the disposable to the context's subscriptions so that the
     // client can be deactivated on extension deactivation
     context.subscriptions.push(
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.enable<%= commandName %>', () => enable<%= commandName %>(true)),
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.disable<%= commandName %>', () => disable<%= commandName %>(true)),
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.enable<%= commandName %>Workspace', () => enable<%= commandName %>(false)),
-        vscode.commands.registerCommand('cSpellExt_<%= name %>.disable<%= commandName %>Workspace', () => disable<%= commandName %>(false)),
+        vscode.commands.registerCommand('cSpellExt_<%= name %>.enable', () => enable(true)),
+        vscode.commands.registerCommand('cSpellExt_<%= name %>.disable', () => disable(true)),
+        vscode.commands.registerCommand('cSpellExt_<%= name %>.enableWorkspace', () => enable(false)),
+        vscode.commands.registerCommand('cSpellExt_<%= name %>.disableWorkspace', () => disable(false)),
     );
-    <% } %>
+    // <% } %>
 }
 
 // this method is called when your extension is deactivated
