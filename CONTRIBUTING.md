@@ -18,6 +18,7 @@ Install Yeoman and then link the generator.
 npm install
 npm install -g yo
 cd generator-cspell-dicts-extensions
+npm install
 npm link
 cd ..
 ```
