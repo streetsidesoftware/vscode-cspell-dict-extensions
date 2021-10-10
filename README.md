@@ -9,6 +9,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Czech](./extensions/czech)
 - [Danish](./extensions/danish)
 - [Dutch](./extensions/dutch)
+- [Estonian](./extensions/estonian)
 - [French](./extensions/french)
 - [French Réforme](./extensions/french-reforme)
 - [Esperanto](./extensions/esperanto)
@@ -35,12 +36,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 - _Catalan_ - [Jordi Olivares Provencio](https://github.com/jordiolivares)
 - _Czech_ - [Zereges](https://github.com/Zereges)
+- _Estonian_ - [Igor Krupenja](https://github.com/igor-krupenja)
 - _Polish_ - [Jackens](https://github.com/jackens)
 - _Danish_ - [viktorstrate](https://github.com/viktorstrate)
 
 <!---
 cspell:words Jordi Olivares Provencio
 cspell:words Zereges
+cspell:words Igor Krupenja
 cspell:words Jackens
 cspell:words viktorstrate
 cspell:words Bokmål bokmal
