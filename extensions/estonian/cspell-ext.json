@@ -1,0 +1,5 @@
+{
+    "import": [
+        "@cspell/dict-et-ee/cspell-ext.json"
+    ]
+}
