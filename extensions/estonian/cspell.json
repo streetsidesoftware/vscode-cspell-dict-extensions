@@ -1,0 +1,13 @@
+{
+  "version": "0.2",
+  "ignorePaths": ["/out"],
+  "language": "en,ee",
+  "noConfigSearch": true,
+  "import": ["./cspell-ext.json"],
+  "overrides": [
+      {
+          "filename": "*.md",
+          "caseSensitive": true
+      }
+  ],
+}
