@@ -22,6 +22,9 @@
             "path": "extensions/esperanto"
         },
         {
+            "path": "extensions/estonian"
+        },
+        {
             "path": "extensions/french"
         },
         {
