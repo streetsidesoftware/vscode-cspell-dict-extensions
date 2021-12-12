@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "displayName": "Estonian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "preview": true,
   "private": true,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",
@@ -26,7 +25,7 @@
     "spelling"
   ],
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "qna": "marketplace",
   "main": "./out/src/extension",
@@ -71,6 +70,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "@cspell/dict-et-ee": "^1.1.0"
+    "@cspell/dict-et-ee": "^2.0.1"
   }
 }
