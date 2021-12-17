@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.14](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-french@0.1.13...code-spell-checker-french@0.1.14) (2021-12-17)
+
+
+### Bug Fixes
+
+* change `activationEvents` to use `onStartupFinished` ([#205](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/205)) ([c664bfe](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c664bfe88497c9eaf82aa5549734d99db9194001)), closes [#195](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/195)
+
+
+
+
+
 ## [0.1.13](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-french@0.1.12...code-spell-checker-french@0.1.13) (2021-09-16)
 
 **Note:** Version bump only for package code-spell-checker-french
