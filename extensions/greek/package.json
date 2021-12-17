@@ -1,76 +1,76 @@
 {
-    "name": "code-spell-checker-greek",
-    "description": "Greek dictionary extension for VS Code.",
-    "version": "0.1.9",
-    "displayName": "Greek - Code Spell Checker",
-    "icon": "images/SpellCheck.png",
-    "preview": true,
-    "private": true,
-    "publisher": "streetsidesoftware",
-    "engines": {
-        "vscode": "^1.54.0"
-    },
-    "extensionKind": [
-        "workspace"
-    ],
-    "categories": [
-        "Linters",
-        "Other"
-    ],
-    "keywords": [
-        "Greek",
-        "VS Code Extension",
-        "Spelling Checker",
-        "dictionary",
-        "spelling"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "qna": "marketplace",
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "cSpellExt_greek.enableGreek",
-                "title": "Enable Greek Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpellExt_greek.disableGreek",
-                "title": "Disable Greek Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpellExt_greek.enableGreekWorkspace",
-                "title": "Enable Greek Spell Checker Dictionary in Workspace"
-            },
-            {
-                "command": "cSpellExt_greek.disableGreekWorkspace",
-                "title": "Disable Greek Spell Checker Dictionary in Workspace"
-            }
-        ]
-    },
-    "extensionDependencies": [
-        "streetsidesoftware.code-spell-checker"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
-    },
-    "bugs": {
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
-    },
-    "license": "MIT",
-    "scripts": {
-        "clean": "rimraf out",
-        "clean-build": "npm run clean && npm run build",
-        "publish-extension": "vsce publish",
-        "vscode:prepublish": "npm run build",
-        "build": "tsc -p ./",
-        "prepare": "npm run build",
-        "watch": "tsc -watch -p ./",
-        "test": "node ../../node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "cspell-dict-el": "^1.1.3"
-    }
+  "name": "code-spell-checker-greek",
+  "description": "Greek dictionary extension for VS Code.",
+  "version": "0.1.9",
+  "displayName": "Greek - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "preview": true,
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "Greek",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_greek.enableGreek",
+        "title": "Enable Greek Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_greek.disableGreek",
+        "title": "Disable Greek Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_greek.enableGreekWorkspace",
+        "title": "Enable Greek Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_greek.disableGreekWorkspace",
+        "title": "Disable Greek Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "prepare": "npm run build",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "cspell-dict-el": "^1.1.3"
+  }
 }

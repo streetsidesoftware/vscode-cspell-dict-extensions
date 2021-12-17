@@ -1,51 +1,51 @@
 {
-    "name": "code-spell-checker-medical-terms",
-    "displayName": "Medical Terms - Code Spell Checker",
-    "description": "Medical Terms Add-On for Code Spell Checker",
-    "icon": "images/SpellCheck.png",
-    "version": "1.0.12",
-    "private": true,
-    "preview": false,
-    "publisher": "streetsidesoftware",
-    "license": "GPL-3.0-or-later",
-    "engines": {
-        "vscode": "^1.54.0"
-    },
-    "extensionKind": [
-        "workspace"
-    ],
-    "categories": [
-        "Linters",
-        "Other"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "qna": "marketplace",
-    "main": "./out/src/extension",
-    "contributes": {},
-    "extensionDependencies": [
-        "streetsidesoftware.code-spell-checker"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
-    },
-    "bugs": {
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
-    },
-    "scripts": {
-        "clean": "rimraf out",
-        "clean-build": "npm run clean && npm run build",
-        "prepublishOnly": "echo prepublishOnly",
-        "publish-extension": "vsce publish",
-        "vscode:prepublish": "npm run build",
-        "build": "tsc -p ./",
-        "prepare": "npm run build",
-        "watch": "tsc -watch -p ./",
-        "test": "node ../../node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "cspell-dict-medicalterms": "^1.1.3"
-    }
+  "name": "code-spell-checker-medical-terms",
+  "displayName": "Medical Terms - Code Spell Checker",
+  "description": "Medical Terms Add-On for Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "version": "1.0.12",
+  "private": true,
+  "preview": false,
+  "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {},
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "prepublishOnly": "echo prepublishOnly",
+    "publish-extension": "vsce publish",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "prepare": "npm run build",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "cspell-dict-medicalterms": "^1.1.3"
+  }
 }
