@@ -1,68 +1,68 @@
 {
-    "name": "code-spell-checker-spanish",
-    "displayName": "Spanish - Code Spell Checker",
-    "description": "Spanish Add-On for Code Spell Checker",
-    "icon": "images/SpellCheck.png",
-    "version": "2.0.3",
-    "private": true,
-    "preview": false,
-    "publisher": "streetsidesoftware",
-    "engines": {
-        "vscode": "^1.54.0"
-    },
-    "extensionKind": [
-        "workspace"
-    ],
-    "categories": [
-        "Linters",
-        "Other"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "qna": "marketplace",
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "cSpell.enableSpanish",
-                "title": "Enable Spanish Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpell.disableSpanish",
-                "title": "Disable Spanish Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpell.enableSpanishWorkspace",
-                "title": "Enable Spanish Spell Checker Dictionary in Workspace"
-            },
-            {
-                "command": "cSpell.disableSpanishWorkspace",
-                "title": "Disable Spanish Spell Checker Dictionary in Workspace"
-            }
-        ]
-    },
-    "extensionDependencies": [
-        "streetsidesoftware.code-spell-checker"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
-    },
-    "bugs": {
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
-    },
-    "scripts": {
-        "clean": "rimraf out",
-        "clean-build": "npm run clean && npm run build",
-        "publish-extension": "vsce publish",
-        "vscode:prepublish": "npm run build",
-        "build": "tsc -p ./",
-        "prepare": "npm run build",
-        "watch": "tsc -watch -p ./",
-        "test": "node ../../node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "@cspell/dict-es-es": "^2.1.0"
-    }
+  "name": "code-spell-checker-spanish",
+  "displayName": "Spanish - Code Spell Checker",
+  "description": "Spanish Add-On for Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "version": "2.0.3",
+  "private": true,
+  "preview": false,
+  "publisher": "streetsidesoftware",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpell.enableSpanish",
+        "title": "Enable Spanish Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpell.disableSpanish",
+        "title": "Disable Spanish Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpell.enableSpanishWorkspace",
+        "title": "Enable Spanish Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpell.disableSpanishWorkspace",
+        "title": "Disable Spanish Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "prepare": "npm run build",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "@cspell/dict-es-es": "^2.1.0"
+  }
 }

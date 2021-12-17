@@ -1,76 +1,76 @@
 {
-    "name": "code-spell-checker-danish",
-    "description": "Danish dictionary extension for VS Code.",
-    "version": "0.2.10",
-    "displayName": "Danish - Code Spell Checker",
-    "icon": "images/SpellCheck.png",
-    "private": true,
-    "preview": true,
-    "publisher": "streetsidesoftware",
-    "engines": {
-        "vscode": "^1.54.0"
-    },
-    "extensionKind": [
-        "workspace"
-    ],
-    "categories": [
-        "Linters",
-        "Other"
-    ],
-    "keywords": [
-        "Danish",
-        "VS Code Extension",
-        "Spelling Checker",
-        "dictionary",
-        "spelling"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "qna": "marketplace",
-    "main": "./out/src/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "cSpellExt_danish.enableDanish",
-                "title": "Enable Danish Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpellExt_danish.disableDanish",
-                "title": "Disable Danish Spell Checker Dictionary"
-            },
-            {
-                "command": "cSpellExt_danish.enableDanishWorkspace",
-                "title": "Enable Danish Spell Checker Dictionary in Workspace"
-            },
-            {
-                "command": "cSpellExt_danish.disableDanishWorkspace",
-                "title": "Disable Danish Spell Checker Dictionary in Workspace"
-            }
-        ]
-    },
-    "extensionDependencies": [
-        "streetsidesoftware.code-spell-checker"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
-    },
-    "bugs": {
-        "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
-    },
-    "license": "MIT",
-    "scripts": {
-        "clean": "rimraf out",
-        "clean-build": "npm run clean && npm run build",
-        "publish-extension": "vsce publish",
-        "vscode:prepublish": "npm run build",
-        "build": "tsc -p ./",
-        "prepare": "npm run build",
-        "watch": "tsc -watch -p ./",
-        "test": "node ../../node_modules/vscode/bin/test"
-    },
-    "dependencies": {
-        "cspell-dict-da-dk": "^1.1.3"
-    }
+  "name": "code-spell-checker-danish",
+  "description": "Danish dictionary extension for VS Code.",
+  "version": "0.2.10",
+  "displayName": "Danish - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "private": true,
+  "preview": true,
+  "publisher": "streetsidesoftware",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "Danish",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_danish.enableDanish",
+        "title": "Enable Danish Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_danish.disableDanish",
+        "title": "Disable Danish Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_danish.enableDanishWorkspace",
+        "title": "Enable Danish Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_danish.disableDanishWorkspace",
+        "title": "Disable Danish Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "prepare": "npm run build",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "cspell-dict-da-dk": "^1.1.3"
+  }
 }

@@ -24,7 +24,7 @@
     "spelling"
   ],
   "activationEvents": [
-    "*"
+    "onStartupFinished"
   ],
   "qna": "marketplace",
   "main": "./out/src/extension",
