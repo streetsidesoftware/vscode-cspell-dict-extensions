@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.14](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@1.0.13...code-spell-checker-medical-terms@1.0.14) (2022-02-04)
+
+**Note:** Version bump only for package code-spell-checker-medical-terms
+
+
+
+
+
 ## [1.0.13](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@1.0.12...code-spell-checker-medical-terms@1.0.13) (2021-12-17)
 
 

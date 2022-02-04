@@ -1,6 +1,6 @@
 {
   "name": "generator-cspell-dict-extensions",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Generate VS Code cspell dictionary extension.",
   "homepage": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
   "author": {
@@ -42,6 +42,5 @@
     }
   },
   "repository": "git@github.com:streetsidesoftware/vscode-cspell-dict-extensions",
-  "license": "MIT",
-  "devDependencies": {}
+  "license": "MIT"
 }
