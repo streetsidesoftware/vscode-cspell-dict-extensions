@@ -3,10 +3,10 @@
     "language": "en,nl",
     "words": [
         "Changelog",
+        "Nederlands",
         "streetsidesoftware"
     ],
     "import": [
-        "../../cspell.json",
-        "cspell-dict-nl-nl/cspell-ext.json"
+        "./cspell-ext.json"
     ]
 }

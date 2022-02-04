@@ -31,19 +31,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_dutch.enableDutch",
+        "command": "cSpellExt_dutch.enable",
         "title": "Enable Dutch Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_dutch.disableDutch",
+        "command": "cSpellExt_dutch.disable",
         "title": "Disable Dutch Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_dutch.enableDutchWorkspace",
+        "command": "cSpellExt_dutch.enableWorkspace",
         "title": "Enable Dutch Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_dutch.disableDutchWorkspace",
+        "command": "cSpellExt_dutch.disableWorkspace",
         "title": "Disable Dutch Spell Checker Dictionary in Workspace"
       }
     ]
@@ -70,6 +70,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "cspell-dict-nl-nl": "^1.1.2"
+    "@cspell/dict-nl-nl": "^2.2.0"
   }
 }

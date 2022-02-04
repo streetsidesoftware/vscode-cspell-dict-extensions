@@ -2,58 +2,62 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import * as dict from 'cspell-dict-nl-nl';
-
 interface CodeSpellCheckerExtension {
     registerConfig(path: string): Promise<void>;
-    enableLocal(isGlobal: boolean, local: string): Promise<void>;
-    disableLocal(isGlobal: boolean, local: string): Promise<void>;
+    enableLocale(isGlobal: boolean, locale: string): Promise<void>;
+    disableLocale(isGlobal: boolean, locale: string): Promise<void>;
 }
 
-
-const local = 'nl';
-
+//
+const locale = 'nl';
+//
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
     const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
+    const configLocation = context.asAbsolutePath('./cspell-ext.json');
 
     const extension = vscode.extensions.getExtension<CodeSpellCheckerExtension>(vscodeSpellCheckerExtension);
 
     if (extension) {
-        extension.activate().then(ext => {
-            const path = dict.getConfigLocation();
+        extension.activate().then((ext) => {
             // We need to register the dictionary configuration with the Code Spell Checker Extension
-            ext && ext.registerConfig && ext.registerConfig(path);
+            ext?.registerConfig?.(configLocation);
         });
     }
 
-    
-    function enableDutch(isGlobal: boolean) {
-        extension && extension.activate().then(ext => {
-            ext && ext.enableLocal && ext.enableLocal(isGlobal, local);
-        });
+    //
+    function enable(isGlobal: boolean) {
+        extension &&
+            extension.activate().then((ext) => {
+                ext?.enableLocale?.(isGlobal, locale);
+            });
     }
 
-    function disableDutch(isGlobal: boolean) {
-        extension && extension.activate().then(ext => {
-            ext && ext.disableLocal && ext.disableLocal(isGlobal, local);
-        });
+    function disable(isGlobal: boolean) {
+        extension &&
+            extension.activate().then((ext) => {
+                ext?.disableLocale?.(isGlobal, locale);
+            });
     }
 
     // Push the disposable to the context's subscriptions so that the
     // client can be deactivated on extension deactivation
     context.subscriptions.push(
-        vscode.commands.registerCommand('cSpellExt_dutch.enableDutch', () => enableDutch(true)),
-        vscode.commands.registerCommand('cSpellExt_dutch.disableDutch', () => disableDutch(true)),
-        vscode.commands.registerCommand('cSpellExt_dutch.enableDutchWorkspace', () => enableDutch(false)),
-        vscode.commands.registerCommand('cSpellExt_dutch.disableDutchWorkspace', () => disableDutch(false)),
+        vscode.commands.registerCommand('cSpellExt_dutch.enable', () => enable(true)),
+        vscode.commands.registerCommand('cSpellExt_dutch.disable', () => disable(true)),
+        vscode.commands.registerCommand('cSpellExt_dutch.enableWorkspace', () => enable(false)),
+        vscode.commands.registerCommand('cSpellExt_dutch.disableWorkspace', () => disable(false)),
+
+        // legacy commands:
+        vscode.commands.registerCommand('cSpellExt_dutch.enableDutch', () => enable(true)),
+        vscode.commands.registerCommand('cSpellExt_dutch.disableDutch', () => disable(true)),
+        vscode.commands.registerCommand('cSpellExt_dutch.enableDutchWorkspace', () => enable(false)),
+        vscode.commands.registerCommand('cSpellExt_dutch.disableDutchWorkspace', () => disable(false))
     );
-    
+    //
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {
-}
+export function deactivate() {}
