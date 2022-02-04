@@ -6,6 +6,9 @@
         "Nederlands",
         "streetsidesoftware"
     ],
+    "ignoreWords": [
+        "but"
+    ],
     "import": [
         "./cspell-ext.json"
     ]
