@@ -5,7 +5,7 @@
   "displayName": "Dutch - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
-  "preview": true,
+  "preview": false,
   "publisher": "streetsidesoftware",
   "engines": {
     "vscode": "^1.54.0"
