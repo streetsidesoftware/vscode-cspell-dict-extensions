@@ -8,7 +8,8 @@
     "publish": {
       "ignoreChanges": [
         "*.md",
-        "package-lock.json",
+        "package.json",
+        "samples/**",
         "cspell.json"
       ]
     }
