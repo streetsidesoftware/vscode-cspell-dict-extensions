@@ -1,6 +1,7 @@
 {
   "packages": [
-    "extensions/*"
+    "extensions/*",
+    "generator-cspell-dicts-extensions"
   ],
   "version": "independent",
   "command": {
