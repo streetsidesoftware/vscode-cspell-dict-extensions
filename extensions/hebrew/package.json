@@ -64,6 +64,7 @@
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
     "publish-extension": "vsce publish",
+    "pack-extension": "vsce package",
     "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",

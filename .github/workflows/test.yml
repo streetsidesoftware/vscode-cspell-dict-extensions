@@ -15,4 +15,5 @@ jobs:
         with:
           cache: npm
       - run: npm install
+      - run: npm run test-pack
       - run: npm run lint
