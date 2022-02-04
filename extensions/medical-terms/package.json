@@ -39,9 +39,9 @@
     "clean-build": "npm run clean && npm run build",
     "prepublishOnly": "echo prepublishOnly",
     "publish-extension": "vsce publish",
+    "pack-extension": "vsce package",
     "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
-    "prepare": "npm run build",
     "watch": "tsc -watch -p ./",
     "test": "node ../../node_modules/vscode/bin/test"
   },
