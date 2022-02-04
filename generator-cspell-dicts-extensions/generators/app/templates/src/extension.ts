@@ -4,8 +4,8 @@
 import * as vscode from 'vscode';
 interface CodeSpellCheckerExtension {
     registerConfig(path: string): Promise<void>;
-    enableLocal(isGlobal: boolean, locale: string): Promise<void>;
-    disableLocal(isGlobal: boolean, locale: string): Promise<void>;
+    enableLocale(isGlobal: boolean, locale: string): Promise<void>;
+    disableLocale(isGlobal: boolean, locale: string): Promise<void>;
 }
 
 // <% if (addCommands) { %>
@@ -31,13 +31,13 @@ export function activate(context: vscode.ExtensionContext) {
     // <% if (addCommands) { %>
     function enable(isGlobal: boolean) {
         extension && extension.activate().then(ext => {
-            ext?.enableLocal?.(isGlobal, locale);
+            ext?.enableLocale?.(isGlobal, locale);
         });
     }
 
     function disable(isGlobal: boolean) {
         extension && extension.activate().then(ext => {
-            ext?.disableLocal?.(isGlobal, locale);
+            ext?.disableLocale?.(isGlobal, locale);
         });
     }
 

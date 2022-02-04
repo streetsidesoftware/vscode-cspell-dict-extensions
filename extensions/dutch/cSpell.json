@@ -3,10 +3,13 @@
     "language": "en,nl",
     "words": [
         "Changelog",
+        "Nederlands",
         "streetsidesoftware"
     ],
+    "ignoreWords": [
+        "but"
+    ],
     "import": [
-        "../../cspell.json",
-        "cspell-dict-nl-nl/cspell-ext.json"
+        "./cspell-ext.json"
     ]
 }
