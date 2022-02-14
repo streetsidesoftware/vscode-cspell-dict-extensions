@@ -71,6 +71,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "@cspell/dict-bg-bg": "^1.0.15"
+    "@cspell/dict-bg-bg": "^2.0.0"
   }
 }
