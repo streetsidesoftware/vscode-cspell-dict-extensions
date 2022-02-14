@@ -54,6 +54,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "@cspell/dict-scientific-terms-us": "^1.0.21"
+    "@cspell/dict-scientific-terms-us": "^2.0.0"
   }
 }
