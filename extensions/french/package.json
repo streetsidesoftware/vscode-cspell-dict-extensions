@@ -7,6 +7,7 @@
   "preview": true,
   "private": true,
   "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
   "engines": {
     "vscode": "^1.54.0"
   },
@@ -17,6 +18,13 @@
     "Linters",
     "Other"
   ],
+  "keywords": [
+    "French",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
   "activationEvents": [
     "onStartupFinished"
   ],
@@ -25,19 +33,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_french.enableFrench",
+        "command": "cSpellExt_french.enable",
         "title": "Enable French Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_french.disableFrench",
+        "command": "cSpellExt_french.disable",
         "title": "Disable French Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_french.enableFrenchWorkspace",
+        "command": "cSpellExt_french.enableWorkspace",
         "title": "Enable French Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_french.disableFrenchWorkspace",
+        "command": "cSpellExt_french.disableWorkspace",
         "title": "Disable French Spell Checker Dictionary in Workspace"
       }
     ]
@@ -52,7 +60,6 @@
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
-  "license": "MIT",
   "scripts": {
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
@@ -64,6 +71,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "cspell-dict-fr-fr": "^1.3.1"
+    "@cspell/dict-fr-fr": "^2.0.1"
   }
 }
