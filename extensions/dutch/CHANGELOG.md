@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-dutch@0.3.0...code-spell-checker-dutch@0.3.1) (2022-05-03)
+
+
+### Bug Fixes
+
+* Remove `preview` from Dutch Ext. ([#241](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/241)) ([14df6a3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/14df6a3cd3b1672a711dbca3375bd987ab6d0393))
+
+
+
+
+
 # [0.3.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-dutch@0.2.11...code-spell-checker-dutch@0.3.0) (2022-02-04)
 
 
