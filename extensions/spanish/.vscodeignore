@@ -3,8 +3,9 @@
 .vscode/**
 **/*.d.ts
 **/*.map
-cspell.json
+**/*.test.*
 out/test/**
+samples/**
 src/**
 test/**
 tsconfig.json
