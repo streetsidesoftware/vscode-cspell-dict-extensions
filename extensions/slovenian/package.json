@@ -1,0 +1,76 @@
+{
+  "name": "code-spell-checker-slovenian",
+  "description": "Slovenian dictionary extension for VS Code.",
+  "version": "0.1.0",
+  "displayName": "Slovenian - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "preview": true,
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "Slovenian",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_slovenian.enable",
+        "title": "Enable Slovenian Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_slovenian.disable",
+        "title": "Disable Slovenian Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_slovenian.enableWorkspace",
+        "title": "Enable Slovenian Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_slovenian.disableWorkspace",
+        "title": "Disable Slovenian Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "pack-extension": "vsce package",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "@cspell/dict-sl-si": "^1.0.1"
+  }
+}
