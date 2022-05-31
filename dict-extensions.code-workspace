@@ -67,6 +67,9 @@
             "path": "extensions/scientific-terms"
         },
         {
+            "path": "extensions/slovenian"
+        },
+        {
             "path": "extensions/spanish"
         },
         {
