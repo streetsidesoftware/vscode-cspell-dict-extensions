@@ -1,6 +1,5 @@
 {
     "import": [
         "@cspell/dict-sl-si/cspell-ext.json"
-    ],
-    "language": "en-GB,sl"
+    ]
 }
