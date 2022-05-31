@@ -23,6 +23,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Polish](./extensions/polish)
 - [Portuguese](./extensions/portuguese)
 - [Russian](./extensions/russian)
+- [Slovenian](./extensions/slovenian)
 - [Spanish](./extensions/spanish)
 - [Swedish](./extensions/swedish)
 - [Turkish](./extensions/turkish)
@@ -39,6 +40,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - _Estonian_ - [Igor Krupenja](https://github.com/igor-krupenja)
 - _Polish_ - [Jackens](https://github.com/jackens)
 - _Danish_ - [viktorstrate](https://github.com/viktorstrate)
+- _Slovenian_ - [KrOstir](https://github.com/KrOstir)
 
 <!---
 cspell:words Jordi Olivares Provencio
@@ -46,5 +48,6 @@ cspell:words Zereges
 cspell:words Igor Krupenja
 cspell:words Jackens
 cspell:words viktorstrate
+cspell:words KrOstir
 cspell:words Bokmål bokmal
 --->
