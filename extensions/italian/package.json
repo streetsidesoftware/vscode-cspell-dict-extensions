@@ -4,7 +4,7 @@
   "version": "0.1.11",
   "displayName": "Italian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "preview": true,
+  "preview": false,
   "private": true,
   "publisher": "streetsidesoftware",
   "engines": {
