@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-slovenian@0.1.1...code-spell-checker-slovenian@0.1.2) (2022-06-09)
+
+
+### Bug Fixes
+
+* Add Sponsor Link ([#306](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/306)) ([1342869](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/13428699ee20f6b6a597dd2638d5633f2a53c9cf)), closes [#1998](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1998)
+
+
+
+
+
 ## 0.1.1 (2022-05-31)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.15](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@1.0.14...code-spell-checker-medical-terms@1.0.15) (2022-06-09)
+
+
+### Bug Fixes
+
+* Add Slovenian ([#299](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/299)) ([7b0becc](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/7b0becc910e11e674ad32be812aa5e138b005219))
+* Add Sponsor Link ([#306](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/306)) ([1342869](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/13428699ee20f6b6a597dd2638d5633f2a53c9cf)), closes [#1998](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1998)
+
+
+
+
+
 ## [1.0.14](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@1.0.13...code-spell-checker-medical-terms@1.0.14) (2022-02-04)
 
 **Note:** Version bump only for package code-spell-checker-medical-terms
