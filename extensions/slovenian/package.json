@@ -4,12 +4,15 @@
   "version": "0.1.1",
   "displayName": "Slovenian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "preview": true,
+  "preview": false,
   "private": true,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",
   "engines": {
-    "vscode": "^1.54.0"
+    "vscode": "^1.67.0"
+  },
+  "sponsor": {
+    "url": "https://opencollective.com/code-spell-checker"
   },
   "extensionKind": [
     "workspace"

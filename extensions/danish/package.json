@@ -5,10 +5,13 @@
   "displayName": "Danish - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
-  "preview": true,
+  "preview": false,
   "publisher": "streetsidesoftware",
   "engines": {
-    "vscode": "^1.54.0"
+    "vscode": "^1.67.0"
+  },
+  "sponsor": {
+    "url": "https://opencollective.com/code-spell-checker"
   },
   "extensionKind": [
     "workspace"

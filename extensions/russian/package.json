@@ -7,7 +7,10 @@
   "private": true,
   "publisher": "streetsidesoftware",
   "engines": {
-    "vscode": "^1.60.0"
+    "vscode": "^1.67.0"
+  },
+  "sponsor": {
+    "url": "https://opencollective.com/code-spell-checker"
   },
   "extensionKind": [
     "workspace"
