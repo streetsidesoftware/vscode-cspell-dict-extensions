@@ -33,5 +33,7 @@
     "vsce": "^2.10.0",
     "@vscode/test-electron": "^2.1.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "yeoman-generator": "^5.6.1"
+  }
 }
