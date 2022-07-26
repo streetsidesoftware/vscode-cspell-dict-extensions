@@ -52,4 +52,5 @@ cspell:words Jackens
 cspell:words viktorstrate
 cspell:words KrOstir
 cspell:words Bokmål bokmal
+cspell:words Watheq Taha Zerrouki Ahmed ElTabarani
 --->
