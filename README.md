@@ -4,6 +4,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 
 ## Current Extensions
 
+- [Arabic](./extensions/arabic)
 - [Brazilian Portuguese](./extensions/portuguese-brazilian)
 - [Catalan](./extensions/catalan)
 - [Czech](./extensions/czech)
@@ -35,6 +36,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Contributors
 
+- _Arabic_ - [Watheq](https://github.com/watheqAlshowaiter/), [Taha Zerrouki](https://github.com/linuxscout), and [Ahmed ElTabarani](https://github.com/AhmedElTabarani)
 - _Catalan_ - [Jordi Olivares Provencio](https://github.com/jordiolivares)
 - _Czech_ - [Zereges](https://github.com/Zereges)
 - _Estonian_ - [Igor Krupenja](https://github.com/igor-krupenja)
@@ -50,4 +52,5 @@ cspell:words Jackens
 cspell:words viktorstrate
 cspell:words KrOstir
 cspell:words Bokmål bokmal
+cspell:words Watheq Taha Zerrouki Ahmed ElTabarani
 --->
