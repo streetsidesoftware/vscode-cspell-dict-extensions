@@ -10,7 +10,7 @@ After this extension is installed, it is necessary to tell the spell checker to 
 
 ### Enable Dictionary
 
-Commands (use `F1` or *View -> Command Palette...*):
+Commands (use `F1` or _View -> Command Palette..._):
 
 - `F1` `Show Spell Checker Configuration Info`
 - Select the `Language` tab.
@@ -18,7 +18,7 @@ Commands (use `F1` or *View -> Command Palette...*):
 
 ### Disable Dictionary
 
-Commands (use `F1` or *View -> Command Palette...*):
+Commands (use `F1` or _View -> Command Palette..._):
 
 - `F1` `Show Spell Checker Configuration Info`
 - Select the `Language` tab.
@@ -28,7 +28,7 @@ Commands (use `F1` or *View -> Command Palette...*):
 
 This is done with the `language` setting.
 
-*Preferences* -> *Settings*
+_Preferences_ -> _Settings_
 
 Adding `ee` to the `cSpell.language` setting, will enable the Estonian dictionary.
 Example using both English and Estonian dictionaries:

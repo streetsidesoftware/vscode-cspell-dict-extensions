@@ -1,8 +1,4 @@
 {
-    "dictionaries": [
-        "scientific-terms-us"
-    ],
-    "import": [
-        "@cspell/dict-scientific-terms-us/cspell-ext.json"
-    ]
+    "dictionaries": ["scientific-terms-us"],
+    "import": ["@cspell/dict-scientific-terms-us/cspell-ext.json"]
 }

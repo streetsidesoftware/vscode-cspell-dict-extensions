@@ -1,5 +1,3 @@
 {
-    "import": [
-        "@cspell/dict-sv/cspell-ext.json"
-    ]
+    "import": ["@cspell/dict-sv/cspell-ext.json"]
 }

@@ -13,13 +13,12 @@ interface CodeSpellCheckerExtension {
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(/*context: vscode.ExtensionContext*/) {
-
     const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
 
     const extension = vscode.extensions.getExtension<CodeSpellCheckerExtension>(vscodeSpellCheckerExtension);
 
     if (extension) {
-        extension.activate().then(ext => {
+        extension.activate().then((ext) => {
             const path = dict.getConfigLocation();
             ext && ext.registerConfig && ext.registerConfig(path);
         });
@@ -27,5 +26,4 @@ export function activate(/*context: vscode.ExtensionContext*/) {
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {
-}
+export function deactivate() {}
