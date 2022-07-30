@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "mkdirp": "^1.0.4",
-    "yeoman-generator": "^5.6.1",
+    "yeoman-generator": "^5.7.0",
     "yosay": "^2.0.2"
   },
   "jest": {
