@@ -5,7 +5,7 @@
   "displayName": "Arabic - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": true,
-  "private": true,
+  "private": false,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",
   "engines": {
