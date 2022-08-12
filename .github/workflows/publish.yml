@@ -42,11 +42,11 @@ jobs:
       - name: Publish VSCE
         run: |
           cd $EXTENSION_DIR
-          vsce publish -p ${{ secrets.VSCE_TOKEN }} || echo "PUB_FAIL_VSCE=true" >> $GITHUB_ENV
+          npx vsce publish -p ${{ secrets.VSCE_TOKEN }} || echo "PUB_FAIL_VSCE=true" >> $GITHUB_ENV
       - name: Publish OVSX
         run: |
           cd $EXTENSION_DIR
-          ovsx publish -p ${{ secrets.OVSX_TOKEN }} || echo "PUB_FAIL_OVSX=true" >> $GITHUB_ENV
+          npx ovsx publish -p ${{ secrets.OVSX_TOKEN }} || echo "PUB_FAIL_OVSX=true" >> $GITHUB_ENV
       - name: Check Publish Result VSCE
         if: ${{ env.PUB_FAIL_VSCE }}
         run: echo "::error title=VSCE::Failed to Publish $EXTENSION_NAME to VS Code Marketplace."
