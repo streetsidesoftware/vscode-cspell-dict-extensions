@@ -28,7 +28,7 @@ jobs:
           paths_released: ${{ inputs.paths_released }}
         run: >
           echo EXTENSION_LIST=$(
-            echo $paths_released | jq 'map(select(startswith("extensions")))
+            echo $paths_released | jq 'map(select(startswith("extensions")))'
           ) $GITHUB_ENV
 
   publish:
