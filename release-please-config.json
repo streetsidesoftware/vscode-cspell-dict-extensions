@@ -66,6 +66,10 @@
         }
     ],
     "packages": {
+        ".": {
+            "component": "vscode-cspell-dict-extensions",
+            "releaseType": "node"
+        },
         "extensions/arabic": {
             "component": "code-spell-checker-arabic",
             "releaseType": "node"
