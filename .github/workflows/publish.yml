@@ -1,0 +1,40 @@
+# This is a basic workflow that is manually triggered
+
+name: "[sub] Publish to Marketplace"
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        required: true
+      paths_released:
+        type: string
+        required: true
+    secrets:
+      OVSX_TOKEN:
+        required: true
+      VSCE_TOKEN:
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        extension_dir: ${{ fromJSON(inputs.paths_released) }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref }}
+      - name: Install
+        run: npm install
+      - name: Prepare Try to Release
+        run: echo "${{ matrix.extension_dir }}"
+      # - name: Publish VSCE
+      #   run: npx lerna exec --no-bail "vsce publish -p ${{ secrets.VSCE_TOKEN }}" || echo done
+      # - name: Publish OVSX
+      #   run: npx lerna exec --no-bail "ovsx publish -p ${{ secrets.OVSX_TOKEN }}" || echo done
+# cspell:ignore vsix xargs OVSX

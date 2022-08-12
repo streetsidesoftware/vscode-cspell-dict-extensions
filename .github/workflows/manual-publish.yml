@@ -16,17 +16,34 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  publish:
+  list_extensions:
     runs-on: ubuntu-latest
+    outputs:
+      extension_list: ${{ env.EXTENSION_LIST }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.inputs.ref }}
-      - name: Install
-        run: npm install
-      - name: Publish VSCE
-        run: npx lerna exec --no-bail "vsce publish -p ${{ secrets.VSCE_TOKEN }}" || echo done
-      - name: Publish OVSX
-        run: npx lerna exec --no-bail "ovsx publish -p ${{ secrets.OVSX_TOKEN }}" || echo done
+          ref: ${{ inputs.ref }}
+
+      - name: From Script
+        run: |
+          echo extensions_from_script=$(./scripts/list-extensions.sh) >> $GITHUB_ENV
+
+      - name: EXTENSION_LIST
+        env:
+          EXTENSION_LIST: ${{ inputs.paths_released || env.extensions_from_script }}
+        run: |
+          echo EXTENSION_LIST=$EXTENSION_LIST >> $GITHUB_ENV
+
+  publish:
+    needs:
+      - list_extensions
+    uses: ./.github/workflows/publish.yml
+    with:
+      ref: ${{ inputs.ref }}
+      paths_released: ${{ needs.list_extensions.outputs.extension_list }}
+    secrets:
+      VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+      OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}
 # cspell:ignore vsix xargs OVSX
