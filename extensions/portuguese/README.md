@@ -30,11 +30,11 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `pt,pt_PT` to the `cSpell.language` setting, will enable the Portuguese dictionary.
+Adding `pt` or `pt_PT` to the `cSpell.language` setting, will enable the Portuguese dictionary.
 Example using both English and Portuguese dictionaries:
 
 ```javascript
-"cSpell.language": "en,pt,pt_PT",
+"cSpell.language": "en,pt_PT",
 ```
 
 ## Requirements
