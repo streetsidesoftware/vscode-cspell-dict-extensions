@@ -4,7 +4,7 @@
     "extensions/catalan": "0.1.13",
     "extensions/croatian": "0.1.6",
     "extensions/czech": "0.1.13",
-    "extensions/danish": "1.0.0",
+    "extensions/danish": "1.0.1",
     "extensions/dutch": "0.3.3",
     "extensions/esperanto": "0.1.11",
     "extensions/estonian": "0.1.7",
@@ -28,5 +28,5 @@
     "extensions/turkish": "0.1.13",
     "extensions/ukrainian": "0.1.14",
     "extensions/vietnamese": "0.1.10",
-    ".": "1.0.0"
+    ".": "1.0.1"
 }

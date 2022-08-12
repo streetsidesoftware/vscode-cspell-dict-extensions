@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@1.0.0...vscode-cspell-dict-extensions@1.0.1) (2022-08-12)
+
+
+### Miscellaneous
+
+* try to get release-please to publish ([2ac0d52](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2ac0d5253c7164540063941e18b6928543059aa8))
+
+
+### Updates and Bug Fixes
+
+* Update sample ([67b2d17](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/67b2d179d56a2ad719a4f69fedd24e55216d3385))
+
 ## 1.0.0 (2022-08-12)
 
 
