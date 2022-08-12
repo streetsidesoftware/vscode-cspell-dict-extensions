@@ -29,11 +29,22 @@ jobs:
       - release-please
     env:
       release_please_info: ${{ needs.release-please.outputs.release_please_info }}
+      output: ${{ toJSON(needs.release-please.outputs) }}
+      paths_released: $${{ needs.release-please.outputs.paths_released }}
     steps:
       - name: Show Release Please Results
         run: |
+          echo "PATHS: $paths_released"
           echo "$release_please_info"
-          echo "${{ needs.release-please.outputs.paths_released }}"
+          echo OUTPUT
+          echo "$output"
+      - name: Release
+        if: ${{ needs.release-please.outputs.release_created }}
+        run: echo RELEASE
+
+      - name: No Release
+        if: ${{ !needs.release-please.outputs.release_created }}
+        run: echo Not Released
 
   publish:
     needs:
