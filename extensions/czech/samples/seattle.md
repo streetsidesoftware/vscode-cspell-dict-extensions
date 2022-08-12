@@ -1,0 +1,9 @@
+Seattle (česky vyslovováno [sɪjɛtl̩], anglicky výslovnost [sɪˈætəl]IPA) je město ve Spojených státech amerických a sídlo okresu King. S více než 686 tisíci obyvateli z roku 2015[1] je nejlidnatějším městem státu Washington a celého amerického severozápadu. Seattle je jedním z nejrychleji se rozvíjejících velkoměst ve Spojených státech,[3] v květnu 2015 vykazoval růst jeho ekonomiky 2,1 %,[4] k červenci 2016 pak dokonce 3,1 %.[5] Město se rozprostírá na pevninské šíji mezi Pugetovým zálivem a Washingtonovým jezerem, asi 175 km jižně od hranic s Kanadou.
+
+Archeologické nálezy nasvědčují tomu, že okolí dnešního Seattlu bylo indiány obývané již před 4 tisíci lety. Před příchodem prvních Evropanů, vedených Georgem Vancouverem, zde žil kmen Duwamišů. Za zakladatele města je považován Arthur A. Denny. V roce 1962 se zde konala světová výstava, během níž byla postavena dominanta města – věž Space Needle. Seattle byl v roce 1999 dějištěm konference Světové obchodní organizace (WTO) a s ní spjatých masových demonstrací proti globalizaci.
+
+Seattlu se přezdívá Smaragdové město. Toto přízvisko vzniklo na počátku 80. let při soutěži vyhlášené místním občanským sdružením. Smaragdové proto, že město i celá oblast jsou charakteristické svou zelení.[6] Neformálně se Seattlu říká i Brána na Aljašku, Královské město či Město letadel, protože až do roku 2001 zde bylo ústředí společnosti Boeing.[7]
+
+Město je považováno za kolébku hudebního stylu grunge a je rovněž pověstné velkou konzumací kávy.[8][9] Vznikly zde společnosti zabývající se prodejem kávy jako Starbucks, Seattle's Best Coffee či Tully's. V roce 1916 zde byla založena společnost Boeing, v současnosti jeden ze dvou největších výrobců letecké techniky na světě. Mezi další úspěšné společnosti ze Seattlu patří například Amazon.com nebo Microsoft.
+
+<!--- cspell:ignore Jimi Handrix --->
