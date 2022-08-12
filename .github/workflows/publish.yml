@@ -35,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - filter_dirs
+    if: ${{ needs.filter_dirs.outputs.paths_released != '[]' }}
     strategy:
       matrix:
         extension_dir: ${{ fromJSON(needs.filter_dirs.outputs.paths_released) }}
