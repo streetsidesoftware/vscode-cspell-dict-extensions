@@ -19,6 +19,7 @@ on:
         # Options are can be generated from `./scripts/extensions.sh`
         options:
           [
+            ".",
             "extensions/arabic",
             "extensions/bulgarian",
             "extensions/catalan",

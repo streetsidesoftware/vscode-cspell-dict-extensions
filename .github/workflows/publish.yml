@@ -17,13 +17,27 @@ on:
       VSCE_TOKEN:
         required: true
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  filter_dirs:
+    runs-on: ubuntu-latest
+    outputs:
+      paths_released: ${{ env.EXTENSION_LIST }}
+    steps:
+      - name: filter
+        env:
+          paths_released: ${{ inputs.paths_released }}
+        run: >
+          echo EXTENSION_LIST=$(
+            echo $paths_released | jq 'map(select(startswith("extensions")))
+          ) $GITHUB_ENV
+
   publish:
     runs-on: ubuntu-latest
+    needs:
+      - filter_dirs
     strategy:
       matrix:
-        extension_dir: ${{ fromJSON(inputs.paths_released) }}
+        extension_dir: ${{ fromJSON(needs.filter_dirs.outputs.paths_released) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -61,4 +75,4 @@ jobs:
       - name: Check Build
         if: ${{ env.PUB_FAIL_VSCE || env.PUB_FAIL_OVSX }}
         run: exit 1
-# cspell:ignore vsix xargs OVSX
+# cspell:ignore vsix xargs OVSX startswith
