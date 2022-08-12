@@ -2,10 +2,13 @@
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 JQ_FILTER_PACKAGES="$SCRIPT_DIR/gen-release-please-config-packages.jq"
-JQ_FILTER_CONFIG="$SCRIPT_DIR/gen-release-please-config.jq"
+
+PACKAGES="$(echo $(ls -1 extensions/*/package.json) \
+    | xargs jq -f $JQ_FILTER_PACKAGES | jq -s "add | { packages: . }")"
 
 
-echo $(ls -1 extensions/*/package.json) \
-    | xargs jq -f $JQ_FILTER_PACKAGES | jq -s add | jq -f $JQ_FILTER_CONFIG > release-please-config.json
+RESULT="$(echo $(cat ./release-please-config.json) $PACKAGES  | jq -s ".[0] + .[1]" | jq --indent 4 .)"
 
-yarn prettier -w r*.json
+echo "$RESULT" > ./release-please-config.json
+
+npx prettier -w r*.json
