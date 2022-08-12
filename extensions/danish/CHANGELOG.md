@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-danish@1.0.0...code-spell-checker-danish@1.0.1) (2022-08-12)
+
+
+### Updates and Bug Fixes
+
+* Update sample ([67b2d17](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/67b2d179d56a2ad719a4f69fedd24e55216d3385))
+
 ## [1.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-danish@0.2.14...code-spell-checker-danish@1.0.0) (2022-08-12)
 
 
