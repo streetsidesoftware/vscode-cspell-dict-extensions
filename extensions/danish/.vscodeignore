@@ -1,7 +1,9 @@
 .gitignore
 .vscode-test/**
 .vscode/**
+**/*.d.ts
 **/*.map
+**/*.test.*
 out/test/**
 samples/**
 src/**

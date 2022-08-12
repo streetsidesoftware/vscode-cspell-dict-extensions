@@ -9,7 +9,7 @@ interface CodeSpellCheckerExtension {
 }
 
 //
-const locale = 'dk';
+const locale = 'da';
 //
 
 // this method is called when your extension is activated
