@@ -7,6 +7,7 @@
   "preview": false,
   "private": true,
   "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -35,19 +36,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_italian.enableItalian",
+        "command": "cSpellExt_italian.enable",
         "title": "Enable Italian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_italian.disableItalian",
+        "command": "cSpellExt_italian.disable",
         "title": "Disable Italian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_italian.enableItalianWorkspace",
+        "command": "cSpellExt_italian.enableWorkspace",
         "title": "Enable Italian Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_italian.disableItalianWorkspace",
+        "command": "cSpellExt_italian.disableWorkspace",
         "title": "Disable Italian Spell Checker Dictionary in Workspace"
       }
     ]
@@ -62,7 +63,6 @@
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
-  "license": "MIT",
   "scripts": {
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
@@ -74,6 +74,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "cspell-dict-it-it": "^1.1.2"
+    "@cspell/dict-it-it": "^2.0.0"
   }
 }
