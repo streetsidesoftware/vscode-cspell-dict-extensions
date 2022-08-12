@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-portuguese@0.1.13...code-spell-checker-portuguese@1.0.0) (2022-08-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Upgrade Portuguese Dictionary to v2.0 (#353)
+
+### Features
+
+* Upgrade Portuguese Dictionary to v2.0 ([#353](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/353)) ([7443cb6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/7443cb6c282a286b9e48d62b8b76f2074162eb64))
+
 ## [0.1.13](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-portuguese@0.1.12...code-spell-checker-portuguese@0.1.13) (2022-07-26)
 
 **Note:** Version bump only for package code-spell-checker-portuguese
