@@ -151,13 +151,13 @@ module.exports = class extends Generator {
 
   install() {
     if (this.props.dictionarySrc) {
-        this.spawnCommand('npm', ['install', '-S', this.props.dictionarySrc]);
+        this.spawnCommandSync('npm', ['install', '-S', this.props.dictionarySrc]);
+        this.spawnCommandSync('npx', ['prettier', '-w', "**/*.{yaml,json,ts,md}"]);
     }
   }
 
   end() {
     this.spawnCommandSync('npm', ['install']);
-    this.spawnCommandSync('npx prettier', ['-w', "**/*.{yaml,json,ts,md}"]);
   }
 };
 
