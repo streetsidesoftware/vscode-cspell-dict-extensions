@@ -1,0 +1,186 @@
+{
+    "bootstrap-sha": "da45b74973205581be78b6a97ef1bc962ac3d555",
+    "include-v-in-tag": false,
+    "tag-separator": "@",
+    "changelog-sections": [
+        {
+            "type": "feat",
+            "section": "Features",
+            "hidden": false
+        },
+        {
+            "type": "feature",
+            "section": "Features"
+        },
+        {
+            "type": "fix",
+            "section": "Updates and Bug Fixes",
+            "hidden": false
+        },
+        {
+            "type": "perf",
+            "section": "Performance Improvements"
+        },
+        {
+            "type": "ci",
+            "section": "Continuous Integration",
+            "hidden": false
+        },
+        {
+            "type": "chore",
+            "section": "Miscellaneous",
+            "hidden": false
+        },
+        {
+            "type": "revert",
+            "section": "Reverts"
+        },
+        {
+            "type": "docs",
+            "section": "Documentation"
+        },
+        {
+            "type": "style",
+            "section": "Styles",
+            "hidden": false
+        },
+        {
+            "type": "refactor",
+            "section": "Code Refactoring",
+            "hidden": false
+        },
+        {
+            "type": "test",
+            "section": "Tests",
+            "hidden": false
+        },
+        {
+            "type": "build",
+            "section": "Build System",
+            "hidden": false
+        },
+        {
+            "type": "",
+            "section": "Changes",
+            "hidden": false
+        }
+    ],
+    "packages": {
+        "extensions/arabic": {
+            "component": "code-spell-checker-arabic",
+            "releaseType": "node"
+        },
+        "extensions/bulgarian": {
+            "component": "code-spell-checker-bulgarian",
+            "releaseType": "node"
+        },
+        "extensions/catalan": {
+            "component": "code-spell-checker-catalan",
+            "releaseType": "node"
+        },
+        "extensions/croatian": {
+            "component": "code-spell-checker-croatian",
+            "releaseType": "node"
+        },
+        "extensions/czech": {
+            "component": "code-spell-checker-czech",
+            "releaseType": "node"
+        },
+        "extensions/danish": {
+            "component": "code-spell-checker-danish",
+            "releaseType": "node"
+        },
+        "extensions/dutch": {
+            "component": "code-spell-checker-dutch",
+            "releaseType": "node"
+        },
+        "extensions/esperanto": {
+            "component": "code-spell-checker-esperanto",
+            "releaseType": "node"
+        },
+        "extensions/estonian": {
+            "component": "code-spell-checker-estonian",
+            "releaseType": "node"
+        },
+        "extensions/french-reforme": {
+            "component": "code-spell-checker-french-reforme",
+            "releaseType": "node"
+        },
+        "extensions/french": {
+            "component": "code-spell-checker-french",
+            "releaseType": "node"
+        },
+        "extensions/german": {
+            "component": "code-spell-checker-german",
+            "releaseType": "node"
+        },
+        "extensions/greek": {
+            "component": "code-spell-checker-greek",
+            "releaseType": "node"
+        },
+        "extensions/hebrew": {
+            "component": "code-spell-checker-hebrew",
+            "releaseType": "node"
+        },
+        "extensions/italian": {
+            "component": "code-spell-checker-italian",
+            "releaseType": "node"
+        },
+        "extensions/medical-terms": {
+            "component": "code-spell-checker-medical-terms",
+            "releaseType": "node"
+        },
+        "extensions/norwegian-bokmal": {
+            "component": "code-spell-checker-norwegian-bokmal",
+            "releaseType": "node"
+        },
+        "extensions/persian": {
+            "component": "code-spell-checker-persian",
+            "releaseType": "node"
+        },
+        "extensions/polish": {
+            "component": "code-spell-checker-polish",
+            "releaseType": "node"
+        },
+        "extensions/portuguese-brazilian": {
+            "component": "code-spell-checker-portuguese-brazilian",
+            "releaseType": "node"
+        },
+        "extensions/portuguese": {
+            "component": "code-spell-checker-portuguese",
+            "releaseType": "node"
+        },
+        "extensions/russian": {
+            "component": "code-spell-checker-russian",
+            "releaseType": "node"
+        },
+        "extensions/scientific-terms": {
+            "component": "code-spell-checker-scientific-terms",
+            "releaseType": "node"
+        },
+        "extensions/slovenian": {
+            "component": "code-spell-checker-slovenian",
+            "releaseType": "node"
+        },
+        "extensions/spanish": {
+            "component": "code-spell-checker-spanish",
+            "releaseType": "node"
+        },
+        "extensions/swedish": {
+            "component": "code-spell-checker-swedish",
+            "releaseType": "node"
+        },
+        "extensions/turkish": {
+            "component": "code-spell-checker-turkish",
+            "releaseType": "node"
+        },
+        "extensions/ukrainian": {
+            "component": "code-spell-checker-ukrainian",
+            "releaseType": "node"
+        },
+        "extensions/vietnamese": {
+            "component": "code-spell-checker-vietnamese",
+            "releaseType": "node"
+        }
+    }
+}

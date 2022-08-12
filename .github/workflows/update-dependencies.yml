@@ -44,6 +44,12 @@ jobs:
       - name: Build
         run: |
           npm run build
+      - name: Update Workspace
+        run: |
+          ./scripts/update-code-workspace.sh
+      - name: Update Release Please Packages
+        run: |
+          ./scripts/gen-release-please-config.sh
       - name: Has changes
         run: |
           git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
