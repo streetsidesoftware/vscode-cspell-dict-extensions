@@ -32,7 +32,7 @@ jobs:
 
       - name: EXTENSION_LIST
         env:
-          EXTENSION_LIST: ${{ inputs.paths_released || env.extensions_from_script }}
+          EXTENSION_LIST: ${{ env.extensions_from_script }}
         run: |
           echo EXTENSION_LIST=$EXTENSION_LIST >> $GITHUB_ENV
 

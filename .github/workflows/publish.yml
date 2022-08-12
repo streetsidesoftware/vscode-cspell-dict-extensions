@@ -32,9 +32,32 @@ jobs:
       - name: Install
         run: npm install
       - name: Prepare Try to Release
-        run: echo "${{ matrix.extension_dir }}"
-      # - name: Publish VSCE
-      #   run: npx lerna exec --no-bail "vsce publish -p ${{ secrets.VSCE_TOKEN }}" || echo done
-      # - name: Publish OVSX
-      #   run: npx lerna exec --no-bail "ovsx publish -p ${{ secrets.OVSX_TOKEN }}" || echo done
+        env:
+          EXTENSION_DIR: ${{ matrix.extension_dir }}
+        run: |
+          echo $EXTENSION_DIR
+          echo EXTENSION_DIR=${{ matrix.extension_dir }} >> $GITHUB_ENV
+          cd $EXTENSION_DIR
+          echo EXTENSION_NAME=$(jq -r .name package.json ) >> $GITHUB_ENV
+      - name: Publish VSCE
+        run: |
+          cd $EXTENSION_DIR
+          vsce publish -p ${{ secrets.VSCE_TOKEN }} || echo "PUB_FAIL_VSCE=true" >> $GITHUB_ENV
+      - name: Publish OVSX
+        run: |
+          cd $EXTENSION_DIR
+          ovsx publish -p ${{ secrets.OVSX_TOKEN }} || echo "PUB_FAIL_OVSX=true" >> $GITHUB_ENV
+      - name: Check Publish Result VSCE
+        if: ${{ env.PUB_FAIL_VSCE }}
+        run: echo "::error title=VSCE::Failed to Publish $EXTENSION_NAME to VS Code Marketplace."
+      - name: Publish OVSX
+        run: >
+          find ./build -name "*.vsix" | xargs npx ovsx publish -p ${{ secrets.OVSX_TOKEN }}
+          || echo "PUB_FAIL_OVSX=true" >> $GITHUB_ENV
+      - name: Check Publish Result OVSX
+        if: ${{ env.PUB_FAIL_OVSX }}
+        run: echo "::error title=OVSX::Failed to Publish $EXTENSION_NAME to Eclipse Open VSX."
+      - name: Check Build
+        if: ${{ env.PUB_FAIL_VSCE || env.PUB_FAIL_OVSX }}
+        run: exit 1
 # cspell:ignore vsix xargs OVSX
