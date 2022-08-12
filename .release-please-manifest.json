@@ -19,7 +19,7 @@
     "extensions/persian": "0.1.13",
     "extensions/polish": "1.0.13",
     "extensions/portuguese-brazilian": "2.0.8",
-    "extensions/portuguese": "1.0.1",
+    "extensions/portuguese": "1.0.2",
     "extensions/russian": "2.0.5",
     "extensions/scientific-terms": "0.1.6",
     "extensions/slovenian": "0.1.3",
@@ -28,5 +28,5 @@
     "extensions/turkish": "0.1.13",
     "extensions/ukrainian": "0.1.14",
     "extensions/vietnamese": "0.1.10",
-    ".": "1.0.2"
+    ".": "1.0.3"
 }
