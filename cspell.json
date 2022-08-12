@@ -17,7 +17,7 @@
         ".vscode",
         ".vscodeignore",
         "extensions/*/samples/**",
-        "generators/app/templates/samples/**",
+        "**/templates/samples/**",
         "node_modules",
         "package-lock.json"
     ],
