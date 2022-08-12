@@ -2,53 +2,55 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import * as dict from 'cspell-dict-el';
-
 interface CodeSpellCheckerExtension {
     registerConfig(path: string): Promise<void>;
-    enableLocal(isGlobal: boolean, local: string): Promise<void>;
-    disableLocal(isGlobal: boolean, local: string): Promise<void>;
+    enableLocale(isGlobal: boolean, locale: string): Promise<void>;
+    disableLocale(isGlobal: boolean, locale: string): Promise<void>;
 }
 
-const local = 'el';
+//
+const locale = 'el';
+//
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
     const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
+    const configLocation = context.asAbsolutePath('./cspell-ext.json');
 
     const extension = vscode.extensions.getExtension<CodeSpellCheckerExtension>(vscodeSpellCheckerExtension);
 
     if (extension) {
         extension.activate().then((ext) => {
-            const path = dict.getConfigLocation();
             // We need to register the dictionary configuration with the Code Spell Checker Extension
-            ext && ext.registerConfig && ext.registerConfig(path);
+            ext?.registerConfig?.(configLocation);
         });
     }
 
-    function enableGreek(isGlobal: boolean) {
+    //
+    function enable(isGlobal: boolean) {
         extension &&
             extension.activate().then((ext) => {
-                ext && ext.enableLocal && ext.enableLocal(isGlobal, local);
+                ext?.enableLocale?.(isGlobal, locale);
             });
     }
 
-    function disableGreek(isGlobal: boolean) {
+    function disable(isGlobal: boolean) {
         extension &&
             extension.activate().then((ext) => {
-                ext && ext.disableLocal && ext.disableLocal(isGlobal, local);
+                ext?.disableLocale?.(isGlobal, locale);
             });
     }
 
     // Push the disposable to the context's subscriptions so that the
     // client can be deactivated on extension deactivation
     context.subscriptions.push(
-        vscode.commands.registerCommand('cSpellExt_greek.enableGreek', () => enableGreek(true)),
-        vscode.commands.registerCommand('cSpellExt_greek.disableGreek', () => disableGreek(true)),
-        vscode.commands.registerCommand('cSpellExt_greek.enableGreekWorkspace', () => enableGreek(false)),
-        vscode.commands.registerCommand('cSpellExt_greek.disableGreekWorkspace', () => disableGreek(false))
+        vscode.commands.registerCommand('cSpellExt_greek.enable', () => enable(true)),
+        vscode.commands.registerCommand('cSpellExt_greek.disable', () => disable(true)),
+        vscode.commands.registerCommand('cSpellExt_greek.enableWorkspace', () => enable(false)),
+        vscode.commands.registerCommand('cSpellExt_greek.disableWorkspace', () => disable(false))
     );
+    //
 }
 
 // this method is called when your extension is deactivated
