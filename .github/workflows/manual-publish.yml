@@ -85,15 +85,14 @@ jobs:
         run: |
           echo EXTENSION_LIST=$EXTENSION_LIST >> $GITHUB_ENV
 
-  # publish:
-  #   needs:
-  #     - list_extensions
-  #   uses: ./.github/workflows/publish.yml
-  #   with:
-  #     ref: ${{ inputs.ref }}
-  #     paths_released: ${{ needs.list_extensions.outputs.extension_list }}
-  #   secrets:
-  #     VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
-  #     OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}
-
+  publish:
+    needs:
+      - list_extensions
+    uses: ./.github/workflows/publish.yml
+    with:
+      ref: ${{ inputs.ref }}
+      paths_released: ${{ needs.list_extensions.outputs.extension_list }}
+    secrets:
+      VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+      OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}
 # cspell:ignore vsix xargs OVSX
