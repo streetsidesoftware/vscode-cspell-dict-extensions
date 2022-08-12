@@ -106,6 +106,7 @@ module.exports = class extends Generator {
       'CHANGELOG.md',
       'cspell-ext.json',
       'src/extension.ts',
+      ['samples', 'samples'],
       'LICENSE'
     ];
     const filesToCopy = [
@@ -114,8 +115,7 @@ module.exports = class extends Generator {
       ['test', 'test'],
       '.gitignore',
       '.vscodeignore',
-      'tsconfig.json',
-      'vsc-extension-quickstart.md'
+      'tsconfig.json'
     ];
     files
       .map(fromTo => typeof fromTo === 'string' ? [fromTo, fromTo] : fromTo)
@@ -156,7 +156,8 @@ module.exports = class extends Generator {
   }
 
   end() {
-    this.spawnCommand('npm', ['install']);
+    this.spawnCommandSync('npm', ['install']);
+    this.spawnCommandSync('npx prettier', ['-w', "**/*.{yaml,json,ts,md}"]);
   }
 };
 
