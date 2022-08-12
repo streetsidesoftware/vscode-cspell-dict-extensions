@@ -30,7 +30,7 @@ jobs:
     env:
       release_please_info: ${{ needs.release-please.outputs.release_please_info }}
       output: ${{ toJSON(needs.release-please.outputs) }}
-      paths_released: $${{ needs.release-please.outputs.paths_released }}
+      paths_released: ${{ needs.release-please.outputs.paths_released }}
     steps:
       - name: Show Release Please Results
         run: |
