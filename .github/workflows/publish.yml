@@ -29,7 +29,7 @@ jobs:
         run: >
           echo EXTENSION_LIST=$(
             echo $paths_released | jq 'map(select(startswith("extensions")))'
-          ) $GITHUB_ENV
+          ) >> $GITHUB_ENV
 
   publish:
     runs-on: ubuntu-latest
