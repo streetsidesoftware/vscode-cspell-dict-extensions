@@ -12,12 +12,13 @@
     "ignorePaths": [
         ".git",
         "*.vsix",
-        "extensions/*/samples/**",
-        "node_modules",
-        ".vscodeignore",
+        ".gitignore",
         ".travis.yml",
         ".vscode",
-        ".gitignore",
+        ".vscodeignore",
+        "extensions/*/samples/**",
+        "generators/app/templates/samples/**",
+        "node_modules",
         "package-lock.json"
     ],
     "dictionaries": [
