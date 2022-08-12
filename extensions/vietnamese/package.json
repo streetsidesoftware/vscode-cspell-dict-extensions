@@ -7,6 +7,7 @@
   "preview": false,
   "private": true,
   "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -35,19 +36,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_vietnamese.enableVietnamese",
+        "command": "cSpellExt_vietnamese.enable",
         "title": "Enable Vietnamese Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_vietnamese.disableVietnamese",
+        "command": "cSpellExt_vietnamese.disable",
         "title": "Disable Vietnamese Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_vietnamese.enableVietnameseWorkspace",
+        "command": "cSpellExt_vietnamese.enableWorkspace",
         "title": "Enable Vietnamese Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_vietnamese.disableVietnameseWorkspace",
+        "command": "cSpellExt_vietnamese.disableWorkspace",
         "title": "Disable Vietnamese Spell Checker Dictionary in Workspace"
       }
     ]
@@ -62,7 +63,6 @@
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
-  "license": "MIT",
   "scripts": {
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
@@ -74,6 +74,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "cspell-dict-vi-vn": "^1.1.1"
+    "@cspell/dict-vi-vn": "^2.0.0"
   }
 }
