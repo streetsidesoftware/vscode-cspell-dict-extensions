@@ -4,7 +4,8 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "npm: build",
+            "identifier": "build",
+            "label": "build",
             "type": "npm",
             "script": "build",
             "group": {
@@ -14,13 +15,13 @@
             "problemMatcher": "$tsc"
         },
         {
-            "label": "npm: clean-build",
+            "identifier": "clean-build",
             "type": "npm",
-            "script": "clean-build",
+            "script": "build",
             "problemMatcher": "$tsc"
         },
         {
-            "label": "npm: test",
+            "identifier": "test",
             "type": "npm",
             "script": "test",
             "group": {
@@ -29,7 +30,7 @@
             }
         },
         {
-            "label": "npm: watch",
+            "identifier": "watch",
             "type": "npm",
             "script": "watch",
             "problemMatcher": ["$tsc-watch"]

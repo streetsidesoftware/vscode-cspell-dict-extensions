@@ -4,10 +4,9 @@
   "version": "1.0.13",
   "displayName": "Polish - Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "preview": false,
   "private": true,
+  "preview": false,
   "publisher": "streetsidesoftware",
-  "license": "GPL-3.0-or-later",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -36,19 +35,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_polish.enable",
+        "command": "cSpellExt_polish.enablePolish",
         "title": "Enable Polish Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_polish.disable",
+        "command": "cSpellExt_polish.disablePolish",
         "title": "Disable Polish Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_polish.enableWorkspace",
+        "command": "cSpellExt_polish.enablePolishWorkspace",
         "title": "Enable Polish Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_polish.disableWorkspace",
+        "command": "cSpellExt_polish.disablePolishWorkspace",
         "title": "Disable Polish Spell Checker Dictionary in Workspace"
       }
     ]
@@ -63,6 +62,7 @@
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
+  "license": "MIT",
   "scripts": {
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
@@ -74,6 +74,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "@cspell/dict-pl_pl": "^2.0.0"
+    "cspell-dict-pl_pl": "^1.1.1"
   }
 }
