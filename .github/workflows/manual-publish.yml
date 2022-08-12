@@ -13,6 +13,43 @@ on:
           Otherwise, uses the default branch.
         required: true
         default: main
+      extension:
+        description: The Extension to publish
+        type: choice
+        # Options are can be generated from `./scripts/extensions.sh`
+        options:
+          [
+            "extensions/arabic",
+            "extensions/bulgarian",
+            "extensions/catalan",
+            "extensions/croatian",
+            "extensions/czech",
+            "extensions/danish",
+            "extensions/dutch",
+            "extensions/esperanto",
+            "extensions/estonian",
+            "extensions/french-reforme",
+            "extensions/french",
+            "extensions/german",
+            "extensions/greek",
+            "extensions/hebrew",
+            "extensions/italian",
+            "extensions/medical-terms",
+            "extensions/norwegian-bokmal",
+            "extensions/persian",
+            "extensions/polish",
+            "extensions/portuguese-brazilian",
+            "extensions/portuguese",
+            "extensions/russian",
+            "extensions/scientific-terms",
+            "extensions/slovenian",
+            "extensions/spanish",
+            "extensions/swedish",
+            "extensions/turkish",
+            "extensions/ukrainian",
+            "extensions/vietnamese",
+          ]
+        required: false
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,7 +69,7 @@ jobs:
 
       - name: EXTENSION_LIST
         env:
-          EXTENSION_LIST: ${{ env.extensions_from_script }}
+          EXTENSION_LIST: ${{ (inputs.extension && ('[' + inputs.extension + ']')) || env.extensions_from_script }}
         run: |
           echo EXTENSION_LIST=$EXTENSION_LIST >> $GITHUB_ENV
 
