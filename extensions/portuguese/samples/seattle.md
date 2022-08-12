@@ -3,3 +3,5 @@ Seattle (pronuncia-se localmente [siːˈætɫ̩] ou [siːˈæɾɫ̩]) é uma cid
 A área metropolitana de Seattle, com um pouco mais de quatro milhões de habitantes, é a 15ª maior área metropolitana nos Estados Unidos.[2] Seattle é a maior cidade da região Noroeste Pacífico e a maior cidade da costa oeste ao norte de São Francisco, sendo uma das cidades que mais crescem nos Estados Unidos.
 
 A área de Seattle foi habitada por nativos americanos por, pelo menos, quatro mil anos antes do primeiro assentamento permanente de colonizadores.[3] O assentamento foi movido para o local atual e nomeado "Seattle", em 1853, em homenagem ao chefe Seattle. Seattle, por si, tem um histórico musical notável. Foi na cidade que surgiram artistas de jazz, como Ray Charles, Quincy Jones, Ernestine Anderson, entre outros. Seattle também é cidade natal do guitarrista Jimi Hendrix, e do estilo musical "grunge", que ficou famoso pelas bandas locais Nirvana, Pearl Jam, Soundgarden e Alice in Chains. A cidade também é famosa pelos seus artistas de hip hop, como os rappers Sir Mix-A-Lot e Macklemore.
+
+<!--- cspell:ignore Jimi Hendrix --->
