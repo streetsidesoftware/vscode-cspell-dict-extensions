@@ -63,24 +63,37 @@ jobs:
         with:
           ref: ${{ inputs.ref }}
 
+      - name: Inputs
+        env:
+          INPUTS: ${{ toJSON(inputs) }}
+        run: |
+          echo "$INPUTS"
+
+      - name: Choice
+        env:
+          INPUT_CHOICE: ${{ (inputs.extension && format('["{0}"]', inputs.extension)) }}
+        run: |
+          echo INPUT_CHOICE=$INPUT_CHOICE >> $GITHUB_ENV
+
       - name: From Script
         run: |
           echo extensions_from_script=$(./scripts/list-extensions.sh) >> $GITHUB_ENV
 
       - name: EXTENSION_LIST
         env:
-          EXTENSION_LIST: ${{ (inputs.extension && format('["{0}"]', inputs.extension)) || env.extensions_from_script }}
+          EXTENSION_LIST: ${{ env.INPUT_CHOICE || env.extensions_from_script }}
         run: |
           echo EXTENSION_LIST=$EXTENSION_LIST >> $GITHUB_ENV
 
-  publish:
-    needs:
-      - list_extensions
-    uses: ./.github/workflows/publish.yml
-    with:
-      ref: ${{ inputs.ref }}
-      paths_released: ${{ needs.list_extensions.outputs.extension_list }}
-    secrets:
-      VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
-      OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}
+  # publish:
+  #   needs:
+  #     - list_extensions
+  #   uses: ./.github/workflows/publish.yml
+  #   with:
+  #     ref: ${{ inputs.ref }}
+  #     paths_released: ${{ needs.list_extensions.outputs.extension_list }}
+  #   secrets:
+  #     VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+  #     OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}
+
 # cspell:ignore vsix xargs OVSX
