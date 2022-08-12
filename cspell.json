@@ -8,11 +8,16 @@
             "addWords": true
         }
     ],
+    "useGitignore": true,
     "ignorePaths": [
         ".git",
         "*.vsix",
         "extensions/*/samples/**",
         "node_modules",
+        ".vscodeignore",
+        ".travis.yml",
+        ".vscode",
+        ".gitignore",
         "package-lock.json"
     ],
     "dictionaries": [

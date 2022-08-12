@@ -16,6 +16,7 @@ jobs:
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       release_please_info: ${{ toJSON(steps.release.outputs) }}
+      paths_released: ${{ steps.release.outputs.paths_released }}
     steps:
       - uses: google-github-actions/release-please-action@v3
         id: release
@@ -30,13 +31,18 @@ jobs:
       release_please_info: ${{ needs.release-please.outputs.release_please_info }}
     steps:
       - name: Show Release Please Results
-        run: echo "$release_please_info"
+        run: |
+          echo "$release_please_info"
+          echo "${{ needs.release-please.outputs.paths_released }}"
 
-  # publish:
-  #   needs:
-  #     - release-please
-  #   uses: ./.github/workflows/publish.yml
-  #   secrets:
-  #     PUBLISH_NPM: ${{ secrets.PUBLISH_NPM }}
-  #   if: ${{ needs.release-please.outputs.release_created }}
-# cspell:ignore noreply
+  publish:
+    needs:
+      - release-please
+    uses: ./.github/workflows/publish.yml
+    with:
+      ref: main
+      paths_released: ${{ needs.release-please.outputs.paths_released }}
+    secrets:
+      VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+      OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}
+    if: ${{ needs.release-please.outputs.release_created }}
