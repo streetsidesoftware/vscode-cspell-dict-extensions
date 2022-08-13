@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@1.0.16...code-spell-checker-medical-terms@2.0.0) (2022-08-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update Medical Terms Dictionary to v2 (#378)
+
+### Features
+
+* Update Medical Terms Dictionary to v2 ([#378](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/378)) ([93fcd66](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/93fcd66ae8ada88e8ac894a6845c9db15e455f34))
+
 ## [1.0.16](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@1.0.15...code-spell-checker-medical-terms@1.0.16) (2022-07-26)
 
 **Note:** Version bump only for package code-spell-checker-medical-terms
