@@ -1,12 +1,13 @@
 {
   "name": "code-spell-checker-persian",
   "description": "Persian dictionary extension for VS Code.",
-  "version": "0.1.13",
+  "version": "0.1.0",
   "displayName": "Persian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "preview": false,
+  "preview": true,
   "private": true,
   "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -35,19 +36,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_persian.enablePersian",
+        "command": "cSpellExt_persian.enable",
         "title": "Enable Persian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_persian.disablePersian",
+        "command": "cSpellExt_persian.disable",
         "title": "Disable Persian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_persian.enablePersianWorkspace",
+        "command": "cSpellExt_persian.enableWorkspace",
         "title": "Enable Persian Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_persian.disablePersianWorkspace",
+        "command": "cSpellExt_persian.disableWorkspace",
         "title": "Disable Persian Spell Checker Dictionary in Workspace"
       }
     ]
@@ -62,7 +63,6 @@
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
-  "license": "MIT",
   "scripts": {
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
@@ -74,6 +74,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "cspell-dict-fa-ir": "^1.1.1"
+    "@cspell/dict-fa-ir": "^2.0.0"
   }
 }
