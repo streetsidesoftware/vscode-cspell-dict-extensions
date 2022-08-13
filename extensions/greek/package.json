@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-greek",
   "description": "Greek dictionary extension for VS Code.",
-  "version": "0.1.13",
+  "version": "1.0.0",
   "displayName": "Greek - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": false,

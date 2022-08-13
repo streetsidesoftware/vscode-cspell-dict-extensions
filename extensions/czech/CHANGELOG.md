@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-czech@0.1.13...code-spell-checker-czech@1.0.0) (2022-08-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Upgrade Czech Dictionary to v2 (#365)
+
+### Features
+
+* Upgrade Czech Dictionary to v2 ([#365](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/365)) ([0aeb44b](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/0aeb44bf30bceffde6b1a09dbd5ac9a305c3dfe4))
+
 ## [0.1.13](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-czech@0.1.12...code-spell-checker-czech@0.1.13) (2022-07-26)
 
 **Note:** Version bump only for package code-spell-checker-czech

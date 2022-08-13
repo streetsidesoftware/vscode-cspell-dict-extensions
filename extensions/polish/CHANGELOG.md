@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-polish@1.0.13...code-spell-checker-polish@2.0.0) (2022-08-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update the Polish Dictionary to v2 (#371)
+
+### Features
+
+* Update the Polish Dictionary to v2 ([#371](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/371)) ([16ebb57](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/16ebb575d9b1fbce1ed69fde0f9f139e34d16c0d))
+
 ## [1.0.13](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-polish@1.0.12...code-spell-checker-polish@1.0.13) (2022-07-26)
 
 **Note:** Version bump only for package code-spell-checker-polish

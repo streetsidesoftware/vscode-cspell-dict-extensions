@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-polish",
   "description": "Polish dictionary extension for VS Code.",
-  "version": "1.0.13",
+  "version": "2.0.0",
   "displayName": "Polish - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": false,

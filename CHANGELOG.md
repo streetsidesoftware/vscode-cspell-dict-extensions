@@ -1,5 +1,53 @@
 # Changelog
 
+## [2.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@1.0.4...vscode-cspell-dict-extensions@2.0.0) (2022-08-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update Medical Terms Dictionary to v2 (#378)
+* Update Persian Dictionary to V2 (#376)
+* Update Ukrainian Dictionary to v2 (#373)
+* Update Hebrew Dictionary to V2 (#377)
+* Update Vietnamese Dictionary to v2 (#374)
+* Update Turkish Dictionary to v2 (#372)
+* Update the Polish Dictionary to v2 (#371)
+* Upgrade Italian Dictionary to v2 (#370)
+* Upgrade Greek Dictionary to V2 (#368)
+* Upgrade Esperanto Dictionary to v2 (#367)
+* Upgrade Czech Dictionary to v2 (#365)
+* Upgrade Catalan Dictionary to v2 (#364)
+
+### Features
+
+* Update Hebrew Dictionary to V2 ([#377](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/377)) ([022c56a](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/022c56a3f82c01a029423c281e42a9e4bbcf5ccf))
+* Update Medical Terms Dictionary to v2 ([#378](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/378)) ([93fcd66](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/93fcd66ae8ada88e8ac894a6845c9db15e455f34))
+* Update Persian Dictionary to V2 ([#376](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/376)) ([543a90d](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/543a90dc7af789e1b62972e49b0590a1bd573d87))
+* Update the Polish Dictionary to v2 ([#371](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/371)) ([16ebb57](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/16ebb575d9b1fbce1ed69fde0f9f139e34d16c0d))
+* Update Turkish Dictionary to v2 ([#372](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/372)) ([943a6d4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/943a6d4997ad59b5295f42eb9d00870c910b9a44))
+* Update Ukrainian Dictionary to v2 ([#373](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/373)) ([745dc28](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/745dc28543c9e704a57891f7a370750658daa9a6))
+* Update Vietnamese Dictionary to v2 ([#374](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/374)) ([6c09bcf](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6c09bcf9f1e68b203c8cb40d3c45c7218d55a328))
+* Upgrade Catalan Dictionary to v2 ([#364](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/364)) ([7e16e1f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/7e16e1f7015bc8bdc9c4fddfab93392834db460a))
+* Upgrade Czech Dictionary to v2 ([#365](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/365)) ([0aeb44b](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/0aeb44bf30bceffde6b1a09dbd5ac9a305c3dfe4))
+* Upgrade Esperanto Dictionary to v2 ([#367](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/367)) ([317aa6d](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/317aa6de2880710043bc8e42350fa2b7da3d8dd8))
+* Upgrade Greek Dictionary to V2 ([#368](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/368)) ([27b2a64](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/27b2a641f3733e58aa832d2908aa034a073c92a7))
+* Upgrade Italian Dictionary to v2 ([#370](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/370)) ([2fca1c5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2fca1c59e586fe3845fb3ad07c994f716c355479))
+
+
+### Updates and Bug Fixes
+
+* Update the extension generator ([#369](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/369)) ([72a0d52](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/72a0d52c1ca3da69fc1ddaf0dbf4003c698942df))
+
+
+### Miscellaneous
+
+* fix generated language code ([67349be](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/67349bea9bf7565c05efb2269264801461d60b61))
+
+
+### Continuous Integration
+
+* Workflow Bot -- Update ALL Dependencies ([#375](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/375)) ([ec697da](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/ec697da0aa4d1af7d1fc3a6831ae99d312ef449e))
+
 ## [1.0.4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@1.0.3...vscode-cspell-dict-extensions@1.0.4) (2022-08-12)
 
 

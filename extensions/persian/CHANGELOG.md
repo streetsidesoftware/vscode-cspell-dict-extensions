@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-persian@0.1.13...code-spell-checker-persian@1.0.0) (2022-08-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update Persian Dictionary to V2 (#376)
+
+### Features
+
+* Update Persian Dictionary to V2 ([#376](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/376)) ([543a90d](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/543a90dc7af789e1b62972e49b0590a1bd573d87))
+
 ## [0.1.13](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-persian@0.1.12...code-spell-checker-persian@0.1.13) (2022-07-26)
 
 **Note:** Version bump only for package code-spell-checker-persian
