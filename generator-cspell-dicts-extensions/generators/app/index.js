@@ -79,7 +79,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'locale',
         message: 'Language Locale (i.e. "en" for English or "fr" for French)',
-        default: props => props.dictionarySrc.split('-').pop().slice(0, 2),
+        default: props => props.dictionarySrc.replace(/.*dict-/, '').slice(0, 2).toLowerCase(),
         when: props => props.addCommands
       },
       {
