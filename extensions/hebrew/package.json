@@ -7,6 +7,7 @@
   "preview": false,
   "private": true,
   "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -35,19 +36,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_hebrew.enableHebrew",
+        "command": "cSpellExt_hebrew.enable",
         "title": "Enable Hebrew Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_hebrew.disableHebrew",
+        "command": "cSpellExt_hebrew.disable",
         "title": "Disable Hebrew Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_hebrew.enableHebrewWorkspace",
+        "command": "cSpellExt_hebrew.enableWorkspace",
         "title": "Enable Hebrew Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_hebrew.disableHebrewWorkspace",
+        "command": "cSpellExt_hebrew.disableWorkspace",
         "title": "Disable Hebrew Spell Checker Dictionary in Workspace"
       }
     ]
@@ -62,7 +63,6 @@
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
-  "license": "MIT",
   "scripts": {
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
