@@ -1,5 +1,5 @@
 {
     "version": "0.2",
-    "import": ["cspell-dict-uk-ua/cspell-ext.json", "../../cspell.json"],
+    "import": ["./cspell-ext.json"],
     "language": "en,uk"
 }
