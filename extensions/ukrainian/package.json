@@ -4,9 +4,10 @@
   "version": "0.1.14",
   "displayName": "Ukrainian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "private": true,
   "preview": false,
+  "private": true,
   "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -35,19 +36,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_ukrainian.enableUkrainian",
+        "command": "cSpellExt_ukrainian.enable",
         "title": "Enable Ukrainian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_ukrainian.disableUkrainian",
+        "command": "cSpellExt_ukrainian.disable",
         "title": "Disable Ukrainian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_ukrainian.enableUkrainianWorkspace",
+        "command": "cSpellExt_ukrainian.enableWorkspace",
         "title": "Enable Ukrainian Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_ukrainian.disableUkrainianWorkspace",
+        "command": "cSpellExt_ukrainian.disableWorkspace",
         "title": "Disable Ukrainian Spell Checker Dictionary in Workspace"
       }
     ]
@@ -62,7 +63,6 @@
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
-  "license": "MIT",
   "scripts": {
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
@@ -74,6 +74,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "cspell-dict-uk-ua": "^1.1.1"
+    "@cspell/dict-uk-ua": "^2.0.0"
   }
 }
