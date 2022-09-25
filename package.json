@@ -25,9 +25,9 @@
   "devDependencies": {
     "@tsconfig/node14": "^1.0.3",
     "@types/mocha": "^9.1.1",
-    "@types/node": "^18.7.18",
+    "@types/node": "^18.7.21",
     "@types/vscode": "^1.71.0",
-    "lerna": "^5.5.1",
+    "lerna": "^5.5.2",
     "mocha": "^10.0.0",
     "ovsx": "^0.5.1",
     "prettier": "^2.7.1",
