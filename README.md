@@ -4,9 +4,12 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 
 ## Current Extensions
 
+### Languages
 - [Arabic](./extensions/arabic)
+- [Bulgarian](./extensions/bulgarian)
 - [Brazilian Portuguese](./extensions/portuguese-brazilian)
 - [Catalan](./extensions/catalan)
+- [Croatian](./extensions/croatian)
 - [Czech](./extensions/czech)
 - [Danish](./extensions/danish)
 - [Dutch](./extensions/dutch)
@@ -18,7 +21,6 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Greek](./extensions/greek)
 - [Hebrew](./extensions/Hebrew)
 - [Italian](./extensions/italian)
-- [Medical Terms](./extensions/medical-terms)
 - [Norwegian Bokmål](./extensions/norwegian-bokmal)
 - [Persian](./extensions/persian)
 - [Polish](./extensions/polish)
@@ -29,6 +31,10 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Swedish](./extensions/swedish)
 - [Turkish](./extensions/turkish)
 - [Ukrainian](./extensions/ukrainian)
+
+### Technical Terms
+- [Medical Terms](./extensions/medical-terms)
+- [Scientific Terms](./extensions/scientific-terms)
 
 ## Contributing
 
