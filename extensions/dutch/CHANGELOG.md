@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-dutch@0.3.4...code-spell-checker-dutch@0.3.5) (2022-10-04)
+
+
+### Build System
+
+* **deps:** bump @cspell/dict-nl-nl from 2.2.6 to 2.2.7 ([#412](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/412)) ([2283c8e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2283c8e66552a2c260730d33a03d546a1a92cdba))
+
+
+### Continuous Integration
+
+* Workflow Bot -- Update ALL Dependencies ([#407](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/407)) ([990e98c](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/990e98c5befbe28655f896ae9618d32626d684f5))
+
 ## [0.3.4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-dutch@0.3.3...code-spell-checker-dutch@0.3.4) (2022-08-29)
 
 
