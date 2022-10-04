@@ -1,5 +1,42 @@
 # Changelog
 
+## [2.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.0.1...vscode-cspell-dict-extensions@2.1.0) (2022-10-04)
+
+
+### Features
+
+* Support alternate German spelling of Umlauts. ([c56a0a9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c56a0a901361d797573f9ef3e2d68a7eeadc265a)), closes [#408](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/408)
+
+
+### Documentation
+
+* Add missing languages, split off tech terms ([#409](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/409)) ([a74a90f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a74a90fa993beddc0c5c09496b640b0cc08b9631))
+
+
+### Build System
+
+* **deps-dev:** bump @types/mocha from 9.1.1 to 10.0.0 ([#415](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/415)) ([55ddd6f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/55ddd6f251d779c9b34c0763b6c272fc3b0b99e4))
+* **deps:** bump @cspell/dict-es-es from 2.2.1 to 2.2.2 ([#411](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/411)) ([0469d4e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/0469d4ea868e9b99b56d6422ead8c1444260978c))
+* **deps:** bump @cspell/dict-nl-nl from 2.2.6 to 2.2.7 ([#412](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/412)) ([2283c8e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2283c8e66552a2c260730d33a03d546a1a92cdba))
+* **deps:** bump @cspell/dict-pl_pl from 2.0.0 to 2.0.1 ([#416](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/416)) ([dc10a9c](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/dc10a9ce73cd0bdd192a76546408dff94d2ddb99))
+
+
+### Updates and Bug Fixes
+
+* [#408](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/408) ([c56a0a9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c56a0a901361d797573f9ef3e2d68a7eeadc265a))
+
+
+### Continuous Integration
+
+* Workflow Bot -- Update ALL Dependencies ([#393](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/393)) ([e5c7751](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/e5c7751d994e21b2a43c5d09cb2acbd7719a39d8))
+* Workflow Bot -- Update ALL Dependencies ([#396](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/396)) ([8c37b82](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/8c37b822f0b80aa0a1266bde9da2f8a3fd1f43ae))
+* Workflow Bot -- Update ALL Dependencies ([#400](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/400)) ([a9b7d13](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a9b7d13f94d26d624728705f6b15a9868595481e))
+* Workflow Bot -- Update ALL Dependencies ([#401](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/401)) ([46d8d7a](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/46d8d7acc64302478584979aeb91a3940d508467))
+* Workflow Bot -- Update ALL Dependencies ([#402](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/402)) ([0f34003](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/0f3400328d7fa896c9ed4bdb840b04980fb1bf3b))
+* Workflow Bot -- Update ALL Dependencies ([#405](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/405)) ([69cab10](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/69cab100e2bd914b554e89ea3beba8aa40503676))
+* Workflow Bot -- Update ALL Dependencies ([#406](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/406)) ([ba1ce03](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/ba1ce0304d4b11518f52e066b2bbe2312e6356aa))
+* Workflow Bot -- Update ALL Dependencies ([#407](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/407)) ([990e98c](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/990e98c5befbe28655f896ae9618d32626d684f5))
+
 ## [2.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.0.0...vscode-cspell-dict-extensions@2.0.1) (2022-08-29)
 
 

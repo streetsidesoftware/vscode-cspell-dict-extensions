@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-german@2.0.5...code-spell-checker-german@2.1.0) (2022-10-04)
+
+
+### Features
+
+* Support alternate German spelling of Umlauts. ([c56a0a9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c56a0a901361d797573f9ef3e2d68a7eeadc265a)), closes [#408](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/408)
+
+
+### Updates and Bug Fixes
+
+* [#408](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/408) ([c56a0a9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c56a0a901361d797573f9ef3e2d68a7eeadc265a))
+
 ## [2.0.5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-german@2.0.4...code-spell-checker-german@2.0.5) (2022-08-29)
 
 

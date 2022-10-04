@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-polish@2.0.0...code-spell-checker-polish@2.0.1) (2022-10-04)
+
+
+### Build System
+
+* **deps:** bump @cspell/dict-pl_pl from 2.0.0 to 2.0.1 ([#416](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/416)) ([dc10a9c](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/dc10a9ce73cd0bdd192a76546408dff94d2ddb99))
+
+
+### Continuous Integration
+
+* Workflow Bot -- Update ALL Dependencies ([#407](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/407)) ([990e98c](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/990e98c5befbe28655f896ae9618d32626d684f5))
+
 ## [2.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-polish@1.0.13...code-spell-checker-polish@2.0.0) (2022-08-13)
 
 
