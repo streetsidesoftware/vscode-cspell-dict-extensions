@@ -3,7 +3,8 @@
   "private": true,
   "version": "2.1.0",
   "scripts": {
-    "test": "npm run test --workspaces",
+    "test": "lerna run test",
+    "postinstall": "lerna exec \"npm i\"",
     "pub-version": "lerna version --conventional-commits",
     "publish-all": "lerna exec --no-bail \"vsce publish\"",
     "publish-all-ovsx": "lerna exec --no-bail \"ovsx publish --pat \\$OVSX_TOKEN\"",
@@ -16,18 +17,15 @@
     "prettier:fix": "prettier -w \"**/*.{ts,md,yaml,yml,json}\"",
     "prettier:lint": "prettier \"**/*.{ts,md,yaml,yml,json}\"",
     "lint": "npm run cspell",
-    "update-packages": "npm ci && npx npm-check-updates -t minor -u && npm i && lerna exec \"npx npm-check-updates -t minor -u && rm -rf node_modules package-lock.json && npm i\" && lerna bootstrap"
+    "update-packages": "npm ci && npx npm-check-updates -t minor -u && npm i && lerna exec \"npx npm-check-updates -t minor -u && rm -rf node_modules package-lock.json && npm i\" && npm i"
   },
   "engines": {
     "vscode": "^1.67.0"
   },
-  "workspaces": [
-    "./extensions/*",
-    "./generator-cspell-dicts-extensions"
-  ],
   "devDependencies": {
     "@lerna-lite/cli": "^1.12.0",
     "@lerna-lite/run": "^1.12.0",
+    "@lerna-lite/exec": "^1.12.0",
     "@tsconfig/node14": "^1.0.3",
     "@types/mocha": "^10.0.0",
     "@types/node": "^18.11.7",
