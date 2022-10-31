@@ -19,7 +19,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Esperanto](./extensions/esperanto)
 - [German](./extensions/german)
 - [Greek](./extensions/greek)
-- [Hebrew](./extensions/Hebrew)
+- [Hebrew](./extensions/hebrew)
 - [Italian](./extensions/italian)
 - [Norwegian Bokmål](./extensions/norwegian-bokmal)
 - [Persian](./extensions/persian)
