@@ -73,6 +73,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "@cspell/dict-et-ee": "^2.0.7"
+    "@cspell/dict-et-ee": "^2.0.8"
   }
 }
