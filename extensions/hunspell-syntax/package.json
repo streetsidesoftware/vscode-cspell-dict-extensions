@@ -59,5 +59,15 @@
   },
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "scripts": {
+    "clean": "echo clean",
+    "clean-build": "echo clean-build",
+    "publish-extension": "vsce publish",
+    "pack-extension": "vsce package",
+    "vscode:prepublish": "echo prepublish",
+    "build": "echo build",
+    "watch": "echo watch",
+    "test": "echo test"
   }
 }
