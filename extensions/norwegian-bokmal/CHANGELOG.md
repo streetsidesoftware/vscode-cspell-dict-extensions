@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-norwegian-bokmal@0.1.7...code-spell-checker-norwegian-bokmal@0.1.8) (2023-01-06)
+
+
+### Continuous Integration
+
+* Workflow Bot -- Update ALL Dependencies ([#463](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/463)) ([85166ed](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/85166ed01b3b324b9bfc737443a76318aa1cdda7))
+
 ## [0.1.7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-norwegian-bokmal@0.1.6...code-spell-checker-norwegian-bokmal@0.1.7) (2022-07-26)
 
 **Note:** Version bump only for package code-spell-checker-norwegian-bokmal

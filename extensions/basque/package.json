@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-basque",
   "description": "Basque dictionary extension for VS Code.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "displayName": "Basque - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": true,

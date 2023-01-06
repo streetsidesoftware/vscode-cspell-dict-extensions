@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.10](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-portuguese-brazilian@2.0.9...code-spell-checker-portuguese-brazilian@2.0.10) (2023-01-06)
+
+
+### Continuous Integration
+
+* Workflow Bot -- Update ALL Dependencies ([#463](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/463)) ([85166ed](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/85166ed01b3b324b9bfc737443a76318aa1cdda7))
+
 ## [2.0.9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-portuguese-brazilian@2.0.8...code-spell-checker-portuguese-brazilian@2.0.9) (2022-08-29)
 
 

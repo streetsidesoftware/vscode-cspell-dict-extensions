@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-bulgarian@0.1.6...code-spell-checker-bulgarian@0.1.7) (2023-01-06)
+
+
+### Build System
+
+* **deps:** bump @cspell/dict-bg-bg from 2.0.0 to 3.0.0 ([#447](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/447)) ([83ed6fe](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/83ed6fec70245ba84353654e36e92d7e57352ad8))
+
+
+### Continuous Integration
+
+* Workflow Bot -- Update ALL Dependencies ([#463](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/463)) ([85166ed](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/85166ed01b3b324b9bfc737443a76318aa1cdda7))
+
 ## [0.1.6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-bulgarian@0.1.5...code-spell-checker-bulgarian@0.1.6) (2022-07-26)
 
 **Note:** Version bump only for package code-spell-checker-bulgarian
