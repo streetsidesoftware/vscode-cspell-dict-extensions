@@ -130,6 +130,10 @@
             "component": "code-spell-checker-hebrew",
             "releaseType": "node"
         },
+        "extensions/hunspell-syntax": {
+            "component": "hunspell",
+            "releaseType": "node"
+        },
         "extensions/italian": {
             "component": "code-spell-checker-italian",
             "releaseType": "node"
