@@ -1,0 +1,19 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "hunspell",
+	"patterns": [
+        {
+            "match": "^\\s*\\d+\\s*$",
+            "name": "constant.numeric"
+        },
+        {
+            "match": "^([^\\s/]+)(?:([/])(\\S+))?",
+            "captures": {
+                "1": { "name": "string" },
+                "2": { "name": "keyword.operator" },
+                "3": { "name": "variable" }
+            }
+        }
+    ],
+	"scopeName": "source.hunspell.dic"
+}
