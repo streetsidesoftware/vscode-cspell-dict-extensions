@@ -1,5 +1,5 @@
 {
-    ".": "2.2.0",
+    ".": "2.2.1",
     "extensions/arabic": "0.1.5",
     "extensions/basque": "1.0.0",
     "extensions/bulgarian": "0.1.7",
@@ -15,7 +15,7 @@
     "extensions/german": "2.1.1",
     "extensions/greek": "1.0.1",
     "extensions/hebrew": "1.0.0",
-    "extensions/hunspell-syntax": "1.0.0",
+    "extensions/hunspell-syntax": "1.0.1",
     "extensions/italian": "1.0.0",
     "extensions/medical-terms": "2.0.1",
     "extensions/norwegian-bokmal": "0.1.8",
