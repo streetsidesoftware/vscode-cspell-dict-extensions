@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.2.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.2.0...vscode-cspell-dict-extensions@2.2.1) (2023-01-06)
+
+
+### Updates and Bug Fixes
+
+* Add Hunspell Syntax Highlighter extension ([#471](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/471)) ([3e04a98](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3e04a98f053ea3b5195b1c1d62f16d679e9054d4))
+
+
+### Continuous Integration
+
+* Workflow Bot -- Update ALL Dependencies ([#470](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/470)) ([f3f0fe4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f3f0fe42ff5b8cbcd6898fbb1ba8e3dd0bc0b21a))
+* Workflow Bot -- Update ALL Dependencies (main) ([#473](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/473)) ([1d1db19](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/1d1db1912ee1ebd56adb9025e90b543ded616a0d))
+
+
+### Miscellaneous
+
+* add Hunspell ext to manifest ([011c306](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/011c3064c36988ca8194831f4607f40fd00b3101))
+* Add skip duplicate to publishing ([#472](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/472)) ([577b2fd](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/577b2fd47db25eaa27d2b4ca3e9c41e3d03be74b))
+* do not spell check CHANGELOG.md ([864e388](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/864e3880e32e58a6b300adbb1b50eb4e9b1a7958))
+* Update vsce ([#469](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/469)) ([e9d80c7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/e9d80c76318384652f516f7d291f3a83a8879856))
+
 ## [2.2.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.1.0...vscode-cspell-dict-extensions@2.2.0) (2023-01-06)
 
 
