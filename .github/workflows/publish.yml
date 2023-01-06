@@ -58,7 +58,7 @@ jobs:
       - name: Publish VSCE
         run: |
           cd $EXTENSION_DIR
-          npx vsce publish -p ${{ secrets.VSCE_TOKEN }} || echo "PUB_FAIL_VSCE=true" >> $GITHUB_ENV
+          npx vsce publish --skip-duplicate -p ${{ secrets.VSCE_TOKEN }} || echo "PUB_FAIL_VSCE=true" >> $GITHUB_ENV
 
       - name: Check Publish Result VSCE
         if: ${{ env.PUB_FAIL_VSCE }}
