@@ -49,6 +49,9 @@
             "path": "extensions/hebrew"
         },
         {
+            "path": "extensions/hunspell-syntax"
+        },
+        {
             "path": "extensions/italian"
         },
         {
