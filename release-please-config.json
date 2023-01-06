@@ -74,6 +74,10 @@
             "component": "code-spell-checker-arabic",
             "releaseType": "node"
         },
+        "extensions/basque": {
+            "component": "code-spell-checker-basque",
+            "releaseType": "node"
+        },
         "extensions/bulgarian": {
             "component": "code-spell-checker-bulgarian",
             "releaseType": "node"
