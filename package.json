@@ -24,19 +24,18 @@
   },
   "devDependencies": {
     "@lerna-lite/cli": "^1.13.0",
-    "@lerna-lite/run": "^1.13.0",
     "@lerna-lite/exec": "^1.13.0",
+    "@lerna-lite/run": "^1.13.0",
     "@tsconfig/node16": "^1.0.3",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.18",
     "@types/vscode": "^1.74.0",
+    "@vscode/test-electron": "^2.2.1",
+    "@vscode/vsce": "^2.16.0",
     "mocha": "^10.2.0",
     "ovsx": "^0.7.1",
     "prettier": "^2.8.1",
     "rimraf": "^3.0.2",
-    "typescript": "^4.9.4",
-    "vsce": "^2.14.0",
-    "@vscode/test-electron": "^2.2.1"
-  },
-  "dependencies": {}
+    "typescript": "^4.9.4"
+  }
 }
