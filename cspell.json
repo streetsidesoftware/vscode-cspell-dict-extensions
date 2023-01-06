@@ -16,6 +16,7 @@
         ".travis.yml",
         ".vscode",
         ".vscodeignore",
+        "CHANGELOG.md",
         "extensions/*/samples/**",
         "**/templates/samples/**",
         "node_modules",
