@@ -79,6 +79,9 @@
             "path": "extensions/scientific-terms"
         },
         {
+            "path": "extensions/serbian"
+        },
+        {
             "path": "extensions/slovenian"
         },
         {

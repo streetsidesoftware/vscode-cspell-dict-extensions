@@ -37,8 +37,8 @@
     "mdast-builder": "^1.1.1",
     "mdast-util-to-markdown": "^1.5.0",
     "mocha": "^10.2.0",
-    "ovsx": "^0.7.1",
-    "prettier": "^2.8.1",
+    "ovsx": "^0.8.0",
+    "prettier": "^2.8.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.9.4"
   }
