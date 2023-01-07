@@ -1,0 +1,12 @@
+{
+    "types": {
+        "Technical Terms": [
+            "extensions/medical-terms",
+            "extensions/scientific-terms"
+        ],
+        "Syntax Highlighters": [
+            "extensions/hunspell-syntax"
+        ]
+    },
+    "default": "Languages"
+}
