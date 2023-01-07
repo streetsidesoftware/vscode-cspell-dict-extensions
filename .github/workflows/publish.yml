@@ -67,7 +67,7 @@ jobs:
       - name: Publish OVSX
         run: |
           cd $EXTENSION_DIR
-          npx ovsx publish -p ${{ secrets.OVSX_TOKEN }} || echo "PUB_FAIL_OVSX=true" >> $GITHUB_ENV
+          npx ovsx publish --skip-duplicate -p ${{ secrets.OVSX_TOKEN }} || echo "PUB_FAIL_OVSX=true" >> $GITHUB_ENV
 
       - name: Check Publish Result OVSX
         if: ${{ env.PUB_FAIL_OVSX }}
