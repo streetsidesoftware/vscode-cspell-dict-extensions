@@ -30,6 +30,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Portuguese](extensions/portuguese#readme) - 1.0.3 - Portuguese dictionary extension for VS Code.
 - [Brazilian Portuguese](extensions/portuguese-brazilian#readme) - 2.0.10 - Brazilian Portuguese dictionary extension for VS Code.
 - [Russian](extensions/russian#readme) - 2.0.7 - Russian dictionary extension for VS Code.
+- [Serbian](extensions/serbian#readme) - 0.1.0 - Serbian dictionary extension for VS Code.
 - [Slovenian](extensions/slovenian#readme) - 0.1.5 - Slovenian dictionary extension for VS Code.
 - [Spanish](extensions/spanish#readme) - 2.1.5 - Spanish Add-On for Code Spell Checker
 - [Swedish](extensions/swedish#readme) - 1.1.3 - Swedish dictionary extension for VS Code.
