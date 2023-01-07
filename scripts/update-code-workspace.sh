@@ -13,7 +13,14 @@ RESULT="$(echo $(cat ./dict-extensions.code-workspace) $FOLDERS  | jq -s ".[0] +
 
 echo "$RESULT" > ./dict-extensions.code-workspace
 
+# Update README.md
+
 ./scripts/gen-extension-list.mjs
 npx prettier -w static/generated/*.md
 npx inject-markdown README.md
 npx prettier -w README.md
+
+# Update .github/workflows/manual-publish.yml
+
+./scripts/update-manual-pub-list.mjs
+npx prettier -w .github/workflows/*
