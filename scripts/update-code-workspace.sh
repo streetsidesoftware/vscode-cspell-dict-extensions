@@ -12,3 +12,8 @@ FOLDERS="$(echo "./package.json" "./generator-cspell-dicts-extensions/package.js
 RESULT="$(echo $(cat ./dict-extensions.code-workspace) $FOLDERS  | jq -s ".[0] + .[1]" | jq --indent 4 .)"
 
 echo "$RESULT" > ./dict-extensions.code-workspace
+
+./scripts/gen-extension-list.mjs
+npx prettier -w static/generated/*.md
+npx inject-markdown README.md
+npx prettier -w README.md

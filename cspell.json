@@ -2,7 +2,7 @@
     "version": "0.2",
     "dictionaryDefinitions": [
         {
-            "name": "workspace",
+            "name": "project-words",
             "path": "./custom-words.txt",
             "description": "Workspace level words",
             "addWords": true
@@ -11,18 +11,19 @@
     "useGitignore": true,
     "ignorePaths": [
         ".git",
-        "*.vsix",
         ".gitignore",
         ".travis.yml",
         ".vscode",
         ".vscodeignore",
+        "*.vsix",
+        "**/templates/samples/**",
         "CHANGELOG.md",
         "extensions/*/samples/**",
-        "**/templates/samples/**",
         "node_modules",
-        "package-lock.json"
+        "package-lock.json",
+        "static/generated"
     ],
     "dictionaries": [
-        "workspace"
+        "project-words"
     ]
 }

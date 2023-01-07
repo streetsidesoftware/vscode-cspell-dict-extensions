@@ -5,6 +5,7 @@ deduplicated
 Dependabot
 Gnomovision
 lgpl
+mdast
 medicalterms
 mkdir
 ovsx
