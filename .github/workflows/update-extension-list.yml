@@ -1,23 +1,20 @@
-name: " 🔗 Update Dependencies Main"
+name: " 🔗 Update Extension Lists"
 
 on:
   push:
     branches:
       - main
-    paths:
-      - "**/package.json"
-      - "**/package-lock.json"
 
   workflow_dispatch:
   schedule:
     - cron: "0 12 * * 0"
 
 jobs:
-  update-dependencies:
+  update-extension-lists:
     if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "update-dependencies-main"
+      NEW_BRANCH: "update-extension-lists"
     steps:
       - name: Start
         run: |
