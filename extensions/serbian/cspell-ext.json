@@ -1,0 +1,7 @@
+{
+    "import": [
+        "@cspell/dict-sr-cyrl/cspell-ext.json",
+        "@cspell/dict-sr-latn/cspell-ext.json"
+    ],
+    "language": "sr"
+}
