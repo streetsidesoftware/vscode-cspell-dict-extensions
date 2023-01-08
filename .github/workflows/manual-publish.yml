@@ -9,48 +9,49 @@ on:
     inputs:
       ref:
         description: >-
-          The branch, tag or SHA to checkout. When checking out the repository that
-          triggered a workflow, this defaults to the reference or SHA for that event.
-          Otherwise, uses the default branch.
+          The branch, tag or SHA to checkout. When checking out the
+          repository that triggered a workflow, this defaults to the reference
+          or SHA for that event. Otherwise, uses the default branch.
         required: true
         default: main
       extension:
         description: The Extension to publish
         type: choice
-        # Options are can be generated from `./scripts/extensions.sh`
+        # Options are generated from `npm run gen:workflow`
         options:
-          [
-            ".",
-            "extensions/arabic",
-            "extensions/bulgarian",
-            "extensions/catalan",
-            "extensions/croatian",
-            "extensions/czech",
-            "extensions/danish",
-            "extensions/dutch",
-            "extensions/esperanto",
-            "extensions/estonian",
-            "extensions/french-reforme",
-            "extensions/french",
-            "extensions/german",
-            "extensions/greek",
-            "extensions/hebrew",
-            "extensions/italian",
-            "extensions/medical-terms",
-            "extensions/norwegian-bokmal",
-            "extensions/persian",
-            "extensions/polish",
-            "extensions/portuguese-brazilian",
-            "extensions/portuguese",
-            "extensions/russian",
-            "extensions/scientific-terms",
-            "extensions/slovenian",
-            "extensions/spanish",
-            "extensions/swedish",
-            "extensions/turkish",
-            "extensions/ukrainian",
-            "extensions/vietnamese",
-          ]
+          - "."
+          - extensions/arabic
+          - extensions/basque
+          - extensions/bulgarian
+          - extensions/catalan
+          - extensions/croatian
+          - extensions/czech
+          - extensions/danish
+          - extensions/dutch
+          - extensions/esperanto
+          - extensions/estonian
+          - extensions/french
+          - extensions/french-reforme
+          - extensions/german
+          - extensions/greek
+          - extensions/hebrew
+          - extensions/hunspell-syntax
+          - extensions/italian
+          - extensions/medical-terms
+          - extensions/norwegian-bokmal
+          - extensions/persian
+          - extensions/polish
+          - extensions/portuguese
+          - extensions/portuguese-brazilian
+          - extensions/russian
+          - extensions/scientific-terms
+          - extensions/serbian
+          - extensions/slovenian
+          - extensions/spanish
+          - extensions/swedish
+          - extensions/turkish
+          - extensions/ukrainian
+          - extensions/vietnamese
         required: false
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel

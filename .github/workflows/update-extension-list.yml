@@ -31,11 +31,11 @@ jobs:
 
       - name: Update Workspace
         run: |
-          ./scripts/update-code-workspace.sh
+          npm run gen:readme
 
       - name: Update Release Please Packages
         run: |
-          ./scripts/gen-release-please-config.sh
+          npm run gen:release-please
 
       - name: PR
         uses: ./.github/actions/pr

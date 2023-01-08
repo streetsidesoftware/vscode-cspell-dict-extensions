@@ -1,6 +1,10 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+ROOT=$(dirname "$SCRIPT_DIR")
+
+cd $ROOT
+
 JQ_FILTER_PACKAGES="$SCRIPT_DIR/code-workspace-packages.jq"
 JQ_FILTER_CONFIG="$SCRIPT_DIR/gen-release-please-config.jq"
 
@@ -15,12 +19,8 @@ echo "$RESULT" > ./dict-extensions.code-workspace
 
 # Update README.md
 
-./scripts/gen-extension-list.mjs
+$SCRIPT_DIR/gen-extension-list.mjs
+
 npx prettier -w static/generated/*.md
 npx inject-markdown README.md
 npx prettier -w README.md
-
-# Update .github/workflows/manual-publish.yml
-
-./scripts/update-manual-pub-list.mjs
-npx prettier -w .github/workflows/*
