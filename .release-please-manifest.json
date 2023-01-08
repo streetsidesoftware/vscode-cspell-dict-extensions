@@ -1,5 +1,5 @@
 {
-    ".": "2.3.0",
+    ".": "2.3.1",
     "extensions/arabic": "0.1.5",
     "extensions/basque": "1.0.0",
     "extensions/bulgarian": "0.1.7",
@@ -31,5 +31,5 @@
     "extensions/turkish": "1.0.0",
     "extensions/ukrainian": "1.0.0",
     "extensions/vietnamese": "1.0.0",
-    "extensions/serbian": "1.0.0"
+    "extensions/serbian": "1.0.1"
 }

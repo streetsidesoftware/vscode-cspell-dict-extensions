@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.3.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.3.0...vscode-cspell-dict-extensions@2.3.1) (2023-01-08)
+
+
+### Continuous Integration
+
+* Update README / Extensions List ([#482](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/482)) ([187aa54](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/187aa54b7f34e92d3a06e18e3f7b7d1b204d97b9))
+
+
+### Updates and Bug Fixes
+
+* Add commands for sr-Cyrl and sr-Latn ([#486](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/486)) ([e705759](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/e70575992202b29508aab5c28a79fe156220eb88))
+* Do not turn on `sr` by default. ([#483](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/483)) ([3655808](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3655808386d9a48f21b118651b163cbce867dc72))
+* Update Serbian dictionaries ([#485](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/485)) ([5773481](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/5773481165c3fcd7f072d35d2f5a98c258c17dea))
+
 ## [2.3.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.2.1...vscode-cspell-dict-extensions@2.3.0) (2023-01-08)
 
 
