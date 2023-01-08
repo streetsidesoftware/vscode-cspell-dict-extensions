@@ -38,6 +38,10 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Ukrainian](extensions/ukrainian#readme) - 1.0.0 - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](extensions/vietnamese#readme) - 1.0.0 - Vietnamese dictionary extension for VS Code.
 
+### Syntax Highlighters
+
+- [hunspell](extensions/hunspell-syntax#readme) - 1.0.1 - Hunspell Syntax Highlighting support
+
 ### Technical Terms
 
 - [Medical Terms](extensions/medical-terms#readme) - 2.0.1 - Medical Terms Add-On for Code Spell Checker
