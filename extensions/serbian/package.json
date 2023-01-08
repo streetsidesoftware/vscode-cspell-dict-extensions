@@ -44,6 +44,22 @@
         "title": "Disable Serbian Spell Checker Dictionary"
       },
       {
+        "command": "cSpellExt_serbian.enableCyrl",
+        "title": "Enable Serbian Cyrillic Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_serbian.disableCyrl",
+        "title": "Disable Serbian Cyrillic Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_serbian.enableLatn",
+        "title": "Enable Serbian Latin Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_serbian.disableLatn",
+        "title": "Disable Serbian Latin Spell Checker Dictionary"
+      },
+      {
         "command": "cSpellExt_serbian.enableWorkspace",
         "title": "Enable Serbian Spell Checker Dictionary in Workspace"
       },

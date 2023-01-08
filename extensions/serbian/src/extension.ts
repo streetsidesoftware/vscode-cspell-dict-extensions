@@ -10,6 +10,8 @@ interface CodeSpellCheckerExtension {
 
 //
 const locale = 'sr';
+const localeCyrl = 'sr-Cyrl';
+const localeLatn = 'sr-Latn';
 //
 
 // this method is called when your extension is activated
@@ -28,17 +30,17 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     //
-    function enable(isGlobal: boolean) {
+    function enable(isGlobal: boolean, useLocale = locale) {
         extension &&
             extension.activate().then((ext) => {
-                ext?.enableLocale?.(isGlobal, locale);
+                ext?.enableLocale?.(isGlobal, useLocale);
             });
     }
 
-    function disable(isGlobal: boolean) {
+    function disable(isGlobal: boolean, useLocale = locale) {
         extension &&
             extension.activate().then((ext) => {
-                ext?.disableLocale?.(isGlobal, locale);
+                ext?.disableLocale?.(isGlobal, useLocale);
             });
     }
 
@@ -46,7 +48,11 @@ export function activate(context: vscode.ExtensionContext) {
     // client can be deactivated on extension deactivation
     context.subscriptions.push(
         vscode.commands.registerCommand('cSpellExt_serbian.enable', () => enable(true)),
+        vscode.commands.registerCommand('cSpellExt_serbian.enableCyrl', () => enable(true, localeCyrl)),
+        vscode.commands.registerCommand('cSpellExt_serbian.enableLatn', () => enable(true, localeLatn)),
         vscode.commands.registerCommand('cSpellExt_serbian.disable', () => disable(true)),
+        vscode.commands.registerCommand('cSpellExt_serbian.disableCyrl', () => disable(true, localeCyrl)),
+        vscode.commands.registerCommand('cSpellExt_serbian.disableLatn', () => disable(true, localeLatn)),
         vscode.commands.registerCommand('cSpellExt_serbian.enableWorkspace', () => enable(false)),
         vscode.commands.registerCommand('cSpellExt_serbian.disableWorkspace', () => disable(false))
     );
