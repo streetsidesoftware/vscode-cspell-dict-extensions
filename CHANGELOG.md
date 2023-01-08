@@ -1,5 +1,38 @@
 # Changelog
 
+## [2.3.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.2.1...vscode-cspell-dict-extensions@2.3.0) (2023-01-08)
+
+
+### Features
+
+* add Serbian ([#476](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/476)) ([3c3d6c9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3c3d6c9b7714a8e3221c2f8d85fa9723b9765bd7))
+
+
+### Documentation
+
+* Auto-generate the Extension Lists ([#479](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/479)) ([2bf1ff8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2bf1ff809323dd5a1b232fd850dbc2f2181d1728))
+
+
+### Tests
+
+* make sure README gets auto updated. ([fe5f5af](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/fe5f5afdfea45c793e2cc442174495a35622969e))
+
+
+### Miscellaneous
+
+* Add an icon before manual workflows ([428a4e0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/428a4e0a27ce3afa0f09e7486f7883c2e413ac80))
+* Adjust the update commit message ([f7ff625](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f7ff6252b9902be5fbb2975fa1d97d19638185e9))
+* auto generate extension lists ([a4418ee](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a4418ee0e2127ea850990f307677ff4537dc168f))
+* auto update the manual-publish list. ([#480](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/480)) ([ae9fa2a](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/ae9fa2ad46944329e95315e22fd785c233d88723))
+* ovsx -- skip if already published. ([#475](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/475)) ([492db30](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/492db3009ed94d7cbe3ad1a3ddd5ae0a15fc27fd))
+* Update update-extension-list.yml ([a0f7715](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a0f77158abe744857c97ab4dec1745c3b8fd5c6d))
+
+
+### Continuous Integration
+
+* Update README / Extensions List ([#481](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/481)) ([c61d341](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c61d341ea86004ffcccb6370ed7b868f7cd34e67))
+* Workflow Bot -- Update ALL Dependencies (main) ([#478](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/478)) ([b16de4e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/b16de4e426947c6de935a1aae907509bf1a06e00))
+
 ## [2.2.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.2.0...vscode-cspell-dict-extensions@2.2.1) (2023-01-06)
 
 
