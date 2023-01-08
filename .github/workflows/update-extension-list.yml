@@ -40,7 +40,7 @@ jobs:
       - name: PR
         uses: ./.github/actions/pr
         with:
-          commit-message: "ci: Update Extension Lists"
+          commit-message: "ci: Update README / Extensions List"
           branch: ${{ env.NEW_BRANCH }}
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
