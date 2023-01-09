@@ -22,7 +22,16 @@ After this extension is installed, it is necessary to tell the spell checker to 
 
 ### Enable/disable dictionaries via commands
 
-You can also use commands (`F1` or _View -> Command Palette..._) to enable Serbian dictionaries.
+You can also use the following commands (`F1` or _View -> Command Palette..._) to enable or disable Serbian dictionaries:
+
+- `Enable Serbian Spell Checker Dictionary`
+- `Disable Serbian Spell Checker Dictionary`
+- `Enable Serbian Cyrillic Spell Checker Dictionary`
+- `Disable Serbian Cyrillic Spell Checker Dictionary`  
+- `Enable Serbian Latin Spell Checker Dictionary`
+- `Disable Serbian Latin Spell Checker Dictionary`
+- `Enable Serbian Spell Checker Dictionary in Workspace`
+- `Disable Serbian Spell Checker Dictionary in Workspace`
 
 ![Commands dropdown for enabling and disabling Serbian dictionaries](https://i.imgur.com/3DPWwFV.png)
 
