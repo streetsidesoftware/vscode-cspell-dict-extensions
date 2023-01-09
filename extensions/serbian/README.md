@@ -27,7 +27,7 @@ You can also use the following commands (`F1` or _View -> Command Palette..._) t
 - `Enable Serbian Spell Checker Dictionary`
 - `Disable Serbian Spell Checker Dictionary`
 - `Enable Serbian Cyrillic Spell Checker Dictionary`
-- `Disable Serbian Cyrillic Spell Checker Dictionary`  
+- `Disable Serbian Cyrillic Spell Checker Dictionary`
 - `Enable Serbian Latin Spell Checker Dictionary`
 - `Disable Serbian Latin Spell Checker Dictionary`
 - `Enable Serbian Spell Checker Dictionary in Workspace`
@@ -54,3 +54,9 @@ To enable only Cyrillic or Latin, use the specific locales: `sr-Cyrl` or `sr-Lat
 ## Requirements
 
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+<p align="center">
+Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software">
+<img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/5Y9JLEW.png" /> Street Side Software
+</a>
+</p>
