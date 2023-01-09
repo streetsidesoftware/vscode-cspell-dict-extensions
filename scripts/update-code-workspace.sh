@@ -22,5 +22,5 @@ echo "$RESULT" > ./dict-extensions.code-workspace
 $SCRIPT_DIR/gen-extension-list.mjs
 
 npx prettier -w static/generated/*.md
-npx inject-markdown README.md
-npx prettier -w README.md
+npx inject-markdown README.md "extensions/*/README.md"
+npx prettier -w README.md "extensions/*/README.md"
