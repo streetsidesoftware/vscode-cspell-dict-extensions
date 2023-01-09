@@ -63,6 +63,20 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - _Danish_ - [viktorstrate](https://github.com/viktorstrate)
 - _Slovenian_ - [KrOstir](https://github.com/KrOstir)
 
+<!--- @@inject: static/footer.md --->
+
+<br/>
+
+---
+
+<p align="center">
+Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software">
+<img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software
+</a>
+</p>
+
+<!--- @@inject-end: static/footer.md --->
+
 <!---
 cspell:words Jordi Olivares Provencio
 cspell:words Zereges
