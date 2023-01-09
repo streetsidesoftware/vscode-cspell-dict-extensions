@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.3.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.3.1...vscode-cspell-dict-extensions@2.3.2) (2023-01-09)
+
+
+### Continuous Integration
+
+* Update README / Extensions List ([#487](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/487)) ([6465021](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6465021da10f2db26778b107b7fd554ca1450b3a))
+
+
+### Updates and Bug Fixes
+
+* Add a logo at the bottom of the README ([#490](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/490)) ([5ad1ae6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/5ad1ae61227580a5c99b0f97a8d7f22fbfc8e667))
+* Serbian - improve README and remove preview flag. [#489](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/489) ([3726ed4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3726ed4b9f8103f05ffc5b2c453d2a2008ec15dd))
+
 ## [2.3.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.3.0...vscode-cspell-dict-extensions@2.3.1) (2023-01-08)
 
 

@@ -2,6 +2,14 @@
 
 All notable changes to the "code-spell-checker-serbian" extension will be documented in this file.
 
+## [1.0.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-serbian@1.0.1...code-spell-checker-serbian@1.0.2) (2023-01-09)
+
+
+### Updates and Bug Fixes
+
+* Add a logo at the bottom of the README ([#490](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/490)) ([5ad1ae6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/5ad1ae61227580a5c99b0f97a8d7f22fbfc8e667))
+* Serbian - improve README and remove preview flag. [#489](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/489) ([3726ed4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3726ed4b9f8103f05ffc5b2c453d2a2008ec15dd))
+
 ## [1.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-serbian@1.0.0...code-spell-checker-serbian@1.0.1) (2023-01-08)
 
 
