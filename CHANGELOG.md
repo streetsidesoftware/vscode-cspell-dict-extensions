@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.3.2...vscode-cspell-dict-extensions@2.3.3) (2023-01-09)
+
+
+### Continuous Integration
+
+* Update README / Extensions List ([#491](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/491)) ([6ba4e32](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6ba4e3209effb27bf36406502d3890476b8d3b55))
+
+
+### Documentation
+
+* Add a footer to the README.md ([#493](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/493)) ([420496a](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/420496a4333696da4b4a3c77709b76786480c581))
+
 ## [2.3.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.3.1...vscode-cspell-dict-extensions@2.3.2) (2023-01-09)
 
 
