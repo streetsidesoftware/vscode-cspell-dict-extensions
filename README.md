@@ -40,7 +40,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 
 ### Syntax Highlighters
 
-- [hunspell](extensions/hunspell-syntax#readme) - 1.0.1 - Hunspell Syntax Highlighting support
+- [hunspell](extensions/hunspell-syntax#readme) - 1.0.2 - Hunspell Syntax Highlighting support
 
 ### Technical Terms
 
