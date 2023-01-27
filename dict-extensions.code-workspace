@@ -10,6 +10,9 @@
             "path": "extensions/basque"
         },
         {
+            "path": "extensions/british-english"
+        },
+        {
             "path": "extensions/bulgarian"
         },
         {
