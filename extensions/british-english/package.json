@@ -1,0 +1,79 @@
+{
+  "name": "code-spell-checker-british-english",
+  "description": "British English dictionary extension for VS Code.",
+  "version": "0.1.0",
+  "displayName": "British English - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "preview": true,
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "sponsor": {
+    "url": "https://opencollective.com/code-spell-checker"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "British English",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_british-english.enable",
+        "title": "Enable British Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_british-english.disable",
+        "title": "Disable British Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_british-english.enableWorkspace",
+        "title": "Enable British Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_british-english.disableWorkspace",
+        "title": "Disable British Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "pack-extension": "vsce package",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "@cspell/dict-en-gb": "^4.1.6"
+  }
+}
