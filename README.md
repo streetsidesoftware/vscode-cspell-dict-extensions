@@ -10,6 +10,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 
 - [Arabic](extensions/arabic#readme) - 0.1.5 - Arabic dictionary extension for VS Code.
 - [Basque](extensions/basque#readme) - 1.0.0 - Basque dictionary extension for VS Code.
+- [British English](extensions/british-english#readme) - 0.1.0 - British English dictionary extension for VS Code.
 - [Bulgarian](extensions/bulgarian#readme) - 0.1.7 - Bulgarian dictionary extension for VS Code.
 - [Catalan](extensions/catalan#readme) - 1.0.1 - Catalan dictionary extension for VS Code.
 - [Croatian](extensions/croatian#readme) - 0.1.6 - Croatian dictionary extension for VS Code.
