@@ -2,13 +2,13 @@
 
 British English dictionary extension for VS Code.
 
-Imports the British English spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Note: this is a replacement dictionary for the one that is bundled with [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). Due to licensing restrictions, the bundled dictionary is many years old.
 
 ## Installation
 
-After this extension is installed, it is necessary to tell the spell checker to use it.
+Once this extension is installed, the updated British English dictionary will automatically be used, if the `en-gb` locale is used.
 
-### Enable Dictionary
+### Enable British English Dictionary
 
 Commands (use `F1` or _View -> Command Palette..._):
 
