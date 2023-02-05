@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-french",
   "description": "French dictionary extension for VS Code.",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "displayName": "French - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": false,
