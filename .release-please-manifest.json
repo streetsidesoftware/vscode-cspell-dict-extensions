@@ -1,5 +1,5 @@
 {
-    ".": "2.3.3",
+    ".": "2.4.0",
     "extensions/arabic": "0.1.5",
     "extensions/basque": "1.0.0",
     "extensions/bulgarian": "0.1.7",
@@ -10,8 +10,8 @@
     "extensions/dutch": "0.3.6",
     "extensions/esperanto": "1.0.0",
     "extensions/estonian": "0.1.9",
-    "extensions/french-reforme": "2.0.7",
-    "extensions/french": "0.2.4",
+    "extensions/french-reforme": "2.0.8",
+    "extensions/french": "0.2.5",
     "extensions/german": "2.1.1",
     "extensions/greek": "1.0.1",
     "extensions/hebrew": "1.0.0",
@@ -31,5 +31,6 @@
     "extensions/turkish": "1.0.0",
     "extensions/ukrainian": "1.0.0",
     "extensions/vietnamese": "1.0.0",
-    "extensions/serbian": "1.0.2"
+    "extensions/serbian": "1.0.2",
+    "extensions/british-english": "1.0.0"
 }
