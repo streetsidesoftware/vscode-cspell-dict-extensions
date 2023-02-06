@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-spanish@2.1.5...code-spell-checker-spanish@2.1.6) (2023-02-06)
+
+
+### Continuous Integration
+
+* Update README / Extensions List ([#526](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/526)) ([fe841bf](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/fe841bfc7209e134740b24897e23748581536eb3))
+* Workflow Bot -- Update ALL Dependencies ([#523](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/523)) ([9ddb1be](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/9ddb1be69e4903bb23bc73b6f6afb43c4eb6ec6b))
+
 ## [2.1.5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-spanish@2.1.4...code-spell-checker-spanish@2.1.5) (2023-01-06)
 
 

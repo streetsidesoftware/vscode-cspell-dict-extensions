@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.5.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.4.0...vscode-cspell-dict-extensions@2.5.0) (2023-02-06)
+
+
+### Features
+
+* Add Slovak Extension ([afdc29e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/afdc29ead01814312a7bab0898bb9ef2398e6f7e))
+
+
+### Build System
+
+* **deps:** bump @cspell/dict-en-gb from 4.1.7 to 4.1.8 ([#520](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/520)) ([9f02e3e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/9f02e3e15b5f2a73263a4862d5c171dcb3647805))
+
+
+### Continuous Integration
+
+* Update README / Extensions List ([#519](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/519)) ([4b17d40](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/4b17d40943af46f28c038254f41b172be59a2713))
+* Update README / Extensions List ([#526](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/526)) ([fe841bf](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/fe841bfc7209e134740b24897e23748581536eb3))
+* Workflow Bot -- Update ALL Dependencies ([#523](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/523)) ([9ddb1be](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/9ddb1be69e4903bb23bc73b6f6afb43c4eb6ec6b))
+* Workflow Bot -- Update ALL Dependencies ([#525](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/525)) ([b1081e6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/b1081e6f97652eba5deaacd72854a409d6e932f2))
+* Workflow Bot -- Update ALL Dependencies ([#527](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/527)) ([7f1cb13](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/7f1cb13f23531962162236525b8be47db6139396))
+
 ## [2.4.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.3.3...vscode-cspell-dict-extensions@2.4.0) (2023-02-05)
 
 

@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-croatian",
   "description": "Croatian dictionary extension for VS Code.",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "displayName": "Croatian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": false,

@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-slovenian",
   "description": "Slovenian dictionary extension for VS Code.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "displayName": "Slovenian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": false,
