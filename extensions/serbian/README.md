@@ -55,8 +55,4 @@ To enable only Cyrillic or Latin, use the specific locales: `sr-Cyrl` or `sr-Lat
 
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
 
-<p align="center">
-Brought to you by <a href="https://streetsidesoftware.com" title="Street Side Software">
-<img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/5Y9JLEW.png" /> Street Side Software
-</a>
-</p>
+<!--- @@inject: ../../static/footer.md --->

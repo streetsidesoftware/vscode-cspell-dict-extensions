@@ -46,3 +46,5 @@ This extension will automatically include [Code Spell Checker](https://marketpla
 - [Zereges](https://github.com/Zereges)
 
 <!--- cspell:words Zereges --->
+
+<!--- @@inject: ../../static/footer.md --->

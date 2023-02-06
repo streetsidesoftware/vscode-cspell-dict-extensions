@@ -46,3 +46,5 @@ This extension will automatically include [Code Spell Checker](https://marketpla
 - [KrOstir](https://github.com/KrOstir)
 
 <!--- cspell:words KrOstir --->
+
+<!--- @@inject: ../../static/footer.md --->

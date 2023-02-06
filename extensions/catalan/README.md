@@ -46,3 +46,5 @@ This extension will automatically include [Code Spell Checker](https://marketpla
 - [Jordi Olivares Provencio](https://github.com/jordiolivares)
 
 <!--- cspell:words Jordi Olivares Provencio --->
+
+<!--- @@inject: ../../static/footer.md --->

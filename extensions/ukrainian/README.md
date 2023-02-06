@@ -48,3 +48,5 @@ This extension will automatically include [Code Spell Checker](https://marketpla
 <!---
 cspell:words Ihor Oleksandrov
 --->
+
+<!--- @@inject: ../../static/footer.md --->
