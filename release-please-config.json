@@ -178,6 +178,10 @@
             "component": "code-spell-checker-serbian",
             "releaseType": "node"
         },
+        "extensions/slovak": {
+            "component": "code-spell-checker-slovak",
+            "releaseType": "node"
+        },
         "extensions/slovenian": {
             "component": "code-spell-checker-slovenian",
             "releaseType": "node"

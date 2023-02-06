@@ -10,7 +10,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 
 - [Arabic](extensions/arabic#readme) - 0.1.5 - Arabic dictionary extension for VS Code.
 - [Basque](extensions/basque#readme) - 1.0.0 - Basque dictionary extension for VS Code.
-- [British English](extensions/british-english#readme) - 0.1.0 - British English dictionary extension for VS Code.
+- [British English](extensions/british-english#readme) - 1.0.0 - British English dictionary extension for VS Code.
 - [Bulgarian](extensions/bulgarian#readme) - 0.1.7 - Bulgarian dictionary extension for VS Code.
 - [Catalan](extensions/catalan#readme) - 1.0.1 - Catalan dictionary extension for VS Code.
 - [Croatian](extensions/croatian#readme) - 0.1.6 - Croatian dictionary extension for VS Code.
@@ -19,8 +19,8 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Dutch](extensions/dutch#readme) - 0.3.6 - Dutch / Nederlands dictionary extension for VS Code.
 - [Esperanto](extensions/esperanto#readme) - 1.0.0 - Esperanto dictionary extension for VS Code.
 - [Estonian](extensions/estonian#readme) - 0.1.9 - Estonian dictionary extension for VS Code.
-- [French](extensions/french#readme) - 0.2.4 - French dictionary extension for VS Code.
-- [French Réforme 90](extensions/french-reforme#readme) - 2.0.7 - French Réforme 90 dictionary extension for VS Code.
+- [French](extensions/french#readme) - 0.2.5 - French dictionary extension for VS Code.
+- [French Réforme 90](extensions/french-reforme#readme) - 2.0.8 - French Réforme 90 dictionary extension for VS Code.
 - [German](extensions/german#readme) - 2.1.1 - German dictionary extension for VS Code.
 - [Greek](extensions/greek#readme) - 1.0.1 - Greek dictionary extension for VS Code.
 - [Hebrew](extensions/hebrew#readme) - 1.0.0 - Hebrew dictionary extension for VS Code.
@@ -32,6 +32,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Brazilian Portuguese](extensions/portuguese-brazilian#readme) - 2.0.10 - Brazilian Portuguese dictionary extension for VS Code.
 - [Russian](extensions/russian#readme) - 2.0.7 - Russian dictionary extension for VS Code.
 - [Serbian](extensions/serbian#readme) - 1.0.2 - Serbian dictionary extension for VS Code.
+- [Slovak](extensions/slovak#readme) - 1.0.0 - Slovak dictionary extension for VS Code.
 - [Slovenian](extensions/slovenian#readme) - 0.1.5 - Slovenian dictionary extension for VS Code.
 - [Spanish](extensions/spanish#readme) - 2.1.5 - Spanish Add-On for Code Spell Checker
 - [Swedish](extensions/swedish#readme) - 1.1.3 - Swedish dictionary extension for VS Code.
