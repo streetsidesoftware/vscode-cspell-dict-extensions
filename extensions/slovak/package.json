@@ -1,0 +1,79 @@
+{
+  "name": "code-spell-checker-slovak",
+  "description": "Slovak dictionary extension for VS Code.",
+  "version": "1.0.0",
+  "displayName": "Slovak - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "private": true,
+  "preview": false,
+  "publisher": "streetsidesoftware",
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "sponsor": {
+    "url": "https://opencollective.com/code-spell-checker"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "Slovak",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_slovak.enableSlovak",
+        "title": "Enable Slovak Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_slovak.disableSlovak",
+        "title": "Disable Slovak Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_slovak.enableSlovakWorkspace",
+        "title": "Enable Slovak Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_slovak.disableSlovakWorkspace",
+        "title": "Disable Slovak Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "license": "MPL v2",
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "pack-extension": "vsce package",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "@cspell/dict-sk-sk": "^3.0.1"
+  }
+}
