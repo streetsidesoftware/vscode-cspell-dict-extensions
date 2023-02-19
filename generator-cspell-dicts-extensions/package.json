@@ -21,7 +21,7 @@
     "yo": "^4.3.0"
   },
   "dependencies": {
-    "yeoman-generator": "^5.7.1",
+    "yeoman-generator": "^5.8.0",
     "yosay": "^2.0.2"
   },
   "jest": {
