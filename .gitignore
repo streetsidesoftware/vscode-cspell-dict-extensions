@@ -64,3 +64,5 @@ typings/
 
 # VSCode extension packages
 *.vsix
+
+extensions/*/out
