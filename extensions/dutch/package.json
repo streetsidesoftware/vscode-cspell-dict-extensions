@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-dutch",
   "description": "Dutch / Nederlands dictionary extension for VS Code.",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "displayName": "Dutch - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-norwegian-bokmal",
   "description": "Norwegian Bokmål dictionary extension for VS Code.",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "displayName": "Norwegian Bokmål - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": false,

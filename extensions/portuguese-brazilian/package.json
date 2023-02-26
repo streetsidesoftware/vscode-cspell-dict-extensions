@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-portuguese-brazilian",
   "description": "Brazilian Portuguese dictionary extension for VS Code.",
-  "version": "2.0.10",
+  "version": "2.0.11",
   "displayName": "Brazilian Portuguese - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
