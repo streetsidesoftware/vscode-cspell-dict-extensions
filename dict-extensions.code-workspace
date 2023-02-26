@@ -7,6 +7,9 @@
             "path": "extensions/arabic"
         },
         {
+            "path": "extensions/australian-english"
+        },
+        {
             "path": "extensions/basque"
         },
         {
@@ -14,6 +17,9 @@
         },
         {
             "path": "extensions/bulgarian"
+        },
+        {
+            "path": "extensions/canadian-english"
         },
         {
             "path": "extensions/catalan"
