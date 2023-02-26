@@ -74,6 +74,10 @@
             "component": "code-spell-checker-arabic",
             "releaseType": "node"
         },
+        "extensions/australian-english": {
+            "component": "code-spell-checker-australian-english",
+            "releaseType": "node"
+        },
         "extensions/basque": {
             "component": "code-spell-checker-basque",
             "releaseType": "node"
@@ -84,6 +88,10 @@
         },
         "extensions/bulgarian": {
             "component": "code-spell-checker-bulgarian",
+            "releaseType": "node"
+        },
+        "extensions/canadian-english": {
+            "component": "code-spell-checker-canadian-english",
             "releaseType": "node"
         },
         "extensions/catalan": {
