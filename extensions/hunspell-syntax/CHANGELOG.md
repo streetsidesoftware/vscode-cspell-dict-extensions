@@ -3,6 +3,13 @@ All notable changes to the "hunspell" extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.0.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/hunspell@1.0.2...hunspell@1.0.3) (2023-02-26)
+
+
+### Continuous Integration
+
+* Workflow Bot -- Update ALL Dependencies ([#531](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/531)) ([c7ee24f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c7ee24f30552a6e8904a8d489b8a76ddcd3eedec))
+
 ## [1.0.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/hunspell@1.0.1...hunspell@1.0.2) (2023-01-09)
 
 

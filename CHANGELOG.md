@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.6.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.5.0...vscode-cspell-dict-extensions@2.6.0) (2023-02-26)
+
+
+### Features
+
+* Add Australian English Dictionary ([#536](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/536)) ([d34a31c](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/d34a31cd01a6392cbf540f39a8952e575904f36d))
+* Add Canadian English ([#535](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/535)) ([300b521](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/300b521138b941a823ce186259d657d58d5eb974))
+
+
+### Continuous Integration
+
+* Update README / Extensions List ([#528](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/528)) ([b2fb473](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/b2fb4738e723f56d15fe9f5edf4d77b25c5cd188))
+* Update README / Extensions List ([#537](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/537)) ([fad8b49](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/fad8b49e6171ff5b6ba21403326a947fa72262bc))
+* Workflow Bot -- Update ALL Dependencies ([#530](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/530)) ([5fbba76](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/5fbba768b218dc7dc9a144ffb78b075f33d7265f))
+* Workflow Bot -- Update ALL Dependencies ([#531](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/531)) ([c7ee24f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c7ee24f30552a6e8904a8d489b8a76ddcd3eedec))
+* Workflow Bot -- Update ALL Dependencies ([#538](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/538)) ([bd29938](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/bd299389f470611cea6aad06ed7bba05e447117c))
+* Workflow Bot -- Update ALL Dependencies ([#539](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/539)) ([3a9794d](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3a9794df219efb3c7ac83b3b7eec471fdec6ab5e))
+
+
+### Miscellaneous
+
+* Prepare to publish ([#540](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/540)) ([8668f86](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/8668f86b5fe3bf076cc44db54ec9b15d2f137623))
+
 ## [2.5.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.4.0...vscode-cspell-dict-extensions@2.5.0) (2023-02-06)
 
 
