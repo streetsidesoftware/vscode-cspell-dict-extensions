@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.6.1...vscode-cspell-dict-extensions@2.7.0) (2023-02-27)
+
+
+### Features
+
+* Add Swiss German ([#549](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/549)) ([bca47c2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/bca47c26e48aeebbb49eee8819129f089db9bca7))
+
 ## [2.6.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.6.0...vscode-cspell-dict-extensions@2.6.1) (2023-02-27)
 
 
