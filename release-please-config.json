@@ -202,6 +202,10 @@
             "component": "code-spell-checker-swedish",
             "releaseType": "node"
         },
+        "extensions/swiss-german": {
+            "component": "code-spell-checker-swiss-german",
+            "releaseType": "node"
+        },
         "extensions/turkish": {
             "component": "code-spell-checker-turkish",
             "releaseType": "node"
