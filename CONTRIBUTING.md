@@ -15,17 +15,18 @@ The [Yeoman](http://yeoman.io/) script can help you create the dictionary templa
 Install Yeoman and then link the generator.
 
 ```sh
-npm install
-npm install -g yo
-cd generator-cspell-dicts-extensions
-npm install
-npm link
-cd ..
+npm run create:setup
 ```
 
 #### Running the generator.
 
 In the `vscode-cspell-dict-extensions` repository root.
+
+```sh
+npm run create:extension
+```
+
+or
 
 ```sh
 yo cspell-dict-extensions <name>

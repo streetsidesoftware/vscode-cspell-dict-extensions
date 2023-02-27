@@ -17,7 +17,7 @@ module.exports = class extends Generator {
         this.argument('name', {
             desc: 'Name of Dictionary',
             type: String,
-            required: true,
+            required: false,
         });
     }
 
@@ -36,7 +36,7 @@ module.exports = class extends Generator {
             {
                 type: 'input',
                 name: 'name',
-                message: 'Your extension dictionary name (i.e. medicalterms)',
+                message: 'Your extension dictionary directory name (i.e. medicalterms or german)',
                 default: this.options.name,
                 filter: (name) => name.toLowerCase().replace(/[^a-z0-9-]/g, '-'),
             },
@@ -44,7 +44,7 @@ module.exports = class extends Generator {
                 type: 'input',
                 name: 'friendlyName',
                 message: 'Friendly Name',
-                default: (props) => title(props.name),
+                default: (props) => friendlyName(props.name),
             },
             {
                 type: 'input',
@@ -81,11 +81,7 @@ module.exports = class extends Generator {
                 type: 'input',
                 name: 'locale',
                 message: 'Language Locale (i.e. "en" for English or "fr" for French)',
-                default: (props) =>
-                    props.dictionarySrc
-                        .replace(/.*dict-/, '')
-                        .slice(0, 2)
-                        .toLowerCase(),
+                default: (props) => dictNameToLocal(props.dictionarySrc),
                 when: (props) => props.addCommands,
             },
             {
@@ -157,6 +153,15 @@ module.exports = class extends Generator {
         this.spawnCommandSync('npm', ['install']);
     }
 };
+
+function dictNameToLocal(dictModuleName) {
+    return dictModuleName.replace(/^.*dict-/, '').toLowerCase();
+}
+
+function friendlyName(name) {
+    const words = name.split('-').map(title);
+    return words.join(' ');
+}
 
 function title(s) {
     return s[0].toUpperCase() + s.slice(1);
