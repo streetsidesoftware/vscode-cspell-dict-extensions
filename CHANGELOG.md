@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.6.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.6.0...vscode-cspell-dict-extensions@2.6.1) (2023-02-27)
+
+
+### Updates and Bug Fixes
+
+* Correct example in README ([#543](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/543)) ([5b4f632](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/5b4f632ae6c73173cc706899f4974b1be3a604aa))
+
+
+### Miscellaneous
+
+* hide CI PRs ([cdcbdf5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/cdcbdf545d622ed64530ab26dc5f04cbff720f70))
+
 ## [2.6.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.5.0...vscode-cspell-dict-extensions@2.6.0) (2023-02-26)
 
 

@@ -1,5 +1,5 @@
 {
-    ".": "2.6.0",
+    ".": "2.6.1",
     "extensions/arabic": "0.1.7",
     "extensions/basque": "1.0.2",
     "extensions/bulgarian": "0.1.9",
@@ -35,5 +35,5 @@
     "extensions/british-english": "1.0.2",
     "extensions/slovak": "1.0.1",
     "extensions/australian-english": "1.0.0",
-    "extensions/canadian-english": "1.0.0"
+    "extensions/canadian-english": "1.0.1"
 }
