@@ -34,7 +34,7 @@ Adding `en-ca` to the `cSpell.language` setting, will enable the Canadian_englis
 Example using both English and Canadian English dictionaries:
 
 ```javascript
-"cSpell.language": "en,en-ca",
+"cSpell.language": "en-ca",
 ```
 
 ## Requirements
