@@ -78,6 +78,10 @@
             "component": "code-spell-checker-australian-english",
             "releaseType": "node"
         },
+        "extensions/austrian-german": {
+            "component": "code-spell-checker-austrian-german",
+            "releaseType": "node"
+        },
         "extensions/basque": {
             "component": "code-spell-checker-basque",
             "releaseType": "node"
