@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.7.0...vscode-cspell-dict-extensions@3.0.0) (2023-03-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update the Danish dictionary ([#556](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/556))
+
+### Features
+
+* Update the Danish dictionary ([#556](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/556)) ([d69ec6b](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/d69ec6b90a2d8e154727a5335956430eff06ad63))
+
 ## [2.7.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.6.1...vscode-cspell-dict-extensions@2.7.0) (2023-02-27)
 
 
