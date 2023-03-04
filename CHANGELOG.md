@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.0.0...vscode-cspell-dict-extensions@3.1.0) (2023-03-04)
+
+
+### Features
+
+* Update Dictionaries ([#559](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/559)) ([918ae55](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/918ae55e564f42b8ebe6cb6b448be68c9af03137))
+
 ## [3.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@2.7.0...vscode-cspell-dict-extensions@3.0.0) (2023-03-04)
 
 
