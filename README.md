@@ -17,7 +17,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Catalan](extensions/catalan#readme) - 1.0.3 - Catalan dictionary extension for VS Code.
 - [Croatian](extensions/croatian#readme) - 0.1.8 - Croatian dictionary extension for VS Code.
 - [Czech](extensions/czech#readme) - 1.0.3 - Czech dictionary extension for VS Code.
-- [Danish](extensions/danish#readme) - 1.0.3 - Danish dictionary extension for VS Code.
+- [Danish](extensions/danish#readme) - 2.0.0 - Danish dictionary extension for VS Code.
 - [Dutch](extensions/dutch#readme) - 0.3.8 - Dutch / Nederlands dictionary extension for VS Code.
 - [Esperanto](extensions/esperanto#readme) - 1.0.2 - Esperanto dictionary extension for VS Code.
 - [Estonian](extensions/estonian#readme) - 0.1.11 - Estonian dictionary extension for VS Code.
