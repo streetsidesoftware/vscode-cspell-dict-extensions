@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.2.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.2.0...vscode-cspell-dict-extensions@3.2.1) (2023-03-16)
+
+
+### Build System
+
+* **deps-dev:** bump rimraf from 4.3.0 to 4.4.0 ([#576](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/576)) ([a5681b8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a5681b8cb3c4bb2c377919894761c070f4f4557f))
+
+
+### Updates and Bug Fixes
+
+* Update dictionaries ([a28a5da](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a28a5dab399499399b03df23ee955d668dca490e))
+* Update sponsor link ([#579](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/579)) ([6df2075](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6df2075cda94e9253a1f11d5dcf63e73a49b8edd))
+
 ## [3.2.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.1.0...vscode-cspell-dict-extensions@3.2.0) (2023-03-05)
 
 
