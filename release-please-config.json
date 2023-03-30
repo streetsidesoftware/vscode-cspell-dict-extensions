@@ -154,6 +154,10 @@
             "component": "code-spell-checker-italian",
             "releaseType": "node"
         },
+        "extensions/lithuanian": {
+            "component": "code-spell-checker-lithuanian",
+            "releaseType": "node"
+        },
         "extensions/medical-terms": {
             "component": "code-spell-checker-medical-terms",
             "releaseType": "node"
