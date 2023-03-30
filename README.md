@@ -56,6 +56,10 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 
 <!--- @@inject-end: static/generated/extension_list.md --->
 
+## VS Code Marketplace
+
+<!--- @@inject: static/generated/marketplace_language_extensions.md --->
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
