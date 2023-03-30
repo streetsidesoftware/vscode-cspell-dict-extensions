@@ -28,7 +28,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 - [Greek](extensions/greek#readme) - 1.0.4 - Greek dictionary extension for VS Code.
 - [Hebrew](extensions/hebrew#readme) - 1.0.4 - Hebrew dictionary extension for VS Code.
 - [Italian](extensions/italian#readme) - 1.0.2 - Italian dictionary extension for VS Code.
-- [Lithuanian](extensions/lithuanian#readme) - 0.1.0 - Lithuanian dictionary extension for VS Code.
+- [Lithuanian](extensions/lithuanian#readme) - 1.0.0 - Lithuanian dictionary extension for VS Code.
 - [Norwegian Bokmål](extensions/norwegian-bokmal#readme) - 0.1.10 - Norwegian Bokmål dictionary extension for VS Code.
 - [Persian](extensions/persian#readme) - 1.0.2 - Persian dictionary extension for VS Code.
 - [Polish](extensions/polish#readme) - 2.0.3 - Polish dictionary extension for VS Code.
