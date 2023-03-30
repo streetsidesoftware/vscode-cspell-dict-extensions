@@ -4,7 +4,7 @@
   "description": "Generate VS Code cspell dictionary extension.",
   "homepage": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
   "author": {
-    "name": "Jason Dent",
+    "name": "Street Side Software",
     "email": "jason@streetsidesoftware.nl",
     "url": ""
   },

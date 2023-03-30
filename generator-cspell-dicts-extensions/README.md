@@ -28,4 +28,4 @@ yo cspell-dict-extensions <name>
 
 ## License
 
-MIT © Jason Dent
+MIT © Street Side Software
