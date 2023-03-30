@@ -1,0 +1,79 @@
+{
+  "name": "code-spell-checker-lithuanian",
+  "description": "Lithuanian dictionary extension for VS Code.",
+  "version": "0.1.0",
+  "displayName": "Lithuanian - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "preview": true,
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/streetsidesoftware"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "Lithuanian",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/src/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_lithuanian.enable",
+        "title": "Enable Lithuanian Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_lithuanian.disable",
+        "title": "Disable Lithuanian Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_lithuanian.enableWorkspace",
+        "title": "Enable Lithuanian Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_lithuanian.disableWorkspace",
+        "title": "Disable Lithuanian Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "pack-extension": "vsce package",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "@cspell/dict-lt-lt": "^2.0.0"
+  }
+}
