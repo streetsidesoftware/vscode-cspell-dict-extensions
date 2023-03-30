@@ -67,6 +67,9 @@
             "path": "extensions/italian"
         },
         {
+            "path": "extensions/lithuanian"
+        },
+        {
             "path": "extensions/medical-terms"
         },
         {
