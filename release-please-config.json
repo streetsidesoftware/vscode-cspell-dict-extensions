@@ -10,7 +10,8 @@
         },
         {
             "type": "feature",
-            "section": "Features"
+            "section": "Features",
+            "hidden": false
         },
         {
             "type": "fix",
@@ -29,7 +30,7 @@
         {
             "type": "chore",
             "section": "Miscellaneous",
-            "hidden": false
+            "hidden": true
         },
         {
             "type": "revert",
@@ -37,7 +38,8 @@
         },
         {
             "type": "docs",
-            "section": "Documentation"
+            "section": "Documentation",
+            "hidden": true
         },
         {
             "type": "style",
@@ -52,17 +54,17 @@
         {
             "type": "test",
             "section": "Tests",
-            "hidden": false
+            "hidden": true
         },
         {
             "type": "build",
             "section": "Build System",
-            "hidden": false
+            "hidden": true
         },
         {
             "type": "",
             "section": "Changes",
-            "hidden": false
+            "hidden": true
         }
     ],
     "packages": {
