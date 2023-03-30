@@ -14,7 +14,7 @@ The [Yeoman](http://yeoman.io/) script can help you create the dictionary templa
 
 ### Setup Yeoman
 
-Install Yoeman
+Install Yeoman
 
 ```sh
 npm install -g yo
