@@ -21,8 +21,12 @@ on:
         options:
           - "."
           - extensions/arabic
+          - extensions/australian-english
+          - extensions/austrian-german
           - extensions/basque
+          - extensions/british-english
           - extensions/bulgarian
+          - extensions/canadian-english
           - extensions/catalan
           - extensions/croatian
           - extensions/czech
@@ -37,6 +41,7 @@ on:
           - extensions/hebrew
           - extensions/hunspell-syntax
           - extensions/italian
+          - extensions/lithuanian
           - extensions/medical-terms
           - extensions/norwegian-bokmal
           - extensions/persian
@@ -46,9 +51,11 @@ on:
           - extensions/russian
           - extensions/scientific-terms
           - extensions/serbian
+          - extensions/slovak
           - extensions/slovenian
           - extensions/spanish
           - extensions/swedish
+          - extensions/swiss-german
           - extensions/turkish
           - extensions/ukrainian
           - extensions/vietnamese
