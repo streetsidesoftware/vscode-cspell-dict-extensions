@@ -122,7 +122,7 @@ async function getExtensionInfo(extensionPath) {
 async function generateExtensionFolderListMarkdown(extensionInfos) {
     const extensionsByCategory = groupExtensionsByType(extensionInfos);
 
-    /** @type {import('mdast').Content} */
+    /** @type {import('mdast').Content[]} */
     const mdastContent = [];
 
     for (const [category, extensions] of extensionsByCategory) {
@@ -130,13 +130,7 @@ async function generateExtensionFolderListMarkdown(extensionInfos) {
         mdastContent.push(list('unordered', extensions.map(makeExtensionListItem)));
     }
 
-    /** @type {import('mdast').Root} */
-    const tree = root(mdastContent);
-    const content = genMarkdown(tree);
-
-    await fs.mkdir(path.dirname(targetExtensionFolderListMarkdown), { recursive: true });
-
-    await fs.writeFile(targetExtensionFolderListMarkdown, content, 'utf8');
+    await writeContentToFile(mdastContent, targetExtensionFolderListMarkdown);
 }
 
 /**
