@@ -162,13 +162,14 @@ async function generateMarketplaceLanguageExtensionsListMarkdown(extensionInfos)
     const mdastContent = [];
 
     const headingTitle = {
-        Languages: 'Add-On Language Dictionaries',
+        Languages: 'Language Dictionaries',
+        'Technical Terms': 'Technical Dictionaries',
     };
 
     for (const [category, extensions] of extensionsByCategory) {
         const title = headingTitle[category];
         if (!title) continue;
-        mdastContent.push(heading(2, text(title)));
+        mdastContent.push(heading(3, text(title)));
         mdastContent.push(list('unordered', extensions.map(makeMarketplaceExtensionListItem)));
     }
 
