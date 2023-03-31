@@ -69,6 +69,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - _Polish_ - [Jackens](https://github.com/jackens)
 - _Danish_ - [viktorstrate](https://github.com/viktorstrate)
 - _Slovenian_ - [KrOstir](https://github.com/KrOstir)
+- _Lithuanian_ - [Combinacijus](https://github.com/Combinacijus)
 
 <!--- @@inject: static/footer.md --->
 
@@ -91,6 +92,7 @@ cspell:words Igor Krupenja
 cspell:words Jackens
 cspell:words viktorstrate
 cspell:words KrOstir
+cspell:words Combinacijus
 cspell:words Bokmål bokmal
 cspell:words Watheq Taha Zerrouki Ahmed ElTabarani
 cspell:words Nederlands
