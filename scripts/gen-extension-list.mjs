@@ -12,6 +12,7 @@ const __root = path.dirname(__dirname);
 
 const targetExtensionFolderListMarkdown = path.join(__root, 'static/generated/extension_list.md');
 const targetMarketplaceLanguageExtensions = path.join(__root, 'static/generated/marketplace_language_extensions.md');
+const targetMarketplaceExtensions = path.join(__root, 'static/generated/marketplace_extensions.md');
 
 const markdownOptions = {
     bullet: '-',
@@ -142,24 +143,56 @@ async function generateExtensionFolderListMarkdown(extensionInfos) {
  *
  * @param {ExtensionInfo[]} extensionInfos
  */
-async function generateMarketplaceLanguageExtensionsListMarkdown(extensionInfos) {
+async function generateMarketplaceExtensionsListMarkdown(extensionInfos) {
     const extensionsByCategory = groupExtensionsByType(extensionInfos);
 
-    /** @type {import('mdast').Content} */
+    /** @type {import('mdast').Content[]} */
     const mdastContent = [];
 
     for (const [category, extensions] of extensionsByCategory) {
-        mdastContent.push(heading(3, text('VS Code Marketplace Extensions: ' + category)));
+        mdastContent.push(heading(3, text(category)));
         mdastContent.push(list('unordered', extensions.map(makeMarketplaceExtensionListItem)));
     }
 
+    await writeContentToFile(mdastContent, targetMarketplaceExtensions);
+}
+
+/**
+ *
+ * @param {ExtensionInfo[]} extensionInfos
+ */
+async function generateMarketplaceLanguageExtensionsListMarkdown(extensionInfos) {
+    const extensionsByCategory = groupExtensionsByType(extensionInfos);
+
+    /** @type {import('mdast').Content[]} */
+    const mdastContent = [];
+
+    const headingTitle = {
+        Languages: 'Add-On Language Dictionaries',
+    };
+
+    for (const [category, extensions] of extensionsByCategory) {
+        const title = headingTitle[category];
+        if (!title) continue;
+        mdastContent.push(heading(2, text(title)));
+        mdastContent.push(list('unordered', extensions.map(makeMarketplaceExtensionListItem)));
+    }
+
+    await writeContentToFile(mdastContent, targetMarketplaceLanguageExtensions);
+}
+
+/**
+ *
+ * @param {import('mdast').Content[]} mdastContent
+ * @param {string} filename
+ */
+async function writeContentToFile(mdastContent, filename) {
     /** @type {import('mdast').Root} */
     const tree = root(mdastContent);
     const content = genMarkdown(tree);
 
-    await fs.mkdir(path.dirname(targetExtensionFolderListMarkdown), { recursive: true });
-
-    await fs.writeFile(targetMarketplaceLanguageExtensions, content, 'utf8');
+    await fs.mkdir(path.dirname(filename), { recursive: true });
+    await fs.writeFile(filename, content, 'utf8');
 }
 
 /**
@@ -201,6 +234,7 @@ async function main() {
     const extensionInfos = await Promise.all(extensions.map(getExtensionInfo));
 
     await generateExtensionFolderListMarkdown(extensionInfos);
+    await generateMarketplaceExtensionsListMarkdown(extensionInfos);
     await generateMarketplaceLanguageExtensionsListMarkdown(extensionInfos);
 }
 
