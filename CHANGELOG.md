@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.3.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.2.3...vscode-cspell-dict-extensions@3.3.0) (2023-04-11)
+
+
+### Features
+
+* Update Ukrainian dictionary ([703f9ff](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/703f9ff9007d0c54c3868b0d1a7d75e72b2da66c))
+
+
+### Updates and Bug Fixes
+
+* bump @cspell/dict-en-gb from 4.1.13 to 4.1.14 ([#611](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/611)) ([9a7d0e1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/9a7d0e1e3c2a1164a7149f059e213976f5767332))
+
 ## [3.2.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.2.2...vscode-cspell-dict-extensions@3.2.3) (2023-03-30)
 
 

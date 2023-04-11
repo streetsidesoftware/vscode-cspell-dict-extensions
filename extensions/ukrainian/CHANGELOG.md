@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-ukrainian@1.0.3...code-spell-checker-ukrainian@1.1.0) (2023-04-11)
+
+
+### Features
+
+* Update Ukrainian dictionary ([703f9ff](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/703f9ff9007d0c54c3868b0d1a7d75e72b2da66c))
+
 ## [1.0.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-ukrainian@1.0.2...code-spell-checker-ukrainian@1.0.3) (2023-03-16)
 
 
