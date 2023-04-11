@@ -74,6 +74,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "@cspell/dict-uk-ua": "^2.0.0"
+    "@cspell/dict-uk-ua": "^3.0.0"
   }
 }
