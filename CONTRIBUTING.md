@@ -115,3 +115,10 @@ Within VS Code `Debug -> Start Debugging` with the `Launch Extension` configurat
 This will open new VSCode window. Inside it open previously edited `seattle.md`. If most words of your language are now recognized (no blue squiggly line) you can open pull request to `main` branch. Build files are already in .gitignore so you can commit all changes.
 
 Shortly after pull request is merged extension will appear in vscode extensions marketplace.
+
+## Contributors
+
+<a href="https://github.com/streetsidesoftware/cspell-dicts/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=streetsidesoftware/cspell-dicts&r="  width="800px"/>
+</a>
+
