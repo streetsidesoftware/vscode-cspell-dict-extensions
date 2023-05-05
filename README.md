@@ -4,6 +4,10 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 
 ## Current Extensions
 
+See Also: 
+
+- [How to Create a New Extension](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/blob/main/CONTRIBUTING.md#how-to-create-a-new-extension)
+
 <!--- @@inject: static/generated/extension_list.md --->
 
 ### Languages
