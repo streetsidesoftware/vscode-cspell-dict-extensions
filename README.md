@@ -120,6 +120,12 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Contributors
 
+<a href="https://github.com/streetsidesoftware/cspell-dicts/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=streetsidesoftware/cspell-dicts&r="  width="800px"/>
+</a>
+
+<!--
+
 - _Arabic_ - [Watheq](https://github.com/watheqAlshowaiter/), [Taha Zerrouki](https://github.com/linuxscout), and [Ahmed ElTabarani](https://github.com/AhmedElTabarani)
 - _Catalan_ - [Jordi Olivares Provencio](https://github.com/jordiolivares)
 - _Czech_ - [Zereges](https://github.com/Zereges)
@@ -128,6 +134,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - _Danish_ - [viktorstrate](https://github.com/viktorstrate)
 - _Slovenian_ - [KrOstir](https://github.com/KrOstir)
 - _Lithuanian_ - [Combinacijus](https://github.com/Combinacijus)
+
+-->
 
 <!--- @@inject: static/footer.md --->
 
