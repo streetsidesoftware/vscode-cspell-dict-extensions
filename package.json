@@ -31,7 +31,7 @@
     "@lerna-lite/cli": "^2.4.1",
     "@lerna-lite/exec": "^2.4.1",
     "@lerna-lite/run": "^2.4.1",
-    "@tsconfig/node16": "^1.0.4",
+    "@tsconfig/node16": "^16.1.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.16.18",
     "@types/vscode": "^1.79.1",
