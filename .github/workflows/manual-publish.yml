@@ -19,7 +19,8 @@ on:
         type: choice
         # Options are generated from `npm run gen:workflow`
         options:
-          - "."
+          - "none"
+          - "all"
           - extensions/arabic
           - extensions/australian-english
           - extensions/austrian-german
@@ -81,7 +82,7 @@ jobs:
 
       - name: Choice
         env:
-          INPUT_CHOICE: ${{ (inputs.extension && format('["{0}"]', inputs.extension)) }}
+          INPUT_CHOICE: ${{ (inputs.extension && (inputs.extension != 'all') && format('["{0}"]', inputs.extension) || '') }}
         run: |
           echo INPUT_CHOICE=$INPUT_CHOICE >> $GITHUB_ENV
 
@@ -102,6 +103,7 @@ jobs:
     with:
       ref: ${{ inputs.ref }}
       paths_released: ${{ needs.list_extensions.outputs.extension_list }}
+    if: ${{ inputs.extension != 'none' }}
     secrets:
       VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
       OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}

@@ -73,6 +73,13 @@ jobs:
         if: ${{ env.PUB_FAIL_OVSX }}
         run: echo "::error title=OVSX::Failed to Publish $EXTENSION_NAME to Eclipse Open VSX."
 
+      - name: Report Results
+        uses: ./.github/actions/summary
+        with:
+          text: |
+            - VSCE Publish ${{ env.EXTENSION_NAME }}: ${{ env.PUB_FAIL_VSCE && 'failed' || 'success' }}
+            - OVSX Publish ${{ env.EXTENSION_NAME }}: ${{ env.PUB_FAIL_OVSX && 'failed' || 'success' }}
+
       - name: Check Build
         if: ${{ env.PUB_FAIL_VSCE || env.PUB_FAIL_OVSX }}
         run: exit 1
