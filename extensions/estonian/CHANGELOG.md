@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-estonian@0.1.12...code-spell-checker-estonian@0.2.0) (2023-07-20)
+
+
+### Features
+
+* Update Dictionaries ([333382a](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/333382a02ac229a13b3d77a122b7e8201cad695c))
+
 ## [0.1.12](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-estonian@0.1.11...code-spell-checker-estonian@0.1.12) (2023-03-16)
 
 
