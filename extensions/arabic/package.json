@@ -74,6 +74,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "@cspell/dict-ar": "^1.0.3"
+    "@cspell/dict-ar": "^1.1.0"
   }
 }
