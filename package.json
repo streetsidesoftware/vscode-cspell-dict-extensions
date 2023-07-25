@@ -33,7 +33,7 @@
     "@lerna-lite/run": "^2.5.0",
     "@tsconfig/node16": "^16.1.0",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^18.16.19",
+    "@types/node": "^18.17.0",
     "@types/vscode": "^1.80.0",
     "@vscode/test-electron": "^2.3.3",
     "@vscode/vsce": "^2.19.0",
