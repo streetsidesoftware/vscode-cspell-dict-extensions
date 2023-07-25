@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-greek@1.0.4...code-spell-checker-greek@1.1.0) (2023-07-25)
+
+
+### Features
+
+* bump @cspell/dict-el from 2.0.1 to 3.0.0 ([#685](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/685)) ([a99f781](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a99f7811cbfeaa9bf7fd87f6e429c733dd6f8d5e))
+
 ## [1.0.4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-greek@1.0.3...code-spell-checker-greek@1.0.4) (2023-03-16)
 
 
