@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.5.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.4.0...vscode-cspell-dict-extensions@3.5.0) (2023-07-25)
+
+
+### Features
+
+* bump @cspell/dict-el from 2.0.1 to 3.0.0 ([#685](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/685)) ([a99f781](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a99f7811cbfeaa9bf7fd87f6e429c733dd6f8d5e))
+* bump @cspell/dict-eo from 2.0.0 to 3.0.1 ([#687](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/687)) ([55d64dc](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/55d64dcd0f2419aecff4ccf52171a3c4c7631a42))
+* bump @cspell/dict-pl_pl from 2.0.1 to 3.0.0 ([#686](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/686)) ([5bfd2af](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/5bfd2af3169f3362ce2b27df9453c668dc2ca951))
+* bump @cspell/dict-scientific-terms-us from 2.0.0 to 3.0.0 ([#688](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/688)) ([60c84ea](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/60c84eaa156d6245428717835a936b045d5dcea6))
+
 ## [3.4.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.3.1...vscode-cspell-dict-extensions@3.4.0) (2023-07-20)
 
 
