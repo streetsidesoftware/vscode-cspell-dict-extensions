@@ -37,7 +37,7 @@
     "@types/vscode": "^1.80.0",
     "@vscode/test-electron": "^2.3.3",
     "@vscode/vsce": "^2.20.0",
-    "inject-markdown": "^1.5.0",
+    "inject-markdown": "^2.0.0",
     "mdast": "^3.0.0",
     "mdast-builder": "^1.1.1",
     "mdast-util-to-markdown": "^1.5.0",
