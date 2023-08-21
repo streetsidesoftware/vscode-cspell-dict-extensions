@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "displayName": "Romanian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "preview": true,
+  "preview": false,
   "private": true,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",
