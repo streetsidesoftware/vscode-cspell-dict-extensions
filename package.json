@@ -33,7 +33,7 @@
     "@lerna-lite/run": "^2.5.0",
     "@tsconfig/node16": "^16.1.0",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^18.17.5",
+    "@types/node": "^18.17.6",
     "@types/vscode": "^1.81.0",
     "@vscode/test-electron": "^2.3.4",
     "@vscode/vsce": "^2.20.1",
@@ -43,7 +43,7 @@
     "mdast-util-to-markdown": "^1.5.0",
     "mocha": "^10.2.0",
     "ovsx": "^0.8.3",
-    "prettier": "^3.0.1",
+    "prettier": "^3.0.2",
     "rimraf": "^5.0.1",
     "typescript": "^5.1.6",
     "yaml": "^2.3.1"
