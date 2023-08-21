@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-norwegian-bokmal@0.1.10...code-spell-checker-norwegian-bokmal@0.2.0) (2023-08-21)
+
+
+### Features
+
+* Update @cspell/dict-nb-no from 1.0.5 to 2.0.0 ([d6cd2f7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/d6cd2f79ce1f4a22133bf88a20e16f07fcd2b4a7))
+
 ## [0.1.10](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-norwegian-bokmal@0.1.9...code-spell-checker-norwegian-bokmal@0.1.10) (2023-03-16)
 
 

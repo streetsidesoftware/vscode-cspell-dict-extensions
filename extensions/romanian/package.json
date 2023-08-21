@@ -1,10 +1,10 @@
 {
   "name": "code-spell-checker-romanian",
   "description": "Romanian dictionary extension for VS Code.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "displayName": "Romanian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "preview": false,
+  "preview": true,
   "private": true,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",

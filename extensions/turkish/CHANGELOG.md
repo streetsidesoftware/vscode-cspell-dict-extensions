@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-turkish@1.0.2...code-spell-checker-turkish@1.1.0) (2023-08-21)
+
+
+### Features
+
+* Update @cspell/dict-tr-tr from 2.0.0 to 3.0.0 ([f73d2f8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f73d2f8275c4b6481643ca189ab9275e26d72192))
+
 ## [1.0.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-turkish@1.0.1...code-spell-checker-turkish@1.0.2) (2023-03-16)
 
 
