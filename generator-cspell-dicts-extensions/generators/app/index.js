@@ -118,6 +118,7 @@ module.exports = class extends Generator {
             '.gitignore',
             '.vscodeignore',
             'tsconfig.json',
+            'cspell.config.yaml'
         ];
         files
             .map((fromTo) => (typeof fromTo === 'string' ? [fromTo, fromTo] : fromTo))

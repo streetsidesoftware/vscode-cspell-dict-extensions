@@ -1,8 +1,8 @@
 {
-  "name": "<%= fullPackageName %>",
-  "description": "<%= description %>",
+  "name": "code-spell-checker-romanian",
+  "description": "Romanian dictionary extension for VS Code.",
   "version": "0.1.0",
-  "displayName": "<%= displayName %>",
+  "displayName": "Romanian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": true,
   "private": true,
@@ -22,7 +22,7 @@
     "Other"
   ],
   "keywords": [
-    "<%= friendlyName %>",
+    "Romanian",
     "VS Code Extension",
     "Spelling Checker",
     "dictionary",
@@ -34,27 +34,24 @@
   "qna": "marketplace",
   "main": "./out/src/extension",
   "contributes": {
-        <% if (addCommands) { %>
-        "commands": [
-        {
-          "command": "cSpellExt_<%= name %>.enable",
-          "title": "Enable <%= commandName %> Spell Checker Dictionary"
-        },
-        {
-          "command": "cSpellExt_<%= name %>.disable",
-          "title": "Disable <%= commandName %> Spell Checker Dictionary"
-        },
-        {
-          "command": "cSpellExt_<%= name %>.enableWorkspace",
-          "title": "Enable <%= commandName %> Spell Checker Dictionary in Workspace"
-        },
-        {
-          "command": "cSpellExt_<%= name %>.disableWorkspace",
-          "title": "Disable <%= commandName %> Spell Checker Dictionary in Workspace"
-        }
-      ]
-        <%
-    } %>
+    "commands": [
+      {
+        "command": "cSpellExt_romanian.enable",
+        "title": "Enable Romanian Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_romanian.disable",
+        "title": "Disable Romanian Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_romanian.enableWorkspace",
+        "title": "Enable Romanian Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_romanian.disableWorkspace",
+        "title": "Disable Romanian Spell Checker Dictionary in Workspace"
+      }
+    ]
   },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
@@ -77,5 +74,8 @@
     "test": "npm run test:samples",
     "test:samples": "cspell samples",
     "test:bin": "node ../../node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "@cspell/dict-ro-ro": "^1.0.0"
   }
 }

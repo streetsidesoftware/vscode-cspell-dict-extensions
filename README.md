@@ -38,6 +38,7 @@ See Also:
 - [Polish](extensions/polish#readme) - 2.1.0 - Polish dictionary extension for VS Code.
 - [Portuguese](extensions/portuguese#readme) - 1.0.5 - Portuguese dictionary extension for VS Code.
 - [Brazilian Portuguese](extensions/portuguese-brazilian#readme) - 2.1.0 - Brazilian Portuguese dictionary extension for VS Code.
+- [Romanian](extensions/romanian#readme) - 0.1.0 - Romanian dictionary extension for VS Code.
 - [Russian](extensions/russian#readme) - 2.1.0 - Russian dictionary extension for VS Code.
 - [Serbian](extensions/serbian#readme) - 1.1.0 - Serbian dictionary extension for VS Code.
 - [Slovak](extensions/slovak#readme) - 1.1.0 - Slovak dictionary extension for VS Code.
@@ -92,6 +93,7 @@ See Also:
 - [Polish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-polish) - Polish dictionary extension for VS Code.
 - [Portuguese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-portuguese) - Portuguese dictionary extension for VS Code.
 - [Brazilian Portuguese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-portuguese-brazilian) - Brazilian Portuguese dictionary extension for VS Code.
+- [Romanian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-romanian) - Romanian dictionary extension for VS Code.
 - [Russian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian) - Russian dictionary extension for VS Code.
 - [Serbian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-serbian) - Serbian dictionary extension for VS Code.
 - [Slovak](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-slovak) - Slovak dictionary extension for VS Code.
