@@ -13,6 +13,6 @@ Størstedelen av befolkningen er nordisk. De siste par årene har innvandring ut
 <!---
 cspell:locale nb
 cspell:words Finnmarksloven demokratiindeks rikdomsøkning utenlandsoperasjoner
-cspell:words locale words
+cspell:words locale words taken
 cspell:words capita Happiness
 --->
