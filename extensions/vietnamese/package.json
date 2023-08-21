@@ -71,7 +71,9 @@
     "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "node ../../node_modules/vscode/bin/test"
+    "test": "npm run test:samples",
+    "test:samples": "cspell samples",
+    "test:bin": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
     "@cspell/dict-vi-vn": "^3.0.0"

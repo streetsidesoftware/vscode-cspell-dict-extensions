@@ -9,3 +9,11 @@ Seattle nổi tiếng với việc tiêu thụ nhiều cà phê;[8] các công t
 Xét về thu nhập bình quân đầu người, một nghiên cứu của Cục phân tích kinh tế Mĩ xếp hạng vùng đô thị Seattle đứng thứ 17 trong 363 khu vực đô thị trong năm 2006.[14] Seattle từ một vùng kinh tế lạc hậu, nay đã phát triển mạnh mẽ về trung tâm công nghệ thông tin, hàng không, kiến trúc và các ngành công nghiệp giải trí. Thành phố được biết đến như một trung tâm của những người yêu công nghệ "xanh".[15]
 
 Các tuyến đường sắt và xe điện thô sơ (street car) đã từng thống trị hệ thống giao thông nhưng đã bị thay thế phần lớn bằng một hệ thống xe buýt dày đặc và sự phát triện nhanh chóng đã khiến cho xe hơi trở thành phương tiện chính của người dân từ giữa đến cuối thế kỉ XX. Chính vì vậy, Seattle đã trở thành một trong những thành phố có nạn ùn tắc giao thông nhiều nhất nước Mĩ. Mặc dù vậy, những nỗ lực để thay đổi vấn nạn này tại các khu vực và các cơ quan chức năng đã dẫn đến dịch vụ đường sắt mới nối Seattle đến Everett và Tahoma, liên kết khu vực Light Rail về phía Nam từ khu Trung tâm và khu nội thành South Lake Union bằng tuyến đường sắt South Lake Union. Một tuyến đường mở rộng ở phía Nam đi tới Sân bay Quốc tế Seattle-Tahoma bắt đầu được đưa vào sử dụng từ ngày 19 tháng 12 năm 2009; tuyến đường mở rộng ở phía Bắc thì đi đến Đại học Washington được xây dựng vào năm 2010; và một vài mở rộng xa hơn như kế hoạch đi đến Lynnwood ở phía Bắc, Des Moines ở phía Nam, và Bellevue và Redmond ở phía Đông vào năm 2023.[16]
+
+<!---
+cspell:locale vi,en
+
+cspell:ignore siːˈæɾ
+cspell:ignore Duwamish Jimi Lakeview Lynnwood Moines
+cspell:ignore Sealth Soundgarden Suquamish Swinson Tahoma Tully's
+--->

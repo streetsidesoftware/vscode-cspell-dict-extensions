@@ -15,3 +15,18 @@ Seattle'da yaşayan nüfusun %12'si 65 yaşın üzerindedir. 2000 yılı değerl
 
 Politika ve yaşam
 Seattle, kuzeybatısındaki Tacoma ve Olympia gibi kentlerin de etkisiyle ABD'nin geneline kıyasla daha çok demokratların hakim olduğu, sola yatkın bir yerdir. Yine de metro bölgesi gibi, liberallerin yoğunlukta olduğu yerler de vardır. ABD'nin en açık görüşlü yerlerinden biri olarak bilinen Seattle'ın Capitol Hill bölgesinde de hayli geniş bir eşcinsel topluluk yaşamaktadır.
+
+<!----
+cspell:locale tr,en
+cspell:ignore ABD'nin
+cspell:ignore Devletleri'nin
+cspell:ignore Duwamish
+cspell:ignore eşcinsel
+cspell:ignore hükûmeti
+cspell:ignore Kaliforniya'daki
+cspell:ignore Seattle'ın
+cspell:ignore Si'ahl
+cspell:ignore Soundgarden
+cspell:ignore Suquamish
+cspell:ignore Vikipedi
+--->
