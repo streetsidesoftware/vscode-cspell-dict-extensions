@@ -1,5 +1,5 @@
 {
-    ".": "3.5.0",
+    ".": "3.6.0",
     "extensions/arabic": "0.2.0",
     "extensions/basque": "1.0.3",
     "extensions/bulgarian": "0.1.10",
@@ -18,7 +18,7 @@
     "extensions/hunspell-syntax": "1.0.3",
     "extensions/italian": "1.0.2",
     "extensions/medical-terms": "2.0.3",
-    "extensions/norwegian-bokmal": "0.1.10",
+    "extensions/norwegian-bokmal": "0.2.0",
     "extensions/persian": "1.0.2",
     "extensions/polish": "2.1.0",
     "extensions/portuguese-brazilian": "2.1.0",
@@ -28,15 +28,16 @@
     "extensions/slovenian": "0.2.0",
     "extensions/spanish": "2.2.0",
     "extensions/swedish": "1.2.0",
-    "extensions/turkish": "1.0.2",
+    "extensions/turkish": "1.1.0",
     "extensions/ukrainian": "1.1.0",
-    "extensions/vietnamese": "1.0.2",
+    "extensions/vietnamese": "1.1.0",
     "extensions/serbian": "1.1.0",
-    "extensions/british-english": "1.2.0",
+    "extensions/british-english": "1.2.1",
     "extensions/slovak": "1.1.0",
     "extensions/australian-english": "1.0.2",
     "extensions/canadian-english": "1.0.3",
     "extensions/swiss-german": "1.1.1",
     "extensions/austrian-german": "1.0.1",
-    "extensions/lithuanian": "1.0.0"
+    "extensions/lithuanian": "1.0.0",
+    "extensions/romanian": "1.0.0"
 }

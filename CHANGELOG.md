@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.6.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.5.0...vscode-cspell-dict-extensions@3.6.0) (2023-08-21)
+
+
+### Features
+
+* Update @cspell/dict-nb-no from 1.0.5 to 2.0.0 ([d6cd2f7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/d6cd2f79ce1f4a22133bf88a20e16f07fcd2b4a7))
+* Update @cspell/dict-tr-tr from 2.0.0 to 3.0.0 ([f73d2f8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f73d2f8275c4b6481643ca189ab9275e26d72192))
+* Update @cspell/dict-vi-vn from 2.0.0 to 3.0.0 ([0dc848f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/0dc848fbdc66e970ddd9d4bf72029d0ebfd3d988))
+
+
+### Updates and Bug Fixes
+
+* Add Romanian ([#708](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/708)) ([6af65d9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6af65d9bc4138e9d8c19be3e6ea81d81f2400f61))
+* Prepare to publish ([#711](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/711)) ([e1d6d0b](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/e1d6d0b63244449bac31802bc13c57a48d38c7da))
+* Update @cspell/dict-en-gb from 4.1.18 to 4.1.19 ([a2f46ef](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a2f46efa8ed393d117ccb27faba3bf2b2b1eb5b3))
+
 ## [3.5.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.4.0...vscode-cspell-dict-extensions@3.5.0) (2023-07-25)
 
 
