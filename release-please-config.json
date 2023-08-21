@@ -184,6 +184,10 @@
             "component": "code-spell-checker-portuguese",
             "releaseType": "node"
         },
+        "extensions/romanian": {
+            "component": "code-spell-checker-romanian",
+            "releaseType": "node"
+        },
         "extensions/russian": {
             "component": "code-spell-checker-russian",
             "releaseType": "node"
