@@ -90,7 +90,7 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "@cspell/dict-sr-cyrl": "^1.0.2",
+    "@cspell/dict-sr-cyrl": "^1.1.0",
     "@cspell/dict-sr-latn": "^1.0.2"
   }
 }
