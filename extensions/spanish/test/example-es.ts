@@ -35,3 +35,4 @@ const kilometros = 22;
 console.log(seattleMd);
 console.log(pacifico);
 console.log(anos);
+console.log(kilometros);

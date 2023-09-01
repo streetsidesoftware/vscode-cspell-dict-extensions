@@ -8,6 +8,7 @@
   "private": true,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",
+  "type": "commonjs",
   "engines": {
     "vscode": "^1.67.0"
   },

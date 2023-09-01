@@ -6,6 +6,7 @@
   "icon": "images/SpellCheck.png",
   "private": true,
   "publisher": "streetsidesoftware",
+  "type": "commonjs",
   "engines": {
     "vscode": "^1.67.0"
   },
