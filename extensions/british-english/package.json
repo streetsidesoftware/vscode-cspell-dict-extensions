@@ -77,6 +77,6 @@
     "test:bin": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "@cspell/dict-en-gb": "^4.1.19"
+    "@cspell/dict-en-gb": "^4.1.21"
   }
 }
