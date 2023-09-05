@@ -13,7 +13,7 @@ jobs:
       extension_list: ${{ env.EXTENSION_LIST }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: From Script
         run: |
@@ -33,7 +33,7 @@ jobs:
       matrix:
         extension_dir: ${{ fromJSON(needs.list_extensions.outputs.extension_list) }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
