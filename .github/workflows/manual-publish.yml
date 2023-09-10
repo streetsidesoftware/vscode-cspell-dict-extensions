@@ -70,7 +70,7 @@ jobs:
       extension_list: ${{ env.EXTENSION_LIST }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref }}
 

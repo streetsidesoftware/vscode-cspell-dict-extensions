@@ -41,7 +41,7 @@ jobs:
         extension_dir: ${{ fromJSON(needs.filter_dirs.outputs.paths_released) }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref }}
       - name: Install
