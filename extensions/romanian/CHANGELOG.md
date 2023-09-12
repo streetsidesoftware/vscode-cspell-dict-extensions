@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-romanian" extension will be documented in this file.
 
+## [1.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-romanian@1.0.0...code-spell-checker-romanian@1.0.1) (2023-09-12)
+
+
+### Updates and Bug Fixes
+
+* Remove preview flag ([#733](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/733)) ([6c0cc22](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6c0cc22cd36b0e7fffe08cb8ae1fdade38149b3d))
+
 ## 1.0.0 (2023-08-21)
 
 

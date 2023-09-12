@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-croatian@0.1.9...code-spell-checker-croatian@1.0.0) (2023-09-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update @cspell/dict-hr-hr from 2.0.0 to 3.0.0 ([#721](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/721))
+
+### Features
+
+* Update @cspell/dict-hr-hr from 2.0.0 to 3.0.0 ([#721](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/721)) ([a3d5d85](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a3d5d8529b620aa2f5a9824e3e6ccb5914523532))
+
 ## [0.1.9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-croatian@0.1.8...code-spell-checker-croatian@0.1.9) (2023-03-16)
 
 

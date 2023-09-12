@@ -1,7 +1,7 @@
 {
   "name": "vscode-cspell-dict-extensions",
   "private": true,
-  "version": "3.7.0",
+  "version": "4.0.0",
   "scripts": {
     "test": "lerna run test",
     "postinstall": "lerna exec \"npm i\"",
