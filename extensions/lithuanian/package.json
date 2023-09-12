@@ -75,6 +75,6 @@
     "test": "node ../../node_modules/vscode/bin/test"
   },
   "dependencies": {
-    "@cspell/dict-lt-lt": "^2.0.0"
+    "@cspell/dict-lt-lt": "^3.0.0"
   }
 }
