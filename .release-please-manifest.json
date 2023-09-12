@@ -1,10 +1,10 @@
 {
-    ".": "3.7.0",
+    ".": "4.0.0",
     "extensions/arabic": "0.2.0",
     "extensions/basque": "1.0.3",
     "extensions/bulgarian": "0.1.10",
     "extensions/catalan": "1.0.4",
-    "extensions/croatian": "0.1.9",
+    "extensions/croatian": "1.0.0",
     "extensions/czech": "1.0.4",
     "extensions/danish": "2.1.1",
     "extensions/dutch": "0.4.0",
@@ -17,12 +17,12 @@
     "extensions/hebrew": "1.0.4",
     "extensions/hunspell-syntax": "1.0.3",
     "extensions/italian": "1.0.2",
-    "extensions/medical-terms": "2.0.3",
+    "extensions/medical-terms": "3.0.0",
     "extensions/norwegian-bokmal": "0.2.0",
-    "extensions/persian": "1.0.2",
+    "extensions/persian": "2.0.0",
     "extensions/polish": "2.1.0",
     "extensions/portuguese-brazilian": "2.1.0",
-    "extensions/portuguese": "1.0.5",
+    "extensions/portuguese": "2.0.0",
     "extensions/russian": "2.1.0",
     "extensions/scientific-terms": "0.2.0",
     "extensions/slovenian": "0.2.0",
@@ -38,6 +38,7 @@
     "extensions/canadian-english": "1.1.0",
     "extensions/swiss-german": "1.1.1",
     "extensions/austrian-german": "1.0.1",
-    "extensions/lithuanian": "1.0.0",
-    "extensions/romanian": "1.0.0"
+    "extensions/lithuanian": "1.1.0",
+    "extensions/romanian": "1.0.1",
+    "extensions/latvian": "1.0.0"
 }

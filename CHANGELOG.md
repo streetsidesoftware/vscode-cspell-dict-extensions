@@ -1,5 +1,29 @@
 # Changelog
 
+## [4.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.7.0...vscode-cspell-dict-extensions@4.0.0) (2023-09-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update @cspell/dict-hr-hr from 2.0.0 to 3.0.0 ([#721](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/721))
+* Update @cspell/dict-medicalterms from 3.0.0 to 4.0.0 ([#722](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/722))
+* Update @cspell/dict-fa-ir from 2.0.0 to 3.0.0 ([#724](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/724))
+* Update @cspell/dict-pt-pt from 2.0.0 to 3.0.0 ([#723](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/723))
+
+### Features
+
+* Add Latvian ([#729](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/729)) ([856b60e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/856b60ec0a66312260488f1f30a078faebc3a63b))
+* Update @cspell/dict-fa-ir from 2.0.0 to 3.0.0 ([#724](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/724)) ([20586c1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/20586c11e0250645cbc433a2d8088d0d57821358))
+* Update @cspell/dict-hr-hr from 2.0.0 to 3.0.0 ([#721](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/721)) ([a3d5d85](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a3d5d8529b620aa2f5a9824e3e6ccb5914523532))
+* Update @cspell/dict-lt-lt from 2.0.0 to 3.0.0 ([#727](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/727)) ([6642a07](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6642a071bc3cd5b1a1df484a8d98ce16d4f82bc4))
+* Update @cspell/dict-medicalterms from 3.0.0 to 4.0.0 ([#722](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/722)) ([002d70c](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/002d70ca34a1f379f431b7315a0341eb76d2a3b9))
+* Update @cspell/dict-pt-pt from 2.0.0 to 3.0.0 ([#723](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/723)) ([fb03da8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/fb03da8ebb2062180407f3ab36939079872957b8))
+
+
+### Updates and Bug Fixes
+
+* Remove preview flag ([#733](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/733)) ([6c0cc22](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6c0cc22cd36b0e7fffe08cb8ae1fdade38149b3d))
+
 ## [3.7.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@3.6.0...vscode-cspell-dict-extensions@3.7.0) (2023-09-01)
 
 
