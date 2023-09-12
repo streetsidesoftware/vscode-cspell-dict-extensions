@@ -20,7 +20,7 @@ See Also:
 - [Bulgarian](extensions/bulgarian#readme) - 0.1.10 - Bulgarian dictionary extension for VS Code.
 - [Canadian English](extensions/canadian-english#readme) - 1.1.0 - Canadian English dictionary extension for VS Code.
 - [Catalan](extensions/catalan#readme) - 1.0.4 - Catalan dictionary extension for VS Code.
-- [Croatian](extensions/croatian#readme) - 0.1.9 - Croatian dictionary extension for VS Code.
+- [Croatian](extensions/croatian#readme) - 1.0.0 - Croatian dictionary extension for VS Code.
 - [Czech](extensions/czech#readme) - 1.0.4 - Czech dictionary extension for VS Code.
 - [Danish](extensions/danish#readme) - 2.1.1 - Danish dictionary extension for VS Code.
 - [Dutch](extensions/dutch#readme) - 0.4.0 - Dutch / Nederlands dictionary extension for VS Code.
@@ -32,14 +32,14 @@ See Also:
 - [Greek](extensions/greek#readme) - 1.1.0 - Greek dictionary extension for VS Code.
 - [Hebrew](extensions/hebrew#readme) - 1.0.4 - Hebrew dictionary extension for VS Code.
 - [Italian](extensions/italian#readme) - 1.0.2 - Italian dictionary extension for VS Code.
-- [Latvian](extensions/latvian#readme) - 0.1.0 - Latvian dictionary extension for VS Code.
-- [Lithuanian](extensions/lithuanian#readme) - 1.0.0 - Lithuanian dictionary extension for VS Code.
+- [Latvian](extensions/latvian#readme) - 1.0.0 - Latvian dictionary extension for VS Code.
+- [Lithuanian](extensions/lithuanian#readme) - 1.1.0 - Lithuanian dictionary extension for VS Code.
 - [Norwegian Bokmål](extensions/norwegian-bokmal#readme) - 0.2.0 - Norwegian Bokmål dictionary extension for VS Code.
-- [Persian](extensions/persian#readme) - 1.0.2 - Persian dictionary extension for VS Code.
+- [Persian](extensions/persian#readme) - 2.0.0 - Persian dictionary extension for VS Code.
 - [Polish](extensions/polish#readme) - 2.1.0 - Polish dictionary extension for VS Code.
-- [Portuguese](extensions/portuguese#readme) - 1.0.5 - Portuguese dictionary extension for VS Code.
+- [Portuguese](extensions/portuguese#readme) - 2.0.0 - Portuguese dictionary extension for VS Code.
 - [Brazilian Portuguese](extensions/portuguese-brazilian#readme) - 2.1.0 - Brazilian Portuguese dictionary extension for VS Code.
-- [Romanian](extensions/romanian#readme) - 1.0.0 - Romanian dictionary extension for VS Code.
+- [Romanian](extensions/romanian#readme) - 1.0.1 - Romanian dictionary extension for VS Code.
 - [Russian](extensions/russian#readme) - 2.1.0 - Russian dictionary extension for VS Code.
 - [Serbian](extensions/serbian#readme) - 1.2.0 - Serbian dictionary extension for VS Code.
 - [Slovak](extensions/slovak#readme) - 1.1.0 - Slovak dictionary extension for VS Code.
@@ -57,7 +57,7 @@ See Also:
 
 ### Technical Terms
 
-- [Medical Terms](extensions/medical-terms#readme) - 2.0.3 - Medical Terms Add-On for Code Spell Checker
+- [Medical Terms](extensions/medical-terms#readme) - 3.0.0 - Medical Terms Add-On for Code Spell Checker
 - [Scientific Terms](extensions/scientific-terms#readme) - 0.2.0 - Scientific Terms dictionary extension for VS Code.
 
 <!--- @@inject-end: static/generated/extension_list.md --->
