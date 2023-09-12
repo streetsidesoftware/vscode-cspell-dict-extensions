@@ -156,6 +156,10 @@
             "component": "code-spell-checker-italian",
             "releaseType": "node"
         },
+        "extensions/latvian": {
+            "component": "code-spell-checker-latvian",
+            "releaseType": "node"
+        },
         "extensions/lithuanian": {
             "component": "code-spell-checker-lithuanian",
             "releaseType": "node"
