@@ -33,8 +33,8 @@
     "@lerna-lite/exec": "^2.5.1",
     "@lerna-lite/run": "^2.5.1",
     "@tsconfig/node16": "^16.1.1",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "^18.17.19",
+    "@types/mocha": "^10.0.2",
+    "@types/node": "^18.18.0",
     "@types/vscode": "^1.82.0",
     "@vscode/test-electron": "^2.3.4",
     "@vscode/vsce": "^2.21.0",
@@ -45,7 +45,7 @@
     "mocha": "^10.2.0",
     "ovsx": "^0.8.3",
     "prettier": "^3.0.3",
-    "rimraf": "^5.0.1",
+    "rimraf": "^5.0.5",
     "typescript": "^5.2.2",
     "yaml": "^2.3.2"
   }
