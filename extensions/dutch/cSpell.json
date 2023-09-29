@@ -11,5 +11,12 @@
     ],
     "import": [
         "./cspell-ext.json"
+    ],
+    "languageSettings": [
+        {
+            "locale": "*",
+            "languageId": "*",
+            "caseSensitive": false
+        }
     ]
 }

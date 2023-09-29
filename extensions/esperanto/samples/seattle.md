@@ -6,4 +6,7 @@ Seatlo estas la plej multnombre loĝata urbo en nordokcidenta Usono, kaj la admi
 
 Kromnomata la “smeralda urbo”, Seatlo estas la sidejo de mondfamaj kompanioj kiel Starbucks kaj Amazon.com (kaj, ĝis 2001, Boeing). Cetere, la sidejo de Microsoft estas en Redmond apud Seatlo. Seatlo estas ankaŭ konata kiel hejmo de alternativa muziko kaj bona kafo. La plej rekonebla konstruaĵo de Seatlo estas la Spacnadlo (Space Needle), konstruita pro la Internacia ekspozicio de 1962, Ekspozicio Jarcento 21. La profesiaj sportteamoj estas la Mariners (bazpilko), Seahawks (usona futbalo), Storm (korbopilko (ina)), kaj Sounders (asocia futbalo).
 
-<!--- cspell:ignore Jimi Handrix --->
+<!---
+cspell:ignore Jimi Handrix
+cspell:ignore Seatlo Seattle Speaker Icon Alki ĉinuka orimpetego duwamish suquamish Redmond Mariners Seahawks Storm Sounders
+--->

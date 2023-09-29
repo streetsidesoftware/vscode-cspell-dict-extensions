@@ -4,5 +4,4 @@ Seattle està en el centre econòmic de la regió coneguda com a "Greater Puget 
 
 <!---
 cspell:ignore siːˈætəl Francisco Sound Seath'tl Greater Sound
-
 --->
