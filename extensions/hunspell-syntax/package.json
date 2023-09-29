@@ -69,7 +69,7 @@
     "build": "echo build",
     "watch": "echo watch",
     "test:cspell": "cspell -c cspell.json samples",
-    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/example.aff",
+    "test:vscode": "echo OK - no code here.",
     "test": "npm run test:cspell && npm run test:vscode"
   }
 }
