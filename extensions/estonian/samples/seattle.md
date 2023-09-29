@@ -17,6 +17,7 @@ Seattle'i ajaloo suuremateks sündmusteks on olnud 1889. aaasta tuleekahju, 1909
 
 <!---
   cspell:ignore Washingtoni Boeingi comi grungemuusika Hendrixi indiaanipealik Jimi kõrgtehnoloogia Microsofti Northwesti Pacificu Pugeti Sealthi Starbucksi
-  cspell:ignore Seattle'it Rainy California Emerald Exposition Yukon words ignore locale Seattle'i
+  cspell:ignore Seattle'it Rainy California Emerald Exposition Yukon words ignore locale Seattle'i Seattle Vikipeedia Kanada aaasta tuleekahju
+
   cspell:locale  et
 --->

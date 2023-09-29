@@ -1,4 +1,5 @@
 {
     "language": "eu",
-    "minWordLength": 2
+    "minWordLength": 2,
+    "ignorePaths": ["cspell.json"]
 }
