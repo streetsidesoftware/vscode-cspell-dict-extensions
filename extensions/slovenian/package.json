@@ -72,7 +72,7 @@
     "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "node ../../node_modules/vscode/bin/test"
+    "test": "node ../../test-runner/bin.mjs ."
   },
   "dependencies": {
     "@cspell/dict-sl-si": "^1.0.4"

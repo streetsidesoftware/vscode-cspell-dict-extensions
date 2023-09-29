@@ -1,9 +1,19 @@
 {
-  "packages": ["scripts", "test", "extensions/*", "generator-cspell-dicts-extensions"],
+  "packages": [
+    "scripts",
+    "test-runner",
+    "extensions/*",
+    "generator-cspell-dicts-extensions"
+  ],
   "version": "independent",
   "command": {
     "publish": {
-      "ignoreChanges": ["*.md", "package-lock.json", "samples/**", "cspell.json"]
+      "ignoreChanges": [
+        "*.md",
+        "package-lock.json",
+        "samples/**",
+        "cspell.json"
+      ]
     }
   }
 }

@@ -74,7 +74,7 @@
     "watch": "tsc -watch -p ./",
     "test": "npm run test:samples",
     "test:samples": "cspell samples",
-    "test:bin": "node ../../node_modules/vscode/bin/test"
+    "test:bin": "node ../../test-runner/bin.mjs ."
   },
   "dependencies": {
     "@cspell/dict-nb-no": "^2.0.0"

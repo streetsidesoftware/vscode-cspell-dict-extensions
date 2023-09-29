@@ -4,7 +4,7 @@ import * as cp from 'child_process';
 import * as path from 'path';
 import { promises as fs } from 'node:fs';
 import { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath, runTests } from '@vscode/test-electron';
-import { Command } from 'commander';
+import { Command, CommanderError } from 'commander';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,7 +21,8 @@ async function main() {
         .description('VSCode test running for testing CSpell addon extensions.')
         .arguments('<extension-path>', 'Directory of the extension to test.')
         .option('--vscode-version', `The version of VSCode to use.`, 'stable')
-        .showHelpAfterError()
+        .option('--sample <path-to-sample-doc>', 'Specify a sample document', 'samples/seattle.md')
+        .showHelpAfterError(true)
         .action(testRunner);
 
     await program.parseAsync();
@@ -30,6 +31,18 @@ async function main() {
 async function testRunner(extensionDevelopmentPath, options) {
     try {
         extensionDevelopmentPath = path.resolve(extensionDevelopmentPath);
+
+        const hasPackage = await fileExists(path.join(extensionDevelopmentPath, 'package.json'));
+        const hasSample = await fileExists(path.join(extensionDevelopmentPath, options.sample));
+
+        if (!hasPackage) {
+            throw new CommanderError(1, 'ENOENT', 'Extension "package.json" is missing.');
+        }
+
+        if (!hasSample) {
+            throw new CommanderError(1, 'ENOENT', `Sample "${options.sample}" is missing.`);
+        }
+
         const { vscodeVersion: version = 'stable' } = options;
         const extensionTestsPath = path.resolve(__dirname, './suite/index.cjs');
 
@@ -47,16 +60,37 @@ async function testRunner(extensionDevelopmentPath, options) {
             stdio: 'inherit',
         });
 
+        const extensionTestsEnv = {
+            SAMPLE_TEST_DOCUMENT: options.sample,
+        };
+
+        console.log('runner info: %o', {
+            vscodeExecutablePath,
+            extensionDevelopmentPath,
+            extensionTestsPath,
+            extensionTestsEnv,
+        });
+
         // Run the extension test
         await runTests({
             // Use the specified `code` executable
             vscodeExecutablePath,
             extensionDevelopmentPath,
             extensionTestsPath,
+            extensionTestsEnv,
         });
     } catch (err) {
         console.error('Failed to run tests');
         process.exit(1);
+    }
+}
+
+async function fileExists(filePath) {
+    try {
+        const s = await fs.stat(filePath);
+        return s.isFile();
+    } catch (e) {
+        return false;
     }
 }
 

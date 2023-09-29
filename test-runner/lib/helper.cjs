@@ -126,10 +126,11 @@ function logYellow(...params) {
  */
 async function readPackageJson(cwd = process.cwd()) {
     const pkgFile = await findUp('package.json', { cwd, stopAt: repoRoot });
+    log('readPackageJson %o', { cwd, pkgFile });
     if (
         !pkgFile ||
         !path.relative(path.dirname(pkgFile), repoRoot) ||
-        path.basename(path.dirname(pkgFile)) !== 'extensions'
+        path.basename(path.dirname(path.dirname(pkgFile))) !== 'extensions'
     ) {
         throw Error('Extension package.json not found.');
     }
