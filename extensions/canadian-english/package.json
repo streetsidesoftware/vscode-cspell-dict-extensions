@@ -35,7 +35,7 @@
     "onStartupFinished"
   ],
   "qna": "marketplace",
-  "main": "./out/src/extension",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {

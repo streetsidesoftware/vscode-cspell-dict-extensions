@@ -26,7 +26,7 @@
     "onStartupFinished"
   ],
   "qna": "marketplace",
-  "main": "./out/src/extension",
+  "main": "./out/extension.js",
   "contributes": {},
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
