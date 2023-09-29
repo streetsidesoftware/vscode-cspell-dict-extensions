@@ -22,7 +22,7 @@
     "prettier:fix": "prettier -w \"**/*.{ts,md,yaml,yml,json}\"",
     "prettier:lint": "prettier \"**/*.{ts,md,yaml,yml,json}\"",
     "lint": "npm run cspell",
-    "update-packages": "npm ci && npx npm-check-updates -t minor -u && npm i && lerna exec \"npx npm-check-updates -t minor -u && rm -rf node_modules package-lock.json && npm i\" && npm i"
+    "update-packages": "npm ci && npx npm-check-updates -t semver -u && npm i && lerna exec \"npx npm-check-updates -t semver -u && rm -rf node_modules package-lock.json && npm i\" && npm i"
   },
   "type": "commonjs",
   "engines": {
@@ -43,8 +43,9 @@
     "ovsx": "^0.8.3",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.1",
+    "scripts": "file:scripts",
+    "test-extensions": "file:test-runner",
     "typescript": "^5.2.2",
     "yaml": "^2.3.2"
-  },
-  "dependencies": {}
+  }
 }
