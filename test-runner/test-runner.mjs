@@ -73,21 +73,31 @@ async function testRunner(extensionDevelopmentPath, options) {
         SAMPLE_TEST_DOCUMENT: options.sample,
     };
 
+    const tempDir = path.join(root, 'temp/.vscode-test/');
+    await fs.mkdir(tempDir, { recursive: true });
+    const userDataDir = await fs.mkdtemp(tempDir);
+
     console.log('runner info: %o', {
         vscodeExecutablePath,
         extensionDevelopmentPath,
         extensionTestsPath,
         extensionTestsEnv,
+        userDataDir,
     });
 
-    // Run the extension test
-    await runTests({
-        // Use the specified `code` executable
-        vscodeExecutablePath,
-        extensionDevelopmentPath,
-        extensionTestsPath,
-        extensionTestsEnv,
-    });
+    try {
+        // Run the extension test
+        await runTests({
+            // Use the specified `code` executable
+            vscodeExecutablePath,
+            extensionDevelopmentPath,
+            extensionTestsPath,
+            extensionTestsEnv,
+            launchArgs: ['--user-data-dir', userDataDir],
+        });
+    } finally {
+        await fs.rm(userDataDir, { recursive: true, force: true });
+    }
 }
 
 async function fileExists(filePath) {
