@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_french.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_french.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_french.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_french.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_french.disableWorkspace', () => disable(false)),
     );
     //
 }

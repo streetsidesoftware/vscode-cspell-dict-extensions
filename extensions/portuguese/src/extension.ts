@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_portuguese.enablePortuguese', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_portuguese.disablePortuguese', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_portuguese.enablePortugueseWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_portuguese.disablePortugueseWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_portuguese.disablePortugueseWorkspace', () => disable(false)),
     );
     //
 }

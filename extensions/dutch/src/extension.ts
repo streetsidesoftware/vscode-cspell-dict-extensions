@@ -53,7 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_dutch.enableDutch', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_dutch.disableDutch', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_dutch.enableDutchWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_dutch.disableDutchWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_dutch.disableDutchWorkspace', () => disable(false)),
     );
     //
 }

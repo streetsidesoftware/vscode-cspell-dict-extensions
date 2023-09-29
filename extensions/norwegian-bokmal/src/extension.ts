@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_norwegian-bokmal.disableWorkspace', () => disable(false)),
     );
 }
 

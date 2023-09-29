@@ -53,7 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_serbian.disableCyrl', () => disable(true, localeCyrl)),
         vscode.commands.registerCommand('cSpellExt_serbian.disableLatn', () => disable(true, localeLatn)),
         vscode.commands.registerCommand('cSpellExt_serbian.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_serbian.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_serbian.disableWorkspace', () => disable(false)),
     );
     //
 }

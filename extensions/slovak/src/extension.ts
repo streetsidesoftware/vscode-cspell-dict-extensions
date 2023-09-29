@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_slovak.enableSlovak', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_slovak.disableSlovak', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_slovak.enableSlovakWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_slovak.disableSlovakWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_slovak.disableSlovakWorkspace', () => disable(false)),
     );
     //
 }

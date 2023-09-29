@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_persian.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_persian.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_persian.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_persian.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_persian.disableWorkspace', () => disable(false)),
     );
     //
 }

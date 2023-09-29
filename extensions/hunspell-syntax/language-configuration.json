@@ -4,11 +4,7 @@
         "lineComment": "#"
     },
     // symbols used as brackets
-    "brackets": [
-        ["[", "]"]
-    ],
+    "brackets": [["[", "]"]],
     // symbols that are auto closed when typing
-    "autoClosingPairs": [
-        ["[", "]"]
-    ]
+    "autoClosingPairs": [["[", "]"]]
 }

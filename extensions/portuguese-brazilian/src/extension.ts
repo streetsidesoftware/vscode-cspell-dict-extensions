@@ -43,17 +43,17 @@ export function activate(context: vscode.ExtensionContext) {
     // client can be deactivated on extension deactivation
     context.subscriptions.push(
         vscode.commands.registerCommand('cSpellExt_portuguese-brazilian.enablePortuguese_brazilian', () =>
-            enable(true)
+            enable(true),
         ),
         vscode.commands.registerCommand('cSpellExt_portuguese-brazilian.disablePortuguese_brazilian', () =>
-            disable(true)
+            disable(true),
         ),
         vscode.commands.registerCommand('cSpellExt_portuguese-brazilian.enablePortuguese_brazilianWorkspace', () =>
-            enable(false)
+            enable(false),
         ),
         vscode.commands.registerCommand('cSpellExt_portuguese-brazilian.disablePortuguese_brazilianWorkspace', () =>
-            disable(false)
-        )
+            disable(false),
+        ),
     );
 }
 

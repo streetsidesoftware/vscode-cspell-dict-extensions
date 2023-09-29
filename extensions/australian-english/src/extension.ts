@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_australian-english.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_australian-english.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_australian-english.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_australian-english.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_australian-english.disableWorkspace', () => disable(false)),
     );
     //
 }

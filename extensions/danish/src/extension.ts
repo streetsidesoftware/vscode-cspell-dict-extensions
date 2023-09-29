@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_danish.enableDanish', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_danish.disableDanish', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_danish.enableDanishWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_danish.disableDanishWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_danish.disableDanishWorkspace', () => disable(false)),
     );
     //
 }

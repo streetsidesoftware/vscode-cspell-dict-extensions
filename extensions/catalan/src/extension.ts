@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_catalan.enableCatalan', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_catalan.disableCatalan', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_catalan.enableCatalanWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_catalan.disableCatalanWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_catalan.disableCatalanWorkspace', () => disable(false)),
     );
     //
 }

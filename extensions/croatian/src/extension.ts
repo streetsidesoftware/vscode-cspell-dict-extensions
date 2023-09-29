@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_croatian.enableCroatian', () => enableCroatian(true)),
         vscode.commands.registerCommand('cSpellExt_croatian.disableCroatian', () => disableCroatian(true)),
         vscode.commands.registerCommand('cSpellExt_croatian.enableCroatianWorkspace', () => enableCroatian(false)),
-        vscode.commands.registerCommand('cSpellExt_croatian.disableCroatianWorkspace', () => disableCroatian(false))
+        vscode.commands.registerCommand('cSpellExt_croatian.disableCroatianWorkspace', () => disableCroatian(false)),
     );
 }
 
