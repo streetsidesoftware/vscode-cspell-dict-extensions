@@ -10,5 +10,5 @@ Nazwa miasta pochodzi od zniekształcenia imienia Si’ahl, wodza okolicznych pl
 W czerwcu 1889 centrum miasta uległo pożarowi nazwanemu The Great Seattle Fire. Władze miasta podjęły dwie ważne decyzje związane z odbudową[4]. Po pierwsze wszystkie nowe budynki musiały powstać z kamienia lub cegły, po drugie powinny one być wyższe przynajmniej o jedno piętro niż poprzednie. W ciągu kolejnych lat nowe drogi budowano od 3,7 do nawet 9 metrów wyżej niż poprzednie, było to podyktowane wysokim poziomem wód gruntowych. Tak właśnie w Seattle powstały charakterystyczne piwnice. Spacerując obecnie po centrum Seattle, przechodzień znajdzie się często na zewnątrz na poziomie drugiego piętra. Żaden z budynków Seattle pierwotnie nie posiadał piwnic. Jeszcze do dziś w „piwnicach” istnieją dawne witryny sklepów i widoczne są okna instytucji i mieszkań.
 
 <!---
-Please download some sample text. The Seattle wikipedia site is translated into many languages and provides a good sample.
+cspell:ignore Puget Everett Si’ahl Duwamish Suquamish Emerald Great Fire
 --->

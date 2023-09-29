@@ -5,3 +5,7 @@ Sietlas (angl. Seattle) – miestas šiaurės vakarų JAV, priklauso Vašingtono
 1960 ir 1962 m. čia vyko Pasaulinė paroda.
 
 Sietlo priemiestyje Redmonde yra „Microsoft“ kompanijos būstinė.
+
+<!---
+cspell:ignore angl Seattle Puget Sound Sietlo Redmonde
+--->
