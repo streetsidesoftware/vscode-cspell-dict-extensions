@@ -40,8 +40,9 @@ suite('Extension Test Suite 1', function () {
     test('reading the sample file.', async () => {
         logYellow('Verifies reading the sample file: %s.', sampleDoc);
         const result = await loadDocument(uriSampleDoc);
+        const urlDoc = result?.doc.uri.toString(true);
         assert(result?.doc, 'Must be able to load the document.');
-        assert(result?.doc.uri.toString().endsWith(path.basename(sampleDoc)), 'matches sample doc');
+        assert(urlDoc.endsWith(path.basename(sampleDoc)), 'matches sample doc');
     });
 
     test('Opening the sample document and making sure there are no errors.', async () => {
