@@ -44,8 +44,8 @@ suite('Extension Test Suite 1', function () {
         assert(result?.doc.uri.toString().endsWith(path.basename(sampleDoc)), 'matches sample doc');
     });
 
-    test('Verifies that some spelling errors were found', async () => {
-        logYellow('Verifies that some spelling errors were found');
+    test('Opening the sample document and making sure there are no errors.', async () => {
+        logYellow('Opening the sample document and making sure there are no errors.');
         const docContext = await loadDocument(uriSampleDoc);
         expect(docContext).to.not.be.undefined;
         await sleep(500);
