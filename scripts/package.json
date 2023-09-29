@@ -1,0 +1,20 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "Useful scripts",
+  "bin": {
+    "gen-extension-list": "./gen-extension-list.mjs",
+    "update-manual-pub-list": "./update-manual-pub-list.mjs"
+  },
+  "dependencies": {
+    "mdast": "^3.0.0",
+    "mdast-builder": "^1.1.1",
+    "mdast-util-to-markdown": "^1.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo OK"
+  },
+  "author": "",
+  "license": "MIT"
+}
