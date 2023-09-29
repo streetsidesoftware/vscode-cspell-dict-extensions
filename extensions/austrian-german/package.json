@@ -72,7 +72,9 @@
     "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "node ../../test-runner/bin.mjs ."
+    "test:cspell": "cspell -c cspell-ext.json samples",
+    "test:vscode": "node ../../test-runner/bin.mjs .",
+    "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
     "@cspell/dict-de-at": "^1.0.0"

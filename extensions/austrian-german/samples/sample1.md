@@ -8,4 +8,5 @@ Verantwortlich für den Betrieb und die Unterhaltung des gesamten Kanals ist Rij
 
 <!---
 cspell:words Noordzeekanaal IJmuiden Schellingwoude Markermeer Normaal Rijkswaterstaat Tiel
+cspell:ignore Waal
 --->
