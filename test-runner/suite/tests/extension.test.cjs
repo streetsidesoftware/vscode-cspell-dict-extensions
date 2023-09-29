@@ -59,7 +59,11 @@ suite('Extension Test Suite 1', function () {
 
         // Force a spelling error
         log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
-        const pEdit1 = docContext.editor.edit((edit) => edit.insert(new vscode.Position(0, 0), 'spellling\n'));
+        await docContext.editor.edit((edit) => edit.insert(new vscode.Position(0, 0), 'spellling\n'));
+        log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
+        await sleep(500);
+        log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
+        const pEdit1 = docContext.editor.edit((edit) => edit.insert(new vscode.Position(0, 0), '\n'));
         log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
         const pWait1 = waitForSpellComplete(uriSampleDoc, 5000);
         await pEdit1;
