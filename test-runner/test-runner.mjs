@@ -34,6 +34,7 @@ async function main() {
         } else {
             console.error(err);
         }
+        process.exitCode = 1;
     }
 }
 
