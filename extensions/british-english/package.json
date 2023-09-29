@@ -72,9 +72,9 @@
     "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "npm run test:samples",
-    "test:samples": "cspell samples",
-    "test:bin": "node ../../test-runner/bin.mjs ."
+    "test:cspell": "cspell -c cspell-ext.json samples",
+    "test:vscode": "node ../../test-runner/bin.mjs .",
+    "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
     "@cspell/dict-en-gb": "^4.1.21"
