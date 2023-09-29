@@ -5,5 +5,5 @@ Seattle je najväčšie mesto na severozápadnom pobreží Spojených štátov a
 Seattle je považované za rodisko hudobného a životného štýlu grunge. Je tu aj rokenrolová sieň slávy.
 
 <!---
-Please download some sample text. The Seattle wikipedia site is translated into many languages and provides a good sample.
+cspell:ignore Seattle County rokenrolová
 --->
