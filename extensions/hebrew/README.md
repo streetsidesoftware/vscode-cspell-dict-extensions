@@ -4,7 +4,7 @@ Hebrew dictionary extension for VS Code.
 
 Imports the Hebrew spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
-## The Hebrew Dictionary
+## About the Hebrew Dictionary
 
 The Hebrew Dictionary has been compiled from the Hunspell Hebrew Dictionary:
 
