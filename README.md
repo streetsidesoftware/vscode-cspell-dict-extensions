@@ -30,7 +30,7 @@ See Also:
 - [French Réforme 90](extensions/french-reforme#readme) - 2.2.0 - French Réforme 90 dictionary extension for VS Code.
 - [German](extensions/german#readme) - 2.2.1 - German dictionary extension for VS Code.
 - [Greek](extensions/greek#readme) - 1.1.0 - Greek dictionary extension for VS Code.
-- [Hebrew](extensions/hebrew#readme) - 1.0.4 - Hebrew dictionary extension for VS Code.
+- [Hebrew](extensions/hebrew#readme) - 2.0.0 - Hebrew dictionary extension for VS Code.
 - [Italian](extensions/italian#readme) - 1.0.2 - Italian dictionary extension for VS Code.
 - [Latvian](extensions/latvian#readme) - 1.0.0 - Latvian dictionary extension for VS Code.
 - [Lithuanian](extensions/lithuanian#readme) - 1.1.0 - Lithuanian dictionary extension for VS Code.
