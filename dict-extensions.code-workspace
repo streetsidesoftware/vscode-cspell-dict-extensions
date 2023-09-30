@@ -4,9 +4,6 @@
             "path": "."
         },
         {
-            "path": "test-runner"
-        },
-        {
             "path": "extensions/arabic"
         },
         {
@@ -131,6 +128,9 @@
         },
         {
             "path": "generator-cspell-dicts-extensions"
+        },
+        {
+            "path": "test-runner"
         }
     ],
     "settings": {}
