@@ -37,6 +37,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
+          node-version: ${{ vars.DEFAULT_NODE_VERSION }}
           cache: npm
       - run: npm install
       - run: |
@@ -55,3 +56,20 @@ jobs:
         run: |
           cd ${{ matrix.extension_dir }}
           npm run test
+
+  # Run the spell checker on all this samples using the extension's settings.
+  # This will help with dictionary updates.
+  check-samples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ vars.DEFAULT_NODE_VERSION }}
+          cache: npm
+
+      - run: npm install
+      - name: Check Samples
+        run: |
+          npm run test:cspell
