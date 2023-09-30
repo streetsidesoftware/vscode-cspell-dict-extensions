@@ -8,7 +8,7 @@ Imports the Hebrew spell checking dictionary for [Code Spell Checker](https://ma
 
 The Hebrew Dictionary has been compiled from the Hunspell Hebrew Dictionary:
 
-> By the Hspell project (http://hspell.ivrix.org.il/).
+> By the Hspell project (<http://hspell.ivrix.org.il/>).
 > Hspell version 1.4 was used.
 > Copyright 2004-2017, Nadav Har'El and Dan Kenigsberg
 > The dictionary (this file and the corresponding word list)
