@@ -46,18 +46,18 @@ yo cspell-dict-extensions <language>
 
 Yeoman will ask you a series of questions most of which default suggestion is ok (to select default suggestion press enter without typing):
 
-| Field                         | Description                                                                                                                                                                                                      |
-| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **name**                          | this is the dictionary. i.e. `swedish`, `ruby`, or `rust`                                                                                                                                                        |
-| friendly name                 | this is the friendly name, like `Swedish`                                                                                                                                                                        |
-| display name                  | this is the name shown on the VS Code Extensions page.                                                                                                                                                           |
-| description                   | short description of the extension.                                                                                                                                                                              |
-| **Source Dictionary**             | This is the NPM install name of the source eg. dictionary `@cspell/dict-sv` (@ is needed). Available dictionaries could be found here [https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries](https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries)                                                                                                                                                          |
-| Add Enable / Disable Commands | This is used for adding helper commands for human language locals like `fr` for French or `fr,fr_CA` for Canadian French. This option is not necessary for word lists like `companies` or programming languages. |
-| Base Name For Commands        | This is added as a suffix onto the command names.                                                                                                                                                                |
-| Language Locale               | This is the two letter language code supported by the dictionary included in the `Source Dictionary` step.                                                                                                       |
-| Target Directory              | Where to create the extension                                                                                                                                                                                    |
-| NPM Package Name              | name added to the `package.json`                                                                                                                                                                                 |
+| Field                         | Description                                                                                                                                                                                                                                                                      |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **name**                      | this is the dictionary. i.e. `swedish`, `ruby`, or `rust`                                                                                                                                                                                                                        |
+| friendly name                 | this is the friendly name, like `Swedish`                                                                                                                                                                                                                                        |
+| display name                  | this is the name shown on the VS Code Extensions page.                                                                                                                                                                                                                           |
+| description                   | short description of the extension.                                                                                                                                                                                                                                              |
+| **Source Dictionary**         | This is the NPM install name of the source eg. dictionary `@cspell/dict-sv` (@ is needed). Available dictionaries could be found here [https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries](https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries) |
+| Add Enable / Disable Commands | This is used for adding helper commands for human language locals like `fr` for French or `fr,fr_CA` for Canadian French. This option is not necessary for word lists like `companies` or programming languages.                                                                 |
+| Base Name For Commands        | This is added as a suffix onto the command names.                                                                                                                                                                                                                                |
+| Language Locale               | This is the two letter language code supported by the dictionary included in the `Source Dictionary` step.                                                                                                                                                                       |
+| Target Directory              | Where to create the extension                                                                                                                                                                                                                                                    |
+| NPM Package Name              | name added to the `package.json`                                                                                                                                                                                                                                                 |
 
 After all the information is entered, the extension should be generated.
 
@@ -70,7 +70,9 @@ npm run build
 ```
 
 Please update files:
+
 - `README.md`
+
   - Add yourself as contributor under `## Contributors` header
 
     ```txt
@@ -79,7 +81,7 @@ Please update files:
 
 - `extensions/<language>/samples/seattle.md`
   - Go to Seattle wikipedia page translated to your language and copy some content to `seattle.md`. It's later used to test if plugin recognizes words
-  
+
 Please update files if necessary (leave it as unless you know why you're changing it):
 
 - `extensions/<language>/README.md`
@@ -121,4 +123,3 @@ Shortly after pull request is merged extension will appear in vscode extensions 
 <a href="https://github.com/streetsidesoftware/cspell-dicts/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=streetsidesoftware/cspell-dicts&r="  width="800px"/>
 </a>
-

@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_bulgarian.enableBulgarian', () => enableBulgarian(true)),
         vscode.commands.registerCommand('cSpellExt_bulgarian.disableBulgarian', () => disableBulgarian(true)),
         vscode.commands.registerCommand('cSpellExt_bulgarian.enableBulgarianWorkspace', () => enableBulgarian(false)),
-        vscode.commands.registerCommand('cSpellExt_bulgarian.disableBulgarianWorkspace', () => disableBulgarian(false))
+        vscode.commands.registerCommand('cSpellExt_bulgarian.disableBulgarianWorkspace', () => disableBulgarian(false)),
     );
 }
 

@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_estonian.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_estonian.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_estonian.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_estonian.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_estonian.disableWorkspace', () => disable(false)),
     );
     //
 }

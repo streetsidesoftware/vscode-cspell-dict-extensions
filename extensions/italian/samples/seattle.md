@@ -9,4 +9,5 @@ La lavorazione del legno è stata la prima grande industria di Seattle, ma verso
 Seattle ha una storia musicale degna di nota. Dal 1918 al 1951 esistevano quasi due dozzine di locali notturni jazz lungo Jackson Street, dall'attuale Chinatown / Distretto Internazionale al Distretto Centrale. La scena jazz sviluppò le prime carriere di Ray Charles, Quincy Jones, Ernestine Anderson ed altri. Seattle è anche la città natale del musicista rock Jimi Hendrix, così come i gruppi Nirvana, Pearl Jam, Soundgarden, Alice in Chains, Foo Fighters ed il movimento rock alternativo grunge.[5]
 
 <!---
+cspell:ignore Seattle siˈætəl Puget Seattleite Denny Portland Exact Alki Elliott Duwamish Suquamish Capitol Anne Beacon Klondike Jackson Chinatown Quincy Ernestine Anderson Jimi Hendrix Pearl Soundgarden Chains Fighters grunge
 --->

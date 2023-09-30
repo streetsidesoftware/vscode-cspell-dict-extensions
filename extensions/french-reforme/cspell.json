@@ -4,6 +4,7 @@
     "language": "en,fr",
     "noConfigSearch": true,
     "import": ["./cspell-ext.json"],
+    "ignoreWords": ["seattle"],
     "overrides": [
         {
             "filename": "*.md",

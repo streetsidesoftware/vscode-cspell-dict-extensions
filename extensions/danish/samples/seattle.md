@@ -4,4 +4,7 @@ Byen har en stor og alsidig industri med nogle af USA's førende firmaer inden f
 
 Seattle er en velbesøgt turistby og med bl.a. University of Washington (1861) et stort uddannelsescenter. Byen er især kendt for sine mange kaffebarer og sin imponerende musikhistorie. Jazzmusikere som Quincy Jones og Ray Charles fik deres gennembrud mens de boede i byen. Byen er også fødested for Jimi Hendrix og den musikalske genre kaldet grunge, med bands som Pearl Jam, Nirvana og Soundgarden kommer fra Seattle.
 
-<!--- cspell:ignore Jimi Handrix --->
+<!---
+cspell:ignore Jimi Handrix
+cspell:ignore Seattleområdet Vigor Shipyards
+--->

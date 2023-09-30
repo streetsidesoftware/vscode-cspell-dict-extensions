@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_basque.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_basque.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_basque.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_basque.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_basque.disableWorkspace', () => disable(false)),
     );
     //
 }

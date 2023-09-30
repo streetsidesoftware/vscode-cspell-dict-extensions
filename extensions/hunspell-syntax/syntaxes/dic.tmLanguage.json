@@ -1,7 +1,7 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "hunspell",
-	"patterns": [
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "hunspell",
+    "patterns": [
         {
             "match": "^\\s*\\d+\\s*$",
             "name": "constant.numeric"
@@ -15,5 +15,5 @@
             }
         }
     ],
-	"scopeName": "source.hunspell.dic"
+    "scopeName": "source.hunspell.dic"
 }

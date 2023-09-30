@@ -68,6 +68,8 @@
     "vscode:prepublish": "echo prepublish",
     "build": "echo build",
     "watch": "echo watch",
-    "test": "echo test"
+    "test:cspell": "cspell -c cspell.json samples",
+    "test:vscode": "echo OK - no code here.",
+    "test": "npm run test:cspell && npm run test:vscode"
   }
 }

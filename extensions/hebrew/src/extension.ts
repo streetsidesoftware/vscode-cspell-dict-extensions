@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_hebrew.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_hebrew.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_hebrew.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_hebrew.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_hebrew.disableWorkspace', () => disable(false)),
     );
     //
 }

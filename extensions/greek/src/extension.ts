@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_greek.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_greek.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_greek.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_greek.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_greek.disableWorkspace', () => disable(false)),
     );
     //
 }

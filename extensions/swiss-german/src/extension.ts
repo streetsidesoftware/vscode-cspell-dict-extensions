@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_swiss-german.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_swiss-german.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_swiss-german.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_swiss-german.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_swiss-german.disableWorkspace', () => disable(false)),
     );
     //
 }

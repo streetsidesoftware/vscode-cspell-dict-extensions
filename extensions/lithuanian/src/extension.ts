@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_lithuanian.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_lithuanian.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_lithuanian.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_lithuanian.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_lithuanian.disableWorkspace', () => disable(false)),
     );
     //
 }

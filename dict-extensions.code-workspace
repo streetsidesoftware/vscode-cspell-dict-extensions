@@ -4,6 +4,9 @@
             "path": "."
         },
         {
+            "path": "test-runner"
+        },
+        {
             "path": "extensions/arabic"
         },
         {

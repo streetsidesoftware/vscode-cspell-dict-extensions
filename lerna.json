@@ -1,5 +1,7 @@
 {
   "packages": [
+    "scripts",
+    "test-runner",
     "extensions/*",
     "generator-cspell-dicts-extensions"
   ],

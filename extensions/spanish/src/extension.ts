@@ -45,7 +45,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpell.enableSpanish', () => enable(true)),
         vscode.commands.registerCommand('cSpell.disableSpanish', () => disable(true)),
         vscode.commands.registerCommand('cSpell.enableSpanishWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpell.disableSpanishWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpell.disableSpanishWorkspace', () => disable(false)),
     );
 }
 

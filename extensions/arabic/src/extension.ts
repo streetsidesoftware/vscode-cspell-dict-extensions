@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_arabic.enable', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_arabic.disable', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_arabic.enableWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_arabic.disableWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_arabic.disableWorkspace', () => disable(false)),
     );
     //
 }

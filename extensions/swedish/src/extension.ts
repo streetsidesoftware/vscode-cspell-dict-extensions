@@ -52,7 +52,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand(commandEnable, () => enable(true)),
         vscode.commands.registerCommand(commandDisable, () => disable(true)),
         vscode.commands.registerCommand(commandEnableWorkspace, () => enable(false)),
-        vscode.commands.registerCommand(commandDisableWorkspace, () => disable(false))
+        vscode.commands.registerCommand(commandDisableWorkspace, () => disable(false)),
     );
 }
 

@@ -33,7 +33,7 @@
     "onStartupFinished"
   ],
   "qna": "marketplace",
-  "main": "./out/src/extension",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
@@ -72,9 +72,11 @@
     "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "node ../../node_modules/vscode/bin/test"
+    "test:cspell": "cspell -c cspell-ext.json samples",
+    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/seattle.md",
+    "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "cspell-dict-he": "^1.1.0"
+    "@cspell/dict-he": "^3.0.0"
   }
 }

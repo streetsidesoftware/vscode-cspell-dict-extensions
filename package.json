@@ -8,9 +8,9 @@
     "pub-version": "lerna version --conventional-commits",
     "publish-all": "lerna exec --no-bail \"vsce publish\"",
     "publish-all-ovsx": "lerna exec --no-bail \"ovsx publish --pat \\$OVSX_TOKEN\"",
-    "gen:readme": "./scripts/update-code-workspace.sh",
-    "gen:release-please": "./scripts/gen-release-please-config.sh",
-    "gen:workflow": "./scripts/update-workflows.sh",
+    "gen:readme": "bash ./scripts/update-code-workspace.sh",
+    "gen:release-please": "bash ./scripts/gen-release-please-config.sh",
+    "gen:workflow": "bash ./scripts/update-workflows.sh",
     "echo": "echo $OVSX_TOKEN",
     "build": "lerna run build",
     "test-pack": "lerna run pack-extension",
@@ -21,8 +21,10 @@
     "X-lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
     "prettier:fix": "prettier -w \"**/*.{ts,md,yaml,yml,json}\"",
     "prettier:lint": "prettier \"**/*.{ts,md,yaml,yml,json}\"",
+    "test:all": "lerna run --concurrency=1 --stream \"--scope=code-spell-checker-*\" test",
+    "test:cspell": "lerna run --concurrency=4 --stream \"--scope=code-spell-checker-*\" test:cspell",
     "lint": "npm run cspell",
-    "update-packages": "npm ci && npx npm-check-updates -t minor -u && npm i && lerna exec \"npx npm-check-updates -t minor -u && rm -rf node_modules package-lock.json && npm i\" && npm i"
+    "update-packages": "npm ci && npx npm-check-updates -t semver -u && npm i && lerna exec \"npx npm-check-updates -t semver -u && rm -rf node_modules package-lock.json && npm i\" && npm i"
   },
   "type": "commonjs",
   "engines": {
@@ -38,14 +40,14 @@
     "@types/vscode": "^1.82.0",
     "@vscode/test-electron": "^2.3.4",
     "@vscode/vsce": "^2.21.0",
+    "cspell": "^7.3.7",
     "inject-markdown": "^2.0.0",
-    "mdast": "^3.0.0",
-    "mdast-builder": "^1.1.1",
-    "mdast-util-to-markdown": "^2.1.0",
     "mocha": "^10.2.0",
     "ovsx": "^0.8.3",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.1",
+    "scripts": "file:scripts",
+    "test-extensions": "file:test-runner",
     "typescript": "^5.2.2",
     "yaml": "^2.3.2"
   }

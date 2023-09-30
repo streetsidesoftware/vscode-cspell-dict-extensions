@@ -6,4 +6,7 @@ Seattlu se přezdívá Smaragdové město. Toto přízvisko vzniklo na počátku
 
 Město je považováno za kolébku hudebního stylu grunge a je rovněž pověstné velkou konzumací kávy.[8][9] Vznikly zde společnosti zabývající se prodejem kávy jako Starbucks, Seattle's Best Coffee či Tully's. V roce 1916 zde byla založena společnost Boeing, v současnosti jeden ze dvou největších výrobců letecké techniky na světě. Mezi další úspěšné společnosti ze Seattlu patří například Amazon.com nebo Microsoft.
 
-<!--- cspell:ignore Jimi Handrix --->
+<!---
+cspell:ignore Jimi Handrix
+cspell:ignore sɪjɛtl̩ sɪˈætəl Pugetovým Washingtonovým Georgem Duwamišů Denny grunge Tully's
+--->

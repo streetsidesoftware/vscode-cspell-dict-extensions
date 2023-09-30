@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_esperanto.enableEsperanto', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_esperanto.disableEsperanto', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_esperanto.enableEsperantoWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_esperanto.disableEsperantoWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_esperanto.disableEsperantoWorkspace', () => disable(false)),
     );
     //
 }

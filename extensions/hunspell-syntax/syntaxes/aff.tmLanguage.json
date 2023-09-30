@@ -1,233 +1,231 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "hunspell",
-	"patterns": [
-		{ "include": "#commands" },
-		{ "include": "#comments" },
-		{ "include": "#keywords" }
-	],
-	"repository": {
-		"comments": {
-			"patterns": [
-				{
-					"name": "comment.line",
-					"match": "#.*\\n"
-				}
-			]
-		},
-		"keywords": {
-			"patterns": [{
-				"name": "keyword",
-				"comment": "Flags",
-				"match": "^\\s*(CHECKCOMPOUNDTRIPLE|SIMPLIFIEDTRIPLE|CHECKCOMPOUNDREP|FULLSTRIP|NOSPLITSUGS|MAXCPDSUGS|ONLYMAXDIFF|MAXDIFF|WARN|FORCEUCASE|FORBIDDENWORD|NOSUGGEST|COMPOUNDRULE|CHECKCOMPOUNDCASE|CHECKCOMPOUNDDUP)\\b"
-			}]
-		},
-		"commands": {
-			"patterns": [
-				{ "include": "#command-string-string" },
-				{ "include": "#command-string" },
-				{ "include": "#command-regex" },
-				{ "include": "#command-variable" },
-				{ "include": "#FX" },
-				{ "include": "#AM" },
-				{ "include": "#flag-variable" },
-				{ "include": "#flag-number" },
-				{ "include": "#flag-string" },
-				{ "include": "#CHECKCOMPOUNDPATTERN" }
-			]
-		},
-		"command-string-string": {
-			"patterns": [
-				{
-					"match": "^\\s*(REP|ICONV|OCONV)\\s+(\\S+)\\s+(\\S+)",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "string" },
-						"3": { "name": "string" }
-					}
-				},
-				{
-					"match": "^\\s*(REP|ICONV|OCONV)\\s+(\\d+)\\b",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "constant.numeric" }
-					}
-				}
-			]
-		},
-		"command-string": {
-			"patterns": [
-				{
-					"match": "^\\s*(MAP)\\s+(\\d+)\\b",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "constant.numeric" }
-					}
-				},
-				{
-					"match": "^\\s*(MAP)\\s+(\\S+)",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "string" }
-					}
-				}
-			]
-		},
-		"command-regex": {
-			"patterns": [
-				{
-					"match": "^\\s*(BREAK)\\s+(\\d+)\\b",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "constant.numeric" }
-					}
-				},
-				{
-					"match": "^\\s*(BREAK)\\s+(\\S+)",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "constant.regexp" }
-					}
-				}
-			]
-		},
-		"command-variable": {
-			"patterns": [
-				{
-					"match": "^\\s*(AF)\\s+(\\d+)\\b",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "constant.numeric" }
-					}
-				},
-				{
-					"match": "^\\s*(AF)\\s+(\\S+)",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "variable" }
-					}
-				}
-			]
-		},
-		"flag-variable": {
-			"patterns": [
-				{
-					"match": "^\\s*(COMPOUNDBEGIN|COMPOUNDMIDDLE|COMPOUNDEND|COMPOUNDPERMITFLAG|ONLYINCOMPOUND|COMPOUNDFLAG|COMPOUNDFORBIDFLAG|SUBSTANDARD|WARN|KEEPCASE|FORBIDDENWORD|NOSUGGEST|NEEDAFFIX|CIRCUMFIX)\\s+(\\S+)",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "variable" }
-					}
-				}
-			]
-		},
-		"flag-number": {
-			"patterns": [
-				{
-					"match": "^\\s*(COMPOUNDMIN|MAXNGRAMSUGS|COMPOUNDWORDMAX)\\s+(\\d+)",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "constant.numeric" }
-					}
-				}
-			]
-		},
-		"flag-string": {
-			"patterns": [
-				{
-					"match": "^\\s*(SET|TRY|WORDCHARS|KEY|FLAG|LANG|IGNORE)\\s+(\\S+)",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "string" }
-					}
-				}
-			]
-		},
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "hunspell",
+    "patterns": [{ "include": "#commands" }, { "include": "#comments" }, { "include": "#keywords" }],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line",
+                    "match": "#.*\\n"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword",
+                    "comment": "Flags",
+                    "match": "^\\s*(CHECKCOMPOUNDTRIPLE|SIMPLIFIEDTRIPLE|CHECKCOMPOUNDREP|FULLSTRIP|NOSPLITSUGS|MAXCPDSUGS|ONLYMAXDIFF|MAXDIFF|WARN|FORCEUCASE|FORBIDDENWORD|NOSUGGEST|COMPOUNDRULE|CHECKCOMPOUNDCASE|CHECKCOMPOUNDDUP)\\b"
+                }
+            ]
+        },
+        "commands": {
+            "patterns": [
+                { "include": "#command-string-string" },
+                { "include": "#command-string" },
+                { "include": "#command-regex" },
+                { "include": "#command-variable" },
+                { "include": "#FX" },
+                { "include": "#AM" },
+                { "include": "#flag-variable" },
+                { "include": "#flag-number" },
+                { "include": "#flag-string" },
+                { "include": "#CHECKCOMPOUNDPATTERN" }
+            ]
+        },
+        "command-string-string": {
+            "patterns": [
+                {
+                    "match": "^\\s*(REP|ICONV|OCONV)\\s+(\\S+)\\s+(\\S+)",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "string" },
+                        "3": { "name": "string" }
+                    }
+                },
+                {
+                    "match": "^\\s*(REP|ICONV|OCONV)\\s+(\\d+)\\b",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "constant.numeric" }
+                    }
+                }
+            ]
+        },
+        "command-string": {
+            "patterns": [
+                {
+                    "match": "^\\s*(MAP)\\s+(\\d+)\\b",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "constant.numeric" }
+                    }
+                },
+                {
+                    "match": "^\\s*(MAP)\\s+(\\S+)",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "string" }
+                    }
+                }
+            ]
+        },
+        "command-regex": {
+            "patterns": [
+                {
+                    "match": "^\\s*(BREAK)\\s+(\\d+)\\b",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "constant.numeric" }
+                    }
+                },
+                {
+                    "match": "^\\s*(BREAK)\\s+(\\S+)",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "constant.regexp" }
+                    }
+                }
+            ]
+        },
+        "command-variable": {
+            "patterns": [
+                {
+                    "match": "^\\s*(AF)\\s+(\\d+)\\b",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "constant.numeric" }
+                    }
+                },
+                {
+                    "match": "^\\s*(AF)\\s+(\\S+)",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "variable" }
+                    }
+                }
+            ]
+        },
+        "flag-variable": {
+            "patterns": [
+                {
+                    "match": "^\\s*(COMPOUNDBEGIN|COMPOUNDMIDDLE|COMPOUNDEND|COMPOUNDPERMITFLAG|ONLYINCOMPOUND|COMPOUNDFLAG|COMPOUNDFORBIDFLAG|SUBSTANDARD|WARN|KEEPCASE|FORBIDDENWORD|NOSUGGEST|NEEDAFFIX|CIRCUMFIX)\\s+(\\S+)",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "variable" }
+                    }
+                }
+            ]
+        },
+        "flag-number": {
+            "patterns": [
+                {
+                    "match": "^\\s*(COMPOUNDMIN|MAXNGRAMSUGS|COMPOUNDWORDMAX)\\s+(\\d+)",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "constant.numeric" }
+                    }
+                }
+            ]
+        },
+        "flag-string": {
+            "patterns": [
+                {
+                    "match": "^\\s*(SET|TRY|WORDCHARS|KEY|FLAG|LANG|IGNORE)\\s+(\\S+)",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "string" }
+                    }
+                }
+            ]
+        },
 
-		"FX": {
-			"patterns": [
-				{
-					"match": "^\\s*(SFX|PFX)\\s+(\\S+)\\s+(Y|N)\\s+(\\d+)\\b",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "variable" },
-						"3": { "name": "constant" },
-						"4": { "name": "constant.numeric" }
-					}
-				},
-				{
-					"match": "^\\s*(SFX|PFX)\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)(?:\\s+(\\S+))?",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "variable" },
-						"3": { "name": "string" },
-						"4": { "patterns": [{"include": "#sub"}]},
-						"5": { "name": "constant.regexp"}
-					}
-				}
-			]
-		},
-		"CHECKCOMPOUNDPATTERN": {
-			"patterns": [
-				{
-					"match": "^\\s*(CHECKCOMPOUNDPATTERN)\\s+(\\d+)\\b",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "constant.numeric" }
-					}
-				},
-				{
-					"match": "^\\s*(CHECKCOMPOUNDPATTERN)\\s+(\\S+)\\s+(\\S+)",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "patterns": [{"include": "#sub"}]},
-						"3": { "patterns": [{"include": "#sub"}]}
-					}
-				}
-			]
-		},
-		"AM": {
-			"patterns": [
-				{
-					"match": "^\\s*(AM)\\s+(\\d+)\\b",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "name": "constant.numeric" }
-					}
-				},
-				{
-					"match": "^\\s*(AM)\\s+([^#]+)",
-					"captures": {
-						"1": { "name": "keyword" },
-						"2": { "patterns": [{"include": "#AM-POS"}]}
-					}
-				}
-			]
-		},
-		"AM-POS": {
-			"patterns": [
-				{
-					"match": "\\s*([^\\s:]+)([:])(\\S+)([^#]+)?",
-					"captures": {
-						"1": { "name": "keyword.control" },
-						"2": { "name": "keyword.operator" },
-						"3": { "name": "string" },
-						"4": { "patterns": [{"include": "#AM-POS"}]}
-					}
-				}
-			]
-		},
-		"sub": {
-			"patterns": [
-				{
-					"match": "([^/]+)?(?:([/])(.*))?",
-					"captures": {
-						"1": { "name": "string" },
-						"2": { "name": "keyword.operator" },
-						"3": { "name": "variable" }
-					}
-				}
-			]
-		}
-	},
-	"scopeName": "source.hunspell.aff"
+        "FX": {
+            "patterns": [
+                {
+                    "match": "^\\s*(SFX|PFX)\\s+(\\S+)\\s+(Y|N)\\s+(\\d+)\\b",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "variable" },
+                        "3": { "name": "constant" },
+                        "4": { "name": "constant.numeric" }
+                    }
+                },
+                {
+                    "match": "^\\s*(SFX|PFX)\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)(?:\\s+(\\S+))?",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "variable" },
+                        "3": { "name": "string" },
+                        "4": { "patterns": [{ "include": "#sub" }] },
+                        "5": { "name": "constant.regexp" }
+                    }
+                }
+            ]
+        },
+        "CHECKCOMPOUNDPATTERN": {
+            "patterns": [
+                {
+                    "match": "^\\s*(CHECKCOMPOUNDPATTERN)\\s+(\\d+)\\b",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "constant.numeric" }
+                    }
+                },
+                {
+                    "match": "^\\s*(CHECKCOMPOUNDPATTERN)\\s+(\\S+)\\s+(\\S+)",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "patterns": [{ "include": "#sub" }] },
+                        "3": { "patterns": [{ "include": "#sub" }] }
+                    }
+                }
+            ]
+        },
+        "AM": {
+            "patterns": [
+                {
+                    "match": "^\\s*(AM)\\s+(\\d+)\\b",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "name": "constant.numeric" }
+                    }
+                },
+                {
+                    "match": "^\\s*(AM)\\s+([^#]+)",
+                    "captures": {
+                        "1": { "name": "keyword" },
+                        "2": { "patterns": [{ "include": "#AM-POS" }] }
+                    }
+                }
+            ]
+        },
+        "AM-POS": {
+            "patterns": [
+                {
+                    "match": "\\s*([^\\s:]+)([:])(\\S+)([^#]+)?",
+                    "captures": {
+                        "1": { "name": "keyword.control" },
+                        "2": { "name": "keyword.operator" },
+                        "3": { "name": "string" },
+                        "4": { "patterns": [{ "include": "#AM-POS" }] }
+                    }
+                }
+            ]
+        },
+        "sub": {
+            "patterns": [
+                {
+                    "match": "([^/]+)?(?:([/])(.*))?",
+                    "captures": {
+                        "1": { "name": "string" },
+                        "2": { "name": "keyword.operator" },
+                        "3": { "name": "variable" }
+                    }
+                }
+            ]
+        }
+    },
+    "scopeName": "source.hunspell.aff"
 }

@@ -20,3 +20,4 @@ vsix
 WIPO
 yosay
 Yoyodyne
+xvfb

@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('cSpellExt_czech.enableCzech', () => enable(true)),
         vscode.commands.registerCommand('cSpellExt_czech.disableCzech', () => disable(true)),
         vscode.commands.registerCommand('cSpellExt_czech.enableCzechWorkspace', () => enable(false)),
-        vscode.commands.registerCommand('cSpellExt_czech.disableCzechWorkspace', () => disable(false))
+        vscode.commands.registerCommand('cSpellExt_czech.disableCzechWorkspace', () => disable(false)),
     );
     //
 }

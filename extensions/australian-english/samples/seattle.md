@@ -8,4 +8,6 @@ The Seattle area was inhabited by Native Americans for at least 4,000 years befo
 
 <!---
 Please download some sample text. The Seattle wikipedia site is translated into many languages and provides a good sample.
+
+cspell:ignore siˈætəl Alki Si'ahl Duwamish Suquamish
 --->
