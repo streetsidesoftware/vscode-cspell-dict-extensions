@@ -24,6 +24,7 @@
     "test:all": "lerna run --concurrency=1 --stream \"--scope=code-spell-checker-*\" test",
     "test:cspell": "lerna run --concurrency=4 --stream \"--scope=code-spell-checker-*\" test:cspell",
     "lint": "npm run cspell",
+    "update-dictionaries": "lerna exec \"npx npm-check-updates -t latest -u -f \\\"@cspell*\\\" \" && npm i",
     "update-packages": "npm ci && npx npm-check-updates -t semver -u && npm i && lerna exec \"npx npm-check-updates -t semver -u && rm -rf node_modules package-lock.json && npm i\" && npm i"
   },
   "type": "commonjs",

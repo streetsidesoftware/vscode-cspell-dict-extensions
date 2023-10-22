@@ -1,4 +1,4 @@
-name: " 🔗 Update Dependencies Main"
+name: " 📚 Update Dictionaries"
 
 on:
   push:
@@ -13,34 +13,36 @@ on:
     - cron: "0 12 * * 0"
 
 jobs:
-  update-dependencies:
+  update-dictionaries:
     if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "update-dependencies-main"
+      NEW_BRANCH: "update-dictionaries-main"
       REF_BRANCH: main
     steps:
       - name: Start
+        env:
+          EVENT_INPUTS: ${{ toJson(github.event.inputs) }};
         run: |
-          echo "${{ toJson(github.event.inputs) }}"
+          echo "$EVENT_INPUTS"
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           ref: ${{ env.REF_BRANCH }}
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           cache: npm
-      - name: Update Root
-        run: |
-          npm i
-          npx npm-check-updates -t semver -u
-          rm -rf node_modules package-lock.json
+
       - name: Install
         run: npm install
-      - name: Update packages
+
+      - name: Update Dictionaries
         run: |
-          npm run update-packages
+          npm run update-dictionaries
+
       - name: Build
         run: |
           npm run build
@@ -49,13 +51,12 @@ jobs:
         id: body
         uses: streetsidesoftware/actions/public/pr-body@v1
         with:
-          title: Update Dependencies
-          path: package.json
+          title: 📚 Update Dictionaries
 
       - name: PR
         uses: streetsidesoftware/actions/.github/actions/pr@v1
         with:
-          commit-message: "ci: Workflow Bot -- Update ALL Dependencies"
+          commit-message: "fix: Workflow Bot -- Update Dictionaries"
           branch: ${{ env.NEW_BRANCH }}
           base: ${{ env.REF_BRANCH }}
           body: ${{ steps.body.outputs.body }}
