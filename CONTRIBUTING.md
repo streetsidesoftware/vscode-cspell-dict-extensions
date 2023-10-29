@@ -8,24 +8,6 @@ Same steps works on Windows (powershell) and Linux. Just needs Node.js installed
 
 Please fork this repository to add new dictionaries.
 
-### Using Yeoman script
-
-The [Yeoman](http://yeoman.io/) script can help you create the dictionary template files seen in most of dictionary directories.
-
-### Setup Yeoman
-
-Install Yeoman
-
-```sh
-npm install -g yo
-```
-
-Link the generator
-
-```sh
-npm run create:setup
-```
-
 #### Running the generator
 
 In the `vscode-cspell-dict-extensions` repository root directory
