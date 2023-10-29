@@ -1,8 +1,10 @@
-'use strict';
-const Generator = require('yeoman-generator');
-const yosay = require('yosay');
-const path = require('path');
-const { promises: fs } = require('fs');
+import Generator from 'yeoman-generator';
+import yosay from 'yosay';
+import chalk from 'chalk';
+import * as path from 'path';
+import { promises as fs } from 'node:fs';
+
+import { guessAtLocale } from './languageCodes.js';
 
 const genName = 'generator-cspell-dicts-extensions';
 
@@ -10,7 +12,7 @@ function mkdirp(file) {
     return fs.mkdir(file, { recursive: true });
 }
 
-module.exports = class extends Generator {
+export default class extends Generator {
     constructor(args, opts) {
         super(args, opts);
 
@@ -36,33 +38,47 @@ module.exports = class extends Generator {
             {
                 type: 'input',
                 name: 'name',
-                message: 'Your extension dictionary directory name (i.e. medicalterms or german)',
+                message: 'Your extension dictionary directory name (i.e. medicalterms or german):',
                 default: this.options.name,
                 filter: (name) => name.toLowerCase().replace(/[^a-z0-9-]/g, '-'),
             },
             {
                 type: 'input',
                 name: 'friendlyName',
-                message: 'Friendly Name',
+                message: 'Friendly Name:',
                 default: (props) => friendlyName(props.name),
             },
             {
                 type: 'input',
                 name: 'displayName',
-                message: 'Display Name',
+                message: 'Display Name:',
                 default: (props) => `${title(props.friendlyName)} - Code Spell Checker`,
             },
             {
                 type: 'input',
                 name: 'description',
-                message: 'Description',
+                message: 'Description:',
                 default: (props) => `${title(props.friendlyName)} dictionary extension for VS Code.`,
             },
             {
                 type: 'input',
                 name: 'dictionarySrc',
-                message: 'Source cspell-dicts Dictionary NPM name. To be installed. i.e. @cspell/dict-name',
-                default: (props) => `@cspell/dict-${props.name}`,
+                message: (props) => {
+                    const message =
+                        'Source cspell-dicts Dictionary NPM name. To be installed. i.e. @cspell/dict-<name>';
+                    const locales = guessAtLocale(props.name);
+                    const options = locales?.length
+                        ? '\n  International Locales based upon name: \n  ' +
+                          locales.map((locale) => chalk.gray(locale)).join(', ') +
+                          '\n  :'
+                        : ':';
+                    return message + options;
+                },
+                default: (props) => {
+                    const locales = guessAtLocale(props.name);
+                    const dictLocal = locales[0] || props.name;
+                    return `@cspell/dict-${dictLocal}`;
+                },
             },
             {
                 type: 'confirm',
@@ -73,27 +89,27 @@ module.exports = class extends Generator {
             {
                 type: 'input',
                 name: 'commandName',
-                message: 'Base Name for Commands',
+                message: 'Base Name for Commands:',
                 default: (props) => title(props.name).replace(/[^a-z0-9]/gi, '_'),
                 when: (props) => props.addCommands,
             },
             {
                 type: 'input',
                 name: 'locale',
-                message: 'Language Locale (i.e. "en" for English or "fr" for French)',
-                default: (props) => dictNameToLocal(props.dictionarySrc),
+                message: 'Language Locale (i.e. "en" for English or "fr" for French):',
+                default: (props) => dictNameToLocale(props.dictionarySrc),
                 when: (props) => props.addCommands,
             },
             {
                 type: 'input',
                 name: 'target',
-                message: 'Target Directory',
+                message: 'Target Directory:',
                 default: (props) => `extensions/${props.name}`,
             },
             {
                 type: 'input',
                 name: 'fullPackageName',
-                message: 'NPM Package Name',
+                message: 'NPM Package Name:',
                 default: (props) => `code-spell-checker-${props.name}`,
             },
         ];
@@ -114,11 +130,10 @@ module.exports = class extends Generator {
         const filesToCopy = [
             ['.vscode', '.vscode'],
             ['images', 'images'],
-            ['test', 'test'],
             '.gitignore',
             '.vscodeignore',
             'tsconfig.json',
-            'cspell.config.yaml'
+            'cspell.config.yaml',
         ];
         files
             .map((fromTo) => (typeof fromTo === 'string' ? [fromTo, fromTo] : fromTo))
@@ -153,10 +168,16 @@ module.exports = class extends Generator {
     end() {
         this.spawnCommandSync('npm', ['install']);
     }
-};
+}
 
-function dictNameToLocal(dictModuleName) {
-    return dictModuleName.replace(/^.*dict-/, '').toLowerCase();
+const regExpCSpellDictModules = /^.*dict-/;
+
+function dictNameToLocale(dictModuleName) {
+    if (regExpCSpellDictModules.test(dictModuleName)) {
+        return dictModuleName.replace(/^.*dict-/, '').toLowerCase();
+    }
+
+    return '*';
 }
 
 function friendlyName(name) {
