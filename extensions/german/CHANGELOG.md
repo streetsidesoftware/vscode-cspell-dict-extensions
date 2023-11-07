@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-german@2.2.2...code-spell-checker-german@2.3.0) (2023-11-07)
+
+
+### Features
+
+* Workflow Bot -- Update Dictionaries ([#771](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/771)) ([2a6ad82](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2a6ad8295ed4e5264867df8c9c97e14d6e0763bc))
+
 ## [2.2.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-german@2.2.1...code-spell-checker-german@2.2.2) (2023-10-22)
 
 
