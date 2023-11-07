@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-romanian" extension will be documented in this file.
 
+## [1.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-romanian@1.0.1...code-spell-checker-romanian@1.1.0) (2023-11-07)
+
+
+### Features
+
+* Workflow Bot -- Update Dictionaries ([#771](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/771)) ([2a6ad82](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2a6ad8295ed4e5264867df8c9c97e14d6e0763bc))
+
 ## [1.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-romanian@1.0.0...code-spell-checker-romanian@1.0.1) (2023-09-12)
 
 
