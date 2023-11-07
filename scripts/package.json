@@ -9,7 +9,7 @@
   "dependencies": {
     "mdast": "^3.0.0",
     "mdast-builder": "^1.1.1",
-    "mdast-util-to-markdown": "^1.5.0"
+    "mdast-util-to-markdown": "^2.1.0"
   },
   "devDependencies": {},
   "scripts": {
