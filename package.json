@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@lerna-lite/cli": "^2.7.1",
-    "@lerna-lite/exec": "^2.7.1",
+    "@lerna-lite/exec": "^3.0.0",
     "@lerna-lite/run": "^2.7.1",
     "@tsconfig/node16": "^16.1.1",
     "@types/mocha": "^10.0.4",
