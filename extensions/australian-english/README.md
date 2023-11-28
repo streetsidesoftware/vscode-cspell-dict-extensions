@@ -34,7 +34,7 @@ Adding `en-au` to the `cSpell.language` setting, will enable the Australian Engl
 Example using both English and Australian English dictionaries:
 
 ```javascript
-"cSpell.language": "en-au",
+"cSpell.language": "en,en-AU",
 ```
 
 ## Requirements
