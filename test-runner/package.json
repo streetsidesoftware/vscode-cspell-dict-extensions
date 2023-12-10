@@ -13,7 +13,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@vscode/test-electron": "^2.3.6",
+    "@vscode/test-electron": "^2.3.8",
     "chai": "^4.3.10",
     "chalk": "^5.3.0",
     "commander": "^11.1.0",
@@ -23,6 +23,6 @@
     "mocha": "^10.2.0"
   },
   "devDependencies": {
-    "@types/vscode": "^1.84.1"
+    "@types/vscode": "^1.85.0"
   }
 }

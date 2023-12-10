@@ -60,6 +60,6 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-scientific-terms-us": "^3.0.0"
+    "@cspell/dict-scientific-terms-us": "^3.0.1"
   }
 }
