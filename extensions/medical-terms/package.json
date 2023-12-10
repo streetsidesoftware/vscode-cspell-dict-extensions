@@ -52,6 +52,6 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-medicalterms": "^4.1.0"
+    "@cspell/dict-medicalterms": "^4.1.1"
   }
 }
