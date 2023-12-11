@@ -14,7 +14,7 @@
     "echo": "echo $OVSX_TOKEN",
     "build": "lerna run build",
     "test-pack": "lerna run pack-extension",
-    "cspell": "npx cspell \"**\" --dot  --no-progress",
+    "cspell": "npx cspell . --dot  --no-progress",
     "create:extension": "node ./generator-cspell-dicts-extensions/run.js",
     "X-lint": "eslint . --fix --cache && prettier -w \"**/*.{md,yaml,yml,json}\"",
     "X-lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",

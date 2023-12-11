@@ -32,3 +32,8 @@ words:
   - Sinhala
   - Tokelau
   - Volapük
+
+ignorePaths:
+  - generators/app/templates/**
+
+noConfigSearch: true
