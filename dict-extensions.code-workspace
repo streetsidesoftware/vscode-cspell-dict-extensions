@@ -127,6 +127,9 @@
             "path": "extensions/vietnamese"
         },
         {
+            "path": "extensions/win32"
+        },
+        {
             "path": "generator-cspell-dicts-extensions"
         },
         {

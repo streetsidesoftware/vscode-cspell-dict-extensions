@@ -235,6 +235,10 @@
         "extensions/vietnamese": {
             "component": "code-spell-checker-vietnamese",
             "releaseType": "node"
+        },
+        "extensions/win32": {
+            "component": "code-spell-checker-win32",
+            "releaseType": "node"
         }
     }
 }

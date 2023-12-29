@@ -50,6 +50,7 @@ See Also:
 - [Turkish](extensions/turkish#readme) - 1.1.0 - Turkish dictionary extension for VS Code.
 - [Ukrainian](extensions/ukrainian#readme) - 1.2.0 - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](extensions/vietnamese#readme) - 1.1.0 - Vietnamese dictionary extension for VS Code.
+- [Win32](extensions/win32#readme) - 0.1.0 - Win32 dictionary extension for VS Code.
 
 ### Syntax Highlighters
 
@@ -106,6 +107,7 @@ See Also:
 - [Turkish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-turkish) - Turkish dictionary extension for VS Code.
 - [Ukrainian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-ukrainian) - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-vietnamese) - Vietnamese dictionary extension for VS Code.
+- [Win32](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-win32) - Win32 dictionary extension for VS Code.
 
 ### Syntax Highlighters
 
