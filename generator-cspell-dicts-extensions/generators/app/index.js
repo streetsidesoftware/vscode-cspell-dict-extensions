@@ -115,6 +115,8 @@ export default class extends Generator {
         ];
 
         this.props = await this.prompt(prompts);
+        this.props.locale ??= '';
+        this.props.commandName ??= '';
     }
 
     writing() {
