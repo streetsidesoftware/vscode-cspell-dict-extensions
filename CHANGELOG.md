@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.2.0...vscode-cspell-dict-extensions@5.2.1) (2023-12-29)
+
+
+### Updates and Bug Fixes
+
+* Update Getting Started docs ([#815](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/815)) ([cb1a452](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/cb1a452e2697d14bbbd9d1c5f8f70d6799bc5742))
+
 ## [5.2.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.1.0...vscode-cspell-dict-extensions@5.2.0) (2023-12-29)
 
 
