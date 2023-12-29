@@ -1,5 +1,20 @@
 # Changelog
 
+## [5.2.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.1.0...vscode-cspell-dict-extensions@5.2.0) (2023-12-29)
+
+
+### Features
+
+* Add Win32 Dictionary ([#811](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/811)) ([2f3aecc](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2f3aecc9cd9e0e76a04098a9af8d158511f45524))
+
+
+### Updates and Bug Fixes
+
+* Correct README.md example for Australian English and Canadian English ([#796](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/796)) ([675157f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/675157ff75f8d87e553122a635c5ce4bdae55b73))
+* Workflow Bot -- Update Dictionaries ([#777](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/777)) ([f650754](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f650754169f0e365409c3edcf45fb6a87fefc727))
+* Workflow Bot -- Update Dictionaries ([#790](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/790)) ([f1b8e4d](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f1b8e4d7a12adb4443302b011eb27e6e988f3ad7))
+* Workflow Bot -- Update Dictionaries ([#808](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/808)) ([46bb02b](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/46bb02b05aefde02a24c0dfe6f3a635e82d70926))
+
 ## [5.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.0.1...vscode-cspell-dict-extensions@5.1.0) (2023-11-07)
 
 
