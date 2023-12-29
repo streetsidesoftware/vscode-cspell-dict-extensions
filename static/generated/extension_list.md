@@ -38,6 +38,7 @@
 - [Turkish](extensions/turkish#readme) - 1.1.0 - Turkish dictionary extension for VS Code.
 - [Ukrainian](extensions/ukrainian#readme) - 1.2.0 - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](extensions/vietnamese#readme) - 1.1.0 - Vietnamese dictionary extension for VS Code.
+- [Win32](extensions/win32#readme) - 0.1.0 - Win32 dictionary extension for VS Code.
 
 ### Syntax Highlighters
 
