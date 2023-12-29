@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@3.0.0...code-spell-checker-medical-terms@3.0.1) (2023-12-29)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#790](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/790)) ([f1b8e4d](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f1b8e4d7a12adb4443302b011eb27e6e988f3ad7))
+
 ## [3.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@2.0.3...code-spell-checker-medical-terms@3.0.0) (2023-09-12)
 
 

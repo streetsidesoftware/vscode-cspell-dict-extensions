@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-hebrew@2.0.0...code-spell-checker-hebrew@2.0.1) (2023-12-29)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#777](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/777)) ([f650754](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f650754169f0e365409c3edcf45fb6a87fefc727))
+
 ## [2.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-hebrew@1.0.4...code-spell-checker-hebrew@2.0.0) (2023-09-30)
 
 

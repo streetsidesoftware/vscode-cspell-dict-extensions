@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-lithuanian" extension will be documented in this file.
 
+## [1.1.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-lithuanian@1.1.0...code-spell-checker-lithuanian@1.1.1) (2023-12-29)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#777](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/777)) ([f650754](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f650754169f0e365409c3edcf45fb6a87fefc727))
+
 ## [1.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-lithuanian@1.0.0...code-spell-checker-lithuanian@1.1.0) (2023-09-12)
 
 
