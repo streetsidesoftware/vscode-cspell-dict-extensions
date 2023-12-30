@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.11](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-bulgarian@0.1.10...code-spell-checker-bulgarian@0.1.11) (2023-12-30)
+
+
+### Updates and Bug Fixes
+
+* Add `capabilities` to manifest ([#819](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/819)) ([b2c53b2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/b2c53b27df0597c88c82c9773c054a1a5f6c1b54))
+
 ## [0.1.10](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-bulgarian@0.1.9...code-spell-checker-bulgarian@0.1.10) (2023-03-16)
 
 
