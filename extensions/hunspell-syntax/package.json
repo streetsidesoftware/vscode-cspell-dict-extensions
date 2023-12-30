@@ -2,7 +2,7 @@
   "name": "hunspell",
   "displayName": "hunspell",
   "description": "Hunspell Syntax Highlighting support",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "publisher": "streetsidesoftware",
   "engines": {
     "vscode": "^1.14.0"

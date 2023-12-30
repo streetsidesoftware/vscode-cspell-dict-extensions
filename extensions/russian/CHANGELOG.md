@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-russian@2.2.0...code-spell-checker-russian@2.2.1) (2023-12-30)
+
+
+### Updates and Bug Fixes
+
+* Add `capabilities` to manifest ([#819](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/819)) ([b2c53b2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/b2c53b27df0597c88c82c9773c054a1a5f6c1b54))
+
 ## [2.2.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-russian@2.1.1...code-spell-checker-russian@2.2.0) (2023-11-07)
 
 

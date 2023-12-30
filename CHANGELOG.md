@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.2.1...vscode-cspell-dict-extensions@5.2.2) (2023-12-30)
+
+
+### Updates and Bug Fixes
+
+* Add `capabilities` to manifest ([#819](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/819)) ([b2c53b2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/b2c53b27df0597c88c82c9773c054a1a5f6c1b54))
+
 ## [5.2.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.2.0...vscode-cspell-dict-extensions@5.2.1) (2023-12-29)
 
 
