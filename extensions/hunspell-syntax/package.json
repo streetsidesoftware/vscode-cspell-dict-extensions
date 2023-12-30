@@ -13,6 +13,12 @@
   "license": "MIT",
   "qna": "marketplace",
   "icon": "images/hunspell.png",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
   "contributes": {
     "languages": [
       {
