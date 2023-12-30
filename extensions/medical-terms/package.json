@@ -27,6 +27,12 @@
   ],
   "qna": "marketplace",
   "main": "./out/extension.js",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
   "contributes": {},
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
