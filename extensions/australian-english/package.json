@@ -83,6 +83,6 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-en-au": "^1.0.7"
+    "@cspell/dict-en-au": "^1.0.8"
   }
 }
