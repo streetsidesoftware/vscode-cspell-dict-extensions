@@ -13,12 +13,12 @@ See Also:
 ### Languages
 
 - [Arabic](extensions/arabic#readme) - 0.2.1 - Arabic dictionary extension for VS Code.
-- [Australian English](extensions/australian-english#readme) - 1.1.3 - Australian English dictionary extension for VS Code.
+- [Australian English](extensions/australian-english#readme) - 1.1.4 - Australian English dictionary extension for VS Code.
 - [Austrian German](extensions/austrian-german#readme) - 1.1.1 - Austrian German dictionary extension for VS Code.
 - [Basque](extensions/basque#readme) - 1.0.4 - Basque dictionary extension for VS Code.
-- [British English](extensions/british-english#readme) - 1.4.2 - British English dictionary extension for VS Code.
+- [British English](extensions/british-english#readme) - 1.4.3 - British English dictionary extension for VS Code.
 - [Bulgarian](extensions/bulgarian#readme) - 0.1.11 - Bulgarian dictionary extension for VS Code.
-- [Canadian English](extensions/canadian-english#readme) - 1.1.3 - Canadian English dictionary extension for VS Code.
+- [Canadian English](extensions/canadian-english#readme) - 1.1.4 - Canadian English dictionary extension for VS Code.
 - [Catalan](extensions/catalan#readme) - 1.0.5 - Catalan dictionary extension for VS Code.
 - [Croatian](extensions/croatian#readme) - 1.0.1 - Croatian dictionary extension for VS Code.
 - [Czech](extensions/czech#readme) - 1.0.6 - Czech dictionary extension for VS Code.
@@ -50,7 +50,7 @@ See Also:
 - [Turkish](extensions/turkish#readme) - 1.1.1 - Turkish dictionary extension for VS Code.
 - [Ukrainian](extensions/ukrainian#readme) - 1.2.2 - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](extensions/vietnamese#readme) - 1.1.1 - Vietnamese dictionary extension for VS Code.
-- [Win32](extensions/win32#readme) - 1.0.2 - Win32 dictionary extension for VS Code.
+- [Win32](extensions/win32#readme) - 1.0.3 - Win32 dictionary extension for VS Code.
 
 ### Syntax Highlighters
 
