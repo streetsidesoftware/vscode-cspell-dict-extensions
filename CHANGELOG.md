@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.3.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.2.3...vscode-cspell-dict-extensions@5.3.0) (2024-01-16)
+
+
+### Features
+
+* Indonesian dictionary ([#842](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/842)) ([67417a4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/67417a4dfa61d8deffd5a0b71dcdbc8e1d03d13d))
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#834](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/834)) ([ea2bdee](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/ea2bdeefcc09ae46c3bfaed11ad731401e8a6dc4))
+
 ## [5.2.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.2.2...vscode-cspell-dict-extensions@5.2.3) (2024-01-01)
 
 
