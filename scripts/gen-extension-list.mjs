@@ -43,8 +43,8 @@ function makeExtensionListItem(extensionInfo) {
     return listItem(
         paragraph([
             link(extensionInfo.extensionPath + '#readme', undefined, text(extensionInfo.displayNameShort)),
-            text(` - ${extensionInfo.version} - ${extensionInfo.description}`),
-        ])
+            text(` - ${extensionInfo.description}`),
+        ]),
     );
 }
 
@@ -59,10 +59,10 @@ function makeMarketplaceExtensionListItem(extensionInfo) {
             link(
                 'https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.' + extensionInfo.name,
                 undefined,
-                text(extensionInfo.displayNameShort)
+                text(extensionInfo.displayNameShort),
             ),
             text(' - ' + extensionInfo.description),
-        ])
+        ]),
     );
 }
 
