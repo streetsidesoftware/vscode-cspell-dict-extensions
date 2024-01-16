@@ -64,6 +64,9 @@
             "path": "extensions/hunspell-syntax"
         },
         {
+            "path": "extensions/indonesian"
+        },
+        {
             "path": "extensions/italian"
         },
         {
