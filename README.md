@@ -31,6 +31,7 @@ See Also:
 - [German](extensions/german#readme) - 2.3.1 - German dictionary extension for VS Code.
 - [Greek](extensions/greek#readme) - 1.2.1 - Greek dictionary extension for VS Code.
 - [Hebrew](extensions/hebrew#readme) - 2.0.2 - Hebrew dictionary extension for VS Code.
+- [Indonesian](extensions/indonesian#readme) - 0.1.0 - Indonesian dictionary extension for VS Code.
 - [Italian](extensions/italian#readme) - 1.1.1 - Italian dictionary extension for VS Code.
 - [Latvian](extensions/latvian#readme) - 1.1.1 - Latvian dictionary extension for VS Code.
 - [Lithuanian](extensions/lithuanian#readme) - 1.1.2 - Lithuanian dictionary extension for VS Code.
@@ -88,6 +89,7 @@ See Also:
 - [German](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-german) - German dictionary extension for VS Code.
 - [Greek](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-greek) - Greek dictionary extension for VS Code.
 - [Hebrew](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-hebrew) - Hebrew dictionary extension for VS Code.
+- [Indonesian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-indonesian) - Indonesian dictionary extension for VS Code.
 - [Italian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-italian) - Italian dictionary extension for VS Code.
 - [Latvian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-latvian) - Latvian dictionary extension for VS Code.
 - [Lithuanian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-lithuanian) - Lithuanian dictionary extension for VS Code.

@@ -152,6 +152,10 @@
             "component": "hunspell",
             "releaseType": "node"
         },
+        "extensions/indonesian": {
+            "component": "code-spell-checker-indonesian",
+            "releaseType": "node"
+        },
         "extensions/italian": {
             "component": "code-spell-checker-italian",
             "releaseType": "node"
