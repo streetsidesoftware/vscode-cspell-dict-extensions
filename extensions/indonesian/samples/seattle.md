@@ -2,7 +2,7 @@
 
 https://id-id.wikipedia.org/wiki/Seattle
 
-Seattle (pengucapan bahasa Inggris: [siːˈætəl] see-at-əl) adalah kota terbesar di wilayah Timur Laut Pasifik Amerika Serikat, terletak di negara bagian Washington antara Puget Sound dan Danau Washington, sekitar 180 km di sebelah selatan perbatasan Amerika Serikat-Kanada.
+Seattle (pengucapan bahasa Inggris: see-at-əl) adalah kota terbesar di wilayah Timur Laut Pasifik Amerika Serikat, terletak di negara bagian Washington antara Puget Sound dan Danau Washington, sekitar 180 km di sebelah selatan perbatasan Amerika Serikat-Kanada.
 
 Seattle didirikan pada tahun 1850-an dan namanya berasal dari nama Seattle, seorang pemimpin suku Amerika Asli. Kota ini mempunyai penduduk yang diperkirakan sebesar 582.174 jiwa dan populasi wilayah metropolitan yang hampir mencapai 3.919.624 juta (2006).
 
