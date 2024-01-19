@@ -6,7 +6,7 @@ Seattle az USA Washington államának legnagyobb városa, egyben King megye szé
 737 015 lakosa van. A város a Seattle-i főegyházmegye érseki székvárosa.
 
 A várost az 1850-es években alapították, nevét a környék legendás indián vezéréről, Seattle törzsfőnökről
-(Noah Sealth, Si’ahl) kapta.
+(Noah Sealth) kapta.
 
 A 2022-as becsléskor lakosainak száma közel 749 256, míg az agglomerációjában mintegy 4,0 millió ember élt.
 Seattle a régió gazdasági és kulturális központja. Jelenlegi, hivatalos beceneve,
