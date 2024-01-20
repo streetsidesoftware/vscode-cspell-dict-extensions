@@ -148,6 +148,10 @@
             "component": "code-spell-checker-hebrew",
             "releaseType": "node"
         },
+        "extensions/hungarian": {
+            "component": "code-spell-checker-hungarian",
+            "releaseType": "node"
+        },
         "extensions/hunspell-syntax": {
             "component": "hunspell",
             "releaseType": "node"

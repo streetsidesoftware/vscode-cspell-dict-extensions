@@ -19,6 +19,7 @@
 - [German](extensions/german#readme) - German dictionary extension for VS Code.
 - [Greek](extensions/greek#readme) - Greek dictionary extension for VS Code.
 - [Hebrew](extensions/hebrew#readme) - Hebrew dictionary extension for VS Code.
+- [Hungarian](extensions/hungarian#readme) - Hungarian dictionary extension for VS Code.
 - [Indonesian](extensions/indonesian#readme) - Indonesian dictionary extension for VS Code.
 - [Italian](extensions/italian#readme) - Italian dictionary extension for VS Code.
 - [Latvian](extensions/latvian#readme) - Latvian dictionary extension for VS Code.
