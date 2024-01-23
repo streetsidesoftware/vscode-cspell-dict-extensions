@@ -1,5 +1,5 @@
 {
-    ".": "5.3.0",
+    ".": "5.4.0",
     "extensions/arabic": "0.2.1",
     "extensions/basque": "1.0.4",
     "extensions/bulgarian": "0.1.11",
@@ -42,5 +42,6 @@
     "extensions/romanian": "1.1.2",
     "extensions/latvian": "1.1.1",
     "extensions/win32": "1.0.3",
-    "extensions/indonesian": "1.0.0"
+    "extensions/indonesian": "1.0.0",
+    "extensions/hungarian": "1.0.0"
 }
