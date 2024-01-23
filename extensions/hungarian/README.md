@@ -4,6 +4,8 @@ Hungarian dictionary extension for VS Code.
 
 Imports the Hungarian spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
+**NOTE:** Due to the complexity of the Hungarian language, the dictionary is limited and might be missing some common words. Work is underway to correct the limitation.
+
 ## Installation
 
 After this extension is installed, it is necessary to tell the spell checker to use it.
