@@ -1,0 +1,88 @@
+{
+  "name": "code-spell-checker-finnish",
+  "description": "Finnish dictionary extension for VS Code.",
+  "version": "0.1.0",
+  "displayName": "Finnish - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "preview": true,
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
+  "type": "commonjs",
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/streetsidesoftware"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "Finnish",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/extension.js",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_finnish.enable",
+        "title": "Enable Finnish Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_finnish.disable",
+        "title": "Disable Finnish Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_finnish.enableWorkspace",
+        "title": "Enable Finnish Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_finnish.disableWorkspace",
+        "title": "Disable Finnish Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "pack-extension": "vsce package",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test:cspell": "cspell -c cspell-ext.json samples",
+    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/seattle.md",
+    "test": "npm run test:cspell && npm run test:vscode"
+  },
+  "dependencies": {
+    "@cspell/dict-fi-fi": "^1.0.0"
+  }
+}
