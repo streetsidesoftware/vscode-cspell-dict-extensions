@@ -1,14 +1,18 @@
-const { suite, test, beforeAll } = require('mocha');
-const { expect, assert } = require('chai');
-const vscode = require('vscode');
-const { stream } = require('kefir');
-const helper = require('../../lib/helper.cjs');
-const path = require('path');
+import { createRequire } from 'module';
+import { suite, test } from 'mocha';
+import { expect, assert } from 'chai';
+import { stream } from 'kefir';
+import helper from '../../lib/helper.cjs';
+import { resolve, basename } from 'path';
+
+const require = createRequire(import.meta.url);
+
+const { Uri, window, Position, languages } = require('vscode');
 
 const { loadDocument, logYellow, log, sleep, activateExtension } = helper;
 
 const sampleDoc = process.env['SAMPLE_TEST_DOCUMENT'];
-const uriSampleDoc = vscode.Uri.file(path.resolve(sampleDoc));
+const uriSampleDoc = Uri.file(resolve(sampleDoc));
 
 /**
  * @typedef {import('../types').OnSpellCheckDocumentStep} OnSpellCheckDocumentStep
@@ -20,7 +24,7 @@ const timeoutInSeconds = 120;
 suite('Extension Test Suite 1', function () {
     this.timeout(timeoutInSeconds * 1000);
 
-    vscode.window.showInformationMessage('Start all tests.');
+    window.showInformationMessage('Start all tests.');
 
     this.beforeAll(async () => {
         // await helper.activateExtension('streetsidesoftware.code-spell-checker');
@@ -42,7 +46,7 @@ suite('Extension Test Suite 1', function () {
         const result = await loadDocument(uriSampleDoc);
         const urlDoc = result?.doc.uri.toString(true);
         assert(result?.doc, 'Must be able to load the document.');
-        assert(urlDoc.endsWith(path.basename(sampleDoc)), 'matches sample doc');
+        assert(urlDoc.endsWith(basename(sampleDoc)), 'matches sample doc');
     });
 
     test('Opening the sample document and making sure there are no errors.', async () => {
@@ -51,7 +55,7 @@ suite('Extension Test Suite 1', function () {
         expect(docContext).to.not.be.undefined;
         await sleep(500);
         // Force a spell check by making an edit, no errors are expected.
-        const pEdit0 = docContext.editor.edit((edit) => edit.insert(new vscode.Position(0, 0), '\n'));
+        const pEdit0 = docContext.editor.edit((edit) => edit.insert(new Position(0, 0), '\n'));
         const pWait0 = waitForSpellComplete(uriSampleDoc, 5000);
         await pEdit0;
         const found0 = await pWait0;
@@ -60,11 +64,11 @@ suite('Extension Test Suite 1', function () {
 
         // Force a spelling error
         log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
-        await docContext.editor.edit((edit) => edit.insert(new vscode.Position(0, 0), 'spellling\n'));
+        await docContext.editor.edit((edit) => edit.insert(new Position(0, 0), 'spellling\n'));
         log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
         await sleep(500);
         log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
-        const pEdit1 = docContext.editor.edit((edit) => edit.insert(new vscode.Position(0, 0), '\n'));
+        const pEdit1 = docContext.editor.edit((edit) => edit.insert(new Position(0, 0), '\n'));
         log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
         const pWait1 = waitForSpellComplete(uriSampleDoc, 5000);
         await pEdit1;
@@ -139,10 +143,10 @@ async function getDiagsFromVsCode(uri, waitInMs) {
     let stop = false;
     const h = setInterval(() => (stop = true), waitInMs);
     try {
-        let diag = vscode.languages.getDiagnostics(uri);
+        let diag = languages.getDiagnostics(uri);
         while (!stop && !diag.length) {
             await sleep(5);
-            diag = vscode.languages.getDiagnostics(uri);
+            diag = languages.getDiagnostics(uri);
         }
         return diag;
     } finally {
