@@ -140,6 +140,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - _Catalan_ - [Jordi Olivares Provencio](https://github.com/jordiolivares)
 - _Czech_ - [Zereges](https://github.com/Zereges)
 - _Estonian_ - [Igor Krupenja](https://github.com/igor-krupenja)
+- _Finnish_ - [Kimi Heinonen](https://github.com/NutCr4cker12)
 - _Polish_ - [Jackens](https://github.com/jackens)
 - _Danish_ - [viktorstrate](https://github.com/viktorstrate)
 - _Slovenian_ - [KrOstir](https://github.com/KrOstir)
@@ -172,4 +173,5 @@ cspell:words Combinacijus
 cspell:words Bokmål bokmal
 cspell:words Watheq Taha Zerrouki Ahmed ElTabarani
 cspell:words Nederlands
+cspell:words Kimi Heinonen
 --->
