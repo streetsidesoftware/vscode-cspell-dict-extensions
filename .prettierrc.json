@@ -20,6 +20,12 @@
             "options": {
                 "parser": "json"
             }
+        },
+        {
+            "files": "**/*.{jsonc,json,md}",
+            "options": {
+                "trailingComma": "none"
+            }
         }
     ]
 }
