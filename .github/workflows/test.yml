@@ -57,7 +57,7 @@ jobs:
           cd ${{ matrix.extension_dir }}
           npm run test
 
-  # Run the spell checker on all this samples using the extension's settings.
+  # Run the spell checker on all the samples using the extension's settings.
   # This will help with dictionary updates.
   check-samples:
     runs-on: ubuntu-latest
