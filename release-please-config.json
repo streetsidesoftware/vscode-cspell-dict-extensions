@@ -128,6 +128,10 @@
             "component": "code-spell-checker-estonian",
             "releaseType": "node"
         },
+        "extensions/finnish": {
+            "component": "code-spell-checker-finnish",
+            "releaseType": "node"
+        },
         "extensions/french-reforme": {
             "component": "code-spell-checker-french-reforme",
             "releaseType": "node"

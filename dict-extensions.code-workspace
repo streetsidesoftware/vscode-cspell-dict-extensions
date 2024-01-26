@@ -46,6 +46,9 @@
             "path": "extensions/estonian"
         },
         {
+            "path": "extensions/finnish"
+        },
+        {
             "path": "extensions/french"
         },
         {
