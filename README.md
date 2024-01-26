@@ -26,6 +26,7 @@ See Also:
 - [Dutch](extensions/dutch#readme) - Dutch / Nederlands dictionary extension for VS Code.
 - [Esperanto](extensions/esperanto#readme) - Esperanto dictionary extension for VS Code.
 - [Estonian](extensions/estonian#readme) - Estonian dictionary extension for VS Code.
+- [Finnish](extensions/finnish#readme) - Finnish dictionary extension for VS Code.
 - [French](extensions/french#readme) - French dictionary extension for VS Code.
 - [French Réforme 90](extensions/french-reforme#readme) - French Réforme 90 dictionary extension for VS Code.
 - [German](extensions/german#readme) - German dictionary extension for VS Code.
@@ -85,6 +86,7 @@ See Also:
 - [Dutch](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-dutch) - Dutch / Nederlands dictionary extension for VS Code.
 - [Esperanto](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-esperanto) - Esperanto dictionary extension for VS Code.
 - [Estonian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-estonian) - Estonian dictionary extension for VS Code.
+- [Finnish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-finnish) - Finnish dictionary extension for VS Code.
 - [French](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-french) - French dictionary extension for VS Code.
 - [French Réforme 90](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-french-reforme) - French Réforme 90 dictionary extension for VS Code.
 - [German](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-german) - German dictionary extension for VS Code.

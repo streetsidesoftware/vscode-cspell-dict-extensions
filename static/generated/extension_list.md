@@ -14,6 +14,7 @@
 - [Dutch](extensions/dutch#readme) - Dutch / Nederlands dictionary extension for VS Code.
 - [Esperanto](extensions/esperanto#readme) - Esperanto dictionary extension for VS Code.
 - [Estonian](extensions/estonian#readme) - Estonian dictionary extension for VS Code.
+- [Finnish](extensions/finnish#readme) - Finnish dictionary extension for VS Code.
 - [French](extensions/french#readme) - French dictionary extension for VS Code.
 - [French Réforme 90](extensions/french-reforme#readme) - French Réforme 90 dictionary extension for VS Code.
 - [German](extensions/german#readme) - German dictionary extension for VS Code.
