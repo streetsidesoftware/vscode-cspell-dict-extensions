@@ -1,7 +1,13 @@
 {
     "types": {
-        "Technical Terms": ["extensions/medical-terms", "extensions/scientific-terms"],
-        "Syntax Highlighters": ["extensions/hunspell-syntax"]
+        "Technical Terms": [
+            "extensions/medical-terms",
+            "extensions/scientific-terms",
+            "extensions/win32"
+        ],
+        "Syntax Highlighters": [
+            "extensions/hunspell-syntax"
+        ]
     },
     "default": "Languages"
 }
