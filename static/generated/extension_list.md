@@ -41,7 +41,6 @@
 - [Turkish](extensions/turkish#readme) - Turkish dictionary extension for VS Code.
 - [Ukrainian](extensions/ukrainian#readme) - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](extensions/vietnamese#readme) - Vietnamese dictionary extension for VS Code.
-- [Win32](extensions/win32#readme) - Win32 dictionary extension for VS Code.
 
 ### Syntax Highlighters
 
@@ -51,3 +50,4 @@
 
 - [Medical Terms](extensions/medical-terms#readme) - Medical Terms Add-On for Code Spell Checker
 - [Scientific Terms](extensions/scientific-terms#readme) - Scientific Terms dictionary extension for VS Code.
+- [Win32](extensions/win32#readme) - Win32 dictionary extension for VS Code.

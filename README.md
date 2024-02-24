@@ -53,7 +53,6 @@ See Also:
 - [Turkish](extensions/turkish#readme) - Turkish dictionary extension for VS Code.
 - [Ukrainian](extensions/ukrainian#readme) - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](extensions/vietnamese#readme) - Vietnamese dictionary extension for VS Code.
-- [Win32](extensions/win32#readme) - Win32 dictionary extension for VS Code.
 
 ### Syntax Highlighters
 
@@ -63,6 +62,7 @@ See Also:
 
 - [Medical Terms](extensions/medical-terms#readme) - Medical Terms Add-On for Code Spell Checker
 - [Scientific Terms](extensions/scientific-terms#readme) - Scientific Terms dictionary extension for VS Code.
+- [Win32](extensions/win32#readme) - Win32 dictionary extension for VS Code.
 
 <!--- @@inject-end: static/generated/extension_list.md --->
 
@@ -113,7 +113,6 @@ See Also:
 - [Turkish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-turkish) - Turkish dictionary extension for VS Code.
 - [Ukrainian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-ukrainian) - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-vietnamese) - Vietnamese dictionary extension for VS Code.
-- [Win32](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-win32) - Win32 dictionary extension for VS Code.
 
 ### Syntax Highlighters
 
@@ -123,6 +122,7 @@ See Also:
 
 - [Medical Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-medical-terms) - Medical Terms Add-On for Code Spell Checker
 - [Scientific Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-scientific-terms) - Scientific Terms dictionary extension for VS Code.
+- [Win32](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-win32) - Win32 dictionary extension for VS Code.
 
 <!--- @@inject-end: static/generated/marketplace_extensions.md --->
 
