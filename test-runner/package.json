@@ -23,6 +23,6 @@
     "mocha": "^10.3.0"
   },
   "devDependencies": {
-    "@types/vscode": "^1.86.0"
+    "@types/vscode": "^1.87.0"
   }
 }
