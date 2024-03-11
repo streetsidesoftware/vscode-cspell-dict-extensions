@@ -1,7 +1,7 @@
 {
   "name": "vscode-cspell-dict-extensions",
   "private": true,
-  "version": "5.5.1",
+  "version": "5.5.2",
   "scripts": {
     "test": "lerna run test",
     "postinstall": "lerna exec \"npm i\"",
@@ -31,16 +31,16 @@
     "vscode": "^1.67.0"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "^3.3.1",
-    "@lerna-lite/exec": "^3.3.1",
-    "@lerna-lite/run": "^3.3.1",
+    "@lerna-lite/cli": "^3.3.0",
+    "@lerna-lite/exec": "^3.3.0",
+    "@lerna-lite/run": "^3.3.0",
     "@tsconfig/node16": "^16.1.1",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^18.19.22",
+    "@types/node": "^18.19.21",
     "@types/vscode": "^1.87.0",
     "@vscode/test-electron": "^2.3.9",
     "@vscode/vsce": "^2.24.0",
-    "cspell": "^8.6.0",
+    "cspell": "^8.5.0",
     "inject-markdown": "^3.0.0",
     "mocha": "^10.3.0",
     "ovsx": "^0.8.3",
@@ -48,7 +48,7 @@
     "rimraf": "^5.0.5",
     "scripts": "file:scripts",
     "test-extensions": "file:test-runner",
-    "typescript": "^5.4.2",
-    "yaml": "^2.4.1"
+    "typescript": "^5.3.3",
+    "yaml": "^2.4.0"
   }
 }
