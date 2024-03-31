@@ -1,5 +1,18 @@
 # Changelog
 
+## [5.6.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.5.1...vscode-cspell-dict-extensions@5.6.0) (2024-03-31)
+
+
+### Features
+
+* Add Ancient Greek Extension ([#906](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/906)) ([ccc99ae](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/ccc99aebc3bfc0d464e695c57f02eee37ad7d14f))
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#883](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/883)) ([310a53f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/310a53f933cb97ba12f7f82b9d715480a156d12f))
+* Workflow Bot -- Update Dictionaries ([#887](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/887)) ([99ac3e6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/99ac3e6405d37eb3a68c8d6b1dce4d22f9ef817d))
+
 ## [5.5.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.5.0...vscode-cspell-dict-extensions@5.5.1) (2024-02-24)
 
 
