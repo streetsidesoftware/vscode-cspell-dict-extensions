@@ -4,6 +4,9 @@
             "path": "."
         },
         {
+            "path": "extensions/ancient-greek"
+        },
+        {
             "path": "extensions/arabic"
         },
         {
