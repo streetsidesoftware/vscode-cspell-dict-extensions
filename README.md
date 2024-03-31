@@ -12,6 +12,7 @@ See Also:
 
 ### Languages
 
+- [Ancient Greek](extensions/ancient-greek#readme) - Ancient Greek dictionary extension for VS Code.
 - [Arabic](extensions/arabic#readme) - Arabic dictionary extension for VS Code.
 - [Australian English](extensions/australian-english#readme) - Australian English dictionary extension for VS Code.
 - [Austrian German](extensions/austrian-german#readme) - Austrian German dictionary extension for VS Code.
@@ -72,6 +73,7 @@ See Also:
 
 ### Languages
 
+- [Ancient Greek](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-ancient-greek) - Ancient Greek dictionary extension for VS Code.
 - [Arabic](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-arabic) - Arabic dictionary extension for VS Code.
 - [Australian English](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-australian-english) - Australian English dictionary extension for VS Code.
 - [Austrian German](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-austrian-german) - Austrian German dictionary extension for VS Code.

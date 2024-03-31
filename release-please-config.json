@@ -72,6 +72,10 @@
             "component": "vscode-cspell-dict-extensions",
             "releaseType": "node"
         },
+        "extensions/ancient-greek": {
+            "component": "code-spell-checker-ancient-greek",
+            "releaseType": "node"
+        },
         "extensions/arabic": {
             "component": "code-spell-checker-arabic",
             "releaseType": "node"

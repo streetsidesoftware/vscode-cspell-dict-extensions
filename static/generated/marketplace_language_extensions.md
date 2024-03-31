@@ -1,5 +1,6 @@
 ### Language Dictionaries
 
+- [Ancient Greek](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-ancient-greek) - Ancient Greek dictionary extension for VS Code.
 - [Arabic](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-arabic) - Arabic dictionary extension for VS Code.
 - [Australian English](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-australian-english) - Australian English dictionary extension for VS Code.
 - [Austrian German](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-austrian-german) - Austrian German dictionary extension for VS Code.

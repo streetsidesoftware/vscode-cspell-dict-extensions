@@ -1,5 +1,6 @@
 ### Languages
 
+- [Ancient Greek](extensions/ancient-greek#readme) - Ancient Greek dictionary extension for VS Code.
 - [Arabic](extensions/arabic#readme) - Arabic dictionary extension for VS Code.
 - [Australian English](extensions/australian-english#readme) - Australian English dictionary extension for VS Code.
 - [Austrian German](extensions/austrian-german#readme) - Austrian German dictionary extension for VS Code.
