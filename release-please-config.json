@@ -172,6 +172,10 @@
             "component": "code-spell-checker-italian",
             "releaseType": "node"
         },
+        "extensions/latin": {
+            "component": "code-spell-checker-latin",
+            "releaseType": "node"
+        },
         "extensions/latvian": {
             "component": "code-spell-checker-latvian",
             "releaseType": "node"

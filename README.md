@@ -36,6 +36,7 @@ See Also:
 - [Hungarian](extensions/hungarian#readme) - Hungarian dictionary extension for VS Code.
 - [Indonesian](extensions/indonesian#readme) - Indonesian dictionary extension for VS Code.
 - [Italian](extensions/italian#readme) - Italian dictionary extension for VS Code.
+- [Latin](extensions/latin#readme) - Latin dictionary extension for VS Code.
 - [Latvian](extensions/latvian#readme) - Latvian dictionary extension for VS Code.
 - [Lithuanian](extensions/lithuanian#readme) - Lithuanian dictionary extension for VS Code.
 - [Norwegian Bokmål](extensions/norwegian-bokmal#readme) - Norwegian Bokmål dictionary extension for VS Code.
@@ -97,6 +98,7 @@ See Also:
 - [Hungarian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-hungarian) - Hungarian dictionary extension for VS Code.
 - [Indonesian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-indonesian) - Indonesian dictionary extension for VS Code.
 - [Italian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-italian) - Italian dictionary extension for VS Code.
+- [Latin](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-latin) - Latin dictionary extension for VS Code.
 - [Latvian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-latvian) - Latvian dictionary extension for VS Code.
 - [Lithuanian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-lithuanian) - Lithuanian dictionary extension for VS Code.
 - [Norwegian Bokmål](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-norwegian-bokmal) - Norwegian Bokmål dictionary extension for VS Code.
