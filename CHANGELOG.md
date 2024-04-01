@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.7.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.6.0...vscode-cspell-dict-extensions@5.7.0) (2024-04-01)
+
+
+### Features
+
+* Add Latin Dictionary Extension ([#910](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/910)) ([8e8bf69](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/8e8bf69676a7a850ce63d58310ea302283e4fdd7))
+
 ## [5.6.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.5.1...vscode-cspell-dict-extensions@5.6.0) (2024-03-31)
 
 

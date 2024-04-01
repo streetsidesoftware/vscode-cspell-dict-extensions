@@ -1,5 +1,5 @@
 {
-    ".": "5.6.0",
+    ".": "5.7.0",
     "extensions/arabic": "0.2.1",
     "extensions/basque": "1.0.4",
     "extensions/bulgarian": "0.1.11",
@@ -45,5 +45,6 @@
     "extensions/indonesian": "1.0.0",
     "extensions/hungarian": "1.0.0",
     "extensions/finnish": "1.0.0",
-    "extensions/ancient-greek": "1.0.0"
+    "extensions/ancient-greek": "1.0.0",
+    "extensions/latin": "1.0.0"
 }
