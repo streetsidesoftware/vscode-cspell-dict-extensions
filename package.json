@@ -31,13 +31,13 @@
     "vscode": "^1.67.0"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "^3.3.1",
-    "@lerna-lite/exec": "^3.3.1",
-    "@lerna-lite/run": "^3.3.1",
+    "@lerna-lite/cli": "^3.3.2",
+    "@lerna-lite/exec": "^3.3.2",
+    "@lerna-lite/run": "^3.3.2",
     "@tsconfig/node18": "^18.2.4",
     "@types/mocha": "^10.0.6",
-    "@types/node": "^18.19.28",
-    "@types/vscode": "^1.87.0",
+    "@types/node": "^18.19.30",
+    "@types/vscode": "^1.88.0",
     "@vscode/test-electron": "^2.3.9",
     "@vscode/vsce": "^2.24.0",
     "cspell": "^8.6.1",
@@ -48,7 +48,7 @@
     "rimraf": "^5.0.5",
     "scripts": "file:scripts",
     "test-extensions": "file:test-runner",
-    "typescript": "^5.4.3",
+    "typescript": "^5.4.4",
     "yaml": "^2.4.1"
   }
 }
