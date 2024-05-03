@@ -31,24 +31,24 @@
     "vscode": "^1.67.0"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "^3.3.2",
-    "@lerna-lite/exec": "^3.3.2",
-    "@lerna-lite/run": "^3.3.2",
+    "@lerna-lite/cli": "^3.3.3",
+    "@lerna-lite/exec": "^3.3.3",
+    "@lerna-lite/run": "^3.3.3",
     "@tsconfig/node18": "^18.2.4",
     "@types/mocha": "^10.0.6",
     "@types/node": "^18.19.31",
     "@types/vscode": "^1.88.0",
     "@vscode/test-electron": "^2.3.9",
-    "@vscode/vsce": "^2.25.0",
+    "@vscode/vsce": "^2.26.0",
     "cspell": "^8.7.0",
     "inject-markdown": "^3.0.0",
     "mocha": "^10.4.0",
-    "ovsx": "^0.9.0",
+    "ovsx": "^0.9.1",
     "prettier": "^3.2.5",
     "rimraf": "^5.0.5",
     "scripts": "file:scripts",
     "test-extensions": "file:test-runner",
     "typescript": "^5.4.5",
-    "yaml": "^2.4.1"
+    "yaml": "^2.4.2"
   }
 }
