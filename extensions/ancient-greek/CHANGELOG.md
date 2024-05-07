@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-ancient-greek" extension will be documented in this file.
 
+## [1.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-ancient-greek@1.0.0...code-spell-checker-ancient-greek@1.0.1) (2024-05-07)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#916](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/916)) ([bd94d14](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/bd94d14827ac6d21538842f839ede3d82b2d6b9c))
+
 ## 1.0.0 (2024-03-31)
 
 

@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-british-english",
   "description": "British English dictionary extension for VS Code.",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "displayName": "British English - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": false,
