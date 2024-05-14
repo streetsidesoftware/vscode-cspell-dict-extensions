@@ -38,7 +38,7 @@
     "@types/mocha": "^10.0.6",
     "@types/node": "^18.19.33",
     "@types/vscode": "^1.89.0",
-    "@vscode/test-electron": "^2.3.9",
+    "@vscode/test-electron": "^2.3.10",
     "@vscode/vsce": "^2.26.1",
     "cspell": "^8.8.1",
     "inject-markdown": "^3.0.0",
