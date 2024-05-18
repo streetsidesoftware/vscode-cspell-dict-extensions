@@ -16,6 +16,7 @@
         ".travis.yml",
         ".vscode",
         ".vscodeignore",
+        ".vscode-test/**",
         "*.vsix",
         "**/templates/samples/**",
         "CHANGELOG.md",

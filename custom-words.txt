@@ -4,6 +4,7 @@ Bokmål
 deduplicated
 Dependabot
 Gnomovision
+googleapis
 lgpl
 mdast
 medicalterms
@@ -18,6 +19,6 @@ uncommenting
 vscodeignore
 vsix
 WIPO
+xvfb
 yosay
 Yoyodyne
-xvfb
