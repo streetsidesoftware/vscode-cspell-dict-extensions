@@ -40,7 +40,7 @@
     "@types/vscode": "^1.89.0",
     "@vscode/test-electron": "^2.3.10",
     "@vscode/vsce": "^2.26.1",
-    "cspell": "^8.8.1",
+    "cspell": "^8.8.3",
     "inject-markdown": "^3.0.0",
     "mocha": "^10.4.0",
     "ovsx": "^0.9.1",
