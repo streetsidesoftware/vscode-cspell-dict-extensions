@@ -43,7 +43,7 @@ This extension will automatically include [Code Spell Checker](https://marketpla
 
 ## Contributors
 
-- [Ihor Oleksandrov](https://github.com/ihodev)
+- [Ihor Oleksandrov](https://github.com/ihor-oleks)
 
 <!---
 cspell:words Ihor Oleksandrov
