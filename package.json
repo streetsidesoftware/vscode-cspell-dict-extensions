@@ -48,7 +48,7 @@
     "rimraf": "^5.0.7",
     "scripts": "file:scripts",
     "test-extensions": "file:test-runner",
-    "typescript": "^5.5.2",
+    "typescript": "^5.5.3",
     "yaml": "^2.4.5"
   }
 }
