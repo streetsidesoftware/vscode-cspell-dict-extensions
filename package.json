@@ -49,6 +49,6 @@
     "scripts": "file:scripts",
     "test-extensions": "file:test-runner",
     "typescript": "^5.5.4",
-    "yaml": "^2.4.5"
+    "yaml": "^2.5.0"
   }
 }
