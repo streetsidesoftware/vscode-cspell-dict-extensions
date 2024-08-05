@@ -1,5 +1,5 @@
 {
-    ".": "5.7.4",
+    ".": "5.7.5",
     "extensions/arabic": "0.2.1",
     "extensions/basque": "1.0.4",
     "extensions/bulgarian": "0.1.11",
@@ -32,7 +32,7 @@
     "extensions/ukrainian": "1.2.3",
     "extensions/vietnamese": "1.1.1",
     "extensions/serbian": "1.2.1",
-    "extensions/british-english": "1.4.10",
+    "extensions/british-english": "1.4.11",
     "extensions/slovak": "1.1.2",
     "extensions/australian-english": "1.1.8",
     "extensions/canadian-english": "1.1.8",
