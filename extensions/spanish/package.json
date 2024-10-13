@@ -75,6 +75,6 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-es-es": "^3.0.0"
+    "@cspell/dict-es-es": "^3.0.3"
   }
 }
