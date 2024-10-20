@@ -10,6 +10,7 @@
 - [Canadian English](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-canadian-english) - Canadian English dictionary extension for VS Code.
 - [Catalan](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-catalan) - Catalan dictionary extension for VS Code.
 - [Croatian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-croatian) - Croatian dictionary extension for VS Code.
+- [Cspell Bundled Dictionaries](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-cspell-bundled-dictionaries) - Cspell Bundled Dictionaries dictionary extension for VS Code.
 - [Czech](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-czech) - Czech dictionary extension for VS Code.
 - [Danish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-danish) - Danish dictionary extension for VS Code.
 - [Dutch](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-dutch) - Dutch / Nederlands dictionary extension for VS Code.
