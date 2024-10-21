@@ -1,5 +1,5 @@
 {
-    ".": "5.7.5",
+    ".": "5.7.6",
     "extensions/arabic": "0.2.1",
     "extensions/basque": "1.0.4",
     "extensions/bulgarian": "0.1.11",
@@ -46,5 +46,6 @@
     "extensions/hungarian": "1.0.0",
     "extensions/finnish": "1.0.0",
     "extensions/ancient-greek": "1.0.1",
-    "extensions/latin": "1.0.0"
+    "extensions/latin": "1.0.0",
+    "extensions/cspell-bundled-dictionaries": "1.0.0"
 }

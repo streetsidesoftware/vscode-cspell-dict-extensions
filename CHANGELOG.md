@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.7.6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.7.5...vscode-cspell-dict-extensions@5.7.6) (2024-10-21)
+
+
+### Updates and Bug Fixes
+
+* Add CSpell Bundled Dictionaries ([#1003](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1003)) ([6c7bff4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6c7bff434c529c5181cc4f0c7b5c1a428f7d8dde))
+
 ## [5.7.5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.7.4...vscode-cspell-dict-extensions@5.7.5) (2024-08-18)
 
 
