@@ -44,6 +44,10 @@
 - [Ukrainian](extensions/ukrainian#readme) - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](extensions/vietnamese#readme) - Vietnamese dictionary extension for VS Code.
 
+### Support
+
+- [CSpell Bundled Dictionaries](extensions/cspell-bundled-dictionaries#readme) - CSpell Bundled Dictionaries dictionary extension for VS Code.
+
 ### Syntax Highlighters
 
 - [hunspell](extensions/hunspell-syntax#readme) - Hunspell Syntax Highlighting support

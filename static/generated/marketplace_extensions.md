@@ -44,6 +44,10 @@
 - [Ukrainian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-ukrainian) - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-vietnamese) - Vietnamese dictionary extension for VS Code.
 
+### Support
+
+- [CSpell Bundled Dictionaries](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-cspell-bundled-dictionaries) - CSpell Bundled Dictionaries dictionary extension for VS Code.
+
 ### Syntax Highlighters
 
 - [hunspell](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.hunspell) - Hunspell Syntax Highlighting support

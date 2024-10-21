@@ -56,6 +56,10 @@ See Also:
 - [Ukrainian](extensions/ukrainian#readme) - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](extensions/vietnamese#readme) - Vietnamese dictionary extension for VS Code.
 
+### Support
+
+- [CSpell Bundled Dictionaries](extensions/cspell-bundled-dictionaries#readme) - CSpell Bundled Dictionaries dictionary extension for VS Code.
+
 ### Syntax Highlighters
 
 - [hunspell](extensions/hunspell-syntax#readme) - Hunspell Syntax Highlighting support
@@ -117,6 +121,10 @@ See Also:
 - [Turkish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-turkish) - Turkish dictionary extension for VS Code.
 - [Ukrainian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-ukrainian) - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-vietnamese) - Vietnamese dictionary extension for VS Code.
+
+### Support
+
+- [CSpell Bundled Dictionaries](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-cspell-bundled-dictionaries) - CSpell Bundled Dictionaries dictionary extension for VS Code.
 
 ### Syntax Highlighters
 

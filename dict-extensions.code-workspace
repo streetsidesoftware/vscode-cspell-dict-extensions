@@ -34,6 +34,9 @@
             "path": "extensions/croatian"
         },
         {
+            "path": "extensions/cspell-bundled-dictionaries"
+        },
+        {
             "path": "extensions/czech"
         },
         {

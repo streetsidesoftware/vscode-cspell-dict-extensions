@@ -112,6 +112,10 @@
             "component": "code-spell-checker-croatian",
             "releaseType": "node"
         },
+        "extensions/cspell-bundled-dictionaries": {
+            "component": "code-spell-checker-cspell-bundled-dictionaries",
+            "releaseType": "node"
+        },
         "extensions/czech": {
             "component": "code-spell-checker-czech",
             "releaseType": "node"
