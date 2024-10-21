@@ -1,5 +1,8 @@
 {
     "types": {
+        "Support": [
+            "extensions/cspell-bundled-dictionaries"
+        ],
         "Technical Terms": [
             "extensions/medical-terms",
             "extensions/scientific-terms",

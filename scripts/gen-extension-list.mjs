@@ -122,7 +122,7 @@ async function getExtensionInfo(extensionPath) {
 async function generateExtensionFolderListMarkdown(extensionInfos) {
     const extensionsByCategory = groupExtensionsByType(extensionInfos);
 
-    /** @type {import('mdast').Content[]} */
+    /** @type {import('mdast').RootContent[]} */
     const mdastContent = [];
 
     for (const [category, extensions] of extensionsByCategory) {
@@ -140,7 +140,7 @@ async function generateExtensionFolderListMarkdown(extensionInfos) {
 async function generateMarketplaceExtensionsListMarkdown(extensionInfos) {
     const extensionsByCategory = groupExtensionsByType(extensionInfos);
 
-    /** @type {import('mdast').Content[]} */
+    /** @type {import('mdast').RootContent[]} */
     const mdastContent = [];
 
     for (const [category, extensions] of extensionsByCategory) {
@@ -158,7 +158,7 @@ async function generateMarketplaceExtensionsListMarkdown(extensionInfos) {
 async function generateMarketplaceLanguageExtensionsListMarkdown(extensionInfos) {
     const extensionsByCategory = groupExtensionsByType(extensionInfos);
 
-    /** @type {import('mdast').Content[]} */
+    /** @type {import('mdast').RootContent[]} */
     const mdastContent = [];
 
     const headingTitle = {
@@ -178,7 +178,7 @@ async function generateMarketplaceLanguageExtensionsListMarkdown(extensionInfos)
 
 /**
  *
- * @param {import('mdast').Content[]} mdastContent
+ * @param {import('mdast').RootContent[]} mdastContent
  * @param {string} filename
  */
 async function writeContentToFile(mdastContent, filename) {

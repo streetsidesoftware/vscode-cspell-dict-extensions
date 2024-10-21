@@ -10,7 +10,6 @@
 - [Canadian English](extensions/canadian-english#readme) - Canadian English dictionary extension for VS Code.
 - [Catalan](extensions/catalan#readme) - Catalan dictionary extension for VS Code.
 - [Croatian](extensions/croatian#readme) - Croatian dictionary extension for VS Code.
-- [Cspell Bundled Dictionaries](extensions/cspell-bundled-dictionaries#readme) - Cspell Bundled Dictionaries dictionary extension for VS Code.
 - [Czech](extensions/czech#readme) - Czech dictionary extension for VS Code.
 - [Danish](extensions/danish#readme) - Danish dictionary extension for VS Code.
 - [Dutch](extensions/dutch#readme) - Dutch / Nederlands dictionary extension for VS Code.
@@ -44,6 +43,10 @@
 - [Turkish](extensions/turkish#readme) - Turkish dictionary extension for VS Code.
 - [Ukrainian](extensions/ukrainian#readme) - Ukrainian dictionary extension for VS Code.
 - [Vietnamese](extensions/vietnamese#readme) - Vietnamese dictionary extension for VS Code.
+
+### Support
+
+- [CSpell Bundled Dictionaries](extensions/cspell-bundled-dictionaries#readme) - CSpell Bundled Dictionaries dictionary extension for VS Code.
 
 ### Syntax Highlighters
 
