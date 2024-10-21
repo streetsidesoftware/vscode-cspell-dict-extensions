@@ -44,7 +44,7 @@
     "inject-markdown": "^3.1.0",
     "mocha": "^10.7.3",
     "npm-check-updates": "^17.1.4",
-    "ovsx": "^0.9.5",
+    "ovsx": "^0.10.0",
     "prettier": "^3.3.3",
     "rimraf": "^5.0.10",
     "scripts": "file:scripts",
