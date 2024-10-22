@@ -46,6 +46,8 @@ jobs:
           ref: ${{ inputs.ref }}
       - name: Use Node.js
         uses: actions/setup-node@v4
+        with:
+          node-version-file: .tool-versions
       - name: Install
         run: npm install
       - name: Prepare Try to Release
