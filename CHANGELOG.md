@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.7.8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.7.7...vscode-cspell-dict-extensions@5.7.8) (2024-10-22)
+
+
+### Updates and Bug Fixes
+
+* turn off preview mode ([#1017](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1017)) ([c406b88](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c406b884b95da797ce2a52f149c198991d89d125))
+
 ## [5.7.7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.7.6...vscode-cspell-dict-extensions@5.7.7) (2024-10-22)
 
 

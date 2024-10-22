@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-indonesian" extension will be documented in this file.
 
+## [1.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-indonesian@1.0.0...code-spell-checker-indonesian@1.0.1) (2024-10-22)
+
+
+### Updates and Bug Fixes
+
+* turn off preview mode ([#1017](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1017)) ([c406b88](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c406b884b95da797ce2a52f149c198991d89d125))
+
 ## 1.0.0 (2024-01-16)
 
 
