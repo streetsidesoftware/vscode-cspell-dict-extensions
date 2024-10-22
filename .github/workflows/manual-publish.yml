@@ -9,9 +9,9 @@ on:
     inputs:
       ref:
         description: >-
-          The branch, tag or SHA to checkout. When checking out the
-          repository that triggered a workflow, this defaults to the reference
-          or SHA for that event. Otherwise, uses the default branch.
+          The branch, tag or SHA to checkout. When checking out the repository
+          that triggered a workflow, this defaults to the reference or SHA for
+          that event. Otherwise, uses the default branch.
         required: true
         default: main
       extension:
@@ -19,8 +19,9 @@ on:
         type: choice
         # Options are generated from `npm run gen:workflow`
         options:
-          - "none"
-          - "all"
+          - none
+          - all
+          - extensions/ancient-greek
           - extensions/arabic
           - extensions/australian-english
           - extensions/austrian-german
@@ -30,18 +31,24 @@ on:
           - extensions/canadian-english
           - extensions/catalan
           - extensions/croatian
+          - extensions/cspell-bundled-dictionaries
           - extensions/czech
           - extensions/danish
           - extensions/dutch
           - extensions/esperanto
           - extensions/estonian
+          - extensions/finnish
           - extensions/french
           - extensions/french-reforme
           - extensions/german
           - extensions/greek
           - extensions/hebrew
+          - extensions/hungarian
           - extensions/hunspell-syntax
+          - extensions/indonesian
           - extensions/italian
+          - extensions/latin
+          - extensions/latvian
           - extensions/lithuanian
           - extensions/medical-terms
           - extensions/norwegian-bokmal
@@ -49,6 +56,7 @@ on:
           - extensions/polish
           - extensions/portuguese
           - extensions/portuguese-brazilian
+          - extensions/romanian
           - extensions/russian
           - extensions/scientific-terms
           - extensions/serbian
@@ -60,6 +68,7 @@ on:
           - extensions/turkish
           - extensions/ukrainian
           - extensions/vietnamese
+          - extensions/win32
         required: false
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
