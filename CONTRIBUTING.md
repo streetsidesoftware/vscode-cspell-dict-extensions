@@ -100,6 +100,10 @@ This will open new VSCode window. Inside it open previously edited `seattle.md`.
 
 Shortly after pull request is merged extension will appear in vscode extensions marketplace.
 
+## Adding words to a language dictionary
+
+This extension is based on [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). Many languages have a file `dictionaries/*/src/*additional-words.txt` (example: [`en_shared`](https://github.com/streetsidesoftware/cspell-dicts/blob/main/dictionaries/en_shared/src/shared-additional-words.txt)) in which changes can be proposed through a GitHub PR. The next release of `cspell` should then contain your changes, and will be automatically bumped in the next release of this VS Code extension.
+
 ## Contributors
 
 <a href="https://github.com/streetsidesoftware/cspell-dicts/graphs/contributors">
