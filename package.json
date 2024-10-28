@@ -43,7 +43,7 @@
     "cspell": "^8.15.4",
     "inject-markdown": "^3.1.0",
     "mocha": "^10.7.3",
-    "npm-check-updates": "^17.1.6",
+    "npm-check-updates": "^17.1.8",
     "ovsx": "^0.10.0",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
