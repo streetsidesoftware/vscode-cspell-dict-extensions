@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+// ts-check
 import * as fs from 'node:fs/promises';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
