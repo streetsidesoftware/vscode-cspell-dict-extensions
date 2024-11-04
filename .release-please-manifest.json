@@ -1,5 +1,5 @@
 {
-    ".": "5.7.9",
+    ".": "5.7.10",
     "extensions/arabic": "0.2.1",
     "extensions/basque": "1.0.4",
     "extensions/bulgarian": "0.1.11",
@@ -24,7 +24,7 @@
     "extensions/portuguese-brazilian": "2.2.1",
     "extensions/portuguese": "2.0.2",
     "extensions/russian": "2.2.2",
-    "extensions/scientific-terms": "0.2.2",
+    "extensions/scientific-terms": "0.2.3",
     "extensions/slovenian": "0.2.2",
     "extensions/spanish": "2.3.4",
     "extensions/swedish": "1.3.1",
@@ -32,7 +32,7 @@
     "extensions/ukrainian": "1.2.3",
     "extensions/vietnamese": "1.1.1",
     "extensions/serbian": "1.2.1",
-    "extensions/british-english": "1.4.11",
+    "extensions/british-english": "1.4.12",
     "extensions/slovak": "1.1.2",
     "extensions/australian-english": "1.1.8",
     "extensions/canadian-english": "1.1.8",
@@ -44,8 +44,8 @@
     "extensions/win32": "1.0.4",
     "extensions/indonesian": "1.0.1",
     "extensions/hungarian": "1.0.1",
-    "extensions/finnish": "1.0.1",
+    "extensions/finnish": "1.0.2",
     "extensions/ancient-greek": "1.0.2",
     "extensions/latin": "1.0.1",
-    "extensions/cspell-bundled-dictionaries": "1.0.3"
+    "extensions/cspell-bundled-dictionaries": "1.0.4"
 }

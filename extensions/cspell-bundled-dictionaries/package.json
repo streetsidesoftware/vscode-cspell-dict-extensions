@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-cspell-bundled-dictionaries",
   "description": "CSpell Bundled Dictionaries dictionary extension for VS Code.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "displayName": "CSpell Bundled Dictionaries - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "preview": false,

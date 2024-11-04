@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-finnish" extension will be documented in this file.
 
+## [1.0.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-finnish@1.0.1...code-spell-checker-finnish@1.0.2) (2024-11-04)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1033](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1033)) ([429c3cc](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/429c3ccd8f4640a2e8792a0d29beaec63e56736c))
+
 ## [1.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-finnish@1.0.0...code-spell-checker-finnish@1.0.1) (2024-10-22)
 
 
