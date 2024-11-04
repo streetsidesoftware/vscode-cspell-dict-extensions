@@ -19,11 +19,6 @@ Pugetin alangolla sijaitsevan Seattlen ympäristössä kohoavat Kaskadien ja Oly
 Washingtonin rannikko on laattatektonisesti subduktiovyöhykettä, jossa mereinen Juan de Fucan laatta vajoaa mantereisen Pohjois-Amerikan laatan alle. Pohjois-Amerikan laatan sisäinen Seattlen siirros kulkee itä-länsi-suunnassa kaupungin halki, ja alueella esiintyy voimakkaita maanjäristyksiä.[3][5]
 
 <!---
-cspell:ignore grunge Emerald Rain Elliott Rainier Juan
-cspell:ignore Washingtonin Frasier Greyn Pugetin Pugetinsalmen Pugetinsalmesta Boeingin Starbucksin Sammamishjärvi
-cspell:ignore Fucan Gatesin Hendrixin Jimi Jäätiköt Kaskadien Kaskadivuoret Kitsapin Olympicin Pugetinsalmi Washingtonjärven Washingtonjärvi ainavihantien
-cspell:ignore alangolla esikaupunkialueet itälaidalla itäpuolella jäätiköitymiset kannakselle kaupunkikeskuksista kitarasuuruuden kotikaupunkina
-cspell:ignore laattatektonisesti laivaliikenteen lentoliikenteen luoteisosien länsipuolella länsirannikolla maanjäristyksiä mantereisen
-cspell:ignore mereinen pohjoispuolelta poimuttumisen sadekaupunki sedimenttiä siirros siˈætəl smaragdikaupunki subduktiovyöhykettä suurkaupunkialueella
-cspell:ignore tapahtumapaikkana televisiosarjojen tulivuoritoiminnan uurtaneet vuonon väestönlaskennan ympäröivien
+cspell:ignore siˈætəl laattatektonisesti Fucan mantereisen Frasier Hendrixin Kitsapin Olympicin Pugetin Starbucksin suom
+cspell:ignore ainavihantien grunge kitarasuuruuden
 --->
