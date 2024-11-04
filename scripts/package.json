@@ -6,8 +6,11 @@
     "gen-extension-list": "./gen-extension-list.mjs",
     "update-manual-pub-list": "./update-manual-pub-list.mjs"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
-    "mdast": "^3.0.0",
+    "@types/mdast": "^4.0.4",
     "mdast-builder": "^1.1.1",
     "mdast-util-to-markdown": "^2.1.2"
   },
