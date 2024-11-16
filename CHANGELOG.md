@@ -1,5 +1,18 @@
 # Changelog
 
+## [5.8.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.7.11...vscode-cspell-dict-extensions@5.8.0) (2024-11-16)
+
+
+### Features
+
+* Add Macedonian ([#1049](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1049)) ([863be86](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/863be86944b5f4952bff0fbead04bd91df8f1a89))
+
+
+### Updates and Bug Fixes
+
+* Set code-spell-checker-cspell-bundled-dictionaries license to MIT ([#1052](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1052)) ([8648bf4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/8648bf4d42ed5454725990f818ee884a72211477))
+* Workflow Bot -- Update Dictionaries ([#1045](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1045)) ([b76dd27](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/b76dd27ed9dd3d39e838890b2b1394f54b13a3d1))
+
 ## [5.7.11](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.7.10...vscode-cspell-dict-extensions@5.7.11) (2024-11-10)
 
 

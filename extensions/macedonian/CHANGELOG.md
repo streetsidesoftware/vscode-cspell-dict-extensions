@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-macedonian" extension will be documented in this file.
 
+## 1.0.0 (2024-11-16)
+
+
+### Features
+
+* Add Macedonian ([#1049](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1049)) ([863be86](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/863be86944b5f4952bff0fbead04bd91df8f1a89))
+
 ## [Unreleased]
 
 - Initial release
