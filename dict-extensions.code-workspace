@@ -91,6 +91,9 @@
             "path": "extensions/lithuanian"
         },
         {
+            "path": "extensions/macedonian"
+        },
+        {
             "path": "extensions/medical-terms"
         },
         {
