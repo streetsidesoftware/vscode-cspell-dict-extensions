@@ -188,6 +188,10 @@
             "component": "code-spell-checker-lithuanian",
             "releaseType": "node"
         },
+        "extensions/macedonian": {
+            "component": "code-spell-checker-macedonian",
+            "releaseType": "node"
+        },
         "extensions/medical-terms": {
             "component": "code-spell-checker-medical-terms",
             "releaseType": "node"
