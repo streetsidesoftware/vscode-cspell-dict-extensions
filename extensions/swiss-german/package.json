@@ -4,7 +4,6 @@
   "version": "1.2.1",
   "displayName": "Swiss German - Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "preview": false,
   "private": true,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",

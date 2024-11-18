@@ -4,7 +4,6 @@
   "version": "2.0.2",
   "displayName": "Hebrew - Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "preview": false,
   "private": true,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",
