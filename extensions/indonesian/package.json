@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-indonesian",
   "description": "Indonesian dictionary extension for VS Code.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "Indonesian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

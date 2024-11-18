@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-danish",
   "description": "Danish dictionary extension for VS Code.",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "displayName": "Danish - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

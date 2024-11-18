@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-czech@1.0.6...code-spell-checker-czech@1.0.7) (2024-11-18)
+
+
+### Updates and Bug Fixes
+
+* Remove `preview` field from `package.json` ([#1053](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1053)) ([dabc8c9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/dabc8c9b4ebbcfe3f0bb61644437e043908a838e))
+
 ## [1.0.6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-czech@1.0.5...code-spell-checker-czech@1.0.6) (2023-12-30)
 
 
