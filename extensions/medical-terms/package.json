@@ -5,7 +5,6 @@
   "icon": "images/SpellCheck.png",
   "version": "3.0.2",
   "private": true,
-  "preview": false,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",
   "type": "commonjs",

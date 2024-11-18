@@ -5,7 +5,6 @@
   "displayName": "Portuguese - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
-  "preview": false,
   "publisher": "streetsidesoftware",
   "type": "commonjs",
   "engines": {
