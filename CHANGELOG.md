@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.8.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.8.0...vscode-cspell-dict-extensions@5.8.1) (2024-11-18)
+
+
+### Updates and Bug Fixes
+
+* Remove `preview` field from `package.json` ([#1053](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1053)) ([dabc8c9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/dabc8c9b4ebbcfe3f0bb61644437e043908a838e))
+* Workflow Bot -- Update Dictionaries ([#1055](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1055)) ([103dd89](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/103dd89849e8dfcd3ece8b22fbb22786a5293045))
+
 ## [5.8.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.7.11...vscode-cspell-dict-extensions@5.8.0) (2024-11-16)
 
 

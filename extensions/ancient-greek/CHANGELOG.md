@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-ancient-greek" extension will be documented in this file.
 
+## [1.0.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-ancient-greek@1.0.2...code-spell-checker-ancient-greek@1.0.3) (2024-11-18)
+
+
+### Updates and Bug Fixes
+
+* Remove `preview` field from `package.json` ([#1053](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1053)) ([dabc8c9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/dabc8c9b4ebbcfe3f0bb61644437e043908a838e))
+
 ## [1.0.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-ancient-greek@1.0.1...code-spell-checker-ancient-greek@1.0.2) (2024-10-22)
 
 
