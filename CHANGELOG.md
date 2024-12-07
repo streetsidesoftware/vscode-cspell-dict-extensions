@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.8.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.8.2...vscode-cspell-dict-extensions@5.8.3) (2024-12-07)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1067](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1067)) ([d4bbaa4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/d4bbaa4b63caa4147bba61a6318b4d365d8f0005))
+
 ## [5.8.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.8.1...vscode-cspell-dict-extensions@5.8.2) (2024-12-07)
 
 
