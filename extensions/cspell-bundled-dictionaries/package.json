@@ -63,6 +63,6 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-cspell-bundle": "^1.0.14"
+    "@cspell/dict-cspell-bundle": "^1.0.15"
   }
 }
