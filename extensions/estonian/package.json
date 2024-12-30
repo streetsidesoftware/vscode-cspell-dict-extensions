@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-estonian",
   "description": "Estonian dictionary extension for VS Code.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "displayName": "Estonian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

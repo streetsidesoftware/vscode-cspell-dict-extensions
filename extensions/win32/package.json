@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-win32",
   "description": "Win32 dictionary extension for VS Code.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "displayName": "Win32 - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-latvian" extension will be documented in this file.
 
+## [1.1.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-latvian@1.1.1...code-spell-checker-latvian@1.1.2) (2024-12-30)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1092](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1092)) ([8b8dfd9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/8b8dfd9df206855d19ff2ba69ab1cb3c9ed18378))
+
 ## [1.1.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-latvian@1.1.0...code-spell-checker-latvian@1.1.1) (2023-12-30)
 
 
