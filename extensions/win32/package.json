@@ -63,6 +63,6 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-win32": "^2.0.6"
+    "@cspell/dict-win32": "^2.0.7"
   }
 }
