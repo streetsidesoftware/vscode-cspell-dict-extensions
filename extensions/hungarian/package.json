@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-hungarian",
   "description": "Hungarian dictionary extension for VS Code.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "Hungarian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
