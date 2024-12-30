@@ -82,6 +82,6 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-tr-tr": "^3.0.3"
+    "@cspell/dict-tr-tr": "^3.0.4"
   }
 }
