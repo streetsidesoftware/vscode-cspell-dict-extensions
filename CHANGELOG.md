@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.9.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.9.0...vscode-cspell-dict-extensions@5.9.1) (2025-01-05)
+
+
+### Updates and Bug Fixes
+
+* Fix Timestamp Hover README.md ([#1108](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1108)) ([7dfc54e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/7dfc54e3211d550919c38fd0ee43561abadc11a7))
+* Remove microsecond conversion ([#1110](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1110)) ([91d10cc](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/91d10cc33dee7ea4e39eb4b9cafc1e27b56ee947))
+
 ## [5.9.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.8.3...vscode-cspell-dict-extensions@5.9.0) (2025-01-05)
 
 
