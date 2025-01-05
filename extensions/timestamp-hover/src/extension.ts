@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(hoverProvider);
 }
 
-const regexpIsNumber = /^\d+$/;
+const regexpIsNumber = /^\d+(?:\.\d*)?$/;
 
 interface FormatTimestampOptions {
     minDate: Date;
@@ -49,7 +49,7 @@ function formatTimestamp(text: string, options: FormatTimestampOptions): string 
         return undefined;
     }
     try {
-        return new Date(timestamp).toISOString();
+        return new Date(Math.round(timestamp)).toISOString();
     } catch {
         return undefined;
     }
