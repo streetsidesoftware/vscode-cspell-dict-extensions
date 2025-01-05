@@ -160,5 +160,7 @@
             "path": "test-runner"
         }
     ],
-    "settings": {}
+    "settings": {
+        "editor.formatOnSave": true
+    }
 }

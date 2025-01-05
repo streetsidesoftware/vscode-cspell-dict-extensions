@@ -4,14 +4,14 @@
   "description": "Useful scripts",
   "bin": {
     "gen-extension-list": "./gen-extension-list.mjs",
-    "update-manual-pub-list": "./update-manual-pub-list.mjs"
+    "update-manual-pub-list": "./update-manual-pub-list.mjs",
+    "fix-extensions": "./fix-extensions.mjs"
   },
   "engines": {
     "node": ">=20.0.0"
   },
   "dependencies": {
     "@types/mdast": "^4.0.4",
-    "mdast-builder": "^1.1.1",
     "mdast-util-to-markdown": "^2.1.2"
   },
   "devDependencies": {},
