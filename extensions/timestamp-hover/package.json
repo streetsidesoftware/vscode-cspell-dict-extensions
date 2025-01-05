@@ -49,7 +49,9 @@
     "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "echo ok."
+    "test:cspell": "cspell .",
+    "test:vscode": "echo OK",
+    "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
   }
