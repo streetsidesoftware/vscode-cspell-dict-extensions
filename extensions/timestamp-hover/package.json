@@ -2,7 +2,7 @@
   "name": "timestamp-hover",
   "displayName": "Timestamp Hover",
   "description": "Display the date and time of a timestamp.",
-  "icon": "images/icon.jpg",
+  "icon": "images/icon.png",
   "version": "0.1.0",
   "private": true,
   "publisher": "streetsidesoftware",
@@ -33,6 +33,9 @@
     }
   },
   "contributes": {},
+  "vsce": {
+    "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/timestamp-hover/"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
