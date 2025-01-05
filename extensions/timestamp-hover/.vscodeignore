@@ -1,8 +1,9 @@
 **/*
 !LICENSE
 !README.md
-!images/Screenshot1.png
-!images/icon.jpg
+# The screen shot is not saved because it is read from the repository.
+images/Screenshot1.png
+!images/icon.png
 !package.json
 !CHANGELOG.md
 !out/**/*.js
