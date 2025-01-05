@@ -24,7 +24,7 @@ export async function getExtensionList() {
     return extensionFolders
         .filter((f) => f.isDirectory())
         .map((f) => new URL(f.name + '/', extensionsUrl))
-        .map((u) => pathPosix.relative(rootUrl.pathname, u.pathname));
+        .map((u) => urlRelativeToRoot(u));
 }
 
 /**
@@ -33,7 +33,8 @@ export async function getExtensionList() {
  * @returns {string}
  */
 export function urlRelativeToRoot(url) {
-    return pathPosix.relative(rootUrl.pathname, url.pathname);
+    const addSlash = url.pathname.endsWith('/') ? '/' : '';
+    return pathPosix.relative(rootUrl.pathname, url.pathname) + addSlash;
 }
 
 /**
@@ -156,7 +157,7 @@ export function fixExtensionPackageJson(extensionDir, pkg) {
     pkg.private = true;
     pkg.preview = undefined;
     pkg.repository = pkg.repository || { ...defaultRepository };
-    pkg.repository.directory = extensionDir;
+    pkg.repository.directory = extensionDir.replace(/\/$/, '');
     pkg.vsce = pkg.vsce || {};
     pkg.vsce.baseContentUrl = new URL(extensionDir, repositoryRawUrl).href;
     pkg.vsce.baseImagesUrl = new URL(extensionDir, repositoryRawUrl).href;
