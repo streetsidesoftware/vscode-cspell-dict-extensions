@@ -10,6 +10,9 @@
         ],
         "Syntax Highlighters": [
             "extensions/hunspell-syntax"
+        ],
+        "Other": [
+            "extensions/timestamp-hover"
         ]
     },
     "default": "Languages"

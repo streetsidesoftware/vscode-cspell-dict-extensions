@@ -1,0 +1,58 @@
+{
+  "name": "timestamp-hover",
+  "displayName": "Timestamp Hover",
+  "description": "Display the date and time of a timestamp.",
+  "icon": "images/icon.jpg",
+  "version": "0.1.0",
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "license": "GPL-3.0-or-later",
+  "type": "commonjs",
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/streetsidesoftware"
+  },
+  "extensionKind": [
+    "ui", "workspace"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/extension.js",
+  "browser": "./out/extension.js",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "scripts": {
+    "clean": "rimraf out *.vsix",
+    "clean-build": "npm run clean && npm run build",
+    "prepublishOnly": "echo prepublishOnly",
+    "publish-extension": "vsce publish",
+    "pack-extension": "vsce package",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test:cspell": "cspell -c cspell-ext.json samples",
+    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/README.md",
+    "test": "npm run test:cspell && npm run test:vscode"
+  },
+  "dependencies": {
+  }
+}
