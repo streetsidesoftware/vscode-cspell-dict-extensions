@@ -61,7 +61,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/hunspell-syntax"
   },
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
@@ -77,5 +78,10 @@
     "test:cspell": "cspell -c cspell.json samples",
     "test:vscode": "echo OK - no code here.",
     "test": "npm run test:cspell && npm run test:vscode"
+  },
+  "private": true,
+  "vsce": {
+    "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/hunspell-syntax/",
+    "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/hunspell-syntax/"
   }
 }

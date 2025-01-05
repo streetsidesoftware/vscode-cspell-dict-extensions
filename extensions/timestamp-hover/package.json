@@ -35,7 +35,8 @@
   },
   "contributes": {},
   "vsce": {
-    "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/timestamp-hover/"
+    "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/timestamp-hover/",
+    "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/timestamp-hover/"
   },
   "repository": {
     "type": "git",
