@@ -139,6 +139,9 @@
             "path": "extensions/swiss-german"
         },
         {
+            "path": "extensions/timestamp-hover"
+        },
+        {
             "path": "extensions/turkish"
         },
         {

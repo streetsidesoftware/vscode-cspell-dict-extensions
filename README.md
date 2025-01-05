@@ -71,6 +71,10 @@ See Also:
 - [Scientific Terms](extensions/scientific-terms#readme) - Scientific Terms dictionary extension for VS Code.
 - [Win32](extensions/win32#readme) - Win32 dictionary extension for VS Code.
 
+### Other
+
+- [Timestamp Hover](extensions/timestamp-hover#readme) - Display the date and time of a timestamp.
+
 <!--- @@inject-end: static/generated/extension_list.md --->
 
 ## VS Code Marketplace
@@ -137,6 +141,10 @@ See Also:
 - [Medical Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-medical-terms) - Medical Terms Add-On for Code Spell Checker
 - [Scientific Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-scientific-terms) - Scientific Terms dictionary extension for VS Code.
 - [Win32](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-win32) - Win32 dictionary extension for VS Code.
+
+### Other
+
+- [Timestamp Hover](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.timestamp-hover) - Display the date and time of a timestamp.
 
 <!--- @@inject-end: static/generated/marketplace_extensions.md --->
 
