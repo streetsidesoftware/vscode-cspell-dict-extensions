@@ -1,11 +1,18 @@
 #!/usr/bin/env node
 
-// ts-check
+// @ts-check
 import * as fs from 'node:fs/promises';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
 import { toMarkdown } from 'mdast-util-to-markdown';
-import { root, paragraph, text, heading, list, listItem, link } from 'mdast-builder';
+
+import { root, paragraph, text, heading, list, listItem, link } from './lib/mdastBuilder.mjs';
+
+import { getExtensionInfo } from './lib/extensionHelper.mjs';
+
+/**
+ * @typedef {import('./lib/extensionHelper.mjs').ExtensionInfo} ExtensionInfo
+ */
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,6 +22,9 @@ const targetExtensionFolderListMarkdown = path.join(__root, 'static/generated/ex
 const targetMarketplaceLanguageExtensions = path.join(__root, 'static/generated/marketplace_language_extensions.md');
 const targetMarketplaceExtensions = path.join(__root, 'static/generated/marketplace_extensions.md');
 
+/**
+ * @type {import('mdast-util-to-markdown').Options}
+ */
 const markdownOptions = {
     bullet: '-',
 };
@@ -43,7 +53,7 @@ function pathToLink(url, name) {
 function makeExtensionListItem(extensionInfo) {
     return listItem(
         paragraph([
-            link(extensionInfo.extensionPath + '#readme', undefined, text(extensionInfo.displayNameShort)),
+            link(extensionInfo.extensionPath + '#readme', text(extensionInfo.displayNameShort)),
             text(` - ${extensionInfo.description}`),
         ]),
     );
@@ -59,7 +69,6 @@ function makeMarketplaceExtensionListItem(extensionInfo) {
         paragraph([
             link(
                 'https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.' + extensionInfo.name,
-                undefined,
                 text(extensionInfo.displayNameShort),
             ),
             text(' - ' + extensionInfo.description),
@@ -67,54 +76,6 @@ function makeMarketplaceExtensionListItem(extensionInfo) {
     );
 }
 
-/**
- *
- * @typedef {Object} ExtensionInfo
- * @property {string} name
- * @property {string} displayName
- * @property {string} displayNameShort
- * @property {string} version
- * @property {string} description
- * @property {string} extensionPath
- * @property {string} dictionaryType
- */
-
-/** @type {import('../static/dictionary-types.json')} */
-const dictionaryTypes = JSON.parse(await fs.readFile(path.join(__root, 'static/dictionary-types.json')));
-
-/**
- *
- * @param {string} extensionPath
- * @returns {string}
- */
-function lookUpDictionaryType(extensionPath) {
-    for (const [category, extensions] of Object.entries(dictionaryTypes.types)) {
-        if (extensions.includes(extensionPath)) return category;
-    }
-
-    return dictionaryTypes.default;
-}
-
-/**
- *
- * @param {string} extensionPath
- * @returns {Promise<ExtensionInfo>}
- */
-async function getExtensionInfo(extensionPath) {
-    const pkg = JSON.parse(await fs.readFile(path.join(__root, extensionPath, 'package.json'), 'utf8'));
-
-    /** @type {ExtensionInfo} */
-    const info = {
-        name: pkg.name,
-        description: pkg.description,
-        displayName: pkg.displayName,
-        displayNameShort: pkg.displayName.replace(/ -.*/, '').trim(),
-        version: pkg.version,
-        extensionPath,
-        dictionaryType: lookUpDictionaryType(extensionPath),
-    };
-    return info;
-}
 
 /**
  *

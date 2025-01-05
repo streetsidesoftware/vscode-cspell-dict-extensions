@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+// @ts-check
 import * as fs from 'node:fs/promises';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
@@ -19,19 +20,15 @@ async function main() {
     /** @type {string[]} */
     const allFolders = workspace.folders.map((f) => f.path);
 
-    const extensions = allFolders.filter((f) => f.startsWith('extension') || f === '.');
+    const extensions = allFolders.filter((f) => f.startsWith('extension'));
     const setOfExt = new Set(extensions);
 
     const workflowContent = await fs.readFile(workflow, 'utf8');
 
     const doc = yaml.parseDocument(workflowContent);
 
-    /** @type {import('yaml').YAMLSeq<>} */
     const options = doc.getIn('on.workflow_dispatch.inputs.extension.options'.split('.'));
-
-    options.items = options.items
-        .filter((item) => setOfExt.has(item.value))
-        .map((item) => (item.value === '.' ? item : (item.type = undefined || item)));
+    assertYAMLSeq(options);
 
     const current = new Set(options.items.map((item) => item.value));
 
@@ -41,13 +38,31 @@ async function main() {
         }
     });
 
-    options.items.sort((a, b) => intl.compare(a.value, b.value));
+    options.items.sort((a, b) => compareExtensions(a.value, b.value));
 
     // console.log('%o', options);
 
     options.flow = false;
 
-    await fs.writeFile(workflow, doc.toString(), 'utf8');
+    await fs.writeFile(workflow, doc.toString({ lineWidth: 120 }), 'utf8');
+}
+
+/**
+ * @param {unknown} value
+ * @returns {asserts value is import('yaml').YAMLSeq<import('yaml').Scalar>}
+ */
+function assertYAMLSeq(value) {
+    if (!(value instanceof yaml.YAMLSeq)) {
+        throw new Error('Expected a YAMLSeq');
+    }
+}
+
+function compareExtensions(a, b) {
+    if (a === 'none') return -1;
+    if (b === 'none') return 1;
+    if (a === 'all') return -1;
+    if (b === 'all') return 1;
+    return intl.compare(a, b);
 }
 
 await main();
