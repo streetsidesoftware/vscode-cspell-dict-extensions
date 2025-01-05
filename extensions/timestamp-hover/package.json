@@ -3,7 +3,7 @@
   "displayName": "Timestamp Hover",
   "description": "Display the date and time of a timestamp.",
   "icon": "images/icon.png",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",
@@ -15,7 +15,8 @@
     "url": "https://github.com/sponsors/streetsidesoftware"
   },
   "extensionKind": [
-    "ui", "workspace"
+    "ui",
+    "workspace"
   ],
   "categories": [
     "Other"
@@ -57,6 +58,5 @@
     "test:vscode": "echo OK",
     "test": "npm run test:cspell && npm run test:vscode"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-cspell-bundled-dictionaries" extension will be documented in this file.
 
+## [1.0.10](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-cspell-bundled-dictionaries@1.0.9...code-spell-checker-cspell-bundled-dictionaries@1.0.10) (2025-01-05)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1097](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1097)) ([dd7b205](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/dd7b2057b9b90f1b1566c6a347b25c9f67e31734))
+
 ## [1.0.9](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-cspell-bundled-dictionaries@1.0.8...code-spell-checker-cspell-bundled-dictionaries@1.0.9) (2024-12-30)
 
 
