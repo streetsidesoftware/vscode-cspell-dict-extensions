@@ -63,7 +63,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/latvian"
   },
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
@@ -82,5 +83,9 @@
   },
   "dependencies": {
     "@cspell/dict-lv": "^1.1.4"
+  },
+  "vsce": {
+    "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/latvian/",
+    "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/latvian/"
   }
 }

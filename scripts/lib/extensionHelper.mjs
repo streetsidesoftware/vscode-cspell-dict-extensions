@@ -88,7 +88,7 @@ function lookUpDictionaryType(extensionPath) {
 
 /**
  * @template T
- * @typedef {import('./index').Writable<T>} Writable
+ * @typedef {{ -readonly [P in keyof T]: T[P] }} Writable
  */
 
 /**
@@ -111,9 +111,11 @@ function lookUpDictionaryType(extensionPath) {
  * @property {string} main
  * @property {string} [browser]
  * @property {Repository} [repository]
+ * @property {string} [publisher]
  * @property {VSCEPackageOptions} [vsce]
  * @property {boolean} private
  * @property {boolean | undefined} [preview]
+ * @property {{ url: string }} [bugs]
  */
 
 /**
@@ -158,8 +160,12 @@ export function fixExtensionPackageJson(extensionDir, pkg) {
     pkg.preview = undefined;
     pkg.repository = pkg.repository || { ...defaultRepository };
     pkg.repository.directory = extensionDir.replace(/\/$/, '');
+    pkg.publisher = 'streetsidesoftware';
     pkg.vsce = pkg.vsce || {};
     pkg.vsce.baseContentUrl = new URL(extensionDir, repositoryRawUrl).href;
     pkg.vsce.baseImagesUrl = new URL(extensionDir, repositoryRawUrl).href;
+    pkg.bugs = {
+        url: 'https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues',
+    };
     return pkg;
 }

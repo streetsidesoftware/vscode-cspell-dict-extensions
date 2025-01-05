@@ -64,7 +64,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/finnish"
   },
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
@@ -83,5 +84,9 @@
   },
   "dependencies": {
     "@cspell/dict-fi-fi": "^1.1.1"
+  },
+  "vsce": {
+    "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/finnish/",
+    "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/finnish/"
   }
 }

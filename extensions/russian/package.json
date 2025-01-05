@@ -56,7 +56,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/russian"
   },
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
@@ -76,5 +77,9 @@
   },
   "dependencies": {
     "@cspell/dict-ru_ru": "^2.2.4"
+  },
+  "vsce": {
+    "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/russian/",
+    "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/russian/"
   }
 }

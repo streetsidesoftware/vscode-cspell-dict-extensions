@@ -66,7 +66,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions"
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/canadian-english"
   },
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
@@ -85,5 +86,9 @@
   },
   "dependencies": {
     "@cspell/dict-en-ca": "^1.0.20"
+  },
+  "vsce": {
+    "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/canadian-english/",
+    "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/canadian-english/"
   }
 }
