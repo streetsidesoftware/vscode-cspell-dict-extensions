@@ -252,6 +252,10 @@
             "component": "code-spell-checker-swiss-german",
             "releaseType": "node"
         },
+        "extensions/timestamp-hover": {
+            "component": "timestamp-hover",
+            "releaseType": "node"
+        },
         "extensions/turkish": {
             "component": "code-spell-checker-turkish",
             "releaseType": "node"
