@@ -7,19 +7,22 @@ import * as vscode from 'vscode';
 export function activate(context: vscode.ExtensionContext) {
     const options: FormatTimestampOptions = {
         minDate: new Date('1980-01-01'),
-    }
+    };
 
-    const hoverProvider = vscode.languages.registerHoverProvider({ scheme: '*', language: '*' }, {
-        provideHover(document, position) {
-            const range = document.getWordRangeAtPosition(position);
-            if (!range) {
-                return undefined;
-            }
-            const word = document.getText(range);
-            const hoverMessage = formatTimestamp(word, options);
-            return hoverMessage ? new vscode.Hover(`_${hoverMessage}_`) : undefined;
-        }
-    });
+    const hoverProvider = vscode.languages.registerHoverProvider(
+        { scheme: '*', language: '*' },
+        {
+            provideHover(document, position) {
+                const range = document.getWordRangeAtPosition(position);
+                if (!range) {
+                    return undefined;
+                }
+                const word = document.getText(range);
+                const hoverMessage = formatTimestamp(word, options);
+                return hoverMessage ? new vscode.Hover(`_${hoverMessage}_`) : undefined;
+            },
+        },
+    );
     context.subscriptions.push(hoverProvider);
 }
 
@@ -39,15 +42,18 @@ function formatTimestamp(text: string, options: FormatTimestampOptions): string 
         timestamp *= 1000;
     }
     if (timestamp > 1e14) {
-        // microseconds to milliseconds
-        timestamp /= 1000;
+        // too large
+        return undefined;
     }
     if (timestamp < options.minDate.getTime()) {
         return undefined;
     }
-    return new Date(timestamp).toISOString();
+    try {
+        return new Date(timestamp).toISOString();
+    } catch {
+        return undefined;
+    }
 }
-
 
 // this method is called when your extension is deactivated
 export function deactivate() {}
