@@ -3,7 +3,7 @@
   "displayName": "Timestamp Hover",
   "description": "Display the date and time of a timestamp.",
   "icon": "images/icon.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",
