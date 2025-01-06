@@ -16,7 +16,7 @@
     "@vscode/test-electron": "^2.4.1",
     "chai": "^5.1.2",
     "chalk": "^5.4.1",
-    "commander": "^12.1.0",
+    "commander": "^13.0.0",
     "find-up": "^7.0.0",
     "glob": "^11.0.0",
     "kefir": "^3.8.8",
