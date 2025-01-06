@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.9.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.9.1...vscode-cspell-dict-extensions@5.9.2) (2025-01-06)
+
+
+### Updates and Bug Fixes
+
+* round the timestamp to the nearest ms. ([#1111](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1111)) ([3c0e040](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3c0e040ed87f2ccafdfa87bed966b06fd2fe498d))
+
 ## [5.9.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.9.0...vscode-cspell-dict-extensions@5.9.1) (2025-01-05)
 
 
