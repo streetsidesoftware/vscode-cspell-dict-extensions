@@ -1,5 +1,5 @@
 {
-    ".": "5.9.1",
+    ".": "5.9.2",
     "extensions/arabic": "0.2.3",
     "extensions/basque": "1.0.6",
     "extensions/bulgarian": "0.1.13",
@@ -49,5 +49,5 @@
     "extensions/latin": "1.0.3",
     "extensions/cspell-bundled-dictionaries": "1.0.10",
     "extensions/macedonian": "1.0.2",
-    "extensions/timestamp-hover": "1.0.1"
+    "extensions/timestamp-hover": "1.0.2"
 }
