@@ -2,6 +2,9 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
+const regexpIsNumber = /^\d+(?:\.\d*)?$/;
+const regexpWord = /[_0-9.]+/;
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -13,11 +16,11 @@ export function activate(context: vscode.ExtensionContext) {
         { scheme: '*', language: '*' },
         {
             provideHover(document, position) {
-                const range = document.getWordRangeAtPosition(position);
+                const range = document.getWordRangeAtPosition(position, regexpWord);
                 if (!range) {
                     return undefined;
                 }
-                const word = document.getText(range);
+                const word = document.getText(range).replaceAll('_', '');
                 const hoverMessage = formatTimestamp(word, options);
                 return hoverMessage ? new vscode.Hover(`_${hoverMessage}_`) : undefined;
             },
@@ -26,7 +29,6 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(hoverProvider);
 }
 
-const regexpIsNumber = /^\d+(?:\.\d*)?$/;
 
 interface FormatTimestampOptions {
     minDate: Date;
