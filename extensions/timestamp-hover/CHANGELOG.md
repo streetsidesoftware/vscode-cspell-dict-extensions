@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/timestamp-hover@1.0.2...timestamp-hover@1.0.3) (2025-01-19)
+
+
+### Updates and Bug Fixes
+
+* Support more number formats ([#1121](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1121)) ([919c6b8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/919c6b8d8b95dda414d40213eb0de7ed63c74d90))
+
 ## [1.0.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/timestamp-hover@1.0.1...timestamp-hover@1.0.2) (2025-01-06)
 
 
