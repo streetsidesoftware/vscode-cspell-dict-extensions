@@ -30,6 +30,7 @@ See Also:
 - [Finnish](extensions/finnish#readme) - Finnish dictionary extension for VS Code.
 - [French](extensions/french#readme) - French dictionary extension for VS Code.
 - [French Réforme 90](extensions/french-reforme#readme) - French Réforme 90 dictionary extension for VS Code.
+- [Galician](extensions/galician#readme) - Galician dictionary extension for VS Code.
 - [German](extensions/german#readme) - German dictionary extension for VS Code.
 - [Greek](extensions/greek#readme) - Greek dictionary extension for VS Code.
 - [Hebrew](extensions/hebrew#readme) - Hebrew dictionary extension for VS Code.
@@ -101,6 +102,7 @@ See Also:
 - [Finnish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-finnish) - Finnish dictionary extension for VS Code.
 - [French](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-french) - French dictionary extension for VS Code.
 - [French Réforme 90](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-french-reforme) - French Réforme 90 dictionary extension for VS Code.
+- [Galician](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-galician) - Galician dictionary extension for VS Code.
 - [German](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-german) - German dictionary extension for VS Code.
 - [Greek](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-greek) - Greek dictionary extension for VS Code.
 - [Hebrew](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-hebrew) - Hebrew dictionary extension for VS Code.
@@ -165,6 +167,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - _Czech_ - [Zereges](https://github.com/Zereges)
 - _Estonian_ - [Igor Krupenja](https://github.com/igor-krupenja)
 - _Finnish_ - [Kimi Heinonen](https://github.com/NutCr4cker12)
+- _Galician_ - [Borja Paz Rodríguez](https://github.com/borjapazr)
 - _Polish_ - [Jackens](https://github.com/jackens)
 - _Danish_ - [viktorstrate](https://github.com/viktorstrate)
 - _Slovenian_ - [KrOstir](https://github.com/KrOstir)
@@ -198,4 +201,5 @@ cspell:words Bokmål bokmal
 cspell:words Watheq Taha Zerrouki Ahmed ElTabarani
 cspell:words Nederlands
 cspell:words Kimi Heinonen
+cspell:words Borja Paz Rodríguez
 --->
