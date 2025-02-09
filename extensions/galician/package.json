@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-galician",
   "description": "Galician dictionary extension for VS Code.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "displayName": "Galician - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
