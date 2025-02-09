@@ -1,5 +1,18 @@
 # Changelog
 
+## [5.10.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.9.3...vscode-cspell-dict-extensions@5.10.0) (2025-02-09)
+
+
+### Features
+
+* **gl:** add galician extension ([#1133](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1133)) ([a49a11c](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a49a11c87c20ea09496dcffddcb1ab65057b8480))
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1131](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1131)) ([67de456](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/67de4566a8dd0608f3219d57da8d264c869adc0d))
+* Workflow Bot -- Update Dictionaries ([#1135](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1135)) ([5b7fa22](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/5b7fa2231193a8d085f498dab94179a8933c2e6a))
+
 ## [5.9.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@5.9.2...vscode-cspell-dict-extensions@5.9.3) (2025-01-19)
 
 
