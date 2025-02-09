@@ -148,6 +148,10 @@
             "component": "code-spell-checker-french",
             "releaseType": "node"
         },
+        "extensions/galician": {
+            "component": "code-spell-checker-galician",
+            "releaseType": "node"
+        },
         "extensions/german": {
             "component": "code-spell-checker-german",
             "releaseType": "node"
