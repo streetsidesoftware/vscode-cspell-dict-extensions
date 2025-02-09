@@ -46,7 +46,7 @@
     "mocha": "^11.1.0",
     "npm-check-updates": "^17.1.14",
     "ovsx": "^0.10.1",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.0",
     "rimraf": "^6.0.1",
     "scripts": "file:scripts",
     "test-extensions": "file:test-runner",
