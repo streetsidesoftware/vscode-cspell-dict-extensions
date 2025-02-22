@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "@vscode/test-electron": "^2.4.1",
-    "chai": "^5.1.2",
+    "chai": "^5.2.0",
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
     "find-up": "^7.0.0",
