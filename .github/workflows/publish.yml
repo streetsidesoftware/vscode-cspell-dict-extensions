@@ -78,7 +78,7 @@ jobs:
         run: echo "::error title=OVSX::Failed to Publish $EXTENSION_NAME to Eclipse Open VSX."
 
       - name: Report Results
-        uses: ./.github/actions/summary
+        uses: streetsidesoftware/actions/public/summary@v1
         with:
           text: |
             ## `${{ env.EXTENSION_NAME }}`
