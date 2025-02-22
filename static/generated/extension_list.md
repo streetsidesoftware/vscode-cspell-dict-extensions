@@ -29,6 +29,7 @@
 - [Latvian](extensions/latvian#readme) - Latvian dictionary extension for VS Code.
 - [Lithuanian](extensions/lithuanian#readme) - Lithuanian dictionary extension for VS Code.
 - [Macedonian](extensions/macedonian#readme) - Macedonian dictionary extension for VS Code.
+- [Mongolian](extensions/mongolian#readme) - Mongolian dictionary extension for VS Code.
 - [Norwegian Bokmål](extensions/norwegian-bokmal#readme) - Norwegian Bokmål dictionary extension for VS Code.
 - [Persian](extensions/persian#readme) - Persian dictionary extension for VS Code.
 - [Polish](extensions/polish#readme) - Polish dictionary extension for VS Code.

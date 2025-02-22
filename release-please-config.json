@@ -200,6 +200,10 @@
             "component": "code-spell-checker-medical-terms",
             "releaseType": "node"
         },
+        "extensions/mongolian": {
+            "component": "code-spell-checker-mongolian",
+            "releaseType": "node"
+        },
         "extensions/norwegian-bokmal": {
             "component": "code-spell-checker-norwegian-bokmal",
             "releaseType": "node"
