@@ -11,6 +11,11 @@
   "engines": {
     "vscode": "^1.67.0"
   },
+  "author": {
+    "name": "Battseren Badral",
+    "email": "bbattseren88@gmail.com",
+    "url": "https://github.com/btseee"
+  },
   "sponsor": {
     "url": "https://github.com/sponsors/streetsidesoftware"
   },
