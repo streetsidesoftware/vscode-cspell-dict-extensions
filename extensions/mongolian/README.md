@@ -1,33 +1,34 @@
 # Mongolian - Code Spell Checker
+
 ### Монгол хэлний үг үсгийн алдаа шалгагч
 
 [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)-ийн Монгол хэлний үг үсгийн алдаа шалгах толь бичгийг импорт хийнэ.
 
 VS Code-д зориулсан Монгол хэлний толь бичгийн өргөтгөл.
 
---------------
+---
 
 Mongolian dictionary extension for VS Code.
 
 Imports the Mongolian spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
-
 ## Суулгах | Installation
 
 Энэ өргөтгөлийг суулгасан-ны дараа үг үсгийн алдаа шалгагчид үүнийг ашиглах-ыг зааж өгөх шаардлага-тай.
 
----------------
+---
 
 After this extension is installed, it is necessary to tell the spell checker to use it.
 
 ## Толь бичгийг идэвхжүүлэх | Enable Dictionary
 
 Командууд (`F1` эсвэл View -> Command Palette...):
+
 - `F1` `Show Spell Checker Configuration Info` | Үг үсгийн алдаа шалгагчийн тохиргооны мэдээллийг харуулах
 - Language таб-ыг сонгоно. | `Language` (Хэл) таб-ыг сонгоно.
 - Хэлийг бүхэлд нь эсвэл зөвхөн тухайн Workspace-д идэвхжүүлнэ. | Хэлийг бүх - систем дээр эсвэл зөвхөн тухайн ажлын орчинд идэвхжүүлнэ.
 
----------------
+---
 
 Commands (use `F1` or _View -> Command Palette..._):
 
@@ -43,11 +44,12 @@ Preferences (Тохиргоо) -> Settings (Тохируулга)
 
 `cSpell.language` тохиргоонд mn-mn нэмж оруулсан-аар Монгол хэлний толь бичгийг идэвхжүүлнэ.
 Англи болон Монгол хэлний толь бичгийг хамтад нь ашиглах жишээ:
+
 ```javascript
 "cSpell.language": "en,mn-mn",
 ```
 
----------------
+---
 
 This is done with the `language` setting.
 
@@ -64,7 +66,7 @@ Example using both English and Mongolian dictionaries:
 
 Энэ өргөтгөл нь [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) өргөтгөлийг автоматаар суулгах болно.
 
----------------
+---
 
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
 
