@@ -1,7 +1,7 @@
 # Mongolian - Code Spell Checker
 ### Монгол хэлний үг үсгийн алдаа шалгагч
 
-[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)-ийн Монгол хэлний үг үсгийн алдаа шалгах толь бичгийг импортлоно.
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)-ийн Монгол хэлний үг үсгийн алдаа шалгах толь бичгийг импорт хийнэ.
 
 VS Code-д зориулсан Монгол хэлний толь бичгийн өргөтгөл.
 
@@ -14,7 +14,7 @@ Imports the Mongolian spell checking dictionary for [Code Spell Checker](https:/
 
 ## Суулгах | Installation
 
-Энэ өргөтгөлийг суулгасны дараа үг үсгийн алдаа шалгагчид үүнийг ашиглахыг зааж өгөх шаардлагатай.
+Энэ өргөтгөлийг суулгасан-ны дараа үг үсгийн алдаа шалгагчид үүнийг ашиглах-ыг зааж өгөх шаардлага-тай.
 
 ---------------
 
