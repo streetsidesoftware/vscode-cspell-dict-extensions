@@ -69,5 +69,7 @@
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/win32/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/win32/"
-  }
+  },
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": []
 }

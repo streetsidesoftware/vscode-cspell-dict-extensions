@@ -6,6 +6,8 @@
   "icon": "images/SpellCheck.png",
   "private": true,
   "publisher": "streetsidesoftware",
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": [],
   "license": "GPL-3.0-or-later",
   "type": "commonjs",
   "engines": {
