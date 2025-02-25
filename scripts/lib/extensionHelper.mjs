@@ -1,6 +1,7 @@
 // @ts-check
 import fs from 'node:fs/promises';
 import pathPosix from 'node:path/posix';
+import { sortPackageJson } from 'sort-package-json';
 
 const rootUrl = new URL('../../', import.meta.url);
 const extensionsUrl = new URL('extensions/', rootUrl);
@@ -171,5 +172,6 @@ export function fixExtensionPackageJson(extensionDir, pkg) {
     pkg.bugs = {
         url: 'https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues',
     };
-    return pkg;
+
+    return sortPackageJson(pkg);
 }
