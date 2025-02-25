@@ -88,5 +88,7 @@
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/latin/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/latin/"
-  }
+  },
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": []
 }
