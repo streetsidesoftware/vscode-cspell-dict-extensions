@@ -37,20 +37,20 @@
     "@lerna-lite/run": "^3.12.1",
     "@tsconfig/node20": "^20.1.4",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^20.17.19",
+    "@types/node": "^20.17.21",
     "@types/vscode": "^1.97.0",
     "@vscode/test-electron": "^2.4.1",
     "@vscode/vsce": "^3.2.2",
     "cspell": "^8.17.5",
     "inject-markdown": "^3.1.4",
     "mocha": "^11.1.0",
-    "npm-check-updates": "^17.1.14",
+    "npm-check-updates": "^17.1.15",
     "ovsx": "^0.10.1",
     "prettier": "^3.5.2",
     "rimraf": "^6.0.1",
     "scripts": "file:scripts",
     "test-extensions": "file:test-runner",
-    "typescript": "^5.7.3",
+    "typescript": "^5.8.2",
     "yaml": "^2.7.0"
   }
 }
