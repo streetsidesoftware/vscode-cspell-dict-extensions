@@ -59,5 +59,7 @@
     "test:vscode": "echo OK",
     "test": "npm run test:cspell && npm run test:vscode"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": []
 }

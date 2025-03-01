@@ -1,6 +1,7 @@
 // @ts-check
 import fs from 'node:fs/promises';
 import pathPosix from 'node:path/posix';
+import { sortPackageJson } from 'sort-package-json';
 
 const rootUrl = new URL('../../', import.meta.url);
 const extensionsUrl = new URL('extensions/', rootUrl);
@@ -112,6 +113,8 @@ function lookUpDictionaryType(extensionPath) {
  * @property {string} [browser]
  * @property {Repository} [repository]
  * @property {string} [publisher]
+ * @property {string} [author]
+ * @property {string[]} [contributors]
  * @property {VSCEPackageOptions} [vsce]
  * @property {boolean} private
  * @property {boolean | undefined} [preview]
@@ -161,11 +164,14 @@ export function fixExtensionPackageJson(extensionDir, pkg) {
     pkg.repository = pkg.repository || { ...defaultRepository };
     pkg.repository.directory = extensionDir.replace(/\/$/, '');
     pkg.publisher = 'streetsidesoftware';
+    pkg.author = 'Street Side Software <support@streetsidesoftware.nl>';
+    pkg.contributors = pkg.contributors || [];
     pkg.vsce = pkg.vsce || {};
     pkg.vsce.baseContentUrl = new URL(extensionDir, repositoryRawUrl).href;
     pkg.vsce.baseImagesUrl = new URL(extensionDir, repositoryRawUrl).href;
     pkg.bugs = {
         url: 'https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues',
     };
-    return pkg;
+
+    return sortPackageJson(pkg);
 }
