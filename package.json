@@ -43,7 +43,7 @@
     "@vscode/vsce": "^3.3.0",
     "cspell": "^8.17.5",
     "inject-markdown": "^3.1.4",
-    "mocha": "^11.1.0",
+    "mocha": "^11.2.0",
     "npm-check-updates": "^17.1.15",
     "ovsx": "^0.10.1",
     "prettier": "^3.5.3",
