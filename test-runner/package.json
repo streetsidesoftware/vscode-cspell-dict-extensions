@@ -20,7 +20,7 @@
     "find-up": "^7.0.0",
     "glob": "^11.0.1",
     "kefir": "^3.8.8",
-    "mocha": "^11.1.0"
+    "mocha": "^11.2.0"
   },
   "devDependencies": {
     "@types/vscode": "^1.98.0"
