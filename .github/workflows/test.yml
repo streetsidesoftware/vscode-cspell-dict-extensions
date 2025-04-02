@@ -11,15 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       download_result: ${{ steps.download.outputs.download_result }}
+      cache_key: ${{ steps.cache-download.outputs.cache-key }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Calc Key
+        id: cache-key
+        uses: streetsidesoftware/actions/public/output@v1
+        with:
+          value: "vscode-download-${{ github.event.pull_request.updated_at || github.event.pull_request.created_at || github.event.repository.updated_at }}"
 
       - name: Cache Download
         id: cache-download
         uses: actions/cache@v4.2.3
         with:
-          key: "vscode-download-${{ github.event.pull_request.created_at }}"
+          key: ${{ steps.cache-key.outputs.value }}
           restore-keys: |
             vscode-download-
           path: .vscode-test
@@ -37,10 +44,10 @@ jobs:
         with:
           text: |
             ## Downloaded VSCode
-            - Cache Key: "vscode-download-${{ github.event.pull_request.created_at }}"
+            - Cache Key: ${{ steps.cache-key.outputs.value }}
             - Cache Download: ${{ steps.cache-download.outputs.cache-hit }}
             - Download Result: ${{ steps.download.outputs.download_result }}
-            - Event: $${{ toJson(github.event) }}
+            - Event: ${{ toJson(github.event) }}
 
   list_extensions:
     runs-on: ubuntu-latest
@@ -89,7 +96,7 @@ jobs:
         id: cache-download
         uses: actions/cache@v4.2.3
         with:
-          key: "vscode-download-${{ github.event.pull_request.created_at }}"
+          key: ${{ needs.download-vscode.outputs.cache_key }}
           path: .vscode-test
           fail-on-cache-miss: true
 
