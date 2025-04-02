@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Test framework for testing the extensions",
   "bin": {
+    "download-vscode": "./download-vscode.mjs",
     "test-runner": "./test-runner.mjs"
   },
   "type": "module",

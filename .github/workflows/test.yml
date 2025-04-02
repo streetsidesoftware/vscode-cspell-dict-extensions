@@ -7,10 +7,58 @@ on: # rebuild any PRs and main branch changes
       - main
 
 jobs:
+  download-vscode:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Test Step Output
+        id: my_step
+        uses: streetsidesoftware/actions/public/output@v1
+        with:
+          value: |
+            Action: ${{ github.action }}
+            Actor: ${{ github.actor }}
+            Ref: ${{ github.ref }}
+            Event: ${{ toJson(github.event)}}
+
+      - name: Cache Key
+        id: cache-key
+        uses: streetsidesoftware/actions/public/output@v1
+        with:
+          value: "vscode-download-${{ github.event.created_at }}"
+
+      - name: Cache Download
+        id: cache-download
+        uses: actions/cache@v4.2.3
+        with:
+          key: ${{ steps.cache-key.outputs.value }}
+          restore-keys: |
+            vscode-download-
+          path: .vscode-test
+
+      - name: Install
+        run: npm i
+
+      - name: Download
+        run: npm run test:download-vscode
+
+      - name: Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Downloaded VSCode
+            - Action: ${{ steps.my_step.outputs.value }}
+            - Cache Key: ${{ steps.cache-key.outputs.value }}
+            - Cache Download: ${{ steps.cache-download.outputs.cache-hit }}
+
   list_extensions:
     runs-on: ubuntu-latest
     outputs:
       extension_list: ${{ env.EXTENSION_LIST }}
+    needs:
+      - download-vscode
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
