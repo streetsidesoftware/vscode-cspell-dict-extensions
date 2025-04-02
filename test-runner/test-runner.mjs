@@ -68,7 +68,8 @@ async function testRunner(extensionDevelopmentPath, options) {
     const vscodeExecutablePath = options.vscodePath || (await downloadAndUnzipVSCode({ cachePath, version }));
     const [cliPath, ...rawArgs] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
     const args = rawArgs.filter((arg) => !arg.startsWith('--extensions-dir='));
-    args.push(`--extensions-dir=${cachePath}/extensions`);
+    const extensionsDirArg = `--extensions-dir=${cachePath}/extensions`;
+    args.push(extensionsDirArg);
 
     if (!options.vscodePath) {
         // Delete `.vscode-test` to prevent socket issues (based upon the current directory)
@@ -105,7 +106,7 @@ async function testRunner(extensionDevelopmentPath, options) {
             extensionDevelopmentPath,
             extensionTestsPath,
             extensionTestsEnv,
-            launchArgs: ['--user-data-dir', userDataDir],
+            launchArgs: ['--user-data-dir', userDataDir, extensionsDirArg],
         });
     } finally {
         await fs.rm(userDataDir, { recursive: true, force: true });

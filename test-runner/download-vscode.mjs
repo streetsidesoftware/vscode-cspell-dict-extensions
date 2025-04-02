@@ -55,7 +55,8 @@ async function downloader(extensionDevelopmentPath, options) {
     const vscodeExecutablePath = await downloadAndUnzipVSCode({ cachePath, version });
     const [cliPath, ...rawArgs] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
     const args = rawArgs.filter((arg) => !arg.startsWith('--extensions-dir='));
-    args.push(`--extensions-dir=${cachePath}/extensions`);
+    const extensionsDirArg = `--extensions-dir=${cachePath}/extensions`;
+    args.push(extensionsDirArg);
 
     console.error('VSCode downloaded to: %o', { vscodeExecutablePath, cliArgs: args });
 
