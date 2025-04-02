@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
+import * as cp from 'child_process';
 import * as path from 'path';
 import { promises as fs } from 'node:fs';
-import { downloadAndUnzipVSCode } from '@vscode/test-electron';
+import { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath } from '@vscode/test-electron';
 import { Command, CommanderError } from 'commander';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
@@ -52,7 +53,17 @@ async function downloader(extensionDevelopmentPath, options) {
     await fs.mkdir(cachePath, { recursive: true });
 
     const vscodeExecutablePath = await downloadAndUnzipVSCode({ cachePath, version });
+    const [cliPath, ...args] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
+
     console.log('VSCode downloaded to:', vscodeExecutablePath);
+
+    // Use cp.spawn / cp.exec for custom setup
+    cp.spawnSync(cliPath, [...args, '--install-extension', 'streetsidesoftware.code-spell-checker'], {
+        encoding: 'utf-8',
+        stdio: 'inherit',
+    });
+
+    console.log('done.');
 }
 
 async function fileExists(filePath) {
