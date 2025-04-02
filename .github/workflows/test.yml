@@ -13,27 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Test Step Output
-        id: my_step
-        uses: streetsidesoftware/actions/public/output@v1
-        with:
-          value: |
-            Action: ${{ github.action }}
-            Actor: ${{ github.actor }}
-            Ref: ${{ github.ref }}
-            Event: ${{ toJson(github.event)}}
-
-      - name: Cache Key
-        id: cache-key
-        uses: streetsidesoftware/actions/public/output@v1
-        with:
-          value: "vscode-download-${{ github.event.created_at }}"
-
       - name: Cache Download
         id: cache-download
         uses: actions/cache@v4.2.3
         with:
-          key: ${{ steps.cache-key.outputs.value }}
+          key: "vscode-download-${{ github.event.pull_request.created_at }}"
           restore-keys: |
             vscode-download-
           path: .vscode-test
@@ -49,16 +33,17 @@ jobs:
         with:
           text: |
             # Downloaded VSCode
-            - Action: ${{ steps.my_step.outputs.value }}
-            - Cache Key: ${{ steps.cache-key.outputs.value }}
+            - Cache Key: "vscode-download-${{ github.event.pull_request.created_at }}"
             - Cache Download: ${{ steps.cache-download.outputs.cache-hit }}
+            - Event:
+            ```json
+              ${{ toJson(github.event)}}
+            ```
 
   list_extensions:
     runs-on: ubuntu-latest
     outputs:
-      extension_list: ${{ env.EXTENSION_LIST }}
-    needs:
-      - download-vscode
+      extension_list: ${{ steps.output.outputs.value }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -67,16 +52,26 @@ jobs:
         run: |
           echo extensions_from_script=$(./scripts/list-extensions.sh) >> $GITHUB_ENV
 
-      - name: EXTENSION_LIST
-        env:
-          EXTENSION_LIST: ${{ env.extensions_from_script }}
-        run: |
-          echo EXTENSION_LIST=$EXTENSION_LIST >> $GITHUB_ENV
+      - name: Output
+        id: output
+        uses: streetsidesoftware/actions/public/output@v1
+        with:
+          value: ${{ env.extensions_from_script }}
+
+      - name: Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # List Extensions
+            ```
+            ${{ steps.output.outputs.value }}
+            ```
 
   build-test:
     runs-on: ubuntu-latest
     needs:
       - list_extensions
+      - download-vscode
     strategy:
       matrix:
         extension_dir: ${{ fromJSON(needs.list_extensions.outputs.extension_list) }}
@@ -87,23 +82,42 @@ jobs:
         with:
           node-version-file: .tool-versions
           cache: npm
+
+      - name: Cache Download
+        id: cache-download
+        uses: actions/cache@v4.2.3
+        with:
+          key: "vscode-download-${{ github.event.pull_request.created_at }}"
+          restore-keys: |
+            vscode-download-
+          path: .vscode-test
+
       - run: npm install
       - run: |
           cd ${{ matrix.extension_dir }}
           npm run pack-extension
           npm run test:cspell
 
-      - name: Run Linux
+      - name: Run Test Linux
         if: runner.os == 'Linux'
         run: |
           cd ${{ matrix.extension_dir }}
           xvfb-run -a npm run test
 
-      - name: Run Windows and MacOS
+      - name: Run Test Windows and MacOS
         if: runner.os != 'Linux'
         run: |
           cd ${{ matrix.extension_dir }}
           npm run test
+
+      - name: Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Test Extension Result
+
+            - Dir: ${{ matrix.extension_dir }}
+            - Cache Download: ${{ steps.cache-download.outputs.cache-hit }}
 
   # Run the spell checker on all the samples using the extension's settings.
   # This will help with dictionary updates.
