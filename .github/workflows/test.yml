@@ -17,25 +17,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # http://man7.org/linux/man-pages/man1/date.1.html
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "date=$(/bin/date -u "+%Y%m%d")" >> $GITHUB_OUTPUT
+        shell: bash
+
       - name: Key Base
         id: key-base
         uses: streetsidesoftware/actions/public/output@v1
         with:
-          value: vscode-download-cache--${{ runner.os }}-
+          value: vscode-download-cache-${{ runner.os }}-
 
       - name: Calc Key
         id: cache-key
         uses: streetsidesoftware/actions/public/output@v1
         with:
-          value: "${{ steps.key-base.outputs.value }}${{ github.event.pull_request.updated_at || github.event.pull_request.created_at || github.event.repository.pushed_at || github.event.repository.updated_at }}"
+          value: "${{ steps.key-base.outputs.value }}${{ steps.get-date.outputs.date }}"
 
       - name: Cache Download
         id: cache-download
         uses: actions/cache@v4.2.3
         with:
           key: ${{ steps.cache-key.outputs.value }}
-          # restore-keys: |
-          #   ${{ steps.key-base.outputs.value }}
           path: .vscode-test
 
       - name: Install
