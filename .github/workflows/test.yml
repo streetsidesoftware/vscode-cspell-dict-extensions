@@ -28,7 +28,7 @@ jobs:
       - name: Download
         id: download
         run: |
-          echo download_result=$(./test-runner/download-version.mjs) >> $GITHUB_OUTPUT
+          echo download_result=$(node ./test-runner/download-vscode.mjs) >> $GITHUB_OUTPUT
 
       - name: Summary
         uses: streetsidesoftware/actions/public/summary@v1
