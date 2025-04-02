@@ -32,7 +32,7 @@ jobs:
         uses: streetsidesoftware/actions/public/summary@v1
         with:
           text: |
-            # Downloaded VSCode
+            ## Downloaded VSCode
             - Cache Key: "vscode-download-${{ github.event.pull_request.created_at }}"
             - Cache Download: ${{ steps.cache-download.outputs.cache-hit }}
             - Event:
@@ -62,7 +62,7 @@ jobs:
         uses: streetsidesoftware/actions/public/summary@v1
         with:
           text: |
-            # List Extensions
+            ### List Extensions
             ```
             ${{ steps.output.outputs.value }}
             ```
