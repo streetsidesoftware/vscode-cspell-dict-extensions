@@ -35,10 +35,6 @@ jobs:
             ## Downloaded VSCode
             - Cache Key: "vscode-download-${{ github.event.pull_request.created_at }}"
             - Cache Download: ${{ steps.cache-download.outputs.cache-hit }}
-            - Event:
-            ```json
-              ${{ toJson(github.event)}}
-            ```
 
   list_extensions:
     runs-on: ubuntu-latest
@@ -88,9 +84,8 @@ jobs:
         uses: actions/cache@v4.2.3
         with:
           key: "vscode-download-${{ github.event.pull_request.created_at }}"
-          restore-keys: |
-            vscode-download-
           path: .vscode-test
+          fail-on-cache-miss: true
 
       - run: npm install
       - run: |
@@ -109,15 +104,6 @@ jobs:
         run: |
           cd ${{ matrix.extension_dir }}
           npm run test
-
-      - name: Summary
-        uses: streetsidesoftware/actions/public/summary@v1
-        with:
-          text: |
-            # Test Extension Result
-
-            - Dir: ${{ matrix.extension_dir }}
-            - Cache Download: ${{ steps.cache-download.outputs.cache-hit }}
 
   # Run the spell checker on all the samples using the extension's settings.
   # This will help with dictionary updates.
