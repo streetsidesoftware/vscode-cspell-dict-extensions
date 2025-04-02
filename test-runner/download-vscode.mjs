@@ -55,15 +55,23 @@ async function downloader(extensionDevelopmentPath, options) {
     const vscodeExecutablePath = await downloadAndUnzipVSCode({ cachePath, version });
     const [cliPath, ...args] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
 
-    console.log('VSCode downloaded to:', vscodeExecutablePath);
+    console.error('VSCode downloaded to:', vscodeExecutablePath);
 
     // Use cp.spawn / cp.exec for custom setup
-    cp.spawnSync(cliPath, [...args, '--install-extension', 'streetsidesoftware.code-spell-checker'], {
+    const result = cp.spawnSync(cliPath, [...args, '--install-extension', 'streetsidesoftware.code-spell-checker'], {
         encoding: 'utf-8',
-        stdio: 'inherit',
     });
 
-    console.log('done.');
+    console.error('Install Extension: \n%s%s', result.stdout, result.stderr);
+    if (result.error) {
+        console.error('Error: %s', result.error.message);
+        process.exitCode = 1;
+        return;
+    }
+
+    console.log('%s', JSON.stringify({ vscodeExecutablePath }));
+
+    console.error('done.');
 }
 
 async function fileExists(filePath) {

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// @ts-check
+
 import * as cp from 'child_process';
 import * as path from 'path';
 import { promises as fs } from 'node:fs';
@@ -20,9 +22,10 @@ async function main() {
     program
         .name('test-runner')
         .description('VSCode test running for testing CSpell addon extensions.')
-        .arguments('<extension-path>', 'Directory of the extension to test.')
-        .option('--vscode-version', `The version of VSCode to use.`, 'stable')
+        .arguments('<extension-path>')
+        .option('--vscode-version <version>', `The version of VSCode to use.`, 'stable')
         .option('--sample <path-to-sample-doc>', 'Specify a sample document', 'samples/seattle.md')
+        .option('--use-cache', 'Use the cached version of VSCode if available.')
         .showHelpAfterError(true)
         .action(testRunner);
 
