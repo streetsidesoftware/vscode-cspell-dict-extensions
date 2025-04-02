@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       download_result: ${{ steps.download.outputs.download_result }}
+      vscode_path: ${{ fromJson(steps.download.outputs.download_result).vscodeExecutablePath }}
       cache_key: ${{ steps.cache-key.outputs.value }}
     steps:
       - name: Checkout code
@@ -114,13 +115,13 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           cd ${{ matrix.extension_dir }}
-          xvfb-run -a npm run test
+          xvfb-run -a npm run test:vscode -- --vscode-path ${{ needs.download-vscode.outputs.vscode_path }}
 
       - name: Run Test Windows and MacOS
         if: runner.os != 'Linux'
         run: |
           cd ${{ matrix.extension_dir }}
-          npm run test
+          npm run test:vscode -- --vscode-path ${{ needs.download-vscode.outputs.vscode_path }}
 
   # Run the spell checker on all the samples using the extension's settings.
   # This will help with dictionary updates.
