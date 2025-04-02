@@ -7,28 +7,85 @@ on: # rebuild any PRs and main branch changes
       - main
 
 jobs:
+  download-vscode:
+    runs-on: ubuntu-latest
+    outputs:
+      download_result: ${{ steps.download.outputs.download_result }}
+      vscode_path: ${{ fromJson(steps.download.outputs.download_result).vscodeExecutablePath }}
+      cache_key: ${{ steps.cache-key.outputs.value }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Key Base
+        id: key-base
+        uses: streetsidesoftware/actions/public/output@v1
+        with:
+          value: vscode-download-cache--${{ runner.os }}-
+
+      - name: Calc Key
+        id: cache-key
+        uses: streetsidesoftware/actions/public/output@v1
+        with:
+          value: "${{ steps.key-base.outputs.value }}${{ github.event.pull_request.updated_at || github.event.pull_request.created_at || github.event.repository.pushed_at || github.event.repository.updated_at }}"
+
+      - name: Cache Download
+        id: cache-download
+        uses: actions/cache@v4.2.3
+        with:
+          key: ${{ steps.cache-key.outputs.value }}
+          # restore-keys: |
+          #   ${{ steps.key-base.outputs.value }}
+          path: .vscode-test
+
+      - name: Install
+        run: npm i
+
+      - name: Download
+        id: download
+        run: |
+          echo download_result=$(node ./test-runner/download-vscode.mjs) >> $GITHUB_OUTPUT
+
+      - name: Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            ## Downloaded VSCode
+            - Cache Key: ${{ steps.cache-key.outputs.value }}
+            - Cache Hit: ${{ toJson(steps.cache-download.outputs) }}
+            - Download Result: ${{ steps.download.outputs.download_result }}
+          # - Event:
+          # ```json
+          # ${{ toJson(github.event) }}
+          # ```
+
   list_extensions:
     runs-on: ubuntu-latest
     outputs:
-      extension_list: ${{ env.EXTENSION_LIST }}
+      extension_list: ${{ steps.get-extensions.outputs.extensions_from_script }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: From Script
+        id: get-extensions
         run: |
-          echo extensions_from_script=$(./scripts/list-extensions.sh) >> $GITHUB_ENV
+          echo extensions_from_script=$(./scripts/list-extensions.sh) >> $GITHUB_OUTPUT
 
-      - name: EXTENSION_LIST
-        env:
-          EXTENSION_LIST: ${{ env.extensions_from_script }}
-        run: |
-          echo EXTENSION_LIST=$EXTENSION_LIST >> $GITHUB_ENV
+      - name: Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            ### List Extensions
+            ```
+            ${{ steps.get-extensions.outputs.extensions_from_script }}
+            ```
 
   build-test:
     runs-on: ubuntu-latest
     needs:
       - list_extensions
+      - download-vscode
     strategy:
       matrix:
         extension_dir: ${{ fromJSON(needs.list_extensions.outputs.extension_list) }}
@@ -39,23 +96,32 @@ jobs:
         with:
           node-version-file: .tool-versions
           cache: npm
+
+      - name: Cache Download
+        id: cache-download
+        uses: actions/cache@v4.2.3
+        with:
+          key: ${{ needs.download-vscode.outputs.cache_key }}
+          path: .vscode-test
+          fail-on-cache-miss: true
+
       - run: npm install
       - run: |
           cd ${{ matrix.extension_dir }}
           npm run pack-extension
           npm run test:cspell
 
-      - name: Run Linux
+      - name: Run Test Linux
         if: runner.os == 'Linux'
         run: |
           cd ${{ matrix.extension_dir }}
-          xvfb-run -a npm run test
+          xvfb-run -a npm run test:vscode -- --vscode-path ${{ needs.download-vscode.outputs.vscode_path }}
 
-      - name: Run Windows and MacOS
+      - name: Run Test Windows and MacOS
         if: runner.os != 'Linux'
         run: |
           cd ${{ matrix.extension_dir }}
-          npm run test
+          npm run test:vscode -- --vscode-path ${{ needs.download-vscode.outputs.vscode_path }}
 
   # Run the spell checker on all the samples using the extension's settings.
   # This will help with dictionary updates.

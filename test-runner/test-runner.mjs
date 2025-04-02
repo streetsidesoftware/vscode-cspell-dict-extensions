@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// @ts-check
+
 import * as cp from 'child_process';
 import * as path from 'path';
 import { promises as fs } from 'node:fs';
@@ -7,6 +9,7 @@ import { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath, runTest
 import { Command, CommanderError } from 'commander';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
+import assert from 'node:assert';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,9 +23,10 @@ async function main() {
     program
         .name('test-runner')
         .description('VSCode test running for testing CSpell addon extensions.')
-        .arguments('<extension-path>', 'Directory of the extension to test.')
-        .option('--vscode-version', `The version of VSCode to use.`, 'stable')
+        .arguments('<extension-path>')
+        .option('--vscode-version <version>', `The version of VSCode to use.`, 'stable')
         .option('--sample <path-to-sample-doc>', 'Specify a sample document', 'samples/seattle.md')
+        .option('--vscode-path <path-to-vscode>', 'Use the specified version of VSCode.')
         .showHelpAfterError(true)
         .action(testRunner);
 
@@ -52,22 +56,31 @@ async function testRunner(extensionDevelopmentPath, options) {
         throw new CommanderError(1, 'ENOENT', `Sample "${options.sample}" is missing.`);
     }
 
+    if (options.vscodePath) {
+        assert(await fileExists(options.vscodePath), `VSCode path "${options.vscodePath}" does not exist.`);
+    }
+
     const { vscodeVersion: version = 'stable' } = options;
     const extensionTestsPath = path.resolve(__dirname, './suite/index.cjs');
 
     await fs.mkdir(cachePath, { recursive: true });
 
-    const vscodeExecutablePath = await downloadAndUnzipVSCode({ cachePath, version });
-    const [cliPath, ...args] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
+    const vscodeExecutablePath = options.vscodePath || (await downloadAndUnzipVSCode({ cachePath, version }));
+    const [cliPath, ...rawArgs] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
+    const args = rawArgs.filter((arg) => !arg.startsWith('--extensions-dir='));
+    const extensionsDirArg = `--extensions-dir=${cachePath}/extensions`;
+    args.push(extensionsDirArg);
 
-    // Delete `.vscode-test` to prevent socket issues (based upon the current directory)
-    await fs.rm(cacheDirVscodeTest, { recursive: true, force: true });
+    if (!options.vscodePath) {
+        // Delete `.vscode-test` to prevent socket issues (based upon the current directory)
+        await fs.rm(cacheDirVscodeTest, { recursive: true, force: true });
 
-    // Use cp.spawn / cp.exec for custom setup
-    cp.spawnSync(cliPath, [...args, '--install-extension', 'streetsidesoftware.code-spell-checker'], {
-        encoding: 'utf-8',
-        stdio: 'inherit',
-    });
+        // Use cp.spawn / cp.exec for custom setup
+        cp.spawnSync(cliPath, [...args, '--install-extension', 'streetsidesoftware.code-spell-checker'], {
+            encoding: 'utf-8',
+            stdio: 'inherit',
+        });
+    }
 
     const extensionTestsEnv = {
         SAMPLE_TEST_DOCUMENT: options.sample,
@@ -93,7 +106,7 @@ async function testRunner(extensionDevelopmentPath, options) {
             extensionDevelopmentPath,
             extensionTestsPath,
             extensionTestsEnv,
-            launchArgs: ['--user-data-dir', userDataDir],
+            launchArgs: ['--user-data-dir', userDataDir, extensionsDirArg],
         });
     } finally {
         await fs.rm(userDataDir, { recursive: true, force: true });
