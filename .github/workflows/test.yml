@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       download_result: ${{ steps.download.outputs.download_result }}
-      cache_key: ${{ steps.cache-download.outputs.cache-key }}
+      cache_key: ${{ steps.cache-key.outputs.value }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -55,20 +55,15 @@ jobs:
   list_extensions:
     runs-on: ubuntu-latest
     outputs:
-      extension_list: ${{ steps.output.outputs.value }}
+      extension_list: ${{ steps.get-extensions.outputs.extensions_from_script }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: From Script
+        id: get-extensions
         run: |
-          echo extensions_from_script=$(./scripts/list-extensions.sh) >> $GITHUB_ENV
-
-      - name: Output
-        id: output
-        uses: streetsidesoftware/actions/public/output@v1
-        with:
-          value: ${{ env.extensions_from_script }}
+          echo extensions_from_script=$(./scripts/list-extensions.sh) >> $GITHUB_OUTPUT
 
       - name: Summary
         uses: streetsidesoftware/actions/public/summary@v1
@@ -76,7 +71,7 @@ jobs:
           text: |
             ### List Extensions
             ```
-            ${{ steps.output.outputs.value }}
+            ${{ steps.get-extensions.outputs.extensions_from_script }}
             ```
 
   build-test:
