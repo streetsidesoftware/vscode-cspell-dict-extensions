@@ -45,9 +45,12 @@ jobs:
           text: |
             ## Downloaded VSCode
             - Cache Key: ${{ steps.cache-key.outputs.value }}
-            - Cache Download: ${{ steps.cache-download.outputs.cache-hit }}
+            - Cache Hit: ${{ toJson(steps.cache-download.outputs) }}
             - Download Result: ${{ steps.download.outputs.download_result }}
-            - Event: ${{ toJson(github.event) }}
+            - Event:
+            ```json
+            ${{ toJson(github.event) }}
+            ```
 
   list_extensions:
     runs-on: ubuntu-latest
