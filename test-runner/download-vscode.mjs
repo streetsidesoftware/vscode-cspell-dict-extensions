@@ -55,7 +55,7 @@ async function downloader(extensionDevelopmentPath, options) {
     const vscodeExecutablePath = await downloadAndUnzipVSCode({ cachePath, version });
     const [cliPath, ...args] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
 
-    console.error('VSCode downloaded to:', vscodeExecutablePath);
+    console.error('VSCode downloaded to: %o', { vscodeExecutablePath, args });
 
     // Use cp.spawn / cp.exec for custom setup
     const result = cp.spawnSync(cliPath, [...args, '--install-extension', 'streetsidesoftware.code-spell-checker'], {
