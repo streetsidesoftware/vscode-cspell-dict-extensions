@@ -9,6 +9,8 @@ on: # rebuild any PRs and main branch changes
 jobs:
   download-vscode:
     runs-on: ubuntu-latest
+    outputs:
+      download_result: ${{ steps.download.outputs.download_result }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,6 +40,7 @@ jobs:
             - Cache Key: "vscode-download-${{ github.event.pull_request.created_at }}"
             - Cache Download: ${{ steps.cache-download.outputs.cache-hit }}
             - Download Result: ${{ steps.download.outputs.download_result }}
+            - Event: $${{ toJson(github.event) }}
 
   list_extensions:
     runs-on: ubuntu-latest
