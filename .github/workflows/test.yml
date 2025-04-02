@@ -20,7 +20,7 @@ jobs:
         id: key-base
         uses: streetsidesoftware/actions/public/output@v1
         with:
-          value: vscode-download-cache-
+          value: vscode-download-cache--${{ runner.os }}-
 
       - name: Calc Key
         id: cache-key
