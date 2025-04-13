@@ -14,16 +14,16 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@vscode/test-electron": "^2.4.1",
+    "@vscode/test-electron": "^2.5.2",
     "chai": "^5.2.0",
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
     "find-up": "^7.0.0",
     "glob": "^11.0.1",
     "kefir": "^3.8.8",
-    "mocha": "^11.2.0"
+    "mocha": "^11.2.2"
   },
   "devDependencies": {
-    "@types/vscode": "^1.99.0"
+    "@types/vscode": "^1.99.1"
   }
 }
