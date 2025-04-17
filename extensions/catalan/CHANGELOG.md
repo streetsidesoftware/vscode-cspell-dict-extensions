@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-catalan@1.0.7...code-spell-checker-catalan@1.0.8) (2025-04-17)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1209](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1209)) ([0777f61](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/0777f61545e284db4b7522b995b732ae2b7037e8))
+
 ## [1.0.7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-catalan@1.0.6...code-spell-checker-catalan@1.0.7) (2024-12-30)
 
 
