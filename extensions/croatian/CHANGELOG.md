@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-croatian@1.0.3...code-spell-checker-croatian@1.0.4) (2025-04-17)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1209](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1209)) ([0777f61](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/0777f61545e284db4b7522b995b732ae2b7037e8))
+
 ## [1.0.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-croatian@1.0.2...code-spell-checker-croatian@1.0.3) (2024-12-30)
 
 
