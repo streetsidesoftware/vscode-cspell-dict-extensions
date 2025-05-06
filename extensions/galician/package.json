@@ -83,7 +83,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-gl-es": "^1.1.0"
+    "@cspell/dict-gl-es": "^1.1.1"
   },
   "author": "Street Side Software <support@streetsidesoftware.nl>",
   "contributors": [],
