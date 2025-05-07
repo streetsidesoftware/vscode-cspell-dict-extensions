@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-galician" extension will be documented in this file.
 
+## [1.0.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-galician@1.0.1...code-spell-checker-galician@1.0.2) (2025-05-07)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1221](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1221)) ([c5591c1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/c5591c1c251f2b863c40d53ec56ae6f501caf569))
+
 ## [1.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-galician@1.0.0...code-spell-checker-galician@1.0.1) (2025-02-22)
 
 
