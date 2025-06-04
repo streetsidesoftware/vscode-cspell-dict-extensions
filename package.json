@@ -33,12 +33,12 @@
     "vscode": "^1.67.0"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "^4.2.0",
-    "@lerna-lite/exec": "^4.2.0",
-    "@lerna-lite/run": "^4.2.0",
+    "@lerna-lite/cli": "^4.3.0",
+    "@lerna-lite/exec": "^4.3.0",
+    "@lerna-lite/run": "^4.3.0",
     "@tsconfig/node20": "^20.1.5",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^20.17.50",
+    "@types/node": "^20.17.57",
     "@types/vscode": "^1.100.0",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/vsce": "^3.4.2",
