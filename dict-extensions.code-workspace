@@ -22,6 +22,9 @@
             "path": "extensions/british-english"
         },
         {
+            "path": "extensions/british-english-ise"
+        },
+        {
             "path": "extensions/bulgarian"
         },
         {
