@@ -92,6 +92,10 @@
             "component": "code-spell-checker-basque",
             "releaseType": "node"
         },
+        "extensions/british-english-ise": {
+            "component": "code-spell-checker-british-english-ise",
+            "releaseType": "node"
+        },
         "extensions/british-english": {
             "component": "code-spell-checker-british-english",
             "releaseType": "node"

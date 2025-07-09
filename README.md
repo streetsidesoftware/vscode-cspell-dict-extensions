@@ -18,6 +18,7 @@ See Also:
 - [Austrian German](extensions/austrian-german#readme) - Austrian German dictionary extension for VS Code.
 - [Basque](extensions/basque#readme) - Basque dictionary extension for VS Code.
 - [British English](extensions/british-english#readme) - British English dictionary extension for VS Code.
+- [British English](extensions/british-english-ise#readme) - British English -ise dictionary extension for VS Code.
 - [Bulgarian](extensions/bulgarian#readme) - Bulgarian dictionary extension for VS Code.
 - [Canadian English](extensions/canadian-english#readme) - Canadian English dictionary extension for VS Code.
 - [Catalan](extensions/catalan#readme) - Catalan dictionary extension for VS Code.
@@ -91,6 +92,7 @@ See Also:
 - [Austrian German](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-austrian-german) - Austrian German dictionary extension for VS Code.
 - [Basque](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-basque) - Basque dictionary extension for VS Code.
 - [British English](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-british-english) - British English dictionary extension for VS Code.
+- [British English](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-british-english-ise) - British English -ise dictionary extension for VS Code.
 - [Bulgarian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-bulgarian) - Bulgarian dictionary extension for VS Code.
 - [Canadian English](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-canadian-english) - Canadian English dictionary extension for VS Code.
 - [Catalan](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-catalan) - Catalan dictionary extension for VS Code.

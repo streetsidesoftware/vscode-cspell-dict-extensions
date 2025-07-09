@@ -6,6 +6,7 @@
 - [Austrian German](extensions/austrian-german#readme) - Austrian German dictionary extension for VS Code.
 - [Basque](extensions/basque#readme) - Basque dictionary extension for VS Code.
 - [British English](extensions/british-english#readme) - British English dictionary extension for VS Code.
+- [British English](extensions/british-english-ise#readme) - British English -ise dictionary extension for VS Code.
 - [Bulgarian](extensions/bulgarian#readme) - Bulgarian dictionary extension for VS Code.
 - [Canadian English](extensions/canadian-english#readme) - Canadian English dictionary extension for VS Code.
 - [Catalan](extensions/catalan#readme) - Catalan dictionary extension for VS Code.
