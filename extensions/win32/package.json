@@ -64,7 +64,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-win32": "^2.0.7"
+    "@cspell/dict-win32": "^2.0.8"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/win32/",

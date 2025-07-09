@@ -83,7 +83,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-de-de": "^4.1.0"
+    "@cspell/dict-de-de": "^4.1.1"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/german/",

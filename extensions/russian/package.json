@@ -76,7 +76,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-ru_ru": "^2.3.0"
+    "@cspell/dict-ru_ru": "^2.3.1"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/russian/",

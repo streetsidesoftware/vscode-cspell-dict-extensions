@@ -83,7 +83,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-he": "^4.0.3"
+    "@cspell/dict-he": "^4.0.4"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/hebrew/",
