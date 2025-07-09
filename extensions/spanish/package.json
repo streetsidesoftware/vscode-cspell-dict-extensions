@@ -3,7 +3,7 @@
   "displayName": "Spanish - Code Spell Checker",
   "description": "Spanish Add-On for Code Spell Checker",
   "icon": "images/SpellCheck.png",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "private": true,
   "publisher": "streetsidesoftware",
   "type": "commonjs",
@@ -75,7 +75,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-es-es": "^3.0.4"
+    "@cspell/dict-es-es": "^3.0.3"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/spanish/",

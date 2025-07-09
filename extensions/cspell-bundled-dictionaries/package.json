@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-cspell-bundled-dictionaries",
   "description": "CSpell Bundled Dictionaries dictionary extension for VS Code.",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "displayName": "CSpell Bundled Dictionaries - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
@@ -64,7 +64,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-cspell-bundle": "^2.0.15"
+    "@cspell/dict-cspell-bundle": "^2.0.13"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/cspell-bundled-dictionaries/",
