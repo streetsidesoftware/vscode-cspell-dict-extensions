@@ -1,6 +1,7 @@
 # British English - Code Spell Checker
 
-British English dictionary extension for VS Code.
+British English dictionary extension for VS Code. This dictionary includes both the `-ise` and `-ize` spelling variants according
+to the Oxford English Dictionary.
 
 Note: this is a replacement dictionary for the one that is bundled with [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). Due to licensing restrictions, the bundled dictionary is many years old.
 
@@ -33,7 +34,13 @@ _Preferences_ -> _Settings_
 Adding `en-GB` to the `cSpell.language` setting, will enable the British dictionary.
 Example using both English and British English dictionaries:
 
-```javascript
+```json
+"cSpell.language": "en-GB",
+```
+
+To include both the American and British English spellings, use:
+
+```json
 "cSpell.language": "en,en-GB",
 ```
 
