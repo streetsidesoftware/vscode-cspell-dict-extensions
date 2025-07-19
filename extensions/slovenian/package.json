@@ -83,7 +83,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-sl-si": "^1.0.10"
+    "@cspell/dict-sl-si": "^1.0.11"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/slovenian/",
