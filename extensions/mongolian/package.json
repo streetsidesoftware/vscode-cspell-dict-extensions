@@ -91,7 +91,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-mn-mn": "^1.2.1"
+    "@cspell/dict-mn-mn": "^1.2.2"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/mongolian/",
