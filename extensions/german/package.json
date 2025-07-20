@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-german",
   "description": "German dictionary extension for VS Code.",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "displayName": "German - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

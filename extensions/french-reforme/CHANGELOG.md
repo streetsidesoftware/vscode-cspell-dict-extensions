@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-french-reforme@2.2.4...code-spell-checker-french-reforme@2.2.5) (2025-07-20)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1305](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1305)) ([d5d40b1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/d5d40b17fbe9df7451d8668cfff8da2921d912ef))
+
 ## [2.2.4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-french-reforme@2.2.3...code-spell-checker-french-reforme@2.2.4) (2025-04-17)
 
 
