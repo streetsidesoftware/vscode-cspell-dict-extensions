@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-finnish",
   "description": "Finnish dictionary extension for VS Code.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "displayName": "Finnish - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
