@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-persian",
   "description": "Persian dictionary extension for VS Code.",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "displayName": "Persian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
