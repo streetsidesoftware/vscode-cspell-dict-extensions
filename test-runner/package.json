@@ -16,7 +16,7 @@
   "dependencies": {
     "@vscode/test-electron": "^2.5.2",
     "chai": "^5.2.1",
-    "chalk": "^5.4.1",
+    "chalk": "^5.5.0",
     "commander": "^14.0.0",
     "find-up": "^7.0.0",
     "glob": "^11.0.3",
