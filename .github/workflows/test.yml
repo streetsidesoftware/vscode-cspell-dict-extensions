@@ -15,7 +15,7 @@ jobs:
       cache_key: ${{ steps.cache-key.outputs.value }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # http://man7.org/linux/man-pages/man1/date.1.html
       - name: Get Date
@@ -70,7 +70,7 @@ jobs:
       extension_list: ${{ steps.get-extensions.outputs.extensions_from_script }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: From Script
         id: get-extensions
@@ -95,7 +95,7 @@ jobs:
       matrix:
         extension_dir: ${{ fromJSON(needs.list_extensions.outputs.extension_list) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
@@ -133,7 +133,7 @@ jobs:
   check-samples:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
