@@ -64,7 +64,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-cspell-bundle": "^2.0.27"
+    "@cspell/dict-cspell-bundle": "^2.0.29"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/cspell-bundled-dictionaries/",
