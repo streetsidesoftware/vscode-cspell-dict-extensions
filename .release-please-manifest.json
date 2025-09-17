@@ -1,5 +1,5 @@
 {
-    ".": "6.1.5",
+    ".": "6.1.6",
     "extensions/arabic": "0.2.4",
     "extensions/basque": "1.0.7",
     "extensions/bulgarian": "0.1.14",
@@ -32,10 +32,10 @@
     "extensions/ukrainian": "1.2.5",
     "extensions/vietnamese": "1.1.4",
     "extensions/serbian": "1.2.3",
-    "extensions/british-english": "1.4.31",
+    "extensions/british-english": "1.4.32",
     "extensions/slovak": "1.1.5",
-    "extensions/australian-english": "1.1.26",
-    "extensions/canadian-english": "1.1.26",
+    "extensions/australian-english": "1.1.27",
+    "extensions/canadian-english": "1.1.27",
     "extensions/swiss-german": "1.2.4",
     "extensions/austrian-german": "1.1.4",
     "extensions/lithuanian": "1.1.5",
@@ -47,10 +47,10 @@
     "extensions/finnish": "1.0.5",
     "extensions/ancient-greek": "1.0.5",
     "extensions/latin": "1.0.5",
-    "extensions/cspell-bundled-dictionaries": "2.0.9",
+    "extensions/cspell-bundled-dictionaries": "2.0.10",
     "extensions/macedonian": "1.0.3",
     "extensions/timestamp-hover": "1.0.3",
     "extensions/galician": "1.0.3",
     "extensions/mongolian": "1.0.4",
-    "extensions/british-english-ise": "1.0.5"
+    "extensions/british-english-ise": "1.0.6"
 }
