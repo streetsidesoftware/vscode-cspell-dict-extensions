@@ -1,5 +1,13 @@
 # Changelog
 
+## [6.1.7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@6.1.6...vscode-cspell-dict-extensions@6.1.7) (2025-10-19)
+
+
+### Updates and Bug Fixes
+
+* correct Estonian locale code in README.md config example ([#1381](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1381)) ([8ff538a](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/8ff538a6a99d5b9ff8aae027fd48344353b8358f))
+* Workflow Bot -- Update Dictionaries ([#1382](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1382)) ([34c0823](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/34c0823074edebf4e6180b5cdd963467814e66b5))
+
 ## [6.1.6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@6.1.5...vscode-cspell-dict-extensions@6.1.6) (2025-09-17)
 
 
