@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-british-english" extension will be documented in this file.
 
+## [1.4.33](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-british-english@1.4.32...code-spell-checker-british-english@1.4.33) (2025-10-19)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1382](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1382)) ([34c0823](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/34c0823074edebf4e6180b5cdd963467814e66b5))
+
 ## [1.4.32](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-british-english@1.4.31...code-spell-checker-british-english@1.4.32) (2025-09-17)
 
 
