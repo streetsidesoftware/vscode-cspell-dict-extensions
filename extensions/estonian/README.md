@@ -30,11 +30,11 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `ee` to the `cSpell.language` setting, will enable the Estonian dictionary.
+Adding `et` to the `cSpell.language` setting, will enable the Estonian dictionary.
 Example using both English and Estonian dictionaries:
 
 ```javascript
-"cSpell.language": "en,ee",
+"cSpell.language": "en,et",
 ```
 
 ## Requirements
