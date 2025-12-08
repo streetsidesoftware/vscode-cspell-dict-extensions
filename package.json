@@ -42,16 +42,16 @@
     "@types/vscode": "^1.106.1",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/vsce": "^3.7.1",
-    "cspell": "^9.3.2",
+    "cspell": "^9.4.0",
     "inject-markdown": "^4.0.0",
     "mocha": "^11.7.5",
     "npm-check-updates": "^19.1.2",
     "ovsx": "^0.10.7",
-    "prettier": "^3.7.2",
+    "prettier": "^3.7.4",
     "rimraf": "^6.1.2",
     "scripts": "file:scripts",
     "test-extensions": "file:test-runner",
     "typescript": "^5.9.3",
-    "yaml": "^2.8.1"
+    "yaml": "^2.8.2"
   }
 }
