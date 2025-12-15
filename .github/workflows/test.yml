@@ -38,7 +38,7 @@ jobs:
 
       - name: Cache Download
         id: cache-download
-        uses: actions/cache@v5.0.0
+        uses: actions/cache@v5.0.1
         with:
           key: ${{ steps.cache-key.outputs.value }}
           path: .vscode-test
@@ -104,7 +104,7 @@ jobs:
 
       - name: Cache Download
         id: cache-download
-        uses: actions/cache@v5.0.0
+        uses: actions/cache@v5.0.1
         with:
           key: ${{ needs.download-vscode.outputs.cache_key }}
           path: .vscode-test
