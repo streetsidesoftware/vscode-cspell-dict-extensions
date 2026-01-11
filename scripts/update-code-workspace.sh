@@ -19,7 +19,8 @@ echo "$RESULT" > ./dict-extensions.code-workspace
 
 # Update README.md
 
-$SCRIPT_DIR/gen-extension-list.mjs
+$SCRIPT_DIR/gen-extension-list.mts
+$SCRIPT_DIR/fix-extensions.mts
 
 npx prettier -w static/generated/*.md
 npx inject-markdown README.md "extensions/*/README.md"
