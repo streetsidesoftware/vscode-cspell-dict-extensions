@@ -4,14 +4,12 @@
  * Fix extensions of files.
  */
 
-// @ts-check
-
 import {
     fixExtensionPackageJson,
     getExtensionList,
     readExtensionPackageJson,
     writeExtensionPackageJson,
-} from './lib/extensionHelper.mjs';
+} from './lib/extensionHelper.mts';
 
 async function run() {
     console.log('Fixing extensions...');

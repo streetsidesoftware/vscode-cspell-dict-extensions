@@ -6,9 +6,9 @@ import { fileURLToPath } from 'url';
 import * as path from 'path';
 import { toMarkdown } from 'mdast-util-to-markdown';
 
-import { root, paragraph, text, heading, list, listItem, link } from './lib/mdastBuilder.mjs';
+import { root, paragraph, text, heading, list, listItem, link, newLineText } from './lib/mdastBuilder.mts';
 
-import { getExtensionInfo } from './lib/extensionHelper.mjs';
+import { getExtensionInfo } from './lib/extensionHelper.mts';
 
 /**
  * @typedef {import('./lib/extensionHelper.mjs').ExtensionInfo} ExtensionInfo
@@ -32,6 +32,7 @@ const markdownOptions = {
 /**
  *
  * @param {string} url
+ * @param {string} name
  * @returns {import('mdast').Link}
  */
 function pathToLink(url, name) {
@@ -89,7 +90,8 @@ async function generateExtensionFolderListMarkdown(extensionInfos) {
 
     for (const [category, extensions] of extensionsByCategory) {
         mdastContent.push(heading(3, text(category)));
-        mdastContent.push(list('unordered', extensions.map(makeExtensionListItem)));
+        mdastContent.push(newLineText());
+        mdastContent.push((list('unordered', extensions.map(makeExtensionListItem))));
     }
 
     await writeContentToFile(mdastContent, targetExtensionFolderListMarkdown);
@@ -107,6 +109,7 @@ async function generateMarketplaceExtensionsListMarkdown(extensionInfos) {
 
     for (const [category, extensions] of extensionsByCategory) {
         mdastContent.push(heading(3, text(category)));
+        mdastContent.push(newLineText());
         mdastContent.push(list('unordered', extensions.map(makeMarketplaceExtensionListItem)));
     }
 
@@ -123,6 +126,7 @@ async function generateMarketplaceLanguageExtensionsListMarkdown(extensionInfos)
     /** @type {import('mdast').RootContent[]} */
     const mdastContent = [];
 
+    /** @type {Record<string, string | undefined>} */
     const headingTitle = {
         Languages: 'Language Dictionaries',
         'Technical Terms': 'Technical Dictionaries',
@@ -132,6 +136,7 @@ async function generateMarketplaceLanguageExtensionsListMarkdown(extensionInfos)
         const title = headingTitle[category];
         if (!title) continue;
         mdastContent.push(heading(3, text(title)));
+        mdastContent.push(newLineText());
         mdastContent.push(list('unordered', extensions.map(makeMarketplaceExtensionListItem)));
     }
 
@@ -158,7 +163,11 @@ async function writeContentToFile(mdastContent, filename) {
  * @returns {string}
  */
 function genMarkdown(tree) {
-    return toMarkdown(tree, markdownOptions).replace(/\r?\n\r?\n( *)[-]\s+/g, '\n$1- ');
+    return toMarkdown(tree, markdownOptions)
+    .replaceAll('\r\n', '\n')
+    .replace(/\n\n( *)[-]\s+/g, '\n$1- ')
+    .replace(/\n\n\n+/g, '\n\n');
+
 }
 
 /**
@@ -181,7 +190,12 @@ function groupExtensionsByType(extensionInfos) {
     return extensionsByCategory;
 }
 
+/**
+ * @typedef {import('./lib/types.ts').CodeWorkspace} CodeWorkspace
+ */
+
 async function main() {
+    /** @type {CodeWorkspace} */
     const workspace = JSON.parse(await fs.readFile(path.resolve(__root, 'dict-extensions.code-workspace'), 'utf-8'));
 
     /** @type {string[]} */
