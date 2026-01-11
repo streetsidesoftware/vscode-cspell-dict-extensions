@@ -23,6 +23,8 @@
     "test:all": "lerna run --concurrency=1 --stream \"--scope=code-spell-checker-*\" test",
     "test:cspell": "lerna run --concurrency=4 --stream \"--scope=code-spell-checker-*\" test:cspell",
     "test:download-vscode": "download-vscode ",
+    "tool:fix-extensions": "node ./scripts/fix-extensions.mts",
+    "tool:gen-extension-list": "node ./scripts/gen-extension-list.mts",
     "lint": "npm run cspell",
     "update-dictionaries": "lerna exec \"npx npm-check-updates -t latest -u -f \\\"@cspell*\\\" \" && npm i",
     "update-packages": "npm ci && npx npm-check-updates -t semver -u && npm i && lerna exec \"npx npm-check-updates -t semver -u && rm -rf node_modules package-lock.json && npm i\" && npm i"
@@ -30,13 +32,15 @@
   "type": "commonjs",
   "engines": {
     "node": ">=22.17.0",
-    "vscode": "^1.67.0"
+    "pnpm": "0",
+    "vscode": "^1.102.3",
+    "yarn": "0"
   },
   "devDependencies": {
     "@lerna-lite/cli": "^4.10.5",
     "@lerna-lite/exec": "^4.10.5",
     "@lerna-lite/run": "^4.10.5",
-    "@tsconfig/node20": "^20.1.8",
+    "@tsconfig/node22": "^22.0.5",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.19.5",
     "@types/vscode": "^1.108.1",
