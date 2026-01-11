@@ -5,7 +5,7 @@
   "version": "1.0.4",
   "publisher": "streetsidesoftware",
   "engines": {
-    "vscode": "^1.14.0"
+    "vscode": "^1.102.3"
   },
   "categories": [
     "Programming Languages"
