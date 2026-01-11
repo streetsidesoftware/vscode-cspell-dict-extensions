@@ -100,6 +100,7 @@ export interface PackageJson {
     private: boolean;
     preview?: boolean | undefined;
     bugs?: { url: string };
+    engines?: { [engine: string]: string };
 }
 
 export async function readPackageJson(pkgUrl: URL | string): Promise<PackageJson> {
@@ -118,7 +119,13 @@ export async function writeExtensionPackageJson(extensionPath: string | URL, pkg
     await fs.writeFile(pkgUrl, JSON.stringify(pkg, null, 2) + '\n');
 }
 
-export function fixExtensionPackageJson(extensionDir: string | URL, pkg: PackageJson): PackageJson {
+export function fixExtensionPackageJson(
+    extensionDir: string | URL,
+    pkg: PackageJson,
+    overrides: Partial<PackageJson>,
+): PackageJson {
+    Object.assign(pkg, overrides);
+
     const extensionDirStr = urlRelativeToRoot(new URL(extensionDir, rootUrl));
     pkg.private = true;
     pkg.preview = undefined;
