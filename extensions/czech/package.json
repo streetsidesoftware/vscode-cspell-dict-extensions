@@ -8,7 +8,7 @@
   "publisher": "streetsidesoftware",
   "type": "commonjs",
   "engines": {
-    "vscode": "^1.67.0"
+    "vscode": "^1.102.3"
   },
   "sponsor": {
     "url": "https://github.com/sponsors/streetsidesoftware"
