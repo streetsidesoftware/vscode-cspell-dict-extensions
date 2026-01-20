@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-win32" extension will be documented in this file.
 
+## [1.0.8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-win32@1.0.7...code-spell-checker-win32@1.0.8) (2026-01-20)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1441](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1441)) ([ce48ae5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/ce48ae5e4e36a178f48fcdf47d5be67ce52c4966))
+
 ## [1.0.7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-win32@1.0.6...code-spell-checker-win32@1.0.7) (2025-07-20)
 
 

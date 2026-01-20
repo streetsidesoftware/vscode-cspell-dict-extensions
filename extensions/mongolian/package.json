@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-mongolian",
   "description": "Mongolian dictionary extension for VS Code.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "displayName": "Mongolian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
