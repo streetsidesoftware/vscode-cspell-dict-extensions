@@ -176,6 +176,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - _Danish_ - [viktorstrate](https://github.com/viktorstrate)
 - _Slovenian_ - [KrOstir](https://github.com/KrOstir)
 - _Lithuanian_ - [Combinacijus](https://github.com/Combinacijus)
+- _Armenian_ - [DHayk87](https://github.com/DHayk87)
 
 -->
 
