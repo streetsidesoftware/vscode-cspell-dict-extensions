@@ -280,6 +280,10 @@
             "component": "code-spell-checker-vietnamese",
             "releaseType": "node"
         },
+        "extensions/armenian": {
+            "component": "code-spell-checker-armenian",
+            "releaseType": "node"
+        },
         "extensions/win32": {
             "component": "code-spell-checker-win32",
             "releaseType": "node"

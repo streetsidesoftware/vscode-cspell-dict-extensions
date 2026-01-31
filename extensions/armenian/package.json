@@ -1,0 +1,46 @@
+{
+  "name": "code-spell-checker-armenian",
+  "description": "Armenian dictionary extension for VS Code.",
+  "version": "1.0.0",
+  "displayName": "Armenian - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "type": "commonjs",
+  "engines": {
+    "vscode": "^1.108.1"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf out",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "rimraf": "^6.1.2",
+    "typescript": "^5.9.3",
+    "@types/vscode": "^1.108.1",
+    "@types/node": "^22.19.7"
+  }
+}

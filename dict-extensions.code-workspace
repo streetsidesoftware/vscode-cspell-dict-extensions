@@ -160,6 +160,9 @@
             "path": "extensions/vietnamese"
         },
         {
+            "path": "extensions/armenian"
+        },
+        {
             "path": "extensions/win32"
         },
         {
