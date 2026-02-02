@@ -85,7 +85,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-en-gb-ise": "^1.0.21"
+    "@cspell/dict-en-gb-ise": "^1.0.22"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/british-english-ise/",
