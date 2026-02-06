@@ -1,20 +1,3 @@
 {
-    "version": "0.2",
-    "name": "armenian",
-    "language": "hy,hy-AM",
-    "dictionaryDefinitions": [
-        {
-            "name": "armenian-dict",
-            "path": "./dict/hy-AM.trie.gz",
-            "description": "Armenian dictionary",
-            "addWords": false
-        }
-    ],
-    "dictionaries": ["armenian-dict"],
-    "languageSettings": [
-        {
-            "languageId": "hy,hy-AM",
-            "dictionaries": ["armenian-dict"]
-        }
-    ]
+    "import": ["@cspell/dict-hy/cspell-ext.json"]
 }

@@ -37,6 +37,9 @@
     "watch": "tsc -watch -p ./",
     "vscode:prepublish": "npm run build"
   },
+  "dependencies": {
+    "@cspell/dict-hy": "^1.0.3"
+  },
   "devDependencies": {
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3",
