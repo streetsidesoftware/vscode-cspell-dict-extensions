@@ -19,11 +19,11 @@
     "chalk": "^5.6.2",
     "commander": "^14.0.3",
     "find-up": "^8.0.0",
-    "glob": "^13.0.0",
+    "glob": "^13.0.3",
     "kefir": "^3.8.8",
     "mocha": "^11.7.5"
   },
   "devDependencies": {
-    "@types/vscode": "^1.108.1"
+    "@types/vscode": "^1.109.0"
   }
 }
