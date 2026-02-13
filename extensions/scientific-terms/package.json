@@ -66,7 +66,7 @@
     "test": "npm run test:cspell && npm run test:vscode"
   },
   "dependencies": {
-    "@cspell/dict-scientific-terms-us": "^3.0.8"
+    "@cspell/dict-scientific-terms-us": "^3.1.0"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/scientific-terms/",
