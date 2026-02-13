@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-scientific-terms@0.2.6...code-spell-checker-scientific-terms@0.2.7) (2026-02-13)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1472](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1472)) ([23222f7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/23222f7bbb59f66c7fe72f83acb30318bffacf78))
+
 ## [0.2.6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-scientific-terms@0.2.5...code-spell-checker-scientific-terms@0.2.6) (2025-07-20)
 
 
