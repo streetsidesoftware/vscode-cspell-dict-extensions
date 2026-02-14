@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-arabic@0.2.4...code-spell-checker-arabic@0.2.5) (2026-02-13)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1468](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1468)) ([ecb7b5f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/ecb7b5f671edfb4fc0c11c4796d10906ee74f236))
+
 ## [0.2.4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-arabic@0.2.3...code-spell-checker-arabic@0.2.4) (2025-07-20)
 
 
