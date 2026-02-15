@@ -1,0 +1,94 @@
+{
+  "name": "code-spell-checker-armenian",
+  "description": "Armenian dictionary extension for VS Code.",
+  "version": "0.1.0",
+  "displayName": "Armenian - Code Spell Checker",
+  "icon": "images/SpellCheck.png",
+  "private": true,
+  "publisher": "streetsidesoftware",
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": [],
+  "license": "GPL-3.0-or-later",
+  "type": "commonjs",
+  "engines": {
+    "vscode": "^1.102.3"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/streetsidesoftware"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "Armenian",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "qna": "marketplace",
+  "main": "./out/extension.js",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_armenian.enable",
+        "title": "Enable Armenian Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_armenian.disable",
+        "title": "Disable Armenian Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_armenian.enableWorkspace",
+        "title": "Enable Armenian Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_armenian.disableWorkspace",
+        "title": "Disable Armenian Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/armenian"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "scripts": {
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "publish-extension": "vsce publish",
+    "pack-extension": "vsce package",
+    "vscode:prepublish": "npm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test:cspell": "cspell -c cspell-ext.json samples",
+    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/seattle.md",
+    "test": "npm run test:cspell && npm run test:vscode"
+  },
+  "dependencies": {
+    "@cspell/dict-hy": "^1.1.0"
+  },
+  "vsce": {
+    "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/armenian/",
+    "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/armenian/"
+  }
+}

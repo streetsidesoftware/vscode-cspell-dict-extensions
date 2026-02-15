@@ -1,0 +1,4 @@
+{
+    "import": ["@cspell/dict-hy/cspell-ext.json"],
+    "ignoreRegExpList": ["[՝։«»,\\-]"]
+}
