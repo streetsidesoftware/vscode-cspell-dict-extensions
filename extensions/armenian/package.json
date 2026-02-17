@@ -7,7 +7,9 @@
   "private": true,
   "publisher": "streetsidesoftware",
   "author": "Street Side Software <support@streetsidesoftware.nl>",
-  "contributors": [],
+  "contributors": [
+    "Dhayk <dhayk87@gmail.com> (https://github.com/DHayk87)"
+  ],
   "license": "GPL-3.0-or-later",
   "type": "commonjs",
   "engines": {
