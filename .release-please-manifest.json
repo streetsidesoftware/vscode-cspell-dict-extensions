@@ -1,5 +1,5 @@
 {
-    ".": "6.1.10",
+    ".": "6.2.0",
     "extensions/arabic": "0.2.5",
     "extensions/basque": "1.0.7",
     "extensions/bulgarian": "0.1.14",
@@ -52,5 +52,6 @@
     "extensions/timestamp-hover": "1.0.3",
     "extensions/galician": "1.0.3",
     "extensions/mongolian": "1.0.6",
-    "extensions/british-english-ise": "1.0.10"
+    "extensions/british-english-ise": "1.0.10",
+    "extensions/armenian": "1.0.0"
 }

@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-armenian",
   "description": "Armenian dictionary extension for VS Code.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "displayName": "Armenian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
