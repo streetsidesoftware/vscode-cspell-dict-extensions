@@ -1,4 +1,7 @@
-<!--- cspell:ignore Seattle Puget Sound Emerald Amazon Starbucks Microsoft Redmond Hendrix Gates Cobain Bruce ... --->
+<!---
+cspell:ignore Seattle Բրյուս Գեյթսը Կոբեյնը Հենդրիքսը Ջիմմի Սիեթլ
+cspell:ignore Սիեթլը Վաշինգտոն Վաշինգտոնի անգլ ավիահրթիռային ավտոհավաքման
+--->
 
 # Seattle
 
