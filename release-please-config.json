@@ -80,6 +80,10 @@
             "component": "code-spell-checker-arabic",
             "releaseType": "node"
         },
+        "extensions/armenian": {
+            "component": "code-spell-checker-armenian",
+            "releaseType": "node"
+        },
         "extensions/australian-english": {
             "component": "code-spell-checker-australian-english",
             "releaseType": "node"
