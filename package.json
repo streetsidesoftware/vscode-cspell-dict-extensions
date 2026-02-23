@@ -46,7 +46,7 @@
     "@types/vscode": "^1.109.0",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/vsce": "^3.7.1",
-    "cspell": "^9.6.4",
+    "cspell": "^9.7.0",
     "inject-markdown": "^4.0.0",
     "mocha": "^11.7.5",
     "npm-check-updates": "^19.4.1",
