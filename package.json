@@ -37,9 +37,9 @@
     "yarn": "0"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "^4.11.2",
-    "@lerna-lite/exec": "^4.11.2",
-    "@lerna-lite/run": "^4.11.2",
+    "@lerna-lite/cli": "^4.11.3",
+    "@lerna-lite/exec": "^4.11.3",
+    "@lerna-lite/run": "^4.11.3",
     "@tsconfig/node22": "^22.0.5",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.19.11",
@@ -49,7 +49,7 @@
     "cspell": "^9.6.4",
     "inject-markdown": "^4.0.0",
     "mocha": "^11.7.5",
-    "npm-check-updates": "^19.3.2",
+    "npm-check-updates": "^19.4.1",
     "ovsx": "^0.10.9",
     "prettier": "^3.8.1",
     "rimraf": "^6.1.3",
