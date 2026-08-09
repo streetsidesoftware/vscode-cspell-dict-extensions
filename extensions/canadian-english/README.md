@@ -30,7 +30,7 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `en-ca` to the `cSpell.language` setting, will enable the Canadian_english dictionary.
+Adding `en-ca` to the `cSpell.language` setting, will enable the Canadian\_english dictionary.
 Example using both English and Canadian English dictionaries:
 
 ```javascript

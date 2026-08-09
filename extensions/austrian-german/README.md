@@ -30,7 +30,7 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `de-at` to the `cSpell.language` setting, will enable the Austrian_german dictionary.
+Adding `de-at` to the `cSpell.language` setting, will enable the Austrian\_german dictionary.
 Example using both English and Austrian German dictionaries:
 
 ```javascript

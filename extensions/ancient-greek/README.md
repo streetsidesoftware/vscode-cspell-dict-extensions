@@ -30,7 +30,7 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `grc` to the `cSpell.language` setting, will enable the Ancient_greek dictionary.
+Adding `grc` to the `cSpell.language` setting, will enable the Ancient\_greek dictionary.
 Example using both English and Ancient Greek dictionaries:
 
 ```javascript

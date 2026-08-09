@@ -30,7 +30,7 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `fr-90` to the `cSpell.language` setting, will enable the French_reforme dictionary.
+Adding `fr-90` to the `cSpell.language` setting, will enable the French\_reforme dictionary.
 Example using both English and French Réforme 90 dictionaries:
 
 ```javascript
