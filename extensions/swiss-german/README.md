@@ -30,7 +30,7 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `de-ch` to the `cSpell.language` setting, will enable the Swiss_german dictionary.
+Adding `de-ch` to the `cSpell.language` setting, will enable the Swiss\_german dictionary.
 Example using both English and Swiss German dictionaries:
 
 ```javascript
