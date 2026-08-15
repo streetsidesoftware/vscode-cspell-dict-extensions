@@ -47,7 +47,7 @@ Please fix any errors and make sure the following two commands run:
 
 ```sh
 cd extensions/<language>
-npm install
+npm ci
 npm run build
 ```
 

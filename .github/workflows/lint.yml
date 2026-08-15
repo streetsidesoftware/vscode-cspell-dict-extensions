@@ -17,5 +17,5 @@ jobs:
         with:
           node-version-file: .tool-versions
           cache: npm
-      - run: npm install
+      - run: npm ci
       - run: npm run lint
