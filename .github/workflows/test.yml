@@ -44,7 +44,7 @@ jobs:
           path: .vscode-test
 
       - name: Install
-        run: npm i
+        run: npm ci
 
       - name: Download
         id: download
@@ -110,7 +110,7 @@ jobs:
           path: .vscode-test
           fail-on-cache-miss: true
 
-      - run: npm install
+      - run: npm ci
       - run: |
           cd ${{ matrix.extension_dir }}
           npm run pack-extension
@@ -140,7 +140,7 @@ jobs:
           node-version-file: .tool-versions
           cache: npm
 
-      - run: npm install
+      - run: npm ci
       - name: Check Samples
         run: |
           npm run test:cspell
