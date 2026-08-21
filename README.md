@@ -18,6 +18,7 @@ See Also:
 - [Australian English](extensions/australian-english#readme) - Australian English dictionary extension for VS Code.
 - [Austrian German](extensions/austrian-german#readme) - Austrian German dictionary extension for VS Code.
 - [Basque](extensions/basque#readme) - Basque dictionary extension for VS Code.
+- [Belarusian](extensions/belarusian#readme) - Belarusian dictionary extension for VS Code.
 - [British English](extensions/british-english#readme) - British English dictionary extension for VS Code.
 - [British English](extensions/british-english-ise#readme) - British English -ise dictionary extension for VS Code.
 - [Bulgarian](extensions/bulgarian#readme) - Bulgarian dictionary extension for VS Code.
@@ -93,6 +94,7 @@ See Also:
 - [Australian English](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-australian-english) - Australian English dictionary extension for VS Code.
 - [Austrian German](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-austrian-german) - Austrian German dictionary extension for VS Code.
 - [Basque](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-basque) - Basque dictionary extension for VS Code.
+- [Belarusian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-belarusian) - Belarusian dictionary extension for VS Code.
 - [British English](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-british-english) - British English dictionary extension for VS Code.
 - [British English](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-british-english-ise) - British English -ise dictionary extension for VS Code.
 - [Bulgarian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-bulgarian) - Bulgarian dictionary extension for VS Code.
@@ -169,6 +171,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 <!--
 
 - _Arabic_ - [Watheq](https://github.com/watheqAlshowaiter/), [Taha Zerrouki](https://github.com/linuxscout), and [Ahmed ElTabarani](https://github.com/AhmedElTabarani)
+- Belarusian - [Aliaksandr Mikhaleu](https://github.com/Ueschar)
 - _Catalan_ - [Jordi Olivares Provencio](https://github.com/jordiolivares)
 - _Czech_ - [Zereges](https://github.com/Zereges)
 - _Estonian_ - [Igor Krupenja](https://github.com/igor-krupenja)
