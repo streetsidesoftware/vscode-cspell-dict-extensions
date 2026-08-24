@@ -38,7 +38,7 @@ jobs:
           npx npm-check-updates -t semver -u
           rm -rf node_modules package-lock.json
       - name: Install
-        run: npm ci
+        run: npm i
       - name: Update packages
         run: |
           npm run update-packages
