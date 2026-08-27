@@ -1,3 +1,5 @@
 language: en,be
+words:
+  - згенераваны
 import:
   - ./cspell-ext.json
