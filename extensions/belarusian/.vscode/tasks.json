@@ -32,9 +32,7 @@
             "label": "npm: watch",
             "type": "npm",
             "script": "watch",
-            "problemMatcher": [
-                "$tsc-watch"
-            ]
+            "problemMatcher": ["$tsc-watch"]
         }
     ]
 }

@@ -1,12 +1,3 @@
 {
-  "version": "0.2",
-  "readonly": true,
-  "language": "be",
-  "dictionaryDefinitions": [
-    {
-      "name": "belarusian",
-      "path": "./dictionaries/be-BY.trie.gz"
-    }
-  ],
-  "dictionaries": ["belarusian"]
+    "import": ["@cspell/dict-be-by/cspell-ext.json"]
 }
