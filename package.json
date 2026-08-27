@@ -55,7 +55,11 @@
     "rimraf": "^6.1.3",
     "scripts": "file:scripts",
     "test-extensions": "file:test-runner",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "yaml": "^2.9.0"
+  },
+  "allowScripts": {
+    "@vscode/vsce-sign@2.1.0": false,
+    "keytar@7.9.0": false
   }
 }
