@@ -96,6 +96,10 @@
             "component": "code-spell-checker-basque",
             "releaseType": "node"
         },
+        "extensions/belarusian": {
+            "component": "code-spell-checker-belarusian",
+            "releaseType": "node"
+        },
         "extensions/british-english-ise": {
             "component": "code-spell-checker-british-english-ise",
             "releaseType": "node"
