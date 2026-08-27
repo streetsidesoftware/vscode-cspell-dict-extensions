@@ -171,7 +171,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 <!--
 
 - _Arabic_ - [Watheq](https://github.com/watheqAlshowaiter/), [Taha Zerrouki](https://github.com/linuxscout), and [Ahmed ElTabarani](https://github.com/AhmedElTabarani)
-- Belarusian - [Aliaksandr Mikhaleu](https://github.com/Ueschar)
+- _Belarusian_ - [Aliaksandr Mikhaleu](https://github.com/Ueschar)
 - _Catalan_ - [Jordi Olivares Provencio](https://github.com/jordiolivares)
 - _Czech_ - [Zereges](https://github.com/Zereges)
 - _Estonian_ - [Igor Krupenja](https://github.com/igor-krupenja)
@@ -211,4 +211,5 @@ cspell:words Watheq Taha Zerrouki Ahmed ElTabarani
 cspell:words Nederlands
 cspell:words Kimi Heinonen
 cspell:words Borja Paz Rodríguez
+cspell:words Aliaksandr Mikhaleu
 --->
