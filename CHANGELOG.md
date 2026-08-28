@@ -1,5 +1,27 @@
 # Changelog
 
+## [6.3.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@6.2.0...vscode-cspell-dict-extensions@6.3.0) (2026-08-28)
+
+
+### Features
+
+* add Belarusian language extension ([#1539](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1539)) ([8366b52](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/8366b523c54caeaf62ebd1cccd074141cc33e636))
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1488](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1488)) ([229ca01](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/229ca01d2dd7ad7e6199b0875fb9475f3e62bece))
+* Workflow Bot -- Update Dictionaries ([#1491](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1491)) ([d8e1187](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/d8e118791cecc0ff3d6c8db13737ae68e828ef8a))
+* Workflow Bot -- Update Dictionaries ([#1493](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1493)) ([5933a59](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/5933a598d48cdda3b4c1cebd10f8cd62c1d5c959))
+* Workflow Bot -- Update Dictionaries ([#1496](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1496)) ([08ed602](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/08ed60210910300ff7823618b034738646c74d3c))
+* Workflow Bot -- Update Dictionaries ([#1501](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1501)) ([2e9167f](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2e9167f93db839cd1d38c8c74cd32c5cd2d2e6fb))
+* Workflow Bot -- Update Dictionaries ([#1516](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1516)) ([6afecd6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6afecd6766ff4ad984f93badb4d14f89d6941665))
+* Workflow Bot -- Update Dictionaries ([#1526](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1526)) ([318ba54](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/318ba54cfeac12b889d5dbb08c8950b5840cb71f))
+* Workflow Bot -- Update Dictionaries ([#1533](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1533)) ([85392bf](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/85392bf13b28b6b77a27b7a618db7625839c0762))
+* Workflow Bot -- Update Dictionaries ([#1540](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1540)) ([3c52f2a](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3c52f2afb1c681fd73134f8c7020af9be952ea69))
+* Workflow Bot -- Update Dictionaries ([#1544](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1544)) ([cff9160](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/cff91601ee4c05ed32cf6d28601b214ed238b755))
+* Workflow Bot -- Update Dictionaries ([#1546](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1546)) ([ad13080](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/ad130804aa7b5b443575deb055a26407982f3383))
+
 ## [6.2.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@6.1.10...vscode-cspell-dict-extensions@6.2.0) (2026-02-18)
 
 
