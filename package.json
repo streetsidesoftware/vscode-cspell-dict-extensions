@@ -43,7 +43,7 @@
     "@tsconfig/node22": "^22.0.6",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.20.1",
-    "@types/vscode": "^1.134.0",
+    "@types/vscode": "^1.136.0",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/vsce": "^3.9.2",
     "cspell": "^9.8.0",
