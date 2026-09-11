@@ -5,6 +5,7 @@
 - [Armenian](extensions/armenian#readme) - Armenian dictionary extension for VS Code.
 - [Australian English](extensions/australian-english#readme) - Australian English dictionary extension for VS Code.
 - [Austrian German](extensions/austrian-german#readme) - Austrian German dictionary extension for VS Code.
+- [Azerbaijani](extensions/azerbaijani#readme) - Azerbaijani dictionary extension for VS Code.
 - [Basque](extensions/basque#readme) - Basque dictionary extension for VS Code.
 - [Belarusian](extensions/belarusian#readme) - Belarusian dictionary extension for VS Code.
 - [British English](extensions/british-english#readme) - British English dictionary extension for VS Code.
