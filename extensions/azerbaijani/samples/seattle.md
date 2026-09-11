@@ -1,7 +1,10 @@
-[Seattle - Wikipedia](https://en.wikipedia.org/wiki/Seattle)
+[Seattle — Vikipediya](https://az.wikipedia.org/wiki/Seattle)
 
-https://az-az.wikipedia.org/wiki/Seattle
+Seattle ABŞ-ın Vaşinqton ştatında yerləşən böyük bir şəhərdir. Şəhər Puget körfəzinin sahilində yerləşir və regionun mühüm iqtisadi, mədəni və texnoloji mərkəzlərindən biri hesab olunur.
 
-<!---
-Please download some sample text. The Seattle wikipedia site is translated into many languages and provides a good sample.
+Seattle limanı, yağışlı iqlimi və yaxınlıqdakı dağ mənzərələri ilə tanınır. Burada bir çox şirkət, universitet və muzey fəaliyyət göstərir.
+
+<!----
+cspell:locale az,en
+cspell:ignore Puget Seattle Vaşinqton Vikipediya ABŞ körfəzinin mərkəzlərindən regionun yerləşən
 --->
