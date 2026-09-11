@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.4.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@6.3.0...vscode-cspell-dict-extensions@6.4.0) (2026-09-11)
+
+
+### Features
+
+* Add Azerbaijani dictionary extension ([#1561](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1561)) ([a82b7c4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a82b7c4837a44deec49056e3bc37c4b5bdde2301))
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1554](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1554)) ([270a846](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/270a8463c78fa276da393937c359bbb1eb353aba))
+* Workflow Bot -- Update Dictionaries ([#1559](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1559)) ([cb383c7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/cb383c7e93edf67721102ba6763aed1c00796508))
+
 ## [6.3.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@6.2.0...vscode-cspell-dict-extensions@6.3.0) (2026-08-28)
 
 
