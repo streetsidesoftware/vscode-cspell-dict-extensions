@@ -92,6 +92,10 @@
             "component": "code-spell-checker-austrian-german",
             "releaseType": "node"
         },
+        "extensions/azerbaijani": {
+            "component": "code-spell-checker-azerbaijani",
+            "releaseType": "node"
+        },
         "extensions/basque": {
             "component": "code-spell-checker-basque",
             "releaseType": "node"
