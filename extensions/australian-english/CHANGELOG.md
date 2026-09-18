@@ -2,6 +2,14 @@
 
 All notable changes to the "code-spell-checker-australian-english" extension will be documented in this file.
 
+## [1.1.33](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-australian-english@1.1.32...code-spell-checker-australian-english@1.1.33) (2026-09-18)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1559](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1559)) ([cb383c7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/cb383c7e93edf67721102ba6763aed1c00796508))
+* Workflow Bot -- Update Dictionaries ([#1564](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1564)) ([143cc99](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/143cc99967cad584a781c628587d2c567d517dde))
+
 ## [1.1.32](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-australian-english@1.1.31...code-spell-checker-australian-english@1.1.32) (2026-08-28)
 
 
