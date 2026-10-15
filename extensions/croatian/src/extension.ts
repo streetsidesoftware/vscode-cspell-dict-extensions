@@ -3,8 +3,8 @@
 import * as vscode from 'vscode';
 interface CodeSpellCheckerExtension {
     registerConfig(path: string): Promise<void>;
-    enableLocal(isGlobal: boolean, local: string): Promise<void>;
-    disableLocal(isGlobal: boolean, local: string): Promise<void>;
+    enableLocale(isGlobal: boolean, local: string): Promise<void>;
+    disableLocale(isGlobal: boolean, local: string): Promise<void>;
 }
 
 const local = 'hr';
@@ -27,14 +27,14 @@ export function activate(context: vscode.ExtensionContext) {
     function enableCroatian(isGlobal: boolean) {
         if (!extension) return;
         void extension.activate().then((ext) => {
-            return ext?.enableLocal?.(isGlobal, local);
+            return ext?.enableLocale?.(isGlobal, local);
         });
     }
 
     function disableCroatian(isGlobal: boolean) {
         if (!extension) return;
         void extension.activate().then((ext) => {
-            return ext?.disableLocal?.(isGlobal, local);
+            return ext?.disableLocale?.(isGlobal, local);
         });
     }
 

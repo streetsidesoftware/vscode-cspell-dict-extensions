@@ -3,8 +3,8 @@
 import * as vscode from 'vscode';
 interface CodeSpellCheckerExtension {
     registerConfig(path: string): Promise<void>;
-    enableLocal(isGlobal: boolean, local: string): Promise<void>;
-    disableLocal(isGlobal: boolean, local: string): Promise<void>;
+    enableLocale(isGlobal: boolean, local: string): Promise<void>;
+    disableLocale(isGlobal: boolean, local: string): Promise<void>;
 }
 
 // this method is called when your extension is activated

@@ -2,8 +2,8 @@ import * as vscode from 'vscode';
 
 interface CodeSpellCheckerExtension {
     registerConfig(path: string): Promise<void>;
-    enableLocal(isGlobal: boolean, locale: string): Promise<void>;
-    disableLocal(isGlobal: boolean, locale: string): Promise<void>;
+    enableLocale(isGlobal: boolean, locale: string): Promise<void>;
+    disableLocale(isGlobal: boolean, locale: string): Promise<void>;
 }
 
 const locale = 'fr-90';
@@ -33,13 +33,13 @@ export async function activate(context: vscode.ExtensionContext) {
     async function enable(isGlobal: boolean) {
         const ext = await extension?.activate();
         if (!ext) return;
-        await ext.enableLocal(isGlobal, localeEnable);
+        await ext.enableLocale(isGlobal, localeEnable);
     }
 
     async function disable(isGlobal: boolean) {
         const ext = await extension?.activate();
         if (!ext) return;
-        await ext.disableLocal(isGlobal, localeDisable);
+        await ext.disableLocale(isGlobal, localeDisable);
     }
 
     // Push the disposable to the context's subscriptions so that the
