@@ -5,6 +5,7 @@
 import * as cp from 'child_process';
 import * as path from 'path';
 import { promises as fs } from 'node:fs';
+import * as os from 'node:os';
 import { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath, runTests } from '@vscode/test-electron';
 import { Command, CommanderError } from 'commander';
 import { fileURLToPath } from 'url';
@@ -44,6 +45,10 @@ async function main() {
 }
 
 async function testRunner(extensionDevelopmentPath, options) {
+    // `runTests` passes `process.env` to VSCode. If this runs from inside a VSCode process (e.g. an extension host),
+    // `ELECTRON_RUN_AS_NODE` makes VSCode start as plain Node and fail with `bad option: --user-data-dir`.
+    delete process.env.ELECTRON_RUN_AS_NODE;
+
     extensionDevelopmentPath = path.resolve(extensionDevelopmentPath);
 
     const hasPackage = await fileExists(path.join(extensionDevelopmentPath, 'package.json'));
@@ -87,8 +92,9 @@ async function testRunner(extensionDevelopmentPath, options) {
         SAMPLE_TEST_DOCUMENT: options.sample,
     };
 
-    const tempDir = path.join(root, 'temp/.vscode-test/');
-    await fs.mkdir(tempDir, { recursive: true });
+    // VSCode creates its IPC socket inside the user data dir. Keep the path short, because
+    // macOS limits socket paths to 103 characters and a deep checkout (e.g. a git worktree) exceeds it.
+    const tempDir = path.join(os.tmpdir(), 'cspell-dict-');
 
     // VSCode exits with code 1 if its window becomes unresponsive while running tests from the CLI.
     // This happens randomly on CI runners during startup, so retry with a fresh user data dir.
