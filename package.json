@@ -31,7 +31,7 @@
   },
   "type": "commonjs",
   "engines": {
-    "node": ">=22.18.0",
+    "node": ">=24.11.0",
     "pnpm": "0",
     "vscode": "^1.102.3",
     "yarn": "0"
