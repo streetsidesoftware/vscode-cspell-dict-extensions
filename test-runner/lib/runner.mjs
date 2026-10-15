@@ -14,7 +14,10 @@ export async function run(testGlob, cwd) {
         color: true,
     });
 
-    const files = await glob(testGlob, { cwd, absolute: true });
+    // Join relative matches onto `cwd` instead of using `absolute: true`. On Windows, glob returns
+    // an upper case drive letter (`D:\`) while VSCode loads the suite as `d:\`. Node caches modules by exact path,
+    // so the mismatch would load a second copy of `esmImport.cjs` that was never initialized.
+    const files = (await glob(testGlob, { cwd })).map((f) => path.join(cwd, f));
 
     console.log('files: %o', files);
 
