@@ -21,7 +21,7 @@ async function main() {
         .name('download-vscode')
         .description('Download the specified version of VSCode for testing.')
         .arguments('[extension-path]', 'Directory of the extension to test.')
-        .option('--vscode-version', `The version of VSCode to use.`, 'stable')
+        .option('--vscode-version <version>', `The version of VSCode to use.`, 'stable')
         .showHelpAfterError(true)
         .action(downloader);
 
