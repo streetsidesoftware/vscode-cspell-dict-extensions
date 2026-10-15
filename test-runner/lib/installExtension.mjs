@@ -26,6 +26,7 @@ export function installExtension(cliPath, args, extensionId, options = {}) {
  */
 export function installFailure(result) {
     if (result.error) return result.error.message;
-    if (result.status !== 0) return `exit code ${result.status ?? result.signal}`;
+    if (result.signal) return `killed by ${result.signal}`;
+    if (result.status !== 0) return `exit code ${result.status}`;
     return undefined;
 }

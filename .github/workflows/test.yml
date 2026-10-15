@@ -51,7 +51,9 @@ jobs:
       - name: Download
         id: download
         run: |
-          echo download_result=$(node ./test-runner/download-vscode.mjs --vscode-version ${{ steps.vscode-version.outputs.version }}) >> $GITHUB_OUTPUT
+          # Assign first: a failing command substitution inside `echo` would not fail the step.
+          result=$(node ./test-runner/download-vscode.mjs --vscode-version ${{ steps.vscode-version.outputs.version }})
+          echo "download_result=$result" >> $GITHUB_OUTPUT
 
       - name: Summary
         uses: streetsidesoftware/actions/public/summary@v1
@@ -156,7 +158,9 @@ jobs:
         id: download
         shell: bash
         run: |
-          echo download_result=$(node ./test-runner/download-vscode.mjs --vscode-version "$VSCODE_VERSION") >> $GITHUB_OUTPUT
+          # Assign first: a failing command substitution inside `echo` would not fail the step.
+          result=$(node ./test-runner/download-vscode.mjs --vscode-version "$VSCODE_VERSION")
+          echo "download_result=$result" >> $GITHUB_OUTPUT
 
       - name: Run Test
         shell: bash
