@@ -121,7 +121,8 @@ jobs:
           npm run pack-extension
           npm run test:cspell
 
-      - name: Run Test
+      - name: Run Test Linux
+        if: runner.os == 'Linux'
         run: |
           cd ${{ matrix.extension_dir }}
           xvfb-run -a npm run test:vscode -- --vscode-path ${{ needs.download-vscode.outputs.vscode_path }}
@@ -162,7 +163,7 @@ jobs:
           result=$(node ./test-runner/download-vscode.mjs --vscode-version "$VSCODE_VERSION")
           echo "download_result=$result" >> $GITHUB_OUTPUT
 
-      - name: Run Test
+      - name: Run Test Windows
         shell: bash
         working-directory: ${{ env.TEST_EXTENSION_DIR }}
         env:
