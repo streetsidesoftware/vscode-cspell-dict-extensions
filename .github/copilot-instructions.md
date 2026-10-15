@@ -5,7 +5,7 @@
 - This is an npm + `lerna-lite` monorepo of many VS Code extensions, mostly under `extensions/*`.
 - Most extension packages have the same shape: `package.json`, `src/extension.ts`, `cspell-ext.json`, `samples/`, and local build/test scripts.
 - There are three important support packages:
-  - `generator-cspell-dicts-extensions/` — scaffolds new extensions; prefer `npm run create:extension` instead of copying an existing extension by hand.
+  - `generator-cspell-dicts-extensions/` — scaffolds new extensions; prefer `npm run create:extension` instead of copying an existing extension by hand. It is TypeScript (`.mts`) run directly by Node with no runtime dependencies. The extension files come from `templates/`, which use a small EJS subset (`<%= value %>` and `<% if (value) { %> … <% } else { %> … <% } %>`) rendered by `src/render.mts`. Run its unit tests with `npm test` inside the generator directory.
   - `test-runner/` — shared VS Code integration test harness.
   - `scripts/` — repo maintenance and generation scripts.
 - Two extensions are notable special cases:
@@ -21,7 +21,7 @@
   - `npm run test` → `lerna run test`
   - `npm run lint` → runs the root cspell check
   - `npm run lint:code` → runs oxlint with type-aware rules; warnings fail the check
-  - `npm run check-types` → type-checks `test-runner`
+  - `npm run check-types` → type-checks `test-runner` and the generator
   - `npm run test:cspell` → runs sample spelling checks across extensions
   - `npm run create:extension` → scaffold a new extension
   - `npm run gen:readme` → regenerate workspace metadata, extension lists, README injections, and normalize extension manifests

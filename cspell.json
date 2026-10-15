@@ -23,7 +23,7 @@
         "extensions/*/samples/**",
         "node_modules",
         "package-lock.json",
-        "generator-cspell-dicts-extensions/generators/app/templates/**",
+        "generator-cspell-dicts-extensions/templates/**",
         "static/generated"
     ],
     "dictionaries": [

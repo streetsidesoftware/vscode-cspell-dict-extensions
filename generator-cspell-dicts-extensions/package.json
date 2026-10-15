@@ -10,34 +10,21 @@
   "type": "module",
   "private": true,
   "files": [
-    "generators"
+    "run.mts",
+    "src",
+    "!src/**/*.test.mts",
+    "templates"
   ],
-  "main": "generators/index.js",
-  "bin": "./run.js",
+  "bin": "./run.mts",
   "keywords": [
-    "VS Code spelling dictionary extension generator",
-    "yeoman-generator"
+    "VS Code spelling dictionary extension generator"
   ],
-  "dependencies": {
-    "chalk": "^5.6.2",
-    "yeoman-environment": "^6.3.0",
-    "yeoman-generator": "^7.5.1",
-    "yosay": "^3.0.0"
-  },
-  "jest": {
-    "testEnvironment": "node"
+  "engines": {
+    "node": ">=24.11.0"
   },
   "scripts": {
-    "prepublishOnly": "npm audit",
-    "pretest": "eslint . --fix",
-    "test": "jest"
-  },
-  "eslintConfig": {
-    "extends": "xo-space",
-    "env": {
-      "jest": true,
-      "node": true
-    }
+    "check-types": "tsc -p .",
+    "test": "node --test \"src/**/*.test.mts\""
   },
   "repository": "git@github.com:streetsidesoftware/vscode-cspell-dict-extensions",
   "license": "MIT"

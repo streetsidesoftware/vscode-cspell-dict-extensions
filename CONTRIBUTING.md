@@ -16,17 +16,17 @@ In the `vscode-cspell-dict-extensions` repository root directory
 npm run create:extension
 ```
 
-OR
+OR, with the dictionary name as the default answer to the first question:
 
 ```sh
-yo cspell-dict-extensions <language>
+npm run create:extension -- <language>
 ```
 
 ##### Example Answers for Swedish
 
 ![Swedish Generation Example](./images/example-yo.png)
 
-Yeoman will ask you a series of questions most of which default suggestion is ok (to select default suggestion press enter without typing):
+The generator will ask you a series of questions most of which default suggestion is ok (to select default suggestion press enter without typing):
 
 | Field                         | Description                                                                                                                                                                                                                                                                      |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
