@@ -13,36 +13,29 @@ jobs:
       download_result: ${{ steps.download.outputs.download_result }}
       vscode_path: ${{ fromJson(steps.download.outputs.download_result).vscodeExecutablePath }}
       vscode_version: ${{ steps.vscode-version.outputs.version }}
-      cache_key: ${{ steps.cache-key.outputs.value }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
-
-      - name: Key Base
-        id: key-base
-        uses: streetsidesoftware/actions/public/output@v1
-        with:
-          value: vscode-download-cache-${{ runner.os }}-
 
       # Resolve `stable` to an exact version so the cache key changes when a new version is released.
       # The cache also holds the Code Spell Checker extension, which is refreshed along with VSCode.
       - name: Get VSCode Version
         id: vscode-version
         run: |
-          echo "version=$(curl -fsSL --retry 3 https://update.code.visualstudio.com/api/releases/stable | jq -r '.[0]')" >> $GITHUB_OUTPUT
+          version=$(curl -fsSL --retry 3 https://update.code.visualstudio.com/api/releases/stable | jq -r '.[0]')
+          if [[ -z "$version" || "$version" == "null" ]]; then
+            echo "::error::Unable to resolve the stable VSCode version."
+            exit 1
+          fi
+          echo "version=$version" >> $GITHUB_OUTPUT
         shell: bash
-
-      - name: Calc Key
-        id: cache-key
-        uses: streetsidesoftware/actions/public/output@v1
-        with:
-          value: "${{ steps.key-base.outputs.value }}${{ steps.vscode-version.outputs.version }}"
 
       - name: Cache Download
         id: cache-download
         uses: actions/cache@v6.1.0
         with:
-          key: ${{ steps.cache-key.outputs.value }}
+          # VSCode cache key: keep the same form in `build-test` and `build-test-windows`.
+          key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ steps.vscode-version.outputs.version }}
           path: .vscode-test
 
       - name: Install
@@ -60,7 +53,7 @@ jobs:
         with:
           text: |
             ## Downloaded VSCode
-            - Cache Key: ${{ steps.cache-key.outputs.value }}
+            - Cache Key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ steps.vscode-version.outputs.version }}
             - Cache Hit: ${{ toJson(steps.cache-download.outputs) }}
             - Download Result: ${{ steps.download.outputs.download_result }}
           # - Event:
@@ -111,7 +104,8 @@ jobs:
         id: cache-download
         uses: actions/cache@v6.1.0
         with:
-          key: ${{ needs.download-vscode.outputs.cache_key }}
+          # VSCode cache key: keep the same form in `download-vscode` and `build-test-windows`.
+          key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ needs.download-vscode.outputs.vscode_version }}
           path: .vscode-test
           fail-on-cache-miss: true
 
@@ -150,7 +144,8 @@ jobs:
         id: cache-download
         uses: actions/cache@v6.1.0
         with:
-          key: vscode-download-cache-${{ runner.os }}-${{ env.VSCODE_VERSION }}
+          # VSCode cache key: keep the same form in `download-vscode` and `build-test`.
+          key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ env.VSCODE_VERSION }}
           path: .vscode-test
 
       - run: npm ci
