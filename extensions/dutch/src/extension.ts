@@ -1,14 +1,12 @@
-// The module 'vscode' contains the VS Code extensibility API
 import * as vscode from 'vscode';
+
 interface CodeSpellCheckerExtension {
     registerConfig(path: string): Promise<void>;
     enableLocale(isGlobal: boolean, locale: string): Promise<void>;
     disableLocale(isGlobal: boolean, locale: string): Promise<void>;
 }
 
-//
 const locale = 'nl';
-//
 
 /**
  * Called by VS Code when the extension is loaded.
@@ -49,5 +47,7 @@ export async function activate(context: vscode.ExtensionContext) {
     await ext?.registerConfig(configLocation);
 }
 
-// this method is called when your extension is deactivated
+/**
+ * Called by VS Code when the extension is unloaded.
+ */
 export function deactivate() {}
