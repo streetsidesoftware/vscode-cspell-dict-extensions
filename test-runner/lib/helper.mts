@@ -4,39 +4,42 @@ import * as path from 'node:path';
 
 import * as vscode from 'vscode';
 
-import { color, log } from './logger.mjs';
+import { color, log } from './logger.mts';
 
 export { log };
 
 export const repoRoot = path.join(import.meta.dirname, '../..');
 
-/**
- * @typedef {import('vscode').Extension} Extension
- * @typedef {import('vscode').TextDocument} TextDocument
- * @typedef {import('vscode').TextEditor} TextEditor
- * @typedef {import('vscode').Uri} Uri
- * @typedef {{doc: TextDocument, editor: TextEditor}} DocumentContext
- */
+export interface DocumentContext {
+    doc: vscode.TextDocument;
+    editor: vscode.TextEditor;
+}
 
-// export interface ExtensionActivation {
-//     ext: vscode.Extension<ExtensionApi>;
-//     extActivate: ExtensionApi;
-//     extApi: ExtensionApi;
-// }
+export interface ExtensionActivation<T> {
+    ext: vscode.Extension<T>;
+    extActivate: T;
+    extApi: T | undefined;
+}
+
+export interface PackageJson {
+    name: string;
+    publisher: string;
+    version: string;
+    [field: string]: unknown;
+}
 
 /**
- * Activates the spell checker extension
- * @param {string | undefined} extId
- * @returns {Promise<{ ext: Extension, extActivate: any, extApi: any }>}
+ * Activates an extension.
+ * @param extId - the extension id, defaults to the extension under test.
  */
-export async function activateExtension(extId) {
+export async function activateExtension<T = unknown>(extId?: string): Promise<ExtensionActivation<T>> {
     const extensionId = extId || (await getExtensionId());
-    await log(`Activate: ${extensionId}`);
+    log(`Activate: ${extensionId}`);
     try {
-        const ext = vscode.extensions.getExtension(extensionId);
+        const ext = vscode.extensions.getExtension<T>(extensionId);
         assert(ext);
         const extActivate = await ext.activate();
-        const extApi = vscode.extensions.getExtension(extensionId)?.exports;
+        const extApi = vscode.extensions.getExtension<T>(extensionId)?.exports;
         return {
             ext,
             extActivate,
@@ -48,16 +51,7 @@ export async function activateExtension(extId) {
     }
 }
 
-/**
- * Activates the spell checker extension
- */
-
-/**
- *
- * @param {Uri} docUri
- * @returns {Promise<DocumentContext | undefined}
- */
-export async function loadDocument(docUri) {
+export async function loadDocument(docUri: vscode.Uri): Promise<DocumentContext | undefined> {
     try {
         const doc = await vscode.workspace.openTextDocument(docUri);
         const editor = await vscode.window.showTextDocument(doc);
@@ -70,22 +64,11 @@ export async function loadDocument(docUri) {
     }
 }
 
-/**
- *
- * @param {number} ms
- * @returns {Promise<void>}
- */
-export async function sleep(ms) {
-    return new Promise((resolve) => setTimeout(() => resolve(undefined), ms));
+export async function sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-/**
- *
- * @param {DocumentContext} context
- * @param {string} content
- * @returns {Promise<boolean>}
- */
-export async function setTestContent(context, content) {
+export async function setTestContent(context: DocumentContext, content: string): Promise<boolean> {
     const { doc, editor } = context;
     const all = new vscode.Range(doc.positionAt(0), doc.positionAt(doc.getText().length));
     return editor.edit((eb) => eb.replace(all, content));
@@ -93,9 +76,8 @@ export async function setTestContent(context, content) {
 
 /**
  * Get the extension id from `package.json`
- * @returns {Promise<string>}
  */
-export async function getExtensionId() {
+export async function getExtensionId(): Promise<string> {
     const extensionPackage = await readPackageJson();
     // The extensionId is `publisher.name` from package.json
     const { name = '', publisher = '' } = extensionPackage;
@@ -104,27 +86,18 @@ export async function getExtensionId() {
 
 export const samplesDirUri = vscode.Uri.file('./samples');
 
-/**
- *
- * @param  {string[]} pathSegments
- * @returns {Uri}
- */
-export function sampleWorkspaceUri(...pathSegments) {
+export function sampleWorkspaceUri(...pathSegments: string[]): vscode.Uri {
     return vscode.Uri.joinPath(samplesDirUri, ...pathSegments);
 }
 
-export function logYellow(...params) {
-    const [message, ...rest] = params;
+export function logYellow(message?: string, ...rest: unknown[]): void {
     if (!message) return log('');
     return log(color('yellow', message), ...rest);
 }
 
-/**
- *
- * @param {string} cwd
- * @returns {{name: string, publisher: string, version: string, [field: string]: unknown}}
- */
-export async function readPackageJson(cwd = process.env['EXTENSION_DEVELOPMENT_PATH'] || process.cwd()) {
+export async function readPackageJson(
+    cwd: string = process.env['EXTENSION_DEVELOPMENT_PATH'] || process.cwd(),
+): Promise<PackageJson> {
     const pkgFile = await findUp('package.json', cwd, repoRoot);
     log('readPackageJson %o', { cwd, pkgFile });
     if (
@@ -139,12 +112,8 @@ export async function readPackageJson(cwd = process.env['EXTENSION_DEVELOPMENT_P
 
 /**
  * Search for `fileName` in `cwd` and its parent directories, up to and including `stopAt`.
- * @param {string} fileName
- * @param {string} cwd
- * @param {string} stopAt
- * @returns {Promise<string | undefined>}
  */
-async function findUp(fileName, cwd, stopAt) {
+async function findUp(fileName: string, cwd: string, stopAt: string): Promise<string | undefined> {
     stopAt = path.resolve(stopAt);
     for (let dir = path.resolve(cwd); ; dir = path.dirname(dir)) {
         const file = path.join(dir, fileName);
@@ -153,11 +122,7 @@ async function findUp(fileName, cwd, stopAt) {
     }
 }
 
-/**
- * @param {string} file
- * @returns {Promise<boolean>}
- */
-async function isFile(file) {
+async function isFile(file: string): Promise<boolean> {
     try {
         return (await fs.stat(file)).isFile();
     } catch {

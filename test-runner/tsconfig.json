@@ -1,0 +1,20 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "target": "es2024",
+        "lib": ["es2024", "ESNext.Array", "ESNext.Iterator"],
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "types": ["node", "mocha"],
+        "strict": true,
+        "skipLibCheck": true,
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
+        "erasableSyntaxOnly": true,
+        "verbatimModuleSyntax": true,
+        "allowJs": true,
+        "checkJs": true
+    },
+    "include": ["*.mts", "*.mjs", "lib", "suite"],
+    "exclude": ["node_modules"]
+}

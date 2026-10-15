@@ -2,17 +2,14 @@ import assert from 'node:assert';
 import { basename, resolve } from 'node:path';
 
 import { suite, test } from 'mocha';
-import { languages, Position, Uri, window } from 'vscode';
+import { type Diagnostic, languages, Position, Uri, window } from 'vscode';
 
-import { activateExtension, loadDocument, log, logYellow, sleep } from '../../lib/helper.mjs';
+import { activateExtension, loadDocument, log, logYellow, sleep } from '../../lib/helper.mts';
+import type { CSpellExtensionApi, OnSpellCheckDocumentStep } from '../types.d.ts';
 
 const sampleDoc = process.env['SAMPLE_TEST_DOCUMENT'];
+assert.ok(sampleDoc, 'SAMPLE_TEST_DOCUMENT must be set.');
 const uriSampleDoc = Uri.file(resolve(sampleDoc));
-
-/**
- * @typedef {import('../types').OnSpellCheckDocumentStep} OnSpellCheckDocumentStep
- * @typedef {import('vscode').Uri} Uri
- */
 
 const timeoutInSeconds = 120;
 
@@ -39,15 +36,15 @@ suite('Extension Test Suite 1', function () {
     test('reading the sample file.', async () => {
         logYellow('Verifies reading the sample file: %s.', sampleDoc);
         const result = await loadDocument(uriSampleDoc);
-        const urlDoc = result?.doc.uri.toString(true);
         assert.ok(result?.doc, 'Must be able to load the document.');
+        const urlDoc = result.doc.uri.toString(true);
         assert.ok(urlDoc.endsWith(basename(sampleDoc)), 'matches sample doc');
     });
 
     test('Opening the sample document and making sure there are no errors.', async () => {
         logYellow('Opening the sample document and making sure there are no errors.');
         const docContext = await loadDocument(uriSampleDoc);
-        assert.notStrictEqual(docContext, undefined);
+        assert.ok(docContext, 'Must be able to load the document.');
         await sleep(500);
         // Force a spell check by making an edit, no errors are expected.
         const pEdit0 = docContext.editor.edit((edit) => edit.insert(new Position(0, 0), '\n'));
@@ -55,7 +52,7 @@ suite('Extension Test Suite 1', function () {
         await pEdit0;
         const found0 = await pWait0;
         log('found %o', found0);
-        assert.strictEqual(found0.numIssues, 0);
+        assert.strictEqual(found0?.numIssues, 0);
 
         // Force a spelling error
         log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
@@ -70,7 +67,7 @@ suite('Extension Test Suite 1', function () {
         const found1 = await pWait1;
         log('found %o', found1);
         log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
-        assert.strictEqual(found1.numIssues, 1);
+        assert.strictEqual(found1?.numIssues, 1);
 
         const diags = await getDiagsFromVsCode(uriSampleDoc, 2000);
 
@@ -100,17 +97,16 @@ suite('Extension Test Suite 1', function () {
  * Wait for the spell checker to finish checking `uri`.
  * The document can be checked several times while it is being edited, so wait until
  * no new result has arrived for 100ms and return the last one.
- * @param {Uri} uri
- * @param {number} timeout
- * @returns {Promise<OnSpellCheckDocumentStep | undefined>} `undefined` if `timeout` ms pass first.
+ * @returns the last result, or `undefined` if `timeout` ms pass first.
  */
-async function waitForSpellComplete(uri, timeout) {
+async function waitForSpellComplete(uri: Uri, timeout: number): Promise<OnSpellCheckDocumentStep | undefined> {
     const matchUri = uri.toString();
-    const ext = await activateExtension('streetsidesoftware.code-spell-checker');
+    const ext = await activateExtension<CSpellExtensionApi>('streetsidesoftware.code-spell-checker');
+    assert.ok(ext.extApi, 'Code Spell Checker API must be available.');
     const cSpellClient = ext.extApi.cSpellClient();
 
     return new Promise((resolve) => {
-        let debounceTimer;
+        let debounceTimer: NodeJS.Timeout | undefined;
         const timeoutTimer = setTimeout(() => finish(undefined), timeout);
         const listener = cSpellClient.onSpellCheckDocumentNotification((step) => {
             if (step.uri !== matchUri || !step.done) return;
@@ -118,7 +114,7 @@ async function waitForSpellComplete(uri, timeout) {
             debounceTimer = setTimeout(() => finish(step), 100);
         });
 
-        function finish(result) {
+        function finish(result: OnSpellCheckDocumentStep | undefined) {
             clearTimeout(debounceTimer);
             clearTimeout(timeoutTimer);
             listener.dispose();
@@ -127,13 +123,7 @@ async function waitForSpellComplete(uri, timeout) {
     });
 }
 
-/**
- *
- * @param {Uri} uri
- * @param {number} waitInMs
- * @returns {Promise<vscode.Diagnostic[]>}
- */
-async function getDiagsFromVsCode(uri, waitInMs) {
+async function getDiagsFromVsCode(uri: Uri, waitInMs: number): Promise<Diagnostic[]> {
     let stop = false;
     const h = setInterval(() => (stop = true), waitInMs);
     try {

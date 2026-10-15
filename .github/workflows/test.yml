@@ -51,7 +51,7 @@ jobs:
         id: download
         run: |
           # Assign first: a failing command substitution inside `echo` would not fail the step.
-          result=$(node ./test-runner/download-vscode.mjs --vscode-version ${{ steps.vscode-version.outputs.version }})
+          result=$(node ./test-runner/download-vscode.mts --vscode-version ${{ steps.vscode-version.outputs.version }})
           echo "download_result=$result" >> $GITHUB_OUTPUT
 
       - name: Summary
@@ -176,7 +176,7 @@ jobs:
         shell: bash
         run: |
           # Assign first: a failing command substitution inside `echo` would not fail the step.
-          result=$(node ./test-runner/download-vscode.mjs --vscode-version "$VSCODE_VERSION")
+          result=$(node ./test-runner/download-vscode.mts --vscode-version "$VSCODE_VERSION")
           echo "download_result=$result" >> $GITHUB_OUTPUT
 
       - name: Run Test Windows

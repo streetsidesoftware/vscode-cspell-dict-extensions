@@ -1,1 +1,1 @@
-import './test-runner.mjs';
+import './test-runner.mts';

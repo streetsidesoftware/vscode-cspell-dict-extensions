@@ -6,7 +6,7 @@ import { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath } from '
 import { Command, CommanderError } from 'commander';
 import { fileURLToPath } from 'url';
 import { styleText } from 'node:util';
-import { installExtension, installFailure } from './lib/installExtension.mjs';
+import { installExtension, installFailure } from './lib/installExtension.mts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,7 +20,7 @@ async function main() {
     program
         .name('download-vscode')
         .description('Download the specified version of VSCode for testing.')
-        .arguments('[extension-path]', 'Directory of the extension to test.')
+        .argument('[extension-path]', 'Directory of the extension to test.')
         .option('--vscode-version <version>', `The version of VSCode to use.`, 'stable')
         .showHelpAfterError(true)
         .action(downloader);
@@ -37,7 +37,11 @@ async function main() {
     }
 }
 
-async function downloader(extensionDevelopmentPath, options) {
+interface DownloaderOptions {
+    vscodeVersion: string;
+}
+
+async function downloader(extensionDevelopmentPath: string | undefined, options: DownloaderOptions) {
     if (extensionDevelopmentPath) {
         extensionDevelopmentPath = path.resolve(extensionDevelopmentPath);
 
@@ -75,7 +79,7 @@ async function downloader(extensionDevelopmentPath, options) {
     console.error('done.');
 }
 
-async function fileExists(filePath) {
+async function fileExists(filePath: string): Promise<boolean> {
     try {
         const s = await fs.stat(filePath);
         return s.isFile();
