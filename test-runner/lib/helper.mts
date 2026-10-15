@@ -25,6 +25,9 @@ export interface PackageJson {
     name?: string;
     publisher?: string;
     version?: string;
+    contributes?: {
+        commands?: { command: string }[];
+    };
     [field: string]: unknown;
 }
 
