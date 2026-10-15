@@ -1,12 +1,11 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
 const regexpIsNumber = /^\d+(?:\.\d*)?$/;
 const regexpWord = /[_0-9.]+/;
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+/**
+ * Called by VS Code when the extension is loaded.
+ */
 export function activate(context: vscode.ExtensionContext) {
     const options: FormatTimestampOptions = {
         minDate: new Date('1980-01-01'),
@@ -28,7 +27,6 @@ export function activate(context: vscode.ExtensionContext) {
     );
     context.subscriptions.push(hoverProvider);
 }
-
 
 interface FormatTimestampOptions {
     minDate: Date;
@@ -57,5 +55,7 @@ function formatTimestamp(text: string, options: FormatTimestampOptions): string 
     }
 }
 
-// this method is called when your extension is deactivated
+/**
+ * Called by VS Code when the extension is unloaded.
+ */
 export function deactivate() {}
