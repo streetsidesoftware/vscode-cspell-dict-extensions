@@ -2,7 +2,6 @@
 
 // @ts-check
 
-import * as cp from 'child_process';
 import * as path from 'path';
 import { promises as fs } from 'node:fs';
 import * as os from 'node:os';
@@ -11,6 +10,7 @@ import { Command, CommanderError } from 'commander';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
 import assert from 'node:assert';
+import { installExtension, installFailure } from './lib/installExtension.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -74,22 +74,27 @@ async function testRunner(extensionDevelopmentPath, options) {
     const vscodeExecutablePath = options.vscodePath || (await downloadAndUnzipVSCode({ cachePath, version }));
     const [cliPath, ...rawArgs] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
     const args = rawArgs.filter((arg) => !arg.startsWith('--extensions-dir='));
-    const extensionsDirArg = `--extensions-dir=${cachePath}/extensions`;
+    const extensionsDirArg = `--extensions-dir=${path.join(cachePath, 'extensions')}`;
     args.push(extensionsDirArg);
 
     if (!options.vscodePath) {
-        // Delete `.vscode-test` to prevent socket issues (based upon the current directory)
+        // Delete `<cwd>/.vscode-test`, NOT the download cache at `cachePath`. `@vscode/test-electron` defaults the
+        // CLI's `--user-data-dir` to `<cwd>/.vscode-test/user-data`, so this clears what earlier extension installs
+        // left behind (including stale sockets). `cachePath` holds the VSCode build downloaded above.
         await fs.rm(cacheDirVscodeTest, { recursive: true, force: true });
 
-        // Use cp.spawn / cp.exec for custom setup
-        cp.spawnSync(cliPath, [...args, '--install-extension', 'streetsidesoftware.code-spell-checker'], {
-            encoding: 'utf-8',
-            stdio: 'inherit',
-        });
+        const result = installExtension(cliPath, args, 'streetsidesoftware.code-spell-checker', { stdio: 'inherit' });
+        const failure = installFailure(result);
+        if (failure) {
+            throw new Error(`Failed to install Code Spell Checker: ${failure}`);
+        }
     }
 
+    // Pass absolute paths. The extension host's current directory is the extension on Linux and macOS,
+    // but the VSCode install directory on Windows.
     const extensionTestsEnv = {
-        SAMPLE_TEST_DOCUMENT: options.sample,
+        SAMPLE_TEST_DOCUMENT: path.resolve(extensionDevelopmentPath, options.sample),
+        EXTENSION_DEVELOPMENT_PATH: extensionDevelopmentPath,
     };
 
     // VSCode creates its IPC socket inside the user data dir. Keep the path short, because
@@ -127,7 +132,8 @@ async function testRunner(extensionDevelopmentPath, options) {
             if (attempt >= maxAttempts) throw err;
             console.error('%s', chalk.yellow(`Test run failed (attempt ${attempt} of ${maxAttempts}), retrying...`));
         } finally {
-            await fs.rm(userDataDir, { recursive: true, force: true });
+            // On Windows, VSCode helper processes can hold files open briefly after exit (EBUSY).
+            await fs.rm(userDataDir, { recursive: true, force: true, maxRetries: 5 });
         }
     }
 }

@@ -12,36 +12,36 @@ jobs:
     outputs:
       download_result: ${{ steps.download.outputs.download_result }}
       vscode_path: ${{ fromJson(steps.download.outputs.download_result).vscodeExecutablePath }}
-      cache_key: ${{ steps.cache-key.outputs.value }}
+      vscode_version: ${{ steps.vscode-version.outputs.version }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
 
-      - name: Key Base
-        id: key-base
-        uses: streetsidesoftware/actions/public/output@v1
+      - name: Use Node.js
+        uses: actions/setup-node@v7
         with:
-          value: vscode-download-cache-${{ runner.os }}-
+          node-version-file: .tool-versions
+          cache: npm
 
       # Resolve `stable` to an exact version so the cache key changes when a new version is released.
       # The cache also holds the Code Spell Checker extension, which is refreshed along with VSCode.
       - name: Get VSCode Version
         id: vscode-version
         run: |
-          echo "version=$(curl -fsSL --retry 3 https://update.code.visualstudio.com/api/releases/stable | jq -r '.[0]')" >> $GITHUB_OUTPUT
+          version=$(curl -fsSL --retry 3 https://update.code.visualstudio.com/api/releases/stable | jq -r '.[0]')
+          if [[ -z "$version" || "$version" == "null" ]]; then
+            echo "::error::Unable to resolve the stable VSCode version."
+            exit 1
+          fi
+          echo "version=$version" >> $GITHUB_OUTPUT
         shell: bash
-
-      - name: Calc Key
-        id: cache-key
-        uses: streetsidesoftware/actions/public/output@v1
-        with:
-          value: "${{ steps.key-base.outputs.value }}${{ steps.vscode-version.outputs.version }}"
 
       - name: Cache Download
         id: cache-download
         uses: actions/cache@v6.1.0
         with:
-          key: ${{ steps.cache-key.outputs.value }}
+          # VSCode cache key: keep the same form in `build-test` and `build-test-windows`.
+          key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ steps.vscode-version.outputs.version }}
           path: .vscode-test
 
       - name: Install
@@ -50,14 +50,16 @@ jobs:
       - name: Download
         id: download
         run: |
-          echo download_result=$(node ./test-runner/download-vscode.mjs --vscode-version ${{ steps.vscode-version.outputs.version }}) >> $GITHUB_OUTPUT
+          # Assign first: a failing command substitution inside `echo` would not fail the step.
+          result=$(node ./test-runner/download-vscode.mjs --vscode-version ${{ steps.vscode-version.outputs.version }})
+          echo "download_result=$result" >> $GITHUB_OUTPUT
 
       - name: Summary
         uses: streetsidesoftware/actions/public/summary@v1
         with:
           text: |
             ## Downloaded VSCode
-            - Cache Key: ${{ steps.cache-key.outputs.value }}
+            - Cache Key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ steps.vscode-version.outputs.version }}
             - Cache Hit: ${{ toJson(steps.cache-download.outputs) }}
             - Download Result: ${{ steps.download.outputs.download_result }}
           # - Event:
@@ -108,7 +110,8 @@ jobs:
         id: cache-download
         uses: actions/cache@v6.1.0
         with:
-          key: ${{ needs.download-vscode.outputs.cache_key }}
+          # VSCode cache key: keep the same form in `download-vscode` and `build-test-windows`.
+          key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ needs.download-vscode.outputs.vscode_version }}
           path: .vscode-test
           fail-on-cache-miss: true
 
@@ -124,11 +127,53 @@ jobs:
           cd ${{ matrix.extension_dir }}
           xvfb-run -a npm run test:vscode -- --vscode-path ${{ needs.download-vscode.outputs.vscode_path }}
 
-      - name: Run Test Windows and MacOS
-        if: runner.os != 'Linux'
+  # Make sure everything builds on Windows and that one extension can be tested.
+  # Uses the same VSCode version as the Linux tests.
+  # This is a separate job rather than a `build-test` matrix entry because the work differs: it builds and
+  # packages all extensions, needs its own VSCode download and cache, and runs without `xvfb-run`.
+  build-test-windows:
+    runs-on: windows-latest
+    needs:
+      - download-vscode
+    env:
+      VSCODE_VERSION: ${{ needs.download-vscode.outputs.vscode_version }}
+      TEST_EXTENSION_DIR: extensions/german
+    steps:
+      - uses: actions/checkout@v7
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+          cache: npm
+
+      - name: Cache Download
+        id: cache-download
+        uses: actions/cache@v6.1.0
+        with:
+          # VSCode cache key: keep the same form in `download-vscode` and `build-test`.
+          key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ env.VSCODE_VERSION }}
+          path: .vscode-test
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test-pack
+
+      - name: Download
+        id: download
+        shell: bash
         run: |
-          cd ${{ matrix.extension_dir }}
-          npm run test:vscode -- --vscode-path ${{ needs.download-vscode.outputs.vscode_path }}
+          # Assign first: a failing command substitution inside `echo` would not fail the step.
+          result=$(node ./test-runner/download-vscode.mjs --vscode-version "$VSCODE_VERSION")
+          echo "download_result=$result" >> $GITHUB_OUTPUT
+
+      - name: Run Test Windows
+        shell: bash
+        working-directory: ${{ env.TEST_EXTENSION_DIR }}
+        env:
+          VSCODE_PATH: ${{ fromJson(steps.download.outputs.download_result).vscodeExecutablePath }}
+        run: |
+          npm run test:cspell
+          npm run test:vscode -- --vscode-path "$VSCODE_PATH"
 
   # Run the spell checker on all the samples using the extension's settings.
   # This will help with dictionary updates.
