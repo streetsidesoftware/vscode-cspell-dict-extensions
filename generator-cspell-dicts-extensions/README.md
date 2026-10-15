@@ -16,7 +16,7 @@ Pass a name to use it as the default answer to the first question:
 npm run create:extension -- swedish
 ```
 
-The generator asks a few questions, writes the extension into `extensions/<name>` (the directory must not exist yet), installs the dictionary, and formats the files with prettier. Use `--skip-install` to only write the files.
+The generator asks a few questions, writes the extension into `extensions/<name>` (the directory must not exist yet), installs the dictionary, and formats the files with prettier.
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for a description of each question.
 
