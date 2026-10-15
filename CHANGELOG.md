@@ -1,5 +1,31 @@
 # Changelog
 
+## [7.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@6.3.0...vscode-cspell-dict-extensions@7.0.0) (2026-10-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update Turkish and Azerbaijani dictionaries ([#1583](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1583))
+
+### Features
+
+* Add Azerbaijani dictionary extension ([#1561](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1561)) ([a82b7c4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a82b7c4837a44deec49056e3bc37c4b5bdde2301))
+* Update Turkish and Azerbaijani dictionaries ([#1583](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1583)) ([bcc617c](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/bcc617c189225612d82d3ac88a1d80d0afbebabd))
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1554](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1554)) ([270a846](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/270a8463c78fa276da393937c359bbb1eb353aba))
+* Workflow Bot -- Update Dictionaries ([#1559](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1559)) ([cb383c7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/cb383c7e93edf67721102ba6763aed1c00796508))
+* Workflow Bot -- Update Dictionaries ([#1564](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1564)) ([143cc99](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/143cc99967cad584a781c628587d2c567d517dde))
+* Workflow Bot -- Update Dictionaries ([#1569](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1569)) ([af56a2e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/af56a2ef47edd11dc3d0138fd9e8a1ae91715a06))
+* Workflow Bot -- Update Dictionaries ([#1577](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1577)) ([52f15e4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/52f15e44d7f127894ca465427880f6bce6f902b6))
+
+
+### Code Refactoring
+
+* **test-runner:** convert CommonJS files to ESM ([#1584](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1584)) ([acaa799](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/acaa799be8940260939f07cbb42885e674e2b07d))
+
 ## [6.3.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@6.2.0...vscode-cspell-dict-extensions@6.3.0) (2026-08-28)
 
 

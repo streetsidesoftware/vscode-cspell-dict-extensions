@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-hungarian" extension will be documented in this file.
 
+## [1.0.6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-hungarian@1.0.5...code-spell-checker-hungarian@1.0.6) (2026-10-15)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1569](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1569)) ([af56a2e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/af56a2ef47edd11dc3d0138fd9e8a1ae91715a06))
+
 ## [1.0.5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-hungarian@1.0.4...code-spell-checker-hungarian@1.0.5) (2025-07-20)
 
 

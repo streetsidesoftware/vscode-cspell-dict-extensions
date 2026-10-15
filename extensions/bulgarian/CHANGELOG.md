@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.15](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-bulgarian@0.1.14...code-spell-checker-bulgarian@0.1.15) (2026-10-15)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1569](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1569)) ([af56a2e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/af56a2ef47edd11dc3d0138fd9e8a1ae91715a06))
+
 ## [0.1.14](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-bulgarian@0.1.13...code-spell-checker-bulgarian@0.1.14) (2025-07-20)
 
 
