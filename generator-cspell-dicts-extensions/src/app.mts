@@ -1,44 +1,38 @@
 import { spawnSync } from 'node:child_process';
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
-import { parseArgs, styleText } from 'node:util';
+import { styleText } from 'node:util';
 
-import { createPrompter, createTerminalReadLine } from './prompt.mts';
-import { type Answers, askQuestions } from './questions.mts';
+import { Command } from 'commander';
+
+import { inquirerPrompter } from './prompt.mts';
+import { askQuestions } from './questions.mts';
 import { writeExtension } from './writeExtension.mts';
 
 const genName = 'generator-cspell-dicts-extensions';
 
-const usage = `Usage: npm run create:extension -- [options] [name]
-
-Generate a VS Code spelling dictionary extension.
-
-Arguments:
-  name            the default dictionary directory name, i.e. swedish
-
-Options:
-  --skip-install  do not run npm install or prettier
-  -h, --help      show this help`;
+interface Options {
+    skipInstall?: boolean;
+}
 
 /**
  * Run the generator.
- * @param args - the command line arguments, without `node` and the script.
+ * @param argv - the command line, including `node` and the script.
  */
-export async function run(args: string[] = process.argv.slice(2)): Promise<void> {
-    const { values, positionals } = parseArgs({
-        args,
-        allowPositionals: true,
-        options: {
-            'skip-install': { type: 'boolean', default: false },
-            help: { type: 'boolean', short: 'h', default: false },
-        },
-    });
+export async function run(argv: string[] = process.argv): Promise<void> {
+    const program = new Command();
+    program
+        .name('create:extension')
+        .description('Generate a VS Code spelling dictionary extension.')
+        .argument('[name]', 'the default dictionary directory name, i.e. swedish')
+        .option('--skip-install', 'do not run npm install or prettier')
+        .showHelpAfterError(true)
+        .action(generate);
 
-    if (values.help) {
-        console.log(usage);
-        return;
-    }
+    await program.parseAsync(argv);
+}
 
+async function generate(name: string | undefined, options: Options): Promise<void> {
     let root = process.cwd();
     if (path.basename(root) === genName) {
         root = path.dirname(root);
@@ -46,30 +40,21 @@ export async function run(args: string[] = process.argv.slice(2)): Promise<void>
 
     console.log(styleText('bold', '\nWelcome to the VS Code Spelling Dictionary Extension generator!\n'));
 
-    const terminal = createTerminalReadLine();
-    const prompter = createPrompter(terminal.readLine);
+    const answers = await askQuestions(inquirerPrompter, name);
 
-    let answers: Answers;
     let destDir = root;
-    try {
-        answers = await askQuestions(prompter, positionals[0]);
-
-        if (path.basename(root) !== answers.name) {
-            console.log('Creating Folder: ' + answers.name);
-            destDir = path.resolve(root, answers.target);
-            await mkdir(destDir, { recursive: true });
-        }
-
-        await writeExtension(destDir, answers, {
-            confirmOverwrite: (file) => prompter.confirm(`Overwrite ${file}?`, true),
-            log: (message) => console.log(message),
-        });
-    } finally {
-        // Release stdin before running npm.
-        terminal.close();
+    if (path.basename(root) !== answers.name) {
+        console.log('Creating Folder: ' + answers.name);
+        destDir = path.resolve(root, answers.target);
+        await mkdir(destDir, { recursive: true });
     }
 
-    if (values['skip-install']) return;
+    await writeExtension(destDir, answers, {
+        confirmOverwrite: (file) => inquirerPrompter.confirm(`Overwrite ${file}?`, true),
+        log: (message) => console.log(message),
+    });
+
+    if (options.skipInstall) return;
 
     if (answers.dictionarySrc) {
         exec('npm', ['install', '-S', answers.dictionarySrc], destDir);

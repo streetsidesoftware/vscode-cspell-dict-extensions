@@ -22,6 +22,10 @@
   "engines": {
     "node": ">=24.11.0"
   },
+  "dependencies": {
+    "@inquirer/prompts": "^8.7.3",
+    "commander": "^15.0.0"
+  },
   "scripts": {
     "check-types": "tsc -p .",
     "test": "node --test \"src/**/*.test.mts\""

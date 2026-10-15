@@ -1,14 +1,27 @@
-import type { ReadLine } from './prompt.mts';
+import type { Prompter } from './prompt.mts';
+
+export interface AskedQuestion {
+    message: string;
+    defaultValue: string | boolean | undefined;
+}
 
 /**
- * A `ReadLine` that answers with the given lines, in order, and records the prompts.
+ * A `Prompter` that gives the answers in order and records the questions.
+ * An empty or missing answer selects the default, like pressing Enter.
  */
-export function scriptedReadLine(lines: readonly string[]): ReadLine & { prompts: string[] } {
-    const remaining = [...lines];
-    const prompts: string[] = [];
-    const readLine = (prompt: string) => {
-        prompts.push(prompt);
-        return Promise.resolve(remaining.shift());
+export function scriptedPrompter(answers: readonly (string | boolean)[]): Prompter & { asked: AskedQuestion[] } {
+    const remaining = [...answers];
+    const asked: AskedQuestion[] = [];
+
+    function next(message: string, defaultValue: string | boolean | undefined) {
+        asked.push({ message, defaultValue });
+        const answer = remaining.shift();
+        return answer === undefined || answer === '' ? defaultValue : answer;
+    }
+
+    return {
+        asked,
+        input: (message, defaultValue) => Promise.resolve(String(next(message, defaultValue) ?? '')),
+        confirm: (message, defaultValue) => Promise.resolve(next(message, defaultValue) === true),
     };
-    return Object.assign(readLine, { prompts });
 }

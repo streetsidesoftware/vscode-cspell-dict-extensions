@@ -2,13 +2,12 @@ import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 import { stripVTControlCharacters } from 'node:util';
 
-import { createPrompter } from './prompt.mts';
 import { askQuestions, dictNameToLocale, normalizeName, toFriendlyName } from './questions.mts';
-import { scriptedReadLine } from './test-helpers.mts';
+import { scriptedPrompter } from './test-helpers.mts';
 
 describe('askQuestions', () => {
     test('defaults for a natural language dictionary', async () => {
-        const answers = await askQuestions(createPrompter(scriptedReadLine(['Swedish', ...Array(9).fill('')])));
+        const answers = await askQuestions(scriptedPrompter(['Swedish']));
         assert.deepEqual(answers, {
             name: 'swedish',
             friendlyName: 'Swedish',
@@ -24,8 +23,8 @@ describe('askQuestions', () => {
     });
 
     test('skips the command questions without commands', async () => {
-        const readLine = scriptedReadLine(['Medical Terms', '', '', '', '', 'n', '', '']);
-        const answers = await askQuestions(createPrompter(readLine));
+        const prompter = scriptedPrompter(['Medical Terms', '', '', '', '', false]);
+        const answers = await askQuestions(prompter);
         assert.deepEqual(answers, {
             name: 'medical-terms',
             friendlyName: 'Medical Terms',
@@ -38,25 +37,12 @@ describe('askQuestions', () => {
             target: 'extensions/medical-terms',
             fullPackageName: 'code-spell-checker-medical-terms',
         });
-        assert.equal(readLine.prompts.length, 8);
+        assert.equal(prompter.asked.length, 8);
     });
 
     test('defaults follow earlier answers', async () => {
         const answers = await askQuestions(
-            createPrompter(
-                scriptedReadLine([
-                    '',
-                    'Dutch Words',
-                    '',
-                    '',
-                    '@cspell/dict-nl-NL',
-                    '',
-                    'Dutch_NL',
-                    '',
-                    'ext/nl',
-                    'pkg',
-                ]),
-            ),
+            scriptedPrompter(['', 'Dutch Words', '', '', '@cspell/dict-nl-NL', true, 'Dutch_NL', '', 'ext/nl', 'pkg']),
             'dutch',
         );
         assert.deepEqual(answers, {
@@ -74,18 +60,21 @@ describe('askQuestions', () => {
     });
 
     test('asks again for an empty name', async () => {
-        const readLine = scriptedReadLine(['', 'rust', ...Array(9).fill('')]);
-        const answers = await askQuestions(createPrompter(readLine));
+        const prompter = scriptedPrompter(['', 'rust']);
+        const answers = await askQuestions(prompter);
         assert.equal(answers.name, 'rust');
-        assert.equal(readLine.prompts.filter((p) => p.includes('directory name')).length, 2);
+        assert.equal(prompter.asked.filter((q) => q.message.includes('directory name')).length, 2);
     });
 
     test('lists the locales guessed from the name', async () => {
-        const readLine = scriptedReadLine(['swedish', ...Array(9).fill('')]);
-        await askQuestions(createPrompter(readLine));
-        const prompt = stripVTControlCharacters(readLine.prompts.find((p) => p.includes('Source cspell-dicts')) ?? '');
-        assert.match(prompt, /International Locales based upon name: \n {2}sv, sv-AX, sv-FI, sv-SE\n {2}:/);
-        assert.match(prompt, /\(@cspell\/dict-sv\) $/);
+        const prompter = scriptedPrompter(['swedish']);
+        await askQuestions(prompter);
+        const question = prompter.asked.find((q) => q.message.includes('Source cspell-dicts'));
+        assert.match(
+            stripVTControlCharacters(question?.message ?? ''),
+            /International Locales based upon name: \n {2}sv, sv-AX, sv-FI, sv-SE\n {2}:$/,
+        );
+        assert.equal(question?.defaultValue, '@cspell/dict-sv');
     });
 });
 

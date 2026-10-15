@@ -22,9 +22,10 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for a description of each question.
 
 ## Development
 
-The generator is written in TypeScript and runs directly with Node.js (type stripping), without a build step or runtime dependencies.
+The generator is written in TypeScript and runs directly with Node.js (type stripping), without a build step. It uses [`@inquirer/prompts`](https://www.npmjs.com/package/@inquirer/prompts) for the questions and [`commander`](https://www.npmjs.com/package/commander) for the command line.
 
-- `run.mts` — the command line entry point.
+- `run.mts` — the entry point.
+- `src/app.mts` — the command line and the steps to generate an extension.
 - `src/questions.mts` — the questions and their defaults.
 - `src/writeExtension.mts` — renders and copies the files in `templates/`.
 - `src/render.mts` — renders the template syntax: `<%= value %>` inserts a value (HTML escaped), and `<% if (value) { %> … <% } else { %> … <% } %>` includes text conditionally.
