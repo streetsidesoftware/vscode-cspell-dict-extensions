@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-import * as cp from 'child_process';
 import * as path from 'path';
 import { promises as fs } from 'node:fs';
 import { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath } from '@vscode/test-electron';
 import { Command, CommanderError } from 'commander';
 import { fileURLToPath } from 'url';
 import chalk from 'chalk';
+import { installExtension, installFailure } from './lib/installExtension.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -55,19 +55,17 @@ async function downloader(extensionDevelopmentPath, options) {
     const vscodeExecutablePath = await downloadAndUnzipVSCode({ cachePath, version });
     const [cliPath, ...rawArgs] = resolveCliArgsFromVSCodeExecutablePath(vscodeExecutablePath);
     const args = rawArgs.filter((arg) => !arg.startsWith('--extensions-dir='));
-    const extensionsDirArg = `--extensions-dir=${cachePath}/extensions`;
+    const extensionsDirArg = `--extensions-dir=${path.join(cachePath, 'extensions')}`;
     args.push(extensionsDirArg);
 
     console.error('VSCode downloaded to: %o', { vscodeExecutablePath, cliArgs: args });
 
-    // Use cp.spawn / cp.exec for custom setup
-    const result = cp.spawnSync(cliPath, [...args, '--install-extension', 'streetsidesoftware.code-spell-checker'], {
-        encoding: 'utf-8',
-    });
+    const result = installExtension(cliPath, args, 'streetsidesoftware.code-spell-checker');
 
-    console.error('Install Extension: \n%s%s', result.stdout, result.stderr);
-    if (result.error) {
-        console.error('Error: %s', result.error.message);
+    console.error('Install Extension: \n%s%s', result.stdout ?? '', result.stderr ?? '');
+    const failure = installFailure(result);
+    if (failure) {
+        console.error('Error: %s', failure);
         process.exitCode = 1;
         return;
     }

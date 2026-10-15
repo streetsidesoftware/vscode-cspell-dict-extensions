@@ -12,6 +12,7 @@ jobs:
     outputs:
       download_result: ${{ steps.download.outputs.download_result }}
       vscode_path: ${{ fromJson(steps.download.outputs.download_result).vscodeExecutablePath }}
+      vscode_version: ${{ steps.vscode-version.outputs.version }}
       cache_key: ${{ steps.cache-key.outputs.value }}
     steps:
       - name: Checkout code
@@ -118,17 +119,53 @@ jobs:
           npm run pack-extension
           npm run test:cspell
 
-      - name: Run Test Linux
-        if: runner.os == 'Linux'
+      - name: Run Test
         run: |
           cd ${{ matrix.extension_dir }}
           xvfb-run -a npm run test:vscode -- --vscode-path ${{ needs.download-vscode.outputs.vscode_path }}
 
-      - name: Run Test Windows and MacOS
-        if: runner.os != 'Linux'
+  # Make sure everything builds on Windows and that one extension can be tested.
+  # Uses the same VSCode version as the Linux tests.
+  build-test-windows:
+    runs-on: windows-latest
+    needs:
+      - download-vscode
+    env:
+      VSCODE_VERSION: ${{ needs.download-vscode.outputs.vscode_version }}
+      TEST_EXTENSION_DIR: extensions/german
+    steps:
+      - uses: actions/checkout@v7
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+          cache: npm
+
+      - name: Cache Download
+        id: cache-download
+        uses: actions/cache@v6.1.0
+        with:
+          key: vscode-download-cache-${{ runner.os }}-${{ env.VSCODE_VERSION }}
+          path: .vscode-test
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test-pack
+
+      - name: Download
+        id: download
+        shell: bash
         run: |
-          cd ${{ matrix.extension_dir }}
-          npm run test:vscode -- --vscode-path ${{ needs.download-vscode.outputs.vscode_path }}
+          echo download_result=$(node ./test-runner/download-vscode.mjs --vscode-version "$VSCODE_VERSION") >> $GITHUB_OUTPUT
+
+      - name: Run Test
+        shell: bash
+        working-directory: ${{ env.TEST_EXTENSION_DIR }}
+        env:
+          VSCODE_PATH: ${{ fromJson(steps.download.outputs.download_result).vscodeExecutablePath }}
+        run: |
+          npm run test:cspell
+          npm run test:vscode -- --vscode-path "$VSCODE_PATH"
 
   # Run the spell checker on all the samples using the extension's settings.
   # This will help with dictionary updates.
