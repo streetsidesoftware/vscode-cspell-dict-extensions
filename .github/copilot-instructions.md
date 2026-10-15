@@ -20,6 +20,8 @@
   - `npm run build` → `lerna run build`
   - `npm run test` → `lerna run test`
   - `npm run lint` → runs the root cspell check
+  - `npm run lint:code` → runs oxlint with type-aware rules; warnings fail the check
+  - `npm run check-types` → type-checks `test-runner`
   - `npm run test:cspell` → runs sample spelling checks across extensions
   - `npm run create:extension` → scaffold a new extension
   - `npm run gen:readme` → regenerate workspace metadata, extension lists, README injections, and normalize extension manifests

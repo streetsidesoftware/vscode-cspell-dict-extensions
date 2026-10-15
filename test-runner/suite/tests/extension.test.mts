@@ -2,9 +2,9 @@ import assert from 'node:assert';
 import { basename, resolve } from 'node:path';
 
 import { suite, test } from 'mocha';
-import { type Diagnostic, languages, Position, Uri, window } from 'vscode';
+import { commands, type Diagnostic, languages, Position, Uri, window } from 'vscode';
 
-import { activateExtension, loadDocument, log, logYellow, sleep } from '../../lib/helper.mts';
+import { activateExtension, loadDocument, log, logYellow, readPackageJson, sleep } from '../../lib/helper.mts';
 import type { CSpellExtensionApi, OnSpellCheckDocumentStep } from '../types.d.ts';
 
 const sampleDoc = process.env['SAMPLE_TEST_DOCUMENT'];
@@ -31,6 +31,16 @@ suite('Extension Test Suite 1', function () {
     test('loading the dictionary extension', async () => {
         const ext = await activateExtension();
         assert.ok(ext, 'Dictionary Extension has loaded.');
+    });
+
+    test('registering all contributed commands', async () => {
+        await activateExtension();
+        const pkg = await readPackageJson();
+        const contributed = pkg.contributes?.commands?.map((c) => c.command) ?? [];
+        const registered = new Set(await commands.getCommands(true));
+        const missing = contributed.filter((command) => !registered.has(command));
+        log('commands: %o', { contributed: contributed.length, missing });
+        assert.deepStrictEqual(missing, [], 'Every command in `contributes.commands` must be registered.');
     });
 
     test('reading the sample file.', async () => {

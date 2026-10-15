@@ -2,4 +2,4 @@
 
 import { run } from './generators/app/run.js';
 
-run();
+await run();

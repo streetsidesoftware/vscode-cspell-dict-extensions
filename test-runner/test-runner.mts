@@ -71,7 +71,7 @@ async function testRunner(extensionDevelopmentPath: string, options: TestRunnerO
         assert(await fileExists(options.vscodePath), `VSCode path "${options.vscodePath}" does not exist.`);
     }
 
-    const { vscodeVersion: version = 'stable' } = options;
+    const { vscodeVersion: version } = options;
     const extensionTestsPath = path.resolve(__dirname, './suite/index.mjs');
 
     await fs.mkdir(cachePath, { recursive: true });
@@ -152,9 +152,9 @@ async function fileExists(filePath: string): Promise<boolean> {
     try {
         const s = await fs.stat(filePath);
         return s.isFile();
-    } catch (e) {
+    } catch {
         return false;
     }
 }
 
-main();
+await main();
