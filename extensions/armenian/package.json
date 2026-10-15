@@ -13,7 +13,7 @@
   "license": "GPL-3.0-or-later",
   "type": "commonjs",
   "engines": {
-    "vscode": "^1.102.3"
+    "vscode": "^1.125.0"
   },
   "sponsor": {
     "url": "https://github.com/sponsors/streetsidesoftware"
