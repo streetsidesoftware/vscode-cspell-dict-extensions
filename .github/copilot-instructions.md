@@ -14,7 +14,7 @@
 
 ## Tooling and runtime
 
-- Use Node.js `22.21.1` from `.tool-versions`.
+- Use Node.js `24.22.0` from `.tool-versions`.
 - Package manager is npm; `pnpm` and `yarn` are intentionally disabled in `package.json`.
 - Root scripts:
   - `npm run build` → `lerna run build`
