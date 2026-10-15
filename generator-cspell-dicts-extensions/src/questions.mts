@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs';
+import path from 'node:path';
 import { styleText } from 'node:util';
 
 import { guessAtLocale } from './languageCodes.mts';
@@ -21,21 +23,25 @@ export interface Answers {
     fullPackageName: string;
 }
 
+export interface AskOptions {
+    /** The repository root. `target` is relative to it. */
+    root: string;
+    /** The default dictionary name, i.e. from the command line. */
+    defaultName?: string | undefined;
+}
+
 /**
  * Ask the questions needed to generate an extension.
  * @param prompter - used to ask the questions.
- * @param defaultName - the default dictionary name, i.e. from the command line.
  */
-export async function askQuestions(prompter: Prompter, defaultName?: string): Promise<Answers> {
-    let name = '';
-    while (!name) {
-        name = normalizeName(
-            await prompter.input(
-                'Your extension dictionary directory name (i.e. medicalterms or german):',
-                defaultName,
-            ),
-        );
-    }
+export async function askQuestions(prompter: Prompter, options: AskOptions): Promise<Answers> {
+    const name = normalizeName(
+        await prompter.input(
+            'Your extension dictionary directory name (i.e. medicalterms or german):',
+            options.defaultName,
+            (answer) => !!normalizeName(answer) || 'Please enter a name.',
+        ),
+    );
 
     const friendlyName = await prompter.input('Friendly Name:', toFriendlyName(name));
     const displayName = await prompter.input('Display Name:', `${title(friendlyName)} - Code Spell Checker`);
@@ -66,7 +72,12 @@ export async function askQuestions(prompter: Prompter, defaultName?: string): Pr
         );
     }
 
-    const target = await prompter.input('Target Directory:', `extensions/${name}`);
+    const target = await prompter.input(
+        'Target Directory:',
+        `extensions/${name}`,
+        (answer) =>
+            !existsSync(path.resolve(options.root, answer)) || `${answer} already exists. Choose another directory.`,
+    );
     const fullPackageName = await prompter.input('NPM Package Name:', `code-spell-checker-${name}`);
 
     return {

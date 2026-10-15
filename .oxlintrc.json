@@ -9,7 +9,7 @@
                     {
                         "from": "package",
                         "package": "node:test",
-                        "name": ["describe", "suite", "test", "it"]
+                        "name": ["describe", "it"]
                     }
                 ]
             }

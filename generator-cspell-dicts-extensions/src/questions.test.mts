@@ -1,13 +1,25 @@
 import assert from 'node:assert/strict';
-import { describe, test } from 'node:test';
+import { mkdir, mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { after, before, describe, it } from 'node:test';
 import { stripVTControlCharacters } from 'node:util';
 
 import { askQuestions, dictNameToLocale, normalizeName, toFriendlyName } from './questions.mts';
 import { scriptedPrompter } from './test-helpers.mts';
 
 describe('askQuestions', () => {
-    test('defaults for a natural language dictionary', async () => {
-        const answers = await askQuestions(scriptedPrompter(['Swedish']));
+    let root = '';
+
+    before(async () => {
+        root = await mkdtemp(path.join(tmpdir(), 'cspell-dict-ext-root-'));
+        await mkdir(path.join(root, 'existing'));
+    });
+
+    after(() => rm(root, { recursive: true, force: true }));
+
+    it('defaults for a natural language dictionary', async () => {
+        const answers = await askQuestions(scriptedPrompter(['Swedish']), { root });
         assert.deepEqual(answers, {
             name: 'swedish',
             friendlyName: 'Swedish',
@@ -22,9 +34,9 @@ describe('askQuestions', () => {
         });
     });
 
-    test('skips the command questions without commands', async () => {
+    it('skips the command questions without commands', async () => {
         const prompter = scriptedPrompter(['Medical Terms', '', '', '', '', false]);
-        const answers = await askQuestions(prompter);
+        const answers = await askQuestions(prompter, { root });
         assert.deepEqual(answers, {
             name: 'medical-terms',
             friendlyName: 'Medical Terms',
@@ -40,10 +52,10 @@ describe('askQuestions', () => {
         assert.equal(prompter.asked.length, 8);
     });
 
-    test('defaults follow earlier answers', async () => {
+    it('defaults follow earlier answers', async () => {
         const answers = await askQuestions(
             scriptedPrompter(['', 'Dutch Words', '', '', '@cspell/dict-nl-NL', true, 'Dutch_NL', '', 'ext/nl', 'pkg']),
-            'dutch',
+            { root, defaultName: 'dutch' },
         );
         assert.deepEqual(answers, {
             name: 'dutch',
@@ -59,16 +71,31 @@ describe('askQuestions', () => {
         });
     });
 
-    test('asks again for an empty name', async () => {
+    it('asks again for an empty name', async () => {
         const prompter = scriptedPrompter(['', 'rust']);
-        const answers = await askQuestions(prompter);
+        const answers = await askQuestions(prompter, { root });
         assert.equal(answers.name, 'rust');
-        assert.equal(prompter.asked.filter((q) => q.message.includes('directory name')).length, 2);
+        const nameQuestions = prompter.asked.filter((q) => q.message.includes('directory name'));
+        assert.deepEqual(
+            nameQuestions.map((q) => q.error),
+            ['Please enter a name.', undefined],
+        );
     });
 
-    test('lists the locales guessed from the name', async () => {
+    it('asks again when the target directory exists', async () => {
+        const prompter = scriptedPrompter(['swedish', '', '', '', '', false, 'existing', '']);
+        const answers = await askQuestions(prompter, { root });
+        assert.equal(answers.target, 'extensions/swedish');
+        const targetQuestions = prompter.asked.filter((q) => q.message === 'Target Directory:');
+        assert.deepEqual(
+            targetQuestions.map((q) => q.error),
+            ['existing already exists. Choose another directory.', undefined],
+        );
+    });
+
+    it('lists the locales guessed from the name', async () => {
         const prompter = scriptedPrompter(['swedish']);
-        await askQuestions(prompter);
+        await askQuestions(prompter, { root });
         const question = prompter.asked.find((q) => q.message.includes('Source cspell-dicts'));
         assert.match(
             stripVTControlCharacters(question?.message ?? ''),
@@ -79,16 +106,16 @@ describe('askQuestions', () => {
 });
 
 describe('helpers', () => {
-    test('normalizeName', () => {
+    it('normalizeName', () => {
         assert.equal(normalizeName('Medical Terms'), 'medical-terms');
         assert.equal(normalizeName('C++'), 'c--');
     });
 
-    test('toFriendlyName', () => {
+    it('toFriendlyName', () => {
         assert.equal(toFriendlyName('medical-terms'), 'Medical Terms');
     });
 
-    test('dictNameToLocale', () => {
+    it('dictNameToLocale', () => {
         assert.equal(dictNameToLocale('@cspell/dict-fr-FR'), 'fr-fr');
         assert.equal(dictNameToLocale('my-words'), '*');
     });

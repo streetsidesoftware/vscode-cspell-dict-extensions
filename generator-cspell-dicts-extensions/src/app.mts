@@ -1,15 +1,15 @@
-import { spawnSync } from 'node:child_process';
-import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
 import { Command } from 'commander';
 
+import { exec } from './exec.mts';
 import { inquirerPrompter } from './prompt.mts';
 import { askQuestions } from './questions.mts';
 import { writeExtension } from './writeExtension.mts';
 
-const genName = 'generator-cspell-dicts-extensions';
+/** The repository root: `target` is relative to it. */
+const repoRoot = path.resolve(import.meta.dirname, '../..');
 
 interface Options {
     skipInstall?: boolean;
@@ -33,26 +33,13 @@ export async function run(argv: string[] = process.argv): Promise<void> {
 }
 
 async function generate(name: string | undefined, options: Options): Promise<void> {
-    let root = process.cwd();
-    if (path.basename(root) === genName) {
-        root = path.dirname(root);
-    }
-
     console.log(styleText('bold', '\nWelcome to the VS Code Spelling Dictionary Extension generator!\n'));
 
-    const answers = await askQuestions(inquirerPrompter, name);
+    const answers = await askQuestions(inquirerPrompter, { root: repoRoot, defaultName: name });
 
-    let destDir = root;
-    if (path.basename(root) !== answers.name) {
-        console.log('Creating Folder: ' + answers.name);
-        destDir = path.resolve(root, answers.target);
-        await mkdir(destDir, { recursive: true });
-    }
-
-    await writeExtension(destDir, answers, {
-        confirmOverwrite: (file) => inquirerPrompter.confirm(`Overwrite ${file}?`, true),
-        log: (message) => console.log(message),
-    });
+    const destDir = path.resolve(repoRoot, answers.target);
+    console.log('Creating Folder: ' + answers.target);
+    await writeExtension(destDir, answers, { log: (message) => console.log(message) });
 
     if (options.skipInstall) return;
 
@@ -61,15 +48,4 @@ async function generate(name: string | undefined, options: Options): Promise<voi
         exec('npx', ['prettier', '-w', '**/*.{yaml,json,ts,md}'], destDir);
     }
     exec('npm', ['install'], destDir);
-}
-
-function exec(command: string, args: string[], cwd: string): void {
-    console.log(styleText('gray', `> ${command} ${args.join(' ')}`));
-    // On Windows, npm and npx are batch files and need a shell.
-    const isWindows = process.platform === 'win32';
-    const result = isWindows
-        ? spawnSync([command, ...args.map((a) => `"${a}"`)].join(' '), { cwd, stdio: 'inherit', shell: true })
-        : spawnSync(command, args, { cwd, stdio: 'inherit' });
-    if (result.error) throw result.error;
-    if (result.status) throw new Error(`${command} ${args.join(' ')} failed with exit code ${result.status}`);
 }

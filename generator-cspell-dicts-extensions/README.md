@@ -16,7 +16,7 @@ Pass a name to use it as the default answer to the first question:
 npm run create:extension -- swedish
 ```
 
-The generator asks a few questions, writes the extension into `extensions/<name>`, installs the dictionary, and formats the files with prettier. Use `--skip-install` to only write the files.
+The generator asks a few questions, writes the extension into `extensions/<name>` (the directory must not exist yet), installs the dictionary, and formats the files with prettier. Use `--skip-install` to only write the files.
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) for a description of each question.
 
@@ -28,6 +28,7 @@ The generator is written in TypeScript and runs directly with Node.js (type stri
 - `src/app.mts` — the command line and the steps to generate an extension.
 - `src/questions.mts` — the questions and their defaults.
 - `src/writeExtension.mts` — renders and copies the files in `templates/`.
+- `src/exec.mts` — runs npm and npx, also on Windows.
 - `src/render.mts` — renders the template syntax: `<%= value %>` inserts a value (HTML escaped), and `<% if (value) { %> … <% } else { %> … <% } %>` includes text conditionally.
 
 ```bash

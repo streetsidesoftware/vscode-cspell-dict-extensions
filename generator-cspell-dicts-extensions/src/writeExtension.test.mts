@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { afterEach, beforeEach, describe, test } from 'node:test';
+import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import type { Answers } from './questions.mts';
 import { templateDir, writeExtension } from './writeExtension.mts';
@@ -61,8 +61,6 @@ const copiedFiles = [
     'cspell.config.yaml',
 ];
 
-const neverOverwrite = () => Promise.resolve(false);
-
 describe('writeExtension', () => {
     let dest = '';
 
@@ -85,8 +83,8 @@ describe('writeExtension', () => {
         ['with commands', withCommands],
         ['without commands', withoutCommands],
     ] as const) {
-        test(`renders the templates ${label}`, async (t) => {
-            const written = await writeExtension(dest, answers, { confirmOverwrite: neverOverwrite });
+        it(`renders the templates ${label}`, async (t) => {
+            const written = await writeExtension(dest, answers);
             assert.deepEqual(written, expectedFiles);
 
             const rendered = expectedFiles.filter((file) => !copiedFiles.includes(file));
@@ -105,27 +103,14 @@ describe('writeExtension', () => {
         });
     }
 
-    test('asks before overwriting changed files', async () => {
-        await writeExtension(dest, withCommands, { confirmOverwrite: neverOverwrite });
-        await writeFile(path.join(dest, 'README.md'), 'changed');
-        await writeFile(path.join(dest, 'LICENSE'), 'changed');
+    it('never overwrites existing files', async () => {
+        await writeFile(path.join(dest, 'README.md'), 'existing');
+        await assert.rejects(writeExtension(dest, withCommands), { code: 'EEXIST' });
+        assert.equal(await readFile(path.join(dest, 'README.md'), 'utf8'), 'existing');
 
-        const asked: string[] = [];
-        const log: string[] = [];
-        const written = await writeExtension(dest, withCommands, {
-            confirmOverwrite: (file) => {
-                asked.push(file);
-                return Promise.resolve(file === 'README.md');
-            },
-            log: (message) => log.push(message),
-        });
-
-        assert.deepEqual(asked, ['README.md', 'LICENSE']);
-        assert.deepEqual(written, ['README.md']);
-        assert.equal(await readFile(path.join(dest, 'LICENSE'), 'utf8'), 'changed');
-        assert.notEqual(await readFile(path.join(dest, 'README.md'), 'utf8'), 'changed');
-        assert.ok(log.includes('force README.md'));
-        assert.ok(log.includes('skip LICENSE'));
-        assert.ok(log.includes('identical package.json'));
+        await rm(path.join(dest, 'README.md'));
+        await writeFile(path.join(dest, '.gitignore'), 'existing');
+        await assert.rejects(writeExtension(dest, withCommands), { code: 'EEXIST' });
+        assert.equal(await readFile(path.join(dest, '.gitignore'), 'utf8'), 'existing');
     });
 });

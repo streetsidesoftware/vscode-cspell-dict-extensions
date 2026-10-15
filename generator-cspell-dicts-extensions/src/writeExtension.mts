@@ -1,4 +1,5 @@
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { constants } from 'node:fs';
+import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type { Answers } from './questions.mts';
@@ -23,49 +24,34 @@ const copies = ['.vscode', 'images', '.gitignore', '.vscodeignore', 'tsconfig.js
 export interface WriteOptions {
     /** Defaults to the generator's `templates` directory. */
     templateDir?: string;
-    /**
-     * Called when a file already exists with different content.
-     * @param file - the path relative to the destination.
-     * @returns true to overwrite the file.
-     */
-    confirmOverwrite: (file: string) => Promise<boolean>;
     log?: (message: string) => void;
 }
 
 /**
- * Write the extension files into `destDir`.
+ * Write the extension files into `destDir`. Existing files are never overwritten.
  * @returns the files written, relative to `destDir`.
  */
-export async function writeExtension(destDir: string, answers: Answers, options: WriteOptions): Promise<string[]> {
+export async function writeExtension(destDir: string, answers: Answers, options: WriteOptions = {}): Promise<string[]> {
     const srcDir = options.templateDir ?? templateDir;
     const log = options.log ?? (() => undefined);
     const data = { ...answers };
     const written: string[] = [];
 
-    const entries = [
-        ...(await listFiles(srcDir, templates)).map((file) => ({ file, isTemplate: true })),
-        ...(await listFiles(srcDir, copies)).map((file) => ({ file, isTemplate: false })),
-    ];
-
-    for (const { file, isTemplate } of entries) {
-        const src = await readFile(path.join(srcDir, file));
-        const content = isTemplate ? Buffer.from(render(src.toString('utf8'), data)) : src;
+    async function create(file: string, write: (dest: string) => Promise<void>): Promise<void> {
         const dest = path.join(destDir, file);
-
-        const existing = await readFile(dest).catch(() => undefined);
-        if (existing?.equals(content)) {
-            log(`identical ${file}`);
-            continue;
-        }
-        if (existing && !(await options.confirmOverwrite(file))) {
-            log(`skip ${file}`);
-            continue;
-        }
-
         await mkdir(path.dirname(dest), { recursive: true });
-        await writeFile(dest, content);
-        log(`${existing ? 'force' : 'create'} ${file}`);
+        await write(dest);
+        log(`create ${file}`);
         written.push(file);
+    }
+
+    for (const file of await listFiles(srcDir, templates)) {
+        const template = await readFile(path.join(srcDir, file), 'utf8');
+        await create(file, (dest) => writeFile(dest, render(template, data), { flag: 'wx' }));
+    }
+
+    for (const file of await listFiles(srcDir, copies)) {
+        await create(file, (dest) => copyFile(path.join(srcDir, file), dest, constants.COPYFILE_EXCL));
     }
 
     return written;
