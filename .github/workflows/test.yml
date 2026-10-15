@@ -129,6 +129,8 @@ jobs:
 
   # Make sure everything builds on Windows and that one extension can be tested.
   # Uses the same VSCode version as the Linux tests.
+  # This is a separate job rather than a `build-test` matrix entry because the work differs: it builds and
+  # packages all extensions, needs its own VSCode download and cache, and runs without `xvfb-run`.
   build-test-windows:
     runs-on: windows-latest
     needs:
