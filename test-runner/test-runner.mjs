@@ -78,7 +78,9 @@ async function testRunner(extensionDevelopmentPath, options) {
     args.push(extensionsDirArg);
 
     if (!options.vscodePath) {
-        // Delete `.vscode-test` to prevent socket issues (based upon the current directory)
+        // Delete `<cwd>/.vscode-test`, NOT the download cache at `cachePath`. `@vscode/test-electron` defaults the
+        // CLI's `--user-data-dir` to `<cwd>/.vscode-test/user-data`, so this clears what earlier extension installs
+        // left behind (including stale sockets). `cachePath` holds the VSCode build downloaded above.
         await fs.rm(cacheDirVscodeTest, { recursive: true, force: true });
 
         const result = installExtension(cliPath, args, 'streetsidesoftware.code-spell-checker', { stdio: 'inherit' });
