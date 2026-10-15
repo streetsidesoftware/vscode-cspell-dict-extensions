@@ -1,14 +1,10 @@
-import { createRequire } from 'module';
-import { suite, test } from 'mocha';
 import assert from 'node:assert';
-import helper from '../../lib/helper.cjs';
-import { resolve, basename } from 'path';
+import { basename, resolve } from 'node:path';
 
-const require = createRequire(import.meta.url);
+import { suite, test } from 'mocha';
+import { languages, Position, Uri, window } from 'vscode';
 
-const { Uri, window, Position, languages } = require('vscode');
-
-const { loadDocument, logYellow, log, sleep, activateExtension } = helper;
+import { activateExtension, loadDocument, log, logYellow, sleep } from '../../lib/helper.mjs';
 
 const sampleDoc = process.env['SAMPLE_TEST_DOCUMENT'];
 const uriSampleDoc = Uri.file(resolve(sampleDoc));
