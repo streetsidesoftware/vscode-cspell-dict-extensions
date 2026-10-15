@@ -27,6 +27,7 @@ async function main() {
         .option('--vscode-version <version>', `The version of VSCode to use.`, 'stable')
         .option('--sample <path-to-sample-doc>', 'Specify a sample document', 'samples/seattle.md')
         .option('--vscode-path <path-to-vscode>', 'Use the specified version of VSCode.')
+        .option('--retries <count>', 'Number of times to retry a failed test run.', (v) => parseInt(v, 10), 2)
         .showHelpAfterError(true)
         .action(testRunner);
 
@@ -88,28 +89,40 @@ async function testRunner(extensionDevelopmentPath, options) {
 
     const tempDir = path.join(root, 'temp/.vscode-test/');
     await fs.mkdir(tempDir, { recursive: true });
-    const userDataDir = await fs.mkdtemp(tempDir);
 
-    console.log('runner info: %o', {
-        vscodeExecutablePath,
-        extensionDevelopmentPath,
-        extensionTestsPath,
-        extensionTestsEnv,
-        userDataDir,
-    });
+    // VSCode exits with code 1 if its window becomes unresponsive while running tests from the CLI.
+    // This happens randomly on CI runners during startup, so retry with a fresh user data dir.
+    const maxAttempts = 1 + Math.max(0, options.retries);
 
-    try {
-        // Run the extension test
-        await runTests({
-            // Use the specified `code` executable
+    for (let attempt = 1; ; ++attempt) {
+        const userDataDir = await fs.mkdtemp(tempDir);
+
+        console.log('runner info: %o', {
+            attempt: `${attempt} of ${maxAttempts}`,
             vscodeExecutablePath,
             extensionDevelopmentPath,
             extensionTestsPath,
             extensionTestsEnv,
-            launchArgs: ['--user-data-dir', userDataDir, extensionsDirArg],
+            userDataDir,
         });
-    } finally {
-        await fs.rm(userDataDir, { recursive: true, force: true });
+
+        try {
+            // Run the extension test
+            await runTests({
+                // Use the specified `code` executable
+                vscodeExecutablePath,
+                extensionDevelopmentPath,
+                extensionTestsPath,
+                extensionTestsEnv,
+                launchArgs: ['--user-data-dir', userDataDir, extensionsDirArg, '--disable-gpu'],
+            });
+            return;
+        } catch (err) {
+            if (attempt >= maxAttempts) throw err;
+            console.error('%s', chalk.yellow(`Test run failed (attempt ${attempt} of ${maxAttempts}), retrying...`));
+        } finally {
+            await fs.rm(userDataDir, { recursive: true, force: true });
+        }
     }
 }
 
