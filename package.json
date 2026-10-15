@@ -13,6 +13,7 @@
     "gen:workflow": "bash ./scripts/update-workflows.sh",
     "echo": "echo $OVSX_TOKEN",
     "build": "lerna run build",
+    "check-types": "lerna run check-types",
     "test-pack": "lerna run pack-extension",
     "cspell": "npx cspell . --dot  --no-progress",
     "create:extension": "node ./generator-cspell-dicts-extensions/run.js",

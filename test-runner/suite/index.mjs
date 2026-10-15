@@ -1,5 +1,5 @@
-import { run as runRunner } from '../lib/runner.mjs';
+import { run as runRunner } from '../lib/runner.mts';
 
 export async function run() {
-    await runRunner('**/*.test.{js,mjs}', import.meta.dirname);
+    await runRunner('**/*.test.mts', import.meta.dirname);
 }

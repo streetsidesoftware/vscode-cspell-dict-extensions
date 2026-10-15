@@ -4,11 +4,12 @@
   "version": "1.0.0",
   "description": "Test framework for testing the extensions",
   "bin": {
-    "download-vscode": "./download-vscode.mjs",
-    "test-runner": "./test-runner.mjs"
+    "download-vscode": "./download-vscode.mts",
+    "test-runner": "./test-runner.mts"
   },
   "type": "module",
   "scripts": {
+    "check-types": "tsc -p .",
     "test": "mocha"
   },
   "author": "",
@@ -19,6 +20,9 @@
     "mocha": "^12.0.3"
   },
   "devDependencies": {
-    "@types/vscode": "^1.140.0"
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.19.2",
+    "@types/vscode": "^1.140.0",
+    "typescript": "^6.0.3"
   }
 }

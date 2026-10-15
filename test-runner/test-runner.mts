@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-// @ts-check
-
 import * as path from 'path';
 import { promises as fs } from 'node:fs';
 import * as os from 'node:os';
@@ -10,7 +8,7 @@ import { Command, CommanderError } from 'commander';
 import { fileURLToPath } from 'url';
 import { styleText } from 'node:util';
 import assert from 'node:assert';
-import { installExtension, installFailure } from './lib/installExtension.mjs';
+import { installExtension, installFailure } from './lib/installExtension.mts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -44,7 +42,14 @@ async function main() {
     }
 }
 
-async function testRunner(extensionDevelopmentPath, options) {
+interface TestRunnerOptions {
+    vscodeVersion: string;
+    sample: string;
+    vscodePath?: string;
+    retries: number;
+}
+
+async function testRunner(extensionDevelopmentPath: string, options: TestRunnerOptions) {
     // `runTests` passes `process.env` to VSCode. If this runs from inside a VSCode process (e.g. an extension host),
     // `ELECTRON_RUN_AS_NODE` makes VSCode start as plain Node and fail with `bad option: --user-data-dir`.
     delete process.env.ELECTRON_RUN_AS_NODE;
@@ -143,7 +148,7 @@ async function testRunner(extensionDevelopmentPath, options) {
     }
 }
 
-async function fileExists(filePath) {
+async function fileExists(filePath: string): Promise<boolean> {
     try {
         const s = await fs.stat(filePath);
         return s.isFile();

@@ -46,3 +46,21 @@ export interface NotificationInfo {
 export interface WorkspaceConfigForDocumentRequest {
     uri: DocumentUri;
 }
+
+export interface Disposable {
+    dispose(): void;
+}
+
+/**
+ * The part of the Code Spell Checker client used by the tests.
+ */
+export interface CSpellClient {
+    onSpellCheckDocumentNotification(fn: (step: OnSpellCheckDocumentStep) => void): Disposable;
+}
+
+/**
+ * The part of the Code Spell Checker extension API used by the tests.
+ */
+export interface CSpellExtensionApi {
+    cSpellClient(): CSpellClient;
+}
