@@ -18,24 +18,24 @@ export function activate(context: vscode.ExtensionContext) {
     const extension = vscode.extensions.getExtension<CodeSpellCheckerExtension>(vscodeSpellCheckerExtension);
 
     if (extension) {
-        extension.activate().then((ext) => {
+        void extension.activate().then((ext) => {
             // We need to register the dictionary configuration with the Code Spell Checker Extension
-            ext?.registerConfig?.(configLocation);
+            return ext?.registerConfig?.(configLocation);
         });
     }
 
     function enableCroatian(isGlobal: boolean) {
-        extension &&
-            extension.activate().then((ext) => {
-                ext?.enableLocal?.(isGlobal, local);
-            });
+        if (!extension) return;
+        void extension.activate().then((ext) => {
+            return ext?.enableLocal?.(isGlobal, local);
+        });
     }
 
     function disableCroatian(isGlobal: boolean) {
-        extension &&
-            extension.activate().then((ext) => {
-                ext?.disableLocal?.(isGlobal, local);
-            });
+        if (!extension) return;
+        void extension.activate().then((ext) => {
+            return ext?.disableLocal?.(isGlobal, local);
+        });
     }
 
     // Push the disposable to the context's subscriptions so that the

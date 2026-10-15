@@ -26,7 +26,7 @@ export async function activate(context: vscode.ExtensionContext) {
     const ext = await extension?.activate();
     if (ext) {
         // We need to register the dictionary configuration with the Code Spell Checker Extension
-        ext?.registerConfig?.(configLocation);
+        return ext?.registerConfig?.(configLocation);
     }
 
     async function enable(isGlobal: boolean) {

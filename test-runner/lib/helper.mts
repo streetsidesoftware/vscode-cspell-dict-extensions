@@ -22,9 +22,9 @@ export interface ExtensionActivation<T> {
 }
 
 export interface PackageJson {
-    name: string;
-    publisher: string;
-    version: string;
+    name?: string;
+    publisher?: string;
+    version?: string;
     [field: string]: unknown;
 }
 

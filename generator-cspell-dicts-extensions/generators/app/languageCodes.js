@@ -559,8 +559,7 @@ export const codes = [
  * @returns {string[]}
  */
 export function guessAtLocale(name) {
-    const nameToLocal = new Map();
     return codes
-        .filter(([_, language]) => name.toLowerCase().includes(language.toLowerCase()))
+        .filter(([, language]) => name.toLowerCase().includes(language.toLowerCase()))
         .map(([locale]) => locale);
 }

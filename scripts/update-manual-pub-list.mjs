@@ -21,7 +21,6 @@ async function main() {
     const allFolders = workspace.folders.map((f) => f.path);
 
     const extensions = allFolders.filter((f) => f.startsWith('extension'));
-    const setOfExt = new Set(extensions);
 
     const workflowContent = await fs.readFile(workflow, 'utf8');
 

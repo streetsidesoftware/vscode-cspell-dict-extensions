@@ -15,6 +15,7 @@ Réforme
 streetsidesoftware
 Sublicensing
 testrunner
+tsgolint
 uncommenting
 vscodeignore
 vsix

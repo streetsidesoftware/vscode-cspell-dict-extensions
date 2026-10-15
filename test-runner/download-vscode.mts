@@ -52,7 +52,7 @@ async function downloader(extensionDevelopmentPath: string | undefined, options:
         }
     }
 
-    const { vscodeVersion: version = 'stable' } = options;
+    const { vscodeVersion: version } = options;
 
     await fs.mkdir(cachePath, { recursive: true });
 
@@ -83,9 +83,9 @@ async function fileExists(filePath: string): Promise<boolean> {
     try {
         const s = await fs.stat(filePath);
         return s.isFile();
-    } catch (e) {
+    } catch {
         return false;
     }
 }
 
-main();
+await main();
