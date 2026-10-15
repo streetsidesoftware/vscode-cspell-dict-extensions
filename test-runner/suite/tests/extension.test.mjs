@@ -1,7 +1,6 @@
 import { createRequire } from 'module';
 import { suite, test } from 'mocha';
 import assert from 'node:assert';
-import { stream } from 'kefir';
 import helper from '../../lib/helper.cjs';
 import { resolve, basename } from 'path';
 
@@ -102,34 +101,34 @@ suite('Extension Test Suite 1', function () {
 });
 
 /**
- *
- * @param {CSpellClient} cSpellClient
- * @returns {import('kefir').Stream<OnSpellCheckDocumentStep, undefined>}
- */
-function streamOnSpellCheckDocumentNotification(cSpellClient) {
-    return stream((emitter) => {
-        const d = cSpellClient.onSpellCheckDocumentNotification(emitter.value);
-        return () => d.dispose();
-    });
-}
-
-/**
- *
+ * Wait for the spell checker to finish checking `uri`.
+ * The document can be checked several times while it is being edited, so wait until
+ * no new result has arrived for 100ms and return the last one.
  * @param {Uri} uri
  * @param {number} timeout
- * @returns {Promise<OnSpellCheckDocumentStep | undefined>}
+ * @returns {Promise<OnSpellCheckDocumentStep | undefined>} `undefined` if `timeout` ms pass first.
  */
 async function waitForSpellComplete(uri, timeout) {
     const matchUri = uri.toString();
     const ext = await activateExtension('streetsidesoftware.code-spell-checker');
-    const s = streamOnSpellCheckDocumentNotification(ext.extApi.cSpellClient())
-        .filter((v) => v.uri === matchUri)
-        .filter((v) => !!v.done)
-        // .map((a) => (log('waitFor 1 %o', a), a))
-        .debounce(100)
-        // .map((a) => (log('waitFor 2 %o', a), a))
-        .take(1);
-    return Promise.race([s.toPromise(), sleep(timeout)]);
+    const cSpellClient = ext.extApi.cSpellClient();
+
+    return new Promise((resolve) => {
+        let debounceTimer;
+        const timeoutTimer = setTimeout(() => finish(undefined), timeout);
+        const listener = cSpellClient.onSpellCheckDocumentNotification((step) => {
+            if (step.uri !== matchUri || !step.done) return;
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => finish(step), 100);
+        });
+
+        function finish(result) {
+            clearTimeout(debounceTimer);
+            clearTimeout(timeoutTimer);
+            listener.dispose();
+            resolve(result);
+        }
+    });
 }
 
 /**
