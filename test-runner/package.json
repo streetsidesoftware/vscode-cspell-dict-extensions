@@ -18,11 +18,5 @@
     "@vscode/test-electron": "^3.1.0",
     "commander": "^15.0.0",
     "mocha": "^12.0.3"
-  },
-  "devDependencies": {
-    "@types/mocha": "^10.0.10",
-    "@types/node": "^24.19.2",
-    "@types/vscode": "^1.140.0",
-    "typescript": "^7.0.2"
   }
 }
