@@ -9,8 +9,7 @@
   },
   "type": "module",
   "scripts": {
-    "check-types": "tsc -p .",
-    "test": "mocha"
+    "check-types": "tsc -p ."
   },
   "author": "",
   "license": "MIT",
