@@ -10,8 +10,9 @@ interface CodeSpellCheckerExtension {
 const locale = 'nl';
 //
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+/**
+ * Called by VS Code when the extension is loaded.
+ */
 export async function activate(context: vscode.ExtensionContext) {
     const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
     const configLocation = context.asAbsolutePath('./cspell-ext.json');
