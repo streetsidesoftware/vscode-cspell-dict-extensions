@@ -1,11 +1,7 @@
+import { glob } from 'node:fs/promises';
 import * as path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-import { glob } from 'glob';
 import Mocha from 'mocha';
-
-// Import side effects from initEsmImports to setup esmImports.
-import './initEsmImports.mjs';
 
 export async function run(testGlob, cwd) {
     // Create the mocha test
@@ -14,10 +10,10 @@ export async function run(testGlob, cwd) {
         color: true,
     });
 
-    // Join relative matches onto `cwd` instead of using `absolute: true`. On Windows, glob returns
-    // an upper case drive letter (`D:\`) while VSCode loads the suite as `d:\`. Node caches modules by exact path,
-    // so the mismatch would load a second copy of `esmImport.cjs` that was never initialized.
-    const files = (await glob(testGlob, { cwd })).map((f) => path.join(cwd, f));
+    // Join relative matches onto `cwd` instead of resolving them. On Windows, a resolved path has an upper case
+    // drive letter (`D:\`) while VSCode loads the suite as `d:\`. Node caches modules by exact path,
+    // so the mismatch would load a second copy of `helper.cjs` and `logger.cjs`.
+    const files = (await Array.fromAsync(glob(testGlob, { cwd }))).map((f) => path.join(cwd, f));
 
     console.log('files: %o', files);
 

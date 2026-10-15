@@ -1,16 +1,20 @@
-const { format } = require('util');
-const { esmImports } = require('./esmImport.cjs');
+const { format, styleText } = require('util');
 
-const { Chalk } = esmImports;
-
-const chalk = new Chalk({ level: 1 });
+/**
+ * Color text even when stdout is not a terminal. VSCode shows the extension host output with colors.
+ * @param {Parameters<typeof styleText>[0]} style
+ * @param {string} text
+ */
+function color(style, text) {
+    return styleText(style, text, { validateStream: false });
+}
 
 function log(...params) {
     const dt = new Date();
-    console.log('%s', `${chalk.cyan(dt.toISOString())} ${format(...params)}`);
+    console.log('%s', `${color('cyan', dt.toISOString())} ${format(...params)}`);
 }
 
 module.exports = {
-    chalk,
+    color,
     log,
 };
