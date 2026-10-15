@@ -1,11 +1,14 @@
-const path = require('path');
-const vscode = require('vscode');
-const assert = require('assert');
-const fs = require('fs/promises');
+import assert from 'node:assert';
+import * as fs from 'node:fs/promises';
+import * as path from 'node:path';
 
-const { color, log } = require('./logger.cjs');
+import * as vscode from 'vscode';
 
-const repoRoot = path.join(__dirname, '../..');
+import { color, log } from './logger.mjs';
+
+export { log };
+
+export const repoRoot = path.join(import.meta.dirname, '../..');
 
 /**
  * @typedef {import('vscode').Extension} Extension
@@ -26,7 +29,7 @@ const repoRoot = path.join(__dirname, '../..');
  * @param {string | undefined} extId
  * @returns {Promise<{ ext: Extension, extActivate: any, extApi: any }>}
  */
-async function activateExtension(extId) {
+export async function activateExtension(extId) {
     const extensionId = extId || (await getExtensionId());
     await log(`Activate: ${extensionId}`);
     try {
@@ -54,7 +57,7 @@ async function activateExtension(extId) {
  * @param {Uri} docUri
  * @returns {Promise<DocumentContext | undefined}
  */
-async function loadDocument(docUri) {
+export async function loadDocument(docUri) {
     try {
         const doc = await vscode.workspace.openTextDocument(docUri);
         const editor = await vscode.window.showTextDocument(doc);
@@ -72,7 +75,7 @@ async function loadDocument(docUri) {
  * @param {number} ms
  * @returns {Promise<void>}
  */
-async function sleep(ms) {
+export async function sleep(ms) {
     return new Promise((resolve) => setTimeout(() => resolve(undefined), ms));
 }
 
@@ -82,7 +85,7 @@ async function sleep(ms) {
  * @param {string} content
  * @returns {Promise<boolean>}
  */
-async function setTestContent(context, content) {
+export async function setTestContent(context, content) {
     const { doc, editor } = context;
     const all = new vscode.Range(doc.positionAt(0), doc.positionAt(doc.getText().length));
     return editor.edit((eb) => eb.replace(all, content));
@@ -92,25 +95,25 @@ async function setTestContent(context, content) {
  * Get the extension id from `package.json`
  * @returns {Promise<string>}
  */
-async function getExtensionId() {
+export async function getExtensionId() {
     const extensionPackage = await readPackageJson();
     // The extensionId is `publisher.name` from package.json
     const { name = '', publisher = '' } = extensionPackage;
     return `${publisher}.${name}`;
 }
 
-const samplesDirUri = vscode.Uri.file('./samples');
+export const samplesDirUri = vscode.Uri.file('./samples');
 
 /**
  *
  * @param  {string[]} pathSegments
  * @returns {Uri}
  */
-function sampleWorkspaceUri(...pathSegments) {
+export function sampleWorkspaceUri(...pathSegments) {
     return vscode.Uri.joinPath(samplesDirUri, ...pathSegments);
 }
 
-function logYellow(...params) {
+export function logYellow(...params) {
     const [message, ...rest] = params;
     if (!message) return log('');
     return log(color('yellow', message), ...rest);
@@ -121,7 +124,7 @@ function logYellow(...params) {
  * @param {string} cwd
  * @returns {{name: string, publisher: string, version: string, [field: string]: unknown}}
  */
-async function readPackageJson(cwd = process.env['EXTENSION_DEVELOPMENT_PATH'] || process.cwd()) {
+export async function readPackageJson(cwd = process.env['EXTENSION_DEVELOPMENT_PATH'] || process.cwd()) {
     const pkgFile = await findUp('package.json', cwd, repoRoot);
     log('readPackageJson %o', { cwd, pkgFile });
     if (
@@ -161,17 +164,3 @@ async function isFile(file) {
         return false;
     }
 }
-
-module.exports = {
-    activateExtension,
-    getExtensionId,
-    loadDocument,
-    log,
-    logYellow,
-    readPackageJson,
-    repoRoot,
-    samplesDirUri,
-    sampleWorkspaceUri,
-    setTestContent,
-    sleep,
-};

@@ -12,7 +12,7 @@ export async function run(testGlob, cwd) {
 
     // Join relative matches onto `cwd` instead of resolving them. On Windows, a resolved path has an upper case
     // drive letter (`D:\`) while VSCode loads the suite as `d:\`. Node caches modules by exact path,
-    // so the mismatch would load a second copy of `helper.cjs` and `logger.cjs`.
+    // so the mismatch would load a second copy of `helper.mjs` and `logger.mjs`.
     const files = (await Array.fromAsync(glob(testGlob, { cwd }))).map((f) => path.join(cwd, f));
 
     console.log('files: %o', files);

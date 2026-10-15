@@ -67,7 +67,7 @@ async function testRunner(extensionDevelopmentPath, options) {
     }
 
     const { vscodeVersion: version = 'stable' } = options;
-    const extensionTestsPath = path.resolve(__dirname, './suite/index.cjs');
+    const extensionTestsPath = path.resolve(__dirname, './suite/index.mjs');
 
     await fs.mkdir(cachePath, { recursive: true });
 
