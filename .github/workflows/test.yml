@@ -40,7 +40,7 @@ jobs:
         id: cache-download
         uses: actions/cache@v6.1.0
         with:
-          # VSCode cache key: keep the same form in `build-test` and `build-test-windows`.
+          # VSCode cache key: keep the same form in `build-test` and `test-windows`.
           key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ steps.vscode-version.outputs.version }}
           path: .vscode-test
 
@@ -110,7 +110,7 @@ jobs:
         id: cache-download
         uses: actions/cache@v6.1.0
         with:
-          # VSCode cache key: keep the same form in `download-vscode` and `build-test-windows`.
+          # VSCode cache key: keep the same form in `download-vscode` and `test-windows`.
           key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ needs.download-vscode.outputs.vscode_version }}
           path: .vscode-test
           fail-on-cache-miss: true
@@ -127,11 +127,11 @@ jobs:
           cd ${{ matrix.extension_dir }}
           xvfb-run -a npm run test:vscode -- --vscode-path ${{ needs.download-vscode.outputs.vscode_path }}
 
-  # Make sure everything builds on Windows and that one extension can be tested.
+  # Make sure one extension can be built, packaged and tested on Windows.
   # Uses the same VSCode version as the Linux tests.
-  # This is a separate job rather than a `build-test` matrix entry because the work differs: it builds and
-  # packages all extensions, needs its own VSCode download and cache, and runs without `xvfb-run`.
-  build-test-windows:
+  # This is a separate job rather than a `build-test` matrix entry because the setup differs: it installs only
+  # what the test extension needs, needs its own VSCode download and cache, and runs without `xvfb-run`.
+  test-windows:
     runs-on: windows-latest
     needs:
       - download-vscode
@@ -145,6 +145,10 @@ jobs:
         with:
           node-version-file: .tool-versions
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            test-runner/package-lock.json
+            ${{ env.TEST_EXTENSION_DIR }}/package-lock.json
 
       - name: Cache Download
         id: cache-download
@@ -154,9 +158,18 @@ jobs:
           key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ env.VSCODE_VERSION }}
           path: .vscode-test
 
-      - run: npm ci
-      - run: npm run build
-      - run: npm run test-pack
+      # Install only what the test extension needs. The root `postinstall` would install all extensions.
+      - name: Install
+        shell: bash
+        run: |
+          npm ci --ignore-scripts
+          npm ci --prefix test-runner
+          npm ci --prefix "$TEST_EXTENSION_DIR"
+
+      - name: Build and Package
+        shell: bash
+        working-directory: ${{ env.TEST_EXTENSION_DIR }}
+        run: npm run pack-extension
 
       - name: Download
         id: download
