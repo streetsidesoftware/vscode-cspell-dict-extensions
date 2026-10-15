@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-danish@2.2.5...code-spell-checker-danish@2.2.6) (2026-10-15)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1569](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1569)) ([af56a2e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/af56a2ef47edd11dc3d0138fd9e8a1ae91715a06))
+
 ## [2.2.5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-danish@2.2.4...code-spell-checker-danish@2.2.5) (2025-07-20)
 
 
