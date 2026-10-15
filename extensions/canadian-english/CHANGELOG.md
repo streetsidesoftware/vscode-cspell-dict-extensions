@@ -2,6 +2,15 @@
 
 All notable changes to the "code-spell-checker-canadian-english" extension will be documented in this file.
 
+## [1.1.33](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-canadian-english@1.1.32...code-spell-checker-canadian-english@1.1.33) (2026-10-15)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1559](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1559)) ([cb383c7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/cb383c7e93edf67721102ba6763aed1c00796508))
+* Workflow Bot -- Update Dictionaries ([#1564](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1564)) ([143cc99](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/143cc99967cad584a781c628587d2c567d517dde))
+* Workflow Bot -- Update Dictionaries ([#1569](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1569)) ([af56a2e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/af56a2ef47edd11dc3d0138fd9e8a1ae91715a06))
+
 ## [1.1.32](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-canadian-english@1.1.31...code-spell-checker-canadian-english@1.1.32) (2026-08-28)
 
 

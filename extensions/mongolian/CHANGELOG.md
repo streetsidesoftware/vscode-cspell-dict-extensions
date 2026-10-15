@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-mongolian" extension will be documented in this file.
 
+## [1.0.8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-mongolian@1.0.7...code-spell-checker-mongolian@1.0.8) (2026-10-15)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1569](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1569)) ([af56a2e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/af56a2ef47edd11dc3d0138fd9e8a1ae91715a06))
+
 ## [1.0.7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-mongolian@1.0.6...code-spell-checker-mongolian@1.0.7) (2026-08-28)
 
 
