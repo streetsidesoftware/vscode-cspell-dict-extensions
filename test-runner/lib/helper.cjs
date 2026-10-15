@@ -124,7 +124,7 @@ function logYellow(...params) {
  * @param {string} cwd
  * @returns {{name: string, publisher: string, version: string, [field: string]: unknown}}
  */
-async function readPackageJson(cwd = process.cwd()) {
+async function readPackageJson(cwd = process.env['EXTENSION_DEVELOPMENT_PATH'] || process.cwd()) {
     const pkgFile = await findUp('package.json', { cwd, stopAt: repoRoot });
     log('readPackageJson %o', { cwd, pkgFile });
     if (

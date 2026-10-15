@@ -88,8 +88,11 @@ async function testRunner(extensionDevelopmentPath, options) {
         }
     }
 
+    // Pass absolute paths. The extension host's current directory is the extension on Linux and macOS,
+    // but the VSCode install directory on Windows.
     const extensionTestsEnv = {
-        SAMPLE_TEST_DOCUMENT: options.sample,
+        SAMPLE_TEST_DOCUMENT: path.resolve(extensionDevelopmentPath, options.sample),
+        EXTENSION_DEVELOPMENT_PATH: extensionDevelopmentPath,
     };
 
     // VSCode creates its IPC socket inside the user data dir. Keep the path short, because
