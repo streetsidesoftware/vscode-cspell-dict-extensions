@@ -5,7 +5,7 @@ import { promises as fs } from 'node:fs';
 import { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath } from '@vscode/test-electron';
 import { Command, CommanderError } from 'commander';
 import { fileURLToPath } from 'url';
-import chalk from 'chalk';
+import { styleText } from 'node:util';
 import { installExtension, installFailure } from './lib/installExtension.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -29,7 +29,7 @@ async function main() {
         await program.parseAsync();
     } catch (err) {
         if (err instanceof CommanderError) {
-            console.error('%s', chalk.red(err.message));
+            console.error('%s', styleText('red', err.message, { stream: process.stderr }));
         } else {
             console.error(err);
         }

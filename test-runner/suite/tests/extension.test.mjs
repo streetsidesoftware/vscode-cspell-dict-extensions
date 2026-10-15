@@ -1,6 +1,6 @@
 import { createRequire } from 'module';
 import { suite, test } from 'mocha';
-import { expect, assert } from 'chai';
+import assert from 'node:assert';
 import { stream } from 'kefir';
 import helper from '../../lib/helper.cjs';
 import { resolve, basename } from 'path';
@@ -33,26 +33,26 @@ suite('Extension Test Suite 1', function () {
 
     test('loading the spell checker extension', async () => {
         const ext = await activateExtension('streetsidesoftware.code-spell-checker');
-        assert(ext, 'Spell Checker Extension has loaded.');
+        assert.ok(ext, 'Spell Checker Extension has loaded.');
     });
 
     test('loading the dictionary extension', async () => {
         const ext = await activateExtension();
-        assert(ext, 'Dictionary Extension has loaded.');
+        assert.ok(ext, 'Dictionary Extension has loaded.');
     });
 
     test('reading the sample file.', async () => {
         logYellow('Verifies reading the sample file: %s.', sampleDoc);
         const result = await loadDocument(uriSampleDoc);
         const urlDoc = result?.doc.uri.toString(true);
-        assert(result?.doc, 'Must be able to load the document.');
-        assert(urlDoc.endsWith(basename(sampleDoc)), 'matches sample doc');
+        assert.ok(result?.doc, 'Must be able to load the document.');
+        assert.ok(urlDoc.endsWith(basename(sampleDoc)), 'matches sample doc');
     });
 
     test('Opening the sample document and making sure there are no errors.', async () => {
         logYellow('Opening the sample document and making sure there are no errors.');
         const docContext = await loadDocument(uriSampleDoc);
-        expect(docContext).to.not.be.undefined;
+        assert.notStrictEqual(docContext, undefined);
         await sleep(500);
         // Force a spell check by making an edit, no errors are expected.
         const pEdit0 = docContext.editor.edit((edit) => edit.insert(new Position(0, 0), '\n'));
@@ -60,7 +60,7 @@ suite('Extension Test Suite 1', function () {
         await pEdit0;
         const found0 = await pWait0;
         log('found %o', found0);
-        expect(found0.numIssues).to.equal(0);
+        assert.strictEqual(found0.numIssues, 0);
 
         // Force a spelling error
         log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
@@ -75,7 +75,7 @@ suite('Extension Test Suite 1', function () {
         const found1 = await pWait1;
         log('found %o', found1);
         log('doc: %o', { uri: docContext.doc.uri.toString(), version: docContext.doc.version });
-        expect(found1.numIssues).to.equal(1);
+        assert.strictEqual(found1.numIssues, 1);
 
         const diags = await getDiagsFromVsCode(uriSampleDoc, 2000);
 
@@ -89,7 +89,7 @@ suite('Extension Test Suite 1', function () {
         // log('diags: %o', diags);
 
         // cspell:ignore spellling
-        expect(JSON.stringify(msgs)).contains('spellling');
+        assert.match(JSON.stringify(msgs), /spellling/);
         logYellow('Done: Verifies that some spelling errors were found');
     });
 
@@ -98,7 +98,6 @@ suite('Extension Test Suite 1', function () {
         // Set `secondsToWait` to 30 or more.
         const secondsToWait = 1;
         await sleep(secondsToWait * 1000);
-        expect(true).to.be.true;
     });
 });
 

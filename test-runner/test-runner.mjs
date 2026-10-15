@@ -8,7 +8,7 @@ import * as os from 'node:os';
 import { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath, runTests } from '@vscode/test-electron';
 import { Command, CommanderError } from 'commander';
 import { fileURLToPath } from 'url';
-import chalk from 'chalk';
+import { styleText } from 'node:util';
 import assert from 'node:assert';
 import { installExtension, installFailure } from './lib/installExtension.mjs';
 
@@ -36,7 +36,7 @@ async function main() {
         await program.parseAsync();
     } catch (err) {
         if (err instanceof CommanderError) {
-            console.error('%s', chalk.red(err.message));
+            console.error('%s', styleText('red', err.message, { stream: process.stderr }));
         } else {
             console.error(err);
         }
@@ -130,7 +130,12 @@ async function testRunner(extensionDevelopmentPath, options) {
             return;
         } catch (err) {
             if (attempt >= maxAttempts) throw err;
-            console.error('%s', chalk.yellow(`Test run failed (attempt ${attempt} of ${maxAttempts}), retrying...`));
+            console.error(
+                '%s',
+                styleText('yellow', `Test run failed (attempt ${attempt} of ${maxAttempts}), retrying...`, {
+                    stream: process.stderr,
+                }),
+            );
         } finally {
             // On Windows, VSCode helper processes can hold files open briefly after exit (EBUSY).
             await fs.rm(userDataDir, { recursive: true, force: true, maxRetries: 5 });

@@ -3,10 +3,7 @@ const vscode = require('vscode');
 const assert = require('assert');
 const fs = require('fs/promises');
 
-const { esmImports } = require('./esmImport.cjs');
-const { chalk, log } = require('./logger.cjs');
-
-const { findUp } = esmImports;
+const { color, log } = require('./logger.cjs');
 
 const repoRoot = path.join(__dirname, '../..');
 
@@ -116,7 +113,7 @@ function sampleWorkspaceUri(...pathSegments) {
 function logYellow(...params) {
     const [message, ...rest] = params;
     if (!message) return log('');
-    return log(chalk.yellow(message), ...rest);
+    return log(color('yellow', message), ...rest);
 }
 
 /**
@@ -125,7 +122,7 @@ function logYellow(...params) {
  * @returns {{name: string, publisher: string, version: string, [field: string]: unknown}}
  */
 async function readPackageJson(cwd = process.env['EXTENSION_DEVELOPMENT_PATH'] || process.cwd()) {
-    const pkgFile = await findUp('package.json', { cwd, stopAt: repoRoot });
+    const pkgFile = await findUp('package.json', cwd, repoRoot);
     log('readPackageJson %o', { cwd, pkgFile });
     if (
         !pkgFile ||
@@ -135,6 +132,34 @@ async function readPackageJson(cwd = process.env['EXTENSION_DEVELOPMENT_PATH'] |
         throw Error('Extension package.json not found.');
     }
     return JSON.parse(await fs.readFile(pkgFile, 'utf8'));
+}
+
+/**
+ * Search for `fileName` in `cwd` and its parent directories, up to and including `stopAt`.
+ * @param {string} fileName
+ * @param {string} cwd
+ * @param {string} stopAt
+ * @returns {Promise<string | undefined>}
+ */
+async function findUp(fileName, cwd, stopAt) {
+    stopAt = path.resolve(stopAt);
+    for (let dir = path.resolve(cwd); ; dir = path.dirname(dir)) {
+        const file = path.join(dir, fileName);
+        if (await isFile(file)) return file;
+        if (dir === stopAt || dir === path.dirname(dir)) return undefined;
+    }
+}
+
+/**
+ * @param {string} file
+ * @returns {Promise<boolean>}
+ */
+async function isFile(file) {
+    try {
+        return (await fs.stat(file)).isFile();
+    } catch {
+        return false;
+    }
 }
 
 module.exports = {
