@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@lerna-lite/cli": "^4.11.5",
-    "@lerna-lite/exec": "^4.11.5",
+    "@lerna-lite/exec": "^5.6.2",
     "@lerna-lite/run": "^5.6.2",
     "@tsconfig/node24": "^24.0.5",
     "@types/node": "^24.19.2",
