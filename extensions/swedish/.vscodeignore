@@ -8,6 +8,8 @@ cspell.json
 extension.config.json
 samples/**
 src/**
+static/**
+!static/cspell-ext.json
 test/**
 tsconfig.json
 tsdown.config.ts

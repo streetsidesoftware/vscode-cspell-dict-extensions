@@ -24,6 +24,8 @@ After this extension is installed, it is necessary to tell the spell checker to 
 
 You can also use the following commands (`F1` or _View -> Command Palette..._) to enable or disable Serbian dictionaries:
 
+<!--- @@inject: ./static/commands.md --->
+
 - `Enable Serbian Spell Checker Dictionary`
 - `Disable Serbian Spell Checker Dictionary`
 - `Enable Serbian Cyrillic Spell Checker Dictionary`
@@ -32,6 +34,8 @@ You can also use the following commands (`F1` or _View -> Command Palette..._) t
 - `Disable Serbian Latin Spell Checker Dictionary`
 - `Enable Serbian Spell Checker Dictionary in Workspace`
 - `Disable Serbian Spell Checker Dictionary in Workspace`
+
+<!--- @@inject-end: ./static/commands.md --->
 
 ![Commands dropdown for enabling and disabling Serbian dictionaries](https://i.imgur.com/3DPWwFV.png)
 
@@ -51,9 +55,18 @@ Example using both English and Serbian dictionaries:
 
 To enable only Cyrillic or Latin, use the specific locales: `sr-Cyrl` or `sr-Latn`.
 
+<!--- @@inject: ./static/requirements.md --->
+
 ## Requirements
 
-This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+| Tool                                                                                                            | Version   |
+| --------------------------------------------------------------------------------------------------------------- | --------- |
+| [cspell](https://github.com/streetsidesoftware/cspell)                                                          | `>=10`    |
+| [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) | `>=4.7.0` |
+
+<!--- @@inject-end: ./static/requirements.md --->
 
 <!--- @@inject: ../../static/footer.md --->
 

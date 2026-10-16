@@ -8,19 +8,18 @@ Imports the Swedish spell checking dictionary for [Code Spell Checker](https://m
 
 After this extension is installed, it is necessary to tell the spell checker to use it.
 
-### Enable Dictionary
+### Enable or Disable the Dictionary
 
 Commands (use `F1` or _View -> Command Palette..._):
+
+<!--- @@inject: ./static/commands.md --->
 
 - `Enable Swedish Spell Checker Dictionary`
-- `Enable Swedish Spell Checker Dictionary in Workspace`
-
-### Disable Dictionary
-
-Commands (use `F1` or _View -> Command Palette..._):
-
 - `Disable Swedish Spell Checker Dictionary`
+- `Enable Swedish Spell Checker Dictionary in Workspace`
 - `Disable Swedish Spell Checker Dictionary in Workspace`
+
+<!--- @@inject-end: ./static/commands.md --->
 
 ### Manual Settings
 
@@ -35,9 +34,18 @@ Example using both English and Swedish dictionaries:
 "cSpell.language": "en,sv",
 ```
 
+<!--- @@inject: ./static/requirements.md --->
+
 ## Requirements
 
-This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+| Tool                                                                                                            | Version   |
+| --------------------------------------------------------------------------------------------------------------- | --------- |
+| [cspell](https://github.com/streetsidesoftware/cspell)                                                          | `>=10`    |
+| [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) | `>=4.7.0` |
+
+<!--- @@inject-end: ./static/requirements.md --->
 
 <!--- @@inject: ../../static/footer.md --->
 

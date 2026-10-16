@@ -33,8 +33,14 @@
             "minLength": 1
         },
         "cspell": {
-            "description": "The content of `cspell-ext.json`.",
-            "type": "object"
+            "description": "The content of `static/cspell-ext.json`, without `engines`.",
+            "type": "object",
+            "not": { "required": ["engines"] }
+        },
+        "engines": {
+            "description": "Overrides of the minimum versions in `static/engines.json`, i.e. `{ \"cspell\": \">=10.4.0\" }`.",
+            "type": "object",
+            "additionalProperties": { "type": "string", "minLength": 1 }
         },
         "commands": {
             "description": "The commands the extension contributes.",

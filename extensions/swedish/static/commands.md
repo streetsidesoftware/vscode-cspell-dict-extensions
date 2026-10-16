@@ -1,0 +1,4 @@
+- `Enable Swedish Spell Checker Dictionary`
+- `Disable Swedish Spell Checker Dictionary`
+- `Enable Swedish Spell Checker Dictionary in Workspace`
+- `Disable Swedish Spell Checker Dictionary in Workspace`

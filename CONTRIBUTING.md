@@ -74,15 +74,16 @@ There are other `.json` and `README` files where new extension is referenced but
 
 ## Synced extensions
 
-Extensions with an `extension.config.json` are maintained centrally. Their code lives in [`extension-runtime/`](./extension-runtime), and `npm run sync:extensions` writes their files from it:
+Extensions with an `extension.config.json` are maintained centrally. They have no `src/extension.ts`: their code is shared in [`extension-runtime/`](./extension-runtime), and their data is in `extension.config.json` (see [the schema](./extension-runtime/extension.config.schema.json)). `npm run sync:extensions` writes their files:
 
-- **Owned, overwritten:** `src/extension.ts`, `tsconfig.json`, `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from `extension-runtime/template/`.
-- **Derived from `extension.config.json`:** `cspell-ext.json` and the `name`, `displayName`, `description`, `type`, `engines.vscode`, `main`, `contributes.commands` and `scripts` fields of `package.json`. The other fields are kept.
-- **Never touched:** the README, `samples/`, `CHANGELOG.md`, `LICENSE`, images, and an optional `src/custom.ts` for code only that extension needs.
+- **Tool configs, overwritten:** `tsconfig.json`, `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from `extension-runtime/template/`.
+- **Generated into `static/`:** `static/cspell-ext.json`, which the extension registers with Code Spell Checker, and the README fragments `static/commands.md` and `static/requirements.md`. The minimum `engines` versions come from [`static/engines.json`](./static/engines.json), and an extension can override them in its `extension.config.json`.
+- **Derived:** the `name`, `displayName`, `description`, `type`, `engines.vscode`, `main`, `contributes.commands` and `scripts` fields of `package.json` (the other fields are kept), and the README sections between `<!--- @@inject: ./static/… --->` markers.
+- **Never touched:** the rest of the README, `samples/`, `CHANGELOG.md`, `LICENSE`, images, and an optional `src/custom.ts` for code only that extension needs.
 
-To change a synced extension, edit its `extension.config.json` (see [the schema](./extension-runtime/extension.config.schema.json)) or the shared files, then run `npm run sync:extensions` and commit the result. CI checks that the extensions are in sync.
+To change a synced extension, edit its `extension.config.json` or the shared files, then run `npm run sync:extensions` and commit the result. CI checks that the extensions are in sync.
 
-The extensions are bundled into one ESM file, `out/extension.js`, with [tsdown](https://tsdown.dev), using the shared base in [`.config/tsdown.extension.config.mts`](./.config/tsdown.extension.config.mts).
+Each extension is bundled into one ESM file, `out/extension.js`, with [tsdown](https://tsdown.dev). The shared config in [`.config/tsdown.extension.config.mts`](./.config/tsdown.extension.config.mts) builds the entry `extension-runtime/src/entry.ts`, with the extension's `extension.config.json` and `src/custom.ts` filled in.
 
 ### Pre-release mode
 

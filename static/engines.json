@@ -1,0 +1,6 @@
+{
+    "engines": {
+        "cspell": ">=10",
+        "code-spell-checker": ">=4.7.0"
+    }
+}

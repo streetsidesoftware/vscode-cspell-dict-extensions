@@ -5,6 +5,9 @@
  * so it must not import `vscode`.
  */
 
+/** Where the sync writes an extension's cspell configuration, relative to the extension. */
+export const cspellExtPath = 'static/cspell-ext.json';
+
 export const toggles = ['locale', 'dictionary', 'fileType'] as const;
 export type Toggle = (typeof toggles)[number];
 
@@ -40,8 +43,10 @@ export interface ExtensionConfig {
     description?: string;
     /** The document opened by the VS Code test, relative to the extension. */
     sample: string;
-    /** The content of `cspell-ext.json`. */
+    /** The content of `static/cspell-ext.json`, without `engines`. */
     cspell: Record<string, unknown>;
+    /** Overrides of the minimum versions in `static/engines.json`, i.e. `{ "cspell": ">=10.4.0" }`. */
+    engines?: Record<string, string>;
     /** The commands the extension contributes. */
     commands: CommandConfig[];
 }
@@ -65,6 +70,7 @@ const configKeys = new Set([
     'description',
     'sample',
     'cspell',
+    'engines',
     'commands',
 ]);
 const commandKeys = new Set(['action', 'toggle', 'value', 'scope', 'id', 'title']);
@@ -86,6 +92,15 @@ export function parseExtensionConfig(data: unknown): ExtensionConfig {
     };
     if (obj.displayName !== undefined) config.displayName = asString(obj.displayName, 'displayName');
     if (obj.description !== undefined) config.description = asString(obj.description, 'description');
+    if (obj.engines !== undefined) {
+        const engines = asObject(obj.engines, 'engines');
+        config.engines = Object.fromEntries(
+            Object.entries(engines).map(([key, value]) => [key, asString(value, `engines.${key}`)]),
+        );
+    }
+    if ('engines' in config.cspell) {
+        throw new ConfigError('cspell.engines: set the engines in "engines", not in "cspell".');
+    }
 
     const ids = new Set<string>();
     for (const command of resolveCommands(config)) {

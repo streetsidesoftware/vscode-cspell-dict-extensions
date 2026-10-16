@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-import { parseExtensionConfig, type ResolvedCommand, resolveCommands } from './config.ts';
+import { cspellExtPath, parseExtensionConfig, type ResolvedCommand, resolveCommands } from './config.ts';
 
 /** The part of the Code Spell Checker extension API used by the extensions. */
 export interface CodeSpellCheckerApi {
@@ -25,7 +25,7 @@ type Extension = vscode.Extension<CodeSpellCheckerApi> | undefined;
 const codeSpellCheckerId = 'streetsidesoftware.code-spell-checker';
 
 /**
- * Activate an extension from its `extension.config.json`: register its commands and its `cspell-ext.json`.
+ * Activate an extension from its `extension.config.json`: register its commands and its `static/cspell-ext.json`.
  *
  * Not an `async` function: the commands must be registered before `activate` returns, and the rest is a
  * promise chain.
@@ -45,7 +45,7 @@ export function activateExtension(
     }
 
     // Register the dictionary configuration with Code Spell Checker.
-    const registered = api.then((cspell) => cspell?.registerConfig(context.asAbsolutePath('./cspell-ext.json')));
+    const registered = api.then((cspell) => cspell?.registerConfig(context.asAbsolutePath(cspellExtPath)));
 
     return Promise.all([registered, custom?.activate?.(context, api)]).then(() => undefined);
 }

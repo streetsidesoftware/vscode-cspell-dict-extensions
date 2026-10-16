@@ -26,6 +26,7 @@ async function run(): Promise<void> {
     const names = positionals.length ? positionals : (await fs.readdir(extensionsDir)).sort();
     const rootPkg = await readPackageJson(path.join(repoRoot, 'package.json'));
     const vscodeEngine = rootPkg.engines?.vscode ?? '^1.125.0';
+    const { engines } = JSON.parse(await fs.readFile(path.join(repoRoot, 'static/engines.json'), 'utf8'));
 
     let synced = 0;
     let outOfDate = 0;
@@ -36,9 +37,10 @@ async function run(): Promise<void> {
             continue;
         }
         ++synced;
-        const changed = await syncExtension(dir, { check: values.check, vscodeEngine });
-        for (const file of changed) {
-            console.log(`${values.check ? 'Out of date' : 'Updated'}: extensions/${name}/${file}`);
+        const changed = await syncExtension(dir, { check: values.check, vscodeEngine, engines });
+        for (const { file, action } of changed) {
+            const verb = values.check ? 'Out of date' : action === 'remove' ? 'Removed' : 'Updated';
+            console.log(`${verb}: extensions/${name}/${file}`);
         }
         outOfDate += changed.length;
     }

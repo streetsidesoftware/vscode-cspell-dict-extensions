@@ -1,17 +1,22 @@
 /**
  * Write the files of an extension that come from `extension-runtime/` or from its `extension.config.json`.
  *
- * - Owned: copied from `extension-runtime/template/`, plus the shared entry `src/extension.ts`.
- * - Derived: `cspell-ext.json` and some fields of `package.json`. The other fields are kept.
- * - Everything else (README, samples, CHANGELOG, LICENSE, images, `src/custom.ts`) is never touched.
+ * - Owned: the tool configs copied from `extension-runtime/template/`.
+ * - Generated into `static/`: `cspell-ext.json` and the README fragments.
+ * - Derived: some fields of `package.json` (the other fields are kept) and the injected sections of `README.md`.
+ * - Everything else (the rest of the README, samples, CHANGELOG, LICENSE, images, `src/custom.ts`) is never touched.
  */
 
+import { execFile } from 'node:child_process';
 import fs from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
+import { promisify } from 'node:util';
 
 import * as prettier from 'prettier';
 
 import {
+    cspellExtPath,
     description,
     displayName,
     type ExtensionConfig,
@@ -23,79 +28,147 @@ import type { PackageJson } from './extensionHelper.mts';
 export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
 export const configFileName = 'extension.config.json';
 const templateDir = path.join(repoRoot, 'extension-runtime/template');
+const injectMarkdownBin = path.join(repoRoot, 'node_modules/inject-markdown/bin.mjs');
+const codeSpellCheckerUrl = 'https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker';
 
 /** Template files whose names can't be used in `extension-runtime/template/`. */
 const renamedTemplateFiles: Record<string, string> = {
     gitignore: '.gitignore',
 };
 
+/** Files from before the sync, replaced by the shared entry and `static/cspell-ext.json`. */
+const obsoleteFiles = ['src/extension.ts', 'cspell-ext.json'];
+
 export interface SyncOptions {
     /** Only report the files that would change. */
     check?: boolean;
     /** The `engines.vscode` of the root package.json. */
     vscodeEngine: string;
+    /** The default minimum versions, from `static/engines.json`. */
+    engines: Record<string, string>;
+}
+
+export interface FileChange {
+    /** The path relative to the extension. */
+    file: string;
+    action: 'update' | 'remove';
 }
 
 /**
  * Sync one extension.
  * @param extensionDir - the extension's directory.
- * @returns the paths, relative to the extension, of the files that changed (or would change with `check`).
+ * @returns the files that changed (or would change with `check`).
  */
-export async function syncExtension(extensionDir: string, options: SyncOptions): Promise<string[]> {
+export async function syncExtension(extensionDir: string, options: SyncOptions): Promise<FileChange[]> {
     const name = path.basename(extensionDir);
     const config = parseExtensionConfig(await readJson(path.join(extensionDir, configFileName)));
     if (config.name !== name) {
         throw new Error(`extensions/${name}/${configFileName}: "name" must be "${name}", not "${config.name}".`);
     }
 
-    const files = new Map<string, string>(await readTemplateFiles());
+    const engines = { ...options.engines, ...config.engines };
     const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
-    files.set('src/extension.ts', entrySource(hasCustom));
-    files.set('cspell-ext.json', JSON.stringify(config.cspell, null, 4) + '\n');
+    const files = new Map<string, string>(await readTemplateFiles());
+    files.set(cspellExtPath, JSON.stringify({ ...config.cspell, engines }, null, 4) + '\n');
+    files.set('static/requirements.md', requirementsMarkdown(engines));
+    const commandsMd = commandsMarkdown(config);
+    if (commandsMd) files.set('static/commands.md', commandsMd);
     const pkg = (await readJson(path.join(extensionDir, 'package.json'))) as PackageJson;
-    files.set('package.json', packageJsonSource(config, pkg, options.vscodeEngine));
+    files.set('package.json', packageJsonSource(config, pkg, options.vscodeEngine, hasCustom));
 
-    const changed: string[] = [];
+    const changes: FileChange[] = [];
     for (const [file, content] of files) {
         const formatted = await format(path.join(repoRoot, 'extensions', name, file), content);
-        const target = path.join(extensionDir, file);
-        if ((await readText(target)) === formatted) continue;
-        changed.push(file);
-        if (!options.check) {
-            await fs.mkdir(path.dirname(target), { recursive: true });
-            await fs.writeFile(target, formatted);
+        if (await writeIfChanged(path.join(extensionDir, file), formatted, options.check)) {
+            changes.push({ file, action: 'update' });
         }
     }
-    return changed;
+
+    const remove = commandsMd ? obsoleteFiles : [...obsoleteFiles, 'static/commands.md'];
+    for (const file of remove) {
+        const target = path.join(extensionDir, file);
+        if (!(await exists(target))) continue;
+        changes.push({ file, action: 'remove' });
+        if (!options.check) await fs.rm(target);
+    }
+
+    const readme = path.join(extensionDir, 'README.md');
+    if (await exists(readme)) {
+        const injected = await format(path.join(repoRoot, 'extensions', name, 'README.md'), await injectReadme(readme));
+        if (await writeIfChanged(readme, injected, options.check))
+            changes.push({ file: 'README.md', action: 'update' });
+    }
+
+    return changes;
 }
 
 /**
- * The shared entry point of every extension.
- * @param hasCustom - the extension has a `src/custom.ts` to activate.
+ * The list of commands, injected into the README with `<!--- @@inject: ./static/commands.md --->`.
+ * @returns `undefined` when the extension has no commands.
  */
-export function entrySource(hasCustom: boolean): string {
-    const lines = [
-        '// Written by `npm run sync:extensions`. Do not edit: put custom code in `src/custom.ts`.',
-        "import type { ExtensionContext } from 'vscode';",
+export function commandsMarkdown(config: ExtensionConfig): string | undefined {
+    const commands = resolveCommands(config);
+    if (!commands.length) return undefined;
+    return commands.map(({ title }) => `- \`${title}\``).join('\n') + '\n';
+}
+
+/**
+ * The README requirements section, injected with `<!--- @@inject: ./static/requirements.md --->`.
+ */
+export function requirementsMarkdown(engines: Record<string, string>): string {
+    const tools: Record<string, string> = {
+        'code-spell-checker': `[Code Spell Checker](${codeSpellCheckerUrl})`,
+        cspell: '[cspell](https://github.com/streetsidesoftware/cspell)',
+    };
+    const rows = Object.entries(engines).map(([engine, version]) => `| ${tools[engine] ?? engine} | \`${version}\` |`);
+    return [
+        '## Requirements',
         '',
-        "import { activateExtension } from '../../../extension-runtime/src/activate.ts';",
-        "import config from '../extension.config.json' with { type: 'json' };",
-        ...(hasCustom ? ["import * as custom from './custom.ts';"] : []),
+        `This extension will automatically include the [Code Spell Checker](${codeSpellCheckerUrl}) extension.`,
         '',
-        'export function activate(context: ExtensionContext): Promise<void> {',
-        `    return activateExtension(context, config${hasCustom ? ', custom' : ''});`,
-        '}',
+        '| Tool | Version |',
+        '| ---- | ------- |',
+        ...rows,
         '',
-        'export function deactivate(): void {}',
-        '',
-    ];
-    return lines.join('\n');
+    ].join('\n');
+}
+
+/**
+ * Run `inject-markdown` on a README without changing it.
+ * @returns the README with its `@@inject` sections filled in.
+ */
+async function injectReadme(readme: string): Promise<string> {
+    const outDir = await fs.mkdtemp(path.join(os.tmpdir(), 'sync-readme-'));
+    try {
+        await promisify(execFile)(
+            process.execPath,
+            [injectMarkdownBin, '--silent', '--no-summary', '--output-dir', outDir, path.basename(readme)],
+            { cwd: path.dirname(readme) },
+        );
+        return await fs.readFile(path.join(outDir, path.basename(readme)), 'utf8');
+    } finally {
+        await fs.rm(outDir, { recursive: true, force: true });
+    }
+}
+
+async function writeIfChanged(target: string, content: string, check: boolean | undefined): Promise<boolean> {
+    if ((await readText(target)) === content) return false;
+    if (!check) {
+        await fs.mkdir(path.dirname(target), { recursive: true });
+        await fs.writeFile(target, content);
+    }
+    return true;
 }
 
 /**
  * Update the derived fields of an extension's `package.json` and keep the others, in their order.
  */
-export function packageJsonSource(config: ExtensionConfig, pkg: PackageJson, vscodeEngine: string): string {
+export function packageJsonSource(
+    config: ExtensionConfig,
+    pkg: PackageJson,
+    vscodeEngine: string,
+    hasCustom: boolean,
+): string {
     const commands = resolveCommands(config).map(({ id, title }) => ({ command: id, title }));
     const contributes = (pkg as { contributes?: object }).contributes;
     const derived: Record<string, unknown> = {
@@ -108,13 +181,14 @@ export function packageJsonSource(config: ExtensionConfig, pkg: PackageJson, vsc
         contributes: { ...contributes, commands },
         scripts: {
             build: 'tsdown',
-            'check-types': 'tsc -p .',
+            // Only `src/custom.ts` is the extension's own code; the shared code is checked in `extension-runtime/`.
+            ...(hasCustom ? { 'check-types': 'tsc -p .' } : {}),
             clean: 'rimraf out',
             'clean-build': 'npm run clean && npm run build',
             'pack-extension': 'vsce package',
             'publish-extension': 'vsce publish',
             test: 'npm run test:cspell && npm run test:vscode',
-            'test:cspell': 'cspell -c cspell-ext.json samples',
+            'test:cspell': `cspell -c ${cspellExtPath} samples`,
             'test:vscode': `node ../../test-runner/bin.mjs . --sample ${config.sample}`,
             'vscode:prepublish': 'npm run build',
             watch: 'tsdown --watch',

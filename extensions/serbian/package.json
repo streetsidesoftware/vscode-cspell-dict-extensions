@@ -88,13 +88,12 @@
   },
   "scripts": {
     "build": "tsdown",
-    "check-types": "tsc -p .",
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
     "pack-extension": "vsce package",
     "publish-extension": "vsce publish",
     "test": "npm run test:cspell && npm run test:vscode",
-    "test:cspell": "cspell -c cspell-ext.json samples",
+    "test:cspell": "cspell -c static/cspell-ext.json samples",
     "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/Београд.md",
     "vscode:prepublish": "npm run build",
     "watch": "tsdown --watch"

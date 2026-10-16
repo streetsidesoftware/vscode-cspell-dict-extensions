@@ -38,6 +38,14 @@ describe('parseExtensionConfig', () => {
         assert.throws(() => parseExtensionConfig({ ...swedish, commands }), /no scope/);
     });
 
+    it('accepts engines and rejects them inside cspell', () => {
+        const config = parseExtensionConfig({ ...swedish, engines: { cspell: '>=10.4.0' } });
+        assert.deepEqual(config.engines, { cspell: '>=10.4.0' });
+        assert.throws(() => parseExtensionConfig({ ...swedish, engines: { cspell: 10 } }), /engines\.cspell/);
+        const cspell = { ...swedish.cspell, engines: {} };
+        assert.throws(() => parseExtensionConfig({ ...swedish, cspell }), /cspell\.engines/);
+    });
+
     it('rejects duplicate command IDs', () => {
         const commands = [
             { action: 'enable', toggle: 'locale', value: 'sr' },

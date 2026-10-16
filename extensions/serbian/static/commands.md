@@ -1,0 +1,8 @@
+- `Enable Serbian Spell Checker Dictionary`
+- `Disable Serbian Spell Checker Dictionary`
+- `Enable Serbian Cyrillic Spell Checker Dictionary`
+- `Disable Serbian Cyrillic Spell Checker Dictionary`
+- `Enable Serbian Latin Spell Checker Dictionary`
+- `Disable Serbian Latin Spell Checker Dictionary`
+- `Enable Serbian Spell Checker Dictionary in Workspace`
+- `Disable Serbian Spell Checker Dictionary in Workspace`
