@@ -1,0 +1,65 @@
+name: " 👀 Set Prerelease"
+
+# Opens a PR that turns an extension's pre-release mode on or off.
+# While it is on, every release of the extension is published as a pre-release.
+# Turning it off is a `fix:` commit, so the next release is a stable version above the pre-releases.
+# Modeled on `set-prerelease.yml` in streetsidesoftware/vscode-spell-checker.
+
+on:
+  workflow_dispatch:
+    inputs:
+      extension:
+        description: The directory name of the extension in `extensions/`, i.e. `swedish`.
+        type: string
+        required: true
+      prerelease:
+        description: Is prerelease?
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  set-prerelease-mode:
+    if: github.repository_owner == 'streetsidesoftware'
+    runs-on: ubuntu-latest
+    env:
+      EXTENSION: ${{ inputs.extension }}
+      PRERELEASE: ${{ inputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+
+      - name: Set Mode
+        run: node ./scripts/set-prerelease-mode.mts "$EXTENSION" "$PRERELEASE"
+
+      - name: PR
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: >-
+            ${{
+              inputs.prerelease
+              && format('chore({0}): Set Prerelease Mode to true', inputs.extension)
+              || format('fix({0}): Prepare for Release', inputs.extension)
+            }}
+          branch: update-prerelease-mode-${{ inputs.extension }}
+          base: main
+          title: >-
+            ${{
+              inputs.prerelease
+              && format('chore({0}): Set Prerelease Mode to true', inputs.extension)
+              || format('fix({0}): Prepare for Release', inputs.extension)
+            }}
+          body: |
+            # Prerelease Mode
+
+            Set the pre-release mode of `extensions/${{ inputs.extension }}` to `${{ inputs.prerelease }}`.
+          token: ${{ secrets.GITHUB_TOKEN }}

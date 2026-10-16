@@ -7,6 +7,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 See Also:
 
 - [How to Create a New Extension](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/blob/main/CONTRIBUTING.md#how-to-create-a-new-extension)
+- [How the Extensions Are Maintained](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/blob/main/CONTRIBUTING.md#synced-extensions)
 
 <!--- @@inject: static/generated/extension_list.md --->
 
@@ -73,7 +74,7 @@ See Also:
 
 ### Technical Terms
 
-- [Medical Terms](extensions/medical-terms#readme) - Medical Terms Add-On for Code Spell Checker
+- [Medical Terms](extensions/medical-terms#readme) - Medical Terms dictionary extension for VS Code.
 - [Scientific Terms](extensions/scientific-terms#readme) - Scientific Terms dictionary extension for VS Code.
 - [Win32](extensions/win32#readme) - Win32 dictionary extension for VS Code.
 
@@ -150,7 +151,7 @@ See Also:
 
 ### Technical Terms
 
-- [Medical Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-medical-terms) - Medical Terms Add-On for Code Spell Checker
+- [Medical Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-medical-terms) - Medical Terms dictionary extension for VS Code.
 - [Scientific Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-scientific-terms) - Scientific Terms dictionary extension for VS Code.
 - [Win32](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-win32) - Win32 dictionary extension for VS Code.
 

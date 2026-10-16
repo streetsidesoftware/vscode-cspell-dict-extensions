@@ -1,0 +1,124 @@
+{
+    "title": "Extension config",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "description": "The JSON schema of this file."
+        },
+        "name": {
+            "type": "string",
+            "description": "The extension's directory in `extensions/`. Also the default command ID prefix: `cSpellExt_<name>`.",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "friendlyName": {
+            "type": "string",
+            "description": "The name shown to people, i.e. `Swedish`.",
+            "minLength": 1
+        },
+        "displayName": {
+            "type": "string",
+            "description": "The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.",
+            "minLength": 1
+        },
+        "description": {
+            "type": "string",
+            "description": "The Marketplace description. Default: `<friendlyName> dictionary extension for VS Code.`",
+            "minLength": 1
+        },
+        "sample": {
+            "type": "string",
+            "description": "The document opened by the VS Code test, relative to the extension.",
+            "minLength": 1
+        },
+        "cspell": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "The content of `static/cspell-ext.json`. Set `engines` here only to override the defaults in `static/engines.json`."
+        },
+        "commands": {
+            "type": "array",
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "action": {
+                                "type": "string",
+                                "enum": ["enable", "disable"],
+                                "description": "Turn the toggle on or off."
+                            },
+                            "value": {
+                                "type": "string",
+                                "description": "The locale, dictionary name, or file type (language ID).",
+                                "minLength": 1
+                            },
+                            "id": {
+                                "type": "string",
+                                "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
+                                "minLength": 1
+                            },
+                            "title": {
+                                "type": "string",
+                                "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
+                                "minLength": 1
+                            },
+                            "toggle": {
+                                "type": "string",
+                                "enum": ["locale", "dictionary"],
+                                "description": "What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
+                            },
+                            "scope": {
+                                "type": "string",
+                                "enum": ["global", "workspace"],
+                                "description": "Where the setting is written. Default: `global`."
+                            }
+                        },
+                        "required": ["action", "toggle", "value"],
+                        "additionalProperties": false,
+                        "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "action": {
+                                "type": "string",
+                                "enum": ["enable", "disable"],
+                                "description": "Turn the toggle on or off."
+                            },
+                            "value": {
+                                "type": "string",
+                                "description": "The locale, dictionary name, or file type (language ID).",
+                                "minLength": 1
+                            },
+                            "id": {
+                                "type": "string",
+                                "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
+                                "minLength": 1
+                            },
+                            "title": {
+                                "type": "string",
+                                "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
+                                "minLength": 1
+                            },
+                            "toggle": {
+                                "type": "string",
+                                "const": "fileType",
+                                "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
+                            }
+                        },
+                        "required": ["action", "toggle", "value"],
+                        "additionalProperties": false,
+                        "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
+                    }
+                ]
+            },
+            "description": "The commands the extension contributes."
+        }
+    },
+    "required": ["name", "friendlyName", "sample", "cspell", "commands"],
+    "additionalProperties": false,
+    "description": "The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it.",
+    "definitions": {}
+}

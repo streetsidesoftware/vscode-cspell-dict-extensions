@@ -1,0 +1,11 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "noEmit": true,
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "erasableSyntaxOnly": true,
+        "verbatimModuleSyntax": true
+    },
+    "include": ["src"]
+}

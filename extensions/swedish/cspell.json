@@ -5,6 +5,6 @@
         "samples/**"
     ],
     "import": [
-        "./cspell-ext.json"
+        "./static/cspell-ext.json"
     ]
 }

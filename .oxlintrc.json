@@ -5,7 +5,8 @@
         "**/samples/**",
         "**/.vscode-test/**",
         "**/static/**",
-        "generator-cspell-dicts-extensions/templates/**"
+        "generator-cspell-dicts-extensions/templates/**",
+        "extension-runtime/template/**"
     ],
     "rules": {
         "typescript/no-floating-promises": [

@@ -1,0 +1,43 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "serbian",
+    "friendlyName": "Serbian",
+    "sample": "samples/Београд.md",
+    "cspell": {
+        "import": ["@cspell/dict-sr-cyrl/cspell-ext.json", "@cspell/dict-sr-latn/cspell-ext.json"]
+    },
+    "commands": [
+        { "action": "enable", "toggle": "locale", "value": "sr" },
+        { "action": "disable", "toggle": "locale", "value": "sr" },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sr-Cyrl",
+            "id": "cSpellExt_serbian.enableCyrl",
+            "title": "Enable Serbian Cyrillic Spell Checker Dictionary"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "sr-Cyrl",
+            "id": "cSpellExt_serbian.disableCyrl",
+            "title": "Disable Serbian Cyrillic Spell Checker Dictionary"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sr-Latn",
+            "id": "cSpellExt_serbian.enableLatn",
+            "title": "Enable Serbian Latin Spell Checker Dictionary"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "sr-Latn",
+            "id": "cSpellExt_serbian.disableLatn",
+            "title": "Disable Serbian Latin Spell Checker Dictionary"
+        },
+        { "action": "enable", "toggle": "locale", "value": "sr", "scope": "workspace" },
+        { "action": "disable", "toggle": "locale", "value": "sr", "scope": "workspace" }
+    ]
+}

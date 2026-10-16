@@ -4,10 +4,12 @@
 
 - This is an npm + `lerna-lite` monorepo of many VS Code extensions, mostly under `extensions/*`.
 - Most extension packages have the same shape: `package.json`, `src/extension.ts`, `cspell-ext.json`, `samples/`, and local build/test scripts.
+- Synced extensions (those with an `extension.config.json`) have no `src/extension.ts`: their code is in `extension-runtime/`, their data in `extension.config.json`, and `npm run sync:extensions` writes their tool configs, `static/` files, derived `package.json` fields and README injections. Edit the config or the shared files, never the written files. See "Synced extensions" in `CONTRIBUTING.md`.
 - There are three important support packages:
   - `generator-cspell-dicts-extensions/` — scaffolds new extensions; prefer `npm run create:extension` instead of copying an existing extension by hand. It is TypeScript (`.mts`) run directly by Node, using `@inquirer/prompts` and `commander`. The extension files come from `templates/`, which use a small EJS subset (`<%= value %>`, `<%- value %>` and `<% if (value) { %> … <% } else { %> … <% } %>`) rendered by `src/render.mts`. Run its unit tests with `npm test` inside the generator directory.
   - `test-runner/` — shared VS Code integration test harness.
-  - `scripts/` — repo maintenance and generation scripts.
+  - `scripts/` — repo maintenance and generation scripts, including `sync-extensions.mts`.
+  - `extension-runtime/` — the shared code, the `ExtensionConfig` type (source of `static/extension.config.schema.json`), and the templates of the synced extensions.
 - Two extensions are notable special cases:
   - `extensions/timestamp-hover/` is a standalone utility extension, not a dictionary wrapper.
   - `extensions/hunspell-syntax/` is a syntax-highlighting extension.

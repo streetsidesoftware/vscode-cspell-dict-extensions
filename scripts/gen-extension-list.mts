@@ -20,6 +20,9 @@ const targetExtensionFolderListMarkdown = path.join(__root, 'static/generated/ex
 const targetMarketplaceLanguageExtensions = path.join(__root, 'static/generated/marketplace_language_extensions.md');
 const targetMarketplaceExtensions = path.join(__root, 'static/generated/marketplace_extensions.md');
 
+// Links must be relative to the generated file, inject-markdown rebases them when injecting.
+const extensionFolderListBase = path.dirname(targetExtensionFolderListMarkdown);
+
 const markdownOptions: Options = {
     bullet: '-',
 };
@@ -27,7 +30,13 @@ const markdownOptions: Options = {
 function makeExtensionListItem(extensionInfo: ExtensionInfo): ListItem {
     return listItem(
         paragraph([
-            link(extensionInfo.extensionPath + '#readme', text(extensionInfo.displayNameShort)),
+            link(
+                path.posix.join(
+                    path.relative(extensionFolderListBase, __root).split(path.sep).join('/'),
+                    extensionInfo.extensionPath,
+                ) + '#readme',
+                text(extensionInfo.displayNameShort),
+            ),
             text(` - ${extensionInfo.description}`),
         ]),
     );
