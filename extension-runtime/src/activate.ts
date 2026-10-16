@@ -13,21 +13,26 @@ export interface CodeSpellCheckerApi {
 
 /** The optional `src/custom.ts` of an extension. */
 export interface CustomModule {
-    activate?(context: vscode.ExtensionContext, api: CodeSpellCheckerApi | undefined): void | Promise<void>;
+    /**
+     * Called by `activate`, after the extension's commands are registered. Like `activate`, it must not make
+     * VS Code wait: register commands right away and don't return a promise.
+     * @param api - resolves once Code Spell Checker is active.
+     */
+    activate?(context: vscode.ExtensionContext, api: Promise<CodeSpellCheckerApi | undefined>): void;
 }
 
 const codeSpellCheckerId = 'streetsidesoftware.code-spell-checker';
 
 /**
  * Activate an extension from its `extension.config.json`: register its commands and its `cspell-ext.json`.
+ *
+ * This is deliberately not `async`. VS Code waits for the promise `activate` returns, and the extension
+ * isn't active until it settles. Waiting here for Code Spell Checker to start can make VS Code report an
+ * error, so the commands are registered right away and the config is registered in the background.
  * @param config - the content of `extension.config.json`.
  * @param custom - the extension's `src/custom.ts`, if it has one.
  */
-export async function activateExtension(
-    context: vscode.ExtensionContext,
-    config: unknown,
-    custom?: CustomModule,
-): Promise<void> {
+export function activateExtension(context: vscode.ExtensionContext, config: unknown, custom?: CustomModule): void {
     const extension = vscode.extensions.getExtension<CodeSpellCheckerApi>(codeSpellCheckerId);
     const getApi = async () => extension?.activate();
 
@@ -35,11 +40,13 @@ export async function activateExtension(
         context.subscriptions.push(vscode.commands.registerCommand(command.id, () => runCommand(command, getApi)));
     }
 
+    const api = getApi();
     // Register the dictionary configuration with Code Spell Checker.
-    const api = await getApi();
-    api?.registerConfig(context.asAbsolutePath('./cspell-ext.json'));
+    api.then((cspell) => cspell?.registerConfig(context.asAbsolutePath('./cspell-ext.json'))).catch((error: unknown) =>
+        console.error('Failed to register %s with Code Spell Checker: %o', context.extension.id, error),
+    );
 
-    await custom?.activate?.(context, api);
+    custom?.activate?.(context, api);
 }
 
 async function runCommand(command: ResolvedCommand, getApi: () => Promise<CodeSpellCheckerApi | undefined>) {
