@@ -135,17 +135,22 @@ export function requirementsMarkdown(engines: Record<string, string>): string {
 
 /**
  * Run `inject-markdown` on a README without changing it.
+ *
+ * It runs from the directory above `extensions/` (the repository root), because inject-markdown only reads files
+ * inside its working directory, and READMEs inject `../../static/footer.md`.
  * @returns the README with its `@@inject` sections filled in.
  */
 async function injectReadme(readme: string): Promise<string> {
+    const root = path.resolve(path.dirname(readme), '../..');
+    const relative = path.relative(root, readme);
     const outDir = await fs.mkdtemp(path.join(os.tmpdir(), 'sync-readme-'));
     try {
         await promisify(execFile)(
             process.execPath,
-            [injectMarkdownBin, '--silent', '--no-summary', '--output-dir', outDir, path.basename(readme)],
-            { cwd: path.dirname(readme) },
+            [injectMarkdownBin, '--silent', '--no-summary', '--output-dir', outDir, relative],
+            { cwd: root },
         );
-        return await fs.readFile(path.join(outDir, path.basename(readme)), 'utf8');
+        return await fs.readFile(path.join(outDir, relative), 'utf8');
     } finally {
         await fs.rm(outDir, { recursive: true, force: true });
     }
