@@ -64,7 +64,10 @@ export async function searchPackages(prefix: string, fetch: FetchJson = fetchJso
  */
 export async function packageInfo(name: string, fetch: FetchJson = fetchJson): Promise<PackageSummary | undefined> {
     try {
-        const pkg = (await fetch(`${registry}/${name.replaceAll('/', '%2f')}`)) as { name: string; description?: string };
+        const pkg = (await fetch(`${registry}/${name.replaceAll('/', '%2f')}`)) as {
+            name: string;
+            description?: string;
+        };
         return { name: pkg.name, description: pkg.description ?? '' };
     } catch (e) {
         if (e instanceof HttpError && e.status === 404) return undefined;
