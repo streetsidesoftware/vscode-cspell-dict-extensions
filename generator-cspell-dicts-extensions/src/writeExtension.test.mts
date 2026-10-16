@@ -51,15 +51,11 @@ const expectedFiles = [
     'cspell.config.yaml',
 ];
 
-const copiedFiles = [
-    '.vscode/launch.json',
-    '.vscode/tasks.json',
-    'images/SpellCheck.png',
-    '.gitignore',
-    '.vscodeignore',
-    'tsconfig.json',
-    'cspell.config.yaml',
-];
+/** Whether a template contains a placeholder, so its output depends upon the answers. Binary files never do. */
+async function hasPlaceholder(file: string): Promise<boolean> {
+    const content = await readFile(path.join(templateDir, file));
+    return !content.includes(0) && content.includes('<%');
+}
 
 describe('writeExtension', () => {
     let dest = '';
@@ -87,12 +83,15 @@ describe('writeExtension', () => {
             const written = await writeExtension(dest, answers);
             assert.deepEqual(written, expectedFiles);
 
-            const rendered = expectedFiles.filter((file) => !copiedFiles.includes(file));
+            // Only snapshot the files that have placeholders; all others must match their template.
+            const placeholders = await Promise.all(expectedFiles.map(hasPlaceholder));
+            const rendered = expectedFiles.filter((_, i) => placeholders[i]);
+            const unchanged = expectedFiles.filter((_, i) => !placeholders[i]);
             t.assert.snapshot(await readText(rendered));
 
-            for (const file of copiedFiles) {
+            for (const file of unchanged) {
                 const expected = await readFile(path.join(templateDir, file));
-                assert.ok(expected.equals(await readFile(path.join(dest, file))), `${file} is copied as is`);
+                assert.ok(expected.equals(await readFile(path.join(dest, file))), `${file} matches its template`);
             }
 
             // The rendered package.json is valid JSON.
