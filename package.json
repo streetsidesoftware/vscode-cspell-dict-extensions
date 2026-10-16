@@ -16,7 +16,7 @@
     "check-types": "lerna run check-types",
     "test-pack": "lerna run pack-extension",
     "cspell": "npx cspell . --dot  --no-progress",
-    "create:extension": "node ./generator-cspell-dicts-extensions/run.js",
+    "create:extension": "node ./generator-cspell-dicts-extensions/run.mts",
     "lint:code": "oxlint --type-aware --deny-warnings",
     "prettier:fix": "prettier -w \"**/*.{ts,md,yaml,yml,json}\"",
     "prettier:lint": "prettier \"**/*.{ts,md,yaml,yml,json}\"",

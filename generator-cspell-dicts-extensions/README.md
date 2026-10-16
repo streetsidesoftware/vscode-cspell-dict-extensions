@@ -1,30 +1,46 @@
 # VS Code Spelling Dictionary Extension Generator
 
-Generate a VS Code Spelling Dictionary Extension
+Generate a VS Code Spelling Dictionary Extension.
 
-## Installation
+## Usage
 
-First, install [Yeoman](http://yeoman.io) and generator-cspell-dicts using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
-
-```bash
-npm install -g yo
-npm link
-```
-
-Then generate an extension project:
-
-Example for **monkey** language:
+In the `vscode-cspell-dict-extensions` repository root directory:
 
 ```bash
-yo cspell-dict-extensions <name>
+npm run create:extension
 ```
 
-## Getting To Know Yeoman
+Pass a name to use it as the default answer to the first question:
 
-- Yeoman has a heart of gold.
-- Yeoman is a person with feelings and opinions, but is very easy to work with.
-- Yeoman can be too opinionated at times but is easily convinced not to be.
-- Feel free to [learn more about Yeoman](http://yeoman.io/).
+```bash
+npm run create:extension -- swedish
+```
+
+The generator asks a few questions, writes the extension into `extensions/<name>` (the directory must not exist yet), installs the dictionary, and formats the files with prettier.
+
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for a description of each question.
+
+## Development
+
+The generator is written in TypeScript and runs directly with Node.js (type stripping), without a build step. It uses [`@inquirer/prompts`](https://www.npmjs.com/package/@inquirer/prompts) for the questions and [`commander`](https://www.npmjs.com/package/commander) for the command line.
+
+- `run.mts` — the entry point.
+- `src/app.mts` — the command line and the steps to generate an extension.
+- `src/questions.mts` — the questions and their defaults.
+- `src/writeExtension.mts` — renders and copies the files in `templates/`.
+- `src/exec.mts` — runs npm and npx, also on Windows.
+- `src/render.mts` — renders the template syntax: `<%= value %>` inserts a value (HTML escaped), and `<% if (value) { %> … <% } else { %> … <% } %>` includes text conditionally.
+
+```bash
+npm test             # unit tests (node:test)
+npm run check-types  # type check
+```
+
+After changing a template, update the test snapshots with:
+
+```bash
+node --test --test-update-snapshots "src/**/*.test.mts"
+```
 
 ## License
 

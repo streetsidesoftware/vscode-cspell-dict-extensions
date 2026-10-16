@@ -1,9 +1,0 @@
-{
-    "generator-node": {
-        "promptValues": {
-            "authorName": "Street Side Software",
-            "authorEmail": "jason@streetsidesoftware.nl",
-            "authorUrl": ""
-        }
-    }
-}

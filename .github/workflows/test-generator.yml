@@ -1,0 +1,45 @@
+name: " 🧪 Test Generator"
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "generator-cspell-dicts-extensions/**"
+      - ".github/workflows/test-generator.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "generator-cspell-dicts-extensions/**"
+      - ".github/workflows/test-generator.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-generator:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+          cache: npm
+          cache-dependency-path: generator-cspell-dicts-extensions/package-lock.json
+      - run: npm ci
+        working-directory: generator-cspell-dicts-extensions
+      - run: npm test
+        working-directory: generator-cspell-dicts-extensions

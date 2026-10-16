@@ -1,4 +1,18 @@
 {
     "$schema": "./node_modules/oxlint/configuration_schema.json",
-    "ignorePatterns": ["**/out/**", "**/samples/**", "**/.vscode-test/**", "**/static/**"]
+    "ignorePatterns": ["**/out/**", "**/samples/**", "**/.vscode-test/**", "**/static/**"],
+    "rules": {
+        "typescript/no-floating-promises": [
+            "warn",
+            {
+                "allowForKnownSafeCalls": [
+                    {
+                        "from": "package",
+                        "package": "node:test",
+                        "name": ["describe", "it"]
+                    }
+                ]
+            }
+        ]
+    }
 }

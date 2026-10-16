@@ -1,23 +1,16 @@
 /**
- * A number, or a string containing a number.
- * ```ts
- * type LangEntry = [
-        /// lang or lang-locale (ISO-639-1) + (ISO-3166-1 alpha 2)
-        code: string,
-        /// Name of the Language
-        language: string,
-        /// Optional Country
-        country?: string,
-    ];
- * ```
- *
- * @typedef {[string, string, string | undefined]} LangEntry
+ * A language entry.
  */
+export type LangEntry = [
+    /** lang or lang-locale (ISO-639-1) + (ISO-3166-1 alpha 2) */
+    code: string,
+    /** Name of the Language */
+    language: string,
+    /** Optional Country */
+    country?: string,
+];
 
-/**
- * @type {LangEntry[]}
- */
-export const codes = [
+export const codes: LangEntry[] = [
     ['af', 'Afrikaans'],
     ['af-NA', 'Afrikaans', 'Namibia'],
     ['af-ZA', 'Afrikaans', 'South Africa'],
@@ -554,11 +547,11 @@ export const codes = [
 ];
 
 /**
- *
- * @param {string} name
- * @returns {string[]}
+ * Guess the locales of a dictionary based upon its name.
+ * @param name - the name of the dictionary, i.e. `swedish`
+ * @returns matching locales, i.e. `['sv', 'sv-FI', 'sv-SE']`
  */
-export function guessAtLocale(name) {
+export function guessAtLocale(name: string): string[] {
     return codes
         .filter(([, language]) => name.toLowerCase().includes(language.toLowerCase()))
         .map(([locale]) => locale);
