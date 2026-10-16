@@ -8,7 +8,8 @@ updates:
     versioning-strategy: increase
     schedule:
       interval: "weekly"
-    # Minor and patch updates come in one PR per dependency type. Major updates get their own PRs.
+    # Minor and patch updates come in one PR per dependency type. Major updates of development dependencies come
+    # in one more PR, so a breaking change doesn't hold up the others. Production majors get their own PRs.
     groups:
       production-dependencies:
         dependency-type: "production"
@@ -20,6 +21,10 @@ updates:
         update-types:
           - minor
           - patch
+      development-dependencies-major:
+        dependency-type: "development"
+        update-types:
+          - major
     ignore:
       # Matches the Node version in .tool-versions.
       - dependency-name: "@types/node"
