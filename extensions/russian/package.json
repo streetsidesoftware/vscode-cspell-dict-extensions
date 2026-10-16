@@ -62,7 +62,7 @@
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
