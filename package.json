@@ -41,7 +41,7 @@
     "vscode": "^1.125.0"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "^4.11.5",
+    "@lerna-lite/cli": "^5.6.2",
     "@lerna-lite/exec": "^4.11.5",
     "@lerna-lite/run": "^5.6.2",
     "@tsconfig/node24": "^24.0.5",
