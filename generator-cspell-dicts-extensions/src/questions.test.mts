@@ -45,7 +45,7 @@ function registry(): Record<string, unknown> {
         },
     };
     for (const [name, p] of Object.entries(packages)) {
-        responses[`https://registry.npmjs.org/${name.replace('/', '%2f')}`] = { name, description: p.description };
+        responses[`https://registry.npmjs.org/${name.replaceAll('/', '%2f')}`] = { name, description: p.description };
         if (p.cspellExt) responses[cspellExtUrl(name)] = p.cspellExt;
     }
     responses['https://registry.npmjs.org/@cspell%2fdict-missing'] = 404;
