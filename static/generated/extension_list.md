@@ -61,7 +61,7 @@
 
 ### Technical Terms
 
-- [Medical Terms](extensions/medical-terms#readme) - Medical Terms Add-On for Code Spell Checker
+- [Medical Terms](extensions/medical-terms#readme) - Medical Terms dictionary extension for VS Code.
 - [Scientific Terms](extensions/scientific-terms#readme) - Scientific Terms dictionary extension for VS Code.
 - [Win32](extensions/win32#readme) - Win32 dictionary extension for VS Code.
 
