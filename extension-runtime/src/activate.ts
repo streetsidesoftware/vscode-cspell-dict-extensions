@@ -14,59 +14,60 @@ export interface CodeSpellCheckerApi {
 /** The optional `src/custom.ts` of an extension. */
 export interface CustomModule {
     /**
-     * Called by `activate`, after the extension's commands are registered. Like `activate`, it must not make
-     * VS Code wait: register commands right away and don't return a promise.
+     * Called by `activate`, after the extension's commands are registered.
      * @param api - resolves once Code Spell Checker is active.
      */
-    activate?(context: vscode.ExtensionContext, api: Promise<CodeSpellCheckerApi | undefined>): void;
+    activate?(context: vscode.ExtensionContext, api: Promise<CodeSpellCheckerApi | undefined>): void | Promise<void>;
 }
+
+type Extension = vscode.Extension<CodeSpellCheckerApi> | undefined;
 
 const codeSpellCheckerId = 'streetsidesoftware.code-spell-checker';
 
 /**
  * Activate an extension from its `extension.config.json`: register its commands and its `cspell-ext.json`.
  *
- * This is deliberately not `async`. VS Code waits for the promise `activate` returns, and the extension
- * isn't active until it settles. Waiting here for Code Spell Checker to start can make VS Code report an
- * error, so the commands are registered right away and the config is registered in the background.
+ * Not an `async` function: the commands must be registered before `activate` returns, and the rest is a
+ * promise chain.
  * @param config - the content of `extension.config.json`.
  * @param custom - the extension's `src/custom.ts`, if it has one.
  */
-export function activateExtension(context: vscode.ExtensionContext, config: unknown, custom?: CustomModule): void {
+export function activateExtension(
+    context: vscode.ExtensionContext,
+    config: unknown,
+    custom?: CustomModule,
+): Promise<void> {
     const extension = vscode.extensions.getExtension<CodeSpellCheckerApi>(codeSpellCheckerId);
-    const getApi = async () => extension?.activate();
+    const api = getApi(extension);
 
     for (const command of resolveCommands(parseExtensionConfig(config))) {
-        context.subscriptions.push(vscode.commands.registerCommand(command.id, () => runCommand(command, getApi)));
+        context.subscriptions.push(vscode.commands.registerCommand(command.id, () => runCommand(command, extension)));
     }
 
-    const api = getApi();
     // Register the dictionary configuration with Code Spell Checker.
-    api.then((cspell) => cspell?.registerConfig(context.asAbsolutePath('./cspell-ext.json'))).catch((error: unknown) =>
-        console.error('Failed to register %s with Code Spell Checker: %o', context.extension.id, error),
-    );
+    const registered = api.then((cspell) => cspell?.registerConfig(context.asAbsolutePath('./cspell-ext.json')));
 
-    custom?.activate?.(context, api);
+    return Promise.all([registered, custom?.activate?.(context, api)]).then(() => undefined);
 }
 
-async function runCommand(command: ResolvedCommand, getApi: () => Promise<CodeSpellCheckerApi | undefined>) {
+function getApi(extension: Extension): Promise<CodeSpellCheckerApi | undefined> {
+    return Promise.resolve(extension?.activate());
+}
+
+function runCommand(command: ResolvedCommand, extension: Extension): Promise<void> {
     const enable = command.action === 'enable';
     const isGlobal = command.scope === 'global';
     switch (command.toggle) {
-        case 'locale': {
-            const api = await getApi();
-            await (enable ? api?.enableLocale(isGlobal, command.value) : api?.disableLocale(isGlobal, command.value));
-            return;
-        }
-        case 'fileType': {
-            const api = await getApi();
-            await (enable ? api?.enableLanguageId(command.value) : api?.disableLanguageId(command.value));
-            return;
-        }
-        case 'dictionary': {
-            await toggleDictionary(command.value, enable, isGlobal);
-            return;
-        }
+        case 'locale':
+            return getApi(extension).then((api) =>
+                enable ? api?.enableLocale(isGlobal, command.value) : api?.disableLocale(isGlobal, command.value),
+            );
+        case 'fileType':
+            return getApi(extension).then((api) =>
+                enable ? api?.enableLanguageId(command.value) : api?.disableLanguageId(command.value),
+            );
+        case 'dictionary':
+            return toggleDictionary(command.value, enable, isGlobal);
     }
 }
 
@@ -74,12 +75,12 @@ async function runCommand(command: ResolvedCommand, getApi: () => Promise<CodeSp
  * Add `name` or `!name` to `cSpell.dictionaries`. Code Spell Checker has no API for this yet
  * (streetsidesoftware/vscode-spell-checker#5585).
  */
-async function toggleDictionary(name: string, enable: boolean, isGlobal: boolean): Promise<void> {
+function toggleDictionary(name: string, enable: boolean, isGlobal: boolean): Promise<void> {
     const settings = vscode.workspace.getConfiguration('cSpell');
     const inspected = settings.inspect<string[]>('dictionaries');
     const current = (isGlobal ? inspected?.globalValue : inspected?.workspaceValue) ?? [];
     const dictionaries = current.filter((d) => d !== name && d !== `!${name}`);
     dictionaries.push(enable ? name : `!${name}`);
     const target = isGlobal ? vscode.ConfigurationTarget.Global : vscode.ConfigurationTarget.Workspace;
-    await settings.update('dictionaries', dictionaries, target);
+    return Promise.resolve(settings.update('dictionaries', dictionaries, target));
 }
