@@ -48,7 +48,7 @@
     "@types/node": "^24.19.2",
     "@types/vscode": "1.125.0",
     "@vscode/test-electron": "^3.1.0",
-    "@vscode/vsce": "^3.9.2",
+    "@vscode/vsce": "^4.0.0",
     "cspell": "^10.4.0",
     "inject-markdown": "^4.0.0",
     "npm-check-updates": "^23.1.1",
