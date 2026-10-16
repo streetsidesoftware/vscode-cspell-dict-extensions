@@ -9,10 +9,14 @@
     "update-manual-pub-list": "./update-manual-pub-list.mjs",
     "fix-extensions": "./fix-extensions.mts"
   },
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "onFail": "error"
+    }
+  },
   "engines": {
-    "node": ">=24.11.0",
-    "pnpm": "0",
-    "yarn": "0"
+    "node": ">=24.11.0"
   },
   "dependencies": {
     "@types/mdast": "^4.0.4",

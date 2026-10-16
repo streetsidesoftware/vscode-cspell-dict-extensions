@@ -31,25 +31,29 @@
     "update-packages": "npm ci && npx npm-check-updates -t semver -u && npm i && lerna exec \"npx npm-check-updates -t semver -u && rm -rf node_modules package-lock.json && npm i\" && npm i"
   },
   "type": "commonjs",
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "onFail": "error"
+    }
+  },
   "engines": {
     "node": ">=24.11.0",
-    "pnpm": "0",
-    "vscode": "^1.125.0",
-    "yarn": "0"
+    "vscode": "^1.125.0"
   },
   "devDependencies": {
-    "@lerna-lite/cli": "^4.11.5",
-    "@lerna-lite/exec": "^4.11.5",
-    "@lerna-lite/run": "^4.11.5",
+    "@lerna-lite/cli": "^5.6.2",
+    "@lerna-lite/exec": "^5.6.2",
+    "@lerna-lite/run": "^5.6.2",
     "@tsconfig/node24": "^24.0.5",
     "@types/node": "^24.19.2",
     "@types/vscode": "1.125.0",
     "@vscode/test-electron": "^3.1.0",
-    "@vscode/vsce": "^3.9.2",
+    "@vscode/vsce": "^4.0.0",
     "cspell": "^10.4.0",
-    "inject-markdown": "^4.0.0",
-    "npm-check-updates": "^19.6.6",
-    "ovsx": "^0.10.12",
+    "inject-markdown": "^6.2.0",
+    "npm-check-updates": "^23.1.1",
+    "ovsx": "^1.2.0",
     "oxlint": "^1.88.0",
     "oxlint-tsgolint": "^7.0.2004",
     "prettier": "^3.9.10",
