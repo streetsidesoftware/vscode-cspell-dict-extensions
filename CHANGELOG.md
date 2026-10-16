@@ -1,5 +1,28 @@
 # Changelog
 
+## [8.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@7.0.0...vscode-cspell-dict-extensions@8.0.0) (2026-10-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* require VS Code 1.125 and Node 24 ([#1590](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1590))
+
+### Features
+
+* require VS Code 1.125 and Node 24 ([#1590](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1590)) ([291f8b7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/291f8b77ff6c6e2d62b10a50fc72d6295f762c1d))
+
+
+### Updates and Bug Fixes
+
+* restore official license texts and add copyright to README footers ([#1595](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1595)) ([5fa2d86](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/5fa2d866c9c95213d6461b78bc896c0b146a8cfb))
+* Workflow Bot -- Update Dictionaries ([#1592](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1592)) ([3fe8e68](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3fe8e68d94d89dbd1e6ad10c303c7f2d9c43dc0d))
+
+
+### Code Refactoring
+
+* **generator:** replace yeoman with TypeScript, inquirer and commander ([#1594](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1594)) ([66c528e](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/66c528e12d0004824b84dba97c9fa9ca2227b629))
+* **test-runner:** convert to TypeScript (.mts) ([#1586](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1586)) ([21659ac](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/21659ac2f75f2041a742adddbac7df66ebbbe05e))
+
 ## [7.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@6.3.0...vscode-cspell-dict-extensions@7.0.0) (2026-10-15)
 
 
