@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@lerna-lite/cli": "^5.6.2",
-    "@lerna-lite/exec": "^4.11.5",
+    "@lerna-lite/exec": "^5.6.2",
     "@lerna-lite/run": "^5.6.2",
     "@tsconfig/node24": "^24.0.5",
     "@types/node": "^24.19.2",
@@ -52,7 +52,7 @@
     "cspell": "^10.4.0",
     "inject-markdown": "^6.2.0",
     "npm-check-updates": "^23.1.1",
-    "ovsx": "^0.10.12",
+    "ovsx": "^1.2.0",
     "oxlint": "^1.88.0",
     "oxlint-tsgolint": "^7.0.2004",
     "prettier": "^3.9.10",
