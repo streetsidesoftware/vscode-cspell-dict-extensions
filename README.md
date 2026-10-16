@@ -7,6 +7,7 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 See Also:
 
 - [How to Create a New Extension](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/blob/main/CONTRIBUTING.md#how-to-create-a-new-extension)
+- [How the Extensions Are Maintained](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/blob/main/CONTRIBUTING.md#synced-extensions)
 
 <!--- @@inject: static/generated/extension_list.md --->
 

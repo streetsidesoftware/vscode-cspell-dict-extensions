@@ -1,6 +1,12 @@
 {
     "$schema": "./node_modules/oxlint/configuration_schema.json",
-    "ignorePatterns": ["**/out/**", "**/samples/**", "**/.vscode-test/**", "**/static/**"],
+    "ignorePatterns": [
+        "**/out/**",
+        "**/samples/**",
+        "**/.vscode-test/**",
+        "**/static/**",
+        "extension-runtime/template/**"
+    ],
     "rules": {
         "typescript/no-floating-promises": [
             "warn",

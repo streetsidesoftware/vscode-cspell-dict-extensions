@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Swedish Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Swedish Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Swedish Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Swedish Spell Checker Dictionary in Workspace"
+    }
+]

@@ -2,6 +2,7 @@
   "packages": [
     "scripts",
     "test-runner",
+    "extension-runtime",
     "extensions/*",
     "generator-cspell-dicts-extensions"
   ],

@@ -20,11 +20,13 @@
   },
   "dependencies": {
     "@types/mdast": "^4.0.4",
+    "ajv": "^8.20.0",
     "mdast-util-to-markdown": "^2.2.0",
-    "sort-package-json": "^4.0.0"
+    "sort-package-json": "^4.0.0",
+    "ts-json-schema-generator": "^2.9.0"
   },
   "scripts": {
-    "test": "tsc --noEmit -p ."
+    "test": "tsc --noEmit -p . && node --test"
   },
   "author": "",
   "license": "MIT"
