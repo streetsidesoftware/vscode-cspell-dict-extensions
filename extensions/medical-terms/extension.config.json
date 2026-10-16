@@ -1,0 +1,10 @@
+{
+    "$schema": "../../extension-runtime/extension.config.schema.json",
+    "name": "medical-terms",
+    "friendlyName": "Medical Terms",
+    "sample": "samples/README.md",
+    "cspell": {
+        "import": ["@cspell/dict-medicalterms/cspell-ext.json"]
+    },
+    "commands": []
+}

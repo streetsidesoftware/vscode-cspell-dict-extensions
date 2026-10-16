@@ -1,0 +1,47 @@
+name: " 🧪 Test Tooling"
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "extension-runtime/**"
+      - "scripts/**"
+      - ".github/workflows/test-tooling.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "extension-runtime/**"
+      - "scripts/**"
+      - ".github/workflows/test-tooling.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-tooling:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+          cache: npm
+      # The root `postinstall` would install all extensions. The tests only need the root and `scripts/` packages.
+      - name: Install
+        run: |
+          npm ci --ignore-scripts
+          npm ci --prefix scripts
+      - name: Test extension-runtime
+        run: npm test
+        working-directory: extension-runtime
+      - name: Test scripts
+        run: npm test
+        working-directory: scripts

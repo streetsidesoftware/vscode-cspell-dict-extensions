@@ -5,9 +5,9 @@
 **/*.d.ts
 **/*.map
 cspell.json
-out/test/**
+extension.config.json
 samples/**
 src/**
 test/**
 tsconfig.json
-vsc-extension-quickstart.md
+tsdown.config.ts

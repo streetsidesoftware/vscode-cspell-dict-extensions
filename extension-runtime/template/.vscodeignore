@@ -1,0 +1,13 @@
+.gitignore
+.vscode-test/**
+.vscode/**
+*.vsix
+**/*.d.ts
+**/*.map
+cspell.json
+extension.config.json
+samples/**
+src/**
+test/**
+tsconfig.json
+tsdown.config.ts

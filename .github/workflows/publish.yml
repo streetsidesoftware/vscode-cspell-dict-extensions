@@ -59,10 +59,17 @@ jobs:
           cd $EXTENSION_DIR
           echo EXTENSION_NAME=$(jq -r .name package.json ) >> $GITHUB_ENV
 
+      # Package once and publish the same file to both stores. The `.vsix` carries the extension's
+      # `vsce.preRelease` mode, which `ovsx` would not read when packaging on its own.
+      - name: Package
+        run: |
+          cd $EXTENSION_DIR
+          npx vsce package -o extension.vsix
+
       - name: Publish VSCE
         run: |
           cd $EXTENSION_DIR
-          npx vsce publish --skip-duplicate -p ${{ secrets.VSCE_TOKEN }} || echo "PUB_FAIL_VSCE=true" >> $GITHUB_ENV
+          npx vsce publish --skip-duplicate -p ${{ secrets.VSCE_TOKEN }} --packagePath extension.vsix || echo "PUB_FAIL_VSCE=true" >> $GITHUB_ENV
 
       - name: Check Publish Result VSCE
         if: ${{ env.PUB_FAIL_VSCE }}
@@ -71,7 +78,7 @@ jobs:
       - name: Publish OVSX
         run: |
           cd $EXTENSION_DIR
-          npx ovsx publish --skip-duplicate -p ${{ secrets.OVSX_TOKEN }} || echo "PUB_FAIL_OVSX=true" >> $GITHUB_ENV
+          npx ovsx publish extension.vsix --skip-duplicate -p ${{ secrets.OVSX_TOKEN }} || echo "PUB_FAIL_OVSX=true" >> $GITHUB_ENV
 
       - name: Check Publish Result OVSX
         if: ${{ env.PUB_FAIL_OVSX }}

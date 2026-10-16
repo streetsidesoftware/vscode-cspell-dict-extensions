@@ -1,12 +1,13 @@
 .gitignore
 .vscode-test/**
 .vscode/**
+*.vsix
 **/*.d.ts
 **/*.map
-**/*.test.*
-out/test/**
+cspell.json
+extension.config.json
 samples/**
 src/**
 test/**
 tsconfig.json
-vsc-extension-quickstart.md
+tsdown.config.ts

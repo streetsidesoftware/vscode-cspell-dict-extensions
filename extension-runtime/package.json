@@ -1,0 +1,13 @@
+{
+  "name": "@internal/extension-runtime",
+  "version": "1.0.0",
+  "description": "The code shared by the extensions, and the files the sync writes into them.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check-types": "tsc -p .",
+    "test": "node --test"
+  },
+  "author": "",
+  "license": "MIT"
+}

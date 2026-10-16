@@ -1,26 +1,11 @@
-import * as vscode from 'vscode';
+// Written by `npm run sync:extensions`. Do not edit: put custom code in `src/custom.ts`.
+import type { ExtensionContext } from 'vscode';
 
-interface CodeSpellCheckerExtension {
-    registerConfig(path: string): Promise<void>;
-    enableLocale(isGlobal: boolean, locale: string): Promise<void>;
-    disableLocale(isGlobal: boolean, locale: string): Promise<void>;
+import { activateExtension } from '../../../extension-runtime/src/activate.ts';
+import config from '../extension.config.json' with { type: 'json' };
+
+export function activate(context: ExtensionContext): Promise<void> {
+    return activateExtension(context, config);
 }
 
-/**
- * Called by VS Code when the extension is loaded.
- */
-export async function activate(context: vscode.ExtensionContext) {
-    const vscodeSpellCheckerExtension = 'streetsidesoftware.code-spell-checker';
-    const configLocation = context.asAbsolutePath('./cspell-ext.json');
-
-    const extension = vscode.extensions.getExtension<CodeSpellCheckerExtension>(vscodeSpellCheckerExtension);
-
-    // We need to register the dictionary configuration with the Code Spell Checker Extension
-    const ext = await extension?.activate();
-    await ext?.registerConfig(configLocation);
-}
-
-/**
- * Called by VS Code when the extension is unloaded.
- */
-export function deactivate() {}
+export function deactivate(): void {}

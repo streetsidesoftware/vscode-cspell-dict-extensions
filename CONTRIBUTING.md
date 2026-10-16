@@ -72,6 +72,22 @@ Please update files if necessary (leave it as unless you know why you're changin
 
 There are other `.json` and `README` files where new extension is referenced but those are automatically generated after pull request so don't edit any other files.
 
+## Synced extensions
+
+Extensions with an `extension.config.json` are maintained centrally. Their code lives in [`extension-runtime/`](./extension-runtime), and `npm run sync:extensions` writes their files from it:
+
+- **Owned, overwritten:** `src/extension.ts`, `tsconfig.json`, `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from `extension-runtime/template/`.
+- **Derived from `extension.config.json`:** `cspell-ext.json` and the `name`, `displayName`, `description`, `type`, `engines.vscode`, `main`, `contributes.commands` and `scripts` fields of `package.json`. The other fields are kept.
+- **Never touched:** the README, `samples/`, `CHANGELOG.md`, `LICENSE`, images, and an optional `src/custom.ts` for code only that extension needs.
+
+To change a synced extension, edit its `extension.config.json` (see [the schema](./extension-runtime/extension.config.schema.json)) or the shared files, then run `npm run sync:extensions` and commit the result. CI checks that the extensions are in sync.
+
+The extensions are bundled into one ESM file, `out/extension.js`, with [tsdown](https://tsdown.dev), using the shared base in [`.config/tsdown.extension.config.mts`](./.config/tsdown.extension.config.mts).
+
+### Pre-release mode
+
+While an extension's `package.json` has `"vsce": { "preRelease": true }`, every release of it is published as a pre-release. The " 👀 Set Prerelease" workflow opens a PR that turns the mode on or off for one extension. Turning it off is a `fix:` commit, so the next release is a stable version above the pre-releases.
+
 ## Licenses
 
 Note: the preferred licenses are either MIT or GPL3.

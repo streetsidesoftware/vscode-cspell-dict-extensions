@@ -21,3 +21,5 @@ jobs:
       - run: npm run lint
       - run: npm run check-types
       - run: npm run lint:code
+      - name: Check the synced extensions
+        run: npm run sync:extensions -- --check
