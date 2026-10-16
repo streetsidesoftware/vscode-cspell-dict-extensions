@@ -5,10 +5,39 @@ version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
+    versioning-strategy: increase
     schedule:
       interval: "weekly"
+    # Minor and patch updates come in one PR per dependency type. Major updates get their own PRs.
+    groups:
+      production-dependencies:
+        dependency-type: "production"
+        update-types:
+          - minor
+          - patch
+      development-dependencies:
+        dependency-type: "development"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Matches the Node version in .tool-versions.
+      - dependency-name: "@types/node"
+        update-types:
+          - version-update:semver-major
+      # Pinned to engines.vscode: vsce refuses to package when the types are newer than the engine.
+      - dependency-name: "@types/vscode"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: chore
+    groups:
+      action-dependencies-version:
+        patterns: ["*"]
+        applies-to: "version-updates"
+      action-dependencies-security:
+        patterns: ["*"]
+        applies-to: "security-updates"
