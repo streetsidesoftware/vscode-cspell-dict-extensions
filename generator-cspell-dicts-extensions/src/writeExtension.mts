@@ -52,6 +52,9 @@ export function templateData(answers: Answers): TemplateData {
         toggleDictionary: toggle === 'dictionary',
         toggleFileType: toggle === 'file-type',
         toggleLocaleOrDictionary: toggle === 'locale' || toggle === 'dictionary',
+        addCommands: toggle !== 'none',
+        /** The end of the command titles, i.e. `Enable Swedish Spell Checker Dictionary`. */
+        commandSubject: toggle === 'file-type' ? 'Spell Checking of File Types' : 'Spell Checker Dictionary',
         locale,
         localeExample: locale || '<locale>',
         dictionariesJson: JSON.stringify(dictionaries),

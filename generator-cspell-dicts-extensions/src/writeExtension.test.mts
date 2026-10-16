@@ -45,11 +45,11 @@ const variants: Record<string, Answers> = {
     'scaffold with file types': answers('extra', 'Extra', { kind: 'scaffold', toggle: 'file-type' }),
 };
 
-const commandCount: Record<Answers['toggle'], number | undefined> = {
+const commandCount: Record<Answers['toggle'], number> = {
     locale: 4,
     dictionary: 4,
     'file-type': 2,
-    none: undefined,
+    none: 0,
 };
 
 const expectedFiles = [
@@ -118,8 +118,8 @@ describe('writeExtension', () => {
                 if (file.endsWith('.json')) JSON.parse(content);
             }
 
-            const pkg = JSON.parse(text['package.json'] ?? '') as { contributes: { commands?: unknown[] } };
-            assert.equal(pkg.contributes.commands?.length, commandCount[answers.toggle]);
+            const pkg = JSON.parse(text['package.json'] ?? '') as { contributes: { commands: unknown[] } };
+            assert.equal(pkg.contributes.commands.length, commandCount[answers.toggle]);
         });
     }
 
