@@ -69,7 +69,7 @@
   "bugs": {
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
-  "license": "MPL v2",
+  "license": "MPL-2.0",
   "scripts": {
     "clean": "rimraf out",
     "clean-build": "npm run clean && npm run build",
