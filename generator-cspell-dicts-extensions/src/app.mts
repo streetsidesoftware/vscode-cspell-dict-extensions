@@ -3,7 +3,7 @@ import { styleText } from 'node:util';
 
 import { Command, Option } from 'commander';
 
-import { exec } from './exec.mts';
+import { npm } from './exec.mts';
 import { findExistingExtensions } from './existingExtensions.mts';
 import { fetchJson } from './npm.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
@@ -62,10 +62,10 @@ async function generate(packageName: string | undefined, options: Omit<Options, 
     await writeExtension(destDir, answers, { log: (message) => console.log(message) });
 
     if (answers.packageName) {
-        exec('npm', ['install', '-S', answers.packageName], destDir);
+        npm(['install', '-S', answers.packageName], destDir);
     }
-    exec('npx', ['prettier', '-w', '**/*.{yaml,json,ts,md}'], destDir);
-    exec('npm', ['install'], destDir);
+    npm(['exec', '--', 'prettier', '-w', '**/*.{yaml,json,ts,md}'], destDir);
+    npm(['install'], destDir);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
 }

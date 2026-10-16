@@ -1,17 +1,36 @@
 import { spawnSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import path from 'node:path';
 import { styleText } from 'node:util';
 
 /**
- * Run a command, showing its output. Throws when it fails.
+ * Find npm's command line script, so npm runs with Node directly instead of through a shell. On Windows, `npm` is a
+ * batch file that only runs in a shell, and a shell would interpret the arguments.
  */
-export function exec(command: string, args: string[], cwd: string): void {
-    console.log(styleText('gray', `> ${command} ${args.join(' ')}`));
-    // On Windows, npm and npx are batch files and need a shell.
-    // The arguments are quoted here, because Node does not quote them for a shell (DEP0190).
-    const isWindows = process.platform === 'win32';
-    const result = isWindows
-        ? spawnSync([command, ...args.map((a) => `"${a}"`)].join(' '), { cwd, stdio: 'inherit', shell: true })
-        : spawnSync(command, args, { cwd, stdio: 'inherit' });
+export function findNpmCli(): string | undefined {
+    const nodeDir = path.dirname(process.execPath);
+    const candidates = [
+        // Set by `npm run`.
+        process.env['npm_execpath'],
+        // Where Node installs npm: next to node.exe on Windows, in ../lib on other systems.
+        path.join(nodeDir, 'node_modules', 'npm', 'bin', 'npm-cli.js'),
+        path.join(nodeDir, '..', 'lib', 'node_modules', 'npm', 'bin', 'npm-cli.js'),
+    ];
+    return candidates.find((file) => !!file && /npm-cli\.c?js$/.test(file) && existsSync(file));
+}
+
+/**
+ * Run npm, showing its output. Throws when it fails.
+ */
+export function npm(args: string[], cwd: string): void {
+    console.log(styleText('gray', `> npm ${args.join(' ')}`));
+    const cli = findNpmCli();
+    if (!cli && process.platform === 'win32') {
+        throw new Error('Could not find npm. Run the generator with: npm run create:extension');
+    }
+    const result = cli
+        ? spawnSync(process.execPath, [cli, ...args], { cwd, stdio: 'inherit' })
+        : spawnSync('npm', args, { cwd, stdio: 'inherit' });
     if (result.error) throw result.error;
-    if (result.status) throw new Error(`${command} ${args.join(' ')} failed with exit code ${result.status}`);
+    if (result.status) throw new Error(`npm ${args.join(' ')} failed with exit code ${result.status}`);
 }

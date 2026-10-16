@@ -52,7 +52,7 @@ The generator is written in TypeScript and runs directly with Node.js (type stri
 - `src/cspellExt.mts` — reads a dictionary's `cspell-ext.json` (from jsDelivr): natural language or not, its locales and dictionary names.
 - `src/names.mts` — derives the extension name.
 - `src/writeExtension.mts` — renders and copies the files in `templates/`.
-- `src/exec.mts` — runs npm and npx, also on Windows.
+- `src/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.
 - `src/render.mts` — renders the template syntax: `<%= value %>` inserts a value (HTML escaped), `<%- value %>` inserts it as is, and `<% if (value) { %> … <% } else { %> … <% } %>` includes text conditionally. A line holding only an `if`, `else` or end tag is removed.
 
 ```bash
