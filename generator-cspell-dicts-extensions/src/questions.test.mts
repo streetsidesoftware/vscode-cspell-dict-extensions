@@ -29,6 +29,10 @@ const packages = {
         cspellExt: { dictionaryDefinitions: [{ name: 'medical terms' }], dictionaries: ['medical terms'] },
     },
     '@cspell/parser-typescript': { description: 'A TypeScript parser plugin for cspell.', cspellExt: undefined },
+    '@cspell/parser-python-strings-comments': {
+        description: 'A strings-and-comments parser plugin for cspell covering Python.',
+        cspellExt: undefined,
+    },
 };
 
 const searchUrl = 'https://registry.npmjs.org/-/v1/search?text=scope%3Acspell%20keywords%3Acspell&size=250&from=0';
@@ -36,7 +40,7 @@ const searchUrl = 'https://registry.npmjs.org/-/v1/search?text=scope%3Acspell%20
 function registry(): Record<string, unknown> {
     const responses: Record<string, unknown> = {
         [searchUrl]: {
-            total: 5,
+            total: 6,
             objects: Object.entries(packages).map(([name, p]) => ({ package: { name, description: p.description } })),
         },
     };
@@ -138,6 +142,14 @@ describe('askQuestions', () => {
                 description: 'Typescript Parser parser extension for VS Code.',
                 commandName: 'Typescript Parser',
             });
+        });
+
+        it('names a parser after its package, since parser descriptions read alike', async () => {
+            const answers = await askQuestions(
+                { package: '@cspell/parser-python-strings-comments', yes: true },
+                context(noPrompter),
+            );
+            assert.equal(answers.name, 'python-strings-comments-parser');
         });
 
         it('creates a scaffold, asking for a name without a default', async () => {

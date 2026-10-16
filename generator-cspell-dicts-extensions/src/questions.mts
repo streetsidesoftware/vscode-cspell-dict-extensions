@@ -4,7 +4,7 @@ import { styleText } from 'node:util';
 
 import { classify, cspellExtUrl, type CSpellExt, type DictionaryInfo, mostSpecificLocale } from './cspellExt.mts';
 import { type FetchJson, packageInfo, type PackageSummary, searchPackages } from './npm.mts';
-import { nameFromDescription, normalizeName, title, toFriendlyName } from './names.mts';
+import { nameFromDescription, nameFromParserPackage, normalizeName, title, toFriendlyName } from './names.mts';
 import type { Choice, Prompter } from './prompt.mts';
 
 /**
@@ -350,7 +350,12 @@ async function askName(kind: Kind, pkg: PackageSummary | undefined, options: Opt
         return name;
     }
 
-    const derived = pkg?.description ? nameFromDescription(pkg.description) : '';
+    const derived =
+        kind === 'parser' && pkg
+            ? nameFromParserPackage(pkg.name)
+            : pkg?.description
+              ? nameFromDescription(pkg.description)
+              : '';
     if (options.yes) {
         if (!derived) {
             return missing('--name', kind === 'scaffold' ? 'a scaffold needs a name' : 'no name could be derived');

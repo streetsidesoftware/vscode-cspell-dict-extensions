@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { nameFromDescription, normalizeName, title, toFriendlyName } from './names.mts';
+import { nameFromDescription, nameFromParserPackage, normalizeName, title, toFriendlyName } from './names.mts';
 
 describe('names', () => {
     it('normalizeName', () => {
@@ -16,8 +16,14 @@ describe('names', () => {
         assert.equal(nameFromDescription('Medical Terms dictionary for cspell.'), 'medical-terms');
         assert.equal(nameFromDescription('Thai Language dictionary for cspell.'), 'thai');
         assert.equal(nameFromDescription('Pokémon dictionary for cspell.'), 'pokemon');
-        assert.equal(nameFromDescription('A TypeScript parser plugin for cspell.'), 'typescript-parser');
         assert.equal(nameFromDescription(''), '');
+    });
+
+    it('nameFromParserPackage', () => {
+        assert.equal(nameFromParserPackage('@cspell/parser-typescript'), 'typescript-parser');
+        assert.equal(nameFromParserPackage('@cspell/parser-python-strings-comments'), 'python-strings-comments-parser');
+        assert.equal(nameFromParserPackage('@cspell/parser-strings-comments'), 'strings-comments-parser');
+        assert.equal(nameFromParserPackage('@cspell/parser-'), '');
     });
 
     it('toFriendlyName and title', () => {

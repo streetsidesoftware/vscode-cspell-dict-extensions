@@ -15,14 +15,24 @@ export function normalizeName(name: string): string {
  *
  * - `Swedish dictionary for CSpell.` -> `swedish`
  * - `Medical Terms dictionary for cspell.` -> `medical-terms`
- * - `A TypeScript parser plugin for cspell.` -> `typescript-parser`
  */
 export function nameFromDescription(description: string): string {
     const subject = description
         .replace(/^(an?|the)\s+/i, '')
-        .replace(/\s*(\blanguage\s+)?\bdictionar(y|ies)\b.*$/i, '')
-        .replace(/\s*\bplugin\b.*$/i, '');
+        .replace(/\s*(?:\blanguage\s+)?\b(?:dictionary|dictionaries)\b.*$/i, '');
     return normalizeName(subject);
+}
+
+/**
+ * Derive an extension name from a parser package name. The descriptions of the per-language parsers all read alike,
+ * so the package name is what tells them apart.
+ *
+ * - `@cspell/parser-typescript` -> `typescript-parser`
+ * - `@cspell/parser-python-strings-comments` -> `python-strings-comments-parser`
+ */
+export function nameFromParserPackage(packageName: string): string {
+    const subject = normalizeName(packageName.replace(/^@cspell\/parser-/, ''));
+    return subject ? `${subject}-parser` : '';
 }
 
 export function toFriendlyName(name: string): string {

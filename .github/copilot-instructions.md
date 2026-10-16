@@ -5,7 +5,7 @@
 - This is an npm + `lerna-lite` monorepo of many VS Code extensions, mostly under `extensions/*`.
 - Most extension packages have the same shape: `package.json`, `src/extension.ts`, `cspell-ext.json`, `samples/`, and local build/test scripts.
 - There are three important support packages:
-  - `generator-cspell-dicts-extensions/` — scaffolds new extensions; prefer `npm run create:extension` instead of copying an existing extension by hand. It is TypeScript (`.mts`) run directly by Node, using `@inquirer/prompts` and `commander`. The extension files come from `templates/`, which use a small EJS subset (`<%= value %>` and `<% if (value) { %> … <% } else { %> … <% } %>`) rendered by `src/render.mts`. Run its unit tests with `npm test` inside the generator directory.
+  - `generator-cspell-dicts-extensions/` — scaffolds new extensions; prefer `npm run create:extension` instead of copying an existing extension by hand. It is TypeScript (`.mts`) run directly by Node, using `@inquirer/prompts` and `commander`. The extension files come from `templates/`, which use a small EJS subset (`<%= value %>`, `<%- value %>` and `<% if (value) { %> … <% } else { %> … <% } %>`) rendered by `src/render.mts`. Run its unit tests with `npm test` inside the generator directory.
   - `test-runner/` — shared VS Code integration test harness.
   - `scripts/` — repo maintenance and generation scripts.
 - Two extensions are notable special cases:
@@ -23,7 +23,7 @@
   - `npm run lint:code` → runs oxlint with type-aware rules; warnings fail the check
   - `npm run check-types` → type-checks `test-runner` and the generator
   - `npm run test:cspell` → runs sample spelling checks across extensions
-  - `npm run create:extension` → scaffold a new extension
+  - `npm run create:extension` → scaffold a new extension (dictionary, parser, or scaffold); run it without prompts with `npm run create:extension -- <package> --yes`, i.e. `@cspell/dict-sv` or `@cspell/parser-typescript`. See `generator-cspell-dicts-extensions/README.md` for the options.
   - `npm run gen:readme` → regenerate workspace metadata, extension lists, README injections, and normalize extension manifests
   - `npm run gen:release-please` → regenerate release-please config
   - `npm run gen:workflow` → regenerate `.github/workflows/manual-publish.yml`
@@ -36,7 +36,7 @@
   - `npm run test:vscode`
 - Use root-level commands only when you need cross-repo validation or you changed shared tooling/scripts.
 - Prefer `rg`/`glob` over opening the whole monorepo; there are many nearly identical extension packages.
-- If the task is “add a new dictionary extension”, use the generator and then review the generated files instead of creating files manually.
+- If the task is “add a new dictionary extension” (or parser extension), run the generator with the package and `--yes` (add `--name` if the suggested name is taken), then review the generated files instead of creating files manually. Replace the sample text in `samples/seattle.md` with text in the extension's language.
 - If the task is “add words to an existing language”, check whether the real source of truth is upstream in `streetsidesoftware/cspell-dicts`; `CONTRIBUTING.md` explicitly says many dictionary word additions belong there first.
 
 ## Generated or normalized files
