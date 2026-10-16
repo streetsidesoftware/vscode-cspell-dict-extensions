@@ -45,13 +45,19 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           commit-message: >-
-            ${{ inputs.prerelease && format('chore({0}): Set Prerelease Mode to true', inputs.extension)
-            || format('fix({0}): Prepare for Release', inputs.extension) }}
+            ${{
+              inputs.prerelease
+              && format('chore({0}): Set Prerelease Mode to true', inputs.extension)
+              || format('fix({0}): Prepare for Release', inputs.extension)
+            }}
           branch: update-prerelease-mode-${{ inputs.extension }}
           base: main
           title: >-
-            ${{ inputs.prerelease && format('chore({0}): Set Prerelease Mode to true', inputs.extension)
-            || format('fix({0}): Prepare for Release', inputs.extension) }}
+            ${{
+              inputs.prerelease
+              && format('chore({0}): Set Prerelease Mode to true', inputs.extension)
+              || format('fix({0}): Prepare for Release', inputs.extension)
+            }}
           body: |
             # Prerelease Mode
 
