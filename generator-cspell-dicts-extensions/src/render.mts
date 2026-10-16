@@ -2,9 +2,11 @@
  * A minimal renderer for the EJS subset used by the templates:
  *
  * - `<%= name %>` inserts a value, HTML escaped like EJS.
+ * - `<%- name %>` inserts a value as it is, i.e. code or JSON.
  * - `<% if (name) { %>`, `<% } else { %>` and `<% } %>` include text based upon a value.
  *
- * Text outside of the tags is kept as is, including whitespace and line breaks.
+ * Text outside of the tags is kept as is, including whitespace and line breaks, except that a line holding only an
+ * `if`, `else` or end tag is removed, so block tags leave no blank lines.
  * Any other tag is an error.
  */
 
@@ -17,7 +19,7 @@ interface Block {
     parentActive: boolean;
 }
 
-const regExpTag = /<%(=?)([\s\S]*?)%>/g;
+const regExpTag = /<%([=-]?)([\s\S]*?)%>/g;
 const regExpIdentifier = /^[a-z_$][\w$]*$/i;
 const regExpIf = /^if\s*\(\s*([a-z_$][\w$]*)\s*\)\s*\{$/i;
 const regExpElse = /^\}\s*else\s*\{$/;
@@ -36,15 +38,28 @@ export function render(template: string, data: TemplateData): string {
     let lastIndex = 0;
 
     for (const match of template.matchAll(regExpTag)) {
-        if (active) result += template.slice(lastIndex, match.index);
-        lastIndex = match.index + match[0].length;
-
-        const isOutput = match[1] === '=';
+        const output = match[1];
         const code = match[2].trim();
+        let start = match.index;
+        let end = match.index + match[0].length;
 
-        if (isOutput) {
+        // A block tag alone on its line removes the whole line.
+        if (!output) {
+            const lineStart = template.lastIndexOf('\n', start - 1) + 1;
+            const after = /^[ \t]*(\r?\n|$)/.exec(template.slice(end));
+            if (lineStart >= lastIndex && after && /^[ \t]*$/.test(template.slice(lineStart, start))) {
+                start = lineStart;
+                end += after[0].length;
+            }
+        }
+
+        if (active) result += template.slice(lastIndex, start);
+        lastIndex = end;
+
+        if (output) {
             if (!regExpIdentifier.test(code)) throw new Error(`Unsupported template expression: ${match[0]}`);
-            if (active) result += escapeXml(lookup(data, code));
+            const value = lookup(data, code);
+            if (active) result += output === '=' ? escapeXml(value) : String(value ?? '');
             continue;
         }
 

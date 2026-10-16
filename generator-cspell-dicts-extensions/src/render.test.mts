@@ -13,6 +13,11 @@ describe('render', () => {
         assert.equal(render('<%= v %>', { v: `Tom's & "Jerry" <b>` }), 'Tom&#39;s &amp; &#34;Jerry&#34; &lt;b&gt;');
     });
 
+    it('inserts raw values', () => {
+        assert.equal(render('const a = <%- list %>;', { list: `["a", 'b' & <c>]` }), `const a = ["a", 'b' & <c>];`);
+        assert.equal(render('[<%-  empty %>]', { empty: undefined }), '[]');
+    });
+
     it('renders undefined as empty and booleans as text', () => {
         assert.equal(render('[<%= a %>][<%= b %>]', { a: undefined, b: true }), '[][true]');
     });
@@ -32,17 +37,30 @@ describe('render', () => {
         assert.equal(render(template, { a: false, b: true }), '-');
     });
 
-    it('keeps whitespace and allows tags across lines', () => {
+    it('removes lines that hold only a block tag, also across lines', () => {
         const template = '{\n    <% if (a) { %>\n    "a": 1\n    <%\n    } %>\n}\n';
-        assert.equal(render(template, { a: true }), '{\n    \n    "a": 1\n    \n}\n');
-        assert.equal(render(template, { a: false }), '{\n    \n}\n');
+        assert.equal(render(template, { a: true }), '{\n    "a": 1\n}\n');
+        assert.equal(render(template, { a: false }), '{\n}\n');
+        assert.equal(render('a\r\n<% if (b) { %>\r\nb\r\n<% } %>\r\nc', { b: true }), 'a\r\nb\r\nc');
+        assert.equal(render('a\n<% if (b) { %>\nb\n<% } %>', { b: false }), 'a\n');
+    });
+
+    it('keeps the text around block tags that share a line', () => {
+        const template = 'x <% if (a) { %>A<% } %> y\n// <% if (a) { %>\nz\n// <% } %>\n';
+        assert.equal(render(template, { a: true }), 'x A y\n// \nz\n// \n');
+        assert.equal(render(template, { a: false }), 'x  y\n// \n');
+    });
+
+    it('keeps lines that hold only a value tag', () => {
+        assert.equal(render('a\n<%= v %>\nb', { v: '' }), 'a\n\nb');
     });
 
     it('rejects unknown values and unsupported tags', () => {
         assert.throws(() => render('<%= missing %>', {}), /Unknown template value: missing/);
         assert.throws(() => render('<%= a + b %>', { a: '', b: '' }), /Unsupported template expression/);
         assert.throws(() => render('<% for (const x of y) { %>', {}), /Unsupported template tag/);
-        assert.throws(() => render('<%- raw %>', { raw: '' }), /Unsupported template tag/);
+        assert.throws(() => render('<%- a.b %>', { a: '' }), /Unsupported template expression/);
+        assert.throws(() => render('<%# comment %>', {}), /Unsupported template tag/);
     });
 
     it('rejects unbalanced blocks', () => {

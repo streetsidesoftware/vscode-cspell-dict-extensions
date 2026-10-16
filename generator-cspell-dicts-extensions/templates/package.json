@@ -42,27 +42,38 @@
     }
   },
   "contributes": {
-        <% if (addCommands) { %>
-        "commands": [
-        {
-          "command": "cSpellExt_<%= name %>.enable",
-          "title": "Enable <%= commandName %> Spell Checker Dictionary"
-        },
-        {
-          "command": "cSpellExt_<%= name %>.disable",
-          "title": "Disable <%= commandName %> Spell Checker Dictionary"
-        },
-        {
-          "command": "cSpellExt_<%= name %>.enableWorkspace",
-          "title": "Enable <%= commandName %> Spell Checker Dictionary in Workspace"
-        },
-        {
-          "command": "cSpellExt_<%= name %>.disableWorkspace",
-          "title": "Disable <%= commandName %> Spell Checker Dictionary in Workspace"
-        }
-      ]
-        <%
-    } %>
+<% if (toggleFileType) { %>
+    "commands": [
+      {
+        "command": "cSpellExt_<%= name %>.enable",
+        "title": "Enable <%= commandName %> Spell Checking of File Types"
+      },
+      {
+        "command": "cSpellExt_<%= name %>.disable",
+        "title": "Disable <%= commandName %> Spell Checking of File Types"
+      }
+    ]
+<% } %>
+<% if (toggleLocaleOrDictionary) { %>
+    "commands": [
+      {
+        "command": "cSpellExt_<%= name %>.enable",
+        "title": "Enable <%= commandName %> Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_<%= name %>.disable",
+        "title": "Disable <%= commandName %> Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_<%= name %>.enableWorkspace",
+        "title": "Enable <%= commandName %> Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_<%= name %>.disableWorkspace",
+        "title": "Disable <%= commandName %> Spell Checker Dictionary in Workspace"
+      }
+    ]
+<% } %>
   },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
