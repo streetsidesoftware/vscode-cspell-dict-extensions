@@ -30,11 +30,11 @@ const readme = `# Demo
 
 Commands:
 
-<!--- @@inject: ./static/commands.md --->
-<!--- @@inject-end: ./static/commands.md --->
+<!--- @@inject-table: ./static/commands.json --->
+<!--- @@inject-end: ./static/commands.json --->
 
-<!--- @@inject: ./static/requirements.md --->
-<!--- @@inject-end: ./static/requirements.md --->
+<!--- @@inject: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->
+<!--- @@inject-end: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->
 `;
 
 const options = { vscodeEngine: '^1.125.0', engines: { cspell: '>=10', 'code-spell-checker': '>=4.7.0' } };
@@ -43,15 +43,19 @@ describe('syncExtension', () => {
     let dir = '';
 
     beforeEach(async () => {
-        dir = path.join(await fs.mkdtemp(path.join(os.tmpdir(), 'sync-')), 'demo');
-        await fs.mkdir(dir);
+        // The layout of the repository: the shared README templates are in `<root>/static/`.
+        const root = await fs.mkdtemp(path.join(os.tmpdir(), 'sync-'));
+        await fs.mkdir(path.join(root, 'static'));
+        await fs.writeFile(path.join(root, 'static/requirements.md'), 'cspell `{@ engines.cspell @}`\n');
+        dir = path.join(root, 'extensions/demo');
+        await fs.mkdir(dir, { recursive: true });
         await writeJson('extension.config.json', config);
         await writeJson('package.json', pkg);
         await fs.writeFile(path.join(dir, 'README.md'), readme);
     });
 
     afterEach(async () => {
-        await fs.rm(path.dirname(dir), { recursive: true, force: true });
+        await fs.rm(path.resolve(dir, '../..'), { recursive: true, force: true });
     });
 
     it('writes the owned and generated files', async () => {
@@ -63,9 +67,8 @@ describe('syncExtension', () => {
             '.vscodeignore',
             'README.md',
             'package.json',
-            'static/commands.md',
+            'static/commands.json',
             'static/cspell-ext.json',
-            'static/requirements.md',
             'tsconfig.json',
             'tsdown.config.ts',
         ]);
@@ -79,34 +82,37 @@ describe('syncExtension', () => {
             import: ['@cspell/dict-demo/cspell-ext.json'],
             engines: { cspell: '>=10.4.0', 'code-spell-checker': '>=4.7.0' },
         });
-        assert.match(await read('static/requirements.md'), /\| `>=10\.4\.0` \|/);
+        assert.match(await read('README.md'), /cspell `>=10\.4\.0`/);
     });
 
-    it('injects the fragments into the README', async () => {
+    it('fills the README from the shared templates and static/ data', async () => {
         await syncExtension(dir, options);
         const result = await read('README.md');
         assert.match(
             result,
-            /- `Enable Demo Spell Checker Dictionary`\n- `Disable Demo Spell Checker Dictionary in Workspace`/,
+            /\| Enable Demo Spell Checker Dictionary +\|\n\| Disable Demo Spell Checker Dictionary in Workspace \|/,
         );
-        assert.match(result, /## Requirements/);
+        assert.match(result, /cspell `>=10`/);
     });
 
-    it('removes the files the shared entry and static/ replace', async () => {
+    it('removes the files the shared entry, static/ and the templates replace', async () => {
         await fs.mkdir(path.join(dir, 'src'));
+        await fs.mkdir(path.join(dir, 'static'));
         await fs.writeFile(path.join(dir, 'src/extension.ts'), 'old\n');
         await fs.writeFile(path.join(dir, 'cspell-ext.json'), '{}\n');
+        await fs.writeFile(path.join(dir, 'static/commands.md'), 'old\n');
         const changes = await syncExtension(dir, options);
-        assert.deepEqual(files(changes, 'remove'), ['cspell-ext.json', 'src/extension.ts']);
+        assert.deepEqual(files(changes, 'remove'), ['cspell-ext.json', 'src/extension.ts', 'static/commands.md']);
         assert.equal(await exists('src/extension.ts'), false);
         assert.equal(await exists('cspell-ext.json'), false);
     });
 
-    it('has no commands fragment without commands', async () => {
+    it('has no static/commands.json without commands', async () => {
         await syncExtension(dir, options);
         await writeJson('extension.config.json', { ...config, commands: [] });
+        await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
         const changes = await syncExtension(dir, options);
-        assert.deepEqual(files(changes, 'remove'), ['static/commands.md']);
+        assert.deepEqual(files(changes, 'remove'), ['static/commands.json']);
     });
 
     it('derives package.json fields and keeps the others in order', async () => {

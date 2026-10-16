@@ -2,17 +2,16 @@
  * Write the files of an extension that come from `extension-runtime/` or from its `extension.config.json`.
  *
  * - Owned: the tool configs copied from `extension-runtime/template/`.
- * - Generated into `static/`: `cspell-ext.json` and the README fragments.
- * - Derived: some fields of `package.json` (the other fields are kept) and the injected sections of `README.md`.
+ * - Generated into `static/`: `cspell-ext.json` and `commands.json`, the data the README templates read.
+ * - Derived: some fields of `package.json` (the other fields are kept) and the injected sections of `README.md`,
+ *   filled from the shared templates in `<repo>/static/` and the extension's `static/` data.
  * - Everything else (the rest of the README, samples, CHANGELOG, LICENSE, images, `src/custom.ts`) is never touched.
  */
 
-import { execFile } from 'node:child_process';
 import fs from 'node:fs/promises';
-import os from 'node:os';
 import path from 'node:path';
-import { promisify } from 'node:util';
 
+import { injectMarkdown } from 'inject-markdown';
 import * as prettier from 'prettier';
 
 import {
@@ -28,16 +27,14 @@ import type { PackageJson } from './extensionHelper.mts';
 export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
 export const configFileName = 'extension.config.json';
 const templateDir = path.join(repoRoot, 'extension-runtime/template');
-const injectMarkdownBin = path.join(repoRoot, 'node_modules/inject-markdown/bin.mjs');
-const codeSpellCheckerUrl = 'https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker';
 
 /** Template files whose names can't be used in `extension-runtime/template/`. */
 const renamedTemplateFiles: Record<string, string> = {
     gitignore: '.gitignore',
 };
 
-/** Files from before the sync, replaced by the shared entry and `static/cspell-ext.json`. */
-const obsoleteFiles = ['src/extension.ts', 'cspell-ext.json'];
+/** Files replaced by the shared entry, `static/cspell-ext.json` and the shared README templates. */
+const obsoleteFiles = ['src/extension.ts', 'cspell-ext.json', 'static/commands.md', 'static/requirements.md'];
 
 export interface SyncOptions {
     /** Only report the files that would change. */
@@ -70,9 +67,8 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
     const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
     const files = new Map<string, string>(await readTemplateFiles());
     files.set(cspellExtPath, JSON.stringify({ ...config.cspell, engines }, null, 4) + '\n');
-    files.set('static/requirements.md', requirementsMarkdown(engines));
-    const commandsMd = commandsMarkdown(config);
-    if (commandsMd) files.set('static/commands.md', commandsMd);
+    const commands = commandsTable(config);
+    if (commands) files.set('static/commands.json', commands);
     const pkg = (await readJson(path.join(extensionDir, 'package.json'))) as PackageJson;
     files.set('package.json', packageJsonSource(config, pkg, options.vscodeEngine, hasCustom));
 
@@ -84,7 +80,7 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
         }
     }
 
-    const remove = commandsMd ? obsoleteFiles : [...obsoleteFiles, 'static/commands.md'];
+    const remove = commands ? obsoleteFiles : [...obsoleteFiles, 'static/commands.json'];
     for (const file of remove) {
         const target = path.join(extensionDir, file);
         if (!(await exists(target))) continue;
@@ -92,8 +88,10 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
         if (!options.check) await fs.rm(target);
     }
 
+    // The README is filled from the files in `static/`. With `check`, they aren't written, so when they're out of
+    // date the README can't be checked yet; the check fails on them anyway.
     const readme = path.join(extensionDir, 'README.md');
-    if (await exists(readme)) {
+    if ((await exists(readme)) && !(options.check && changes.length)) {
         const injected = await format(path.join(repoRoot, 'extensions', name, 'README.md'), await injectReadme(readme));
         if (await writeIfChanged(readme, injected, options.check))
             changes.push({ file: 'README.md', action: 'update' });
@@ -103,57 +101,37 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
 }
 
 /**
- * The list of commands, injected into the README with `<!--- @@inject: ./static/commands.md --->`.
+ * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`.
  * @returns `undefined` when the extension has no commands.
  */
-export function commandsMarkdown(config: ExtensionConfig): string | undefined {
+export function commandsTable(config: ExtensionConfig): string | undefined {
     const commands = resolveCommands(config);
     if (!commands.length) return undefined;
-    return commands.map(({ title }) => `- \`${title}\``).join('\n') + '\n';
+    return (
+        JSON.stringify(
+            commands.map(({ title }) => ({ Command: title })),
+            null,
+            4,
+        ) + '\n'
+    );
 }
 
 /**
- * The README requirements section, injected with `<!--- @@inject: ./static/requirements.md --->`.
- */
-export function requirementsMarkdown(engines: Record<string, string>): string {
-    const tools: Record<string, string> = {
-        'code-spell-checker': `[Code Spell Checker](${codeSpellCheckerUrl})`,
-        cspell: '[cspell](https://github.com/streetsidesoftware/cspell)',
-    };
-    const rows = Object.entries(engines).map(([engine, version]) => `| ${tools[engine] ?? engine} | \`${version}\` |`);
-    return [
-        '## Requirements',
-        '',
-        `This extension will automatically include the [Code Spell Checker](${codeSpellCheckerUrl}) extension.`,
-        '',
-        '| Tool | Version |',
-        '| ---- | ------- |',
-        ...rows,
-        '',
-    ].join('\n');
-}
-
-/**
- * Run `inject-markdown` on a README without changing it.
+ * Fill in a README's `@@inject` sections.
  *
  * It runs from the directory above `extensions/` (the repository root), because inject-markdown only reads files
- * inside its working directory, and READMEs inject `../../static/footer.md`.
+ * inside that root, and READMEs inject the shared templates in `../../static/`.
  * @returns the README with its `@@inject` sections filled in.
  */
 async function injectReadme(readme: string): Promise<string> {
-    const root = path.resolve(path.dirname(readme), '../..');
-    const relative = path.relative(root, readme);
-    const outDir = await fs.mkdtemp(path.join(os.tmpdir(), 'sync-readme-'));
-    try {
-        await promisify(execFile)(
-            process.execPath,
-            [injectMarkdownBin, '--silent', '--no-summary', '--output-dir', outDir, relative],
-            { cwd: root },
-        );
-        return await fs.readFile(path.join(outDir, relative), 'utf8');
-    } finally {
-        await fs.rm(outDir, { recursive: true, force: true });
+    const cwd = path.resolve(path.dirname(readme), '../..');
+    const file = path.relative(cwd, readme);
+    const result = await injectMarkdown({ file, content: await fs.readFile(readme, 'utf8') }, { cwd });
+    if (result.errors.length) {
+        const messages = result.errors.map((e) => `${file}:${e.line ?? 0}: ${e.message}`);
+        throw new Error(`inject-markdown failed:\n${messages.join('\n')}`);
     }
+    return result.document.content;
 }
 
 async function writeIfChanged(target: string, content: string, check: boolean | undefined): Promise<boolean> {

@@ -10,16 +10,18 @@ After this extension is installed, it is necessary to tell the spell checker to 
 
 ### Enable or Disable the Dictionary
 
-Commands (use `F1` or _View -> Command Palette..._):
+Run these commands with `F1` or _View -> Command Palette..._:
 
-<!--- @@inject: ./static/commands.md --->
+<!--- @@inject-table: ./static/commands.json --->
 
-- `Enable Swedish Spell Checker Dictionary`
-- `Disable Swedish Spell Checker Dictionary`
-- `Enable Swedish Spell Checker Dictionary in Workspace`
-- `Disable Swedish Spell Checker Dictionary in Workspace`
+| Command                                               |
+| ----------------------------------------------------- |
+| Enable Swedish Spell Checker Dictionary               |
+| Disable Swedish Spell Checker Dictionary              |
+| Enable Swedish Spell Checker Dictionary in Workspace  |
+| Disable Swedish Spell Checker Dictionary in Workspace |
 
-<!--- @@inject-end: ./static/commands.md --->
+<!--- @@inject-end: ./static/commands.json --->
 
 ### Manual Settings
 
@@ -34,7 +36,7 @@ Example using both English and Swedish dictionaries:
 "cSpell.language": "en,sv",
 ```
 
-<!--- @@inject: ./static/requirements.md --->
+<!--- @@inject: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->
 
 ## Requirements
 
@@ -45,7 +47,7 @@ This extension will automatically include the [Code Spell Checker](https://marke
 | [cspell](https://github.com/streetsidesoftware/cspell)                                                          | `>=10`    |
 | [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) | `>=4.7.0` |
 
-<!--- @@inject-end: ./static/requirements.md --->
+<!--- @@inject-end: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->
 
 <!--- @@inject: ../../static/footer.md --->
 

@@ -1,0 +1,26 @@
+[
+    {
+        "Command": "Enable Serbian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Serbian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Serbian Cyrillic Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Serbian Cyrillic Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Serbian Latin Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Serbian Latin Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Serbian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Serbian Spell Checker Dictionary in Workspace"
+    }
+]

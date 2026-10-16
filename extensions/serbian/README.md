@@ -24,18 +24,20 @@ After this extension is installed, it is necessary to tell the spell checker to 
 
 You can also use the following commands (`F1` or _View -> Command Palette..._) to enable or disable Serbian dictionaries:
 
-<!--- @@inject: ./static/commands.md --->
+<!--- @@inject-table: ./static/commands.json --->
 
-- `Enable Serbian Spell Checker Dictionary`
-- `Disable Serbian Spell Checker Dictionary`
-- `Enable Serbian Cyrillic Spell Checker Dictionary`
-- `Disable Serbian Cyrillic Spell Checker Dictionary`
-- `Enable Serbian Latin Spell Checker Dictionary`
-- `Disable Serbian Latin Spell Checker Dictionary`
-- `Enable Serbian Spell Checker Dictionary in Workspace`
-- `Disable Serbian Spell Checker Dictionary in Workspace`
+| Command                                               |
+| ----------------------------------------------------- |
+| Enable Serbian Spell Checker Dictionary               |
+| Disable Serbian Spell Checker Dictionary              |
+| Enable Serbian Cyrillic Spell Checker Dictionary      |
+| Disable Serbian Cyrillic Spell Checker Dictionary     |
+| Enable Serbian Latin Spell Checker Dictionary         |
+| Disable Serbian Latin Spell Checker Dictionary        |
+| Enable Serbian Spell Checker Dictionary in Workspace  |
+| Disable Serbian Spell Checker Dictionary in Workspace |
 
-<!--- @@inject-end: ./static/commands.md --->
+<!--- @@inject-end: ./static/commands.json --->
 
 ![Commands dropdown for enabling and disabling Serbian dictionaries](https://i.imgur.com/3DPWwFV.png)
 
@@ -55,7 +57,7 @@ Example using both English and Serbian dictionaries:
 
 To enable only Cyrillic or Latin, use the specific locales: `sr-Cyrl` or `sr-Latn`.
 
-<!--- @@inject: ./static/requirements.md --->
+<!--- @@inject: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->
 
 ## Requirements
 
@@ -66,7 +68,7 @@ This extension will automatically include the [Code Spell Checker](https://marke
 | [cspell](https://github.com/streetsidesoftware/cspell)                                                          | `>=10`    |
 | [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) | `>=4.7.0` |
 
-<!--- @@inject-end: ./static/requirements.md --->
+<!--- @@inject-end: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->
 
 <!--- @@inject: ../../static/footer.md --->
 
