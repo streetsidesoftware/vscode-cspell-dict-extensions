@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Sync the extensions that have an `extension.config.json` with `extension-runtime/`.
+ * Sync the extensions that have an `extension.config.json` with `extension-runtime/`, after generating
+ * `static/extension.config.schema.json` from the `ExtensionConfig` type.
  *
  * Usage: sync-extensions.mts [--check] [extension...]
  *
@@ -14,7 +15,8 @@ import path from 'node:path';
 import { parseArgs, styleText } from 'node:util';
 
 import { readPackageJson } from './lib/extensionHelper.mts';
-import { configFileName, repoRoot, syncExtension } from './lib/syncExtension.mts';
+import { createExtensionConfigValidator, generateExtensionSchema, schemaPath } from './lib/extensionSchema.mts';
+import { configFileName, format, repoRoot, syncExtension, writeIfChanged } from './lib/syncExtension.mts';
 
 async function run(): Promise<void> {
     const { values, positionals } = parseArgs({
@@ -26,10 +28,19 @@ async function run(): Promise<void> {
     const names = positionals.length ? positionals : (await fs.readdir(extensionsDir)).sort();
     const rootPkg = await readPackageJson(path.join(repoRoot, 'package.json'));
     const vscodeEngine = rootPkg.engines?.vscode ?? '^1.125.0';
-    const { engines } = JSON.parse(await fs.readFile(path.join(repoRoot, 'static/engines.json'), 'utf8'));
+
+    // The schema comes from the `ExtensionConfig` type; every extension.config.json is checked against it.
+    const schema = generateExtensionSchema();
+    const schemaFile = path.join(repoRoot, schemaPath);
+    const schemaContent = await format(schemaFile, JSON.stringify(schema, null, 4) + '\n');
+    let outOfDate = 0;
+    if (await writeIfChanged(schemaFile, schemaContent, values.check)) {
+        console.log(`${values.check ? 'Out of date' : 'Updated'}: ${schemaPath}`);
+        ++outOfDate;
+    }
+    const validate = createExtensionConfigValidator(schema);
 
     let synced = 0;
-    let outOfDate = 0;
     for (const name of names) {
         const dir = path.join(extensionsDir, name);
         if (!(await isFile(path.join(dir, configFileName)))) {
@@ -37,7 +48,7 @@ async function run(): Promise<void> {
             continue;
         }
         ++synced;
-        const changed = await syncExtension(dir, { check: values.check, vscodeEngine, engines });
+        const changed = await syncExtension(dir, { check: values.check, vscodeEngine, validate });
         for (const { file, action } of changed) {
             const verb = values.check ? 'Out of date' : action === 'remove' ? 'Removed' : 'Updated';
             console.log(`${verb}: extensions/${name}/${file}`);

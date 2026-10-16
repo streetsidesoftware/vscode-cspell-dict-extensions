@@ -1,5 +1,5 @@
 {
-    "$schema": "../../extension-runtime/extension.config.schema.json",
+    "$schema": "../../static/extension.config.schema.json",
     "name": "serbian",
     "friendlyName": "Serbian",
     "sample": "samples/Београд.md",

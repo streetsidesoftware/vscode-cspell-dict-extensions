@@ -4,6 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
+import { createExtensionConfigValidator, generateExtensionSchema } from './extensionSchema.mts';
 import { type FileChange, syncExtension } from './syncExtension.mts';
 
 const config = {
@@ -33,11 +34,11 @@ Commands:
 <!--- @@inject-table: ./static/commands.json --->
 <!--- @@inject-end: ./static/commands.json --->
 
-<!--- @@inject: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->
-<!--- @@inject-end: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->
+<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+<!--- @@inject-end: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 `;
 
-const options = { vscodeEngine: '^1.125.0', engines: { cspell: '>=10', 'code-spell-checker': '>=4.7.0' } };
+const options = { vscodeEngine: '^1.125.0', validate: createExtensionConfigValidator(generateExtensionSchema()) };
 
 describe('syncExtension', () => {
     let dir = '';
@@ -47,6 +48,7 @@ describe('syncExtension', () => {
         const root = await fs.mkdtemp(path.join(os.tmpdir(), 'sync-'));
         await fs.mkdir(path.join(root, 'static'));
         await fs.writeFile(path.join(root, 'static/requirements.md'), 'cspell `{@ engines.cspell @}`\n');
+        await fs.writeFile(path.join(root, 'static/engines.json'), '{ "engines": { "cspell": ">=10" } }\n');
         dir = path.join(root, 'extensions/demo');
         await fs.mkdir(dir, { recursive: true });
         await writeJson('extension.config.json', config);
@@ -75,13 +77,15 @@ describe('syncExtension', () => {
         assert.deepEqual(files(changes, 'remove'), []);
     });
 
-    it('writes static/cspell-ext.json with the engines, overridden by the config', async () => {
-        await writeJson('extension.config.json', { ...config, engines: { cspell: '>=10.4.0' } });
+    it('takes the engines from static/engines.json, overridden in static/cspell-ext.json', async () => {
         await syncExtension(dir, options);
-        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')), {
-            import: ['@cspell/dict-demo/cspell-ext.json'],
-            engines: { cspell: '>=10.4.0', 'code-spell-checker': '>=4.7.0' },
-        });
+        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')), config.cspell);
+        assert.match(await read('README.md'), /cspell `>=10`/);
+
+        const cspell = { ...config.cspell, engines: { cspell: '>=10.4.0' } };
+        await writeJson('extension.config.json', { ...config, cspell });
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')), cspell);
         assert.match(await read('README.md'), /cspell `>=10\.4\.0`/);
     });
 

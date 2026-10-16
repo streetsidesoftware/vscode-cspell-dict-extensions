@@ -74,16 +74,16 @@ There are other `.json` and `README` files where new extension is referenced but
 
 ## Synced extensions
 
-Extensions with an `extension.config.json` are maintained centrally. They have no `src/extension.ts`: their code is shared in [`extension-runtime/`](./extension-runtime), and their data is in `extension.config.json` (see [the schema](./extension-runtime/extension.config.schema.json)). `npm run sync:extensions` writes their files:
+Extensions with an `extension.config.json` are maintained centrally. They have no `src/extension.ts`: their code is shared in [`extension-runtime/`](./extension-runtime), and their data is in `extension.config.json` (see [the schema](./static/extension.config.schema.json), generated from the `ExtensionConfig` type in [`extension-runtime/src/config.ts`](./extension-runtime/src/config.ts)). `npm run sync:extensions` writes their files:
 
 - **Tool configs, overwritten:** `tsconfig.json`, `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from `extension-runtime/template/`.
-- **Generated into `static/`:** `static/cspell-ext.json`, which the extension registers with Code Spell Checker, and `static/commands.json`. The minimum `engines` versions come from [`static/engines.json`](./static/engines.json), and an extension can override them in its `extension.config.json`.
+- **Generated into `static/`:** `static/cspell-ext.json`, which the extension registers with Code Spell Checker, and `static/commands.json`. The minimum `engines` versions default to [`static/engines.json`](./static/engines.json). An extension overrides them by setting `cspell.engines` in its `extension.config.json`, which puts them in its `static/cspell-ext.json`, as in cspell-dicts.
 - **Derived:** the `name`, `displayName`, `description`, `type`, `engines.vscode`, `main`, `contributes.commands` and `scripts` fields of `package.json` (the other fields are kept), and the README sections between `@@inject` markers. Those are filled from shared templates in the root [`static/`](./static) (for example `requirements.md`, with `{@ engines.cspell @}` placeholders) and from the extension's `static/` data, using [inject-markdown](https://github.com/streetsidesoftware/inject-markdown):
-  - `<!--- @@inject: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->`
+  - `<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->`
   - `<!--- @@inject-table: ./static/commands.json --->`
 - **Never touched:** the rest of the README, `samples/`, `CHANGELOG.md`, `LICENSE`, images, and an optional `src/custom.ts` for code only that extension needs.
 
-To change a synced extension, edit its `extension.config.json` or the shared files, then run `npm run sync:extensions` and commit the result. CI checks that the extensions are in sync.
+To change a synced extension, edit its `extension.config.json` or the shared files, then run `npm run sync:extensions` and commit the result. The sync first regenerates the schema from the types and checks every `extension.config.json` against it. CI checks that the schema and the extensions are in sync.
 
 Each extension is bundled into one ESM file, `out/extension.js`, with [tsdown](https://tsdown.dev). The shared config in [`.config/tsdown.extension.config.mts`](./.config/tsdown.extension.config.mts) builds the entry `extension-runtime/src/entry.ts`, with the extension's `extension.config.json` and `src/custom.ts` filled in.
 

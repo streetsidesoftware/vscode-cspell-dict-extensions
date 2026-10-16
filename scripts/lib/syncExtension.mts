@@ -19,10 +19,10 @@ import {
     description,
     displayName,
     type ExtensionConfig,
-    parseExtensionConfig,
     resolveCommands,
 } from '../../extension-runtime/src/config.ts';
 import type { PackageJson } from './extensionHelper.mts';
+import type { ExtensionConfigValidator } from './extensionSchema.mts';
 
 export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
 export const configFileName = 'extension.config.json';
@@ -41,8 +41,8 @@ export interface SyncOptions {
     check?: boolean;
     /** The `engines.vscode` of the root package.json. */
     vscodeEngine: string;
-    /** The default minimum versions, from `static/engines.json`. */
-    engines: Record<string, string>;
+    /** Checks `extension.config.json` against the generated schema. */
+    validate: ExtensionConfigValidator;
 }
 
 export interface FileChange {
@@ -58,15 +58,15 @@ export interface FileChange {
  */
 export async function syncExtension(extensionDir: string, options: SyncOptions): Promise<FileChange[]> {
     const name = path.basename(extensionDir);
-    const config = parseExtensionConfig(await readJson(path.join(extensionDir, configFileName)));
+    const configFile = `extensions/${name}/${configFileName}`;
+    const config = options.validate(await readJson(path.join(extensionDir, configFileName)), configFile);
     if (config.name !== name) {
-        throw new Error(`extensions/${name}/${configFileName}: "name" must be "${name}", not "${config.name}".`);
+        throw new Error(`${configFile}: "name" must be "${name}", not "${config.name}".`);
     }
 
-    const engines = { ...options.engines, ...config.engines };
     const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
     const files = new Map<string, string>(await readTemplateFiles());
-    files.set(cspellExtPath, JSON.stringify({ ...config.cspell, engines }, null, 4) + '\n');
+    files.set(cspellExtPath, JSON.stringify(config.cspell, null, 4) + '\n');
     const commands = commandsTable(config);
     if (commands) files.set('static/commands.json', commands);
     const pkg = (await readJson(path.join(extensionDir, 'package.json'))) as PackageJson;
@@ -134,7 +134,7 @@ async function injectReadme(readme: string): Promise<string> {
     return result.document.content;
 }
 
-async function writeIfChanged(target: string, content: string, check: boolean | undefined): Promise<boolean> {
+export async function writeIfChanged(target: string, content: string, check: boolean | undefined): Promise<boolean> {
     if ((await readText(target)) === content) return false;
     if (!check) {
         await fs.mkdir(path.dirname(target), { recursive: true });
@@ -197,7 +197,7 @@ async function readTemplateFiles(): Promise<[string, string][]> {
  * Format a file the way `prettier` in this repo would.
  * @param repoPath - where the file is in the repository, which picks the prettier options.
  */
-async function format(repoPath: string, content: string): Promise<string> {
+export async function format(repoPath: string, content: string): Promise<string> {
     const info = await prettier.getFileInfo(repoPath, { ignorePath: path.join(repoRoot, '.prettierignore') });
     if (info.ignored || !info.inferredParser) return content;
     const options = await prettier.resolveConfig(repoPath, { editorconfig: true });

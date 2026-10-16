@@ -1,7 +1,7 @@
 // The modules the shared tsdown config resolves for each extension. See `entry.ts`.
 
 declare module 'extension-config' {
-    /** The extension's `extension.config.json`, checked at run time by `parseExtensionConfig`. */
+    /** The extension's `extension.config.json`, checked by `npm run sync:extensions`. */
     const config: unknown;
     export default config;
 }

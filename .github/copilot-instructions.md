@@ -9,7 +9,7 @@
   - `generator-cspell-dicts-extensions/` — scaffolds new extensions; prefer `npm run create:extension` instead of copying an existing extension by hand. It is TypeScript (`.mts`) run directly by Node, using `@inquirer/prompts` and `commander`. The extension files come from `templates/`, which use a small EJS subset (`<%= value %>` and `<% if (value) { %> … <% } else { %> … <% } %>`) rendered by `src/render.mts`. Run its unit tests with `npm test` inside the generator directory.
   - `test-runner/` — shared VS Code integration test harness.
   - `scripts/` — repo maintenance and generation scripts, including `sync-extensions.mts`.
-  - `extension-runtime/` — the shared code, `extension.config.json` schema, and templates of the synced extensions.
+  - `extension-runtime/` — the shared code, the `ExtensionConfig` type (source of `static/extension.config.schema.json`), and the templates of the synced extensions.
 - Two extensions are notable special cases:
   - `extensions/timestamp-hover/` is a standalone utility extension, not a dictionary wrapper.
   - `extensions/hunspell-syntax/` is a syntax-highlighting extension.

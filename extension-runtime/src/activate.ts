@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-import { cspellExtPath, parseExtensionConfig, type ResolvedCommand, resolveCommands } from './config.ts';
+import { cspellExtPath, type ExtensionConfig, type ResolvedCommand, resolveCommands } from './config.ts';
 
 /** The part of the Code Spell Checker extension API used by the extensions. */
 export interface CodeSpellCheckerApi {
@@ -29,18 +29,18 @@ const codeSpellCheckerId = 'streetsidesoftware.code-spell-checker';
  *
  * Not an `async` function: the commands must be registered before `activate` returns, and the rest is a
  * promise chain.
- * @param config - the content of `extension.config.json`.
+ * @param config - the content of `extension.config.json`, already checked by the sync.
  * @param custom - the extension's `src/custom.ts`, if it has one.
  */
 export function activateExtension(
     context: vscode.ExtensionContext,
-    config: unknown,
+    config: ExtensionConfig,
     custom?: CustomModule,
 ): Promise<void> {
     const extension = vscode.extensions.getExtension<CodeSpellCheckerApi>(codeSpellCheckerId);
     const api = getApi(extension);
 
-    for (const command of resolveCommands(parseExtensionConfig(config))) {
+    for (const command of resolveCommands(config)) {
         context.subscriptions.push(vscode.commands.registerCommand(command.id, () => runCommand(command, extension)));
     }
 

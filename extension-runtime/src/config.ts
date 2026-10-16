@@ -1,6 +1,10 @@
 /**
  * The data in an extension's `extension.config.json`.
  *
+ * These types are the source of truth: `npm run sync:extensions` generates `static/extension.config.schema.json`
+ * from `ExtensionConfig` and validates every `extension.config.json` against it. The runtime trusts the bundled
+ * config, because the sync has checked it.
+ *
  * This file is shared by the extension runtime (bundled into each extension) and by the sync script,
  * so it must not import `vscode`.
  */
@@ -8,45 +12,85 @@
 /** Where the sync writes an extension's cspell configuration, relative to the extension. */
 export const cspellExtPath = 'static/cspell-ext.json';
 
-export const toggles = ['locale', 'dictionary', 'fileType'] as const;
-export type Toggle = (typeof toggles)[number];
+/** Turn the toggle on or off. */
+export type Action = 'enable' | 'disable';
 
-export const actions = ['enable', 'disable'] as const;
-export type Action = (typeof actions)[number];
+/** Where the setting is written. */
+export type Scope = 'global' | 'workspace';
 
-export const scopes = ['global', 'workspace'] as const;
-export type Scope = (typeof scopes)[number];
-
-export interface CommandConfig {
+interface CommandBase {
     /** Turn the toggle on or off. */
     action: Action;
-    /** What the command changes. */
-    toggle: Toggle;
-    /** The locale, dictionary name, or file type (language ID). */
+    /**
+     * The locale, dictionary name, or file type (language ID).
+     * @minLength 1
+     */
     value: string;
-    /** Where the setting is written. Not used by `fileType`. Default: `global`. */
-    scope?: Scope;
-    /** The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope. */
+    /**
+     * The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.
+     * @minLength 1
+     */
     id?: string;
-    /** The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended. */
+    /**
+     * The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended
+     * for the workspace scope.
+     * @minLength 1
+     */
     title?: string;
 }
 
+/** A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`). */
+export interface ScopedCommandConfig extends CommandBase {
+    /** What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`). */
+    toggle: 'locale' | 'dictionary';
+    /** Where the setting is written. Default: `global`. */
+    scope?: Scope;
+}
+
+/** A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope. */
+export interface FileTypeCommandConfig extends CommandBase {
+    /** What the command changes: a file type (`cSpell.enabledFileTypes`). */
+    toggle: 'fileType';
+}
+
+export type CommandConfig = ScopedCommandConfig | FileTypeCommandConfig;
+
+export type Toggle = CommandConfig['toggle'];
+
+/** The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it. */
 export interface ExtensionConfig {
-    /** The extension's directory in `extensions/`. */
+    /** The JSON schema of this file. */
+    $schema?: string;
+    /**
+     * The extension's directory in `extensions/`. Also the default command ID prefix: `cSpellExt_<name>`.
+     * @pattern ^[a-z0-9]+(-[a-z0-9]+)*$
+     */
     name: string;
-    /** The name shown to people, i.e. `Swedish`. */
+    /**
+     * The name shown to people, i.e. `Swedish`.
+     * @minLength 1
+     */
     friendlyName: string;
-    /** The Marketplace name. Default: `<friendlyName> - Code Spell Checker`. */
+    /**
+     * The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.
+     * @minLength 1
+     */
     displayName?: string;
-    /** The Marketplace description. Default: `<friendlyName> dictionary extension for VS Code.` */
+    /**
+     * The Marketplace description. Default: `<friendlyName> dictionary extension for VS Code.`
+     * @minLength 1
+     */
     description?: string;
-    /** The document opened by the VS Code test, relative to the extension. */
+    /**
+     * The document opened by the VS Code test, relative to the extension.
+     * @minLength 1
+     */
     sample: string;
-    /** The content of `static/cspell-ext.json`, without `engines`. */
+    /**
+     * The content of `static/cspell-ext.json`. Set `engines` here only to override the defaults in
+     * `static/engines.json`.
+     */
     cspell: Record<string, unknown>;
-    /** Overrides of the minimum versions in `static/engines.json`, i.e. `{ "cspell": ">=10.4.0" }`. */
-    engines?: Record<string, string>;
     /** The commands the extension contributes. */
     commands: CommandConfig[];
 }
@@ -58,78 +102,6 @@ export interface ResolvedCommand {
     toggle: Toggle;
     value: string;
     scope: Scope;
-}
-
-export class ConfigError extends Error {}
-
-const configKeys = new Set([
-    '$schema',
-    'name',
-    'friendlyName',
-    'displayName',
-    'description',
-    'sample',
-    'cspell',
-    'engines',
-    'commands',
-]);
-const commandKeys = new Set(['action', 'toggle', 'value', 'scope', 'id', 'title']);
-
-/**
- * Check the data read from `extension.config.json`.
- * @throws ConfigError when the data doesn't match the schema.
- */
-export function parseExtensionConfig(data: unknown): ExtensionConfig {
-    const obj = asObject(data, 'extension.config.json');
-    checkKnownKeys(obj, configKeys, 'extension.config.json');
-
-    const config: ExtensionConfig = {
-        name: asString(obj.name, 'name'),
-        friendlyName: asString(obj.friendlyName, 'friendlyName'),
-        sample: asString(obj.sample, 'sample'),
-        cspell: asObject(obj.cspell, 'cspell'),
-        commands: asArray(obj.commands, 'commands').map((c, i) => parseCommand(c, `commands[${i}]`)),
-    };
-    if (obj.displayName !== undefined) config.displayName = asString(obj.displayName, 'displayName');
-    if (obj.description !== undefined) config.description = asString(obj.description, 'description');
-    if (obj.engines !== undefined) {
-        const engines = asObject(obj.engines, 'engines');
-        config.engines = Object.fromEntries(
-            Object.entries(engines).map(([key, value]) => [key, asString(value, `engines.${key}`)]),
-        );
-    }
-    if ('engines' in config.cspell) {
-        throw new ConfigError('cspell.engines: set the engines in "engines", not in "cspell".');
-    }
-
-    const ids = new Set<string>();
-    for (const command of resolveCommands(config)) {
-        if (ids.has(command.id)) {
-            throw new ConfigError(`Duplicate command ID "${command.id}". Give the commands explicit IDs.`);
-        }
-        ids.add(command.id);
-    }
-
-    return config;
-}
-
-function parseCommand(data: unknown, path: string): CommandConfig {
-    const obj = asObject(data, path);
-    checkKnownKeys(obj, commandKeys, path);
-    const command: CommandConfig = {
-        action: asOneOf(obj.action, actions, `${path}.action`),
-        toggle: asOneOf(obj.toggle, toggles, `${path}.toggle`),
-        value: asString(obj.value, `${path}.value`),
-    };
-    if (obj.scope !== undefined) {
-        if (command.toggle === 'fileType') {
-            throw new ConfigError(`${path}.scope: a fileType toggle has no scope.`);
-        }
-        command.scope = asOneOf(obj.scope, scopes, `${path}.scope`);
-    }
-    if (obj.id !== undefined) command.id = asString(obj.id, `${path}.id`);
-    if (obj.title !== undefined) command.title = asString(obj.title, `${path}.title`);
-    return command;
 }
 
 export function displayName(config: ExtensionConfig): string {
@@ -145,7 +117,7 @@ export function description(config: ExtensionConfig): string {
  */
 export function resolveCommands(config: ExtensionConfig): ResolvedCommand[] {
     return config.commands.map((command) => {
-        const scope = command.scope ?? 'global';
+        const scope = (command.toggle !== 'fileType' && command.scope) || 'global';
         const inWorkspace = scope === 'workspace';
         const action = command.action === 'enable' ? 'Enable' : 'Disable';
         return {
@@ -161,33 +133,15 @@ export function resolveCommands(config: ExtensionConfig): ResolvedCommand[] {
     });
 }
 
-function asObject(value: unknown, path: string): Record<string, unknown> {
-    if (typeof value !== 'object' || value === null || Array.isArray(value)) {
-        throw new ConfigError(`${path}: expected an object.`);
+/**
+ * The command IDs used more than once. A schema can't express this, so the sync checks it.
+ */
+export function duplicateCommandIds(config: ExtensionConfig): string[] {
+    const seen = new Set<string>();
+    const duplicates = new Set<string>();
+    for (const { id } of resolveCommands(config)) {
+        if (seen.has(id)) duplicates.add(id);
+        seen.add(id);
     }
-    return value as Record<string, unknown>;
-}
-
-function asArray(value: unknown, path: string): unknown[] {
-    if (!Array.isArray(value)) throw new ConfigError(`${path}: expected an array.`);
-    return value;
-}
-
-function asString(value: unknown, path: string): string {
-    if (typeof value !== 'string' || !value) throw new ConfigError(`${path}: expected a non-empty string.`);
-    return value;
-}
-
-function asOneOf<T extends string>(value: unknown, choices: readonly T[], path: string): T {
-    if (!choices.includes(value as T)) {
-        throw new ConfigError(`${path}: expected one of ${choices.map((c) => `"${c}"`).join(', ')}.`);
-    }
-    return value as T;
-}
-
-function checkKnownKeys(obj: Record<string, unknown>, known: Set<string>, path: string): void {
-    const unknownKeys = Object.keys(obj).filter((key) => !known.has(key));
-    if (unknownKeys.length) {
-        throw new ConfigError(`${path}: unknown ${unknownKeys.map((k) => `"${k}"`).join(', ')}.`);
-    }
+    return [...duplicates];
 }

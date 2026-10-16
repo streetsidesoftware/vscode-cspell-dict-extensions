@@ -14,7 +14,7 @@ The name of the dictionary is `medical terms`.
 
 The dictionary is based on [wordlist-medicalterms-en](https://github.com/Glutanimate/wordlist-medicalterms-en) by Aristotelis P., which merges OpenMedSpel (R. Robinson, e-MedTools) and MTH-Med-Spel-Chek (Rajasekharan N.).
 
-<!--- @@inject: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->
+<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 ## Requirements
 
@@ -25,7 +25,7 @@ This extension will automatically include the [Code Spell Checker](https://marke
 | [cspell](https://github.com/streetsidesoftware/cspell)                                                          | `>=10`    |
 | [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) | `>=4.7.0` |
 
-<!--- @@inject-end: ../../static/requirements.md#values-file=:./static/cspell-ext.json --->
+<!--- @@inject-end: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 <!---
 cspell:words Aristotelis OpenMedSpel Rajasekharan Med-Spel-Chek wordlist

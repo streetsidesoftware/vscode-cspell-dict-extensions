@@ -1,7 +1,3 @@
 {
-    "import": ["@cspell/dict-sv/cspell-ext.json"],
-    "engines": {
-        "cspell": ">=10",
-        "code-spell-checker": ">=4.7.0"
-    }
+    "import": ["@cspell/dict-sv/cspell-ext.json"]
 }

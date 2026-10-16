@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { ConfigError, description, displayName, parseExtensionConfig, resolveCommands } from './config.ts';
+import { description, displayName, duplicateCommandIds, type ExtensionConfig, resolveCommands } from './config.ts';
 
-const swedish = {
+const swedish: ExtensionConfig = {
     name: 'swedish',
     friendlyName: 'Swedish',
     sample: 'samples/Seattle.md',
@@ -14,51 +14,9 @@ const swedish = {
     ],
 };
 
-describe('parseExtensionConfig', () => {
-    it('accepts a valid config', () => {
-        const config = parseExtensionConfig({ $schema: 'x', ...swedish });
-        assert.equal(config.name, 'swedish');
-        assert.equal(config.commands.length, 2);
-    });
-
-    it('rejects unknown keys', () => {
-        assert.throws(() => parseExtensionConfig({ ...swedish, extra: 1 }), ConfigError);
-        const commands = [{ action: 'enable', toggle: 'locale', value: 'sv', target: 'global' }];
-        assert.throws(() => parseExtensionConfig({ ...swedish, commands }), /commands\[0\]: unknown "target"/);
-    });
-
-    it('rejects missing and wrong values', () => {
-        assert.throws(() => parseExtensionConfig({ ...swedish, friendlyName: '' }), /friendlyName/);
-        const commands = [{ action: 'toggle', toggle: 'locale', value: 'sv' }];
-        assert.throws(() => parseExtensionConfig({ ...swedish, commands }), /commands\[0\]\.action/);
-    });
-
-    it('rejects a scope on a fileType toggle', () => {
-        const commands = [{ action: 'enable', toggle: 'fileType', value: 'python', scope: 'global' }];
-        assert.throws(() => parseExtensionConfig({ ...swedish, commands }), /no scope/);
-    });
-
-    it('accepts engines and rejects them inside cspell', () => {
-        const config = parseExtensionConfig({ ...swedish, engines: { cspell: '>=10.4.0' } });
-        assert.deepEqual(config.engines, { cspell: '>=10.4.0' });
-        assert.throws(() => parseExtensionConfig({ ...swedish, engines: { cspell: 10 } }), /engines\.cspell/);
-        const cspell = { ...swedish.cspell, engines: {} };
-        assert.throws(() => parseExtensionConfig({ ...swedish, cspell }), /cspell\.engines/);
-    });
-
-    it('rejects duplicate command IDs', () => {
-        const commands = [
-            { action: 'enable', toggle: 'locale', value: 'sr' },
-            { action: 'enable', toggle: 'locale', value: 'sr-Cyrl' },
-        ];
-        assert.throws(() => parseExtensionConfig({ ...swedish, commands }), /Duplicate command ID/);
-    });
-});
-
 describe('resolveCommands', () => {
     it('fills in the default ID, title and scope', () => {
-        const commands = resolveCommands(parseExtensionConfig(swedish));
-        assert.deepEqual(commands, [
+        assert.deepEqual(resolveCommands(swedish), [
             {
                 id: 'cSpellExt_swedish.enable',
                 title: 'Enable Swedish Spell Checker Dictionary',
@@ -79,24 +37,39 @@ describe('resolveCommands', () => {
     });
 
     it('keeps an explicit ID and title', () => {
-        const commands = [
+        const commands: ExtensionConfig['commands'] = [
             { action: 'enable', toggle: 'locale', value: 'sv_SE', id: 'cSpellExt_swedish.enableSwedish', title: 'T' },
         ];
-        const [command] = resolveCommands(parseExtensionConfig({ ...swedish, commands }));
+        const [command] = resolveCommands({ ...swedish, commands });
         assert.equal(command?.id, 'cSpellExt_swedish.enableSwedish');
         assert.equal(command?.title, 'T');
+    });
+
+    it('gives a fileType toggle the global scope', () => {
+        const commands: ExtensionConfig['commands'] = [{ action: 'enable', toggle: 'fileType', value: 'python' }];
+        assert.equal(resolveCommands({ ...swedish, commands })[0]?.scope, 'global');
+    });
+});
+
+describe('duplicateCommandIds', () => {
+    it('finds IDs used more than once', () => {
+        assert.deepEqual(duplicateCommandIds(swedish), []);
+        const commands: ExtensionConfig['commands'] = [
+            { action: 'enable', toggle: 'locale', value: 'sr' },
+            { action: 'enable', toggle: 'locale', value: 'sr-Cyrl' },
+        ];
+        assert.deepEqual(duplicateCommandIds({ ...swedish, commands }), ['cSpellExt_swedish.enable']);
     });
 });
 
 describe('displayName and description', () => {
     it('derive from the friendly name', () => {
-        const config = parseExtensionConfig(swedish);
-        assert.equal(displayName(config), 'Swedish - Code Spell Checker');
-        assert.equal(description(config), 'Swedish dictionary extension for VS Code.');
+        assert.equal(displayName(swedish), 'Swedish - Code Spell Checker');
+        assert.equal(description(swedish), 'Swedish dictionary extension for VS Code.');
     });
 
     it('can be set', () => {
-        const config = parseExtensionConfig({ ...swedish, displayName: 'D', description: 'E' });
+        const config = { ...swedish, displayName: 'D', description: 'E' };
         assert.equal(displayName(config), 'D');
         assert.equal(description(config), 'E');
     });

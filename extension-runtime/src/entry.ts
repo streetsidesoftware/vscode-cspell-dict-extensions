@@ -10,9 +10,11 @@ import config from 'extension-config';
 import * as custom from 'extension-custom';
 
 import { activateExtension } from './activate.ts';
+import type { ExtensionConfig } from './config.ts';
 
 export function activate(context: ExtensionContext): Promise<void> {
-    return activateExtension(context, config, custom);
+    // `npm run sync:extensions` has checked the config against its schema.
+    return activateExtension(context, config as ExtensionConfig, custom);
 }
 
 export function deactivate(): void {}
