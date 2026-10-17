@@ -1,0 +1,33 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "persian",
+    "friendlyName": "Persian",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-fa-ir/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fa"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fa"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fa",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fa",
+            "scope": "workspace"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Romanian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Romanian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Romanian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Romanian Spell Checker Dictionary in Workspace"
+    }
+]

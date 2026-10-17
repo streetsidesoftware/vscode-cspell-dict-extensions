@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Italian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Italian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Italian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Italian Spell Checker Dictionary in Workspace"
+    }
+]

@@ -1,0 +1,33 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "polish",
+    "friendlyName": "Polish",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-pl_pl/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pl"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "pl"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pl",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "pl",
+            "scope": "workspace"
+        }
+    ]
+}

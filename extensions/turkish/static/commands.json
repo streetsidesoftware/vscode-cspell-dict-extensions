@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Turkish Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Turkish Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Turkish Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Turkish Spell Checker Dictionary in Workspace"
+    }
+]

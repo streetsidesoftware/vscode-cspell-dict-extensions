@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Lithuanian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Lithuanian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Lithuanian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Lithuanian Spell Checker Dictionary in Workspace"
+    }
+]
