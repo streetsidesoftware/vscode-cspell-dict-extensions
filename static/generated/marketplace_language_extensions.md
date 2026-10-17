@@ -41,11 +41,11 @@
 - [Brazilian Portuguese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-portuguese-brazilian) - Brazilian Portuguese dictionary extension for VS Code.
 - [Romanian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-romanian) - Romanian dictionary extension for VS Code.
 - [Russian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian) - Russian dictionary extension for VS Code.
-- [Serbian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-serbian) - Serbian dictionary extension for VS Code.
+- [Serbian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-serbian) (pre-release) - Serbian dictionary extension for VS Code.
 - [Slovak](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-slovak) - Slovak dictionary extension for VS Code.
 - [Slovenian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-slovenian) - Slovenian dictionary extension for VS Code.
 - [Spanish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-spanish) - Spanish Add-On for Code Spell Checker
-- [Swedish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-swedish) - Swedish dictionary extension for VS Code.
+- [Swedish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-swedish) (pre-release) - Swedish dictionary extension for VS Code.
 - [Swiss German](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-swiss-german) - Swiss German dictionary extension for VS Code.
 - [Turkish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-turkish) - Turkish dictionary extension for VS Code.
 - [Ukrainian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-ukrainian) - Ukrainian dictionary extension for VS Code.
@@ -53,6 +53,6 @@
 
 ### Technical Dictionaries
 
-- [Medical Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-medical-terms) - Medical Terms dictionary extension for VS Code.
+- [Medical Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-medical-terms) (pre-release) - Medical Terms dictionary extension for VS Code.
 - [Scientific Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-scientific-terms) - Scientific Terms dictionary extension for VS Code.
 - [Win32](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-win32) - Win32 dictionary extension for VS Code.
