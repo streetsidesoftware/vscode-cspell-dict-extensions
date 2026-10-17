@@ -13,28 +13,62 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "de-DE"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-DE"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
             "value": "de-DE",
-            "id": "cSpellExt_german.enableGerman"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "de-DE",
-            "id": "cSpellExt_german.disableGerman"
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "id": "cSpellExt_german.enableGerman",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "id": "cSpellExt_german.disableGerman",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "de-DE",
             "scope": "workspace",
-            "id": "cSpellExt_german.enableGermanWorkspace"
+            "id": "cSpellExt_german.enableGermanWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "de-DE",
             "scope": "workspace",
-            "id": "cSpellExt_german.disableGermanWorkspace"
+            "id": "cSpellExt_german.disableGermanWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ]
 }

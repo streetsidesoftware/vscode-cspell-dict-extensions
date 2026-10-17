@@ -4,7 +4,15 @@ import { basename, resolve } from 'node:path';
 import { suite, test } from 'mocha';
 import { commands, type Diagnostic, languages, Position, Uri, window } from 'vscode';
 
-import { activateExtension, loadDocument, log, logYellow, readPackageJson, sleep } from '../../lib/helper.mts';
+import {
+    activateExtension,
+    loadDocument,
+    log,
+    logYellow,
+    readExplicitCommandIds,
+    readPackageJson,
+    sleep,
+} from '../../lib/helper.mts';
 import type { CSpellExtensionApi, OnSpellCheckDocumentStep } from '../types.d.ts';
 
 const sampleDoc = process.env['SAMPLE_TEST_DOCUMENT'];
@@ -41,6 +49,15 @@ suite('Extension Test Suite 1', function () {
         const missing = contributed.filter((command) => !registered.has(command));
         log('commands: %o', { contributed: contributed.length, missing });
         assert.deepStrictEqual(missing, [], 'Every command in `contributes.commands` must be registered.');
+    });
+
+    test('registering the commands with explicit IDs, including legacy ones', async () => {
+        await activateExtension();
+        const ids = await readExplicitCommandIds();
+        const registered = new Set(await commands.getCommands(true));
+        const missing = ids.filter((command) => !registered.has(command));
+        log('explicit command IDs: %o', { ids: ids.length, missing });
+        assert.deepEqual(missing, [], 'Every command in `extension.config.json` must be registered.');
     });
 
     test('reading the sample file.', async () => {

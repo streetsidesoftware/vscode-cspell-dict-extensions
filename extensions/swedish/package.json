@@ -41,19 +41,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_swedish.enableSwedish",
+        "command": "cSpellExt_swedish.enable",
         "title": "Enable Swedish Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_swedish.disableSwedish",
+        "command": "cSpellExt_swedish.disable",
         "title": "Disable Swedish Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_swedish.enableSwedishWorkspace",
+        "command": "cSpellExt_swedish.enableWorkspace",
         "title": "Enable Swedish Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_swedish.disableSwedishWorkspace",
+        "command": "cSpellExt_swedish.disableWorkspace",
         "title": "Disable Swedish Spell Checker Dictionary in Workspace"
       }
     ]

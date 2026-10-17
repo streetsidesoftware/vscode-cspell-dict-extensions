@@ -13,28 +13,62 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "pt"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "pt"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
             "value": "pt",
-            "id": "cSpellExt_portuguese.enablePortuguese"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "pt",
-            "id": "cSpellExt_portuguese.disablePortuguese"
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pt",
+            "id": "cSpellExt_portuguese.enablePortuguese",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "pt",
+            "id": "cSpellExt_portuguese.disablePortuguese",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "pt",
             "scope": "workspace",
-            "id": "cSpellExt_portuguese.enablePortugueseWorkspace"
+            "id": "cSpellExt_portuguese.enablePortugueseWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "pt",
             "scope": "workspace",
-            "id": "cSpellExt_portuguese.disablePortugueseWorkspace"
+            "id": "cSpellExt_portuguese.disablePortugueseWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ]
 }

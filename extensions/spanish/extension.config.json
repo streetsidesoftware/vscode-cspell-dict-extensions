@@ -13,28 +13,62 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "es-ES"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "es-ES"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
             "value": "es-ES",
-            "id": "cSpell.enableSpanish"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "es-ES",
-            "id": "cSpell.disableSpanish"
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "es-ES",
+            "id": "cSpell.enableSpanish",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "es-ES",
+            "id": "cSpell.disableSpanish",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "es-ES",
             "scope": "workspace",
-            "id": "cSpell.enableSpanishWorkspace"
+            "id": "cSpell.enableSpanishWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "es-ES",
             "scope": "workspace",
-            "id": "cSpell.disableSpanishWorkspace"
+            "id": "cSpell.disableSpanishWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."
         }
     ],
     "description": "Spanish Add-On for Code Spell Checker"

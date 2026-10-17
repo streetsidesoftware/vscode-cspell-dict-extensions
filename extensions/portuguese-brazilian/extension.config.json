@@ -14,14 +14,12 @@
             "action": "enable",
             "toggle": "locale",
             "value": "pt,pt_BR",
-            "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilian",
             "title": "Enable Portuguese Brazilian Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "pt,pt_BR",
-            "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilian",
             "title": "Disable Portuguese Brazilian Spell Checker Dictionary"
         },
         {
@@ -29,7 +27,6 @@
             "toggle": "locale",
             "value": "pt,pt_BR",
             "scope": "workspace",
-            "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilianWorkspace",
             "title": "Enable Portuguese Brazilian Spell Checker Dictionary in Workspace"
         },
         {
@@ -37,8 +34,45 @@
             "toggle": "locale",
             "value": "pt,pt_BR",
             "scope": "workspace",
-            "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilianWorkspace",
             "title": "Disable Portuguese Brazilian Spell Checker Dictionary in Workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pt,pt_BR",
+            "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "pt,pt_BR",
+            "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pt,pt_BR",
+            "scope": "workspace",
+            "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "pt,pt_BR",
+            "scope": "workspace",
+            "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ]
 }

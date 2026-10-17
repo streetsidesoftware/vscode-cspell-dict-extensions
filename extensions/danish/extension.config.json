@@ -13,28 +13,62 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "da"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "da"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
             "value": "da",
-            "id": "cSpellExt_danish.enableDanish"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "da",
-            "id": "cSpellExt_danish.disableDanish"
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "da",
+            "id": "cSpellExt_danish.enableDanish",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "da",
+            "id": "cSpellExt_danish.disableDanish",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "da",
             "scope": "workspace",
-            "id": "cSpellExt_danish.enableDanishWorkspace"
+            "id": "cSpellExt_danish.enableDanishWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "da",
             "scope": "workspace",
-            "id": "cSpellExt_danish.disableDanishWorkspace"
+            "id": "cSpellExt_danish.disableDanishWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ]
 }

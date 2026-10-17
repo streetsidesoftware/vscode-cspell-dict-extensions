@@ -41,19 +41,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_czech.enableCzech",
+        "command": "cSpellExt_czech.enable",
         "title": "Enable Czech Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_czech.disableCzech",
+        "command": "cSpellExt_czech.disable",
         "title": "Disable Czech Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_czech.enableCzechWorkspace",
+        "command": "cSpellExt_czech.enableWorkspace",
         "title": "Enable Czech Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_czech.disableCzechWorkspace",
+        "command": "cSpellExt_czech.disableWorkspace",
         "title": "Disable Czech Spell Checker Dictionary in Workspace"
       }
     ]

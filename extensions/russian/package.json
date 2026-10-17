@@ -34,19 +34,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_russian.enableRussian",
+        "command": "cSpellExt_russian.enable",
         "title": "Enable Russian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_russian.disableRussian",
+        "command": "cSpellExt_russian.disable",
         "title": "Disable Russian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_russian.enableRussianWorkspace",
+        "command": "cSpellExt_russian.enableWorkspace",
         "title": "Enable Russian Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_russian.disableRussianWorkspace",
+        "command": "cSpellExt_russian.disableWorkspace",
         "title": "Disable Russian Spell Checker Dictionary in Workspace"
       }
     ]

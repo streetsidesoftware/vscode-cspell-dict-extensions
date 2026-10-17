@@ -13,28 +13,62 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "bg_BG"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "bg_BG"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
             "value": "bg_BG",
-            "id": "cSpellExt_bulgarian.enableBulgarian"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "bg_BG",
-            "id": "cSpellExt_bulgarian.disableBulgarian"
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "bg_BG",
+            "id": "cSpellExt_bulgarian.enableBulgarian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "bg_BG",
+            "id": "cSpellExt_bulgarian.disableBulgarian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "bg_BG",
             "scope": "workspace",
-            "id": "cSpellExt_bulgarian.enableBulgarianWorkspace"
+            "id": "cSpellExt_bulgarian.enableBulgarianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "bg_BG",
             "scope": "workspace",
-            "id": "cSpellExt_bulgarian.disableBulgarianWorkspace"
+            "id": "cSpellExt_bulgarian.disableBulgarianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ]
 }

@@ -66,6 +66,18 @@
                                         "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
                                         "minLength": 1
                                     },
+                                    "contributes": {
+                                        "type": "boolean",
+                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
+                                    },
+                                    "legacy": {
+                                        "type": "boolean",
+                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
+                                    },
                                     "toggle": {
                                         "type": "string",
                                         "enum": ["locale", "dictionary"],
@@ -103,6 +115,18 @@
                                         "type": "string",
                                         "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
                                         "minLength": 1
+                                    },
+                                    "contributes": {
+                                        "type": "boolean",
+                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
+                                    },
+                                    "legacy": {
+                                        "type": "boolean",
+                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
                                     },
                                     "toggle": {
                                         "type": "string",
@@ -206,6 +230,18 @@
                                         "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
                                         "minLength": 1
                                     },
+                                    "contributes": {
+                                        "type": "boolean",
+                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
+                                    },
+                                    "legacy": {
+                                        "type": "boolean",
+                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
+                                    },
                                     "toggle": {
                                         "type": "string",
                                         "enum": ["locale", "dictionary"],
@@ -243,6 +279,18 @@
                                         "type": "string",
                                         "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
                                         "minLength": 1
+                                    },
+                                    "contributes": {
+                                        "type": "boolean",
+                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
+                                    },
+                                    "legacy": {
+                                        "type": "boolean",
+                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
                                     },
                                     "toggle": {
                                         "type": "string",
@@ -336,6 +384,18 @@
                                         "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
                                         "minLength": 1
                                     },
+                                    "contributes": {
+                                        "type": "boolean",
+                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
+                                    },
+                                    "legacy": {
+                                        "type": "boolean",
+                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
+                                    },
                                     "toggle": {
                                         "type": "string",
                                         "enum": ["locale", "dictionary"],
@@ -373,6 +433,18 @@
                                         "type": "string",
                                         "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
                                         "minLength": 1
+                                    },
+                                    "contributes": {
+                                        "type": "boolean",
+                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
+                                    },
+                                    "legacy": {
+                                        "type": "boolean",
+                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
                                     },
                                     "toggle": {
                                         "type": "string",
@@ -466,6 +538,18 @@
                                         "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
                                         "minLength": 1
                                     },
+                                    "contributes": {
+                                        "type": "boolean",
+                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
+                                    },
+                                    "legacy": {
+                                        "type": "boolean",
+                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
+                                    },
                                     "toggle": {
                                         "type": "string",
                                         "enum": ["locale", "dictionary"],
@@ -503,6 +587,18 @@
                                         "type": "string",
                                         "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
                                         "minLength": 1
+                                    },
+                                    "contributes": {
+                                        "type": "boolean",
+                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
+                                    },
+                                    "legacy": {
+                                        "type": "boolean",
+                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
                                     },
                                     "toggle": {
                                         "type": "string",

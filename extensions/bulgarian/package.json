@@ -42,19 +42,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_bulgarian.enableBulgarian",
+        "command": "cSpellExt_bulgarian.enable",
         "title": "Enable Bulgarian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_bulgarian.disableBulgarian",
+        "command": "cSpellExt_bulgarian.disable",
         "title": "Disable Bulgarian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_bulgarian.enableBulgarianWorkspace",
+        "command": "cSpellExt_bulgarian.enableWorkspace",
         "title": "Enable Bulgarian Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_bulgarian.disableBulgarianWorkspace",
+        "command": "cSpellExt_bulgarian.disableWorkspace",
         "title": "Disable Bulgarian Spell Checker Dictionary in Workspace"
       }
     ]

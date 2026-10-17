@@ -41,19 +41,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_slovak.enableSlovak",
+        "command": "cSpellExt_slovak.enable",
         "title": "Enable Slovak Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_slovak.disableSlovak",
+        "command": "cSpellExt_slovak.disable",
         "title": "Disable Slovak Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_slovak.enableSlovakWorkspace",
+        "command": "cSpellExt_slovak.enableWorkspace",
         "title": "Enable Slovak Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_slovak.disableSlovakWorkspace",
+        "command": "cSpellExt_slovak.disableWorkspace",
         "title": "Disable Slovak Spell Checker Dictionary in Workspace"
       }
     ]

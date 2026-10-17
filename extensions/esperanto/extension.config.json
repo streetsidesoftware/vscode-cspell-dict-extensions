@@ -12,28 +12,62 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "eo"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "eo"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
             "value": "eo",
-            "id": "cSpellExt_esperanto.enableEsperanto"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "eo",
-            "id": "cSpellExt_esperanto.disableEsperanto"
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "eo",
+            "id": "cSpellExt_esperanto.enableEsperanto",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "eo",
+            "id": "cSpellExt_esperanto.disableEsperanto",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "eo",
             "scope": "workspace",
-            "id": "cSpellExt_esperanto.enableEsperantoWorkspace"
+            "id": "cSpellExt_esperanto.enableEsperantoWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "eo",
             "scope": "workspace",
-            "id": "cSpellExt_esperanto.disableEsperantoWorkspace"
+            "id": "cSpellExt_esperanto.disableEsperantoWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ]
 }
