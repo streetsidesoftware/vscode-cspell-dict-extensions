@@ -41,7 +41,7 @@
 - [Brazilian Portuguese](../../extensions/portuguese-brazilian#readme) - Brazilian Portuguese dictionary extension for VS Code.
 - [Romanian](../../extensions/romanian#readme) - Romanian dictionary extension for VS Code.
 - [Russian](../../extensions/russian#readme) - Russian dictionary extension for VS Code.
-- [Serbian](../../extensions/serbian#readme) **pre-release** - Serbian dictionary extension for VS Code.
+- [Serbian](../../extensions/serbian#readme) - Serbian dictionary extension for VS Code.
 - [Slovak](../../extensions/slovak#readme) - Slovak dictionary extension for VS Code.
 - [Slovenian](../../extensions/slovenian#readme) - Slovenian dictionary extension for VS Code.
 - [Spanish](../../extensions/spanish#readme) - Spanish Add-On for Code Spell Checker
