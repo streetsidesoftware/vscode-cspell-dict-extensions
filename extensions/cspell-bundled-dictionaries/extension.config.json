@@ -1,0 +1,10 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "cspell-bundled-dictionaries",
+    "friendlyName": "CSpell Bundled Dictionaries",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-cspell-bundle/cspell-ext.json"]
+    },
+    "commands": []
+}
