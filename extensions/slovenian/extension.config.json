@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Slovenian",
     "nativeName": "slovenščina",
-    "locale": "sl",
+    "locale": "sl-SI",
     "sample": "samples/Ljubljana.md",
     "cspell": {
         "import": ["@cspell/dict-sl-si/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "sl"
+            "value": "sl-SI"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sl"
+            "value": "sl,sl-SI"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "sl",
+            "value": "sl-SI",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sl",
+            "value": "sl,sl-SI",
             "scope": "workspace"
         }
     ]

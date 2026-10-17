@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ro-ro"
+            "value": "ro-RO,ro"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ro-ro",
+            "value": "ro-RO,ro",
             "scope": "workspace"
         }
     ]

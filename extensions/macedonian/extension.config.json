@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Macedonian",
     "nativeName": "македонски",
-    "locale": "mk",
+    "locale": "mk-Cyrl",
     "sample": "samples/Skopje.md",
     "cspell": {
         "import": ["@cspell/dict-mk/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "mk"
+            "value": "mk-Cyrl"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "mk"
+            "value": "mk,mk-Cyrl"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "mk",
+            "value": "mk-Cyrl",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "mk",
+            "value": "mk,mk-Cyrl",
             "scope": "workspace"
         }
     ]

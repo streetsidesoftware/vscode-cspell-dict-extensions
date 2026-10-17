@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Croatian",
     "nativeName": "hrvatski",
-    "locale": "hr",
+    "locale": "hr-HR",
     "sample": "samples/amsterdam.md",
     "cspell": {
         "import": ["@cspell/dict-hr-hr/cspell-ext.json"]
@@ -13,29 +13,29 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hr"
+            "value": "hr-HR"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hr"
+            "value": "hr,hr-HR"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hr",
+            "value": "hr-HR",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hr",
+            "value": "hr,hr-HR",
             "scope": "workspace"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hr",
+            "value": "hr-HR",
             "id": "cSpellExt_croatian.enableCroatian",
             "contributes": false,
             "legacy": true,
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hr",
+            "value": "hr,hr-HR",
             "id": "cSpellExt_croatian.disableCroatian",
             "contributes": false,
             "legacy": true,
@@ -53,7 +53,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hr",
+            "value": "hr-HR",
             "scope": "workspace",
             "id": "cSpellExt_croatian.enableCroatianWorkspace",
             "contributes": false,
@@ -63,7 +63,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hr",
+            "value": "hr,hr-HR",
             "scope": "workspace",
             "id": "cSpellExt_croatian.disableCroatianWorkspace",
             "contributes": false,

@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Estonian",
     "nativeName": "eesti",
-    "locale": "et",
+    "locale": "et-EE",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-et-ee/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "et"
+            "value": "et-EE"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "et"
+            "value": "et,et-EE"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "et",
+            "value": "et-EE",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "et",
+            "value": "et,et-EE",
             "scope": "workspace"
         }
     ]

@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Russian",
     "nativeName": "русский",
-    "locale": "ru",
+    "locale": "ru-RU",
     "sample": "samples/portland.md",
     "cspell": {
         "version": "0.2",
@@ -15,29 +15,29 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "ru"
+            "value": "ru-RU"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ru"
+            "value": "ru,ru-RU"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "ru",
+            "value": "ru-RU",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ru",
+            "value": "ru,ru-RU",
             "scope": "workspace"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "ru",
+            "value": "ru-RU",
             "id": "cSpellExt_russian.enableRussian",
             "contributes": false,
             "legacy": true,
@@ -46,7 +46,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ru",
+            "value": "ru,ru-RU",
             "id": "cSpellExt_russian.disableRussian",
             "contributes": false,
             "legacy": true,
@@ -55,7 +55,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "ru",
+            "value": "ru-RU",
             "scope": "workspace",
             "id": "cSpellExt_russian.enableRussianWorkspace",
             "contributes": false,
@@ -65,7 +65,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ru",
+            "value": "ru,ru-RU",
             "scope": "workspace",
             "id": "cSpellExt_russian.disableRussianWorkspace",
             "contributes": false,

@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Lithuanian",
     "nativeName": "lietuvių",
-    "locale": "lt",
+    "locale": "lt-LT",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-lt-lt/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "lt"
+            "value": "lt-LT"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "lt"
+            "value": "lt,lt-LT"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "lt",
+            "value": "lt-LT",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "lt",
+            "value": "lt,lt-LT",
             "scope": "workspace"
         }
     ]

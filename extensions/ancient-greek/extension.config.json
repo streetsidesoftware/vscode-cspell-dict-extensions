@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Ancient Greek",
     "nativeName": "Ἀρχαία Ἑλληνική",
-    "locale": "grc",
+    "locale": "grc-GR",
     "sample": "samples/Hymn-4-to-Hermes.md",
     "cspell": {
         "import": ["@cspell/dict-grc/cspell-ext.json"]
@@ -13,26 +13,26 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "grc",
+            "value": "grc-GR",
             "title": "Enable Ancient_greek Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "grc",
+            "value": "grc,grc-GR,gr,el-GRC",
             "title": "Disable Ancient_greek Spell Checker Dictionary"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "grc",
+            "value": "grc-GR",
             "scope": "workspace",
             "title": "Enable Ancient_greek Spell Checker Dictionary in Workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "grc",
+            "value": "grc,grc-GR,gr,el-GRC",
             "scope": "workspace",
             "title": "Disable Ancient_greek Spell Checker Dictionary in Workspace"
         }

@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Latin",
     "nativeName": "Latina",
-    "locale": "la",
+    "locale": "la-VA",
     "sample": "samples/lingua-latina.md",
     "cspell": {
         "import": ["@cspell/dict-la/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "la"
+            "value": "la-VA"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "la"
+            "value": "la,la-VA"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "la",
+            "value": "la-VA",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "la",
+            "value": "la,la-VA",
             "scope": "workspace"
         }
     ]

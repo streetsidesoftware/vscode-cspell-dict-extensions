@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Norwegian Bokmål",
     "nativeName": "norsk bokmål",
-    "locale": "nb",
+    "locale": "nb-NO",
     "sample": "samples/norge.md",
     "cspell": {
         "import": ["@cspell/dict-nb-no/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "nb"
+            "value": "nb-NO"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "nb"
+            "value": "nb,nb-NO"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "nb",
+            "value": "nb-NO",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "nb",
+            "value": "nb,nb-NO",
             "scope": "workspace"
         }
     ]

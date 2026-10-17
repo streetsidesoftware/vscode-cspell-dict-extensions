@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sv_SE"
+            "value": "sv-SE,sv"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sv_SE",
+            "value": "sv-SE,sv",
             "scope": "workspace"
         },
         {
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sv_SE",
+            "value": "sv-SE,sv",
             "id": "cSpellExt_swedish.disableSwedish",
             "contributes": false,
             "legacy": true,
@@ -63,7 +63,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sv_SE",
+            "value": "sv-SE,sv",
             "scope": "workspace",
             "id": "cSpellExt_swedish.disableSwedishWorkspace",
             "contributes": false,

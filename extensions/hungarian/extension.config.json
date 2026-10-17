@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Hungarian",
     "nativeName": "magyar",
-    "locale": "hu",
+    "locale": "hu-HU",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-hu-hu/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hu"
+            "value": "hu-HU"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hu"
+            "value": "hu,hu-HU"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hu",
+            "value": "hu-HU",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hu",
+            "value": "hu,hu-HU",
             "scope": "workspace"
         }
     ]

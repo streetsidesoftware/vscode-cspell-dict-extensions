@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "bg_BG"
+            "value": "bg-BG,bg"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "bg_BG",
+            "value": "bg-BG,bg",
             "scope": "workspace"
         },
         {
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "bg_BG",
+            "value": "bg-BG,bg",
             "id": "cSpellExt_bulgarian.disableBulgarian",
             "contributes": false,
             "legacy": true,
@@ -63,7 +63,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "bg_BG",
+            "value": "bg-BG,bg",
             "scope": "workspace",
             "id": "cSpellExt_bulgarian.disableBulgarianWorkspace",
             "contributes": false,

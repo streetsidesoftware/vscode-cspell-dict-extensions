@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Italian",
     "nativeName": "italiano",
-    "locale": "it",
+    "locale": "it-IT",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-it-it/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "it"
+            "value": "it-IT"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "it"
+            "value": "it,it-IT"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "it",
+            "value": "it-IT",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "it",
+            "value": "it,it-IT",
             "scope": "workspace"
         }
     ]

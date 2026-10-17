@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Dutch",
     "nativeName": "Nederlands",
-    "locale": "nl",
+    "locale": "nl-NL",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-nl-nl/cspell-ext.json"]
@@ -13,25 +13,26 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "nl"
+            "value": "nl-NL"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "nl"
+            "value": "nl-NL"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "nl",
+            "value": "nl-NL",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "nl",
+            "value": "nl-NL",
             "scope": "workspace"
         }
     ],
-    "description": "Dutch / Nederlands dictionary extension for VS Code."
+    "description": "Dutch / Nederlands dictionary extension for VS Code.",
+    "notes": "Disable removes only `nl-NL`, not `nl`: `nl` is shared with Flemish (nl-BE), so a user who added `nl` keeps this dictionary on."
 }

@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Finnish",
     "nativeName": "suomi",
-    "locale": "fi",
+    "locale": "fi-FI",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-fi-fi/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "fi"
+            "value": "fi-FI"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fi"
+            "value": "fi,fi-FI"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "fi",
+            "value": "fi-FI",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fi",
+            "value": "fi,fi-FI",
             "scope": "workspace"
         }
     ]

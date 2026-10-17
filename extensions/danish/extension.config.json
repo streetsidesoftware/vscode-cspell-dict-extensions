@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Danish",
     "nativeName": "dansk",
-    "locale": "da",
+    "locale": "da-DK",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-da-dk/cspell-ext.json"]
@@ -13,29 +13,29 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "da"
+            "value": "da-DK"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "da"
+            "value": "da,da-DK"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "da",
+            "value": "da-DK",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "da",
+            "value": "da,da-DK",
             "scope": "workspace"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "da",
+            "value": "da-DK",
             "id": "cSpellExt_danish.enableDanish",
             "contributes": false,
             "legacy": true,
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "da",
+            "value": "da,da-DK",
             "id": "cSpellExt_danish.disableDanish",
             "contributes": false,
             "legacy": true,
@@ -53,7 +53,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "da",
+            "value": "da-DK",
             "scope": "workspace",
             "id": "cSpellExt_danish.enableDanishWorkspace",
             "contributes": false,
@@ -63,7 +63,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "da",
+            "value": "da,da-DK",
             "scope": "workspace",
             "id": "cSpellExt_danish.disableDanishWorkspace",
             "contributes": false,

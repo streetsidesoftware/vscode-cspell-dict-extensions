@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Galician",
     "nativeName": "galego",
-    "locale": "gl",
+    "locale": "gl-ES",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-gl-es/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "gl"
+            "value": "gl-ES"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "gl"
+            "value": "gl,gl-ES"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "gl",
+            "value": "gl-ES",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "gl",
+            "value": "gl,gl-ES",
             "scope": "workspace"
         }
     ]

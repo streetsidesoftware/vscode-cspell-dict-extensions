@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Armenian",
     "nativeName": "հայերեն",
-    "locale": "hy",
+    "locale": "hy-AM",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-hy/cspell-ext.json"]
@@ -13,23 +13,23 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hy"
+            "value": "hy-AM"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hy"
+            "value": "hy,hy-AM"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hy",
+            "value": "hy-AM",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hy",
+            "value": "hy,hy-AM",
             "scope": "workspace"
         }
     ]
