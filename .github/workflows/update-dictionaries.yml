@@ -47,10 +47,6 @@ jobs:
         run: |
           npm run update-dictionaries
 
-      - name: Sync Extensions
-        run: |
-          npm run sync:extensions
-
       - name: Build
         run: |
           npm run build
