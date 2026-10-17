@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-catalan",
-  "description": "Catalan dictionary extension for VS Code.",
+  "description": "Adds Catalan (català) spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Catalan - Code Spell Checker",
   "icon": "images/SpellCheck.png",

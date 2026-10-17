@@ -87,7 +87,7 @@ interface ExtensionConfigBase {
      */
     displayName?: string;
     /**
-     * The Marketplace description. Default: `<friendlyName> dictionary extension for VS Code.`
+     * The Marketplace description.
      * @minLength 1
      */
     description?: string;
@@ -135,12 +135,22 @@ export interface WordListExtensionConfig extends ExtensionConfigBase {
 export interface BundleExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'bundle';
+    /**
+     * The Marketplace description. Required: there is no default wording for this kind.
+     * @minLength 1
+     */
+    description: string;
 }
 
 /** A cspell parser for a programming language. */
 export interface ParserExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'parser';
+    /**
+     * The Marketplace description. Required: there is no default wording for this kind.
+     * @minLength 1
+     */
+    description: string;
 }
 
 /** The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it. */
@@ -164,8 +174,23 @@ export function displayName(config: ExtensionConfig): string {
     return config.displayName ?? `${config.friendlyName} - Code Spell Checker`;
 }
 
+/**
+ * The Marketplace description. Default for a language: `Adds <friendlyName> (<nativeName>) spell checking to Code Spell Checker.`,
+ * without the parentheses when there is no `nativeName`. Default for a word list:
+ * `Adds the <friendlyName> dictionary to Code Spell Checker.` Bundles and parsers set their own.
+ */
 export function description(config: ExtensionConfig): string {
-    return config.description ?? `${config.friendlyName} dictionary extension for VS Code.`;
+    if (config.description) return config.description;
+    switch (config.kind) {
+        case 'language': {
+            const name = config.nativeName ? `${config.friendlyName} (${config.nativeName})` : config.friendlyName;
+            return `Adds ${name} spell checking to Code Spell Checker.`;
+        }
+        case 'wordList':
+            return `Adds the ${config.friendlyName} dictionary to Code Spell Checker.`;
+        default:
+            return config.description;
+    }
 }
 
 /**

@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-russian",
-  "description": "Russian dictionary extension for VS Code.",
+  "description": "Adds Russian (русский) spell checking to Code Spell Checker.",
   "version": "3.0.0",
   "displayName": "Russian - Code Spell Checker",
   "icon": "images/SpellCheck.png",

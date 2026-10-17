@@ -71,6 +71,5 @@
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."
         }
     ],
-    "description": "Spanish Add-On for Code Spell Checker",
     "notes": "Disable removes only `es-ES`, not `es`: `es` is shared with other Spanish variants, so a user who added `es` keeps this dictionary on."
 }

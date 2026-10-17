@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-ancient-greek",
-  "description": "Ancient Greek dictionary extension for VS Code.",
+  "description": "Adds Ancient Greek (Ἀρχαία Ἑλληνική) spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Ancient Greek - Code Spell Checker",
   "icon": "images/SpellCheck.png",

@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-australian-english",
-  "description": "Australian English dictionary extension for VS Code.",
+  "description": "Adds Australian English spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Australian English - Code Spell Checker",
   "icon": "images/SpellCheck.png",

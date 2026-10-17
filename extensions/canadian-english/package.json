@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-canadian-english",
-  "description": "Canadian English dictionary extension for VS Code.",
+  "description": "Adds Canadian English spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Canadian English - Code Spell Checker",
   "icon": "images/SpellCheck.png",

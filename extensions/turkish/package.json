@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-turkish",
-  "description": "Turkish dictionary extension for VS Code.",
+  "description": "Adds Turkish (Türkçe) spell checking to Code Spell Checker.",
   "version": "3.0.0",
   "displayName": "Turkish - Code Spell Checker",
   "icon": "images/SpellCheck.png",

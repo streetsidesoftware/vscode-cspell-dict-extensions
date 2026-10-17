@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-hebrew",
-  "description": "Hebrew dictionary extension for VS Code.",
+  "description": "Adds Hebrew (עברית) spell checking to Code Spell Checker.",
   "version": "3.0.0",
   "displayName": "Hebrew - Code Spell Checker",
   "icon": "images/SpellCheck.png",

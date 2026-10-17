@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-medical-terms",
   "displayName": "Medical Terms - Code Spell Checker",
-  "description": "Medical Terms dictionary extension for VS Code.",
+  "description": "Adds the Medical Terms dictionary to Code Spell Checker.",
   "icon": "images/SpellCheck.png",
   "version": "4.1.0",
   "private": true,

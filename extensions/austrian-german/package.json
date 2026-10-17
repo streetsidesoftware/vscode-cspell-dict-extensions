@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-austrian-german",
-  "description": "Austrian German dictionary extension for VS Code.",
+  "description": "Adds Austrian German (Österreichisches Deutsch) spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Austrian German - Code Spell Checker",
   "icon": "images/SpellCheck.png",

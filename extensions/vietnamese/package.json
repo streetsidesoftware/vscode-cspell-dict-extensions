@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-vietnamese",
-  "description": "Vietnamese dictionary extension for VS Code.",
+  "description": "Adds Vietnamese (Tiếng Việt) spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Vietnamese - Code Spell Checker",
   "icon": "images/SpellCheck.png",

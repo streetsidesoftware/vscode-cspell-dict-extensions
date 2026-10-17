@@ -41,7 +41,7 @@
                 },
                 "description": {
                     "type": "string",
-                    "description": "The Marketplace description. Default: `<friendlyName> dictionary extension for VS Code.`",
+                    "description": "The Marketplace description.",
                     "minLength": 1
                 },
                 "sample": {
@@ -221,7 +221,7 @@
                 },
                 "description": {
                     "type": "string",
-                    "description": "The Marketplace description. Default: `<friendlyName> dictionary extension for VS Code.`",
+                    "description": "The Marketplace description.",
                     "minLength": 1
                 },
                 "sample": {
@@ -279,7 +279,7 @@
                 },
                 "description": {
                     "type": "string",
-                    "description": "The Marketplace description. Default: `<friendlyName> dictionary extension for VS Code.`",
+                    "description": "The Marketplace description. Required: there is no default wording for this kind.",
                     "minLength": 1
                 },
                 "sample": {
@@ -309,7 +309,7 @@
                     "description": "What the extension is."
                 }
             },
-            "required": ["commands", "cspell", "friendlyName", "kind", "name", "sample"],
+            "required": ["commands", "cspell", "description", "friendlyName", "kind", "name", "sample"],
             "additionalProperties": false,
             "description": "A collection of dictionaries, i.e. the latest copies of the dictionaries Code Spell Checker bundles."
         },
@@ -337,7 +337,7 @@
                 },
                 "description": {
                     "type": "string",
-                    "description": "The Marketplace description. Default: `<friendlyName> dictionary extension for VS Code.`",
+                    "description": "The Marketplace description. Required: there is no default wording for this kind.",
                     "minLength": 1
                 },
                 "sample": {
@@ -367,7 +367,7 @@
                     "description": "What the extension is."
                 }
             },
-            "required": ["commands", "cspell", "friendlyName", "kind", "name", "sample"],
+            "required": ["commands", "cspell", "description", "friendlyName", "kind", "name", "sample"],
             "additionalProperties": false,
             "description": "A cspell parser for a programming language."
         }

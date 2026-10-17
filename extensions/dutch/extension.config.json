@@ -33,6 +33,5 @@
             "scope": "workspace"
         }
     ],
-    "description": "Dutch / Nederlands dictionary extension for VS Code.",
     "notes": "Disable removes only `nl-NL`, not `nl`: `nl` is shared with Flemish (nl-BE), so a user who added `nl` keeps this dictionary on."
 }
