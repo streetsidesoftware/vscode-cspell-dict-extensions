@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-portuguese-brazilian",
   "description": "Adds Brazilian Portuguese (português (Brasil)) spell checking to Code Spell Checker.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "displayName": "Brazilian Portuguese - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

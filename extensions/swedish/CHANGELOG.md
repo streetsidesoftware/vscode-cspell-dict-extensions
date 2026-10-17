@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-swedish@2.1.0...code-spell-checker-swedish@2.1.1) (2026-10-17)
+
+
+### Updates and Bug Fixes
+
+* describe each kind of extension in its own words ([#1648](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1648)) ([1b38ab8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/1b38ab80fda1ecb65a953bcf4efaa715b2116637))
+* **swedish:** Prepare for Release ([#1636](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1636)) ([01e1d4b](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/01e1d4b0da4e1381a1ae6dc9359cf7bc00c58fcf))
+
 ## [2.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-swedish@2.0.0...code-spell-checker-swedish@2.1.0) (2026-10-17)
 
 
