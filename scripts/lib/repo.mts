@@ -11,9 +11,6 @@ export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
 /**
  * The extensions: the directories in `extensions/` that have a `package.json`, relative to the repository root,
  * e.g. `extensions/swedish`, sorted by code point.
- *
- * Every script lists the extensions with this, except `sync-extensions.mts`, which syncs only the ones with an
- * `extension.config.json`.
  */
 export async function listExtensionDirs(): Promise<string[]> {
     const dirs: string[] = [];
