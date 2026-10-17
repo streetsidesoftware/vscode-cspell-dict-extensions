@@ -1,3 +1,4 @@
+// Written by `npm run sync:extensions`. Do not edit.
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
@@ -7,13 +8,11 @@
             "label": "npm: build",
             "type": "npm",
             "script": "build",
-            "problemMatcher": "$tsc"
-        },
-        {
-            "label": "npm: clean-build",
-            "type": "npm",
-            "script": "clean-build",
-            "problemMatcher": "$tsc"
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
         },
         {
             "label": "npm: test",
@@ -23,12 +22,6 @@
                 "kind": "test",
                 "isDefault": true
             }
-        },
-        {
-            "label": "npm: watch",
-            "type": "npm",
-            "script": "watch",
-            "problemMatcher": ["$tsc-watch"]
         }
     ]
 }

@@ -1,0 +1,33 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "mongolian",
+    "friendlyName": "Mongolian",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-mn-mn/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "mn-mn"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "mn-mn"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "mn-mn",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "mn-mn",
+            "scope": "workspace"
+        }
+    ]
+}

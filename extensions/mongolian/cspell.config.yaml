@@ -1,6 +1,6 @@
 language: en,mn
 import:
-  - ./cspell-ext.json
+  - ./static/cspell-ext.json
 words:
   - Badral
   - Battseren
