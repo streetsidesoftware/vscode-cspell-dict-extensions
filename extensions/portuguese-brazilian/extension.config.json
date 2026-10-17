@@ -3,7 +3,7 @@
     "name": "portuguese-brazilian",
     "kind": "language",
     "friendlyName": "Brazilian Portuguese",
-    "nativeName": "português (Brasil)",
+    "nativeName": "português brasileiro",
     "locale": "pt-BR",
     "sample": "samples/Seattle.md",
     "cspell": {

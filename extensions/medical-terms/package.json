@@ -1,54 +1,31 @@
 {
   "name": "code-spell-checker-medical-terms",
   "displayName": "Medical Terms - Code Spell Checker",
-  "description": "Adds the Medical Terms dictionary to Code Spell Checker.",
-  "icon": "images/SpellCheck.png",
   "version": "4.1.0",
   "private": true,
-  "publisher": "streetsidesoftware",
-  "license": "GPL-3.0-or-later",
-  "type": "module",
-  "engines": {
-    "vscode": "^1.125.0"
-  },
-  "sponsor": {
-    "url": "https://github.com/sponsors/streetsidesoftware"
-  },
-  "extensionKind": [
-    "workspace"
-  ],
+  "description": "Adds the Medical Terms dictionary to Code Spell Checker.",
   "categories": [
     "Linters",
     "Other"
   ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
-  "qna": "marketplace",
-  "main": "./out/extension.js",
-  "capabilities": {
-    "virtualWorkspaces": true,
-    "untrustedWorkspaces": {
-      "supported": true
-    }
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
-  "contributes": {
-    "commands": []
-  },
-  "extensionDependencies": [
-    "streetsidesoftware.code-spell-checker"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
     "directory": "extensions/medical-terms"
   },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
-  },
+  "license": "GPL-3.0-or-later",
+  "qna": "marketplace",
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": [],
+  "publisher": "streetsidesoftware",
+  "type": "module",
+  "main": "./out/extension.js",
   "scripts": {
     "build": "tsdown",
-    "clean": "rimraf out",
+    "clean": "node ../../scripts/clean.mts",
     "clean-build": "npm run clean && npm run build",
     "pack-extension": "vsce package",
     "publish-extension": "vsce publish",
@@ -58,13 +35,36 @@
     "vscode:prepublish": "npm run build",
     "watch": "tsdown --watch"
   },
+  "contributes": {
+    "commands": []
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "dependencies": {
     "@cspell/dict-medicalterms": "^4.1.9"
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "icon": "images/SpellCheck.png",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "sponsor": {
+    "url": "https://github.com/sponsors/streetsidesoftware"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/medical-terms/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/medical-terms/"
-  },
-  "author": "Street Side Software <support@streetsidesoftware.nl>",
-  "contributors": []
+  }
 }

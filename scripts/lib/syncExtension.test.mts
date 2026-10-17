@@ -56,6 +56,8 @@ describe('syncExtension', () => {
         await writeJson('extension.config.json', config);
         await writeJson('package.json', pkg);
         await fs.writeFile(path.join(dir, 'README.md'), readme);
+        await writeJson('node_modules/@cspell/dict-demo/package.json', { name: '@cspell/dict-demo', version: '1.0.0' });
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {});
     });
 
     afterEach(async () => {
@@ -89,6 +91,27 @@ describe('syncExtension', () => {
         await syncExtension(dir, options);
         assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')), cspell);
         assert.match(await read('README.md'), /cspell `>=10\.4\.0`/);
+    });
+
+    it('takes the engines the dictionaries declare, unless cspell.engines sets them', async () => {
+        const engines = { cspell: '>=10.4.0', 'code-spell-checker': '>=4.10.0' };
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', { engines });
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')), { ...config.cspell, engines });
+        assert.match(await read('README.md'), /cspell `>=10\.4\.0`/);
+
+        const cspell = { ...config.cspell, engines: { cspell: '>=10.5.0' } };
+        await writeJson('extension.config.json', { ...config, cspell });
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')).engines, {
+            cspell: '>=10.5.0',
+            'code-spell-checker': '>=4.10.0',
+        });
+    });
+
+    it('needs the dictionaries installed', async () => {
+        await fs.rm(path.join(dir, 'node_modules'), { recursive: true });
+        await assert.rejects(syncExtension(dir, options), /can't find "@cspell\/dict-demo\/cspell-ext\.json"/);
     });
 
     it('fills the README from the shared templates and static/ data', async () => {
@@ -194,6 +217,7 @@ describe('syncExtension', () => {
     });
 
     async function writeJson(file: string, data: unknown): Promise<void> {
+        await fs.mkdir(path.dirname(path.join(dir, file)), { recursive: true });
         await fs.writeFile(path.join(dir, file), JSON.stringify(data, null, 2) + '\n');
     }
 

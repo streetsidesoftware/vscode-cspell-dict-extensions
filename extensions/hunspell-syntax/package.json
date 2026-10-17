@@ -1,25 +1,50 @@
 {
   "name": "hunspell",
   "displayName": "hunspell",
-  "description": "Hunspell Syntax Highlighting support",
   "version": "2.0.0",
-  "publisher": "streetsidesoftware",
-  "engines": {
-    "vscode": "^1.125.0"
-  },
+  "private": true,
+  "description": "Hunspell Syntax Highlighting support",
   "categories": [
     "Programming Languages"
   ],
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/hunspell-syntax"
+  },
   "license": "MIT",
   "qna": "marketplace",
-  "icon": "images/hunspell.png",
-  "capabilities": {
-    "virtualWorkspaces": true,
-    "untrustedWorkspaces": {
-      "supported": true
-    }
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": [],
+  "publisher": "streetsidesoftware",
+  "scripts": {
+    "build": "echo build",
+    "clean": "echo clean",
+    "clean-build": "echo clean-build",
+    "pack-extension": "vsce package",
+    "publish-extension": "vsce publish",
+    "test": "npm run test:cspell && npm run test:vscode",
+    "test:cspell": "cspell -c cspell.json samples",
+    "test:vscode": "echo OK - no code here.",
+    "vscode:prepublish": "echo prepublish",
+    "watch": "echo watch"
   },
   "contributes": {
+    "grammars": [
+      {
+        "language": "hunspell.aff",
+        "scopeName": "source.hunspell.aff",
+        "path": "./syntaxes/aff.tmLanguage.json"
+      },
+      {
+        "language": "hunspell.dic",
+        "scopeName": "source.hunspell.dic",
+        "path": "./syntaxes/dic.tmLanguage.json"
+      }
+    ],
     "languages": [
       {
         "id": "hunspell.aff",
@@ -45,45 +70,20 @@
         ],
         "configuration": "./language-configuration.json"
       }
-    ],
-    "grammars": [
-      {
-        "language": "hunspell.aff",
-        "scopeName": "source.hunspell.aff",
-        "path": "./syntaxes/aff.tmLanguage.json"
-      },
-      {
-        "language": "hunspell.dic",
-        "scopeName": "source.hunspell.dic",
-        "path": "./syntaxes/dic.tmLanguage.json"
-      }
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
-    "directory": "extensions/hunspell-syntax"
+  "engines": {
+    "vscode": "^1.125.0"
   },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  "icon": "images/hunspell.png",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
   },
-  "scripts": {
-    "clean": "echo clean",
-    "clean-build": "echo clean-build",
-    "publish-extension": "vsce publish",
-    "pack-extension": "vsce package",
-    "vscode:prepublish": "echo prepublish",
-    "build": "echo build",
-    "watch": "echo watch",
-    "test:cspell": "cspell -c cspell.json samples",
-    "test:vscode": "echo OK - no code here.",
-    "test": "npm run test:cspell && npm run test:vscode"
-  },
-  "private": true,
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/hunspell-syntax/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/hunspell-syntax/"
-  },
-  "author": "Street Side Software <support@streetsidesoftware.nl>",
-  "contributors": []
+  }
 }

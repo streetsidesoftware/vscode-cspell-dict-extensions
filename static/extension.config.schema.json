@@ -52,7 +52,7 @@
                 "cspell": {
                     "type": "object",
                     "additionalProperties": {},
-                    "description": "The content of `static/cspell-ext.json`. Set `engines` here only to override the defaults in `static/engines.json`."
+                    "description": "The content of `static/cspell-ext.json`. The sync adds the `engines` the imported dictionaries declare. Set `engines` here only to override them or the defaults in `static/engines.json`."
                 },
                 "commands": {
                     "type": "array",
@@ -232,7 +232,7 @@
                 "cspell": {
                     "type": "object",
                     "additionalProperties": {},
-                    "description": "The content of `static/cspell-ext.json`. Set `engines` here only to override the defaults in `static/engines.json`."
+                    "description": "The content of `static/cspell-ext.json`. The sync adds the `engines` the imported dictionaries declare. Set `engines` here only to override them or the defaults in `static/engines.json`."
                 },
                 "commands": {
                     "type": "array",
@@ -290,7 +290,7 @@
                 "cspell": {
                     "type": "object",
                     "additionalProperties": {},
-                    "description": "The content of `static/cspell-ext.json`. Set `engines` here only to override the defaults in `static/engines.json`."
+                    "description": "The content of `static/cspell-ext.json`. The sync adds the `engines` the imported dictionaries declare. Set `engines` here only to override them or the defaults in `static/engines.json`."
                 },
                 "commands": {
                     "type": "array",
@@ -348,7 +348,7 @@
                 "cspell": {
                     "type": "object",
                     "additionalProperties": {},
-                    "description": "The content of `static/cspell-ext.json`. Set `engines` here only to override the defaults in `static/engines.json`."
+                    "description": "The content of `static/cspell-ext.json`. The sync adds the `engines` the imported dictionaries declare. Set `engines` here only to override them or the defaults in `static/engines.json`."
                 },
                 "commands": {
                     "type": "array",

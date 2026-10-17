@@ -97,8 +97,8 @@ interface ExtensionConfigBase {
      */
     sample: string;
     /**
-     * The content of `static/cspell-ext.json`. Set `engines` here only to override the defaults in
-     * `static/engines.json`.
+     * The content of `static/cspell-ext.json`. The sync adds the `engines` the imported dictionaries declare. Set
+     * `engines` here only to override them or the defaults in `static/engines.json`.
      */
     cspell: Record<string, unknown>;
     /** The commands the extension contributes. */

@@ -1,22 +1,9 @@
 {
   "name": "code-spell-checker-scientific-terms",
-  "description": "Adds the Scientific Terms dictionary to Code Spell Checker.",
-  "version": "1.0.0",
   "displayName": "Scientific Terms - Code Spell Checker",
-  "icon": "images/SpellCheck.png",
+  "version": "1.0.0",
   "private": true,
-  "publisher": "streetsidesoftware",
-  "license": "GPL-3.0-or-later",
-  "type": "module",
-  "engines": {
-    "vscode": "^1.125.0"
-  },
-  "sponsor": {
-    "url": "https://github.com/sponsors/streetsidesoftware"
-  },
-  "extensionKind": [
-    "workspace"
-  ],
+  "description": "Adds the Scientific Terms dictionary to Code Spell Checker.",
   "categories": [
     "Linters",
     "Other"
@@ -28,34 +15,24 @@
     "dictionary",
     "spelling"
   ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
-  "qna": "marketplace",
-  "main": "./out/extension.js",
-  "capabilities": {
-    "virtualWorkspaces": true,
-    "untrustedWorkspaces": {
-      "supported": true
-    }
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
-  "contributes": {
-    "commands": []
-  },
-  "extensionDependencies": [
-    "streetsidesoftware.code-spell-checker"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
     "directory": "extensions/scientific-terms"
   },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
-  },
+  "license": "GPL-3.0-or-later",
+  "qna": "marketplace",
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": [],
+  "publisher": "streetsidesoftware",
+  "type": "module",
+  "main": "./out/extension.js",
   "scripts": {
     "build": "tsdown",
-    "clean": "rimraf out",
+    "clean": "node ../../scripts/clean.mts",
     "clean-build": "npm run clean && npm run build",
     "pack-extension": "vsce package",
     "publish-extension": "vsce publish",
@@ -65,13 +42,36 @@
     "vscode:prepublish": "npm run build",
     "watch": "tsdown --watch"
   },
+  "contributes": {
+    "commands": []
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "dependencies": {
     "@cspell/dict-scientific-terms-us": "^3.1.1"
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "icon": "images/SpellCheck.png",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "sponsor": {
+    "url": "https://github.com/sponsors/streetsidesoftware"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/scientific-terms/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/scientific-terms/"
-  },
-  "author": "Street Side Software <support@streetsidesoftware.nl>",
-  "contributors": []
+  }
 }
