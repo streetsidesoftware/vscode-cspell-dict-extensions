@@ -3,6 +3,21 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "anyOf": [
         {
+            "$ref": "#/definitions/LanguageExtensionConfig"
+        },
+        {
+            "$ref": "#/definitions/WordListExtensionConfig"
+        },
+        {
+            "$ref": "#/definitions/BundleExtensionConfig"
+        },
+        {
+            "$ref": "#/definitions/ParserExtensionConfig"
+        }
+    ],
+    "description": "The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it.",
+    "definitions": {
+        "LanguageExtensionConfig": {
             "type": "object",
             "properties": {
                 "$schema": {
@@ -42,103 +57,7 @@
                 "commands": {
                     "type": "array",
                     "items": {
-                        "anyOf": [
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "action": {
-                                        "type": "string",
-                                        "enum": ["enable", "disable"],
-                                        "description": "Turn the toggle on or off."
-                                    },
-                                    "value": {
-                                        "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID).",
-                                        "minLength": 1
-                                    },
-                                    "id": {
-                                        "type": "string",
-                                        "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "contributes": {
-                                        "type": "boolean",
-                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
-                                    },
-                                    "legacy": {
-                                        "type": "boolean",
-                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
-                                    },
-                                    "notes": {
-                                        "type": "string",
-                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
-                                    },
-                                    "toggle": {
-                                        "type": "string",
-                                        "enum": ["locale", "dictionary"],
-                                        "description": "What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
-                                    },
-                                    "scope": {
-                                        "type": "string",
-                                        "enum": ["global", "workspace"],
-                                        "description": "Where the setting is written. Default: `global`."
-                                    }
-                                },
-                                "required": ["action", "toggle", "value"],
-                                "additionalProperties": false,
-                                "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "action": {
-                                        "type": "string",
-                                        "enum": ["enable", "disable"],
-                                        "description": "Turn the toggle on or off."
-                                    },
-                                    "value": {
-                                        "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID).",
-                                        "minLength": 1
-                                    },
-                                    "id": {
-                                        "type": "string",
-                                        "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "contributes": {
-                                        "type": "boolean",
-                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
-                                    },
-                                    "legacy": {
-                                        "type": "boolean",
-                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
-                                    },
-                                    "notes": {
-                                        "type": "string",
-                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
-                                    },
-                                    "toggle": {
-                                        "type": "string",
-                                        "const": "fileType",
-                                        "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
-                                    }
-                                },
-                                "required": ["action", "toggle", "value"],
-                                "additionalProperties": false,
-                                "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
-                            }
-                        ]
+                        "$ref": "#/definitions/CommandConfig"
                     },
                     "description": "The commands the extension contributes."
                 },
@@ -166,7 +85,119 @@
             "additionalProperties": false,
             "description": "A natural language, enabled by its locale, i.e. Swedish."
         },
-        {
+        "CommandConfig": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/ScopedCommandConfig"
+                },
+                {
+                    "$ref": "#/definitions/FileTypeCommandConfig"
+                }
+            ]
+        },
+        "ScopedCommandConfig": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "$ref": "#/definitions/Action",
+                    "description": "Turn the toggle on or off."
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The locale, dictionary name, or file type (language ID).",
+                    "minLength": 1
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
+                    "minLength": 1
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
+                    "minLength": 1
+                },
+                "contributes": {
+                    "type": "boolean",
+                    "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
+                },
+                "legacy": {
+                    "type": "boolean",
+                    "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
+                },
+                "notes": {
+                    "type": "string",
+                    "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
+                },
+                "toggle": {
+                    "type": "string",
+                    "enum": ["locale", "dictionary"],
+                    "description": "What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
+                },
+                "scope": {
+                    "$ref": "#/definitions/Scope",
+                    "description": "Where the setting is written. Default: `global`."
+                }
+            },
+            "required": ["action", "toggle", "value"],
+            "additionalProperties": false,
+            "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
+        },
+        "Action": {
+            "type": "string",
+            "enum": ["enable", "disable"],
+            "description": "Turn the toggle on or off."
+        },
+        "Scope": {
+            "type": "string",
+            "enum": ["global", "workspace"],
+            "description": "Where the setting is written."
+        },
+        "FileTypeCommandConfig": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "$ref": "#/definitions/Action",
+                    "description": "Turn the toggle on or off."
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The locale, dictionary name, or file type (language ID).",
+                    "minLength": 1
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
+                    "minLength": 1
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
+                    "minLength": 1
+                },
+                "contributes": {
+                    "type": "boolean",
+                    "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
+                },
+                "legacy": {
+                    "type": "boolean",
+                    "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
+                },
+                "notes": {
+                    "type": "string",
+                    "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
+                },
+                "toggle": {
+                    "type": "string",
+                    "const": "fileType",
+                    "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
+                }
+            },
+            "required": ["action", "toggle", "value"],
+            "additionalProperties": false,
+            "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
+        },
+        "WordListExtensionConfig": {
             "type": "object",
             "properties": {
                 "$schema": {
@@ -206,103 +237,7 @@
                 "commands": {
                     "type": "array",
                     "items": {
-                        "anyOf": [
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "action": {
-                                        "type": "string",
-                                        "enum": ["enable", "disable"],
-                                        "description": "Turn the toggle on or off."
-                                    },
-                                    "value": {
-                                        "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID).",
-                                        "minLength": 1
-                                    },
-                                    "id": {
-                                        "type": "string",
-                                        "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "contributes": {
-                                        "type": "boolean",
-                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
-                                    },
-                                    "legacy": {
-                                        "type": "boolean",
-                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
-                                    },
-                                    "notes": {
-                                        "type": "string",
-                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
-                                    },
-                                    "toggle": {
-                                        "type": "string",
-                                        "enum": ["locale", "dictionary"],
-                                        "description": "What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
-                                    },
-                                    "scope": {
-                                        "type": "string",
-                                        "enum": ["global", "workspace"],
-                                        "description": "Where the setting is written. Default: `global`."
-                                    }
-                                },
-                                "required": ["action", "toggle", "value"],
-                                "additionalProperties": false,
-                                "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "action": {
-                                        "type": "string",
-                                        "enum": ["enable", "disable"],
-                                        "description": "Turn the toggle on or off."
-                                    },
-                                    "value": {
-                                        "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID).",
-                                        "minLength": 1
-                                    },
-                                    "id": {
-                                        "type": "string",
-                                        "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "contributes": {
-                                        "type": "boolean",
-                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
-                                    },
-                                    "legacy": {
-                                        "type": "boolean",
-                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
-                                    },
-                                    "notes": {
-                                        "type": "string",
-                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
-                                    },
-                                    "toggle": {
-                                        "type": "string",
-                                        "const": "fileType",
-                                        "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
-                                    }
-                                },
-                                "required": ["action", "toggle", "value"],
-                                "additionalProperties": false,
-                                "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
-                            }
-                        ]
+                        "$ref": "#/definitions/CommandConfig"
                     },
                     "description": "The commands the extension contributes."
                 },
@@ -320,7 +255,7 @@
             "additionalProperties": false,
             "description": "A list of words, enabled by dictionary name, i.e. medical terms."
         },
-        {
+        "BundleExtensionConfig": {
             "type": "object",
             "properties": {
                 "$schema": {
@@ -360,103 +295,7 @@
                 "commands": {
                     "type": "array",
                     "items": {
-                        "anyOf": [
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "action": {
-                                        "type": "string",
-                                        "enum": ["enable", "disable"],
-                                        "description": "Turn the toggle on or off."
-                                    },
-                                    "value": {
-                                        "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID).",
-                                        "minLength": 1
-                                    },
-                                    "id": {
-                                        "type": "string",
-                                        "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "contributes": {
-                                        "type": "boolean",
-                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
-                                    },
-                                    "legacy": {
-                                        "type": "boolean",
-                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
-                                    },
-                                    "notes": {
-                                        "type": "string",
-                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
-                                    },
-                                    "toggle": {
-                                        "type": "string",
-                                        "enum": ["locale", "dictionary"],
-                                        "description": "What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
-                                    },
-                                    "scope": {
-                                        "type": "string",
-                                        "enum": ["global", "workspace"],
-                                        "description": "Where the setting is written. Default: `global`."
-                                    }
-                                },
-                                "required": ["action", "toggle", "value"],
-                                "additionalProperties": false,
-                                "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "action": {
-                                        "type": "string",
-                                        "enum": ["enable", "disable"],
-                                        "description": "Turn the toggle on or off."
-                                    },
-                                    "value": {
-                                        "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID).",
-                                        "minLength": 1
-                                    },
-                                    "id": {
-                                        "type": "string",
-                                        "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "contributes": {
-                                        "type": "boolean",
-                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
-                                    },
-                                    "legacy": {
-                                        "type": "boolean",
-                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
-                                    },
-                                    "notes": {
-                                        "type": "string",
-                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
-                                    },
-                                    "toggle": {
-                                        "type": "string",
-                                        "const": "fileType",
-                                        "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
-                                    }
-                                },
-                                "required": ["action", "toggle", "value"],
-                                "additionalProperties": false,
-                                "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
-                            }
-                        ]
+                        "$ref": "#/definitions/CommandConfig"
                     },
                     "description": "The commands the extension contributes."
                 },
@@ -474,7 +313,7 @@
             "additionalProperties": false,
             "description": "A collection of dictionaries, i.e. the latest copies of the dictionaries Code Spell Checker bundles."
         },
-        {
+        "ParserExtensionConfig": {
             "type": "object",
             "properties": {
                 "$schema": {
@@ -514,103 +353,7 @@
                 "commands": {
                     "type": "array",
                     "items": {
-                        "anyOf": [
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "action": {
-                                        "type": "string",
-                                        "enum": ["enable", "disable"],
-                                        "description": "Turn the toggle on or off."
-                                    },
-                                    "value": {
-                                        "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID).",
-                                        "minLength": 1
-                                    },
-                                    "id": {
-                                        "type": "string",
-                                        "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "contributes": {
-                                        "type": "boolean",
-                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
-                                    },
-                                    "legacy": {
-                                        "type": "boolean",
-                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
-                                    },
-                                    "notes": {
-                                        "type": "string",
-                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
-                                    },
-                                    "toggle": {
-                                        "type": "string",
-                                        "enum": ["locale", "dictionary"],
-                                        "description": "What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
-                                    },
-                                    "scope": {
-                                        "type": "string",
-                                        "enum": ["global", "workspace"],
-                                        "description": "Where the setting is written. Default: `global`."
-                                    }
-                                },
-                                "required": ["action", "toggle", "value"],
-                                "additionalProperties": false,
-                                "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "action": {
-                                        "type": "string",
-                                        "enum": ["enable", "disable"],
-                                        "description": "Turn the toggle on or off."
-                                    },
-                                    "value": {
-                                        "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID).",
-                                        "minLength": 1
-                                    },
-                                    "id": {
-                                        "type": "string",
-                                        "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "title": {
-                                        "type": "string",
-                                        "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
-                                        "minLength": 1
-                                    },
-                                    "contributes": {
-                                        "type": "boolean",
-                                        "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
-                                    },
-                                    "legacy": {
-                                        "type": "boolean",
-                                        "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
-                                    },
-                                    "notes": {
-                                        "type": "string",
-                                        "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
-                                    },
-                                    "toggle": {
-                                        "type": "string",
-                                        "const": "fileType",
-                                        "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
-                                    }
-                                },
-                                "required": ["action", "toggle", "value"],
-                                "additionalProperties": false,
-                                "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
-                            }
-                        ]
+                        "$ref": "#/definitions/CommandConfig"
                     },
                     "description": "The commands the extension contributes."
                 },
@@ -628,7 +371,5 @@
             "additionalProperties": false,
             "description": "A cspell parser for a programming language."
         }
-    ],
-    "description": "The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it.",
-    "definitions": {}
+    }
 }
