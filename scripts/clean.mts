@@ -9,8 +9,7 @@
 import fs from 'node:fs/promises';
 
 async function run(): Promise<void> {
-    const vsixFiles = (await fs.readdir('.')).filter((name) => name.endsWith('.vsix'));
-    for (const target of ['out', ...vsixFiles]) {
+    for await (const target of fs.glob(['out', '*.vsix'])) {
         await fs.rm(target, { recursive: true, force: true });
     }
 }
