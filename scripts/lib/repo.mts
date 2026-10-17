@@ -16,14 +16,14 @@ export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
  * `extensions/british-english-ise` comes before `extensions/british-english`.
  */
 export async function listExtensionDirs(): Promise<string[]> {
-    const entries = await fs.readdir(path.join(repoRoot, 'extensions'), { withFileTypes: true });
-    const pkgFiles: string[] = [];
-    for (const entry of entries) {
-        if (!entry.isDirectory()) continue;
-        const pkgFile = `extensions/${entry.name}/package.json`;
-        if (await exists(path.join(repoRoot, pkgFile))) pkgFiles.push(pkgFile);
+    const names: string[] = [];
+    for await (const pkgFile of fs.glob('*/package.json', { cwd: path.join(repoRoot, 'extensions') })) {
+        names.push(path.dirname(pkgFile));
     }
-    return pkgFiles.sort(compareCodePoints).map((pkgFile) => path.posix.dirname(pkgFile));
+    return names
+        .map((name) => `extensions/${name}/package.json`)
+        .sort(compareCodePoints)
+        .map((pkgFile) => path.posix.dirname(pkgFile));
 }
 
 /** Compare strings by code point, like `jq`'s `sort` and the `C` locale. */
@@ -43,13 +43,4 @@ export async function writeJson(file: string, value: unknown): Promise<void> {
 /** Run a command in the repository root and fail if it fails. */
 export function run(command: string, args: string[]): void {
     execFileSync(command, args, { cwd: repoRoot, stdio: 'inherit' });
-}
-
-async function exists(file: string): Promise<boolean> {
-    try {
-        await fs.access(file);
-        return true;
-    } catch {
-        return false;
-    }
 }
