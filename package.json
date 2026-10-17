@@ -27,8 +27,8 @@
     "tool:fix-extensions": "node ./scripts/fix-extensions.mts",
     "tool:gen-extension-list": "node ./scripts/gen-extension-list.mts",
     "lint": "npm run cspell",
-    "update-dictionaries": "lerna exec \"npx npm-check-updates -t latest -u -f \\\"@cspell*\\\" \" && npm i",
-    "update-packages": "npm ci && npx npm-check-updates -t semver -u && npm i && lerna exec \"npx npm-check-updates -t semver -u && rm -rf node_modules package-lock.json && npm i\" && npm i"
+    "update-dictionaries": "lerna exec \"npx npm-check-updates -t latest -u -f \\\"@cspell*\\\" \" && npm i && npm run sync:extensions",
+    "update-packages": "npm ci && npx npm-check-updates -t semver -u && npm i && lerna exec \"npx npm-check-updates -t semver -u && rm -rf node_modules package-lock.json && npm i\" && npm i && npm run sync:extensions"
   },
   "type": "commonjs",
   "devEngines": {
