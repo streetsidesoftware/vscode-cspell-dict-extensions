@@ -39,6 +39,10 @@ jobs:
         run: |
           npm run gen:release-please
 
+      - name: Update Workflow Extension Lists
+        run: |
+          npm run gen:workflow
+
       - name: PR Body
         id: pr-body
         uses: streetsidesoftware/actions/public/pr-body@v1
@@ -49,12 +53,14 @@ jobs:
           path: >-
             README.md
 
+      # Uses the automation app because GITHUB_TOKEN cannot push changes to `.github/workflows/`.
       - name: Create PR
-        uses: peter-evans/create-pull-request@v8
+        uses: streetsidesoftware/actions/.github/actions/pr@v1
         with:
           commit-message: "ci: Update README / Extensions List"
           branch: ${{ env.NEW_BRANCH }}
           base: main
           title: "ci: Update README / Extensions List"
           body: ${{ steps.pr-body.outputs.body }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
