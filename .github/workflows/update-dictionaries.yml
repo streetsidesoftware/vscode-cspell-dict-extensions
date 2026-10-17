@@ -12,6 +12,10 @@ on:
   schedule:
     - cron: "0 12 * * *"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   update-dictionaries:
     if: github.repository_owner == 'streetsidesoftware'
