@@ -24,7 +24,7 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-end: ./static/commands.json --->
 
-<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
+<!--- @@inject: ../../static/manual-settings.english.md#values-file=:./extension.config.json --->
 
 ### Manual Settings
 
@@ -32,20 +32,19 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `en-GB` to the `cSpell.language` setting, will enable the British English dictionary.
-Example using both English and British English dictionaries:
+Replacing `en` with `en-GB` in the `cSpell.language` setting will check British English spelling instead of American English:
+
+```javascript
+"cSpell.language": "en-GB",
+```
+
+To accept both the American and the British English spellings:
 
 ```javascript
 "cSpell.language": "en,en-GB",
 ```
 
-<!--- @@inject-end: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
-
-To use only the British spellings:
-
-```javascript
-"cSpell.language": "en-GB",
-```
+<!--- @@inject-end: ../../static/manual-settings.english.md#values-file=:./extension.config.json --->
 
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
