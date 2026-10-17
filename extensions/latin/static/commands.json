@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Latin Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Latin Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Latin Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Latin Spell Checker Dictionary in Workspace"
+    }
+]

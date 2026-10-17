@@ -1,0 +1,33 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "french",
+    "friendlyName": "French",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-fr-fr/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fr"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fr"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fr",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fr",
+            "scope": "workspace"
+        }
+    ]
+}

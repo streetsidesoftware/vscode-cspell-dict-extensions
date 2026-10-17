@@ -21,21 +21,20 @@ included in this extension.
 
 After this extension is installed, it is necessary to tell the spell checker to use it.
 
-### Enable Dictionary
+### Enable or Disable the Dictionary
 
-Commands (use `F1` or _View -> Command Palette..._):
+Run these commands with `F1` or _View -> Command Palette..._:
 
-- `F1` `Show Spell Checker Configuration Info`
-- Select the `Language` tab.
-- Enable the language Globally or in just the Workspace.
+<!--- @@inject-table: ./static/commands.json --->
 
-### Disable Dictionary
+| Command                                              |
+| ---------------------------------------------------- |
+| Enable Hebrew Spell Checker Dictionary               |
+| Disable Hebrew Spell Checker Dictionary              |
+| Enable Hebrew Spell Checker Dictionary in Workspace  |
+| Disable Hebrew Spell Checker Dictionary in Workspace |
 
-Commands (use `F1` or _View -> Command Palette..._):
-
-- `F1` `Show Spell Checker Configuration Info`
-- Select the `Language` tab.
-- Disable the language Globally or in just the Workspace.
+<!--- @@inject-end: ./static/commands.json --->
 
 ### Manual Settings
 
@@ -50,9 +49,18 @@ Example using both English and Hebrew dictionaries:
 "cSpell.language": "en,he",
 ```
 
+<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+
 ## Requirements
 
-This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+| Tool                                                                                                            | Version   |
+| --------------------------------------------------------------------------------------------------------------- | --------- |
+| [cspell](https://github.com/streetsidesoftware/cspell)                                                          | `>=10`    |
+| [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) | `>=4.7.0` |
+
+<!--- @@inject-end: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 <!--- @@inject: ../../static/footer.md --->
 

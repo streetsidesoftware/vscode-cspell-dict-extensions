@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Persian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Persian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Persian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Persian Spell Checker Dictionary in Workspace"
+    }
+]

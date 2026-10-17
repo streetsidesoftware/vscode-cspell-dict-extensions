@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Ukrainian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Ukrainian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Ukrainian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Ukrainian Spell Checker Dictionary in Workspace"
+    }
+]

@@ -6,7 +6,7 @@
     "language": "en,nb",
     "noConfigSearch": true,
     "import": [
-        "./cspell-ext.json"
+        "./static/cspell-ext.json"
     ],
     "overrides": [
         {

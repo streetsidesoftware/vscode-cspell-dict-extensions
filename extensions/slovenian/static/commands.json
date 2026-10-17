@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Slovenian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Slovenian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Slovenian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Slovenian Spell Checker Dictionary in Workspace"
+    }
+]

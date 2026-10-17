@@ -1,0 +1,37 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "swiss-german",
+    "friendlyName": "Swiss German",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-de-ch/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-ch",
+            "title": "Enable Swiss_german Spell Checker Dictionary"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-ch",
+            "title": "Disable Swiss_german Spell Checker Dictionary"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-ch",
+            "scope": "workspace",
+            "title": "Enable Swiss_german Spell Checker Dictionary in Workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-ch",
+            "scope": "workspace",
+            "title": "Disable Swiss_german Spell Checker Dictionary in Workspace"
+        }
+    ]
+}

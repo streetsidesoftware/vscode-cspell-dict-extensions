@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Norwegian Bokmål Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Norwegian Bokmål Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Norwegian Bokmål Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Norwegian Bokmål Spell Checker Dictionary in Workspace"
+    }
+]

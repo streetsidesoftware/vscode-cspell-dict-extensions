@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Hebrew Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Hebrew Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Hebrew Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Hebrew Spell Checker Dictionary in Workspace"
+    }
+]

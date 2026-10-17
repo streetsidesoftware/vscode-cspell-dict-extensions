@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Vietnamese Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Vietnamese Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Vietnamese Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Vietnamese Spell Checker Dictionary in Workspace"
+    }
+]

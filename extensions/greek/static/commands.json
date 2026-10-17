@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Greek Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Greek Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Greek Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Greek Spell Checker Dictionary in Workspace"
+    }
+]

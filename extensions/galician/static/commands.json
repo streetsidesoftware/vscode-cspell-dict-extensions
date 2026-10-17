@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Galician Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Galician Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Galician Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Galician Spell Checker Dictionary in Workspace"
+    }
+]

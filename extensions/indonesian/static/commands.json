@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Indonesian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Indonesian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Indonesian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Indonesian Spell Checker Dictionary in Workspace"
+    }
+]

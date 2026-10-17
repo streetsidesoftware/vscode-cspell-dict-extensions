@@ -1,0 +1,33 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "ukrainian",
+    "friendlyName": "Ukrainian",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-uk-ua/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "uk"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "uk"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "uk",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "uk",
+            "scope": "workspace"
+        }
+    ]
+}
