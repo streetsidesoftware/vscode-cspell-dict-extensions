@@ -12,22 +12,26 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "eo",
             "id": "cSpellExt_esperanto.enableEsperanto"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "eo",
             "id": "cSpellExt_esperanto.disableEsperanto"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "eo",
             "scope": "workspace",
             "id": "cSpellExt_esperanto.enableEsperantoWorkspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "eo",
             "scope": "workspace",
             "id": "cSpellExt_esperanto.disableEsperantoWorkspace"
         }

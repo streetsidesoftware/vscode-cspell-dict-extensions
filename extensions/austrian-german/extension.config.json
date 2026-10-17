@@ -13,22 +13,26 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "de-at",
             "title": "Enable Austrian_german Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "de-at",
             "title": "Disable Austrian_german Spell Checker Dictionary"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "de-at",
             "scope": "workspace",
             "title": "Enable Austrian_german Spell Checker Dictionary in Workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "de-at",
             "scope": "workspace",
             "title": "Disable Austrian_german Spell Checker Dictionary in Workspace"
         }

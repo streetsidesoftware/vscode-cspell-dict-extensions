@@ -59,12 +59,6 @@ describe('extension.config.json validation', () => {
         assert.throws(() => validate({ ...rest, kind: 'wordList', commands: [], locale: 'sv' }, file), /doesn't match/);
     });
 
-    it('requires a value when there is no locale to default to', () => {
-        const { locale: _l, nativeName: _n, ...rest } = swedish;
-        const commands = [{ action: 'enable', toggle: 'dictionary' }];
-        assert.throws(() => validate({ ...rest, kind: 'wordList', commands }, file), /without a `value`/);
-    });
-
     it('rejects duplicate command IDs', () => {
         const commands = [
             { action: 'enable', toggle: 'locale', value: 'sr' },

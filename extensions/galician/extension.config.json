@@ -12,20 +12,24 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale"
+            "toggle": "locale",
+            "value": "gl"
         },
         {
             "action": "disable",
-            "toggle": "locale"
+            "toggle": "locale",
+            "value": "gl"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "gl",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "gl",
             "scope": "workspace"
         }
     ]

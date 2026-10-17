@@ -16,20 +16,24 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale"
+            "toggle": "locale",
+            "value": "tr"
         },
         {
             "action": "disable",
-            "toggle": "locale"
+            "toggle": "locale",
+            "value": "tr"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "tr",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "tr",
             "scope": "workspace"
         }
     ]

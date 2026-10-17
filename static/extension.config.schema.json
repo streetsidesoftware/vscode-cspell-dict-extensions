@@ -53,7 +53,7 @@
                                     },
                                     "value": {
                                         "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID). Default: the extension's `locale`.",
+                                        "description": "The locale, dictionary name, or file type (language ID).",
                                         "minLength": 1
                                     },
                                     "id": {
@@ -77,7 +77,7 @@
                                         "description": "Where the setting is written. Default: `global`."
                                     }
                                 },
-                                "required": ["action", "toggle"],
+                                "required": ["action", "toggle", "value"],
                                 "additionalProperties": false,
                                 "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
                             },
@@ -91,7 +91,7 @@
                                     },
                                     "value": {
                                         "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID). Default: the extension's `locale`.",
+                                        "description": "The locale, dictionary name, or file type (language ID).",
                                         "minLength": 1
                                     },
                                     "id": {
@@ -110,7 +110,7 @@
                                         "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
                                     }
                                 },
-                                "required": ["action", "toggle"],
+                                "required": ["action", "toggle", "value"],
                                 "additionalProperties": false,
                                 "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
                             }
@@ -125,7 +125,7 @@
                 },
                 "locale": {
                     "type": "string",
-                    "description": "The locale people add to `cSpell.language` to use this language, i.e. `sv_SE`, or a comma-separated list. The default `value` of the commands.",
+                    "description": "The locale people add to `cSpell.language` to use this language, i.e. `sv_SE`, or a comma-separated list.",
                     "minLength": 1
                 },
                 "nativeName": {
@@ -189,7 +189,7 @@
                                     },
                                     "value": {
                                         "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID). Default: the extension's `locale`.",
+                                        "description": "The locale, dictionary name, or file type (language ID).",
                                         "minLength": 1
                                     },
                                     "id": {
@@ -213,7 +213,7 @@
                                         "description": "Where the setting is written. Default: `global`."
                                     }
                                 },
-                                "required": ["action", "toggle"],
+                                "required": ["action", "toggle", "value"],
                                 "additionalProperties": false,
                                 "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
                             },
@@ -227,7 +227,7 @@
                                     },
                                     "value": {
                                         "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID). Default: the extension's `locale`.",
+                                        "description": "The locale, dictionary name, or file type (language ID).",
                                         "minLength": 1
                                     },
                                     "id": {
@@ -246,7 +246,7 @@
                                         "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
                                     }
                                 },
-                                "required": ["action", "toggle"],
+                                "required": ["action", "toggle", "value"],
                                 "additionalProperties": false,
                                 "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
                             }
@@ -315,7 +315,7 @@
                                     },
                                     "value": {
                                         "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID). Default: the extension's `locale`.",
+                                        "description": "The locale, dictionary name, or file type (language ID).",
                                         "minLength": 1
                                     },
                                     "id": {
@@ -339,7 +339,7 @@
                                         "description": "Where the setting is written. Default: `global`."
                                     }
                                 },
-                                "required": ["action", "toggle"],
+                                "required": ["action", "toggle", "value"],
                                 "additionalProperties": false,
                                 "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
                             },
@@ -353,7 +353,7 @@
                                     },
                                     "value": {
                                         "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID). Default: the extension's `locale`.",
+                                        "description": "The locale, dictionary name, or file type (language ID).",
                                         "minLength": 1
                                     },
                                     "id": {
@@ -372,7 +372,7 @@
                                         "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
                                     }
                                 },
-                                "required": ["action", "toggle"],
+                                "required": ["action", "toggle", "value"],
                                 "additionalProperties": false,
                                 "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
                             }
@@ -441,7 +441,7 @@
                                     },
                                     "value": {
                                         "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID). Default: the extension's `locale`.",
+                                        "description": "The locale, dictionary name, or file type (language ID).",
                                         "minLength": 1
                                     },
                                     "id": {
@@ -465,7 +465,7 @@
                                         "description": "Where the setting is written. Default: `global`."
                                     }
                                 },
-                                "required": ["action", "toggle"],
+                                "required": ["action", "toggle", "value"],
                                 "additionalProperties": false,
                                 "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
                             },
@@ -479,7 +479,7 @@
                                     },
                                     "value": {
                                         "type": "string",
-                                        "description": "The locale, dictionary name, or file type (language ID). Default: the extension's `locale`.",
+                                        "description": "The locale, dictionary name, or file type (language ID).",
                                         "minLength": 1
                                     },
                                     "id": {
@@ -498,7 +498,7 @@
                                         "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
                                     }
                                 },
-                                "required": ["action", "toggle"],
+                                "required": ["action", "toggle", "value"],
                                 "additionalProperties": false,
                                 "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
                             }

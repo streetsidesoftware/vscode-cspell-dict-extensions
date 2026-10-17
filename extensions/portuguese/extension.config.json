@@ -13,22 +13,26 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "pt",
             "id": "cSpellExt_portuguese.enablePortuguese"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "pt",
             "id": "cSpellExt_portuguese.disablePortuguese"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "pt",
             "scope": "workspace",
             "id": "cSpellExt_portuguese.enablePortugueseWorkspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "pt",
             "scope": "workspace",
             "id": "cSpellExt_portuguese.disablePortugueseWorkspace"
         }

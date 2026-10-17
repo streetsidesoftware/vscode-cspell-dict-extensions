@@ -13,18 +13,21 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "pt,pt_BR",
             "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilian",
             "title": "Enable Portuguese Brazilian Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "pt,pt_BR",
             "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilian",
             "title": "Disable Portuguese Brazilian Spell Checker Dictionary"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "pt,pt_BR",
             "scope": "workspace",
             "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilianWorkspace",
             "title": "Enable Portuguese Brazilian Spell Checker Dictionary in Workspace"
@@ -32,6 +35,7 @@
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "pt,pt_BR",
             "scope": "workspace",
             "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilianWorkspace",
             "title": "Disable Portuguese Brazilian Spell Checker Dictionary in Workspace"

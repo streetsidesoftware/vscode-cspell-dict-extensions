@@ -1,14 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import {
-    commandsWithoutValue,
-    description,
-    displayName,
-    duplicateCommandIds,
-    type ExtensionConfig,
-    resolveCommands,
-} from './config.ts';
+import { description, displayName, duplicateCommandIds, type ExtensionConfig, resolveCommands } from './config.ts';
 
 const swedish: ExtensionConfig = {
     name: 'swedish',
@@ -57,26 +50,6 @@ describe('resolveCommands', () => {
     it('gives a fileType toggle the global scope', () => {
         const commands: ExtensionConfig['commands'] = [{ action: 'enable', toggle: 'fileType', value: 'python' }];
         assert.equal(resolveCommands({ ...swedish, commands })[0]?.scope, 'global');
-    });
-});
-
-describe('command values', () => {
-    it('default to the locale', () => {
-        const commands: ExtensionConfig['commands'] = [{ action: 'enable', toggle: 'locale' }];
-        assert.equal(resolveCommands({ ...swedish, commands })[0]?.value, 'sv_SE');
-        assert.deepEqual(commandsWithoutValue({ ...swedish, commands }), []);
-    });
-
-    it('are required without a locale', () => {
-        const wordList: ExtensionConfig = {
-            name: 'medical-terms',
-            kind: 'wordList',
-            friendlyName: 'Medical Terms',
-            sample: 'samples/README.md',
-            cspell: {},
-            commands: [{ action: 'enable', toggle: 'dictionary' }],
-        };
-        assert.deepEqual(commandsWithoutValue(wordList), ['cSpellExt_medical-terms.enable']);
     });
 });
 

@@ -13,22 +13,26 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "da",
             "id": "cSpellExt_danish.enableDanish"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "da",
             "id": "cSpellExt_danish.disableDanish"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "da",
             "scope": "workspace",
             "id": "cSpellExt_danish.enableDanishWorkspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "da",
             "scope": "workspace",
             "id": "cSpellExt_danish.disableDanishWorkspace"
         }

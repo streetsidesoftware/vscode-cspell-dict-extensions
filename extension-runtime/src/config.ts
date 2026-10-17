@@ -22,10 +22,10 @@ interface CommandBase {
     /** Turn the toggle on or off. */
     action: Action;
     /**
-     * The locale, dictionary name, or file type (language ID). Default: the extension's `locale`.
+     * The locale, dictionary name, or file type (language ID).
      * @minLength 1
      */
-    value?: string;
+    value: string;
     /**
      * The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.
      * @minLength 1
@@ -101,7 +101,6 @@ export interface LanguageExtensionConfig extends ExtensionConfigBase {
     kind: 'language';
     /**
      * The locale people add to `cSpell.language` to use this language, i.e. `sv_SE`, or a comma-separated list.
-     * The default `value` of the commands.
      * @minLength 1
      */
     locale: string;
@@ -168,20 +167,10 @@ export function resolveCommands(config: ExtensionConfig): ResolvedCommand[] {
                 `${action} ${config.friendlyName} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
             action: command.action,
             toggle: command.toggle,
-            value: command.value ?? (config.kind === 'language' ? config.locale : ''),
+            value: command.value,
             scope,
         };
     });
-}
-
-/**
- * The commands that have no `value` and no `locale` to default to. A schema can't express this, so the sync
- * checks it.
- */
-export function commandsWithoutValue(config: ExtensionConfig): string[] {
-    return resolveCommands(config)
-        .filter(({ value }) => !value)
-        .map(({ id }) => id);
 }
 
 /**

@@ -12,20 +12,24 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale"
+            "toggle": "locale",
+            "value": "he"
         },
         {
             "action": "disable",
-            "toggle": "locale"
+            "toggle": "locale",
+            "value": "he"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "he",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "he",
             "scope": "workspace"
         }
     ]

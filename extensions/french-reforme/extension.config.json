@@ -12,18 +12,21 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "fr-90",
             "id": "cSpellExt_french-reforme.enableFrench",
             "title": "Enable French Reforme Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "fr-90",
             "id": "cSpellExt_french-reforme.disableFrench",
             "title": "Disable French Reforme Spell Checker Dictionary"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "fr-90",
             "scope": "workspace",
             "id": "cSpellExt_french-reforme.enableFrenchWorkspace",
             "title": "Enable French Reforme Spell Checker Dictionary in Workspace"
@@ -31,6 +34,7 @@
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "fr-90",
             "scope": "workspace",
             "id": "cSpellExt_french-reforme.disableFrenchWorkspace",
             "title": "Disable French Reforme Spell Checker Dictionary in Workspace"

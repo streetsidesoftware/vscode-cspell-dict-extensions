@@ -13,22 +13,26 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "sk",
             "id": "cSpellExt_slovak.enableSlovak"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "sk",
             "id": "cSpellExt_slovak.disableSlovak"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "sk",
             "scope": "workspace",
             "id": "cSpellExt_slovak.enableSlovakWorkspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "sk",
             "scope": "workspace",
             "id": "cSpellExt_slovak.disableSlovakWorkspace"
         }

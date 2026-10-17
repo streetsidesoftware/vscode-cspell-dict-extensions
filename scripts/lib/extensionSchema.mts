@@ -7,7 +7,7 @@ import path from 'node:path';
 import { Ajv, type ValidateFunction } from 'ajv';
 import * as tsj from 'ts-json-schema-generator';
 
-import { commandsWithoutValue, duplicateCommandIds, type ExtensionConfig } from '../../extension-runtime/src/config.ts';
+import { duplicateCommandIds, type ExtensionConfig } from '../../extension-runtime/src/config.ts';
 
 const runtimeDir = path.resolve(import.meta.dirname, '../../extension-runtime');
 
@@ -48,12 +48,6 @@ export function createExtensionConfigValidator(schema: tsj.Schema): ExtensionCon
         const duplicates = duplicateCommandIds(config);
         if (duplicates.length) {
             throw new Error(`${file}: duplicate command IDs ${duplicates.join(', ')}. Give the commands explicit IDs.`);
-        }
-        const withoutValue = commandsWithoutValue(config);
-        if (withoutValue.length) {
-            throw new Error(
-                `${file}: commands without a \`value\` or a \`locale\` to default to: ${withoutValue.join(', ')}.`,
-            );
         }
         return config;
     };

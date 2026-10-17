@@ -12,22 +12,26 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "grc",
             "title": "Enable Ancient_greek Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "grc",
             "title": "Disable Ancient_greek Spell Checker Dictionary"
         },
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "grc",
             "scope": "workspace",
             "title": "Enable Ancient_greek Spell Checker Dictionary in Workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
+            "value": "grc",
             "scope": "workspace",
             "title": "Disable Ancient_greek Spell Checker Dictionary in Workspace"
         }
