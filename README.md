@@ -54,7 +54,7 @@ See Also:
 - [Brazilian Portuguese](extensions/portuguese-brazilian#readme) - Brazilian Portuguese dictionary extension for VS Code.
 - [Romanian](extensions/romanian#readme) - Romanian dictionary extension for VS Code.
 - [Russian](extensions/russian#readme) - Russian dictionary extension for VS Code.
-- [Serbian](extensions/serbian#readme) **pre-release** - Serbian dictionary extension for VS Code.
+- [Serbian](extensions/serbian#readme) - Serbian dictionary extension for VS Code.
 - [Slovak](extensions/slovak#readme) - Slovak dictionary extension for VS Code.
 - [Slovenian](extensions/slovenian#readme) - Slovenian dictionary extension for VS Code.
 - [Spanish](extensions/spanish#readme) - Spanish Add-On for Code Spell Checker
@@ -131,7 +131,7 @@ See Also:
 - [Brazilian Portuguese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-portuguese-brazilian) - Brazilian Portuguese dictionary extension for VS Code.
 - [Romanian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-romanian) - Romanian dictionary extension for VS Code.
 - [Russian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian) - Russian dictionary extension for VS Code.
-- [Serbian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-serbian) **pre-release** - Serbian dictionary extension for VS Code.
+- [Serbian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-serbian) - Serbian dictionary extension for VS Code.
 - [Slovak](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-slovak) - Slovak dictionary extension for VS Code.
 - [Slovenian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-slovenian) - Slovenian dictionary extension for VS Code.
 - [Spanish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-spanish) - Spanish Add-On for Code Spell Checker
