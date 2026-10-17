@@ -38,7 +38,7 @@
 - [Persian](../../extensions/persian#readme) - Adds Persian (فارسی) spell checking to Code Spell Checker.
 - [Polish](../../extensions/polish#readme) - Adds Polish (polski) spell checking to Code Spell Checker.
 - [Portuguese](../../extensions/portuguese#readme) - Adds Portuguese (português) spell checking to Code Spell Checker.
-- [Brazilian Portuguese](../../extensions/portuguese-brazilian#readme) - Adds Brazilian Portuguese (português (Brasil)) spell checking to Code Spell Checker.
+- [Brazilian Portuguese](../../extensions/portuguese-brazilian#readme) - Adds Brazilian Portuguese (português brasileiro) spell checking to Code Spell Checker.
 - [Romanian](../../extensions/romanian#readme) - Adds Romanian (română) spell checking to Code Spell Checker.
 - [Russian](../../extensions/russian#readme) - Adds Russian (русский) spell checking to Code Spell Checker.
 - [Serbian](../../extensions/serbian#readme) - Adds Serbian (српски) spell checking to Code Spell Checker.
