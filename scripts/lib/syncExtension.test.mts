@@ -124,6 +124,18 @@ describe('syncExtension', () => {
         assert.match(result, /cspell `>=10`/);
     });
 
+    it('fails on an unresolved placeholder or a missing file in the README', async () => {
+        const root = path.resolve(dir, '../..');
+        await fs.writeFile(path.join(root, 'static/requirements.md'), 'cspell `{@ engines.cspel @}`\n');
+        await assert.rejects(syncExtension(dir, options), /README\.md:\d+: .*engines\.cspel/);
+
+        await fs.writeFile(
+            path.join(dir, 'README.md'),
+            '<!--- @@inject: ./missing.md --->\n<!--- @@inject-end: ./missing.md --->\n',
+        );
+        await assert.rejects(syncExtension(dir, options), /README\.md:\d+: .*missing\.md/);
+    });
+
     it('removes the files the shared entry, static/ and the templates replace', async () => {
         await fs.mkdir(path.join(dir, 'src'));
         await fs.mkdir(path.join(dir, 'static'));

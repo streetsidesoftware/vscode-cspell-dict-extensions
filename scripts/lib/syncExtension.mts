@@ -25,7 +25,7 @@ import {
 } from '../../extension-runtime/src/config.ts';
 import type { PackageJson } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
-import { format } from './format.mts';
+import { format, injectProblems } from './format.mts';
 import { exists, readJson, repoRoot } from './repo.mts';
 
 export const configFileName = 'extension.config.json';
@@ -170,10 +170,8 @@ async function injectReadme(readme: string): Promise<string> {
     const cwd = path.resolve(path.dirname(readme), '../..');
     const file = path.relative(cwd, readme);
     const result = await injectMarkdown({ file, content: await fs.readFile(readme, 'utf8') }, { cwd });
-    if (result.errors.length) {
-        const messages = result.errors.map((e) => `${file}:${e.line ?? 0}: ${e.message}`);
-        throw new Error(`inject-markdown failed:\n${messages.join('\n')}`);
-    }
+    const problems = injectProblems(result);
+    if (problems.length) throw new Error(`inject-markdown failed:\n${problems.join('\n')}`);
     return result.document.content;
 }
 
