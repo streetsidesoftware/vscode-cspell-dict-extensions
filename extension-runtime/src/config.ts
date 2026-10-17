@@ -93,6 +93,11 @@ interface ExtensionConfigBase {
     cspell: Record<string, unknown>;
     /** The commands the extension contributes. */
     commands: CommandConfig[];
+    /**
+     * Notes for maintainers: why something in this file is the way it is. Not used by the sync.
+     * @minLength 1
+     */
+    notes?: string;
 }
 
 /** A natural language, enabled by its locale, i.e. Swedish. */

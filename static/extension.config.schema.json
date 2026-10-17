@@ -118,6 +118,11 @@
                     },
                     "description": "The commands the extension contributes."
                 },
+                "notes": {
+                    "type": "string",
+                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync.",
+                    "minLength": 1
+                },
                 "kind": {
                     "type": "string",
                     "const": "language",
@@ -254,6 +259,11 @@
                     },
                     "description": "The commands the extension contributes."
                 },
+                "notes": {
+                    "type": "string",
+                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync.",
+                    "minLength": 1
+                },
                 "kind": {
                     "type": "string",
                     "const": "wordList",
@@ -380,6 +390,11 @@
                     },
                     "description": "The commands the extension contributes."
                 },
+                "notes": {
+                    "type": "string",
+                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync.",
+                    "minLength": 1
+                },
                 "kind": {
                     "type": "string",
                     "const": "bundle",
@@ -505,6 +520,11 @@
                         ]
                     },
                     "description": "The commands the extension contributes."
+                },
+                "notes": {
+                    "type": "string",
+                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync.",
+                    "minLength": 1
                 },
                 "kind": {
                     "type": "string",

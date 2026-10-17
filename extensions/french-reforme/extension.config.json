@@ -40,5 +40,6 @@
             "id": "cSpellExt_french-reforme.disableFrenchWorkspace",
             "title": "Disable French Reforme Spell Checker Dictionary in Workspace"
         }
-    ]
+    ],
+    "notes": "`locale` is `fr-90`, not a BCP 47 tag: the IANA registry has no variant for the 1990 French spelling reform, and `fr-90` is the locale cspell's French Réforme dictionary declares."
 }
