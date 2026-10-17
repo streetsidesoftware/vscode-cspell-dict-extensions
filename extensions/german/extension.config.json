@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-DE,de"
+            "value": "de-DE"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-DE,de",
+            "value": "de-DE",
             "scope": "workspace"
         },
         {
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-DE,de",
+            "value": "de-DE",
             "id": "cSpellExt_german.disableGerman",
             "contributes": false,
             "legacy": true,
@@ -63,12 +63,13 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-DE,de",
+            "value": "de-DE",
             "scope": "workspace",
             "id": "cSpellExt_german.disableGermanWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
-    ]
+    ],
+    "notes": "Disable removes only `de-DE`, not `de`: `de` is shared with Austrian and Swiss German, so a user who added `de` keeps this dictionary on."
 }

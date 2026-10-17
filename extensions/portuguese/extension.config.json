@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt,pt-PT"
+            "value": "pt-PT"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt,pt-PT",
+            "value": "pt-PT",
             "scope": "workspace"
         },
         {
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt,pt-PT",
+            "value": "pt-PT",
             "id": "cSpellExt_portuguese.disablePortuguese",
             "contributes": false,
             "legacy": true,
@@ -63,12 +63,13 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt,pt-PT",
+            "value": "pt-PT",
             "scope": "workspace",
             "id": "cSpellExt_portuguese.disablePortugueseWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
-    ]
+    ],
+    "notes": "Disable removes only `pt-PT`, not `pt`: `pt` is shared with Brazilian Portuguese, so a user who added `pt` keeps this dictionary on."
 }

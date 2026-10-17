@@ -19,7 +19,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90,fr,fr-FR",
+            "value": "fr-90",
             "title": "Disable French Reforme Spell Checker Dictionary"
         },
         {
@@ -32,7 +32,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90,fr,fr-FR",
+            "value": "fr-90",
             "scope": "workspace",
             "title": "Disable French Reforme Spell Checker Dictionary in Workspace"
         },
@@ -48,7 +48,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90,fr,fr-FR",
+            "value": "fr-90",
             "id": "cSpellExt_french-reforme.disableFrench",
             "contributes": false,
             "legacy": true,
@@ -67,7 +67,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90,fr,fr-FR",
+            "value": "fr-90",
             "scope": "workspace",
             "id": "cSpellExt_french-reforme.disableFrenchWorkspace",
             "contributes": false,
@@ -75,5 +75,5 @@
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ],
-    "notes": "`locale` is `fr-90`, not a BCP 47 tag: the IANA registry has no variant for the 1990 French spelling reform, and `fr-90` is the locale cspell's French Réforme dictionary declares. Enable uses `fr-90` because it is the only locale exclusive to this dictionary: `fr` and `fr-FR` also turn on French."
+    "notes": "`locale` is `fr-90`, not a BCP 47 tag: the IANA registry has no variant for the 1990 French spelling reform, and `fr-90` is the locale cspell's French Réforme dictionary declares. Enable uses `fr-90` because it is the only locale exclusive to this dictionary: `fr` and `fr-FR` also turn on French. Disable removes only `fr-90`, not `fr`: `fr` is shared with French, so a user who added `fr` keeps this dictionary on."
 }

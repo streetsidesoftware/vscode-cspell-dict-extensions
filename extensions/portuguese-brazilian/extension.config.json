@@ -19,7 +19,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt,pt_BR",
+            "value": "pt-BR",
             "title": "Disable Portuguese Brazilian Spell Checker Dictionary"
         },
         {
@@ -32,7 +32,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt,pt_BR",
+            "value": "pt-BR",
             "scope": "workspace",
             "title": "Disable Portuguese Brazilian Spell Checker Dictionary in Workspace"
         },
@@ -48,7 +48,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt,pt_BR",
+            "value": "pt-BR",
             "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilian",
             "contributes": false,
             "legacy": true,
@@ -67,12 +67,13 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt,pt_BR",
+            "value": "pt-BR",
             "scope": "workspace",
             "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilianWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
-    ]
+    ],
+    "notes": "Disable removes only `pt-BR`, not `pt`: `pt` is shared with European Portuguese, so a user who added `pt` keeps this dictionary on."
 }

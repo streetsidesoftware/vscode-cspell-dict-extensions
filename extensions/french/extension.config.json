@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "French",
     "nativeName": "français",
-    "locale": "fr",
+    "locale": "fr-FR",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-fr-fr/cspell-ext.json"]
@@ -13,25 +13,25 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "fr"
+            "value": "fr-FR"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr,fr-FR"
+            "value": "fr-FR"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "fr",
+            "value": "fr-FR",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr,fr-FR",
+            "value": "fr-FR",
             "scope": "workspace"
         }
     ],
-    "notes": "Enable uses `fr`, not `fr-FR`: this dictionary declares `fr,fr_FR`, and French Réforme 90 declares `fr,fr-fr,fr-90`, so `fr-FR` would turn on both. No locale is exclusive to classic French."
+    "notes": "Enable uses `fr-FR`. French Réforme 90 declares `fr,fr-fr,fr-90`, so `fr-FR` also turns it on when it is installed; no locale is exclusive to classic French. Disable removes only `fr-FR`, not `fr`: `fr` is shared with other French variants and French Réforme 90, so a user who added `fr` keeps this dictionary on."
 }

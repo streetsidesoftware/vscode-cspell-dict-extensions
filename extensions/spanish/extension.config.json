@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES,es"
+            "value": "es-ES"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES,es",
+            "value": "es-ES",
             "scope": "workspace"
         },
         {
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES,es",
+            "value": "es-ES",
             "id": "cSpell.disableSpanish",
             "contributes": false,
             "legacy": true,
@@ -63,7 +63,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES,es",
+            "value": "es-ES",
             "scope": "workspace",
             "id": "cSpell.disableSpanishWorkspace",
             "contributes": false,
@@ -71,5 +71,6 @@
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."
         }
     ],
-    "description": "Spanish Add-On for Code Spell Checker"
+    "description": "Spanish Add-On for Code Spell Checker",
+    "notes": "Disable removes only `es-ES`, not `es`: `es` is shared with other Spanish variants, so a user who added `es` keeps this dictionary on."
 }

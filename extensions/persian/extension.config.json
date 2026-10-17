@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fa,fa-IR"
+            "value": "fa-IR"
         },
         {
             "action": "enable",
@@ -29,8 +29,9 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fa,fa-IR",
+            "value": "fa-IR",
             "scope": "workspace"
         }
-    ]
+    ],
+    "notes": "Disable removes only `fa-IR`, not `fa`: `fa` is shared with Dari (fa-AF), so a user who added `fa` keeps this dictionary on."
 }

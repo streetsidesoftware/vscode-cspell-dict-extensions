@@ -22,7 +22,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sr-Cyrl,sr",
+            "value": "sr-Cyrl",
             "id": "cSpellExt_serbian.disableCyrl",
             "title": "Disable Serbian Cyrillic Spell Checker Dictionary"
         },
@@ -36,11 +36,12 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sr-Latn,sr",
+            "value": "sr-Latn",
             "id": "cSpellExt_serbian.disableLatn",
             "title": "Disable Serbian Latin Spell Checker Dictionary"
         },
         { "action": "enable", "toggle": "locale", "value": "sr", "scope": "workspace" },
         { "action": "disable", "toggle": "locale", "value": "sr,sr-Cyrl,sr-Latn", "scope": "workspace" }
-    ]
+    ],
+    "notes": "Disable Cyrillic and Disable Latin remove only `sr-Cyrl` or `sr-Latn`, not `sr`: `sr` turns on both scripts, and the plain Disable commands remove all three."
 }

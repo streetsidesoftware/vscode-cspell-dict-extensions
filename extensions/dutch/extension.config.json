@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "nl,nl-NL"
+            "value": "nl-NL"
         },
         {
             "action": "enable",
@@ -29,9 +29,10 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "nl,nl-NL",
+            "value": "nl-NL",
             "scope": "workspace"
         }
     ],
-    "description": "Dutch / Nederlands dictionary extension for VS Code."
+    "description": "Dutch / Nederlands dictionary extension for VS Code.",
+    "notes": "Disable removes only `nl-NL`, not `nl`: `nl` is shared with Flemish (nl-BE), so a user who added `nl` keeps this dictionary on."
 }
