@@ -22,7 +22,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "az-az"
+            "value": "az-AZ,az"
         },
         {
             "action": "enable",
@@ -33,7 +33,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "az-az",
+            "value": "az-AZ,az",
             "scope": "workspace"
         }
     ]

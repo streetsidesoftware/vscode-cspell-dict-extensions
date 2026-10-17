@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "gl"
+            "value": "gl,gl-ES"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "gl",
+            "value": "gl,gl-ES",
             "scope": "workspace"
         }
     ]

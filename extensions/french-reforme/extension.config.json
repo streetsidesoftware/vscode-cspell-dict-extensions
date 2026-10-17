@@ -19,7 +19,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90",
+            "value": "fr-90,fr,fr-FR",
             "title": "Disable French Reforme Spell Checker Dictionary"
         },
         {
@@ -32,7 +32,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90",
+            "value": "fr-90,fr,fr-FR",
             "scope": "workspace",
             "title": "Disable French Reforme Spell Checker Dictionary in Workspace"
         },
@@ -48,7 +48,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90",
+            "value": "fr-90,fr,fr-FR",
             "id": "cSpellExt_french-reforme.disableFrench",
             "contributes": false,
             "legacy": true,
@@ -67,7 +67,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90",
+            "value": "fr-90,fr,fr-FR",
             "scope": "workspace",
             "id": "cSpellExt_french-reforme.disableFrenchWorkspace",
             "contributes": false,

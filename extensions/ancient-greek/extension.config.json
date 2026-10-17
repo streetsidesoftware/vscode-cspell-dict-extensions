@@ -19,7 +19,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "grc",
+            "value": "grc,grc-GR,gr,el-GRC",
             "title": "Disable Ancient_greek Spell Checker Dictionary"
         },
         {
@@ -32,7 +32,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "grc",
+            "value": "grc,grc-GR,gr,el-GRC",
             "scope": "workspace",
             "title": "Disable Ancient_greek Spell Checker Dictionary in Workspace"
         }

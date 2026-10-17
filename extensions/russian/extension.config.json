@@ -20,7 +20,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ru"
+            "value": "ru,ru-RU"
         },
         {
             "action": "enable",
@@ -31,7 +31,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ru",
+            "value": "ru,ru-RU",
             "scope": "workspace"
         },
         {
@@ -46,7 +46,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ru",
+            "value": "ru,ru-RU",
             "id": "cSpellExt_russian.disableRussian",
             "contributes": false,
             "legacy": true,
@@ -65,7 +65,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ru",
+            "value": "ru,ru-RU",
             "scope": "workspace",
             "id": "cSpellExt_russian.disableRussianWorkspace",
             "contributes": false,

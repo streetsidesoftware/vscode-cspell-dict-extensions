@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hu"
+            "value": "hu,hu-HU"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hu",
+            "value": "hu,hu-HU",
             "scope": "workspace"
         }
     ]

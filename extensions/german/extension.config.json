@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-DE"
+            "value": "de-DE,de"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-DE",
+            "value": "de-DE,de",
             "scope": "workspace"
         },
         {
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-DE",
+            "value": "de-DE,de",
             "id": "cSpellExt_german.disableGerman",
             "contributes": false,
             "legacy": true,
@@ -63,7 +63,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-DE",
+            "value": "de-DE,de",
             "scope": "workspace",
             "id": "cSpellExt_german.disableGermanWorkspace",
             "contributes": false,

@@ -19,7 +19,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-ch",
+            "value": "de-CH,de",
             "title": "Disable Swiss_german Spell Checker Dictionary"
         },
         {
@@ -32,7 +32,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-ch",
+            "value": "de-CH,de",
             "scope": "workspace",
             "title": "Disable Swiss_german Spell Checker Dictionary in Workspace"
         }

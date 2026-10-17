@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "da"
+            "value": "da,da-DK"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "da",
+            "value": "da,da-DK",
             "scope": "workspace"
         },
         {
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "da",
+            "value": "da,da-DK",
             "id": "cSpellExt_danish.disableDanish",
             "contributes": false,
             "legacy": true,
@@ -63,7 +63,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "da",
+            "value": "da,da-DK",
             "scope": "workspace",
             "id": "cSpellExt_danish.disableDanishWorkspace",
             "contributes": false,

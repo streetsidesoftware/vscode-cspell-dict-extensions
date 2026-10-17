@@ -11,7 +11,7 @@
     },
     "commands": [
         { "action": "enable", "toggle": "locale", "value": "sr" },
-        { "action": "disable", "toggle": "locale", "value": "sr" },
+        { "action": "disable", "toggle": "locale", "value": "sr,sr-Cyrl,sr-Latn" },
         {
             "action": "enable",
             "toggle": "locale",
@@ -22,7 +22,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sr-Cyrl",
+            "value": "sr-Cyrl,sr",
             "id": "cSpellExt_serbian.disableCyrl",
             "title": "Disable Serbian Cyrillic Spell Checker Dictionary"
         },
@@ -36,11 +36,11 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sr-Latn",
+            "value": "sr-Latn,sr",
             "id": "cSpellExt_serbian.disableLatn",
             "title": "Disable Serbian Latin Spell Checker Dictionary"
         },
         { "action": "enable", "toggle": "locale", "value": "sr", "scope": "workspace" },
-        { "action": "disable", "toggle": "locale", "value": "sr", "scope": "workspace" }
+        { "action": "disable", "toggle": "locale", "value": "sr,sr-Cyrl,sr-Latn", "scope": "workspace" }
     ]
 }

@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "id-id"
+            "value": "id-ID,id"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "id-id",
+            "value": "id-ID,id",
             "scope": "workspace"
         }
     ]

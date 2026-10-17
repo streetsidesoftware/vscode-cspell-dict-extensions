@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES"
+            "value": "es-ES,es"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES",
+            "value": "es-ES,es",
             "scope": "workspace"
         },
         {
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES",
+            "value": "es-ES,es",
             "id": "cSpell.disableSpanish",
             "contributes": false,
             "legacy": true,
@@ -63,7 +63,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES",
+            "value": "es-ES,es",
             "scope": "workspace",
             "id": "cSpell.disableSpanishWorkspace",
             "contributes": false,

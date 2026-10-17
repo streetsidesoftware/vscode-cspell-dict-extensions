@@ -13,29 +13,29 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pt"
+            "value": "pt-PT"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt"
+            "value": "pt,pt-PT"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pt",
+            "value": "pt-PT",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt",
+            "value": "pt,pt-PT",
             "scope": "workspace"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pt",
+            "value": "pt-PT",
             "id": "cSpellExt_portuguese.enablePortuguese",
             "contributes": false,
             "legacy": true,
@@ -44,7 +44,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt",
+            "value": "pt,pt-PT",
             "id": "cSpellExt_portuguese.disablePortuguese",
             "contributes": false,
             "legacy": true,
@@ -53,7 +53,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pt",
+            "value": "pt-PT",
             "scope": "workspace",
             "id": "cSpellExt_portuguese.enablePortugueseWorkspace",
             "contributes": false,
@@ -63,7 +63,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt",
+            "value": "pt,pt-PT",
             "scope": "workspace",
             "id": "cSpellExt_portuguese.disablePortugueseWorkspace",
             "contributes": false,

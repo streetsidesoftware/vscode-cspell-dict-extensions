@@ -13,7 +13,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pt,pt_BR",
+            "value": "pt-BR",
             "title": "Enable Portuguese Brazilian Spell Checker Dictionary"
         },
         {
@@ -25,7 +25,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pt,pt_BR",
+            "value": "pt-BR",
             "scope": "workspace",
             "title": "Enable Portuguese Brazilian Spell Checker Dictionary in Workspace"
         },
@@ -39,7 +39,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pt,pt_BR",
+            "value": "pt-BR",
             "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilian",
             "contributes": false,
             "legacy": true,
@@ -57,7 +57,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pt,pt_BR",
+            "value": "pt-BR",
             "scope": "workspace",
             "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilianWorkspace",
             "contributes": false,

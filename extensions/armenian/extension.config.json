@@ -18,7 +18,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hy"
+            "value": "hy,hy-AM"
         },
         {
             "action": "enable",
@@ -29,7 +29,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hy",
+            "value": "hy,hy-AM",
             "scope": "workspace"
         }
     ]

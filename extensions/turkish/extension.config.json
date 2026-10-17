@@ -22,7 +22,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "tr"
+            "value": "tr,tr-TR"
         },
         {
             "action": "enable",
@@ -33,7 +33,7 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "tr",
+            "value": "tr,tr-TR",
             "scope": "workspace"
         }
     ]
