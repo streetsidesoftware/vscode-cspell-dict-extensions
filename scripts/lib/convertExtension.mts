@@ -154,7 +154,8 @@ export function convertReadme(readme: string, hasCommands: boolean): Converted<s
  * Point a local cspell config at `static/cspell-ext.json`.
  */
 export function convertCspellConfig(content: string): string {
-    return content.replaceAll(/(["']?)\.\/cspell-ext\.json\1/g, '$1./static/cspell-ext.json$1');
+    // `./cspell-ext.json` or `cspell-ext.json`, but not a package's `@cspell/dict-xx/cspell-ext.json`.
+    return content.replaceAll(/(^|["'\s[])(?:\.\/)?cspell-ext\.json/gm, '$1./static/cspell-ext.json');
 }
 
 /**
