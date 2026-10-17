@@ -1,26 +1,21 @@
 #!/usr/bin/env node
 
-// @ts-check
-import * as fs from 'node:fs/promises';
-import { fileURLToPath } from 'url';
-import * as path from 'path';
+/**
+ * Update the extension choice lists in `.github/workflows/manual-publish.yml` and `set-prerelease.yml`.
+ */
+
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import yaml from 'yaml';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const __root = path.dirname(__dirname);
+import { listExtensionDirs, repoRoot, run } from './lib/repo.mts';
 
-const workflowsDir = path.join(__root, '.github/workflows');
+const workflowsDir = path.join(repoRoot, '.github/workflows');
 
 const intl = new Intl.Collator();
 
-async function main() {
-    const workspace = JSON.parse(await fs.readFile(path.resolve(__root, 'dict-extensions.code-workspace'), 'utf-8'));
-
-    /** @type {string[]} */
-    const allFolders = workspace.folders.map((f) => f.path);
-
-    const extensions = allFolders.filter((f) => f.startsWith('extension')).sort(intl.compare);
+async function main(): Promise<void> {
+    const extensions = (await listExtensionDirs()).sort(intl.compare);
 
     // Manual Publish takes the extension path, i.e. `extensions/swedish`.
     await updateExtensionOptions('manual-publish.yml', ['none', 'all', ...extensions]);
@@ -30,14 +25,16 @@ async function main() {
         'set-prerelease.yml',
         extensions.map((ext) => path.posix.basename(ext)),
     );
+
+    run('npx', ['prettier', '-w', '.github/workflows/manual-publish.yml', '.github/workflows/set-prerelease.yml']);
 }
 
 /**
  * Replace the options of the `extension` choice input of a workflow.
- * @param {string} workflowFile - file name in `.github/workflows`
- * @param {string[]} values - the options, in order
+ * @param workflowFile - file name in `.github/workflows`
+ * @param values - the options, in order
  */
-async function updateExtensionOptions(workflowFile, values) {
+async function updateExtensionOptions(workflowFile: string, values: string[]): Promise<void> {
     const workflow = path.join(workflowsDir, workflowFile);
 
     const workflowContent = await fs.readFile(workflow, 'utf8');
@@ -53,11 +50,7 @@ async function updateExtensionOptions(workflowFile, values) {
     await fs.writeFile(workflow, doc.toString({ lineWidth: 120 }), 'utf8');
 }
 
-/**
- * @param {unknown} value
- * @returns {asserts value is import('yaml').YAMLSeq<import('yaml').Scalar>}
- */
-function assertYAMLSeq(value) {
+function assertYAMLSeq(value: unknown): asserts value is yaml.YAMLSeq<yaml.Scalar> {
     if (!(value instanceof yaml.YAMLSeq)) {
         throw new Error('Expected a YAMLSeq');
     }
