@@ -3,6 +3,7 @@
     "name": "french-reforme",
     "kind": "language",
     "friendlyName": "French Réforme 90",
+    "nativeName": "français",
     "locale": "fr-90",
     "sample": "samples/seattle.md",
     "cspell": {
