@@ -1,0 +1,33 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "estonian",
+    "friendlyName": "Estonian",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-et-ee/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "et"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "et"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "et",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "et",
+            "scope": "workspace"
+        }
+    ]
+}

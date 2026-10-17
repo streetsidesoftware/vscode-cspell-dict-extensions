@@ -1,0 +1,33 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "belarusian",
+    "friendlyName": "Belarusian",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-be-by/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "be"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "be"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "be",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "be",
+            "scope": "workspace"
+        }
+    ]
+}

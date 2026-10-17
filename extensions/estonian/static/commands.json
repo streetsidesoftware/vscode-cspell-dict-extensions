@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Estonian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Estonian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Estonian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Estonian Spell Checker Dictionary in Workspace"
+    }
+]

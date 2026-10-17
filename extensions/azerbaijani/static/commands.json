@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Azerbaijani Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Azerbaijani Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Azerbaijani Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Azerbaijani Spell Checker Dictionary in Workspace"
+    }
+]

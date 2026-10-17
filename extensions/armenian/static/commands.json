@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Armenian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Armenian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Armenian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Armenian Spell Checker Dictionary in Workspace"
+    }
+]
