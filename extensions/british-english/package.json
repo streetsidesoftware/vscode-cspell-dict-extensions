@@ -43,19 +43,19 @@
     "commands": [
       {
         "command": "cSpellExt_british-english.enable",
-        "title": "Enable British Spell Checker Dictionary"
+        "title": "Enable British English Spell Checker Dictionary"
       },
       {
         "command": "cSpellExt_british-english.disable",
-        "title": "Disable British Spell Checker Dictionary"
+        "title": "Disable British English Spell Checker Dictionary"
       },
       {
         "command": "cSpellExt_british-english.enableWorkspace",
-        "title": "Enable British Spell Checker Dictionary in Workspace"
+        "title": "Enable British English Spell Checker Dictionary in Workspace"
       },
       {
         "command": "cSpellExt_british-english.disableWorkspace",
-        "title": "Disable British Spell Checker Dictionary in Workspace"
+        "title": "Disable British English Spell Checker Dictionary in Workspace"
       }
     ]
   },

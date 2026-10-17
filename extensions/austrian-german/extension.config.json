@@ -13,28 +13,24 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "de-at",
-            "title": "Enable Austrian_german Spell Checker Dictionary"
+            "value": "de-at"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-at",
-            "title": "Disable Austrian_german Spell Checker Dictionary"
+            "value": "de-at"
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "de-at",
-            "scope": "workspace",
-            "title": "Enable Austrian_german Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "de-at",
-            "scope": "workspace",
-            "title": "Disable Austrian_german Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         }
     ]
 }

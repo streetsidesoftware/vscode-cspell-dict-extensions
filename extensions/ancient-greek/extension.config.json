@@ -13,28 +13,24 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "grc-GR",
-            "title": "Enable Ancient_greek Spell Checker Dictionary"
+            "value": "grc-GR"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "grc,grc-GR,gr,el-GRC",
-            "title": "Disable Ancient_greek Spell Checker Dictionary"
+            "value": "grc,grc-GR,gr,el-GRC"
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "grc-GR",
-            "scope": "workspace",
-            "title": "Enable Ancient_greek Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "grc,grc-GR,gr,el-GRC",
-            "scope": "workspace",
-            "title": "Disable Ancient_greek Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         }
     ]
 }

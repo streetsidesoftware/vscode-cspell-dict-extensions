@@ -45,19 +45,19 @@
     "commands": [
       {
         "command": "cSpellExt_british-english-ise.enable",
-        "title": "Enable British_english_ise Spell Checker Dictionary"
+        "title": "Enable British English -ise Spell Checker Dictionary"
       },
       {
         "command": "cSpellExt_british-english-ise.disable",
-        "title": "Disable British_english_ise Spell Checker Dictionary"
+        "title": "Disable British English -ise Spell Checker Dictionary"
       },
       {
         "command": "cSpellExt_british-english-ise.enableWorkspace",
-        "title": "Enable British_english_ise Spell Checker Dictionary in Workspace"
+        "title": "Enable British English -ise Spell Checker Dictionary in Workspace"
       },
       {
         "command": "cSpellExt_british-english-ise.disableWorkspace",
-        "title": "Disable British_english_ise Spell Checker Dictionary in Workspace"
+        "title": "Disable British English -ise Spell Checker Dictionary in Workspace"
       }
     ]
   },

@@ -43,19 +43,19 @@
     "commands": [
       {
         "command": "cSpellExt_swiss-german.enable",
-        "title": "Enable Swiss_german Spell Checker Dictionary"
+        "title": "Enable Swiss German Spell Checker Dictionary"
       },
       {
         "command": "cSpellExt_swiss-german.disable",
-        "title": "Disable Swiss_german Spell Checker Dictionary"
+        "title": "Disable Swiss German Spell Checker Dictionary"
       },
       {
         "command": "cSpellExt_swiss-german.enableWorkspace",
-        "title": "Enable Swiss_german Spell Checker Dictionary in Workspace"
+        "title": "Enable Swiss German Spell Checker Dictionary in Workspace"
       },
       {
         "command": "cSpellExt_swiss-german.disableWorkspace",
-        "title": "Disable Swiss_german Spell Checker Dictionary in Workspace"
+        "title": "Disable Swiss German Spell Checker Dictionary in Workspace"
       }
     ]
   },
