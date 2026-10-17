@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "danish",
+    "kind": "language",
     "friendlyName": "Danish",
+    "nativeName": "dansk",
+    "locale": "da",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-da-dk/cspell-ext.json"]

@@ -1,6 +1,7 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "scientific-terms",
+    "kind": "wordList",
     "friendlyName": "Scientific Terms",
     "sample": "samples/README.md",
     "cspell": {

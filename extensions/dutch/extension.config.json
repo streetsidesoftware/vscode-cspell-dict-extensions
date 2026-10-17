@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "dutch",
+    "kind": "language",
     "friendlyName": "Dutch",
+    "nativeName": "Nederlands",
+    "locale": "nl",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-nl-nl/cspell-ext.json"]

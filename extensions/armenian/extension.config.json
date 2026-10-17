@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "armenian",
+    "kind": "language",
     "friendlyName": "Armenian",
+    "nativeName": "հայերեն",
+    "locale": "hy",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-hy/cspell-ext.json"]

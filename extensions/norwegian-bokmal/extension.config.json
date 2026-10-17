@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "norwegian-bokmal",
+    "kind": "language",
     "friendlyName": "Norwegian Bokmål",
+    "nativeName": "norsk bokmål",
+    "locale": "nb",
     "sample": "samples/norge.md",
     "cspell": {
         "import": ["@cspell/dict-nb-no/cspell-ext.json"]

@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "arabic",
+    "kind": "language",
     "friendlyName": "Arabic",
+    "nativeName": "العربية",
+    "locale": "ar",
     "sample": "samples/README-ar.md",
     "cspell": {
         "import": ["@cspell/dict-ar/cspell-ext.json"]

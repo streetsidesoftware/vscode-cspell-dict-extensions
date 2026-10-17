@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "hebrew",
+    "kind": "language",
     "friendlyName": "Hebrew",
+    "nativeName": "עברית",
+    "locale": "he",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-he/cspell-ext.json"]

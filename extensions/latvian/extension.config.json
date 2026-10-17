@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "latvian",
+    "kind": "language",
     "friendlyName": "Latvian",
+    "nativeName": "latviešu",
+    "locale": "lv",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-lv/cspell-ext.json"]

@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "canadian-english",
+    "kind": "language",
     "friendlyName": "Canadian English",
+    "locale": "en-CA",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-en-ca/cspell-ext.json"]

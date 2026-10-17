@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "belarusian",
+    "kind": "language",
     "friendlyName": "Belarusian",
+    "nativeName": "беларуская",
+    "locale": "be",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-be-by/cspell-ext.json"]

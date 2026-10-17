@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "galician",
+    "kind": "language",
     "friendlyName": "Galician",
+    "nativeName": "galego",
+    "locale": "gl",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-gl-es/cspell-ext.json"]

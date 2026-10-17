@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "russian",
+    "kind": "language",
     "friendlyName": "Russian",
+    "nativeName": "русский",
+    "locale": "ru",
     "sample": "samples/portland.md",
     "cspell": {
         "version": "0.2",

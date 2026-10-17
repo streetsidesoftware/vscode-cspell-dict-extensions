@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "spanish",
+    "kind": "language",
     "friendlyName": "Spanish",
+    "nativeName": "español",
+    "locale": "es-ES",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-es-es/cspell-ext.json"]

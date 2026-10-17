@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "indonesian",
+    "kind": "language",
     "friendlyName": "Indonesian",
+    "nativeName": "Indonesia",
+    "locale": "id-ID",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-id-id/cspell-ext.json"]

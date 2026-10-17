@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "finnish",
+    "kind": "language",
     "friendlyName": "Finnish",
+    "nativeName": "suomi",
+    "locale": "fi",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-fi-fi/cspell-ext.json"]

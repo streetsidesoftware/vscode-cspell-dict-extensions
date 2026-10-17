@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "czech",
+    "kind": "language",
     "friendlyName": "Czech",
+    "nativeName": "čeština",
+    "locale": "cs",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-cs-cz/cspell-ext.json"]

@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "macedonian",
+    "kind": "language",
     "friendlyName": "Macedonian",
+    "nativeName": "македонски",
+    "locale": "mk",
     "sample": "samples/Skopje.md",
     "cspell": {
         "import": ["@cspell/dict-mk/cspell-ext.json"]

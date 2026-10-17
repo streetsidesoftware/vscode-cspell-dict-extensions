@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "vietnamese",
+    "kind": "language",
     "friendlyName": "Vietnamese",
+    "nativeName": "Tiếng Việt",
+    "locale": "vi",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-vi-vn/cspell-ext.json"]

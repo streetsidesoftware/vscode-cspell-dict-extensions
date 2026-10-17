@@ -57,8 +57,8 @@ export type CommandConfig = ScopedCommandConfig | FileTypeCommandConfig;
 
 export type Toggle = CommandConfig['toggle'];
 
-/** The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it. */
-export interface ExtensionConfig {
+/** The fields every kind of extension has. */
+interface ExtensionConfigBase {
     /** The JSON schema of this file. */
     $schema?: string;
     /**
@@ -93,7 +93,51 @@ export interface ExtensionConfig {
     cspell: Record<string, unknown>;
     /** The commands the extension contributes. */
     commands: CommandConfig[];
+    /**
+     * Notes for maintainers: why something in this file is the way it is. Not used by the sync.
+     */
+    notes?: string;
 }
+
+/** A natural language, enabled by its locale, i.e. Swedish. */
+export interface LanguageExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'language';
+    /**
+     * The locale people add to `cSpell.language` to use this language, as a BCP 47 tag (i.e. `sv-SE`) or a comma-separated list of them.
+     * @minLength 1
+     */
+    locale: string;
+    /**
+     * The language's name in the language itself, i.e. `svenska`.
+     * @minLength 1
+     */
+    nativeName?: string;
+}
+
+/** A list of words, enabled by dictionary name, i.e. medical terms. */
+export interface WordListExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'wordList';
+}
+
+/** A collection of dictionaries, i.e. the latest copies of the dictionaries Code Spell Checker bundles. */
+export interface BundleExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'bundle';
+}
+
+/** A cspell parser for a programming language. */
+export interface ParserExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'parser';
+}
+
+/** The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it. */
+export type ExtensionConfig =
+    LanguageExtensionConfig | WordListExtensionConfig | BundleExtensionConfig | ParserExtensionConfig;
+
+export type ExtensionKind = ExtensionConfig['kind'];
 
 export interface ResolvedCommand {
     id: string;

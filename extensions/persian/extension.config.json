@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "persian",
+    "kind": "language",
     "friendlyName": "Persian",
+    "nativeName": "فارسی",
+    "locale": "fa",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-fa-ir/cspell-ext.json"]

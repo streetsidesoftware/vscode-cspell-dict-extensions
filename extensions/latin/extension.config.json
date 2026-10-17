@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "latin",
+    "kind": "language",
     "friendlyName": "Latin",
+    "nativeName": "Latina",
+    "locale": "la",
     "sample": "samples/lingua-latina.md",
     "cspell": {
         "import": ["@cspell/dict-la/cspell-ext.json"]

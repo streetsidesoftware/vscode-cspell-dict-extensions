@@ -5,6 +5,8 @@ import { description, displayName, duplicateCommandIds, type ExtensionConfig, re
 
 const swedish: ExtensionConfig = {
     name: 'swedish',
+    kind: 'language',
+    locale: 'sv_SE',
     friendlyName: 'Swedish',
     sample: 'samples/Seattle.md',
     cspell: { import: ['@cspell/dict-sv/cspell-ext.json'] },

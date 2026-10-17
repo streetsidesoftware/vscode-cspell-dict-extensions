@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "esperanto",
+    "kind": "language",
     "friendlyName": "Esperanto",
+    "locale": "eo",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-eo/cspell-ext.json"]

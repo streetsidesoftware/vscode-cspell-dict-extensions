@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "hungarian",
+    "kind": "language",
     "friendlyName": "Hungarian",
+    "nativeName": "magyar",
+    "locale": "hu",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-hu-hu/cspell-ext.json"]

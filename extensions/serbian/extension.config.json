@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "serbian",
+    "kind": "language",
     "friendlyName": "Serbian",
+    "nativeName": "српски",
+    "locale": "sr",
     "sample": "samples/Београд.md",
     "cspell": {
         "import": ["@cspell/dict-sr-cyrl/cspell-ext.json", "@cspell/dict-sr-latn/cspell-ext.json"]

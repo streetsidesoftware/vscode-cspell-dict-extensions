@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "estonian",
+    "kind": "language",
     "friendlyName": "Estonian",
+    "nativeName": "eesti",
+    "locale": "et",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-et-ee/cspell-ext.json"]

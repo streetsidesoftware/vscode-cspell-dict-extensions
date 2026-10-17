@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "australian-english",
+    "kind": "language",
     "friendlyName": "Australian English",
+    "locale": "en-AU",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-en-au/cspell-ext.json"]

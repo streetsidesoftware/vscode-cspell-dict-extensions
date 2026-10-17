@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "azerbaijani",
+    "kind": "language",
     "friendlyName": "Azerbaijani",
+    "nativeName": "azərbaycan",
+    "locale": "az-AZ",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-az-az/cspell-ext.json"],

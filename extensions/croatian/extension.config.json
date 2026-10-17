@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "croatian",
+    "kind": "language",
     "friendlyName": "Croatian",
+    "nativeName": "hrvatski",
+    "locale": "hr",
     "sample": "samples/amsterdam.md",
     "cspell": {
         "import": ["@cspell/dict-hr-hr/cspell-ext.json"]

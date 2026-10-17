@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "british-english-ise",
+    "kind": "language",
     "friendlyName": "British English -ise",
+    "locale": "en-GB",
     "sample": "samples/sample.md",
     "cspell": {
         "import": ["@cspell/dict-en-gb-ise/cspell-ext.json"]
