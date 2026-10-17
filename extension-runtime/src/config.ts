@@ -37,6 +37,16 @@ interface CommandBase {
      * @minLength 1
      */
     title?: string;
+    /**
+     * Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README.
+     * A command that isn't is still registered, so keybindings and tasks that use its ID keep working.
+     * Default: `true`.
+     */
+    contributes?: boolean;
+    /** The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers. */
+    legacy?: boolean;
+    /** Notes for maintainers: why this command is the way it is. Not used by the sync. */
+    notes?: string;
 }
 
 /** A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`). */
@@ -57,8 +67,8 @@ export type CommandConfig = ScopedCommandConfig | FileTypeCommandConfig;
 
 export type Toggle = CommandConfig['toggle'];
 
-/** The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it. */
-export interface ExtensionConfig {
+/** The fields every kind of extension has. */
+interface ExtensionConfigBase {
     /** The JSON schema of this file. */
     $schema?: string;
     /**
@@ -77,7 +87,7 @@ export interface ExtensionConfig {
      */
     displayName?: string;
     /**
-     * The Marketplace description. Default: `<friendlyName> dictionary extension for VS Code.`
+     * The Marketplace description.
      * @minLength 1
      */
     description?: string;
@@ -87,17 +97,73 @@ export interface ExtensionConfig {
      */
     sample: string;
     /**
-     * The content of `static/cspell-ext.json`. Set `engines` here only to override the defaults in
-     * `static/engines.json`.
+     * The content of `static/cspell-ext.json`. The sync adds the `engines` the imported dictionaries declare. Set
+     * `engines` here only to override them or the defaults in `static/engines.json`.
      */
     cspell: Record<string, unknown>;
     /** The commands the extension contributes. */
     commands: CommandConfig[];
+    /**
+     * Notes for maintainers: why something in this file is the way it is. Not used by the sync.
+     */
+    notes?: string;
 }
+
+/** A natural language, enabled by its locale, i.e. Swedish. */
+export interface LanguageExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'language';
+    /**
+     * The locale people add to `cSpell.language` to use this language, as a BCP 47 tag (i.e. `sv-SE`) or a comma-separated list of them.
+     * @minLength 1
+     */
+    locale: string;
+    /**
+     * The language's name in the language itself, i.e. `svenska`.
+     * @minLength 1
+     */
+    nativeName?: string;
+}
+
+/** A list of words, enabled by dictionary name, i.e. medical terms. */
+export interface WordListExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'wordList';
+}
+
+/** A collection of dictionaries, i.e. the latest copies of the dictionaries Code Spell Checker bundles. */
+export interface BundleExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'bundle';
+    /**
+     * The Marketplace description. Required: there is no default wording for this kind.
+     * @minLength 1
+     */
+    description: string;
+}
+
+/** A cspell parser for a programming language. */
+export interface ParserExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'parser';
+    /**
+     * The Marketplace description. Required: there is no default wording for this kind.
+     * @minLength 1
+     */
+    description: string;
+}
+
+/** The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it. */
+export type ExtensionConfig =
+    LanguageExtensionConfig | WordListExtensionConfig | BundleExtensionConfig | ParserExtensionConfig;
+
+export type ExtensionKind = ExtensionConfig['kind'];
 
 export interface ResolvedCommand {
     id: string;
     title: string;
+    /** Listed in `package.json`, the Command Palette and the README; registered either way. */
+    contributes: boolean;
     action: Action;
     toggle: Toggle;
     value: string;
@@ -108,8 +174,23 @@ export function displayName(config: ExtensionConfig): string {
     return config.displayName ?? `${config.friendlyName} - Code Spell Checker`;
 }
 
+/**
+ * The Marketplace description. Default for a language: `Adds <friendlyName> (<nativeName>) spell checking to Code Spell Checker.`,
+ * without the parentheses when there is no `nativeName`. Default for a word list:
+ * `Adds the <friendlyName> dictionary to Code Spell Checker.` Bundles and parsers set their own.
+ */
 export function description(config: ExtensionConfig): string {
-    return config.description ?? `${config.friendlyName} dictionary extension for VS Code.`;
+    if (config.description) return config.description;
+    switch (config.kind) {
+        case 'language': {
+            const name = config.nativeName ? `${config.friendlyName} (${config.nativeName})` : config.friendlyName;
+            return `Adds ${name} spell checking to Code Spell Checker.`;
+        }
+        case 'wordList':
+            return `Adds the ${config.friendlyName} dictionary to Code Spell Checker.`;
+        default:
+            return config.description;
+    }
 }
 
 /**
@@ -125,6 +206,7 @@ export function resolveCommands(config: ExtensionConfig): ResolvedCommand[] {
             title:
                 command.title ??
                 `${action} ${config.friendlyName} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
+            contributes: command.contributes ?? true,
             action: command.action,
             toggle: command.toggle,
             value: command.value,

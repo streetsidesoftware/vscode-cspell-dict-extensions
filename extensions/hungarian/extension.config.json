@@ -1,0 +1,36 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "hungarian",
+    "kind": "language",
+    "friendlyName": "Hungarian",
+    "nativeName": "magyar",
+    "locale": "hu-HU",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-hu-hu/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "hu-HU"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "hu,hu-HU"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "hu-HU",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "hu,hu-HU",
+            "scope": "workspace"
+        }
+    ]
+}

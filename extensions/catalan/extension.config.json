@@ -1,0 +1,74 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "catalan",
+    "kind": "language",
+    "friendlyName": "Catalan",
+    "nativeName": "català",
+    "locale": "ca",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-ca/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ca"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ca"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ca",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ca",
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ca",
+            "id": "cSpellExt_catalan.enableCatalan",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ca",
+            "id": "cSpellExt_catalan.disableCatalan",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ca",
+            "scope": "workspace",
+            "id": "cSpellExt_catalan.enableCatalanWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ca",
+            "scope": "workspace",
+            "id": "cSpellExt_catalan.disableCatalanWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        }
+    ]
+}

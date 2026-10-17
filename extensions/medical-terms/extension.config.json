@@ -1,6 +1,7 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "medical-terms",
+    "kind": "wordList",
     "friendlyName": "Medical Terms",
     "sample": "samples/README.md",
     "cspell": {

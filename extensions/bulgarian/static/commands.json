@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Bulgarian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Bulgarian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Bulgarian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Bulgarian Spell Checker Dictionary in Workspace"
+    }
+]

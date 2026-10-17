@@ -5,6 +5,8 @@ import { description, displayName, duplicateCommandIds, type ExtensionConfig, re
 
 const swedish: ExtensionConfig = {
     name: 'swedish',
+    kind: 'language',
+    locale: 'sv_SE',
     friendlyName: 'Swedish',
     sample: 'samples/Seattle.md',
     cspell: { import: ['@cspell/dict-sv/cspell-ext.json'] },
@@ -20,6 +22,7 @@ describe('resolveCommands', () => {
             {
                 id: 'cSpellExt_swedish.enable',
                 title: 'Enable Swedish Spell Checker Dictionary',
+                contributes: true,
                 action: 'enable',
                 toggle: 'locale',
                 value: 'sv_SE',
@@ -28,6 +31,7 @@ describe('resolveCommands', () => {
             {
                 id: 'cSpellExt_swedish.disableWorkspace',
                 title: 'Disable Swedish Spell Checker Dictionary in Workspace',
+                contributes: true,
                 action: 'disable',
                 toggle: 'locale',
                 value: 'sv_SE',
@@ -43,6 +47,27 @@ describe('resolveCommands', () => {
         const [command] = resolveCommands({ ...swedish, commands });
         assert.equal(command?.id, 'cSpellExt_swedish.enableSwedish');
         assert.equal(command?.title, 'T');
+    });
+
+    it('contributes commands unless told not to', () => {
+        const commands: ExtensionConfig['commands'] = [
+            { action: 'enable', toggle: 'locale', value: 'sv-SE' },
+            {
+                action: 'enable',
+                toggle: 'locale',
+                value: 'sv-SE',
+                id: 'cSpellExt_swedish.enableSwedish',
+                contributes: false,
+                legacy: true,
+            },
+        ];
+        assert.deepEqual(
+            resolveCommands({ ...swedish, commands }).map(({ id, contributes }) => ({ id, contributes })),
+            [
+                { id: 'cSpellExt_swedish.enable', contributes: true },
+                { id: 'cSpellExt_swedish.enableSwedish', contributes: false },
+            ],
+        );
     });
 
     it('gives a fileType toggle the global scope', () => {
@@ -65,7 +90,20 @@ describe('duplicateCommandIds', () => {
 describe('displayName and description', () => {
     it('derive from the friendly name', () => {
         assert.equal(displayName(swedish), 'Swedish - Code Spell Checker');
-        assert.equal(description(swedish), 'Swedish dictionary extension for VS Code.');
+        assert.equal(description(swedish), 'Adds Swedish spell checking to Code Spell Checker.');
+        assert.equal(
+            description({ ...swedish, nativeName: 'svenska' }),
+            'Adds Swedish (svenska) spell checking to Code Spell Checker.',
+        );
+        const wordList: ExtensionConfig = {
+            name: 'medical-terms',
+            kind: 'wordList',
+            friendlyName: 'Medical Terms',
+            sample: 'samples/sample.md',
+            cspell: {},
+            commands: [],
+        };
+        assert.equal(description(wordList), 'Adds the Medical Terms dictionary to Code Spell Checker.');
     });
 
     it('can be set', () => {

@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Russian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Russian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Russian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Russian Spell Checker Dictionary in Workspace"
+    }
+]

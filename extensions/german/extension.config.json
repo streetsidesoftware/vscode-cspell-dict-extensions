@@ -1,0 +1,75 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "german",
+    "kind": "language",
+    "friendlyName": "German",
+    "nativeName": "Deutsch",
+    "locale": "de-DE",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-de-de/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-DE"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-DE"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "id": "cSpellExt_german.enableGerman",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "id": "cSpellExt_german.disableGerman",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "scope": "workspace",
+            "id": "cSpellExt_german.enableGermanWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "scope": "workspace",
+            "id": "cSpellExt_german.disableGermanWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        }
+    ],
+    "notes": "Disable removes only `de-DE`, not `de`: `de` is shared with Austrian and Swiss German, so a user who added `de` keeps this dictionary on."
+}

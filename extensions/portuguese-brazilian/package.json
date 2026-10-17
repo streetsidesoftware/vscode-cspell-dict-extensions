@@ -1,21 +1,9 @@
 {
   "name": "code-spell-checker-portuguese-brazilian",
-  "description": "Brazilian Portuguese dictionary extension for VS Code.",
-  "version": "3.0.0",
   "displayName": "Brazilian Portuguese - Code Spell Checker",
-  "icon": "images/SpellCheck.png",
+  "version": "3.0.0",
   "private": true,
-  "publisher": "streetsidesoftware",
-  "type": "commonjs",
-  "engines": {
-    "vscode": "^1.125.0"
-  },
-  "sponsor": {
-    "url": "https://github.com/sponsors/streetsidesoftware"
-  },
-  "extensionKind": [
-    "workspace"
-  ],
+  "description": "Adds Brazilian Portuguese (português brasileiro) spell checking to Code Spell Checker.",
   "categories": [
     "Linters",
     "Other"
@@ -27,68 +15,80 @@
     "dictionary",
     "spelling"
   ],
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/portuguese-brazilian"
+  },
+  "license": "GPL-3.0-or-later",
+  "qna": "marketplace",
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": [],
+  "publisher": "streetsidesoftware",
+  "type": "module",
+  "main": "./out/extension.js",
+  "scripts": {
+    "build": "tsdown",
+    "clean": "node ../../scripts/clean.mts",
+    "clean-build": "npm run clean && npm run build",
+    "pack-extension": "vsce package",
+    "publish-extension": "vsce publish",
+    "test": "npm run test:cspell && npm run test:vscode",
+    "test:cspell": "cspell -c static/cspell-ext.json samples",
+    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/Seattle.md",
+    "vscode:prepublish": "npm run build",
+    "watch": "tsdown --watch"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_portuguese-brazilian.enable",
+        "title": "Enable Brazilian Portuguese Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_portuguese-brazilian.disable",
+        "title": "Disable Brazilian Portuguese Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_portuguese-brazilian.enableWorkspace",
+        "title": "Enable Brazilian Portuguese Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_portuguese-brazilian.disableWorkspace",
+        "title": "Disable Brazilian Portuguese Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
   "activationEvents": [
     "onStartupFinished"
   ],
-  "qna": "marketplace",
-  "main": "./out/extension.js",
+  "dependencies": {
+    "@cspell/dict-pt-br": "^2.4.4"
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "icon": "images/SpellCheck.png",
   "capabilities": {
     "virtualWorkspaces": true,
     "untrustedWorkspaces": {
       "supported": true
     }
   },
-  "contributes": {
-    "commands": [
-      {
-        "command": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilian",
-        "title": "Enable Portuguese Brazilian Spell Checker Dictionary"
-      },
-      {
-        "command": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilian",
-        "title": "Disable Portuguese Brazilian Spell Checker Dictionary"
-      },
-      {
-        "command": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilianWorkspace",
-        "title": "Enable Portuguese Brazilian Spell Checker Dictionary in Workspace"
-      },
-      {
-        "command": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilianWorkspace",
-        "title": "Disable Portuguese Brazilian Spell Checker Dictionary in Workspace"
-      }
-    ]
-  },
-  "extensionDependencies": [
-    "streetsidesoftware.code-spell-checker"
+  "extensionKind": [
+    "workspace"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
-    "directory": "extensions/portuguese-brazilian"
-  },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
-  },
-  "license": "GPL-3.0-or-later",
-  "scripts": {
-    "clean": "rimraf out",
-    "clean-build": "npm run clean && npm run build",
-    "publish-extension": "vsce publish",
-    "pack-extension": "vsce package",
-    "vscode:prepublish": "npm run build",
-    "build": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "test:cspell": "cspell -c cspell-ext.json samples",
-    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/Seattle.md",
-    "test": "npm run test:cspell && npm run test:vscode"
-  },
-  "dependencies": {
-    "@cspell/dict-pt-br": "^2.4.4"
+  "sponsor": {
+    "url": "https://github.com/sponsors/streetsidesoftware"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/portuguese-brazilian/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/portuguese-brazilian/"
-  },
-  "author": "Street Side Software <support@streetsidesoftware.nl>",
-  "contributors": []
+  }
 }

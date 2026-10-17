@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Polish Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Polish Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Polish Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Polish Spell Checker Dictionary in Workspace"
+    }
+]

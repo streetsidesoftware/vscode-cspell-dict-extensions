@@ -1,0 +1,36 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "italian",
+    "kind": "language",
+    "friendlyName": "Italian",
+    "nativeName": "italiano",
+    "locale": "it-IT",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-it-it/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "it-IT"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "it,it-IT"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "it-IT",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "it,it-IT",
+            "scope": "workspace"
+        }
+    ]
+}

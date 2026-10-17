@@ -1,0 +1,74 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "bulgarian",
+    "kind": "language",
+    "friendlyName": "Bulgarian",
+    "nativeName": "български",
+    "locale": "bg-BG",
+    "sample": "samples/seattle-bg.md",
+    "cspell": {
+        "import": ["@cspell/dict-bg-bg/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "bg_BG"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "bg-BG,bg"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "bg_BG",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "bg-BG,bg",
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "bg_BG",
+            "id": "cSpellExt_bulgarian.enableBulgarian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "bg-BG,bg",
+            "id": "cSpellExt_bulgarian.disableBulgarian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "bg_BG",
+            "scope": "workspace",
+            "id": "cSpellExt_bulgarian.enableBulgarianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "bg-BG,bg",
+            "scope": "workspace",
+            "id": "cSpellExt_bulgarian.disableBulgarianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        }
+    ]
+}

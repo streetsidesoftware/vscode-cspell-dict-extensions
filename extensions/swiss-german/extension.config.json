@@ -1,0 +1,37 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "swiss-german",
+    "kind": "language",
+    "friendlyName": "Swiss German",
+    "nativeName": "Schweizer Hochdeutsch",
+    "locale": "de-CH",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-de-ch/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-ch"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-CH"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-ch",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-CH",
+            "scope": "workspace"
+        }
+    ],
+    "notes": "Disable removes only `de-CH`, not `de`: `de` is shared with German, so a user who added `de` keeps this dictionary on."
+}

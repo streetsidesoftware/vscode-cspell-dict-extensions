@@ -1,0 +1,36 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "norwegian-bokmal",
+    "kind": "language",
+    "friendlyName": "Norwegian Bokmål",
+    "nativeName": "norsk bokmål",
+    "locale": "nb-NO",
+    "sample": "samples/norge.md",
+    "cspell": {
+        "import": ["@cspell/dict-nb-no/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "nb-NO"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "nb,nb-NO"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "nb-NO",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "nb,nb-NO",
+            "scope": "workspace"
+        }
+    ]
+}

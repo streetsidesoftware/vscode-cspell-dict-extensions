@@ -1,0 +1,36 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "finnish",
+    "kind": "language",
+    "friendlyName": "Finnish",
+    "nativeName": "suomi",
+    "locale": "fi-FI",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-fi-fi/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fi-FI"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fi,fi-FI"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fi-FI",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fi,fi-FI",
+            "scope": "workspace"
+        }
+    ]
+}

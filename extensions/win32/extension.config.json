@@ -1,0 +1,11 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "win32",
+    "kind": "wordList",
+    "friendlyName": "Win32",
+    "sample": "samples/window_sample.cpp",
+    "cspell": {
+        "import": ["@cspell/dict-win32/cspell-ext.json"]
+    },
+    "commands": []
+}

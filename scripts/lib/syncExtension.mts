@@ -3,15 +3,18 @@
  *
  * - Owned: the tool configs copied from `extension-runtime/template/`.
  * - Generated into `static/`: `cspell-ext.json` and `commands.json`, the data the README templates read.
+ *   `cspell-ext.json` gets the `engines` the imported dictionaries declare, unless `cspell.engines` sets them.
  * - Derived: some fields of `package.json` (the other fields are kept) and the injected sections of `README.md`,
  *   filled from the shared templates in `<repo>/static/` and the extension's `static/` data.
  * - Everything else (the rest of the README, samples, CHANGELOG, LICENSE, images, `src/custom.ts`) is never touched.
  */
 
 import fs from 'node:fs/promises';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 
 import { injectMarkdown } from 'inject-markdown';
+import { parse as parseJsonc } from 'jsonc-parser';
 import * as prettier from 'prettier';
 
 import {
@@ -66,7 +69,7 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
 
     const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
     const files = new Map<string, string>(await readTemplateFiles());
-    files.set(cspellExtPath, JSON.stringify(config.cspell, null, 4) + '\n');
+    files.set(cspellExtPath, JSON.stringify(await cspellExt(extensionDir, config), null, 4) + '\n');
     const commands = commandsTable(config);
     if (commands) files.set('static/commands.json', commands);
     const pkg = (await readJson(path.join(extensionDir, 'package.json'))) as PackageJson;
@@ -104,8 +107,47 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
  * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`.
  * @returns `undefined` when the extension has no commands.
  */
+/**
+ * The content of `static/cspell-ext.json`: `cspell` from the config, with the `engines` the imported dictionaries
+ * declare. An engine set in `cspell.engines` wins over the dictionaries.
+ */
+async function cspellExt(extensionDir: string, config: ExtensionConfig): Promise<Record<string, unknown>> {
+    const { engines, ...cspell } = config.cspell as { engines?: Record<string, string> };
+    const derived = await dictionaryEngines(extensionDir, config);
+    const merged = { ...derived, ...engines };
+    return Object.keys(merged).length ? { ...cspell, engines: merged } : cspell;
+}
+
+/** The `engines` declared by the dictionaries in `cspell.import`, read from the extension's `node_modules`. */
+async function dictionaryEngines(extensionDir: string, config: ExtensionConfig): Promise<Record<string, string>> {
+    const imports = (config.cspell as { import?: string[] }).import ?? [];
+    const require = createRequire(path.join(extensionDir, 'package.json'));
+    const engines: Record<string, string> = {};
+    for (const spec of imports.filter((spec) => !spec.startsWith('.'))) {
+        let file: string;
+        try {
+            file = require.resolve(spec);
+        } catch {
+            throw new Error(`extensions/${config.name}: can't find "${spec}". Run \`npm install\` first.`);
+        }
+        // A dictionary's cspell-ext.json may have comments.
+        const ext = parseJsonc(await fs.readFile(file, 'utf8')) as { engines?: Record<string, string> };
+        const declared = ext.engines ?? {};
+        for (const [engine, range] of Object.entries(declared)) {
+            if (engines[engine] !== undefined && engines[engine] !== range) {
+                throw new Error(
+                    `extensions/${config.name}: the dictionaries need different ${engine} versions ` +
+                        `("${engines[engine]}" and "${range}"). Set it in cspell.engines.`,
+                );
+            }
+            engines[engine] = range;
+        }
+    }
+    return engines;
+}
+
 export function commandsTable(config: ExtensionConfig): string | undefined {
-    const commands = resolveCommands(config);
+    const commands = resolveCommands(config).filter((command) => command.contributes);
     if (!commands.length) return undefined;
     return (
         JSON.stringify(
@@ -152,7 +194,9 @@ export function packageJsonSource(
     vscodeEngine: string,
     hasCustom: boolean,
 ): string {
-    const commands = resolveCommands(config).map(({ id, title }) => ({ command: id, title }));
+    const commands = resolveCommands(config)
+        .filter((command) => command.contributes)
+        .map(({ id, title }) => ({ command: id, title }));
     const contributes = (pkg as { contributes?: object }).contributes;
     const derived: Record<string, unknown> = {
         name: `code-spell-checker-${config.name}`,
@@ -166,7 +210,7 @@ export function packageJsonSource(
             build: 'tsdown',
             // Only `src/custom.ts` is the extension's own code; the shared code is checked in `extension-runtime/`.
             ...(hasCustom ? { 'check-types': 'tsc -p .' } : {}),
-            clean: 'rimraf out',
+            clean: 'node ../../scripts/clean.mts',
             'clean-build': 'npm run clean && npm run build',
             'pack-extension': 'vsce package',
             'publish-extension': 'vsce publish',

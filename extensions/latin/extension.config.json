@@ -1,0 +1,36 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "latin",
+    "kind": "language",
+    "friendlyName": "Latin",
+    "nativeName": "Latina",
+    "locale": "la-VA",
+    "sample": "samples/lingua-latina.md",
+    "cspell": {
+        "import": ["@cspell/dict-la/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "la-VA"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "la,la-VA"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "la-VA",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "la,la-VA",
+            "scope": "workspace"
+        }
+    ]
+}

@@ -36,6 +36,19 @@ Commands (use `F1` or _View -> Command Palette..._):
 - Select the `Language` tab.
 - Enable the language Globally or in just the Workspace.
 
+Or run these commands:
+
+<!--- @@inject-table: ./static/commands.json --->
+
+| Command                                                 |
+| ------------------------------------------------------- |
+| Enable Mongolian Spell Checker Dictionary               |
+| Disable Mongolian Spell Checker Dictionary              |
+| Enable Mongolian Spell Checker Dictionary in Workspace  |
+| Disable Mongolian Spell Checker Dictionary in Workspace |
+
+<!--- @@inject-end: ./static/commands.json --->
+
 ## Гар аргаар тохиргоо хийх | Manual Settings
 
 Үүнийг language тохиргоогоор гүйцэтгэнэ.

@@ -1,0 +1,74 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "danish",
+    "kind": "language",
+    "friendlyName": "Danish",
+    "nativeName": "dansk",
+    "locale": "da-DK",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-da-dk/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "da-DK"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "da,da-DK"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "da-DK",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "da,da-DK",
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "da-DK",
+            "id": "cSpellExt_danish.enableDanish",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "da,da-DK",
+            "id": "cSpellExt_danish.disableDanish",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "da-DK",
+            "scope": "workspace",
+            "id": "cSpellExt_danish.enableDanishWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "da,da-DK",
+            "scope": "workspace",
+            "id": "cSpellExt_danish.disableDanishWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        }
+    ]
+}

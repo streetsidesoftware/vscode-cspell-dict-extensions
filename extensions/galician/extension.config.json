@@ -1,0 +1,36 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "galician",
+    "kind": "language",
+    "friendlyName": "Galician",
+    "nativeName": "galego",
+    "locale": "gl-ES",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-gl-es/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "gl-ES"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "gl,gl-ES"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "gl-ES",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "gl,gl-ES",
+            "scope": "workspace"
+        }
+    ]
+}

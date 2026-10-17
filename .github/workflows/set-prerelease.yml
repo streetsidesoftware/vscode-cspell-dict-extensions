@@ -9,9 +9,67 @@ on:
   workflow_dispatch:
     inputs:
       extension:
-        description: The directory name of the extension in `extensions/`, i.e. `swedish`.
-        type: string
+        description: The extension
+        type: choice
         required: true
+        # Options are generated from `npm run gen:workflow`
+        options:
+          - ancient-greek
+          - arabic
+          - armenian
+          - australian-english
+          - austrian-german
+          - azerbaijani
+          - basque
+          - belarusian
+          - british-english
+          - british-english-ise
+          - bulgarian
+          - canadian-english
+          - catalan
+          - croatian
+          - cspell-bundled-dictionaries
+          - czech
+          - danish
+          - dutch
+          - esperanto
+          - estonian
+          - finnish
+          - french
+          - french-reforme
+          - galician
+          - german
+          - greek
+          - hebrew
+          - hungarian
+          - hunspell-syntax
+          - indonesian
+          - italian
+          - latin
+          - latvian
+          - lithuanian
+          - macedonian
+          - medical-terms
+          - mongolian
+          - norwegian-bokmal
+          - persian
+          - polish
+          - portuguese
+          - portuguese-brazilian
+          - romanian
+          - russian
+          - scientific-terms
+          - serbian
+          - slovak
+          - slovenian
+          - spanish
+          - swedish
+          - swiss-german
+          - timestamp-hover
+          - turkish
+          - ukrainian
+          - vietnamese
+          - win32
       prerelease:
         description: Is prerelease?
         type: boolean

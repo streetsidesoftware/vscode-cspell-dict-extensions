@@ -23,7 +23,8 @@ export function generateExtensionSchema(): tsj.Schema {
         tsconfig: path.join(runtimeDir, 'tsconfig.json'),
         type: 'ExtensionConfig',
         topRef: false,
-        expose: 'none',
+        // Exported types become shared definitions, so the schema doesn't repeat them.
+        expose: 'export',
         skipTypeCheck: true,
         sortProps: false,
         additionalProperties: false,

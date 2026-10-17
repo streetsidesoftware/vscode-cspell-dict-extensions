@@ -1,0 +1,75 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "portuguese",
+    "kind": "language",
+    "friendlyName": "Portuguese",
+    "nativeName": "português",
+    "locale": "pt-PT",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-pt-pt/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pt-PT"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "pt-PT"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pt-PT",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "pt-PT",
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pt-PT",
+            "id": "cSpellExt_portuguese.enablePortuguese",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "pt-PT",
+            "id": "cSpellExt_portuguese.disablePortuguese",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pt-PT",
+            "scope": "workspace",
+            "id": "cSpellExt_portuguese.enablePortugueseWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "pt-PT",
+            "scope": "workspace",
+            "id": "cSpellExt_portuguese.disablePortugueseWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        }
+    ],
+    "notes": "Disable removes only `pt-PT`, not `pt`: `pt` is shared with Brazilian Portuguese, so a user who added `pt` keeps this dictionary on."
+}

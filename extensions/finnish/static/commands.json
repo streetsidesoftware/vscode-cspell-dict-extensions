@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Finnish Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Finnish Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Finnish Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Finnish Spell Checker Dictionary in Workspace"
+    }
+]

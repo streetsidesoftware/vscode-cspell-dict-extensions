@@ -1,0 +1,75 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "french-reforme",
+    "kind": "language",
+    "friendlyName": "French Réforme 90",
+    "nativeName": "français",
+    "locale": "fr-90",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-fr-reforme/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fr-90"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fr-90"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "id": "cSpellExt_french-reforme.enableFrench",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "id": "cSpellExt_french-reforme.disableFrench",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "scope": "workspace",
+            "id": "cSpellExt_french-reforme.enableFrenchWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "scope": "workspace",
+            "id": "cSpellExt_french-reforme.disableFrenchWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        }
+    ],
+    "notes": "`locale` is `fr-90`, not a BCP 47 tag: the IANA registry has no variant for the 1990 French spelling reform, and `fr-90` is the locale cspell's French Réforme dictionary declares. Enable uses `fr-90` because it is the only locale exclusive to this dictionary: `fr` and `fr-FR` also turn on French. Disable removes only `fr-90`, not `fr`: `fr` is shared with French, so a user who added `fr` keeps this dictionary on."
+}

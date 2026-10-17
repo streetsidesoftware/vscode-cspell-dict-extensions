@@ -28,5 +28,18 @@
     ],
     "dictionaries": [
         "project-words"
-    ]
+    ],
+    "patterns": [
+        {
+            "name": "native-name",
+            "description": "A language's name in the language itself, in extension.config.json.",
+            "pattern": "/\"nativeName\":\\s*\"[^\"]*\"/g"
+        },
+        {
+            "name": "language-description",
+            "description": "A language extension's description, which repeats its nativeName: in package.json and the extension list in README.md.",
+            "pattern": "/Adds [^\"\\n]* spell checking to Code Spell Checker\\./g"
+        }
+    ],
+    "ignoreRegExpList": ["native-name", "language-description"]
 }

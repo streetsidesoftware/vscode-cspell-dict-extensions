@@ -1,0 +1,36 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "ancient-greek",
+    "kind": "language",
+    "friendlyName": "Ancient Greek",
+    "nativeName": "Ἀρχαία Ἑλληνική",
+    "locale": "grc-GR",
+    "sample": "samples/Hymn-4-to-Hermes.md",
+    "cspell": {
+        "import": ["@cspell/dict-grc/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "grc-GR"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "grc,grc-GR,gr,el-GRC"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "grc-GR",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "grc,grc-GR,gr,el-GRC",
+            "scope": "workspace"
+        }
+    ]
+}

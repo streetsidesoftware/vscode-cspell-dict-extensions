@@ -28,7 +28,7 @@
   - `npm run create:extension` → scaffold a new extension (dictionary, parser, or scaffold); run it without prompts with `npm run create:extension -- <package> --yes`, i.e. `@cspell/dict-sv` or `@cspell/parser-typescript`. See `generator-cspell-dicts-extensions/README.md` for the options.
   - `npm run gen:readme` → regenerate workspace metadata, extension lists, README injections, and normalize extension manifests
   - `npm run gen:release-please` → regenerate release-please config
-  - `npm run gen:workflow` → regenerate `.github/workflows/manual-publish.yml`
+  - `npm run gen:workflow` → regenerate the extension choice lists in `.github/workflows/manual-publish.yml` and `set-prerelease.yml`
 
 ## Efficient workflow
 
@@ -49,7 +49,7 @@
   - `/static/generated/*.md`
   - extension README injections
   - extension `package.json` normalization via `scripts/fix-extensions.mts`
-- Do not hand-edit the extension choice list in `/.github/workflows/manual-publish.yml`; regenerate it with `npm run gen:workflow`.
+- Do not hand-edit the extension choice lists in `/.github/workflows/manual-publish.yml` and `/.github/workflows/set-prerelease.yml`; regenerate it with `npm run gen:workflow`.
 - If package/release metadata needs refreshing, use `npm run gen:release-please`.
 
 ## Validation guidance

@@ -1,0 +1,35 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "australian-english",
+    "kind": "language",
+    "friendlyName": "Australian English",
+    "locale": "en-AU",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-en-au/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "en-au"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "en-au"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "en-au",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "en-au",
+            "scope": "workspace"
+        }
+    ]
+}

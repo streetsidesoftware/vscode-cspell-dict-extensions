@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable British English Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable British English Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable British English Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable British English Spell Checker Dictionary in Workspace"
+    }
+]

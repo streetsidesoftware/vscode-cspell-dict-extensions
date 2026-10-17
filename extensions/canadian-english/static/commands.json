@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Canadian English Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Canadian English Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Canadian English Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Canadian English Spell Checker Dictionary in Workspace"
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Macedonian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Macedonian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Macedonian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Macedonian Spell Checker Dictionary in Workspace"
+    }
+]

@@ -74,7 +74,7 @@
     "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
   },
   "scripts": {
-    "clean": "rimraf out",
+    "clean": "node ../../scripts/clean.mts",
     "clean-build": "npm run clean && npm run build",
     "publish-extension": "vsce publish",
     "pack-extension": "vsce package",

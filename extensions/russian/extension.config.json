@@ -1,0 +1,76 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "russian",
+    "kind": "language",
+    "friendlyName": "Russian",
+    "nativeName": "русский",
+    "locale": "ru-RU",
+    "sample": "samples/portland.md",
+    "cspell": {
+        "version": "0.2",
+        "readonly": true,
+        "import": ["@cspell/dict-ru_ru/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ru-RU"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ru,ru-RU"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ru-RU",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ru,ru-RU",
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ru-RU",
+            "id": "cSpellExt_russian.enableRussian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ru,ru-RU",
+            "id": "cSpellExt_russian.disableRussian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ru-RU",
+            "scope": "workspace",
+            "id": "cSpellExt_russian.enableRussianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ru,ru-RU",
+            "scope": "workspace",
+            "id": "cSpellExt_russian.disableRussianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        }
+    ]
+}

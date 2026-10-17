@@ -114,6 +114,19 @@ export async function readPackageJson(
 }
 
 /**
+ * The explicit command IDs in the extension's `extension.config.json`, including those that are only registered
+ * (`"contributes": false`), i.e. legacy IDs. Empty when the extension has no `extension.config.json`.
+ */
+export async function readExplicitCommandIds(
+    cwd: string = process.env['EXTENSION_DEVELOPMENT_PATH'] || process.cwd(),
+): Promise<string[]> {
+    const configFile = path.join(cwd, 'extension.config.json');
+    if (!(await isFile(configFile))) return [];
+    const config: { commands?: { id?: string }[] } = JSON.parse(await fs.readFile(configFile, 'utf8'));
+    return (config.commands ?? []).flatMap((command) => (command.id ? [command.id] : []));
+}
+
+/**
  * Search for `fileName` in `cwd` and its parent directories, up to and including `stopAt`.
  */
 async function findUp(fileName: string, cwd: string, stopAt: string): Promise<string | undefined> {

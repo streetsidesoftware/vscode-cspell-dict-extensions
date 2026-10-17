@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Australian English Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Australian English Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Australian English Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Australian English Spell Checker Dictionary in Workspace"
+    }
+]

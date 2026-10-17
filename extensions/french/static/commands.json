@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable French Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable French Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable French Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable French Spell Checker Dictionary in Workspace"
+    }
+]

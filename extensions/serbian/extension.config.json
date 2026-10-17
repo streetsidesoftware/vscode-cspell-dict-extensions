@@ -1,14 +1,17 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "serbian",
+    "kind": "language",
     "friendlyName": "Serbian",
+    "nativeName": "српски",
+    "locale": "sr",
     "sample": "samples/Београд.md",
     "cspell": {
         "import": ["@cspell/dict-sr-cyrl/cspell-ext.json", "@cspell/dict-sr-latn/cspell-ext.json"]
     },
     "commands": [
         { "action": "enable", "toggle": "locale", "value": "sr" },
-        { "action": "disable", "toggle": "locale", "value": "sr" },
+        { "action": "disable", "toggle": "locale", "value": "sr,sr-Cyrl,sr-Latn" },
         {
             "action": "enable",
             "toggle": "locale",
@@ -38,6 +41,7 @@
             "title": "Disable Serbian Latin Spell Checker Dictionary"
         },
         { "action": "enable", "toggle": "locale", "value": "sr", "scope": "workspace" },
-        { "action": "disable", "toggle": "locale", "value": "sr", "scope": "workspace" }
-    ]
+        { "action": "disable", "toggle": "locale", "value": "sr,sr-Cyrl,sr-Latn", "scope": "workspace" }
+    ],
+    "notes": "Disable Cyrillic and Disable Latin remove only `sr-Cyrl` or `sr-Latn`, not `sr`: `sr` turns on both scripts, and the plain Disable commands remove all three."
 }

@@ -1,0 +1,37 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "persian",
+    "kind": "language",
+    "friendlyName": "Persian",
+    "nativeName": "فارسی",
+    "locale": "fa-IR",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-fa-ir/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fa-IR"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fa-IR"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fa-IR",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fa-IR",
+            "scope": "workspace"
+        }
+    ],
+    "notes": "Disable removes only `fa-IR`, not `fa`: `fa` is shared with Dari (fa-AF), so a user who added `fa` keeps this dictionary on."
+}

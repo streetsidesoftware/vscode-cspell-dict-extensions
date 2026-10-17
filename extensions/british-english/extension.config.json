@@ -1,0 +1,35 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "british-english",
+    "kind": "language",
+    "friendlyName": "British English",
+    "locale": "en-GB",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-en-gb/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "en-GB"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "en-GB"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "en-GB",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "en-GB",
+            "scope": "workspace"
+        }
+    ]
+}

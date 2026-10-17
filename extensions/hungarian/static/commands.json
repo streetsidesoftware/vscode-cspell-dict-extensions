@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Hungarian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Hungarian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Hungarian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Hungarian Spell Checker Dictionary in Workspace"
+    }
+]

@@ -9,6 +9,8 @@ import { type FileChange, syncExtension } from './syncExtension.mts';
 
 const config = {
     name: 'demo',
+    kind: 'language',
+    locale: 'xx',
     friendlyName: 'Demo',
     sample: 'samples/demo.md',
     cspell: { import: ['@cspell/dict-demo/cspell-ext.json'] },
@@ -54,6 +56,8 @@ describe('syncExtension', () => {
         await writeJson('extension.config.json', config);
         await writeJson('package.json', pkg);
         await fs.writeFile(path.join(dir, 'README.md'), readme);
+        await writeJson('node_modules/@cspell/dict-demo/package.json', { name: '@cspell/dict-demo', version: '1.0.0' });
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {});
     });
 
     afterEach(async () => {
@@ -87,6 +91,27 @@ describe('syncExtension', () => {
         await syncExtension(dir, options);
         assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')), cspell);
         assert.match(await read('README.md'), /cspell `>=10\.4\.0`/);
+    });
+
+    it('takes the engines the dictionaries declare, unless cspell.engines sets them', async () => {
+        const engines = { cspell: '>=10.4.0', 'code-spell-checker': '>=4.10.0' };
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', { engines });
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')), { ...config.cspell, engines });
+        assert.match(await read('README.md'), /cspell `>=10\.4\.0`/);
+
+        const cspell = { ...config.cspell, engines: { cspell: '>=10.5.0' } };
+        await writeJson('extension.config.json', { ...config, cspell });
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')).engines, {
+            cspell: '>=10.5.0',
+            'code-spell-checker': '>=4.10.0',
+        });
+    });
+
+    it('needs the dictionaries installed', async () => {
+        await fs.rm(path.join(dir, 'node_modules'), { recursive: true });
+        await assert.rejects(syncExtension(dir, options), /can't find "@cspell\/dict-demo\/cspell-ext\.json"/);
     });
 
     it('fills the README from the shared templates and static/ data', async () => {
@@ -155,6 +180,25 @@ describe('syncExtension', () => {
         assert.equal(await read('src/custom.ts'), 'export {};\n');
     });
 
+    it('leaves commands that do not contribute out of package.json and the README table', async () => {
+        const legacy = {
+            action: 'enable',
+            toggle: 'locale',
+            value: 'xx',
+            id: 'cSpellExt_demo.enableDemo',
+            contributes: false,
+            legacy: true,
+            notes: 'Old ID.',
+        };
+        await writeJson('extension.config.json', { ...config, commands: [...config.commands, legacy] });
+        await syncExtension(dir, options);
+        const contributed = JSON.parse(await read('package.json')).contributes.commands.map(
+            (c: { command: string }) => c.command,
+        );
+        assert.deepEqual(contributed, ['cSpellExt_demo.enable', 'cSpellExt_demo.disableWorkspace']);
+        assert.equal(JSON.parse(await read('static/commands.json')).length, 2);
+    });
+
     it('changes nothing the second time', async () => {
         await syncExtension(dir, options);
         assert.deepEqual(await syncExtension(dir, { ...options, check: true }), []);
@@ -173,6 +217,7 @@ describe('syncExtension', () => {
     });
 
     async function writeJson(file: string, data: unknown): Promise<void> {
+        await fs.mkdir(path.dirname(path.join(dir, file)), { recursive: true });
         await fs.writeFile(path.join(dir, file), JSON.stringify(data, null, 2) + '\n');
     }
 

@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable German Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable German Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable German Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable German Spell Checker Dictionary in Workspace"
+    }
+]

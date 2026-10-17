@@ -1,0 +1,12 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "scientific-terms",
+    "kind": "wordList",
+    "friendlyName": "Scientific Terms",
+    "sample": "samples/README.md",
+    "cspell": {
+        "dictionaries": ["scientific-terms-us"],
+        "import": ["@cspell/dict-scientific-terms-us/cspell-ext.json"]
+    },
+    "commands": []
+}

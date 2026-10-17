@@ -1,0 +1,36 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "romanian",
+    "kind": "language",
+    "friendlyName": "Romanian",
+    "nativeName": "română",
+    "locale": "ro-RO",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-ro-ro/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ro-ro"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ro-RO,ro"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ro-ro",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ro-RO,ro",
+            "scope": "workspace"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "azerbaijani",
+    "kind": "language",
+    "friendlyName": "Azerbaijani",
+    "nativeName": "azərbaycan",
+    "locale": "az-AZ",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-az-az/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "az-az"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "az-AZ,az"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "az-az",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "az-AZ,az",
+            "scope": "workspace"
+        }
+    ]
+}

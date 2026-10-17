@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Brazilian Portuguese Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Brazilian Portuguese Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Brazilian Portuguese Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Brazilian Portuguese Spell Checker Dictionary in Workspace"
+    }
+]
