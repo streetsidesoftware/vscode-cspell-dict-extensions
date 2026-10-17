@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Basque Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Basque Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Basque Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Basque Spell Checker Dictionary in Workspace"
+    }
+]

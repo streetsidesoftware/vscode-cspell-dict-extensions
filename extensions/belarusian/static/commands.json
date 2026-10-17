@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Belarusian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Belarusian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Belarusian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Belarusian Spell Checker Dictionary in Workspace"
+    }
+]

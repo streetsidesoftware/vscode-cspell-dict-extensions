@@ -1,0 +1,34 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "dutch",
+    "friendlyName": "Dutch",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-nl-nl/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "nl"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "nl"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "nl",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "nl",
+            "scope": "workspace"
+        }
+    ],
+    "description": "Dutch / Nederlands dictionary extension for VS Code."
+}

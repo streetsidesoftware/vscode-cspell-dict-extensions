@@ -10,7 +10,7 @@
         "but"
     ],
     "import": [
-        "./cspell-ext.json"
+        "./static/cspell-ext.json"
     ],
     "languageSettings": [
         {

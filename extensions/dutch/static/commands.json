@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Dutch Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Dutch Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Dutch Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Dutch Spell Checker Dictionary in Workspace"
+    }
+]

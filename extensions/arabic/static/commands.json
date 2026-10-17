@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Arabic Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Arabic Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Arabic Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Arabic Spell Checker Dictionary in Workspace"
+    }
+]

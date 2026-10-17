@@ -1,0 +1,33 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "arabic",
+    "friendlyName": "Arabic",
+    "sample": "samples/README-ar.md",
+    "cspell": {
+        "import": ["@cspell/dict-ar/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ar"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ar"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ar",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ar",
+            "scope": "workspace"
+        }
+    ]
+}

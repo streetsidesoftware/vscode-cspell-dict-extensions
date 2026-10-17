@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable British_english_ise Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable British_english_ise Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable British_english_ise Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable British_english_ise Spell Checker Dictionary in Workspace"
+    }
+]
