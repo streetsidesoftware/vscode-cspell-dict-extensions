@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@4.0.0...code-spell-checker-medical-terms@4.1.0) (2026-10-17)
+
+
+### Features
+
+* sync extensions from a shared runtime; pilot swedish, serbian and medical-terms ([#1603](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1603)) ([6ffccc6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6ffccc64c58c28a8efbcc52a66e4b248d6b74963))
+
 ## [4.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@3.0.6...code-spell-checker-medical-terms@4.0.0) (2026-10-16)
 
 

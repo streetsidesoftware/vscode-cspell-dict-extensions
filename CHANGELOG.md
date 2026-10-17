@@ -1,5 +1,17 @@
 # Changelog
 
+## [8.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@8.0.0...vscode-cspell-dict-extensions@8.1.0) (2026-10-17)
+
+
+### Features
+
+* sync extensions from a shared runtime; pilot swedish, serbian and medical-terms ([#1603](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1603)) ([6ffccc6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6ffccc64c58c28a8efbcc52a66e4b248d6b74963))
+
+
+### Updates and Bug Fixes
+
+* make extension list links relative to the generated file ([#1619](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1619)) ([987bf21](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/987bf219c2aee9377ccd3a69125f12103eb127cc))
+
 ## [8.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@7.0.0...vscode-cspell-dict-extensions@8.0.0) (2026-10-16)
 
 
