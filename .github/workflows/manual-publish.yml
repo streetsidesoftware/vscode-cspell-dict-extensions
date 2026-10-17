@@ -22,10 +22,14 @@ on:
           - all
           - extensions/ancient-greek
           - extensions/arabic
+          - extensions/armenian
           - extensions/australian-english
           - extensions/austrian-german
+          - extensions/azerbaijani
           - extensions/basque
+          - extensions/belarusian
           - extensions/british-english
+          - extensions/british-english-ise
           - extensions/bulgarian
           - extensions/canadian-english
           - extensions/catalan
@@ -39,6 +43,7 @@ on:
           - extensions/finnish
           - extensions/french
           - extensions/french-reforme
+          - extensions/galician
           - extensions/german
           - extensions/greek
           - extensions/hebrew
@@ -51,6 +56,7 @@ on:
           - extensions/lithuanian
           - extensions/macedonian
           - extensions/medical-terms
+          - extensions/mongolian
           - extensions/norwegian-bokmal
           - extensions/persian
           - extensions/polish
