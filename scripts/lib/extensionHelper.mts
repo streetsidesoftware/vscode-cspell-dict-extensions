@@ -46,6 +46,8 @@ export interface ExtensionInfo {
     description: string;
     extensionPath: string;
     dictionaryType: string;
+    /** `vsce.preRelease` in the extension's package.json */
+    preRelease: boolean;
 }
 
 export async function getExtensionInfo(extensionPath: string): Promise<ExtensionInfo> {
@@ -60,6 +62,7 @@ export async function getExtensionInfo(extensionPath: string): Promise<Extension
         version: pkg.version,
         extensionPath,
         dictionaryType: lookUpDictionaryType(extensionPath),
+        preRelease: pkg.vsce?.preRelease === true,
     };
     return info;
 }
