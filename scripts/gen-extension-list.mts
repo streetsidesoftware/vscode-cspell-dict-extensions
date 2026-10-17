@@ -4,10 +4,10 @@ import * as fs from 'node:fs/promises';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
 import { toMarkdown } from 'mdast-util-to-markdown';
-import type { Root, RootContent, ListItem } from 'mdast';
+import type { Root, RootContent, ListItem, PhrasingContent } from 'mdast';
 import type { Options } from 'mdast-util-to-markdown';
 
-import { root, paragraph, text, heading, list, listItem, link, newLineText } from './lib/mdastBuilder.mts';
+import { root, paragraph, text, strong, heading, list, listItem, link, newLineText } from './lib/mdastBuilder.mts';
 import { getExtensionInfo } from './lib/extensionHelper.mts';
 import type { ExtensionInfo } from './lib/extensionHelper.mts';
 import type { CodeWorkspace } from './lib/types.ts';
@@ -27,8 +27,8 @@ const markdownOptions: Options = {
     bullet: '-',
 };
 
-function preReleaseMarker(extensionInfo: ExtensionInfo): string {
-    return extensionInfo.preRelease ? ' (pre-release)' : '';
+function preReleaseMarker(extensionInfo: ExtensionInfo): PhrasingContent[] {
+    return extensionInfo.preRelease ? [text(' '), strong(text('pre-release'))] : [];
 }
 
 function makeExtensionListItem(extensionInfo: ExtensionInfo): ListItem {
@@ -41,7 +41,8 @@ function makeExtensionListItem(extensionInfo: ExtensionInfo): ListItem {
                 ) + '#readme',
                 text(extensionInfo.displayNameShort),
             ),
-            text(preReleaseMarker(extensionInfo) + ` - ${extensionInfo.description}`),
+            ...preReleaseMarker(extensionInfo),
+            text(` - ${extensionInfo.description}`),
         ]),
     );
 }
@@ -53,7 +54,8 @@ function makeMarketplaceExtensionListItem(extensionInfo: ExtensionInfo): ListIte
                 'https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.' + extensionInfo.name,
                 text(extensionInfo.displayNameShort),
             ),
-            text(preReleaseMarker(extensionInfo) + ' - ' + extensionInfo.description),
+            ...preReleaseMarker(extensionInfo),
+            text(' - ' + extensionInfo.description),
         ]),
     );
 }

@@ -15,6 +15,8 @@ import type {
     ListItemData,
     Link,
     LinkData,
+    Strong,
+    StrongData,
     BlockContent,
 } from 'mdast';
 
@@ -61,6 +63,17 @@ export function text(value: string, data?: TextData): Text {
     return {
         type: 'text',
         value,
+        data,
+    };
+}
+
+/**
+ * Create a strong (bold) node
+ */
+export function strong(children: PhrasingContent | PhrasingContent[], data?: StrongData): Strong {
+    return {
+        type: 'strong',
+        children: Array.isArray(children) ? children : [children],
         data,
     };
 }
