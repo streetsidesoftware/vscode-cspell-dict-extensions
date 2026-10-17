@@ -27,8 +27,7 @@ async function run() {
 
     for (const ext of extensions) {
         const pkg = await readExtensionPackageJson(ext);
-        fixExtensionPackageJson(ext, pkg, overrides);
-        await writeExtensionPackageJson(ext, pkg);
+        await writeExtensionPackageJson(ext, fixExtensionPackageJson(ext, pkg, overrides));
     }
 }
 
