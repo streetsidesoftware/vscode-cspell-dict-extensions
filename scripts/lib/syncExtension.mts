@@ -1,12 +1,13 @@
 /**
- * Write the files of an extension that come from `extension-runtime/` or from its `extension.config.json`.
+ * Sync one extension with `extension-runtime/` and its `extension.config.json`.
  *
- * - Owned: the tool configs copied from `extension-runtime/template/`.
- * - Generated into `static/`: `cspell-ext.json` and `commands.json`, the data the README templates read.
- *   `cspell-ext.json` gets the `engines` the imported dictionaries declare, unless `cspell.engines` sets them.
- * - Derived: some fields of `package.json` (the other fields are kept) and the injected sections of `README.md`,
- *   filled from the shared templates in `<repo>/static/` and the extension's `static/` data.
- * - Everything else (the rest of the README, samples, CHANGELOG, LICENSE, images, `src/custom.ts`) is never touched.
+ * The sync writes:
+ * - the tool configs, copied from `extension-runtime/template/`;
+ * - `static/cspell-ext.json` and `static/commands.json`, generated from the config;
+ * - some fields of `package.json`, and the `@@inject` sections of `README.md`.
+ *
+ * It removes the old files these replace, such as `src/extension.ts`, and leaves every other file alone.
+ * "Synced extensions" in CONTRIBUTING.md has the details.
  */
 
 import fs from 'node:fs/promises';
