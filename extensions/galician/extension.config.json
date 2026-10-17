@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Galician",
     "nativeName": "galego",
-    "locale": "gl",
+    "locale": "gl-ES",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-gl-es/cspell-ext.json"]

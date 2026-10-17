@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Hungarian",
     "nativeName": "magyar",
-    "locale": "hu",
+    "locale": "hu-HU",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-hu-hu/cspell-ext.json"]

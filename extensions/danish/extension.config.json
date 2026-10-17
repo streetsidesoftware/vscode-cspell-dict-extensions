@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Danish",
     "nativeName": "dansk",
-    "locale": "da",
+    "locale": "da-DK",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-da-dk/cspell-ext.json"]

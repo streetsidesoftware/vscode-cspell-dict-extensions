@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Russian",
     "nativeName": "русский",
-    "locale": "ru",
+    "locale": "ru-RU",
     "sample": "samples/portland.md",
     "cspell": {
         "version": "0.2",

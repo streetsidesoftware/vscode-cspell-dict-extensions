@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Macedonian",
     "nativeName": "македонски",
-    "locale": "mk",
+    "locale": "mk-Cyrl",
     "sample": "samples/Skopje.md",
     "cspell": {
         "import": ["@cspell/dict-mk/cspell-ext.json"]

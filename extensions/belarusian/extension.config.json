@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Belarusian",
     "nativeName": "беларуская",
-    "locale": "be",
+    "locale": "be-BY",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-be-by/cspell-ext.json"]

@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Ancient Greek",
     "nativeName": "Ἀρχαία Ἑλληνική",
-    "locale": "grc",
+    "locale": "grc-GR",
     "sample": "samples/Hymn-4-to-Hermes.md",
     "cspell": {
         "import": ["@cspell/dict-grc/cspell-ext.json"]

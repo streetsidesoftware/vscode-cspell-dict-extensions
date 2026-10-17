@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Armenian",
     "nativeName": "հայերեն",
-    "locale": "hy",
+    "locale": "hy-AM",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-hy/cspell-ext.json"]

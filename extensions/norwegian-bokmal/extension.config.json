@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Norwegian Bokmål",
     "nativeName": "norsk bokmål",
-    "locale": "nb",
+    "locale": "nb-NO",
     "sample": "samples/norge.md",
     "cspell": {
         "import": ["@cspell/dict-nb-no/cspell-ext.json"]

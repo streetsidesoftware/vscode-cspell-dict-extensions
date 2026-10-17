@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Finnish",
     "nativeName": "suomi",
-    "locale": "fi",
+    "locale": "fi-FI",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-fi-fi/cspell-ext.json"]

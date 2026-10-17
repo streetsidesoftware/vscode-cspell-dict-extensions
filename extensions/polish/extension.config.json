@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Polish",
     "nativeName": "polski",
-    "locale": "pl",
+    "locale": "pl-PL",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-pl_pl/cspell-ext.json"]

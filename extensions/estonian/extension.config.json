@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Estonian",
     "nativeName": "eesti",
-    "locale": "et",
+    "locale": "et-EE",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-et-ee/cspell-ext.json"]

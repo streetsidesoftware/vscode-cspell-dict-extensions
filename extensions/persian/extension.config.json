@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Persian",
     "nativeName": "فارسی",
-    "locale": "fa",
+    "locale": "fa-IR",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-fa-ir/cspell-ext.json"]

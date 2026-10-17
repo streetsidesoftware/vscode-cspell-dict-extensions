@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Croatian",
     "nativeName": "hrvatski",
-    "locale": "hr",
+    "locale": "hr-HR",
     "sample": "samples/amsterdam.md",
     "cspell": {
         "import": ["@cspell/dict-hr-hr/cspell-ext.json"]

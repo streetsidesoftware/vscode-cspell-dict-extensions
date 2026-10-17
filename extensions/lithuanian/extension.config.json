@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Lithuanian",
     "nativeName": "lietuvių",
-    "locale": "lt",
+    "locale": "lt-LT",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-lt-lt/cspell-ext.json"]

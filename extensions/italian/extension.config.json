@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Italian",
     "nativeName": "italiano",
-    "locale": "it",
+    "locale": "it-IT",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-it-it/cspell-ext.json"]

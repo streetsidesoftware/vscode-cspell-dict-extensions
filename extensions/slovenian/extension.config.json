@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Slovenian",
     "nativeName": "slovenščina",
-    "locale": "sl",
+    "locale": "sl-SI",
     "sample": "samples/Ljubljana.md",
     "cspell": {
         "import": ["@cspell/dict-sl-si/cspell-ext.json"]
