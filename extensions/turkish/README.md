@@ -23,18 +23,22 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-end: ./static/commands.json --->
 
+<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
+
 ### Manual Settings
 
 This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `tr` to the `cSpell.language` setting, will enable the Turkish dictionary.
+Adding `tr-TR` to the `cSpell.language` setting, will enable the Turkish dictionary.
 Example using both English and Turkish dictionaries:
 
 ```javascript
-"cSpell.language": "en,tr",
+"cSpell.language": "en,tr-TR",
 ```
+
+<!--- @@inject-end: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
 
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
