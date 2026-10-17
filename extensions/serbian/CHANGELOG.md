@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-serbian" extension will be documented in this file.
 
+## [2.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-serbian@2.0.0...code-spell-checker-serbian@2.1.0) (2026-10-17)
+
+
+### Features
+
+* sync extensions from a shared runtime; pilot swedish, serbian and medical-terms ([#1603](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1603)) ([6ffccc6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6ffccc64c58c28a8efbcc52a66e4b248d6b74963))
+
 ## [2.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-serbian@1.2.4...code-spell-checker-serbian@2.0.0) (2026-10-16)
 
 
