@@ -23,18 +23,22 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-end: ./static/commands.json --->
 
+<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
+
 ### Manual Settings
 
 This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `gl` to the `cSpell.language` setting, will enable the Galician dictionary.
+Adding `gl-ES` to the `cSpell.language` setting, will enable the Galician dictionary.
 Example using both English and Galician dictionaries:
 
 ```javascript
-"cSpell.language": "en,gl",
+"cSpell.language": "en,gl-ES",
 ```
+
+<!--- @@inject-end: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
 
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
