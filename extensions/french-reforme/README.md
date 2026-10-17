@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                      |
-| ------------------------------------------------------------ |
-| Enable French Reforme Spell Checker Dictionary               |
-| Disable French Reforme Spell Checker Dictionary              |
-| Enable French Reforme Spell Checker Dictionary in Workspace  |
-| Disable French Reforme Spell Checker Dictionary in Workspace |
+| Command                                                         |
+| --------------------------------------------------------------- |
+| Enable French Réforme 90 Spell Checker Dictionary               |
+| Disable French Réforme 90 Spell Checker Dictionary              |
+| Enable French Réforme 90 Spell Checker Dictionary in Workspace  |
+| Disable French Réforme 90 Spell Checker Dictionary in Workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

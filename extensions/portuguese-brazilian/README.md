@@ -16,10 +16,10 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                            |
 | ------------------------------------------------------------------ |
-| Enable Portuguese Brazilian Spell Checker Dictionary               |
-| Disable Portuguese Brazilian Spell Checker Dictionary              |
-| Enable Portuguese Brazilian Spell Checker Dictionary in Workspace  |
-| Disable Portuguese Brazilian Spell Checker Dictionary in Workspace |
+| Enable Brazilian Portuguese Spell Checker Dictionary               |
+| Disable Brazilian Portuguese Spell Checker Dictionary              |
+| Enable Brazilian Portuguese Spell Checker Dictionary in Workspace  |
+| Disable Brazilian Portuguese Spell Checker Dictionary in Workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

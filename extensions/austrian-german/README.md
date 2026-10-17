@@ -16,10 +16,10 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                       |
 | ------------------------------------------------------------- |
-| Enable Austrian_german Spell Checker Dictionary               |
-| Disable Austrian_german Spell Checker Dictionary              |
-| Enable Austrian_german Spell Checker Dictionary in Workspace  |
-| Disable Austrian_german Spell Checker Dictionary in Workspace |
+| Enable Austrian German Spell Checker Dictionary               |
+| Disable Austrian German Spell Checker Dictionary              |
+| Enable Austrian German Spell Checker Dictionary in Workspace  |
+| Disable Austrian German Spell Checker Dictionary in Workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

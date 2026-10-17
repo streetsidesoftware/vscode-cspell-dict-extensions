@@ -1,14 +1,14 @@
 [
     {
-        "Command": "Enable Austrian_german Spell Checker Dictionary"
+        "Command": "Enable Austrian German Spell Checker Dictionary"
     },
     {
-        "Command": "Disable Austrian_german Spell Checker Dictionary"
+        "Command": "Disable Austrian German Spell Checker Dictionary"
     },
     {
-        "Command": "Enable Austrian_german Spell Checker Dictionary in Workspace"
+        "Command": "Enable Austrian German Spell Checker Dictionary in Workspace"
     },
     {
-        "Command": "Disable Austrian_german Spell Checker Dictionary in Workspace"
+        "Command": "Disable Austrian German Spell Checker Dictionary in Workspace"
     }
 ]

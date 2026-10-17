@@ -16,10 +16,10 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                     |
 | ----------------------------------------------------------- |
-| Enable Ancient_greek Spell Checker Dictionary               |
-| Disable Ancient_greek Spell Checker Dictionary              |
-| Enable Ancient_greek Spell Checker Dictionary in Workspace  |
-| Disable Ancient_greek Spell Checker Dictionary in Workspace |
+| Enable Ancient Greek Spell Checker Dictionary               |
+| Disable Ancient Greek Spell Checker Dictionary              |
+| Enable Ancient Greek Spell Checker Dictionary in Workspace  |
+| Disable Ancient Greek Spell Checker Dictionary in Workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

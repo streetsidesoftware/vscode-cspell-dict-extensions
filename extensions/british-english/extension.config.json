@@ -12,28 +12,24 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "en-GB",
-            "title": "Enable British Spell Checker Dictionary"
+            "value": "en-GB"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "en-GB",
-            "title": "Disable British Spell Checker Dictionary"
+            "value": "en-GB"
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "en-GB",
-            "scope": "workspace",
-            "title": "Enable British Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "en-GB",
-            "scope": "workspace",
-            "title": "Disable British Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         }
     ]
 }

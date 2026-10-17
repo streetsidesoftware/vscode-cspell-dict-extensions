@@ -13,28 +13,24 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "fr-90",
-            "title": "Enable French Reforme Spell Checker Dictionary"
+            "value": "fr-90"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90",
-            "title": "Disable French Reforme Spell Checker Dictionary"
+            "value": "fr-90"
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "fr-90",
-            "scope": "workspace",
-            "title": "Enable French Reforme Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "fr-90",
-            "scope": "workspace",
-            "title": "Disable French Reforme Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         },
         {
             "action": "enable",

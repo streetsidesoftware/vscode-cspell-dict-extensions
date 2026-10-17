@@ -13,28 +13,24 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "de-ch",
-            "title": "Enable Swiss_german Spell Checker Dictionary"
+            "value": "de-ch"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "de-CH",
-            "title": "Disable Swiss_german Spell Checker Dictionary"
+            "value": "de-CH"
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "de-ch",
-            "scope": "workspace",
-            "title": "Enable Swiss_german Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "de-CH",
-            "scope": "workspace",
-            "title": "Disable Swiss_german Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         }
     ],
     "notes": "Disable removes only `de-CH`, not `de`: `de` is shared with German, so a user who added `de` keeps this dictionary on."

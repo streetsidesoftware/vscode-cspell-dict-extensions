@@ -13,28 +13,24 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pt-BR",
-            "title": "Enable Portuguese Brazilian Spell Checker Dictionary"
+            "value": "pt-BR"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "pt-BR",
-            "title": "Disable Portuguese Brazilian Spell Checker Dictionary"
+            "value": "pt-BR"
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "pt-BR",
-            "scope": "workspace",
-            "title": "Enable Portuguese Brazilian Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "pt-BR",
-            "scope": "workspace",
-            "title": "Disable Portuguese Brazilian Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         },
         {
             "action": "enable",

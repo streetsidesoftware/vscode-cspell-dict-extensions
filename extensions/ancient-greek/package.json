@@ -43,19 +43,19 @@
     "commands": [
       {
         "command": "cSpellExt_ancient-greek.enable",
-        "title": "Enable Ancient_greek Spell Checker Dictionary"
+        "title": "Enable Ancient Greek Spell Checker Dictionary"
       },
       {
         "command": "cSpellExt_ancient-greek.disable",
-        "title": "Disable Ancient_greek Spell Checker Dictionary"
+        "title": "Disable Ancient Greek Spell Checker Dictionary"
       },
       {
         "command": "cSpellExt_ancient-greek.enableWorkspace",
-        "title": "Enable Ancient_greek Spell Checker Dictionary in Workspace"
+        "title": "Enable Ancient Greek Spell Checker Dictionary in Workspace"
       },
       {
         "command": "cSpellExt_ancient-greek.disableWorkspace",
-        "title": "Disable Ancient_greek Spell Checker Dictionary in Workspace"
+        "title": "Disable Ancient Greek Spell Checker Dictionary in Workspace"
       }
     ]
   },
