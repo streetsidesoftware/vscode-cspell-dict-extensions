@@ -27,6 +27,10 @@ const markdownOptions: Options = {
     bullet: '-',
 };
 
+function preReleaseMarker(extensionInfo: ExtensionInfo): string {
+    return extensionInfo.preRelease ? ' (pre-release)' : '';
+}
+
 function makeExtensionListItem(extensionInfo: ExtensionInfo): ListItem {
     return listItem(
         paragraph([
@@ -37,7 +41,7 @@ function makeExtensionListItem(extensionInfo: ExtensionInfo): ListItem {
                 ) + '#readme',
                 text(extensionInfo.displayNameShort),
             ),
-            text(` - ${extensionInfo.description}`),
+            text(preReleaseMarker(extensionInfo) + ` - ${extensionInfo.description}`),
         ]),
     );
 }
@@ -49,7 +53,7 @@ function makeMarketplaceExtensionListItem(extensionInfo: ExtensionInfo): ListIte
                 'https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.' + extensionInfo.name,
                 text(extensionInfo.displayNameShort),
             ),
-            text(' - ' + extensionInfo.description),
+            text(preReleaseMarker(extensionInfo) + ' - ' + extensionInfo.description),
         ]),
     );
 }
