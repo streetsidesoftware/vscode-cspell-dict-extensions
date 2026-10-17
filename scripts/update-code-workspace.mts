@@ -8,13 +8,13 @@
 import path from 'node:path';
 
 import type { CodeWorkspace } from './lib/types.ts';
-import { compareCodePoints, listExtensionDirs, readJson, repoRoot, run, writeJson } from './lib/repo.mts';
+import { listExtensionDirs, readJson, repoRoot, run, writeJson } from './lib/repo.mts';
 
 const workspaceFile = 'dict-extensions.code-workspace';
 
 async function updateCodeWorkspace(): Promise<void> {
     const dirs = ['.', 'test-runner', 'generator-cspell-dicts-extensions', ...(await listExtensionDirs())];
-    const folders = dirs.sort(compareCodePoints).map((dir) => ({ path: dir }));
+    const folders = dirs.sort().map((dir) => ({ path: dir }));
 
     const workspace = await readJson<CodeWorkspace>(workspaceFile);
     await writeJson(workspaceFile, { ...workspace, folders });
