@@ -13,7 +13,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hy"
+            "value": "hy-AM"
         },
         {
             "action": "disable",
@@ -23,7 +23,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hy",
+            "value": "hy-AM",
             "scope": "workspace"
         },
         {

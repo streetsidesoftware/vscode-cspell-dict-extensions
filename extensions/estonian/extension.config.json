@@ -13,7 +13,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "et"
+            "value": "et-EE"
         },
         {
             "action": "disable",
@@ -23,7 +23,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "et",
+            "value": "et-EE",
             "scope": "workspace"
         },
         {

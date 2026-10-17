@@ -13,7 +13,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hu"
+            "value": "hu-HU"
         },
         {
             "action": "disable",
@@ -23,7 +23,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hu",
+            "value": "hu-HU",
             "scope": "workspace"
         },
         {

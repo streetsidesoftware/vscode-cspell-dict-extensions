@@ -13,7 +13,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "mk"
+            "value": "mk-Cyrl"
         },
         {
             "action": "disable",
@@ -23,7 +23,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "mk",
+            "value": "mk-Cyrl",
             "scope": "workspace"
         },
         {

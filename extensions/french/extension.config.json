@@ -32,5 +32,6 @@
             "value": "fr,fr-FR",
             "scope": "workspace"
         }
-    ]
+    ],
+    "notes": "Enable uses `fr`, not `fr-FR`: this dictionary declares `fr,fr_FR`, and French Réforme 90 declares `fr,fr-fr,fr-90`, so `fr-FR` would turn on both. No locale is exclusive to classic French."
 }

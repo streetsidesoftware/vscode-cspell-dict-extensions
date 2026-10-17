@@ -13,7 +13,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "grc",
+            "value": "grc-GR",
             "title": "Enable Ancient_greek Spell Checker Dictionary"
         },
         {
@@ -25,7 +25,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "grc",
+            "value": "grc-GR",
             "scope": "workspace",
             "title": "Enable Ancient_greek Spell Checker Dictionary in Workspace"
         },

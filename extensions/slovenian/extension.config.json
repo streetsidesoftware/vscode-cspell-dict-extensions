@@ -13,7 +13,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "sl"
+            "value": "sl-SI"
         },
         {
             "action": "disable",
@@ -23,7 +23,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "sl",
+            "value": "sl-SI",
             "scope": "workspace"
         },
         {

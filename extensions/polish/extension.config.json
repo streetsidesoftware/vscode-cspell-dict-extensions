@@ -13,7 +13,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pl"
+            "value": "pl-PL"
         },
         {
             "action": "disable",
@@ -23,7 +23,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "pl",
+            "value": "pl-PL",
             "scope": "workspace"
         },
         {

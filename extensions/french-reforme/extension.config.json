@@ -75,5 +75,5 @@
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ],
-    "notes": "`locale` is `fr-90`, not a BCP 47 tag: the IANA registry has no variant for the 1990 French spelling reform, and `fr-90` is the locale cspell's French Réforme dictionary declares."
+    "notes": "`locale` is `fr-90`, not a BCP 47 tag: the IANA registry has no variant for the 1990 French spelling reform, and `fr-90` is the locale cspell's French Réforme dictionary declares. Enable uses `fr-90` because it is the only locale exclusive to this dictionary: `fr` and `fr-FR` also turn on French."
 }

@@ -13,7 +13,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "fi"
+            "value": "fi-FI"
         },
         {
             "action": "disable",
@@ -23,7 +23,7 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "fi",
+            "value": "fi-FI",
             "scope": "workspace"
         },
         {
