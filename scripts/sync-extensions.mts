@@ -14,8 +14,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { parseArgs, styleText } from 'node:util';
 
-import { readPackageJson } from './lib/extensionHelper.mts';
 import { createExtensionConfigValidator, generateExtensionSchema, schemaPath } from './lib/extensionSchema.mts';
+import { readVscodeEngine } from './lib/repo.mts';
 import { configFileName, format, repoRoot, syncExtension, writeIfChanged } from './lib/syncExtension.mts';
 
 async function run(): Promise<void> {
@@ -26,8 +26,7 @@ async function run(): Promise<void> {
 
     const extensionsDir = path.join(repoRoot, 'extensions');
     const names = positionals.length ? positionals : (await fs.readdir(extensionsDir)).sort();
-    const rootPkg = await readPackageJson(path.join(repoRoot, 'package.json'));
-    const vscodeEngine = rootPkg.engines?.vscode ?? '^1.125.0';
+    const vscodeEngine = await readVscodeEngine();
 
     // The schema comes from the `ExtensionConfig` type; every extension.config.json is checked against it.
     const schema = generateExtensionSchema();

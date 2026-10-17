@@ -104,12 +104,12 @@
             "component": "code-spell-checker-belarusian",
             "releaseType": "node"
         },
-        "extensions/british-english-ise": {
-            "component": "code-spell-checker-british-english-ise",
-            "releaseType": "node"
-        },
         "extensions/british-english": {
             "component": "code-spell-checker-british-english",
+            "releaseType": "node"
+        },
+        "extensions/british-english-ise": {
+            "component": "code-spell-checker-british-english-ise",
             "releaseType": "node"
         },
         "extensions/bulgarian": {
@@ -156,12 +156,12 @@
             "component": "code-spell-checker-finnish",
             "releaseType": "node"
         },
-        "extensions/french-reforme": {
-            "component": "code-spell-checker-french-reforme",
-            "releaseType": "node"
-        },
         "extensions/french": {
             "component": "code-spell-checker-french",
+            "releaseType": "node"
+        },
+        "extensions/french-reforme": {
+            "component": "code-spell-checker-french-reforme",
             "releaseType": "node"
         },
         "extensions/galician": {
@@ -232,12 +232,12 @@
             "component": "code-spell-checker-polish",
             "releaseType": "node"
         },
-        "extensions/portuguese-brazilian": {
-            "component": "code-spell-checker-portuguese-brazilian",
-            "releaseType": "node"
-        },
         "extensions/portuguese": {
             "component": "code-spell-checker-portuguese",
+            "releaseType": "node"
+        },
+        "extensions/portuguese-brazilian": {
+            "component": "code-spell-checker-portuguese-brazilian",
             "releaseType": "node"
         },
         "extensions/romanian": {
