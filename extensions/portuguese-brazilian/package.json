@@ -3,7 +3,7 @@
   "displayName": "Brazilian Portuguese - Code Spell Checker",
   "version": "3.0.0",
   "private": true,
-  "description": "Adds Brazilian Portuguese (português (Brasil)) spell checking to Code Spell Checker.",
+  "description": "Adds Brazilian Portuguese (português brasileiro) spell checking to Code Spell Checker.",
   "categories": [
     "Linters",
     "Other"
