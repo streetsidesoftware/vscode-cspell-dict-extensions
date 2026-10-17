@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-danish",
   "description": "Adds Danish (dansk) spell checking to Code Spell Checker.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "displayName": "Danish - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

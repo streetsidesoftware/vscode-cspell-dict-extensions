@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-german@3.0.0...code-spell-checker-german@3.0.1) (2026-10-17)
+
+
+### Updates and Bug Fixes
+
+* describe each kind of extension in its own words ([#1648](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1648)) ([1b38ab8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/1b38ab80fda1ecb65a953bcf4efaa715b2116637))
+
 ## [3.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-german@2.3.5...code-spell-checker-german@3.0.0) (2026-10-16)
 
 

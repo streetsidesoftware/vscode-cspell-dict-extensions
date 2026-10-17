@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-azerbaijani",
   "description": "Adds Azerbaijani (azərbaycan) spell checking to Code Spell Checker.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "displayName": "Azerbaijani - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
