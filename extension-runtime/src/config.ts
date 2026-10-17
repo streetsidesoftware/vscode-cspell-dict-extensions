@@ -95,7 +95,6 @@ interface ExtensionConfigBase {
     commands: CommandConfig[];
     /**
      * Notes for maintainers: why something in this file is the way it is. Not used by the sync.
-     * @minLength 1
      */
     notes?: string;
 }

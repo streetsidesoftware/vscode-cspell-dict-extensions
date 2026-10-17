@@ -120,8 +120,7 @@
                 },
                 "notes": {
                     "type": "string",
-                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync.",
-                    "minLength": 1
+                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync."
                 },
                 "kind": {
                     "type": "string",
@@ -261,8 +260,7 @@
                 },
                 "notes": {
                     "type": "string",
-                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync.",
-                    "minLength": 1
+                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync."
                 },
                 "kind": {
                     "type": "string",
@@ -392,8 +390,7 @@
                 },
                 "notes": {
                     "type": "string",
-                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync.",
-                    "minLength": 1
+                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync."
                 },
                 "kind": {
                     "type": "string",
@@ -523,8 +520,7 @@
                 },
                 "notes": {
                     "type": "string",
-                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync.",
-                    "minLength": 1
+                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync."
                 },
                 "kind": {
                     "type": "string",
