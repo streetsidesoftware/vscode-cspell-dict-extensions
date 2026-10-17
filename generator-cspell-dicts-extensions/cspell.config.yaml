@@ -1,37 +1,8 @@
 words:
-  - Aland
-  - Barthelemy
-  - Bokmål
-  - Burkina
-  - Caicos
-  - d'Ivoire
-  - Dzongkha
-  - Faroese
-  - Faso
-  - Fulah
-  - Futuna
-  - Islas
-  - Kalaallisut
-  - Kinyarwanda
-  - Kitts
-  - Leste
-  - Limburgan
-  - Lingala
-  - Luba
-  - Luxembourgish
-  - Marino
-  - Ndebele
-  - Oromo
-  - Ossetian
-  - Pushto
-  - Rica
-  - Rundi
-  - Sami
-  - Sango
-  - Shona
-  - Sinhala
-  - Tokelau
-  - Volapük
+  - Bangla
+  - francais
+  - Français
+  - svenska
 
 ignorePaths:
   - templates/**

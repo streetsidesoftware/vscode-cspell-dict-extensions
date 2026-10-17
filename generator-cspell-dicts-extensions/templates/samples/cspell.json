@@ -1,6 +1,6 @@
 {
-    <% if (locale) { %>
-    "language": "<%= locale %>",
-    <% } %>
-    "dictionaries": []
+<% if (sampleLocale) { %>
+    "language": "<%= sampleLocale %>",
+<% } %>
+    "dictionaries": <%- sampleDictionariesJson %>
 }

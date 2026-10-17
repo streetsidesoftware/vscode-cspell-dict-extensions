@@ -3,7 +3,7 @@ import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path';
 
 import type { Answers } from './questions.mts';
-import { render } from './render.mts';
+import { render, type TemplateData } from './render.mts';
 
 export const templateDir: string = path.join(import.meta.dirname, '..', 'templates');
 
@@ -28,13 +28,53 @@ export interface WriteOptions {
 }
 
 /**
+ * The values the templates use.
+ */
+export function templateData(answers: Answers): TemplateData {
+    const { kind, toggle, locale, dictionaries } = answers;
+    const cspellImports = {
+        dictionary: [`${answers.packageName}/cspell-ext.json`],
+        parser: [`${answers.packageName}/recommended`],
+        scaffold: [],
+    }[kind];
+    const sampleLocale = kind === 'dictionary' && toggle === 'locale' ? locale : '';
+    return {
+        name: answers.name,
+        friendlyName: answers.friendlyName,
+        displayName: answers.displayName,
+        description: answers.description,
+        commandName: answers.commandName,
+        fullPackageName: `code-spell-checker-${answers.name}`,
+        isDictionary: kind === 'dictionary',
+        isParser: kind === 'parser',
+        isScaffold: kind === 'scaffold',
+        toggleLocale: toggle === 'locale',
+        toggleDictionary: toggle === 'dictionary',
+        toggleFileType: toggle === 'file-type',
+        toggleLocaleOrDictionary: toggle === 'locale' || toggle === 'dictionary',
+        addCommands: toggle !== 'none',
+        /** The end of the command titles, i.e. `Enable Swedish Spell Checker Dictionary`. */
+        commandSubject: toggle === 'file-type' ? 'Spell Checking of File Types' : 'Spell Checker Dictionary',
+        locale,
+        localeExample: locale || '<locale>',
+        dictionariesJson: JSON.stringify(dictionaries),
+        dictionaryExample: dictionaries[0] ?? '<dictionary>',
+        cspellImportsJson: JSON.stringify(cspellImports),
+        sampleLocale,
+        sampleDictionariesJson: JSON.stringify(toggle === 'dictionary' ? dictionaries : []),
+        /** The Wikipedia language of the sample text, i.e. `sv` for `sv_SE`. */
+        wikiLanguage: sampleLocale.split(/[-_,]/)[0]?.toLowerCase() || 'en',
+    };
+}
+
+/**
  * Write the extension files into `destDir`. Existing files are never overwritten.
  * @returns the files written, relative to `destDir`.
  */
 export async function writeExtension(destDir: string, answers: Answers, options: WriteOptions = {}): Promise<string[]> {
     const srcDir = options.templateDir ?? templateDir;
     const log = options.log ?? (() => undefined);
-    const data = { ...answers };
+    const data = templateData(answers);
     const written: string[] = [];
 
     async function create(file: string, write: (dest: string) => Promise<void>): Promise<void> {

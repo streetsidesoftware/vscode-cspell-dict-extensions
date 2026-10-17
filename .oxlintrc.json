@@ -5,6 +5,7 @@
         "**/samples/**",
         "**/.vscode-test/**",
         "**/static/**",
+        "generator-cspell-dicts-extensions/templates/**",
         "extension-runtime/template/**"
     ],
     "rules": {

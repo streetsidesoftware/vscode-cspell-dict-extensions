@@ -7,30 +7,49 @@ import { afterEach, beforeEach, describe, it } from 'node:test';
 import type { Answers } from './questions.mts';
 import { templateDir, writeExtension } from './writeExtension.mts';
 
-const withCommands: Answers = {
-    name: 'swedish',
-    friendlyName: 'Swedish',
-    displayName: 'Swedish - Code Spell Checker',
-    description: 'Swedish dictionary extension for VS Code.',
-    dictionarySrc: '@cspell/dict-sv',
-    addCommands: true,
-    commandName: 'Swedish',
-    locale: 'sv',
-    target: 'extensions/swedish',
-    fullPackageName: 'code-spell-checker-swedish',
+function answers(name: string, friendly: string, rest: Partial<Answers> & Pick<Answers, 'kind' | 'toggle'>): Answers {
+    return {
+        packageName: '',
+        locale: '',
+        dictionaries: [],
+        name,
+        friendlyName: friendly,
+        displayName: `${friendly} - Code Spell Checker`,
+        description: `${friendly} dictionary extension for VS Code.`,
+        commandName: friendly,
+        ...rest,
+    };
+}
+
+const variants: Record<string, Answers> = {
+    'natural language dictionary': answers('swedish', 'Swedish', {
+        kind: 'dictionary',
+        packageName: '@cspell/dict-sv',
+        toggle: 'locale',
+        locale: 'sv_SE',
+    }),
+    'word list dictionary': answers('medical-terms', 'Medical Terms', {
+        kind: 'dictionary',
+        packageName: '@cspell/dict-medicalterms',
+        toggle: 'dictionary',
+        dictionaries: ['medical terms'],
+    }),
+    parser: answers('typescript-parser', 'TypeScript Parser', {
+        kind: 'parser',
+        packageName: '@cspell/parser-typescript',
+        toggle: 'none',
+        description: 'TypeScript Parser parser extension for VS Code.',
+    }),
+    'scaffold with a locale': answers('extra', 'Extra', { kind: 'scaffold', toggle: 'locale' }),
+    'scaffold with dictionaries': answers('extra', 'Extra', { kind: 'scaffold', toggle: 'dictionary' }),
+    'scaffold with file types': answers('extra', 'Extra', { kind: 'scaffold', toggle: 'file-type' }),
 };
 
-const withoutCommands: Answers = {
-    name: 'medical-terms',
-    friendlyName: 'Medical Terms',
-    displayName: 'Medical Terms - Code Spell Checker',
-    description: 'Medical Terms dictionary extension for VS Code.',
-    dictionarySrc: '@cspell/dict-medical-terms',
-    addCommands: false,
-    commandName: '',
-    locale: '',
-    target: 'extensions/medical-terms',
-    fullPackageName: 'code-spell-checker-medical-terms',
+const commandCount: Record<Answers['toggle'], number> = {
+    locale: 4,
+    dictionary: 4,
+    'file-type': 2,
+    none: 0,
 };
 
 const expectedFiles = [
@@ -57,6 +76,8 @@ async function hasPlaceholder(file: string): Promise<boolean> {
     return !content.includes(0) && content.includes('<%');
 }
 
+const swedish = variants['natural language dictionary'] as Answers;
+
 describe('writeExtension', () => {
     let dest = '';
 
@@ -75,11 +96,8 @@ describe('writeExtension', () => {
         return Object.fromEntries(entries);
     }
 
-    for (const [label, answers] of [
-        ['with commands', withCommands],
-        ['without commands', withoutCommands],
-    ] as const) {
-        it(`renders the templates ${label}`, async (t) => {
+    for (const [label, answers] of Object.entries(variants)) {
+        it(`renders the templates: ${label}`, async (t) => {
             const written = await writeExtension(dest, answers);
             assert.deepEqual(written, expectedFiles);
 
@@ -87,29 +105,32 @@ describe('writeExtension', () => {
             const placeholders = await Promise.all(expectedFiles.map(hasPlaceholder));
             const rendered = expectedFiles.filter((_, i) => placeholders[i]);
             const unchanged = expectedFiles.filter((_, i) => !placeholders[i]);
-            t.assert.snapshot(await readText(rendered));
+            const text = await readText(rendered);
+            t.assert.snapshot(text);
 
             for (const file of unchanged) {
                 const expected = await readFile(path.join(templateDir, file));
                 assert.ok(expected.equals(await readFile(path.join(dest, file))), `${file} matches its template`);
             }
 
-            // The rendered package.json is valid JSON.
-            const pkg = JSON.parse(await readFile(path.join(dest, 'package.json'), 'utf8')) as {
-                contributes: { commands?: unknown[] };
-            };
-            assert.equal(pkg.contributes.commands?.length, answers.addCommands ? 4 : undefined);
+            for (const [file, content] of Object.entries(text)) {
+                assert.doesNotMatch(content, /<%/, `${file} has no template tags left`);
+                if (file.endsWith('.json')) JSON.parse(content);
+            }
+
+            const pkg = JSON.parse(text['package.json'] ?? '') as { contributes: { commands: unknown[] } };
+            assert.equal(pkg.contributes.commands.length, commandCount[answers.toggle]);
         });
     }
 
     it('never overwrites existing files', async () => {
         await writeFile(path.join(dest, 'README.md'), 'existing');
-        await assert.rejects(writeExtension(dest, withCommands), { code: 'EEXIST' });
+        await assert.rejects(writeExtension(dest, swedish), { code: 'EEXIST' });
         assert.equal(await readFile(path.join(dest, 'README.md'), 'utf8'), 'existing');
 
         await rm(path.join(dest, 'README.md'));
         await writeFile(path.join(dest, '.gitignore'), 'existing');
-        await assert.rejects(writeExtension(dest, withCommands), { code: 'EEXIST' });
+        await assert.rejects(writeExtension(dest, swedish), { code: 'EEXIST' });
         assert.equal(await readFile(path.join(dest, '.gitignore'), 'utf8'), 'existing');
     });
 });

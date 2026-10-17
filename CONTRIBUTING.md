@@ -16,30 +16,29 @@ In the `vscode-cspell-dict-extensions` repository root directory
 npm run create:extension
 ```
 
-OR, with the dictionary name as the default answer to the first question:
+The generator asks which kind of extension to create, then helps you find the package on npm. Press enter to accept a suggested answer.
+
+| Question           | Description                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Kind**           | `Dictionary` for a `@cspell/dict-*` package from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts), `Parser` for a `@cspell/parser-*` package from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers), or `Scaffold` for an extension without a package. A dictionary or parser that isn't published yet must be added to its repository first. |
+| **Package**        | Type a language or topic, i.e. `swedish`, and pick the package. Packages that already have an extension are marked.                                                                                                                                                                                                                                                                  |
+| Natural language   | Dictionaries only. Suggested from the package: a natural language, like Swedish, is enabled by locale; a word list, like `medical terms`, is enabled by name.                                                                                                                                                                                                                        |
+| Locale             | Natural languages only. The locale the enable / disable commands toggle. The most specific one, i.e. `fr-90` rather than `fr`, avoids also enabling other dictionaries for the language.                                                                                                                                                                                             |
+| Toggle             | Scaffolds only. What the enable / disable commands toggle: a locale, dictionaries or file types. The value is filled in later.                                                                                                                                                                                                                                                       |
+| **Extension name** | The directory in `extensions/` and the command ID prefix, i.e. `swedish`. Suggested from the package. The directory must not exist yet.                                                                                                                                                                                                                                              |
+| Friendly name      | The name shown to people, i.e. `Swedish`. It is used for the display name (`Swedish - Code Spell Checker`), the description, and the command titles.                                                                                                                                                                                                                                 |
+
+A parser extension has no enable / disable commands: disable the extension in VS Code to turn the parser off.
+
+##### Without questions
+
+Pass the package and `--yes` to use the suggested answers:
 
 ```sh
-npm run create:extension -- <language>
+npm run create:extension -- @cspell/dict-sv --yes
 ```
 
-##### Example Answers for Swedish
-
-![Swedish Generation Example](./images/example-yo.png)
-
-The generator will ask you a series of questions most of which default suggestion is ok (to select default suggestion press enter without typing):
-
-| Field                         | Description                                                                                                                                                                                                                                                                      |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **name**                      | this is the dictionary. i.e. `swedish`, `ruby`, or `rust`                                                                                                                                                                                                                        |
-| friendly name                 | this is the friendly name, like `Swedish`                                                                                                                                                                                                                                        |
-| display name                  | this is the name shown on the VS Code Extensions page.                                                                                                                                                                                                                           |
-| description                   | short description of the extension.                                                                                                                                                                                                                                              |
-| **Source Dictionary**         | This is the NPM install name of the source eg. dictionary `@cspell/dict-sv` (@ is needed). Available dictionaries could be found here [https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries](https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries) |
-| Add Enable / Disable Commands | This is used for adding helper commands for human language locals like `fr` for French or `fr,fr_CA` for Canadian French. This option is not necessary for word lists like `companies` or programming languages.                                                                 |
-| Base Name For Commands        | This is added as a suffix onto the command names.                                                                                                                                                                                                                                |
-| Language Locale               | This is the two letter language code supported by the dictionary included in the `Source Dictionary` step.                                                                                                                                                                       |
-| Target Directory              | Where to create the extension. It must not exist yet.                                                                                                                                                                                                                            |
-| NPM Package Name              | name added to the `package.json`                                                                                                                                                                                                                                                 |
+With `--yes` the generator never asks; it stops with an error when a value has no default, i.e. `--name` for a scaffold. Run `npm run create:extension -- --help` for all options.
 
 After all the information is entered, the extension should be generated.
 
