@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Spanish Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Spanish Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Spanish Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Spanish Spell Checker Dictionary in Workspace"
+    }
+]

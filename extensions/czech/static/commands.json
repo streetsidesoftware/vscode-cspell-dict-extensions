@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Czech Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Czech Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Czech Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Czech Spell Checker Dictionary in Workspace"
+    }
+]

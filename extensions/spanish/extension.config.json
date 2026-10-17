@@ -1,0 +1,38 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "spanish",
+    "friendlyName": "Spanish",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-es-es/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "es-ES",
+            "id": "cSpell.enableSpanish"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "es-ES",
+            "id": "cSpell.disableSpanish"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "es-ES",
+            "scope": "workspace",
+            "id": "cSpell.enableSpanishWorkspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "es-ES",
+            "scope": "workspace",
+            "id": "cSpell.disableSpanishWorkspace"
+        }
+    ],
+    "description": "Spanish Add-On for Code Spell Checker"
+}

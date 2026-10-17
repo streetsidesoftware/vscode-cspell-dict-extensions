@@ -1,0 +1,37 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "german",
+    "friendlyName": "German",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-de-de/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "id": "cSpellExt_german.enableGerman"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "id": "cSpellExt_german.disableGerman"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "scope": "workspace",
+            "id": "cSpellExt_german.enableGermanWorkspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "scope": "workspace",
+            "id": "cSpellExt_german.disableGermanWorkspace"
+        }
+    ]
+}

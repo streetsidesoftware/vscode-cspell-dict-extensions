@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Croatian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Croatian Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Croatian Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Croatian Spell Checker Dictionary in Workspace"
+    }
+]
