@@ -103,9 +103,14 @@ jobs:
         run: |
           echo INPUT_CHOICE=$INPUT_CHOICE >> $GITHUB_ENV
 
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+
       - name: From Script
         run: |
-          echo extensions_from_script=$(./scripts/list-extensions.sh) >> $GITHUB_ENV
+          echo extensions_from_script=$(node ./scripts/list-extensions.mts) >> $GITHUB_ENV
 
       - name: EXTENSION_LIST
         env:

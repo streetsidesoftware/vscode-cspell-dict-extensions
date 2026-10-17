@@ -6,7 +6,7 @@
   "type": "module",
   "bin": {
     "gen-extension-list": "./gen-extension-list.mts",
-    "update-manual-pub-list": "./update-manual-pub-list.mjs",
+    "update-workflows": "./update-workflows.mts",
     "fix-extensions": "./fix-extensions.mts"
   },
   "devEngines": {
