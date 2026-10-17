@@ -83,6 +83,15 @@ Example using both English and Mongolian dictionaries:
 
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
 
+<!--- @@inject: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+
+| Tool                                                                                                            | Version   |
+| --------------------------------------------------------------------------------------------------------------- | --------- |
+| [cspell](https://github.com/streetsidesoftware/cspell)                                                          | `>=10`    |
+| [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) | `>=4.7.0` |
+
+<!--- @@inject-end: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+
 ## Хувь нэмэр оруулагчид | Contributors
 
 _Language_ - [Battseren Badral](https://github.com/btseee)

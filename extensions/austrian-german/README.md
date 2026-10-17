@@ -36,18 +36,22 @@ Example using both English and Austrian German dictionaries:
 "cSpell.language": "en,de-at",
 ```
 
-<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+<!--- @@inject: ../../static/requirements.md --->
 
 ## Requirements
 
 This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+<!--- @@inject-end: ../../static/requirements.md --->
+
+<!--- @@inject: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |
 | [cspell](https://github.com/streetsidesoftware/cspell)                                                          | `>=10`    |
 | [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) | `>=4.7.0` |
 
-<!--- @@inject-end: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+<!--- @@inject-end: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 <!--- @@inject: ../../static/footer.md --->
 

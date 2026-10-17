@@ -36,18 +36,22 @@ Example using both English and Azerbaijani dictionaries:
 "cSpell.language": "en,az-az",
 ```
 
-<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+<!--- @@inject: ../../static/requirements.md --->
 
 ## Requirements
 
 This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+<!--- @@inject-end: ../../static/requirements.md --->
+
+<!--- @@inject: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 | Tool                                                                                                            | Version    |
 | --------------------------------------------------------------------------------------------------------------- | ---------- |
 | [cspell](https://github.com/streetsidesoftware/cspell)                                                          | `>=10.4.0` |
 | [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) | `>=4.10.0` |
 
-<!--- @@inject-end: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+<!--- @@inject-end: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 <!--- @@inject: ../../static/footer.md --->
 

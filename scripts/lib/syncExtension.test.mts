@@ -36,8 +36,8 @@ Commands:
 <!--- @@inject-table: ./static/commands.json --->
 <!--- @@inject-end: ./static/commands.json --->
 
-<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
-<!--- @@inject-end: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+<!--- @@inject: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+<!--- @@inject-end: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 `;
 
 const options = { vscodeEngine: '^1.125.0', validate: createExtensionConfigValidator(generateExtensionSchema()) };
@@ -49,7 +49,7 @@ describe('syncExtension', () => {
         // The layout of the repository: the shared README templates are in `<root>/static/`.
         const root = await fs.mkdtemp(path.join(os.tmpdir(), 'sync-'));
         await fs.mkdir(path.join(root, 'static'));
-        await fs.writeFile(path.join(root, 'static/requirements.md'), 'cspell `{@ engines.cspell @}`\n');
+        await fs.writeFile(path.join(root, 'static/engines-table.md'), 'cspell `{@ engines.cspell @}`\n');
         await fs.writeFile(path.join(root, 'static/engines.json'), '{ "engines": { "cspell": ">=10" } }\n');
         dir = path.join(root, 'extensions/demo');
         await fs.mkdir(dir, { recursive: true });
