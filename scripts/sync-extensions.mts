@@ -16,8 +16,8 @@ import { parseArgs, styleText } from 'node:util';
 
 import { createExtensionConfigValidator, generateExtensionSchema, schemaPath } from './lib/extensionSchema.mts';
 import { format } from './lib/format.mts';
-import { exists, extensionsDir, readVscodeEngine, repoRoot } from './lib/repo.mts';
-import { configFileName, syncExtension, writeIfChanged } from './lib/syncExtension.mts';
+import { exists, extensionsDir, readVscodeEngine, repoRoot, writeIfChanged } from './lib/repo.mts';
+import { configFileName, syncExtension } from './lib/syncExtension.mts';
 
 async function run(): Promise<void> {
     const { values, positionals } = parseArgs({

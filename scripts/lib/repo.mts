@@ -46,3 +46,26 @@ export async function exists(file: string): Promise<boolean> {
         return false;
     }
 }
+
+/**
+ * Write a file if its content differs.
+ * @param check - only report whether it differs.
+ * @returns whether the file differs.
+ */
+export async function writeIfChanged(file: string, content: string, check: boolean | undefined): Promise<boolean> {
+    const target = path.resolve(repoRoot, file);
+    if ((await readText(target)) === content) return false;
+    if (!check) {
+        await fs.mkdir(path.dirname(target), { recursive: true });
+        await fs.writeFile(target, content);
+    }
+    return true;
+}
+
+async function readText(file: string): Promise<string | undefined> {
+    try {
+        return await fs.readFile(file, 'utf8');
+    } catch {
+        return undefined;
+    }
+}
