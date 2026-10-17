@@ -12,7 +12,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const repoRoot = path.resolve(import.meta.dirname, '..');
+import { repoRoot } from './lib/repo.mts';
 
 async function run(): Promise<void> {
     const [name, mode, ...rest] = process.argv.slice(2);

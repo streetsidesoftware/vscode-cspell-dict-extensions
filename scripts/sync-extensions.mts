@@ -15,8 +15,9 @@ import path from 'node:path';
 import { parseArgs, styleText } from 'node:util';
 
 import { createExtensionConfigValidator, generateExtensionSchema, schemaPath } from './lib/extensionSchema.mts';
-import { readVscodeEngine } from './lib/repo.mts';
-import { configFileName, format, repoRoot, syncExtension, writeIfChanged } from './lib/syncExtension.mts';
+import { format } from './lib/format.mts';
+import { exists, readVscodeEngine, repoRoot } from './lib/repo.mts';
+import { configFileName, syncExtension, writeIfChanged } from './lib/syncExtension.mts';
 
 async function run(): Promise<void> {
     const { values, positionals } = parseArgs({
@@ -42,7 +43,7 @@ async function run(): Promise<void> {
     let synced = 0;
     for (const name of names) {
         const dir = path.join(extensionsDir, name);
-        if (!(await isFile(path.join(dir, configFileName)))) {
+        if (!(await exists(path.join(dir, configFileName)))) {
             if (positionals.length) throw new Error(`extensions/${name}/${configFileName} not found.`);
             continue;
         }
@@ -61,14 +62,6 @@ async function run(): Promise<void> {
             styleText('red', 'Run `npm run sync:extensions` and commit the changes.', { stream: process.stderr }),
         );
         process.exitCode = 1;
-    }
-}
-
-async function isFile(file: string): Promise<boolean> {
-    try {
-        return (await fs.stat(file)).isFile();
-    } catch {
-        return false;
     }
 }
 

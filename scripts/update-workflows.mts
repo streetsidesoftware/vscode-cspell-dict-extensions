@@ -8,7 +8,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import yaml from 'yaml';
 
-import { listExtensionDirs, repoRoot, run } from './lib/repo.mts';
+import { format } from './lib/format.mts';
+import { listExtensionDirs, repoRoot } from './lib/repo.mts';
 
 const workflowsDir = path.join(repoRoot, '.github/workflows');
 
@@ -26,8 +27,6 @@ async function main(): Promise<void> {
         'set-prerelease.yml',
         extensions.map((ext) => path.posix.basename(ext)),
     );
-
-    run('npx', ['prettier', '-w', '.github/workflows/manual-publish.yml', '.github/workflows/set-prerelease.yml']);
 }
 
 /**
@@ -48,7 +47,7 @@ async function updateExtensionOptions(workflowFile: string, values: string[]): P
     options.items = values.map((value) => doc.createNode(value));
     options.flow = false;
 
-    await fs.writeFile(workflow, doc.toString({ lineWidth: 120 }), 'utf8');
+    await fs.writeFile(workflow, await format(workflow, doc.toString({ lineWidth: 120 })));
 }
 
 function assertYAMLSeq(value: unknown): asserts value is yaml.YAMLSeq<yaml.Scalar> {

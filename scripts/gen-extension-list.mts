@@ -1,129 +1,77 @@
 #!/usr/bin/env node
 
-import * as fs from 'node:fs/promises';
-import { fileURLToPath } from 'url';
-import * as path from 'path';
+/**
+ * Generate the extension lists in `static/generated/`, which READMEs inject.
+ */
+
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+import type { ListItem, PhrasingContent, RootContent } from 'mdast';
 import { toMarkdown } from 'mdast-util-to-markdown';
-import type { Root, RootContent, ListItem, PhrasingContent } from 'mdast';
-import type { Options } from 'mdast-util-to-markdown';
 
-import { root, paragraph, text, strong, heading, list, listItem, link, newLineText } from './lib/mdastBuilder.mts';
-import { getExtensionInfo } from './lib/extensionHelper.mts';
-import type { ExtensionInfo } from './lib/extensionHelper.mts';
-import { listExtensionDirs } from './lib/repo.mts';
+import { type ExtensionInfo, getExtensionInfo } from './lib/extensionHelper.mts';
+import { heading, link, list, listItem, paragraph, root, strong, text } from './lib/mdastBuilder.mts';
+import { listExtensionDirs, repoRoot } from './lib/repo.mts';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const __root = path.dirname(__dirname);
+const generatedDir = path.join(repoRoot, 'static/generated');
 
-const targetExtensionFolderListMarkdown = path.join(__root, 'static/generated/extension_list.md');
-const targetMarketplaceLanguageExtensions = path.join(__root, 'static/generated/marketplace_language_extensions.md');
-const targetMarketplaceExtensions = path.join(__root, 'static/generated/marketplace_extensions.md');
-
-// Links must be relative to the generated file, inject-markdown rebases them when injecting.
-const extensionFolderListBase = path.dirname(targetExtensionFolderListMarkdown);
-
-const markdownOptions: Options = {
-    bullet: '-',
+/** The headings of the categories in `marketplace_language_extensions.md`; the other categories are left out. */
+const languageListHeadings: Record<string, string | undefined> = {
+    Languages: 'Language Dictionaries',
+    'Technical Terms': 'Technical Dictionaries',
 };
 
 function preReleaseMarker(extensionInfo: ExtensionInfo): PhrasingContent[] {
     return extensionInfo.preRelease ? [text(' '), strong(text('pre-release'))] : [];
 }
 
-function makeExtensionListItem(extensionInfo: ExtensionInfo): ListItem {
+function extensionListItem(url: string, extensionInfo: ExtensionInfo): ListItem {
     return listItem(
         paragraph([
-            link(
-                path.posix.join(
-                    path.relative(extensionFolderListBase, __root).split(path.sep).join('/'),
-                    extensionInfo.extensionPath,
-                ) + '#readme',
-                text(extensionInfo.displayNameShort),
-            ),
+            link(url, text(extensionInfo.displayNameShort)),
             ...preReleaseMarker(extensionInfo),
             text(` - ${extensionInfo.description}`),
         ]),
     );
 }
 
-function makeMarketplaceExtensionListItem(extensionInfo: ExtensionInfo): ListItem {
-    return listItem(
-        paragraph([
-            link(
-                'https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.' + extensionInfo.name,
-                text(extensionInfo.displayNameShort),
-            ),
-            ...preReleaseMarker(extensionInfo),
-            text(' - ' + extensionInfo.description),
-        ]),
-    );
+/** An item that links to the extension's folder. */
+function folderListItem(extensionInfo: ExtensionInfo): ListItem {
+    // Relative to `static/generated/`; inject-markdown rebases the link when injecting.
+    return extensionListItem(`../../${extensionInfo.extensionPath}#readme`, extensionInfo);
 }
 
-async function generateExtensionFolderListMarkdown(extensionInfos: ExtensionInfo[]): Promise<void> {
-    const extensionsByCategory = groupExtensionsByType(extensionInfos);
-
-    const mdastContent: RootContent[] = [];
-
-    for (const [category, extensions] of extensionsByCategory) {
-        mdastContent.push(heading(3, text(category)));
-        mdastContent.push(newLineText());
-        mdastContent.push(list('unordered', extensions.map(makeExtensionListItem)));
-    }
-
-    await writeContentToFile(mdastContent, targetExtensionFolderListMarkdown);
+/** An item that links to the extension in the Marketplace. */
+function marketplaceListItem(extensionInfo: ExtensionInfo): ListItem {
+    const url = `https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.${extensionInfo.name}`;
+    return extensionListItem(url, extensionInfo);
 }
 
-async function generateMarketplaceExtensionsListMarkdown(extensionInfos: ExtensionInfo[]): Promise<void> {
-    const extensionsByCategory = groupExtensionsByType(extensionInfos);
-
-    const mdastContent: RootContent[] = [];
-
+/**
+ * Write a list of the extensions, under a heading per category.
+ * @param file - the file name in `static/generated/`.
+ * @param makeItem - makes the list item of an extension.
+ * @param headingOf - the heading of a category, or `undefined` to leave the category out.
+ */
+async function writeExtensionList(
+    file: string,
+    extensionsByCategory: Map<string, ExtensionInfo[]>,
+    makeItem: (extensionInfo: ExtensionInfo) => ListItem,
+    headingOf: (category: string) => string | undefined = (category) => category,
+): Promise<void> {
+    const content: RootContent[] = [];
     for (const [category, extensions] of extensionsByCategory) {
-        mdastContent.push(heading(3, text(category)));
-        mdastContent.push(newLineText());
-        mdastContent.push(list('unordered', extensions.map(makeMarketplaceExtensionListItem)));
-    }
-
-    await writeContentToFile(mdastContent, targetMarketplaceExtensions);
-}
-
-async function generateMarketplaceLanguageExtensionsListMarkdown(extensionInfos: ExtensionInfo[]): Promise<void> {
-    const extensionsByCategory = groupExtensionsByType(extensionInfos);
-
-    const mdastContent: RootContent[] = [];
-
-    const headingTitle: Record<string, string | undefined> = {
-        Languages: 'Language Dictionaries',
-        'Technical Terms': 'Technical Dictionaries',
-    };
-
-    for (const [category, extensions] of extensionsByCategory) {
-        const title = headingTitle[category];
+        const title = headingOf(category);
         if (!title) continue;
-        mdastContent.push(heading(3, text(title)));
-        mdastContent.push(newLineText());
-        mdastContent.push(list('unordered', extensions.map(makeMarketplaceExtensionListItem)));
+        content.push(heading(3, text(title)), list('unordered', extensions.map(makeItem)));
     }
 
-    await writeContentToFile(mdastContent, targetMarketplaceLanguageExtensions);
+    await fs.mkdir(generatedDir, { recursive: true });
+    await fs.writeFile(path.join(generatedDir, file), toMarkdown(root(content), { bullet: '-' }), 'utf8');
 }
 
-async function writeContentToFile(mdastContent: RootContent[], filename: string): Promise<void> {
-    const tree: Root = root(mdastContent);
-    const content = genMarkdown(tree);
-
-    await fs.mkdir(path.dirname(filename), { recursive: true });
-    await fs.writeFile(filename, content, 'utf8');
-}
-
-function genMarkdown(tree: Root): string {
-    return toMarkdown(tree, markdownOptions)
-        .replaceAll('\r\n', '\n')
-        .replace(/\n\n( *)[-]\s+/g, '\n$1- ')
-        .replace(/\n\n\n+/g, '\n\n');
-}
-
+/** The categories in the order their first extension appears. */
 function groupExtensionsByType(extensionInfos: ExtensionInfo[]): Map<string, ExtensionInfo[]> {
     const extensionsByCategory = new Map<string, ExtensionInfo[]>();
 
@@ -136,13 +84,18 @@ function groupExtensionsByType(extensionInfos: ExtensionInfo[]): Map<string, Ext
     return extensionsByCategory;
 }
 
-async function main(): Promise<void> {
-    const extensions = await listExtensionDirs();
-    const extensionInfos = await Promise.all(extensions.map(getExtensionInfo));
+export async function genExtensionList(): Promise<void> {
+    const extensionInfos = await Promise.all((await listExtensionDirs()).map(getExtensionInfo));
+    const byCategory = groupExtensionsByType(extensionInfos);
 
-    await generateExtensionFolderListMarkdown(extensionInfos);
-    await generateMarketplaceExtensionsListMarkdown(extensionInfos);
-    await generateMarketplaceLanguageExtensionsListMarkdown(extensionInfos);
+    await writeExtensionList('extension_list.md', byCategory, folderListItem);
+    await writeExtensionList('marketplace_extensions.md', byCategory, marketplaceListItem);
+    await writeExtensionList(
+        'marketplace_language_extensions.md',
+        byCategory,
+        marketplaceListItem,
+        (category) => languageListHeadings[category],
+    );
 }
 
-await main();
+if (import.meta.main) await genExtensionList();

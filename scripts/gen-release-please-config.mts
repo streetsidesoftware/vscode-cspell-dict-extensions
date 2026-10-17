@@ -4,9 +4,13 @@
  * Update the `packages` in `release-please-config.json`: the root and each extension.
  */
 
-import { listExtensionDirs, readJson, run, writeJson } from './lib/repo.mts';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
-const configFile = 'release-please-config.json';
+import { format } from './lib/format.mts';
+import { listExtensionDirs, readJson, repoRoot } from './lib/repo.mts';
+
+const configFile = path.join(repoRoot, 'release-please-config.json');
 
 interface PackageConfig {
     component: string;
@@ -23,9 +27,7 @@ async function main(): Promise<void> {
     }
 
     const config = await readJson<Record<string, unknown>>(configFile);
-    await writeJson(configFile, { ...config, packages });
-
-    run('npx', ['prettier', '-w', configFile]);
+    await fs.writeFile(configFile, await format(configFile, JSON.stringify({ ...config, packages }, null, 4)));
 }
 
 await main();

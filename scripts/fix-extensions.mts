@@ -1,30 +1,24 @@
 #!/usr/bin/env node
 
 /**
- * Fix extensions of files.
+ * Give every extension's `package.json` the fields the extensions share, and sort it.
  */
 
 import {
     fixExtensionPackageJson,
-    type PackageJson,
     readExtensionPackageJson,
     writeExtensionPackageJson,
 } from './lib/extensionHelper.mts';
 import { listExtensionDirs, readVscodeEngine } from './lib/repo.mts';
 
-async function run() {
+export async function fixExtensions(): Promise<void> {
     console.log('Fixing extensions...');
-    // The helpers take the directory as a URL path, with a trailing slash.
-    const extensions = (await listExtensionDirs()).map((dir) => dir + '/');
+    const overrides = { engines: { vscode: await readVscodeEngine() } };
 
-    const overrides: Partial<PackageJson> = {
-        engines: { vscode: await readVscodeEngine() },
-    };
-
-    for (const ext of extensions) {
+    for (const ext of await listExtensionDirs()) {
         const pkg = await readExtensionPackageJson(ext);
         await writeExtensionPackageJson(ext, fixExtensionPackageJson(ext, pkg, overrides));
     }
 }
 
-await run();
+if (import.meta.main) await fixExtensions();

@@ -15,7 +15,6 @@ import path from 'node:path';
 
 import { injectMarkdown } from 'inject-markdown';
 import { parse as parseJsonc } from 'jsonc-parser';
-import * as prettier from 'prettier';
 
 import {
     cspellExtPath,
@@ -26,8 +25,9 @@ import {
 } from '../../extension-runtime/src/config.ts';
 import type { PackageJson } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
+import { format } from './format.mts';
+import { exists, readJson, repoRoot } from './repo.mts';
 
-export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
 export const configFileName = 'extension.config.json';
 const templateDir = path.join(repoRoot, 'extension-runtime/template');
 
@@ -72,7 +72,7 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
     files.set(cspellExtPath, JSON.stringify(await cspellExt(extensionDir, config), null, 4) + '\n');
     const commands = commandsTable(config);
     if (commands) files.set('static/commands.json', commands);
-    const pkg = (await readJson(path.join(extensionDir, 'package.json'))) as PackageJson;
+    const pkg = await readJson<PackageJson>(path.join(extensionDir, 'package.json'));
     files.set('package.json', packageJsonSource(config, pkg, options.vscodeEngine, hasCustom));
 
     const changes: FileChange[] = [];
@@ -96,17 +96,14 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
     const readme = path.join(extensionDir, 'README.md');
     if ((await exists(readme)) && !(options.check && changes.length)) {
         const injected = await format(path.join(repoRoot, 'extensions', name, 'README.md'), await injectReadme(readme));
-        if (await writeIfChanged(readme, injected, options.check))
+        if (await writeIfChanged(readme, injected, options.check)) {
             changes.push({ file: 'README.md', action: 'update' });
+        }
     }
 
     return changes;
 }
 
-/**
- * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`.
- * @returns `undefined` when the extension has no commands.
- */
 /**
  * The content of `static/cspell-ext.json`: `cspell` from the config, with the `engines` the imported dictionaries
  * declare. An engine set in `cspell.engines` wins over the dictionaries.
@@ -146,6 +143,10 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
     return engines;
 }
 
+/**
+ * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`.
+ * @returns `undefined` when the extension has no commands.
+ */
 export function commandsTable(config: ExtensionConfig): string | undefined {
     const commands = resolveCommands(config).filter((command) => command.contributes);
     if (!commands.length) return undefined;
@@ -237,29 +238,10 @@ async function readTemplateFiles(): Promise<[string, string][]> {
     return files.sort(([a], [b]) => a.localeCompare(b));
 }
 
-/**
- * Format a file the way `prettier` in this repo would.
- * @param repoPath - where the file is in the repository, which picks the prettier options.
- */
-export async function format(repoPath: string, content: string): Promise<string> {
-    const info = await prettier.getFileInfo(repoPath, { ignorePath: path.join(repoRoot, '.prettierignore') });
-    if (info.ignored || !info.inferredParser) return content;
-    const options = await prettier.resolveConfig(repoPath, { editorconfig: true });
-    return prettier.format(content, { ...options, filepath: repoPath });
-}
-
-async function readJson(file: string): Promise<unknown> {
-    return JSON.parse(await fs.readFile(file, 'utf8'));
-}
-
 async function readText(file: string): Promise<string | undefined> {
     try {
         return await fs.readFile(file, 'utf8');
     } catch {
         return undefined;
     }
-}
-
-async function exists(file: string): Promise<boolean> {
-    return (await readText(file)) !== undefined;
 }

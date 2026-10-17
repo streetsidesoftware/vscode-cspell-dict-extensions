@@ -47,7 +47,11 @@ export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 /**
  * Create a heading node
  */
-export function heading(depth: HeadingLevel, children: PhrasingContent | PhrasingContent[], data?: HeadingData): Heading {
+export function heading(
+    depth: HeadingLevel,
+    children: PhrasingContent | PhrasingContent[],
+    data?: HeadingData,
+): Heading {
     return {
         type: 'heading',
         depth,
@@ -79,13 +83,6 @@ export function strong(children: PhrasingContent | PhrasingContent[], data?: Str
 }
 
 /**
- * Create newline
- */
-export function newLineText(): Paragraph {
-    return paragraph([]);
-}
-
-/**
  * Create a list item node
  */
 export function listItem(children: BlockContent | BlockContent[], data?: ListItemData): ListItem {
@@ -97,13 +94,14 @@ export function listItem(children: BlockContent | BlockContent[], data?: ListIte
 }
 
 /**
- * Create a list node
+ * Create a tight list node: no blank lines between the items.
  */
 export function list(ordered: boolean | 'ordered' | 'unordered', children: ListItem[], data?: ListData): List {
     const isOrdered = ordered === 'ordered' ? true : ordered === 'unordered' ? false : ordered;
     return {
         type: 'list',
         ordered: isOrdered,
+        spread: false,
         children,
         data,
     };
@@ -112,7 +110,12 @@ export function list(ordered: boolean | 'ordered' | 'unordered', children: ListI
 /**
  * Create a link node
  */
-export function link(url: string, children: PhrasingContent | PhrasingContent[], title?: string, data?: LinkData): Link {
+export function link(
+    url: string,
+    children: PhrasingContent | PhrasingContent[],
+    title?: string,
+    data?: LinkData,
+): Link {
     return {
         type: 'link',
         url,

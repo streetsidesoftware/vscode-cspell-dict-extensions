@@ -1,4 +1,3 @@
-import { execFileSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -39,7 +38,11 @@ export async function writeJson(file: string, value: unknown): Promise<void> {
     await fs.writeFile(path.resolve(repoRoot, file), JSON.stringify(value, null, 4) + '\n');
 }
 
-/** Run a command in the repository root and fail if it fails. */
-export function run(command: string, args: string[]): void {
-    execFileSync(command, args, { cwd: repoRoot, stdio: 'inherit' });
+export async function exists(file: string): Promise<boolean> {
+    try {
+        await fs.access(path.resolve(repoRoot, file));
+        return true;
+    } catch {
+        return false;
+    }
 }

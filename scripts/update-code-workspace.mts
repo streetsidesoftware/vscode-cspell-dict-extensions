@@ -5,10 +5,11 @@
  * the extensions' `package.json` files.
  */
 
-import path from 'node:path';
-
+import { fixExtensions } from './fix-extensions.mts';
+import { genExtensionList } from './gen-extension-list.mts';
+import { formatFiles, injectFiles } from './lib/format.mts';
+import { listExtensionDirs, readJson, writeJson } from './lib/repo.mts';
 import type { CodeWorkspace } from './lib/types.ts';
-import { listExtensionDirs, readJson, repoRoot, run, writeJson } from './lib/repo.mts';
 
 const workspaceFile = 'dict-extensions.code-workspace';
 
@@ -24,12 +25,12 @@ async function main(): Promise<void> {
     await updateCodeWorkspace();
 
     // Update README.md
-    run(process.execPath, [path.join(repoRoot, 'scripts/gen-extension-list.mts')]);
-    run(process.execPath, [path.join(repoRoot, 'scripts/fix-extensions.mts')]);
+    await genExtensionList();
+    await fixExtensions();
 
-    run('npx', ['prettier', '-w', 'static/generated/*.md']);
-    run('npx', ['inject-markdown', 'README.md', 'extensions/*/README.md']);
-    run('npx', ['prettier', '-w', 'README.md', 'extensions/*/README.md']);
+    await formatFiles('static/generated/*.md');
+    await injectFiles('README.md', 'extensions/*/README.md');
+    await formatFiles('README.md', 'extensions/*/README.md');
 }
 
 await main();
