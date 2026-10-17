@@ -1,0 +1,37 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "slovak",
+    "friendlyName": "Slovak",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-sk-sk/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sk",
+            "id": "cSpellExt_slovak.enableSlovak"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "sk",
+            "id": "cSpellExt_slovak.disableSlovak"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sk",
+            "scope": "workspace",
+            "id": "cSpellExt_slovak.enableSlovakWorkspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "sk",
+            "scope": "workspace",
+            "id": "cSpellExt_slovak.disableSlovakWorkspace"
+        }
+    ]
+}

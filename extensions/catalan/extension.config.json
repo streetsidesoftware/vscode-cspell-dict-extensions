@@ -1,0 +1,37 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "catalan",
+    "friendlyName": "Catalan",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-ca/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ca",
+            "id": "cSpellExt_catalan.enableCatalan"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ca",
+            "id": "cSpellExt_catalan.disableCatalan"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ca",
+            "scope": "workspace",
+            "id": "cSpellExt_catalan.enableCatalanWorkspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ca",
+            "scope": "workspace",
+            "id": "cSpellExt_catalan.disableCatalanWorkspace"
+        }
+    ]
+}

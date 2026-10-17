@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Portuguese Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Portuguese Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Portuguese Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Portuguese Spell Checker Dictionary in Workspace"
+    }
+]

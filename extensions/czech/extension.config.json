@@ -1,0 +1,37 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "czech",
+    "friendlyName": "Czech",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-cs-cz/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "cs",
+            "id": "cSpellExt_czech.enableCzech"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "cs",
+            "id": "cSpellExt_czech.disableCzech"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "cs",
+            "scope": "workspace",
+            "id": "cSpellExt_czech.enableCzechWorkspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "cs",
+            "scope": "workspace",
+            "id": "cSpellExt_czech.disableCzechWorkspace"
+        }
+    ]
+}

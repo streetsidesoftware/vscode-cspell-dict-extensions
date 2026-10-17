@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Esperanto Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Esperanto Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Esperanto Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Esperanto Spell Checker Dictionary in Workspace"
+    }
+]

@@ -1,0 +1,37 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "bulgarian",
+    "friendlyName": "Bulgarian",
+    "sample": "samples/seattle-bg.md",
+    "cspell": {
+        "import": ["@cspell/dict-bg-bg/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "bg_BG",
+            "id": "cSpellExt_bulgarian.enableBulgarian"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "bg_BG",
+            "id": "cSpellExt_bulgarian.disableBulgarian"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "bg_BG",
+            "scope": "workspace",
+            "id": "cSpellExt_bulgarian.enableBulgarianWorkspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "bg_BG",
+            "scope": "workspace",
+            "id": "cSpellExt_bulgarian.disableBulgarianWorkspace"
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "$schema": "../../static/extension.config.schema.json",
+    "name": "russian",
+    "friendlyName": "Russian",
+    "sample": "samples/portland.md",
+    "cspell": {
+        "version": "0.2",
+        "readonly": true,
+        "import": ["@cspell/dict-ru_ru/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ru",
+            "id": "cSpellExt_russian.enableRussian"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ru",
+            "id": "cSpellExt_russian.disableRussian"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ru",
+            "scope": "workspace",
+            "id": "cSpellExt_russian.enableRussianWorkspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ru",
+            "scope": "workspace",
+            "id": "cSpellExt_russian.disableRussianWorkspace"
+        }
+    ]
+}

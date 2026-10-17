@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Slovak Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Slovak Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Slovak Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Slovak Spell Checker Dictionary in Workspace"
+    }
+]

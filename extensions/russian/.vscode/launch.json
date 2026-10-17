@@ -1,4 +1,5 @@
-// A launch configuration that compiles the extension and then opens it inside a new window
+// Written by `npm run sync:extensions`. Do not edit.
+// A launch configuration that builds the extension and then opens it inside a new window.
 {
     "version": "0.2.0",
     "configurations": [
@@ -6,33 +7,9 @@
             "name": "Launch Extension",
             "type": "extensionHost",
             "request": "launch",
-            "runtimeExecutable": "${execPath}",
-            "args": ["--extensionDevelopmentPath=${workspaceRoot}", "${workspaceRoot}"],
-            "stopOnEntry": false,
+            "args": ["--extensionDevelopmentPath=${workspaceFolder}", "${workspaceFolder}/samples"],
             "sourceMaps": true,
-            "outFiles": ["${workspaceRoot}/out/src/**/*.js"],
-            "preLaunchTask": "npm: build"
-        },
-        {
-            "name": "Launch Extension Samples",
-            "type": "extensionHost",
-            "request": "launch",
-            "runtimeExecutable": "${execPath}",
-            "args": ["--extensionDevelopmentPath=${workspaceRoot}", "${workspaceRoot}/samples"],
-            "stopOnEntry": false,
-            "sourceMaps": true,
-            "outFiles": ["${workspaceRoot}/out/src/**/*.js"],
-            "preLaunchTask": "npm: build"
-        },
-        {
-            "name": "Launch Tests",
-            "type": "extensionHost",
-            "request": "launch",
-            "runtimeExecutable": "${execPath}",
-            "args": ["--extensionDevelopmentPath=${workspaceRoot}", "--extensionTestsPath=${workspaceRoot}/out/test"],
-            "stopOnEntry": false,
-            "sourceMaps": true,
-            "outFiles": ["${workspaceRoot}/out/test/**/*.js"],
+            "outFiles": ["${workspaceFolder}/out/**/*.js"],
             "preLaunchTask": "npm: build"
         }
     ]
