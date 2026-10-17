@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-swiss-german",
   "description": "Adds Swiss German (Schweizer Hochdeutsch) spell checking to Code Spell Checker.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "displayName": "Swiss German - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

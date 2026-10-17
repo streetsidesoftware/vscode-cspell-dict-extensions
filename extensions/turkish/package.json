@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-turkish",
   "description": "Adds Turkish (Türkçe) spell checking to Code Spell Checker.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "displayName": "Turkish - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-british-english",
   "description": "Adds British English spell checking to Code Spell Checker.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "displayName": "British English - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

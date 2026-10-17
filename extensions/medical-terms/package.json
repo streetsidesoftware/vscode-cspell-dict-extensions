@@ -3,7 +3,7 @@
   "displayName": "Medical Terms - Code Spell Checker",
   "description": "Adds the Medical Terms dictionary to Code Spell Checker.",
   "icon": "images/SpellCheck.png",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "private": true,
   "publisher": "streetsidesoftware",
   "license": "GPL-3.0-or-later",

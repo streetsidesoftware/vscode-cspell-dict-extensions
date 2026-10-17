@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-slovak",
   "description": "Adds Slovak (slovenčina) spell checking to Code Spell Checker.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "displayName": "Slovak - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,

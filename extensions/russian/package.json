@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-russian",
   "description": "Adds Russian (русский) spell checking to Code Spell Checker.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "displayName": "Russian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
   "private": true,
