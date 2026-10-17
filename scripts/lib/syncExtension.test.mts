@@ -126,8 +126,8 @@ describe('syncExtension', () => {
 
     it('fails on an unresolved placeholder or a missing file in the README', async () => {
         const root = path.resolve(dir, '../..');
-        await fs.writeFile(path.join(root, 'static/requirements.md'), 'cspell `{@ engines.cspel @}`\n');
-        await assert.rejects(syncExtension(dir, options), /README\.md:\d+: .*engines\.cspel/);
+        await fs.writeFile(path.join(root, 'static/requirements.md'), 'cspell `{@ engines.missing @}`\n');
+        await assert.rejects(syncExtension(dir, options), /README\.md:\d+: .*engines\.missing/);
 
         await fs.writeFile(
             path.join(dir, 'README.md'),
