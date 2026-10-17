@@ -86,7 +86,7 @@ jobs:
       - name: From Script
         id: get-extensions
         run: |
-          echo extensions_from_script=$(node ./scripts/list-extensions.mts) >> $GITHUB_OUTPUT
+          echo extensions_from_script=$(./scripts/list-extensions.mts) >> $GITHUB_OUTPUT
 
       - name: Summary
         uses: streetsidesoftware/actions/public/summary@v1

@@ -110,7 +110,7 @@ jobs:
 
       - name: From Script
         run: |
-          echo extensions_from_script=$(node ./scripts/list-extensions.mts) >> $GITHUB_ENV
+          echo extensions_from_script=$(./scripts/list-extensions.mts) >> $GITHUB_ENV
 
       - name: EXTENSION_LIST
         env:
