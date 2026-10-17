@@ -41,19 +41,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_danish.enableDanish",
+        "command": "cSpellExt_danish.enable",
         "title": "Enable Danish Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_danish.disableDanish",
+        "command": "cSpellExt_danish.disable",
         "title": "Disable Danish Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_danish.enableDanishWorkspace",
+        "command": "cSpellExt_danish.enableWorkspace",
         "title": "Enable Danish Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_danish.disableDanishWorkspace",
+        "command": "cSpellExt_danish.disableWorkspace",
         "title": "Disable Danish Spell Checker Dictionary in Workspace"
       }
     ]

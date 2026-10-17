@@ -34,19 +34,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpell.enableSpanish",
+        "command": "cSpellExt_spanish.enable",
         "title": "Enable Spanish Spell Checker Dictionary"
       },
       {
-        "command": "cSpell.disableSpanish",
+        "command": "cSpellExt_spanish.disable",
         "title": "Disable Spanish Spell Checker Dictionary"
       },
       {
-        "command": "cSpell.enableSpanishWorkspace",
+        "command": "cSpellExt_spanish.enableWorkspace",
         "title": "Enable Spanish Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpell.disableSpanishWorkspace",
+        "command": "cSpellExt_spanish.disableWorkspace",
         "title": "Disable Spanish Spell Checker Dictionary in Workspace"
       }
     ]

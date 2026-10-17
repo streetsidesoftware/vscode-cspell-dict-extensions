@@ -14,14 +14,12 @@
             "action": "enable",
             "toggle": "locale",
             "value": "fr-90",
-            "id": "cSpellExt_french-reforme.enableFrench",
             "title": "Enable French Reforme Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "fr-90",
-            "id": "cSpellExt_french-reforme.disableFrench",
             "title": "Disable French Reforme Spell Checker Dictionary"
         },
         {
@@ -29,7 +27,6 @@
             "toggle": "locale",
             "value": "fr-90",
             "scope": "workspace",
-            "id": "cSpellExt_french-reforme.enableFrenchWorkspace",
             "title": "Enable French Reforme Spell Checker Dictionary in Workspace"
         },
         {
@@ -37,8 +34,45 @@
             "toggle": "locale",
             "value": "fr-90",
             "scope": "workspace",
-            "id": "cSpellExt_french-reforme.disableFrenchWorkspace",
             "title": "Disable French Reforme Spell Checker Dictionary in Workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "id": "cSpellExt_french-reforme.enableFrench",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "id": "cSpellExt_french-reforme.disableFrench",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "scope": "workspace",
+            "id": "cSpellExt_french-reforme.enableFrenchWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "scope": "workspace",
+            "id": "cSpellExt_french-reforme.disableFrenchWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ],
     "notes": "`locale` is `fr-90`, not a BCP 47 tag: the IANA registry has no variant for the 1990 French spelling reform, and `fr-90` is the locale cspell's French Réforme dictionary declares."

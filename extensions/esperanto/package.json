@@ -41,19 +41,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_esperanto.enableEsperanto",
+        "command": "cSpellExt_esperanto.enable",
         "title": "Enable Esperanto Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_esperanto.disableEsperanto",
+        "command": "cSpellExt_esperanto.disable",
         "title": "Disable Esperanto Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_esperanto.enableEsperantoWorkspace",
+        "command": "cSpellExt_esperanto.enableWorkspace",
         "title": "Enable Esperanto Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_esperanto.disableEsperantoWorkspace",
+        "command": "cSpellExt_esperanto.disableWorkspace",
         "title": "Disable Esperanto Spell Checker Dictionary in Workspace"
       }
     ]

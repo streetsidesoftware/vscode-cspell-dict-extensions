@@ -22,6 +22,7 @@ describe('resolveCommands', () => {
             {
                 id: 'cSpellExt_swedish.enable',
                 title: 'Enable Swedish Spell Checker Dictionary',
+                contributes: true,
                 action: 'enable',
                 toggle: 'locale',
                 value: 'sv_SE',
@@ -30,6 +31,7 @@ describe('resolveCommands', () => {
             {
                 id: 'cSpellExt_swedish.disableWorkspace',
                 title: 'Disable Swedish Spell Checker Dictionary in Workspace',
+                contributes: true,
                 action: 'disable',
                 toggle: 'locale',
                 value: 'sv_SE',
@@ -45,6 +47,27 @@ describe('resolveCommands', () => {
         const [command] = resolveCommands({ ...swedish, commands });
         assert.equal(command?.id, 'cSpellExt_swedish.enableSwedish');
         assert.equal(command?.title, 'T');
+    });
+
+    it('contributes commands unless told not to', () => {
+        const commands: ExtensionConfig['commands'] = [
+            { action: 'enable', toggle: 'locale', value: 'sv-SE' },
+            {
+                action: 'enable',
+                toggle: 'locale',
+                value: 'sv-SE',
+                id: 'cSpellExt_swedish.enableSwedish',
+                contributes: false,
+                legacy: true,
+            },
+        ];
+        assert.deepEqual(
+            resolveCommands({ ...swedish, commands }).map(({ id, contributes }) => ({ id, contributes })),
+            [
+                { id: 'cSpellExt_swedish.enable', contributes: true },
+                { id: 'cSpellExt_swedish.enableSwedish', contributes: false },
+            ],
+        );
     });
 
     it('gives a fileType toggle the global scope', () => {

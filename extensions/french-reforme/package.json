@@ -41,19 +41,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_french-reforme.enableFrench",
+        "command": "cSpellExt_french-reforme.enable",
         "title": "Enable French Reforme Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_french-reforme.disableFrench",
+        "command": "cSpellExt_french-reforme.disable",
         "title": "Disable French Reforme Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_french-reforme.enableFrenchWorkspace",
+        "command": "cSpellExt_french-reforme.enableWorkspace",
         "title": "Enable French Reforme Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_french-reforme.disableFrenchWorkspace",
+        "command": "cSpellExt_french-reforme.disableWorkspace",
         "title": "Disable French Reforme Spell Checker Dictionary in Workspace"
       }
     ]

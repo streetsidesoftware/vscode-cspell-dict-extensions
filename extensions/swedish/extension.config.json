@@ -10,21 +10,65 @@
         "import": ["@cspell/dict-sv/cspell-ext.json"]
     },
     "commands": [
-        { "action": "enable", "toggle": "locale", "value": "sv_SE", "id": "cSpellExt_swedish.enableSwedish" },
-        { "action": "disable", "toggle": "locale", "value": "sv_SE", "id": "cSpellExt_swedish.disableSwedish" },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sv_SE"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "sv_SE"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sv_SE",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "sv_SE",
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sv_SE",
+            "id": "cSpellExt_swedish.enableSwedish",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "sv_SE",
+            "id": "cSpellExt_swedish.disableSwedish",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "sv_SE",
             "scope": "workspace",
-            "id": "cSpellExt_swedish.enableSwedishWorkspace"
+            "id": "cSpellExt_swedish.enableSwedishWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "sv_SE",
             "scope": "workspace",
-            "id": "cSpellExt_swedish.disableSwedishWorkspace"
+            "id": "cSpellExt_swedish.disableSwedishWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ]
 }

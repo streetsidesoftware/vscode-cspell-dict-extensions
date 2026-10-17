@@ -157,6 +157,25 @@ describe('syncExtension', () => {
         assert.equal(await read('src/custom.ts'), 'export {};\n');
     });
 
+    it('leaves commands that do not contribute out of package.json and the README table', async () => {
+        const legacy = {
+            action: 'enable',
+            toggle: 'locale',
+            value: 'xx',
+            id: 'cSpellExt_demo.enableDemo',
+            contributes: false,
+            legacy: true,
+            notes: 'Old ID.',
+        };
+        await writeJson('extension.config.json', { ...config, commands: [...config.commands, legacy] });
+        await syncExtension(dir, options);
+        const contributed = JSON.parse(await read('package.json')).contributes.commands.map(
+            (c: { command: string }) => c.command,
+        );
+        assert.deepEqual(contributed, ['cSpellExt_demo.enable', 'cSpellExt_demo.disableWorkspace']);
+        assert.equal(JSON.parse(await read('static/commands.json')).length, 2);
+    });
+
     it('changes nothing the second time', async () => {
         await syncExtension(dir, options);
         assert.deepEqual(await syncExtension(dir, { ...options, check: true }), []);

@@ -13,28 +13,62 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "ca"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ca"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
             "value": "ca",
-            "id": "cSpellExt_catalan.enableCatalan"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "ca",
-            "id": "cSpellExt_catalan.disableCatalan"
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ca",
+            "id": "cSpellExt_catalan.enableCatalan",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ca",
+            "id": "cSpellExt_catalan.disableCatalan",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "ca",
             "scope": "workspace",
-            "id": "cSpellExt_catalan.enableCatalanWorkspace"
+            "id": "cSpellExt_catalan.enableCatalanWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "ca",
             "scope": "workspace",
-            "id": "cSpellExt_catalan.disableCatalanWorkspace"
+            "id": "cSpellExt_catalan.disableCatalanWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ]
 }

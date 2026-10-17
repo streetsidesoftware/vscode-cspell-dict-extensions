@@ -105,7 +105,7 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
  * @returns `undefined` when the extension has no commands.
  */
 export function commandsTable(config: ExtensionConfig): string | undefined {
-    const commands = resolveCommands(config);
+    const commands = resolveCommands(config).filter((command) => command.contributes);
     if (!commands.length) return undefined;
     return (
         JSON.stringify(
@@ -152,7 +152,9 @@ export function packageJsonSource(
     vscodeEngine: string,
     hasCustom: boolean,
 ): string {
-    const commands = resolveCommands(config).map(({ id, title }) => ({ command: id, title }));
+    const commands = resolveCommands(config)
+        .filter((command) => command.contributes)
+        .map(({ id, title }) => ({ command: id, title }));
     const contributes = (pkg as { contributes?: object }).contributes;
     const derived: Record<string, unknown> = {
         name: `code-spell-checker-${config.name}`,

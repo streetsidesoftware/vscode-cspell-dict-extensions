@@ -42,19 +42,19 @@
   "contributes": {
     "commands": [
       {
-        "command": "cSpellExt_croatian.enableCroatian",
+        "command": "cSpellExt_croatian.enable",
         "title": "Enable Croatian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_croatian.disableCroatian",
+        "command": "cSpellExt_croatian.disable",
         "title": "Disable Croatian Spell Checker Dictionary"
       },
       {
-        "command": "cSpellExt_croatian.enableCroatianWorkspace",
+        "command": "cSpellExt_croatian.enableWorkspace",
         "title": "Enable Croatian Spell Checker Dictionary in Workspace"
       },
       {
-        "command": "cSpellExt_croatian.disableCroatianWorkspace",
+        "command": "cSpellExt_croatian.disableWorkspace",
         "title": "Disable Croatian Spell Checker Dictionary in Workspace"
       }
     ]

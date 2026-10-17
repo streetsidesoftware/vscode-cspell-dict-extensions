@@ -13,28 +13,62 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "hr"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "hr"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
             "value": "hr",
-            "id": "cSpellExt_croatian.enableCroatian"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "hr",
-            "id": "cSpellExt_croatian.disableCroatian"
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "hr",
+            "id": "cSpellExt_croatian.enableCroatian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "hr",
+            "id": "cSpellExt_croatian.disableCroatian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "hr",
             "scope": "workspace",
-            "id": "cSpellExt_croatian.enableCroatianWorkspace"
+            "id": "cSpellExt_croatian.enableCroatianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "hr",
             "scope": "workspace",
-            "id": "cSpellExt_croatian.disableCroatianWorkspace"
+            "id": "cSpellExt_croatian.disableCroatianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ]
 }

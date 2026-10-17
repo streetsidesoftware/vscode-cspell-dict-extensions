@@ -15,28 +15,62 @@
         {
             "action": "enable",
             "toggle": "locale",
+            "value": "ru"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ru"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
             "value": "ru",
-            "id": "cSpellExt_russian.enableRussian"
+            "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "ru",
-            "id": "cSpellExt_russian.disableRussian"
+            "scope": "workspace"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ru",
+            "id": "cSpellExt_russian.enableRussian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "value": "ru",
+            "id": "cSpellExt_russian.disableRussian",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "enable",
             "toggle": "locale",
             "value": "ru",
             "scope": "workspace",
-            "id": "cSpellExt_russian.enableRussianWorkspace"
+            "id": "cSpellExt_russian.enableRussianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
             "action": "disable",
             "toggle": "locale",
             "value": "ru",
             "scope": "workspace",
-            "id": "cSpellExt_russian.disableRussianWorkspace"
+            "id": "cSpellExt_russian.disableRussianWorkspace",
+            "contributes": false,
+            "legacy": true,
+            "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         }
     ]
 }

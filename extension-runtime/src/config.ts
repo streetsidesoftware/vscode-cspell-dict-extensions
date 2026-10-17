@@ -37,6 +37,16 @@ interface CommandBase {
      * @minLength 1
      */
     title?: string;
+    /**
+     * Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README.
+     * A command that isn't is still registered, so keybindings and tasks that use its ID keep working.
+     * Default: `true`.
+     */
+    contributes?: boolean;
+    /** The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers. */
+    legacy?: boolean;
+    /** Notes for maintainers: why this command is the way it is. Not used by the sync. */
+    notes?: string;
 }
 
 /** A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`). */
@@ -142,6 +152,8 @@ export type ExtensionKind = ExtensionConfig['kind'];
 export interface ResolvedCommand {
     id: string;
     title: string;
+    /** Listed in `package.json`, the Command Palette and the README; registered either way. */
+    contributes: boolean;
     action: Action;
     toggle: Toggle;
     value: string;
@@ -169,6 +181,7 @@ export function resolveCommands(config: ExtensionConfig): ResolvedCommand[] {
             title:
                 command.title ??
                 `${action} ${config.friendlyName} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
+            contributes: command.contributes ?? true,
             action: command.action,
             toggle: command.toggle,
             value: command.value,
