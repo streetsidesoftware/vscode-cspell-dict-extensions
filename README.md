@@ -51,7 +51,7 @@ See Also:
 - [Persian](extensions/persian#readme) - Adds Persian (فارسی) spell checking to Code Spell Checker.
 - [Polish](extensions/polish#readme) - Adds Polish (polski) spell checking to Code Spell Checker.
 - [Portuguese](extensions/portuguese#readme) - Adds Portuguese (português) spell checking to Code Spell Checker.
-- [Brazilian Portuguese](extensions/portuguese-brazilian#readme) - Adds Brazilian Portuguese (português (Brasil)) spell checking to Code Spell Checker.
+- [Brazilian Portuguese](extensions/portuguese-brazilian#readme) - Adds Brazilian Portuguese (português brasileiro) spell checking to Code Spell Checker.
 - [Romanian](extensions/romanian#readme) - Adds Romanian (română) spell checking to Code Spell Checker.
 - [Russian](extensions/russian#readme) - Adds Russian (русский) spell checking to Code Spell Checker.
 - [Serbian](extensions/serbian#readme) - Adds Serbian (српски) spell checking to Code Spell Checker.
@@ -128,7 +128,7 @@ See Also:
 - [Persian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-persian) - Adds Persian (فارسی) spell checking to Code Spell Checker.
 - [Polish](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-polish) - Adds Polish (polski) spell checking to Code Spell Checker.
 - [Portuguese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-portuguese) - Adds Portuguese (português) spell checking to Code Spell Checker.
-- [Brazilian Portuguese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-portuguese-brazilian) - Adds Brazilian Portuguese (português (Brasil)) spell checking to Code Spell Checker.
+- [Brazilian Portuguese](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-portuguese-brazilian) - Adds Brazilian Portuguese (português brasileiro) spell checking to Code Spell Checker.
 - [Romanian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-romanian) - Adds Romanian (română) spell checking to Code Spell Checker.
 - [Russian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-russian) - Adds Russian (русский) spell checking to Code Spell Checker.
 - [Serbian](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-serbian) - Adds Serbian (српски) spell checking to Code Spell Checker.
