@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "armenian",
+    "kind": "language",
     "friendlyName": "Armenian",
+    "nativeName": "հայերեն",
+    "locale": "hy",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-hy/cspell-ext.json"]
@@ -9,24 +12,20 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale",
-            "value": "hy"
+            "toggle": "locale"
         },
         {
             "action": "disable",
-            "toggle": "locale",
-            "value": "hy"
+            "toggle": "locale"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hy",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hy",
             "scope": "workspace"
         }
     ]

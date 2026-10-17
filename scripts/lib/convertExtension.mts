@@ -41,9 +41,13 @@ export function deriveConfig(old: OldExtension): Converted<ExtensionConfig> {
     const friendlyName = pkg.displayName.endsWith(displayNameSuffix)
         ? pkg.displayName.slice(0, -displayNameSuffix.length)
         : pkg.displayName;
+    const contributed = pkg.contributes?.commands ?? [];
+    const locale = contributed.length ? findLocale(old.extensionTs, warnings) : undefined;
     const config: ExtensionConfig = {
         $schema: '../../static/extension.config.schema.json',
         name: old.name,
+        // A conversion can't tell a word list from a bundle; review the kind of an extension without commands.
+        ...(locale ? { kind: 'language' as const, locale } : { kind: 'wordList' as const }),
         friendlyName,
         sample: '',
         cspell: parseJsonc(old.cspellExt) as Record<string, unknown>,
@@ -58,8 +62,6 @@ export function deriveConfig(old: OldExtension): Converted<ExtensionConfig> {
     const engines = mergedEngines(config.cspell, old.importedEngines ?? {});
     if (engines) config.cspell = { ...config.cspell, engines };
 
-    const contributed = pkg.contributes?.commands ?? [];
-    const locale = contributed.length ? findLocale(old.extensionTs, warnings) : undefined;
     config.commands = contributed.map(({ command: id, title }) => {
         const command = commandFromId(id, locale ?? '', warnings);
         const resolved = resolveCommands({ ...config, commands: [command] })[0];

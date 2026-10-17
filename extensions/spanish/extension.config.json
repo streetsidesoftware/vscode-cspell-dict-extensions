@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "spanish",
+    "kind": "language",
     "friendlyName": "Spanish",
+    "nativeName": "español",
+    "locale": "es-ES",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-es-es/cspell-ext.json"]
@@ -10,26 +13,22 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "es-ES",
             "id": "cSpell.enableSpanish"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES",
             "id": "cSpell.disableSpanish"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "es-ES",
             "scope": "workspace",
             "id": "cSpell.enableSpanishWorkspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES",
             "scope": "workspace",
             "id": "cSpell.disableSpanishWorkspace"
         }

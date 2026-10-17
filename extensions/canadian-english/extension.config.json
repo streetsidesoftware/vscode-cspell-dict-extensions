@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "canadian-english",
+    "kind": "language",
     "friendlyName": "Canadian English",
+    "locale": "en-ca",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-en-ca/cspell-ext.json"]
@@ -9,24 +11,20 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale",
-            "value": "en-ca"
+            "toggle": "locale"
         },
         {
             "action": "disable",
-            "toggle": "locale",
-            "value": "en-ca"
+            "toggle": "locale"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "en-ca",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "en-ca",
             "scope": "workspace"
         }
     ]

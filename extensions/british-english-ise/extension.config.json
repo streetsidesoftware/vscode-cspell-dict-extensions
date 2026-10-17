@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "british-english-ise",
+    "kind": "language",
     "friendlyName": "British English -ise",
+    "locale": "en-gb",
     "sample": "samples/sample.md",
     "cspell": {
         "import": ["@cspell/dict-en-gb-ise/cspell-ext.json"]
@@ -10,26 +12,22 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "en-gb",
             "title": "Enable British_english_ise Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "en-gb",
             "title": "Disable British_english_ise Spell Checker Dictionary"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "en-gb",
             "scope": "workspace",
             "title": "Enable British_english_ise Spell Checker Dictionary in Workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "en-gb",
             "scope": "workspace",
             "title": "Disable British_english_ise Spell Checker Dictionary in Workspace"
         }

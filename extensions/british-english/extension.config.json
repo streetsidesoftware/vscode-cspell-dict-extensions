@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "british-english",
+    "kind": "language",
     "friendlyName": "British English",
+    "locale": "en-GB",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-en-gb/cspell-ext.json"]
@@ -10,26 +12,22 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "en-GB",
             "title": "Enable British Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "en-GB",
             "title": "Disable British Spell Checker Dictionary"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "en-GB",
             "scope": "workspace",
             "title": "Enable British Spell Checker Dictionary in Workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "en-GB",
             "scope": "workspace",
             "title": "Disable British Spell Checker Dictionary in Workspace"
         }

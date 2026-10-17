@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "turkish",
+    "kind": "language",
     "friendlyName": "Turkish",
+    "nativeName": "Türkçe",
+    "locale": "tr",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-tr-tr/cspell-ext.json"],
@@ -13,24 +16,20 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale",
-            "value": "tr"
+            "toggle": "locale"
         },
         {
             "action": "disable",
-            "toggle": "locale",
-            "value": "tr"
+            "toggle": "locale"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "tr",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "tr",
             "scope": "workspace"
         }
     ]

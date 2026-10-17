@@ -1,14 +1,23 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "serbian",
+    "kind": "language",
     "friendlyName": "Serbian",
+    "nativeName": "српски",
+    "locale": "sr",
     "sample": "samples/Београд.md",
     "cspell": {
         "import": ["@cspell/dict-sr-cyrl/cspell-ext.json", "@cspell/dict-sr-latn/cspell-ext.json"]
     },
     "commands": [
-        { "action": "enable", "toggle": "locale", "value": "sr" },
-        { "action": "disable", "toggle": "locale", "value": "sr" },
+        {
+            "action": "enable",
+            "toggle": "locale"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale"
+        },
         {
             "action": "enable",
             "toggle": "locale",
@@ -37,7 +46,15 @@
             "id": "cSpellExt_serbian.disableLatn",
             "title": "Disable Serbian Latin Spell Checker Dictionary"
         },
-        { "action": "enable", "toggle": "locale", "value": "sr", "scope": "workspace" },
-        { "action": "disable", "toggle": "locale", "value": "sr", "scope": "workspace" }
+        {
+            "action": "enable",
+            "toggle": "locale",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "scope": "workspace"
+        }
     ]
 }

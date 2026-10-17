@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "lithuanian",
+    "kind": "language",
     "friendlyName": "Lithuanian",
+    "nativeName": "lietuvių",
+    "locale": "lt",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-lt-lt/cspell-ext.json"]
@@ -9,24 +12,20 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale",
-            "value": "lt"
+            "toggle": "locale"
         },
         {
             "action": "disable",
-            "toggle": "locale",
-            "value": "lt"
+            "toggle": "locale"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "lt",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "lt",
             "scope": "workspace"
         }
     ]

@@ -22,10 +22,10 @@ interface CommandBase {
     /** Turn the toggle on or off. */
     action: Action;
     /**
-     * The locale, dictionary name, or file type (language ID).
+     * The locale, dictionary name, or file type (language ID). Default: the extension's `locale`.
      * @minLength 1
      */
-    value: string;
+    value?: string;
     /**
      * The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.
      * @minLength 1
@@ -57,8 +57,8 @@ export type CommandConfig = ScopedCommandConfig | FileTypeCommandConfig;
 
 export type Toggle = CommandConfig['toggle'];
 
-/** The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it. */
-export interface ExtensionConfig {
+/** The fields every kind of extension has. */
+interface ExtensionConfigBase {
     /** The JSON schema of this file. */
     $schema?: string;
     /**
@@ -95,6 +95,47 @@ export interface ExtensionConfig {
     commands: CommandConfig[];
 }
 
+/** A natural language, enabled by its locale, i.e. Swedish. */
+export interface LanguageExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'language';
+    /**
+     * The locale people add to `cSpell.language` to use this language, i.e. `sv_SE`, or a comma-separated list.
+     * The default `value` of the commands.
+     * @minLength 1
+     */
+    locale: string;
+    /**
+     * The language's name in the language itself, i.e. `svenska`.
+     * @minLength 1
+     */
+    nativeName?: string;
+}
+
+/** A list of words, enabled by dictionary name, i.e. medical terms. */
+export interface WordListExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'wordList';
+}
+
+/** A collection of dictionaries, i.e. the latest copies of the dictionaries Code Spell Checker bundles. */
+export interface BundleExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'bundle';
+}
+
+/** A cspell parser for a programming language. */
+export interface ParserExtensionConfig extends ExtensionConfigBase {
+    /** What the extension is. */
+    kind: 'parser';
+}
+
+/** The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it. */
+export type ExtensionConfig =
+    LanguageExtensionConfig | WordListExtensionConfig | BundleExtensionConfig | ParserExtensionConfig;
+
+export type ExtensionKind = ExtensionConfig['kind'];
+
 export interface ResolvedCommand {
     id: string;
     title: string;
@@ -127,10 +168,20 @@ export function resolveCommands(config: ExtensionConfig): ResolvedCommand[] {
                 `${action} ${config.friendlyName} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
             action: command.action,
             toggle: command.toggle,
-            value: command.value,
+            value: command.value ?? (config.kind === 'language' ? config.locale : ''),
             scope,
         };
     });
+}
+
+/**
+ * The commands that have no `value` and no `locale` to default to. A schema can't express this, so the sync
+ * checks it.
+ */
+export function commandsWithoutValue(config: ExtensionConfig): string[] {
+    return resolveCommands(config)
+        .filter(({ value }) => !value)
+        .map(({ id }) => id);
 }
 
 /**

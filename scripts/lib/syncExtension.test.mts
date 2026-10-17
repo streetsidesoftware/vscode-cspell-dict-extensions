@@ -9,6 +9,8 @@ import { type FileChange, syncExtension } from './syncExtension.mts';
 
 const config = {
     name: 'demo',
+    kind: 'language',
+    locale: 'xx',
     friendlyName: 'Demo',
     sample: 'samples/demo.md',
     cspell: { import: ['@cspell/dict-demo/cspell-ext.json'] },

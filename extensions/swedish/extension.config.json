@@ -1,25 +1,34 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "swedish",
+    "kind": "language",
     "friendlyName": "Swedish",
+    "nativeName": "svenska",
+    "locale": "sv_SE",
     "sample": "samples/Seattle.md",
     "cspell": {
         "import": ["@cspell/dict-sv/cspell-ext.json"]
     },
     "commands": [
-        { "action": "enable", "toggle": "locale", "value": "sv_SE", "id": "cSpellExt_swedish.enableSwedish" },
-        { "action": "disable", "toggle": "locale", "value": "sv_SE", "id": "cSpellExt_swedish.disableSwedish" },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "sv_SE",
+            "id": "cSpellExt_swedish.enableSwedish"
+        },
+        {
+            "action": "disable",
+            "toggle": "locale",
+            "id": "cSpellExt_swedish.disableSwedish"
+        },
+        {
+            "action": "enable",
+            "toggle": "locale",
             "scope": "workspace",
             "id": "cSpellExt_swedish.enableSwedishWorkspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sv_SE",
             "scope": "workspace",
             "id": "cSpellExt_swedish.disableSwedishWorkspace"
         }

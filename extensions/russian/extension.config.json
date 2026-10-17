@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "russian",
+    "kind": "language",
     "friendlyName": "Russian",
+    "nativeName": "русский",
+    "locale": "ru",
     "sample": "samples/portland.md",
     "cspell": {
         "version": "0.2",
@@ -12,26 +15,22 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "ru",
             "id": "cSpellExt_russian.enableRussian"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ru",
             "id": "cSpellExt_russian.disableRussian"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "ru",
             "scope": "workspace",
             "id": "cSpellExt_russian.enableRussianWorkspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "ru",
             "scope": "workspace",
             "id": "cSpellExt_russian.disableRussianWorkspace"
         }

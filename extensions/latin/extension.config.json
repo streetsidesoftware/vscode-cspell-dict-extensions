@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "latin",
+    "kind": "language",
     "friendlyName": "Latin",
+    "locale": "la",
     "sample": "samples/lingua-latina.md",
     "cspell": {
         "import": ["@cspell/dict-la/cspell-ext.json"]
@@ -9,24 +11,20 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale",
-            "value": "la"
+            "toggle": "locale"
         },
         {
             "action": "disable",
-            "toggle": "locale",
-            "value": "la"
+            "toggle": "locale"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "la",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "la",
             "scope": "workspace"
         }
     ]

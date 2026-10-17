@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "slovenian",
+    "kind": "language",
     "friendlyName": "Slovenian",
+    "nativeName": "slovenščina",
+    "locale": "sl",
     "sample": "samples/Ljubljana.md",
     "cspell": {
         "import": ["@cspell/dict-sl-si/cspell-ext.json"]
@@ -9,24 +12,20 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale",
-            "value": "sl"
+            "toggle": "locale"
         },
         {
             "action": "disable",
-            "toggle": "locale",
-            "value": "sl"
+            "toggle": "locale"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "sl",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "sl",
             "scope": "workspace"
         }
     ]

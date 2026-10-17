@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "hebrew",
+    "kind": "language",
     "friendlyName": "Hebrew",
+    "nativeName": "עברית",
+    "locale": "he",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-he/cspell-ext.json"]
@@ -9,24 +12,20 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale",
-            "value": "he"
+            "toggle": "locale"
         },
         {
             "action": "disable",
-            "toggle": "locale",
-            "value": "he"
+            "toggle": "locale"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "he",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "he",
             "scope": "workspace"
         }
     ]

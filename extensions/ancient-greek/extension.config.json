@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "ancient-greek",
+    "kind": "language",
     "friendlyName": "Ancient Greek",
+    "locale": "grc",
     "sample": "samples/Hymn-4-to-Hermes.md",
     "cspell": {
         "import": ["@cspell/dict-grc/cspell-ext.json"]
@@ -10,26 +12,22 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "grc",
             "title": "Enable Ancient_greek Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "grc",
             "title": "Disable Ancient_greek Spell Checker Dictionary"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "grc",
             "scope": "workspace",
             "title": "Enable Ancient_greek Spell Checker Dictionary in Workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "grc",
             "scope": "workspace",
             "title": "Disable Ancient_greek Spell Checker Dictionary in Workspace"
         }

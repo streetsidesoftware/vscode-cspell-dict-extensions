@@ -1,6 +1,7 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "cspell-bundled-dictionaries",
+    "kind": "bundle",
     "friendlyName": "CSpell Bundled Dictionaries",
     "sample": "samples/seattle.md",
     "cspell": {

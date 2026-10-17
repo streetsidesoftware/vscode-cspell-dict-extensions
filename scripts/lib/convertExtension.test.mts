@@ -47,6 +47,8 @@ describe('deriveConfig', () => {
         assert.deepEqual(value, {
             $schema: '../../static/extension.config.schema.json',
             name: 'danish',
+            kind: 'language',
+            locale: 'da',
             friendlyName: 'Danish',
             sample: 'samples/kbh.md',
             cspell: { import: ['@cspell/dict-da/cspell-ext.json'] },

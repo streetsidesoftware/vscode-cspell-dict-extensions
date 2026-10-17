@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "dutch",
+    "kind": "language",
     "friendlyName": "Dutch",
+    "nativeName": "Nederlands",
+    "locale": "nl",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-nl-nl/cspell-ext.json"]
@@ -9,24 +12,20 @@
     "commands": [
         {
             "action": "enable",
-            "toggle": "locale",
-            "value": "nl"
+            "toggle": "locale"
         },
         {
             "action": "disable",
-            "toggle": "locale",
-            "value": "nl"
+            "toggle": "locale"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "nl",
             "scope": "workspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "nl",
             "scope": "workspace"
         }
     ],

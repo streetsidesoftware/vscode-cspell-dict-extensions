@@ -1,7 +1,10 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "croatian",
+    "kind": "language",
     "friendlyName": "Croatian",
+    "nativeName": "hrvatski",
+    "locale": "hr",
     "sample": "samples/amsterdam.md",
     "cspell": {
         "import": ["@cspell/dict-hr-hr/cspell-ext.json"]
@@ -10,26 +13,22 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hr",
             "id": "cSpellExt_croatian.enableCroatian"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hr",
             "id": "cSpellExt_croatian.disableCroatian"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "hr",
             "scope": "workspace",
             "id": "cSpellExt_croatian.enableCroatianWorkspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "hr",
             "scope": "workspace",
             "id": "cSpellExt_croatian.disableCroatianWorkspace"
         }

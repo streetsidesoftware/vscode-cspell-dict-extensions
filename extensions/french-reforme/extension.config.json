@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "french-reforme",
+    "kind": "language",
     "friendlyName": "French Réforme 90",
+    "locale": "fr-90",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-fr-reforme/cspell-ext.json"]
@@ -10,21 +12,18 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "fr-90",
             "id": "cSpellExt_french-reforme.enableFrench",
             "title": "Enable French Reforme Spell Checker Dictionary"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90",
             "id": "cSpellExt_french-reforme.disableFrench",
             "title": "Disable French Reforme Spell Checker Dictionary"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "fr-90",
             "scope": "workspace",
             "id": "cSpellExt_french-reforme.enableFrenchWorkspace",
             "title": "Enable French Reforme Spell Checker Dictionary in Workspace"
@@ -32,7 +31,6 @@
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90",
             "scope": "workspace",
             "id": "cSpellExt_french-reforme.disableFrenchWorkspace",
             "title": "Disable French Reforme Spell Checker Dictionary in Workspace"

@@ -1,7 +1,9 @@
 {
     "$schema": "../../static/extension.config.schema.json",
     "name": "esperanto",
+    "kind": "language",
     "friendlyName": "Esperanto",
+    "locale": "eo",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-eo/cspell-ext.json"]
@@ -10,26 +12,22 @@
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "eo",
             "id": "cSpellExt_esperanto.enableEsperanto"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "eo",
             "id": "cSpellExt_esperanto.disableEsperanto"
         },
         {
             "action": "enable",
             "toggle": "locale",
-            "value": "eo",
             "scope": "workspace",
             "id": "cSpellExt_esperanto.enableEsperantoWorkspace"
         },
         {
             "action": "disable",
             "toggle": "locale",
-            "value": "eo",
             "scope": "workspace",
             "id": "cSpellExt_esperanto.disableEsperantoWorkspace"
         }
