@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-latin",
-  "description": "Latin dictionary extension for VS Code.",
+  "description": "Adds Latin (Latina) spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Latin - Code Spell Checker",
   "icon": "images/SpellCheck.png",

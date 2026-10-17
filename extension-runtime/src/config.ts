@@ -87,11 +87,6 @@ interface ExtensionConfigBase {
      */
     displayName?: string;
     /**
-     * The Marketplace description. Default: `<friendlyName> dictionary extension for VS Code.`
-     * @minLength 1
-     */
-    description?: string;
-    /**
      * The document opened by the VS Code test, relative to the extension.
      * @minLength 1
      */
@@ -123,24 +118,45 @@ export interface LanguageExtensionConfig extends ExtensionConfigBase {
      * @minLength 1
      */
     nativeName?: string;
+    /**
+     * The Marketplace description. Default: `Adds <friendlyName> (<nativeName>) spell checking to Code Spell Checker.`,
+     * without the parentheses when there is no `nativeName`.
+     * @minLength 1
+     */
+    description?: string;
 }
 
 /** A list of words, enabled by dictionary name, i.e. medical terms. */
 export interface WordListExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'wordList';
+    /**
+     * The Marketplace description. Default: `Adds the <friendlyName> dictionary to Code Spell Checker.`
+     * @minLength 1
+     */
+    description?: string;
 }
 
 /** A collection of dictionaries, i.e. the latest copies of the dictionaries Code Spell Checker bundles. */
 export interface BundleExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'bundle';
+    /**
+     * The Marketplace description. Required: there is no default wording for this kind.
+     * @minLength 1
+     */
+    description: string;
 }
 
 /** A cspell parser for a programming language. */
 export interface ParserExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'parser';
+    /**
+     * The Marketplace description. Required: there is no default wording for this kind.
+     * @minLength 1
+     */
+    description: string;
 }
 
 /** The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it. */
@@ -165,7 +181,17 @@ export function displayName(config: ExtensionConfig): string {
 }
 
 export function description(config: ExtensionConfig): string {
-    return config.description ?? `${config.friendlyName} dictionary extension for VS Code.`;
+    if (config.description) return config.description;
+    switch (config.kind) {
+        case 'language': {
+            const name = config.nativeName ? `${config.friendlyName} (${config.nativeName})` : config.friendlyName;
+            return `Adds ${name} spell checking to Code Spell Checker.`;
+        }
+        case 'wordList':
+            return `Adds the ${config.friendlyName} dictionary to Code Spell Checker.`;
+        default:
+            return config.description;
+    }
 }
 
 /**

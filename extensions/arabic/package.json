@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-arabic",
-  "description": "Arabic dictionary extension for VS Code.",
+  "description": "Adds Arabic (العربية) spell checking to Code Spell Checker.",
   "version": "1.0.0",
   "displayName": "Arabic - Code Spell Checker",
   "icon": "images/SpellCheck.png",

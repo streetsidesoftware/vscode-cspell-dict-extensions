@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-swiss-german",
-  "description": "Swiss German dictionary extension for VS Code.",
+  "description": "Adds Swiss German (Schweizer Hochdeutsch) spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Swiss German - Code Spell Checker",
   "icon": "images/SpellCheck.png",

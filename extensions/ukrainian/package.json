@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-ukrainian",
-  "description": "Ukrainian dictionary extension for VS Code.",
+  "description": "Adds Ukrainian (українська) spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Ukrainian - Code Spell Checker",
   "icon": "images/SpellCheck.png",

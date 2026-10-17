@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-macedonian",
-  "description": "Macedonian dictionary extension for VS Code.",
+  "description": "Adds Macedonian (македонски) spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Macedonian - Code Spell Checker",
   "icon": "images/SpellCheck.png",

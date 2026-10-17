@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-esperanto",
-  "description": "Esperanto dictionary extension for VS Code.",
+  "description": "Adds Esperanto spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Esperanto - Code Spell Checker",
   "icon": "images/SpellCheck.png",

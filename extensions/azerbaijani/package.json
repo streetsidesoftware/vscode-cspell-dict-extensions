@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-azerbaijani",
-  "description": "Azerbaijani dictionary extension for VS Code.",
+  "description": "Adds Azerbaijani (azərbaycan) spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Azerbaijani - Code Spell Checker",
   "icon": "images/SpellCheck.png",

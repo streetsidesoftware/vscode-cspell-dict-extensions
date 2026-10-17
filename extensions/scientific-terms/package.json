@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-scientific-terms",
-  "description": "Scientific Terms dictionary extension for VS Code.",
+  "description": "Adds the Scientific Terms dictionary to Code Spell Checker.",
   "version": "1.0.0",
   "displayName": "Scientific Terms - Code Spell Checker",
   "icon": "images/SpellCheck.png",

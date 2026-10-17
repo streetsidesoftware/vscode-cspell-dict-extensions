@@ -1,6 +1,6 @@
 {
   "name": "code-spell-checker-belarusian",
-  "description": "Belarusian dictionary extension for VS Code.",
+  "description": "Adds Belarusian (беларуская) spell checking to Code Spell Checker.",
   "version": "2.0.0",
   "displayName": "Belarusian - Code Spell Checker",
   "icon": "images/SpellCheck.png",
