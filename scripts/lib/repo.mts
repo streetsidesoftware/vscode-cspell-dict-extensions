@@ -34,7 +34,6 @@ export async function readJson<T = unknown>(file: string): Promise<T> {
     return JSON.parse(await fs.readFile(path.resolve(repoRoot, file), 'utf8'));
 }
 
-/** Write JSON indented with 4 spaces, like `jq --indent 4`. */
 export async function writeJson(file: string, value: unknown): Promise<void> {
     await fs.writeFile(path.resolve(repoRoot, file), JSON.stringify(value, null, 4) + '\n');
 }

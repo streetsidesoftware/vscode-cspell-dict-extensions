@@ -34,9 +34,6 @@ export interface ExtensionInfo {
     preRelease: boolean;
 }
 
-/**
- * @param extensionPath - the extension's directory, relative to the repository root, e.g. `extensions/swedish`.
- */
 export async function getExtensionInfo(extensionPath: string): Promise<ExtensionInfo> {
     const pkg = await readExtensionPackageJson(extensionPath);
 
@@ -101,7 +98,6 @@ export async function writeExtensionPackageJson(extensionPath: string, pkg: Pack
 
 /**
  * The extension's `package.json` with the fields every extension shares, sorted.
- * @param extensionPath - the extension's directory, relative to the repository root, e.g. `extensions/swedish`.
  */
 export function fixExtensionPackageJson(
     extensionPath: string,

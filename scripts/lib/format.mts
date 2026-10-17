@@ -1,7 +1,3 @@
-/**
- * Format files with the prettier API and fill in `@@inject` sections with the inject-markdown API.
- */
-
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -37,8 +33,9 @@ export async function formatFiles(...patterns: string[]): Promise<void> {
 /**
  * Fill in the `@@inject` sections of Markdown files in place, like the `inject-markdown` command.
  *
- * Unlike the command, a warning (an unresolved `{@ name @}` placeholder, a file to inject that doesn't exist) fails
- * too. All the files are checked first; the ones without problems are written, then it fails with every problem.
+ * Unlike the command, a warning fails too, because the injected content is wrong: an unresolved `{@ name @}`
+ * placeholder stays in the text, and a file to inject that doesn't exist becomes an error comment. All the files are
+ * checked first; the ones without problems are written, then it fails with every problem.
  * @param patterns - globs relative to the repository root.
  */
 export async function injectFiles(...patterns: string[]): Promise<void> {
@@ -54,8 +51,7 @@ export async function injectFiles(...patterns: string[]): Promise<void> {
 }
 
 /**
- * The errors and warnings of an injection, as `file:line: message`. Warnings count, because the injected content is
- * wrong: an unresolved placeholder stays in the text, and a missing file becomes an error comment.
+ * The errors and warnings of an injection, as `file:line: message`. See `injectFiles` for why warnings count.
  */
 export function injectProblems(result: InjectMarkdownResult): string[] {
     const { file } = result.document;

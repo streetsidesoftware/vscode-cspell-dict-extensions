@@ -36,13 +36,11 @@ function extensionListItem(url: string, extensionInfo: ExtensionInfo): ListItem 
     );
 }
 
-/** An item that links to the extension's folder. */
 function folderListItem(extensionInfo: ExtensionInfo): ListItem {
     // Relative to `static/generated/`; inject-markdown rebases the link when injecting.
     return extensionListItem(`../../${extensionInfo.extensionPath}#readme`, extensionInfo);
 }
 
-/** An item that links to the extension in the Marketplace. */
 function marketplaceListItem(extensionInfo: ExtensionInfo): ListItem {
     const url = `https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.${extensionInfo.name}`;
     return extensionListItem(url, extensionInfo);
@@ -50,8 +48,6 @@ function marketplaceListItem(extensionInfo: ExtensionInfo): ListItem {
 
 /**
  * Write a list of the extensions, under a heading per category.
- * @param file - the file name in `static/generated/`.
- * @param makeItem - makes the list item of an extension.
  * @param headingOf - the heading of a category, or `undefined` to leave the category out.
  */
 async function writeExtensionList(
