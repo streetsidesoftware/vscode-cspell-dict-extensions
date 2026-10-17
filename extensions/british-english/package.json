@@ -1,22 +1,9 @@
 {
   "name": "code-spell-checker-british-english",
-  "description": "Adds British English spell checking to Code Spell Checker.",
-  "version": "2.0.0",
   "displayName": "British English - Code Spell Checker",
-  "icon": "images/SpellCheck.png",
+  "version": "2.0.0",
   "private": true,
-  "publisher": "streetsidesoftware",
-  "license": "GPL-3.0-or-later",
-  "type": "module",
-  "engines": {
-    "vscode": "^1.125.0"
-  },
-  "sponsor": {
-    "url": "https://github.com/sponsors/streetsidesoftware"
-  },
-  "extensionKind": [
-    "workspace"
-  ],
+  "description": "Adds British English spell checking to Code Spell Checker.",
   "categories": [
     "Linters",
     "Other"
@@ -28,16 +15,32 @@
     "dictionary",
     "spelling"
   ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/british-english"
+  },
+  "license": "GPL-3.0-or-later",
   "qna": "marketplace",
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": [],
+  "publisher": "streetsidesoftware",
+  "type": "module",
   "main": "./out/extension.js",
-  "capabilities": {
-    "virtualWorkspaces": true,
-    "untrustedWorkspaces": {
-      "supported": true
-    }
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "pack-extension": "vsce package",
+    "publish-extension": "vsce publish",
+    "test": "npm run test:cspell && npm run test:vscode",
+    "test:cspell": "cspell -c static/cspell-ext.json samples",
+    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/seattle.md",
+    "vscode:prepublish": "npm run build",
+    "watch": "tsdown --watch"
   },
   "contributes": {
     "commands": [
@@ -59,36 +62,33 @@
       }
     ]
   },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "dependencies": {
+    "@cspell/dict-en-gb": "^5.0.36"
+  },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
-    "directory": "extensions/british-english"
+  "engines": {
+    "vscode": "^1.125.0"
   },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  "icon": "images/SpellCheck.png",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
   },
-  "scripts": {
-    "build": "tsdown",
-    "clean": "rimraf out",
-    "clean-build": "npm run clean && npm run build",
-    "pack-extension": "vsce package",
-    "publish-extension": "vsce publish",
-    "test": "npm run test:cspell && npm run test:vscode",
-    "test:cspell": "cspell -c static/cspell-ext.json samples",
-    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/seattle.md",
-    "vscode:prepublish": "npm run build",
-    "watch": "tsdown --watch"
-  },
-  "dependencies": {
-    "@cspell/dict-en-gb": "^5.0.36"
+  "extensionKind": [
+    "workspace"
+  ],
+  "sponsor": {
+    "url": "https://github.com/sponsors/streetsidesoftware"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/british-english/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/british-english/"
-  },
-  "author": "Street Side Software <support@streetsidesoftware.nl>",
-  "contributors": []
+  }
 }

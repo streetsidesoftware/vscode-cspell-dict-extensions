@@ -1,22 +1,9 @@
 {
   "name": "code-spell-checker-ancient-greek",
-  "description": "Adds Ancient Greek (Ἀρχαία Ἑλληνική) spell checking to Code Spell Checker.",
-  "version": "2.0.0",
   "displayName": "Ancient Greek - Code Spell Checker",
-  "icon": "images/SpellCheck.png",
+  "version": "2.0.0",
   "private": true,
-  "publisher": "streetsidesoftware",
-  "license": "GPL-3.0-or-later",
-  "type": "module",
-  "engines": {
-    "vscode": "^1.125.0"
-  },
-  "sponsor": {
-    "url": "https://github.com/sponsors/streetsidesoftware"
-  },
-  "extensionKind": [
-    "workspace"
-  ],
+  "description": "Adds Ancient Greek (Ἀρχαία Ἑλληνική) spell checking to Code Spell Checker.",
   "categories": [
     "Linters",
     "Other"
@@ -28,16 +15,32 @@
     "dictionary",
     "spelling"
   ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/ancient-greek"
+  },
+  "license": "GPL-3.0-or-later",
   "qna": "marketplace",
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": [],
+  "publisher": "streetsidesoftware",
+  "type": "module",
   "main": "./out/extension.js",
-  "capabilities": {
-    "virtualWorkspaces": true,
-    "untrustedWorkspaces": {
-      "supported": true
-    }
+  "scripts": {
+    "build": "tsdown",
+    "clean": "rimraf out",
+    "clean-build": "npm run clean && npm run build",
+    "pack-extension": "vsce package",
+    "publish-extension": "vsce publish",
+    "test": "npm run test:cspell && npm run test:vscode",
+    "test:cspell": "cspell -c static/cspell-ext.json samples",
+    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/Hymn-4-to-Hermes.md",
+    "vscode:prepublish": "npm run build",
+    "watch": "tsdown --watch"
   },
   "contributes": {
     "commands": [
@@ -59,36 +62,33 @@
       }
     ]
   },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "dependencies": {
+    "@cspell/dict-grc": "^1.0.9"
+  },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
-    "directory": "extensions/ancient-greek"
+  "engines": {
+    "vscode": "^1.125.0"
   },
-  "bugs": {
-    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  "icon": "images/SpellCheck.png",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
   },
-  "scripts": {
-    "build": "tsdown",
-    "clean": "rimraf out",
-    "clean-build": "npm run clean && npm run build",
-    "pack-extension": "vsce package",
-    "publish-extension": "vsce publish",
-    "test": "npm run test:cspell && npm run test:vscode",
-    "test:cspell": "cspell -c static/cspell-ext.json samples",
-    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/Hymn-4-to-Hermes.md",
-    "vscode:prepublish": "npm run build",
-    "watch": "tsdown --watch"
-  },
-  "dependencies": {
-    "@cspell/dict-grc": "^1.0.9"
+  "extensionKind": [
+    "workspace"
+  ],
+  "sponsor": {
+    "url": "https://github.com/sponsors/streetsidesoftware"
   },
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/ancient-greek/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/ancient-greek/"
-  },
-  "author": "Street Side Software <support@streetsidesoftware.nl>",
-  "contributors": []
+  }
 }
