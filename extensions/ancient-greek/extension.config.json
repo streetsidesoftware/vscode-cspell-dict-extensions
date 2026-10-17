@@ -3,6 +3,7 @@
     "name": "ancient-greek",
     "kind": "language",
     "friendlyName": "Ancient Greek",
+    "nativeName": "Ἀρχαία Ἑλληνική",
     "locale": "grc",
     "sample": "samples/Hymn-4-to-Hermes.md",
     "cspell": {
