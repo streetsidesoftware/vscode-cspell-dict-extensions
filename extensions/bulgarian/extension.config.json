@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Bulgarian",
     "nativeName": "български",
-    "locale": "bg_BG",
+    "locale": "bg-BG",
     "sample": "samples/seattle-bg.md",
     "cspell": {
         "import": ["@cspell/dict-bg-bg/cspell-ext.json"]

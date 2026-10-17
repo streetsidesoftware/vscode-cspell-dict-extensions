@@ -3,7 +3,7 @@
     "name": "british-english-ise",
     "kind": "language",
     "friendlyName": "British English -ise",
-    "locale": "en-gb",
+    "locale": "en-GB",
     "sample": "samples/sample.md",
     "cspell": {
         "import": ["@cspell/dict-en-gb-ise/cspell-ext.json"]

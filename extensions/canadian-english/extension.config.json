@@ -3,7 +3,7 @@
     "name": "canadian-english",
     "kind": "language",
     "friendlyName": "Canadian English",
-    "locale": "en-ca",
+    "locale": "en-CA",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-en-ca/cspell-ext.json"]

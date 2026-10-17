@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Mongolian",
     "nativeName": "монгол",
-    "locale": "mn-mn",
+    "locale": "mn-MN",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-mn-mn/cspell-ext.json"]

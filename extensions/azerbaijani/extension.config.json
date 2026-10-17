@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Azerbaijani",
     "nativeName": "azərbaycan",
-    "locale": "az-az",
+    "locale": "az-AZ",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-az-az/cspell-ext.json"],

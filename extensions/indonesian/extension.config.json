@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Indonesian",
     "nativeName": "Indonesia",
-    "locale": "id-id",
+    "locale": "id-ID",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-id-id/cspell-ext.json"]

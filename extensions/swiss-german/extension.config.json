@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Swiss German",
     "nativeName": "Schweizer Hochdeutsch",
-    "locale": "de-ch",
+    "locale": "de-CH",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-de-ch/cspell-ext.json"]

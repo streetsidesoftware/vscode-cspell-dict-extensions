@@ -100,7 +100,7 @@ export interface LanguageExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'language';
     /**
-     * The locale people add to `cSpell.language` to use this language, i.e. `sv_SE`, or a comma-separated list.
+     * The locale people add to `cSpell.language` to use this language, as a BCP 47 tag (i.e. `sv-SE`) or a comma-separated list of them.
      * @minLength 1
      */
     locale: string;

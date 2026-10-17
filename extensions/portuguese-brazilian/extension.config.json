@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Brazilian Portuguese",
     "nativeName": "português (Brasil)",
-    "locale": "pt,pt_BR",
+    "locale": "pt,pt-BR",
     "sample": "samples/Seattle.md",
     "cspell": {
         "import": ["@cspell/dict-pt-br/cspell-ext.json"]

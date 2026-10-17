@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Romanian",
     "nativeName": "română",
-    "locale": "ro-ro",
+    "locale": "ro-RO",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-ro-ro/cspell-ext.json"]

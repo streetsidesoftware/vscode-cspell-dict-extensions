@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Austrian German",
     "nativeName": "Österreichisches Deutsch",
-    "locale": "de-at",
+    "locale": "de-AT",
     "sample": "samples/seattle.md",
     "cspell": {
         "import": ["@cspell/dict-de-at/cspell-ext.json"]
