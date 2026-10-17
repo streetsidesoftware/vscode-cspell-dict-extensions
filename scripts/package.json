@@ -5,6 +5,7 @@
   "private": true,
   "type": "module",
   "bin": {
+    "clean": "./clean.mts",
     "gen-extension-list": "./gen-extension-list.mts",
     "update-manual-pub-list": "./update-manual-pub-list.mjs",
     "fix-extensions": "./fix-extensions.mts"
