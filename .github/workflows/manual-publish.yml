@@ -81,6 +81,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   list_extensions:
+    if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     outputs:
       extension_list: ${{ env.EXTENSION_LIST }}
@@ -119,7 +120,7 @@ jobs:
     with:
       ref: ${{ inputs.ref }}
       paths_released: ${{ needs.list_extensions.outputs.extension_list }}
-    if: ${{ inputs.extension != 'none' }}
+    if: ${{ github.repository_owner == 'streetsidesoftware' && inputs.extension != 'none' }}
     secrets:
       VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
       OVSX_TOKEN: ${{ secrets.OVSX_TOKEN }}

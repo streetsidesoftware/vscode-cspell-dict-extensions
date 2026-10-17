@@ -6,6 +6,9 @@ on: # rebuild any PRs and main branch changes
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   download-vscode:
     runs-on: ubuntu-latest
