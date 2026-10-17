@@ -39,6 +39,11 @@
                     "description": "The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.",
                     "minLength": 1
                 },
+                "description": {
+                    "type": "string",
+                    "description": "The Marketplace description.",
+                    "minLength": 1
+                },
                 "sample": {
                     "type": "string",
                     "description": "The document opened by the VS Code test, relative to the extension.",
@@ -73,11 +78,6 @@
                 "nativeName": {
                     "type": "string",
                     "description": "The language's name in the language itself, i.e. `svenska`.",
-                    "minLength": 1
-                },
-                "description": {
-                    "type": "string",
-                    "description": "The Marketplace description. Default: `Adds <friendlyName> (<nativeName>) spell checking to Code Spell Checker.`, without the parentheses when there is no `nativeName`.",
                     "minLength": 1
                 }
             },
@@ -219,6 +219,11 @@
                     "description": "The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.",
                     "minLength": 1
                 },
+                "description": {
+                    "type": "string",
+                    "description": "The Marketplace description.",
+                    "minLength": 1
+                },
                 "sample": {
                     "type": "string",
                     "description": "The document opened by the VS Code test, relative to the extension.",
@@ -244,11 +249,6 @@
                     "type": "string",
                     "const": "wordList",
                     "description": "What the extension is."
-                },
-                "description": {
-                    "type": "string",
-                    "description": "The Marketplace description. Default: `Adds the <friendlyName> dictionary to Code Spell Checker.`",
-                    "minLength": 1
                 }
             },
             "required": ["commands", "cspell", "friendlyName", "kind", "name", "sample"],
@@ -277,6 +277,11 @@
                     "description": "The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.",
                     "minLength": 1
                 },
+                "description": {
+                    "type": "string",
+                    "description": "The Marketplace description. Required: there is no default wording for this kind.",
+                    "minLength": 1
+                },
                 "sample": {
                     "type": "string",
                     "description": "The document opened by the VS Code test, relative to the extension.",
@@ -302,11 +307,6 @@
                     "type": "string",
                     "const": "bundle",
                     "description": "What the extension is."
-                },
-                "description": {
-                    "type": "string",
-                    "description": "The Marketplace description. Required: there is no default wording for this kind.",
-                    "minLength": 1
                 }
             },
             "required": ["commands", "cspell", "description", "friendlyName", "kind", "name", "sample"],
@@ -335,6 +335,11 @@
                     "description": "The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.",
                     "minLength": 1
                 },
+                "description": {
+                    "type": "string",
+                    "description": "The Marketplace description. Required: there is no default wording for this kind.",
+                    "minLength": 1
+                },
                 "sample": {
                     "type": "string",
                     "description": "The document opened by the VS Code test, relative to the extension.",
@@ -360,11 +365,6 @@
                     "type": "string",
                     "const": "parser",
                     "description": "What the extension is."
-                },
-                "description": {
-                    "type": "string",
-                    "description": "The Marketplace description. Required: there is no default wording for this kind.",
-                    "minLength": 1
                 }
             },
             "required": ["commands", "cspell", "description", "friendlyName", "kind", "name", "sample"],

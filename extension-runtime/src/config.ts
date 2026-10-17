@@ -87,6 +87,11 @@ interface ExtensionConfigBase {
      */
     displayName?: string;
     /**
+     * The Marketplace description.
+     * @minLength 1
+     */
+    description?: string;
+    /**
      * The document opened by the VS Code test, relative to the extension.
      * @minLength 1
      */
@@ -118,23 +123,12 @@ export interface LanguageExtensionConfig extends ExtensionConfigBase {
      * @minLength 1
      */
     nativeName?: string;
-    /**
-     * The Marketplace description. Default: `Adds <friendlyName> (<nativeName>) spell checking to Code Spell Checker.`,
-     * without the parentheses when there is no `nativeName`.
-     * @minLength 1
-     */
-    description?: string;
 }
 
 /** A list of words, enabled by dictionary name, i.e. medical terms. */
 export interface WordListExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'wordList';
-    /**
-     * The Marketplace description. Default: `Adds the <friendlyName> dictionary to Code Spell Checker.`
-     * @minLength 1
-     */
-    description?: string;
 }
 
 /** A collection of dictionaries, i.e. the latest copies of the dictionaries Code Spell Checker bundles. */
@@ -180,6 +174,11 @@ export function displayName(config: ExtensionConfig): string {
     return config.displayName ?? `${config.friendlyName} - Code Spell Checker`;
 }
 
+/**
+ * The Marketplace description. Default for a language: `Adds <friendlyName> (<nativeName>) spell checking to Code Spell Checker.`,
+ * without the parentheses when there is no `nativeName`. Default for a word list:
+ * `Adds the <friendlyName> dictionary to Code Spell Checker.` Bundles and parsers set their own.
+ */
 export function description(config: ExtensionConfig): string {
     if (config.description) return config.description;
     switch (config.kind) {
