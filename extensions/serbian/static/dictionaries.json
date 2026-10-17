@@ -1,0 +1,10 @@
+[
+    {
+        "Dictionary": "`sr-cyrl`",
+        "Locales": "`sr`, `sr-Cyrl`"
+    },
+    {
+        "Dictionary": "`sr-latn`",
+        "Locales": "`sr`, `sr-Latn`"
+    }
+]

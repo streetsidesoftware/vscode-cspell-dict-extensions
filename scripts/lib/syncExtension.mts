@@ -2,7 +2,7 @@
  * Write the files of an extension that come from `extension-runtime/` or from its `extension.config.json`.
  *
  * - Owned: the tool configs copied from `extension-runtime/template/`.
- * - Generated into `static/`: `cspell-ext.json` and `commands.json`, the data the README templates read.
+ * - Generated into `static/`: `cspell-ext.json`, `commands.json` and `dictionaries.json`, the data the README templates read.
  *   `cspell-ext.json` gets the `engines` the imported dictionaries declare, unless `cspell.engines` sets them.
  * - Derived: some fields of `package.json` (the other fields are kept) and the injected sections of `README.md`,
  *   filled from the shared templates in `<repo>/static/` and the extension's `static/` data.
@@ -72,6 +72,8 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
     files.set(cspellExtPath, JSON.stringify(await cspellExt(extensionDir, config), null, 4) + '\n');
     const commands = commandsTable(config);
     if (commands) files.set('static/commands.json', commands);
+    const dictionaries = await dictionariesTable(extensionDir, config);
+    if (dictionaries) files.set('static/dictionaries.json', dictionaries);
     const pkg = (await readJson(path.join(extensionDir, 'package.json'))) as PackageJson;
     files.set('package.json', packageJsonSource(config, pkg, options.vscodeEngine, hasCustom));
 
@@ -83,7 +85,11 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
         }
     }
 
-    const remove = commands ? obsoleteFiles : [...obsoleteFiles, 'static/commands.json'];
+    const remove = [
+        ...obsoleteFiles,
+        ...(commands ? [] : ['static/commands.json']),
+        ...(dictionaries ? [] : ['static/dictionaries.json']),
+    ];
     for (const file of remove) {
         const target = path.join(extensionDir, file);
         if (!(await exists(target))) continue;
@@ -104,10 +110,6 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
 }
 
 /**
- * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`.
- * @returns `undefined` when the extension has no commands.
- */
-/**
  * The content of `static/cspell-ext.json`: `cspell` from the config, with the `engines` the imported dictionaries
  * declare. An engine set in `cspell.engines` wins over the dictionaries.
  */
@@ -118,22 +120,11 @@ async function cspellExt(extensionDir: string, config: ExtensionConfig): Promise
     return Object.keys(merged).length ? { ...cspell, engines: merged } : cspell;
 }
 
-/** The `engines` declared by the dictionaries in `cspell.import`, read from the extension's `node_modules`. */
+/** The `engines` declared by the dictionaries in `cspell.import`. */
 async function dictionaryEngines(extensionDir: string, config: ExtensionConfig): Promise<Record<string, string>> {
-    const imports = (config.cspell as { import?: string[] }).import ?? [];
-    const require = createRequire(path.join(extensionDir, 'package.json'));
     const engines: Record<string, string> = {};
-    for (const spec of imports.filter((spec) => !spec.startsWith('.'))) {
-        let file: string;
-        try {
-            file = require.resolve(spec);
-        } catch {
-            throw new Error(`extensions/${config.name}: can't find "${spec}". Run \`npm install\` first.`);
-        }
-        // A dictionary's cspell-ext.json may have comments.
-        const ext = parseJsonc(await fs.readFile(file, 'utf8')) as { engines?: Record<string, string> };
-        const declared = ext.engines ?? {};
-        for (const [engine, range] of Object.entries(declared)) {
+    for (const ext of await readDictionaries(extensionDir, config)) {
+        for (const [engine, range] of Object.entries(ext.engines ?? {})) {
             if (engines[engine] !== undefined && engines[engine] !== range) {
                 throw new Error(
                     `extensions/${config.name}: the dictionaries need different ${engine} versions ` +
@@ -146,6 +137,87 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
     return engines;
 }
 
+/** The parts of a dictionary's `cspell-ext.json` the sync reads. */
+interface DictionaryExt {
+    engines?: Record<string, string>;
+    dictionaryDefinitions?: { name: string }[];
+    dictionaries?: string[];
+    languageSettings?: { languageId?: string; locale?: string; dictionaries?: string[] }[];
+}
+
+/** The `cspell-ext.json` of each dictionary in `cspell.import`, read from the extension's `node_modules`. */
+async function readDictionaries(extensionDir: string, config: ExtensionConfig): Promise<DictionaryExt[]> {
+    const imports = (config.cspell as { import?: string[] }).import ?? [];
+    const require = createRequire(path.join(extensionDir, 'package.json'));
+    const exts: DictionaryExt[] = [];
+    for (const spec of imports.filter((spec) => !spec.startsWith('.'))) {
+        let file: string;
+        try {
+            file = require.resolve(spec);
+        } catch {
+            throw new Error(`extensions/${config.name}: can't find "${spec}". Run \`npm install\` first.`);
+        }
+        // A dictionary's cspell-ext.json may have comments.
+        exts.push(parseJsonc(await fs.readFile(file, 'utf8')) as DictionaryExt);
+    }
+    return exts;
+}
+
+/**
+ * The dictionaries the extension adds, as table rows, injected into the README with
+ * `<!--- @@inject-table: ./static/dictionaries.json --->`. A language lists the locales that turn each dictionary on;
+ * the other kinds list the file types.
+ * @returns `undefined` for a bundle, or when the dictionaries define nothing.
+ */
+async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
+    if (config.kind === 'bundle') return undefined;
+    const rows: Record<string, string>[] = [];
+    for (const ext of await readDictionaries(extensionDir, config)) {
+        for (const { name } of ext.dictionaryDefinitions ?? []) {
+            const settings = (ext.languageSettings ?? []).filter((s) => s.dictionaries?.includes(name));
+            const always = ext.dictionaries?.includes(name) ?? false;
+            if (!settings.length && !always) continue;
+            if (config.kind === 'language') {
+                const locales = unique(settings.flatMap((s) => splitList(s.locale)).map(canonicalLocale));
+                rows.push({ Dictionary: code(name), Locales: locales.map(code).join(', ') });
+            } else {
+                const ids = unique(settings.flatMap((s) => splitList(s.languageId)));
+                const all = always || !ids.length || ids.includes('*');
+                rows.push({ Dictionary: code(name), 'File types': all ? 'all' : ids.map(code).join(', ') });
+            }
+        }
+    }
+    return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
+}
+
+function splitList(list: string | undefined): string[] {
+    return (list ?? '')
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean);
+}
+
+/** A locale as canonical BCP 47 (i.e. `sv_SE` → `sv-SE`), or as written when it isn't a valid tag (i.e. `fr-90`). */
+function canonicalLocale(locale: string): string {
+    try {
+        return Intl.getCanonicalLocales(locale.replaceAll('_', '-'))[0] ?? locale;
+    } catch {
+        return locale;
+    }
+}
+
+function unique(values: string[]): string[] {
+    return [...new Set(values)];
+}
+
+function code(text: string): string {
+    return `\`${text}\``;
+}
+
+/**
+ * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`.
+ * @returns `undefined` when the extension has no commands.
+ */
 export function commandsTable(config: ExtensionConfig): string | undefined {
     const commands = resolveCommands(config).filter((command) => command.contributes);
     if (!commands.length) return undefined;

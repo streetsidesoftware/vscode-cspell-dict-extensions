@@ -14,6 +14,18 @@ The name of the dictionary is `medical terms`.
 
 The dictionary is based on [wordlist-medicalterms-en](https://github.com/Glutanimate/wordlist-medicalterms-en) by Aristotelis P., which merges OpenMedSpel (R. Robinson, e-MedTools) and MTH-Med-Spel-Chek (Rajasekharan N.).
 
+## Dictionaries
+
+The dictionaries this extension adds, and the file types they check:
+
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary      | File types |
+| --------------- | ---------- |
+| `medical terms` | all        |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 ## Requirements

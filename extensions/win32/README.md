@@ -4,6 +4,18 @@ Win32 dictionary extension for VS Code.
 
 Imports the Win32 spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
+## Dictionaries
+
+The dictionaries this extension adds, and the file types they check:
+
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary | File types |
+| ---------- | ---------- |
+| `win32`    | `c`, `cpp` |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 ## Requirements
