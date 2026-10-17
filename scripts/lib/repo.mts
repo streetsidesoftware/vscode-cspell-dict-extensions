@@ -9,26 +9,25 @@ import path from 'node:path';
 export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
 
 /**
- * The directories in `extensions/` that have a `package.json`, relative to the repository root, i.e.
- * `extensions/swedish`.
- *
- * They are sorted by the path of their `package.json`, like the shell glob `extensions/*\/package.json`, so
- * `extensions/british-english-ise` comes before `extensions/british-english`.
+ * The extensions: the directories in `extensions/` that have a `package.json`, relative to the repository root,
+ * e.g. `extensions/swedish`, sorted.
  */
 export async function listExtensionDirs(): Promise<string[]> {
-    const names: string[] = [];
+    const dirs: string[] = [];
     for await (const pkgFile of fs.glob('*/package.json', { cwd: path.join(repoRoot, 'extensions') })) {
-        names.push(path.dirname(pkgFile));
+        dirs.push(`extensions/${path.dirname(pkgFile)}`);
     }
-    return names
-        .map((name) => `extensions/${name}/package.json`)
-        .sort(compareCodePoints)
-        .map((pkgFile) => path.posix.dirname(pkgFile));
+    return dirs.sort();
 }
 
-/** Compare strings by code point, like `jq`'s `sort` and the `C` locale. */
-export function compareCodePoints(a: string, b: string): number {
-    return a < b ? -1 : a > b ? 1 : 0;
+/**
+ * The `engines.vscode` of the root `package.json`, which every extension gets.
+ */
+export async function readVscodeEngine(): Promise<string> {
+    const pkg = await readJson<{ engines?: { vscode?: string } }>('package.json');
+    const vscodeEngine = pkg.engines?.vscode;
+    if (!vscodeEngine) throw new Error('package.json: "engines.vscode" is missing.');
+    return vscodeEngine;
 }
 
 export async function readJson<T = unknown>(file: string): Promise<T> {
