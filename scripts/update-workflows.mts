@@ -12,7 +12,8 @@ import { listExtensionDirs, repoRoot, run } from './lib/repo.mts';
 
 const workflowsDir = path.join(repoRoot, '.github/workflows');
 
-const intl = new Intl.Collator();
+// A fixed locale, so the order doesn't depend on the machine.
+const intl = new Intl.Collator('en');
 
 async function main(): Promise<void> {
     const extensions = (await listExtensionDirs()).sort(intl.compare);
