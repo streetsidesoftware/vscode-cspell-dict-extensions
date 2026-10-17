@@ -38,7 +38,7 @@
   "main": "./out/extension.js",
   "scripts": {
     "build": "tsdown",
-    "clean": "rimraf out",
+    "clean": "node ../../scripts/clean.mts",
     "clean-build": "npm run clean && npm run build",
     "pack-extension": "vsce package",
     "publish-extension": "vsce publish",

@@ -210,7 +210,7 @@ export function packageJsonSource(
             build: 'tsdown',
             // Only `src/custom.ts` is the extension's own code; the shared code is checked in `extension-runtime/`.
             ...(hasCustom ? { 'check-types': 'tsc -p .' } : {}),
-            clean: 'rimraf out',
+            clean: 'node ../../scripts/clean.mts',
             'clean-build': 'npm run clean && npm run build',
             'pack-extension': 'vsce package',
             'publish-extension': 'vsce publish',
