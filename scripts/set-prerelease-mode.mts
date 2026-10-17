@@ -12,7 +12,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { repoRoot } from './lib/repo.mts';
+import { extensionsDir } from './lib/repo.mts';
 
 async function run(): Promise<void> {
     const [name, mode, ...rest] = process.argv.slice(2);
@@ -22,7 +22,7 @@ async function run(): Promise<void> {
         return;
     }
 
-    const pkgFile = path.join(repoRoot, 'extensions', name, 'package.json');
+    const pkgFile = path.join(extensionsDir, name, 'package.json');
     const pkg = JSON.parse(await fs.readFile(pkgFile, 'utf8'));
     const vsce: Record<string, unknown> = pkg.vsce ?? {};
     const isPrerelease = mode === 'true';

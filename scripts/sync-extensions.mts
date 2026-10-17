@@ -16,7 +16,7 @@ import { parseArgs, styleText } from 'node:util';
 
 import { createExtensionConfigValidator, generateExtensionSchema, schemaPath } from './lib/extensionSchema.mts';
 import { format } from './lib/format.mts';
-import { exists, readVscodeEngine, repoRoot } from './lib/repo.mts';
+import { exists, extensionsDir, readVscodeEngine, repoRoot } from './lib/repo.mts';
 import { configFileName, syncExtension, writeIfChanged } from './lib/syncExtension.mts';
 
 async function run(): Promise<void> {
@@ -25,7 +25,6 @@ async function run(): Promise<void> {
         allowPositionals: true,
     });
 
-    const extensionsDir = path.join(repoRoot, 'extensions');
     const names = positionals.length ? positionals : (await fs.readdir(extensionsDir)).sort();
     const vscodeEngine = await readVscodeEngine();
 

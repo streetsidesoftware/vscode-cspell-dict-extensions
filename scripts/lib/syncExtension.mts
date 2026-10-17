@@ -26,7 +26,7 @@ import {
 import type { PackageJson } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { format, injectProblems } from './format.mts';
-import { exists, readJson, repoRoot } from './repo.mts';
+import { exists, extensionsDir, readJson, repoRoot } from './repo.mts';
 
 export const configFileName = 'extension.config.json';
 const templateDir = path.join(repoRoot, 'extension-runtime/template');
@@ -77,7 +77,7 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
 
     const changes: FileChange[] = [];
     for (const [file, content] of files) {
-        const formatted = await format(path.join(repoRoot, 'extensions', name, file), content);
+        const formatted = await format(path.join(extensionsDir, name, file), content);
         if (await writeIfChanged(path.join(extensionDir, file), formatted, options.check)) {
             changes.push({ file, action: 'update' });
         }
@@ -95,7 +95,7 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
     // date the README can't be checked yet; the check fails on them anyway.
     const readme = path.join(extensionDir, 'README.md');
     if ((await exists(readme)) && !(options.check && changes.length)) {
-        const injected = await format(path.join(repoRoot, 'extensions', name, 'README.md'), await injectReadme(readme));
+        const injected = await format(path.join(extensionsDir, name, 'README.md'), await injectReadme(readme));
         if (await writeIfChanged(readme, injected, options.check)) {
             changes.push({ file: 'README.md', action: 'update' });
         }

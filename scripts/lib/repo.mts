@@ -6,6 +6,7 @@ import path from 'node:path';
  */
 
 export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
+export const extensionsDir: string = path.join(repoRoot, 'extensions');
 
 /**
  * The extensions: the directories in `extensions/` that have a `package.json`, relative to the repository root,
@@ -13,7 +14,7 @@ export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
  */
 export async function listExtensionDirs(): Promise<string[]> {
     const dirs: string[] = [];
-    for await (const pkgFile of fs.glob('*/package.json', { cwd: path.join(repoRoot, 'extensions') })) {
+    for await (const pkgFile of fs.glob('*/package.json', { cwd: extensionsDir })) {
         dirs.push(`extensions/${path.dirname(pkgFile)}`);
     }
     return dirs.sort();
