@@ -10,6 +10,11 @@ on: # rebuild any PRs and main branch changes
 permissions:
   contents: read
 
+# A new push to a pull request cancels its older run. Other runs never share a group.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
 # Skip the install-time audit: a hung audit request can stall an install for 5 minutes.
 env:
   NPM_CONFIG_AUDIT: false
