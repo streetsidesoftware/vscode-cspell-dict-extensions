@@ -5,14 +5,11 @@ import { promises as fs } from 'node:fs';
 import * as os from 'node:os';
 import { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath, runTests } from '@vscode/test-electron';
 import { Command, CommanderError } from 'commander';
-import { fileURLToPath } from 'url';
 import { styleText } from 'node:util';
 import assert from 'node:assert';
 import { installExtension, installFailure } from './lib/installExtension.mts';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const root = path.join(__dirname, '..');
+const root = path.join(import.meta.dirname, '..');
 const cacheDirVscodeTest = '.vscode-test';
 const cachePath = path.join(root, cacheDirVscodeTest);
 
@@ -72,7 +69,7 @@ async function testRunner(extensionDevelopmentPath: string, options: TestRunnerO
     }
 
     const { vscodeVersion: version } = options;
-    const extensionTestsPath = path.resolve(__dirname, './suite/index.mjs');
+    const extensionTestsPath = path.resolve(import.meta.dirname, './suite/index.mjs');
 
     await fs.mkdir(cachePath, { recursive: true });
 
