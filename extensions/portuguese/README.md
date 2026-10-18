@@ -23,18 +23,22 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-end: ./static/commands.json --->
 
+<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
+
 ### Manual Settings
 
 This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `pt` or `pt_PT` to the `cSpell.language` setting, will enable the Portuguese dictionary.
+Adding `pt-PT` to the `cSpell.language` setting, will enable the Portuguese dictionary.
 Example using both English and Portuguese dictionaries:
 
 ```javascript
-"cSpell.language": "en,pt_PT",
+"cSpell.language": "en,pt-PT",
 ```
+
+<!--- @@inject-end: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
 
 ## Dictionaries
 
