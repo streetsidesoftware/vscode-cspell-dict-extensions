@@ -28,14 +28,14 @@ export interface ExtensionInfo {
     displayNameShort: string;
     version: string;
     description: string;
-    extensionPath: string;
+    repoPath: string;
     dictionaryType: string;
     /** `vsce.preRelease` in the extension's package.json */
     preRelease: boolean;
 }
 
-export async function getExtensionInfo(extensionPath: string): Promise<ExtensionInfo> {
-    const pkg = await readExtensionPackageJson(extensionPath);
+export async function getExtensionInfo(repoPath: string): Promise<ExtensionInfo> {
+    const pkg = await readExtensionPackageJson(repoPath);
 
     const info: ExtensionInfo = {
         name: pkg.name,
@@ -43,8 +43,8 @@ export async function getExtensionInfo(extensionPath: string): Promise<Extension
         displayName: pkg.displayName,
         displayNameShort: pkg.displayName.replace(/ -.*/, '').trim(),
         version: pkg.version,
-        extensionPath,
-        dictionaryType: await lookUpDictionaryType(extensionPath),
+        repoPath,
+        dictionaryType: await lookUpDictionaryType(repoPath),
         preRelease: pkg.vsce?.preRelease === true,
     };
     return info;
@@ -57,10 +57,10 @@ interface DictionaryTypesConfig {
 
 let dictionaryTypes: Promise<DictionaryTypesConfig> | undefined;
 
-async function lookUpDictionaryType(extensionPath: string): Promise<string> {
+async function lookUpDictionaryType(repoPath: string): Promise<string> {
     const { types, default: defaultType } = await (dictionaryTypes ??= readJson('static/dictionary-types.json'));
     for (const [category, extensions] of Object.entries(types)) {
-        if (extensions.includes(extensionPath)) return category;
+        if (extensions.includes(repoPath)) return category;
     }
 
     return defaultType;
@@ -88,29 +88,29 @@ export interface PackageJson {
     engines?: { [engine: string]: string };
 }
 
-export async function readExtensionPackageJson(extensionPath: string): Promise<PackageJson> {
-    return readJson(`${extensionPath}/package.json`);
+export async function readExtensionPackageJson(repoPath: string): Promise<PackageJson> {
+    return readJson(`${repoPath}/package.json`);
 }
 
-export async function writeExtensionPackageJson(extensionPath: string, pkg: PackageJson): Promise<void> {
-    await fs.writeFile(path.join(repoRoot, extensionPath, 'package.json'), JSON.stringify(pkg, null, 2) + '\n');
+export async function writeExtensionPackageJson(repoPath: string, pkg: PackageJson): Promise<void> {
+    await fs.writeFile(path.join(repoRoot, repoPath, 'package.json'), JSON.stringify(pkg, null, 2) + '\n');
 }
 
 /**
  * The extension's `package.json` with the fields every extension shares, sorted.
  */
 export function fixExtensionPackageJson(
-    extensionPath: string,
+    repoPath: string,
     pkg: PackageJson,
     overrides: Partial<PackageJson>,
 ): PackageJson {
-    const baseUrl = new URL(`${extensionPath}/`, repositoryRawUrl).href;
+    const baseUrl = new URL(`${repoPath}/`, repositoryRawUrl).href;
     return sortPackageJson({
         ...pkg,
         ...overrides,
         private: true,
         preview: undefined,
-        repository: { ...(pkg.repository ?? defaultRepository), directory: extensionPath },
+        repository: { ...(pkg.repository ?? defaultRepository), directory: repoPath },
         publisher: 'streetsidesoftware',
         author: 'Street Side Software <support@streetsidesoftware.nl>',
         contributors: pkg.contributors ?? [],

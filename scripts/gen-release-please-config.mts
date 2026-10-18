@@ -8,7 +8,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import { format } from './lib/format.mts';
-import { listExtensionDirs, readJson, repoRoot } from './lib/repo.mts';
+import { listExtensionRepoPaths, readJson, repoRoot } from './lib/repo.mts';
 
 const configFile = path.join(repoRoot, 'release-please-config.json');
 
@@ -18,12 +18,12 @@ interface PackageConfig {
 }
 
 async function main(): Promise<void> {
-    const dirs = ['.', ...(await listExtensionDirs())];
+    const repoPaths = ['.', ...(await listExtensionRepoPaths())];
 
     const packages: Record<string, PackageConfig> = {};
-    for (const dir of dirs) {
-        const pkg = await readJson<{ name: string }>(`${dir}/package.json`);
-        packages[dir] = { component: pkg.name, releaseType: 'node' };
+    for (const repoPath of repoPaths) {
+        const pkg = await readJson<{ name: string }>(`${repoPath}/package.json`);
+        packages[repoPath] = { component: pkg.name, releaseType: 'node' };
     }
 
     const config = await readJson<Record<string, unknown>>(configFile);

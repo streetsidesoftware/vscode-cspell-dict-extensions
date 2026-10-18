@@ -9,15 +9,15 @@ import {
     readExtensionPackageJson,
     writeExtensionPackageJson,
 } from './lib/extensionHelper.mts';
-import { listExtensionDirs, readVscodeEngine } from './lib/repo.mts';
+import { listExtensionRepoPaths, readVscodeEngine } from './lib/repo.mts';
 
 export async function fixExtensions(): Promise<void> {
     console.log('Fixing extensions...');
     const overrides = { engines: { vscode: await readVscodeEngine() } };
 
-    for (const ext of await listExtensionDirs()) {
-        const pkg = await readExtensionPackageJson(ext);
-        await writeExtensionPackageJson(ext, fixExtensionPackageJson(ext, pkg, overrides));
+    for (const repoPath of await listExtensionRepoPaths()) {
+        const pkg = await readExtensionPackageJson(repoPath);
+        await writeExtensionPackageJson(repoPath, fixExtensionPackageJson(repoPath, pkg, overrides));
     }
 }
 

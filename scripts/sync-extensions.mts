@@ -41,13 +41,13 @@ async function run(): Promise<void> {
 
     let synced = 0;
     for (const name of names) {
-        const dir = path.join(extensionsDir, name);
-        if (!(await exists(path.join(dir, configFileName)))) {
+        const extensionDir = path.join(extensionsDir, name);
+        if (!(await exists(path.join(extensionDir, configFileName)))) {
             if (positionals.length) throw new Error(`extensions/${name}/${configFileName} not found.`);
             continue;
         }
         ++synced;
-        const changed = await syncExtension(dir, { check: values.check, vscodeEngine, validate });
+        const changed = await syncExtension(extensionDir, { check: values.check, vscodeEngine, validate });
         for (const { file, action } of changed) {
             const verb = values.check ? 'Out of date' : action === 'remove' ? 'Removed' : 'Updated';
             console.log(`${verb}: extensions/${name}/${file}`);

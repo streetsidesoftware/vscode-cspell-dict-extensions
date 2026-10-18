@@ -57,7 +57,7 @@ export interface FileChange {
 
 /**
  * Sync one extension.
- * @param extensionDir - the extension's directory.
+ * @param extensionDir - the extension's directory, as an absolute path.
  * @returns the files that changed (or would change with `check`).
  */
 export async function syncExtension(extensionDir: string, options: SyncOptions): Promise<FileChange[]> {

@@ -9,7 +9,7 @@ import path from 'node:path';
 import yaml from 'yaml';
 
 import { format } from './lib/format.mts';
-import { listExtensionDirs, repoRoot } from './lib/repo.mts';
+import { listExtensionRepoPaths, repoRoot } from './lib/repo.mts';
 
 const workflowsDir = path.join(repoRoot, '.github/workflows');
 
@@ -17,15 +17,15 @@ const workflowsDir = path.join(repoRoot, '.github/workflows');
 const intl = new Intl.Collator('en');
 
 async function main(): Promise<void> {
-    const extensions = (await listExtensionDirs()).sort(intl.compare);
+    const repoPaths = (await listExtensionRepoPaths()).sort(intl.compare);
 
-    // Manual Publish takes the extension path, i.e. `extensions/swedish`.
-    await updateExtensionOptions('manual-publish.yml', ['none', 'all', ...extensions]);
+    // Manual Publish takes the repo path, e.g. `extensions/swedish`.
+    await updateExtensionOptions('manual-publish.yml', ['none', 'all', ...repoPaths]);
 
-    // Set Prerelease takes the directory name in `extensions/`, i.e. `swedish`.
+    // Set Prerelease takes the name, e.g. `swedish`.
     await updateExtensionOptions(
         'set-prerelease.yml',
-        extensions.map((ext) => path.posix.basename(ext)),
+        repoPaths.map((repoPath) => path.posix.basename(repoPath)),
     );
 }
 

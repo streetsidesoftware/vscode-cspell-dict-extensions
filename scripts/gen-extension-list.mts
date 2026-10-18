@@ -12,7 +12,7 @@ import { toMarkdown } from 'mdast-util-to-markdown';
 
 import { type ExtensionInfo, getExtensionInfo } from './lib/extensionHelper.mts';
 import { heading, link, list, listItem, paragraph, root, strong, text } from './lib/mdastBuilder.mts';
-import { listExtensionDirs, repoRoot } from './lib/repo.mts';
+import { listExtensionRepoPaths, repoRoot } from './lib/repo.mts';
 
 const generatedDir = path.join(repoRoot, 'static/generated');
 
@@ -38,7 +38,7 @@ function extensionListItem(url: string, extensionInfo: ExtensionInfo): ListItem 
 
 function folderListItem(extensionInfo: ExtensionInfo): ListItem {
     // Relative to `static/generated/`; inject-markdown rebases the link when injecting.
-    return extensionListItem(`../../${extensionInfo.extensionPath}#readme`, extensionInfo);
+    return extensionListItem(`../../${extensionInfo.repoPath}#readme`, extensionInfo);
 }
 
 function marketplaceListItem(extensionInfo: ExtensionInfo): ListItem {
@@ -71,17 +71,17 @@ async function writeExtensionList(
 function groupExtensionsByType(extensionInfos: ExtensionInfo[]): Map<string, ExtensionInfo[]> {
     const extensionsByCategory = new Map<string, ExtensionInfo[]>();
 
-    for (const ext of extensionInfos) {
-        const cat = extensionsByCategory.get(ext.dictionaryType) || [];
-        cat.push(ext);
-        extensionsByCategory.set(ext.dictionaryType, cat);
+    for (const extensionInfo of extensionInfos) {
+        const cat = extensionsByCategory.get(extensionInfo.dictionaryType) || [];
+        cat.push(extensionInfo);
+        extensionsByCategory.set(extensionInfo.dictionaryType, cat);
     }
 
     return extensionsByCategory;
 }
 
 export async function genExtensionList(): Promise<void> {
-    const extensionInfos = await Promise.all((await listExtensionDirs()).map(getExtensionInfo));
+    const extensionInfos = await Promise.all((await listExtensionRepoPaths()).map(getExtensionInfo));
     const byCategory = groupExtensionsByType(extensionInfos);
 
     await writeExtensionList('extension_list.md', byCategory, folderListItem);

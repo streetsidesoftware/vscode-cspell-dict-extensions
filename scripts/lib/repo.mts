@@ -9,15 +9,17 @@ export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
 export const extensionsDir: string = path.join(repoRoot, 'extensions');
 
 /**
- * The extensions: the directories in `extensions/` that have a `package.json`, relative to the repository root,
- * e.g. `extensions/swedish`, sorted.
+ * The repo paths of the extensions: the directories in `extensions/` that have a `package.json`, sorted.
+ *
+ * A repo path is relative to the repository root and always uses `/`, e.g. `extensions/swedish`. It works as a file
+ * path from the root, and as a path in a URL of the repository.
  */
-export async function listExtensionDirs(): Promise<string[]> {
-    const dirs: string[] = [];
+export async function listExtensionRepoPaths(): Promise<string[]> {
+    const repoPaths: string[] = [];
     for await (const pkgFile of fs.glob('*/package.json', { cwd: extensionsDir })) {
-        dirs.push(`extensions/${path.dirname(pkgFile)}`);
+        repoPaths.push(`extensions/${path.dirname(pkgFile)}`);
     }
-    return dirs.sort();
+    return repoPaths.sort();
 }
 
 /**
@@ -30,6 +32,9 @@ export async function readVscodeEngine(): Promise<string> {
     return vscodeEngine;
 }
 
+/**
+ * @param file - a repo path, or an absolute path.
+ */
 export async function readJson<T = unknown>(file: string): Promise<T> {
     return JSON.parse(await fs.readFile(path.resolve(repoRoot, file), 'utf8'));
 }

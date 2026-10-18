@@ -6,6 +6,6 @@
  * Workflows write the output to `GITHUB_OUTPUT` or `GITHUB_ENV`.
  */
 
-import { listExtensionDirs } from './lib/repo.mts';
+import { listExtensionRepoPaths } from './lib/repo.mts';
 
-console.log(JSON.stringify(await listExtensionDirs()));
+console.log(JSON.stringify(await listExtensionRepoPaths()));
