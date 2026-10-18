@@ -1,9 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import type { IPackageOptions } from '@vscode/vsce';
-import { sortPackageJson } from 'sort-package-json';
-
 import { readJson, repoRoot } from './repo.mts';
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');
@@ -67,9 +64,13 @@ async function lookUpDictionaryType(repoPath: string): Promise<string> {
     return defaultType;
 }
 
-type Writable<T> = { -readonly [P in keyof T]: T[P] };
-
-export type VSCEPackageOptions = Writable<IPackageOptions>;
+/** The `vsce` options the scripts set or read; the others are kept as they are. */
+export interface VsceOptions {
+    baseContentUrl?: string;
+    baseImagesUrl?: string;
+    preRelease?: boolean;
+    [option: string]: unknown;
+}
 
 export interface PackageJson {
     name: string;
@@ -82,7 +83,7 @@ export interface PackageJson {
     publisher?: string;
     author?: string;
     contributors?: string[];
-    vsce?: VSCEPackageOptions;
+    vsce?: VsceOptions;
     private: boolean;
     preview?: boolean | undefined;
     bugs?: { url: string };
@@ -98,7 +99,7 @@ export async function writeExtensionPackageJson(repoPath: string, pkg: PackageJs
 }
 
 /**
- * The extension's `package.json` with the fields every extension shares, sorted.
+ * The extension's `package.json` with the fields every extension shares.
  */
 export function fixExtensionPackageJson(
     repoPath: string,
@@ -106,7 +107,7 @@ export function fixExtensionPackageJson(
     overrides: Partial<PackageJson>,
 ): PackageJson {
     const baseUrl = new URL(`${repoPath}/`, repositoryRawUrl).href;
-    return sortPackageJson({
+    return {
         ...pkg,
         ...overrides,
         private: true,
@@ -119,5 +120,5 @@ export function fixExtensionPackageJson(
         bugs: {
             url: 'https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues',
         },
-    });
+    };
 }

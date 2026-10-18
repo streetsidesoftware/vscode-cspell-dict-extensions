@@ -4,6 +4,8 @@
  * Give every extension's `package.json` the fields the extensions share, and sort it.
  */
 
+import { sortPackageJson } from 'sort-package-json';
+
 import {
     fixExtensionPackageJson,
     readExtensionPackageJson,
@@ -17,7 +19,8 @@ export async function fixExtensions(): Promise<void> {
 
     for (const repoPath of await listExtensionRepoPaths()) {
         const pkg = await readExtensionPackageJson(repoPath);
-        await writeExtensionPackageJson(repoPath, fixExtensionPackageJson(repoPath, pkg, overrides));
+        const fixed = fixExtensionPackageJson(repoPath, pkg, overrides);
+        await writeExtensionPackageJson(repoPath, sortPackageJson(fixed));
     }
 }
 
