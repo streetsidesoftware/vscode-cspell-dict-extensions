@@ -17,6 +17,10 @@ on:
       VSCE_TOKEN:
         required: true
 
+# Skip the install-time audit: a hung audit request can stall an install for 5 minutes.
+env:
+  NPM_CONFIG_AUDIT: false
+
 jobs:
   filter_dirs:
     runs-on: ubuntu-latest
