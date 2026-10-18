@@ -161,10 +161,11 @@ describe('syncExtension', () => {
 
     it('lists the file types that turn each dictionary on for the other kinds', async () => {
         await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
-            dictionaryDefinitions: [{ name: 'c-only' }, { name: 'any' }, { name: 'always' }],
+            dictionaryDefinitions: [{ name: 'c-only' }, { name: 'web' }, { name: 'any' }, { name: 'always' }],
             dictionaries: ['always'],
             languageSettings: [
                 { languageId: 'c,cpp', locale: '*', dictionaries: ['c-only'] },
+                { languageId: ['html', 'css'], locale: '*', dictionaries: ['web'] },
                 { languageId: '*', locale: '*', dictionaries: ['any'] },
             ],
         });
@@ -174,6 +175,7 @@ describe('syncExtension', () => {
         await syncExtension(dir, options);
         assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
             { Dictionary: '`c-only`', 'File types': '`c`, `cpp`' },
+            { Dictionary: '`web`', 'File types': '`html`, `css`' },
             { Dictionary: '`any`', 'File types': 'all' },
             { Dictionary: '`always`', 'File types': 'all' },
         ]);

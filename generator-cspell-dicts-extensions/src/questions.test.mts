@@ -75,16 +75,14 @@ describe('askQuestions', () => {
     }
 
     const bengali: Answers = {
-        kind: 'dictionary',
+        kind: 'language',
         packageName: '@cspell/dict-bn',
-        toggle: 'locale',
         locale: 'bn',
-        dictionaries: [],
+        nativeName: 'বাংলা',
         name: 'bengali',
         friendlyName: 'Bengali',
-        displayName: 'Bengali - Code Spell Checker',
-        description: 'Bengali dictionary extension for VS Code.',
-        commandName: 'Bengali',
+        displayName: '',
+        description: '',
     };
 
     describe('interactive', () => {
@@ -93,21 +91,27 @@ describe('askQuestions', () => {
             assert.deepEqual(await askQuestions({}, context(prompter)), bengali);
             assert.deepEqual(
                 prompter.asked.map((q) => q.message.split(' ')[0]),
-                ['What', 'Search', 'Is', 'Locale', 'Extension', 'Friendly'],
+                ['What', 'Search', 'Is', 'Locale', 'Extension', 'Friendly', 'Native'],
             );
         });
 
-        it('defaults to the most specific locale', async () => {
+        it('defaults to the most specific locale, written as BCP 47 when it is valid', async () => {
             const prompter = scriptedPrompter(['', 'fr-reforme', '', '', 'french-reforme', 'French Réforme']);
             const answers = await askQuestions({}, context(prompter));
             assert.equal(answers.locale, 'fr-90');
             assert.equal(answers.name, 'french-reforme');
-            assert.equal(answers.displayName, 'French Réforme - Code Spell Checker');
+            assert.equal(answers.nativeName, 'français');
             const localeQuestion = prompter.asked.find((q) => q.message.startsWith('Locale'));
             assert.deepEqual(localeQuestion?.choices, ['fr', 'fr-fr', 'fr-90']);
             assert.equal(localeQuestion?.defaultValue, 'fr-90');
             const nameQuestion = prompter.asked.find((q) => q.message.startsWith('Extension name'));
             assert.equal(nameQuestion?.defaultValue, 'francais-reforme-1990');
+
+            const swedish = await askQuestions(
+                { package: '@cspell/dict-sv', name: 'svenska', yes: true },
+                context(noPrompter),
+            );
+            assert.equal(swedish.locale, 'sv-SE');
         });
 
         it('lists packages that have an extension last, and marked', async () => {
@@ -118,51 +122,41 @@ describe('askQuestions', () => {
             assert.equal(choices?.filter((c) => c.includes('has an extension')).length, 1);
         });
 
-        it('toggles the dictionary names of a word list', async () => {
+        it('makes a word list of a dictionary without a locale', async () => {
             const prompter = scriptedPrompter(['', 'medical']);
             const answers = await askQuestions({}, context(prompter));
             assert.equal(prompter.asked[2]?.defaultValue, false);
             assert.deepEqual(
-                { toggle: answers.toggle, dictionaries: answers.dictionaries, name: answers.name },
-                { toggle: 'dictionary', dictionaries: ['medical terms'], name: 'medical-terms' },
+                { kind: answers.kind, locale: answers.locale, nativeName: answers.nativeName, name: answers.name },
+                { kind: 'wordList', locale: '', nativeName: '', name: 'medical-terms' },
             );
         });
 
-        it('creates a parser extension without commands', async () => {
-            const answers = await askQuestions({}, context(scriptedPrompter(['parser', 'typescript'])));
+        it('asks a parser for its description, which has no default', async () => {
+            const prompter = scriptedPrompter(['parser', 'typescript', '', '', '', 'Spell checks TypeScript.']);
+            const answers = await askQuestions({}, context(prompter));
             assert.deepEqual(answers, {
                 kind: 'parser',
                 packageName: '@cspell/parser-typescript',
-                toggle: 'none',
                 locale: '',
-                dictionaries: [],
+                nativeName: '',
                 name: 'typescript-parser',
                 friendlyName: 'Typescript Parser',
-                displayName: 'Typescript Parser - Code Spell Checker',
-                description: 'Typescript Parser parser extension for VS Code.',
-                commandName: 'Typescript Parser',
+                displayName: '',
+                description: 'Spell checks TypeScript.',
             });
+            assert.deepEqual(
+                prompter.asked.filter((q) => q.message.startsWith('Marketplace')).map((q) => q.error),
+                ['Please enter a description.', undefined],
+            );
         });
 
         it('names a parser after its package, since parser descriptions read alike', async () => {
             const answers = await askQuestions(
-                { package: '@cspell/parser-python-strings-comments', yes: true },
+                { package: '@cspell/parser-python-strings-comments', description: 'Python.', yes: true },
                 context(noPrompter),
             );
             assert.equal(answers.name, 'python-strings-comments-parser');
-        });
-
-        it('creates a scaffold, asking for a name without a default', async () => {
-            const prompter = scriptedPrompter(['scaffold', 'dictionary', '', 'swedish', 'My Words!', '']);
-            const answers = await askQuestions({}, context(prompter));
-            assert.deepEqual(
-                { kind: answers.kind, toggle: answers.toggle, name: answers.name, packageName: answers.packageName },
-                { kind: 'scaffold', toggle: 'dictionary', name: 'my-words', packageName: '' },
-            );
-            assert.deepEqual(
-                prompter.asked.filter((q) => q.message.startsWith('Extension name')).map((q) => q.error),
-                ['Please enter a name.', 'extensions/swedish already exists. Choose another name.', undefined],
-            );
         });
 
         it('asks for the package and its kind when offline', async () => {
@@ -180,8 +174,11 @@ describe('askQuestions', () => {
 
         it('only asks what the options do not answer', async () => {
             const prompter = scriptedPrompter([]);
-            const answers = await askQuestions({ package: '@cspell/dict-sv', name: 'svenska' }, context(prompter));
-            assert.equal(answers.locale, 'sv_SE');
+            const answers = await askQuestions(
+                { package: '@cspell/dict-sv', name: 'svenska', nativeName: '' },
+                context(prompter),
+            );
+            assert.equal(answers.nativeName, '');
             assert.deepEqual(
                 prompter.asked.map((q) => q.message.split(' ')[0]),
                 ['Is', 'Locale', 'Friendly'],
@@ -199,36 +196,26 @@ describe('askQuestions', () => {
                     package: '@cspell/dict-bn',
                     name: 'Bangla',
                     friendlyName: 'Bangla',
+                    nativeName: 'Bangla',
                     displayName: 'Bangla',
                     description: 'Bangla words.',
-                    commandName: 'Bangla Words',
-                    locale: 'bn-BD',
+                    locale: 'bn_BD',
                 }),
                 {
                     ...bengali,
                     locale: 'bn-BD',
+                    nativeName: 'Bangla',
                     name: 'bangla',
                     friendlyName: 'Bangla',
                     displayName: 'Bangla',
                     description: 'Bangla words.',
-                    commandName: 'Bangla Words',
                 },
             );
         });
 
-        it('creates a scaffold from options', async () => {
-            const answers = await yes({ kind: 'scaffold', toggle: 'locale', locale: 'xx', name: 'Extra Words' });
-            assert.deepEqual(
-                { toggle: answers.toggle, locale: answers.locale, name: answers.name },
-                { toggle: 'locale', locale: 'xx', name: 'extra-words' },
-            );
-            assert.equal(answers.description, 'Extra Words extension for VS Code.');
-        });
-
         it('fails when a required value is missing', async () => {
             await assert.rejects(yes({}), /Missing package/);
-            await assert.rejects(yes({ kind: 'scaffold' }), /Missing --toggle/);
-            await assert.rejects(yes({ kind: 'scaffold', toggle: 'file-type' }), /Missing --name/);
+            await assert.rejects(yes({ package: '@cspell/parser-typescript' }), /Missing --description/);
         });
 
         it('fails when the derived name is taken', async () => {
@@ -237,7 +224,7 @@ describe('askQuestions', () => {
                 /extensions\/swedish already exists.*Pass --name/,
             );
             await assert.rejects(yes({ package: '@cspell/dict-bn', name: 'swedish' }), /--name swedish:/);
-            assert.equal((await yes({ package: '@cspell/dict-sv', name: 'svenska' })).locale, 'sv_SE');
+            assert.equal((await yes({ package: '@cspell/dict-sv', name: 'svenska' })).locale, 'sv-SE');
         });
 
         it('fails without network unless the kind and locale are given', async () => {
@@ -245,16 +232,14 @@ describe('askQuestions', () => {
                 askQuestions({ ...options, yes: true }, context(noPrompter, fakeFetch({})));
             await assert.rejects(offline({ package: '@cspell/dict-sv' }), /Missing --natural-language/);
             await assert.rejects(
-                offline({ package: '@cspell/dict-sv', naturalLanguage: false, name: 'sv' }),
-                /Could not find the dictionary names/,
-            );
-            await assert.rejects(
                 offline({ package: '@cspell/dict-sv', naturalLanguage: true, name: 'sv' }),
                 /Missing --locale/,
             );
             await assert.rejects(offline({ package: '@cspell/dict-sv', locale: 'sv' }), /Missing --name/);
             const answers = await offline({ package: '@cspell/dict-sv', locale: 'sv', name: 'svenska' });
-            assert.deepEqual([answers.toggle, answers.locale, answers.friendlyName], ['locale', 'sv', 'Svenska']);
+            assert.deepEqual([answers.kind, answers.locale, answers.nativeName], ['language', 'sv', 'svenska']);
+            const wordList = await offline({ package: '@cspell/dict-sv', naturalLanguage: false, name: 'sv' });
+            assert.equal(wordList.kind, 'wordList');
         });
     });
 
@@ -268,20 +253,17 @@ describe('askQuestions', () => {
 
         it('rejects options that do not fit', async () => {
             await assert.rejects(ask({ package: '@cspell/dict-sv', kind: 'parser' }), /does not match/);
-            await assert.rejects(ask({ package: '@cspell/dict-sv', kind: 'scaffold' }), /A scaffold has no package/);
-            await assert.rejects(ask({ package: '@cspell/dict-sv', toggle: 'locale' }), /--toggle only applies/);
             await assert.rejects(
                 ask({ package: '@cspell/parser-typescript', naturalLanguage: true }),
                 /--natural-language only applies to a dictionary/,
             );
-            await assert.rejects(ask({ package: '@cspell/parser-typescript', locale: 'en' }), /--locale only applies/);
             await assert.rejects(
-                ask({ kind: 'scaffold', toggle: 'dictionary', locale: 'en' }),
-                /--locale only applies to a scaffold with --toggle locale/,
+                ask({ package: '@cspell/parser-typescript', locale: 'en' }),
+                /--locale only applies to a natural language dictionary/,
             );
             await assert.rejects(
-                ask({ package: '@cspell/dict-sv', naturalLanguage: false, locale: 'sv' }),
-                /--locale only applies to a natural language dictionary/,
+                ask({ package: '@cspell/dict-sv', naturalLanguage: false, nativeName: 'svenska' }),
+                /--native-name only applies to a natural language dictionary/,
             );
         });
     });

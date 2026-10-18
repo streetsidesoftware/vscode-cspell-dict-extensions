@@ -7,7 +7,7 @@ import { npm } from './exec.mts';
 import { findExistingExtensions } from './existingExtensions.mts';
 import { fetchJson } from './npm.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
-import { askQuestions, kinds, type Options, scaffoldToggles } from './questions.mts';
+import { askQuestions, kinds, type Options } from './questions.mts';
 import { writeExtension } from './writeExtension.mts';
 
 /** The repository root. */
@@ -27,13 +27,12 @@ export async function run(argv: string[] = process.argv): Promise<void> {
         .addOption(new Option('--kind <kind>', 'the kind of extension; implied by the package').choices(kinds))
         .option('--natural-language', 'the dictionary is a natural language, enabled by locale')
         .option('--no-natural-language', 'the dictionary is a word list, enabled by name')
-        .option('--locale <locale>', 'the locale the commands toggle, i.e. sv_SE')
-        .addOption(new Option('--toggle <toggle>', 'what the commands of a scaffold toggle').choices(scaffoldToggles))
+        .option('--locale <locale>', 'the locale that enables a natural language, i.e. sv-SE')
+        .option('--native-name <name>', 'the language in the language itself, i.e. "svenska" (default: from Intl)')
         .option('--name <name>', 'the extension name: its directory in extensions/ and its command ID prefix')
         .option('--friendly-name <name>', 'the name shown to people, i.e. "Swedish"')
         .option('--display-name <name>', 'the Marketplace name (default: "<friendly name> - Code Spell Checker")')
-        .option('--description <text>', 'the Marketplace description')
-        .option('--command-name <name>', 'the name in the command titles (default: the friendly name)')
+        .option('--description <text>', 'the Marketplace description (required for a parser)')
         .option('-y, --yes', 'never ask: use the defaults, and fail when a required value is missing')
         .showHelpAfterError(true)
         .action(generate);
@@ -61,11 +60,11 @@ async function generate(packageName: string | undefined, options: Omit<Options, 
     console.log(`Creating extensions/${answers.name}`);
     await writeExtension(destDir, answers, { log: (message) => console.log(message) });
 
-    if (answers.packageName) {
-        npm(['install', '-S', answers.packageName], destDir);
-    }
-    npm(['exec', '--', 'prettier', '-w', '**/*.{yaml,json,ts,md}'], destDir);
-    npm(['install'], destDir);
+    npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
+    npm(['install', '-S', answers.packageName], destDir);
+    // The shared package.json fields, then the files the sync owns or derives.
+    npm(['run', 'tool:fix-extensions'], repoRoot);
+    npm(['run', 'sync:extensions', '--', answers.name], repoRoot);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
 }

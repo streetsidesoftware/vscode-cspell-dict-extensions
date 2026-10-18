@@ -5,132 +5,159 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import type { Answers } from './questions.mts';
-import { templateDir, writeExtension } from './writeExtension.mts';
+import { extensionConfig, localeCommands, readme, sampleText, writeExtension } from './writeExtension.mts';
 
-function answers(name: string, friendly: string, rest: Partial<Answers> & Pick<Answers, 'kind' | 'toggle'>): Answers {
-    return {
-        packageName: '',
-        locale: '',
-        dictionaries: [],
-        name,
-        friendlyName: friendly,
-        displayName: `${friendly} - Code Spell Checker`,
-        description: `${friendly} dictionary extension for VS Code.`,
-        commandName: friendly,
-        ...rest,
-    };
-}
-
-const variants: Record<string, Answers> = {
-    'natural language dictionary': answers('swedish', 'Swedish', {
-        kind: 'dictionary',
-        packageName: '@cspell/dict-sv',
-        toggle: 'locale',
-        locale: 'sv_SE',
-    }),
-    'word list dictionary': answers('medical-terms', 'Medical Terms', {
-        kind: 'dictionary',
-        packageName: '@cspell/dict-medicalterms',
-        toggle: 'dictionary',
-        dictionaries: ['medical terms'],
-    }),
-    parser: answers('typescript-parser', 'TypeScript Parser', {
-        kind: 'parser',
-        packageName: '@cspell/parser-typescript',
-        toggle: 'none',
-        description: 'TypeScript Parser parser extension for VS Code.',
-    }),
-    'scaffold with a locale': answers('extra', 'Extra', { kind: 'scaffold', toggle: 'locale' }),
-    'scaffold with dictionaries': answers('extra', 'Extra', { kind: 'scaffold', toggle: 'dictionary' }),
-    'scaffold with file types': answers('extra', 'Extra', { kind: 'scaffold', toggle: 'file-type' }),
+const swedish: Answers = {
+    kind: 'language',
+    packageName: '@cspell/dict-sv',
+    locale: 'sv-SE',
+    nativeName: 'svenska',
+    name: 'swedish',
+    friendlyName: 'Swedish',
+    displayName: '',
+    description: '',
 };
 
-const commandCount: Record<Answers['toggle'], number> = {
-    locale: 4,
-    dictionary: 4,
-    'file-type': 2,
-    none: 0,
+const medicalTerms: Answers = {
+    ...swedish,
+    kind: 'wordList',
+    packageName: '@cspell/dict-medicalterms',
+    locale: '',
+    nativeName: '',
+    name: 'medical-terms',
+    friendlyName: 'Medical Terms',
 };
 
-const expectedFiles = [
-    'package.json',
-    'README.md',
-    'CHANGELOG.md',
-    'cspell-ext.json',
-    'src/extension.ts',
-    'samples/cspell.json',
-    'samples/seattle.md',
-    'LICENSE',
-    '.vscode/launch.json',
-    '.vscode/tasks.json',
-    'images/SpellCheck.png',
-    '.gitignore',
-    '.vscodeignore',
-    'tsconfig.json',
-    'cspell.config.yaml',
-];
+const parser: Answers = {
+    ...medicalTerms,
+    kind: 'parser',
+    packageName: '@cspell/parser-typescript',
+    name: 'typescript-parser',
+    friendlyName: 'TypeScript Parser',
+    description: 'Spell checks TypeScript.',
+};
 
-/** Whether a template contains a placeholder, so its output depends upon the answers. Binary files never do. */
-async function hasPlaceholder(file: string): Promise<boolean> {
-    const content = await readFile(path.join(templateDir, file));
-    return !content.includes(0) && content.includes('<%');
-}
+describe('extensionConfig', () => {
+    it('describes a language, with commands for its locale', () => {
+        assert.deepEqual(extensionConfig(swedish), {
+            $schema: '../../static/extension.config.schema.json',
+            name: 'swedish',
+            kind: 'language',
+            friendlyName: 'Swedish',
+            nativeName: 'svenska',
+            locale: 'sv-SE',
+            sample: 'samples/seattle.md',
+            cspell: { import: ['@cspell/dict-sv/cspell-ext.json'] },
+            commands: localeCommands('sv-SE'),
+        });
+    });
 
-const swedish = variants['natural language dictionary'] as Answers;
+    it('orders the fields like the existing configs', () => {
+        const config = extensionConfig({ ...swedish, displayName: 'Svenska', description: 'Swedish words.' });
+        assert.deepEqual(Object.keys(config), [
+            '$schema',
+            'name',
+            'kind',
+            'friendlyName',
+            'displayName',
+            'nativeName',
+            'locale',
+            'description',
+            'sample',
+            'cspell',
+            'commands',
+        ]);
+    });
+
+    it('leaves out the optional fields that are empty, and writes the ones that are given', () => {
+        const config = extensionConfig({ ...swedish, nativeName: '' });
+        assert.equal('nativeName' in config, false);
+        assert.equal('displayName' in config, false);
+        assert.equal('description' in config, false);
+        const named = extensionConfig({ ...swedish, displayName: 'Svenska', description: 'Swedish words.' });
+        assert.deepEqual([named.displayName, named.description], ['Svenska', 'Swedish words.']);
+    });
+
+    it('gives a word list and a parser no commands', () => {
+        assert.deepEqual(extensionConfig(medicalTerms).commands, []);
+        assert.equal(extensionConfig(medicalTerms).kind, 'wordList');
+        const config = extensionConfig(parser);
+        assert.deepEqual(
+            [config.kind, config.description, config.commands, config.cspell],
+            ['parser', 'Spell checks TypeScript.', [], { import: ['@cspell/parser-typescript/recommended'] }],
+        );
+    });
+});
+
+describe('localeCommands', () => {
+    it('enables the locale, and disables it with its language', () => {
+        assert.deepEqual(localeCommands('sv-SE'), [
+            { action: 'enable', toggle: 'locale', value: 'sv-SE' },
+            { action: 'disable', toggle: 'locale', value: 'sv,sv-SE' },
+            { action: 'enable', toggle: 'locale', value: 'sv-SE', scope: 'workspace' },
+            { action: 'disable', toggle: 'locale', value: 'sv,sv-SE', scope: 'workspace' },
+        ]);
+        assert.deepEqual(
+            localeCommands('bn').map((c) => c.value),
+            ['bn', 'bn', 'bn', 'bn'],
+        );
+    });
+});
+
+describe('readme', () => {
+    it('has the sections the sync fills in', () => {
+        const markers = (text: string) => [...text.matchAll(/@@(inject(?:-table)?): (\S+)/g)].map((m) => m[2]);
+        assert.deepEqual(markers(readme(swedish)), [
+            './static/commands.json',
+            '../../static/manual-settings.language.md#values-file=:./extension.config.json',
+            './static/dictionaries.json#markdown',
+            '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
+            '../../static/footer.md',
+        ]);
+        assert.ok(!markers(readme(medicalTerms)).includes('./static/commands.json'));
+        assert.ok(!markers(readme(parser)).includes('./static/dictionaries.json#markdown'));
+        assert.match(readme(swedish), /^# Swedish - Code Spell Checker\n/);
+        assert.match(readme({ ...swedish, displayName: 'Svenska' }), /^# Svenska\n/);
+    });
+});
+
+describe('sampleText', () => {
+    it('turns on the locale of a language, and links its Wikipedia', () => {
+        assert.match(sampleText(swedish), /^<!-- cspell:locale sv,en -->\n/);
+        assert.match(sampleText(swedish), /https:\/\/sv\.wikipedia\.org\/wiki\/Seattle/);
+        assert.doesNotMatch(sampleText(medicalTerms), /cspell:locale/);
+    });
+});
 
 describe('writeExtension', () => {
-    let dest = '';
+    let destDir = '';
 
     beforeEach(async () => {
-        dest = await mkdtemp(path.join(tmpdir(), 'cspell-dict-ext-'));
+        destDir = await mkdtemp(path.join(tmpdir(), 'cspell-dict-ext-'));
     });
 
-    afterEach(async () => {
-        await rm(dest, { recursive: true, force: true });
+    afterEach(() => rm(destDir, { recursive: true, force: true }));
+
+    it('writes only the files a person owns', async () => {
+        const written = await writeExtension(destDir, swedish);
+        assert.deepEqual(written.toSorted(), [
+            'LICENSE',
+            'README.md',
+            'extension.config.json',
+            'images/SpellCheck.png',
+            'package.json',
+            'samples/cspell.json',
+            'samples/seattle.md',
+        ]);
+        const config: unknown = JSON.parse(await readFile(path.join(destDir, 'extension.config.json'), 'utf8'));
+        assert.deepEqual(config, extensionConfig(swedish));
+        const pkg = JSON.parse(await readFile(path.join(destDir, 'package.json'), 'utf8')) as { name: string };
+        assert.equal(pkg.name, 'code-spell-checker-swedish');
     });
 
-    async function readText(files: string[]): Promise<Record<string, string>> {
-        const entries = await Promise.all(
-            files.map(async (file) => [file, await readFile(path.join(dest, file), 'utf8')] as const),
-        );
-        return Object.fromEntries(entries);
-    }
-
-    for (const [label, answers] of Object.entries(variants)) {
-        it(`renders the templates: ${label}`, async (t) => {
-            const written = await writeExtension(dest, answers);
-            assert.deepEqual(written, expectedFiles);
-
-            // Only snapshot the files that have placeholders; all others must match their template.
-            const placeholders = await Promise.all(expectedFiles.map(hasPlaceholder));
-            const rendered = expectedFiles.filter((_, i) => placeholders[i]);
-            const unchanged = expectedFiles.filter((_, i) => !placeholders[i]);
-            const text = await readText(rendered);
-            t.assert.snapshot(text);
-
-            for (const file of unchanged) {
-                const expected = await readFile(path.join(templateDir, file));
-                assert.ok(expected.equals(await readFile(path.join(dest, file))), `${file} matches its template`);
-            }
-
-            for (const [file, content] of Object.entries(text)) {
-                assert.doesNotMatch(content, /<%/, `${file} has no template tags left`);
-                if (file.endsWith('.json')) JSON.parse(content);
-            }
-
-            const pkg = JSON.parse(text['package.json'] ?? '') as { contributes: { commands: unknown[] } };
-            assert.equal(pkg.contributes.commands.length, commandCount[answers.toggle]);
-        });
-    }
-
-    it('never overwrites existing files', async () => {
-        await writeFile(path.join(dest, 'README.md'), 'existing');
-        await assert.rejects(writeExtension(dest, swedish), { code: 'EEXIST' });
-        assert.equal(await readFile(path.join(dest, 'README.md'), 'utf8'), 'existing');
-
-        await rm(path.join(dest, 'README.md'));
-        await writeFile(path.join(dest, '.gitignore'), 'existing');
-        await assert.rejects(writeExtension(dest, swedish), { code: 'EEXIST' });
-        assert.equal(await readFile(path.join(dest, '.gitignore'), 'utf8'), 'existing');
+    it('never overwrites a file', async () => {
+        await writeFile(path.join(destDir, 'README.md'), 'mine\n');
+        await assert.rejects(writeExtension(destDir, swedish), /EEXIST/);
+        assert.equal(await readFile(path.join(destDir, 'README.md'), 'utf8'), 'mine\n');
     });
 });

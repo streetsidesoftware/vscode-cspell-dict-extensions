@@ -2,9 +2,10 @@
 
 Generate a VS Code extension for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker):
 
-- **Dictionary:** wraps a `@cspell/dict-*` package from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts).
+- **Dictionary:** wraps a `@cspell/dict-*` package from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A natural language is enabled by its locale; a word list is on once installed.
 - **Parser:** wraps a `@cspell/parser-*` package from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
-- **Scaffold:** the extension without a package, with enable / disable commands to fill in.
+
+The package must be published first. To add a new dictionary, add it to cspell-dicts.
 
 ## Usage
 
@@ -14,9 +15,9 @@ In the `vscode-cspell-dict-extensions` repository root directory:
 npm run create:extension
 ```
 
-The generator asks which kind of extension to create, searches npm for the package, and suggests the rest from the package. It writes the extension into `extensions/<name>` (the directory must not exist yet), installs the package, and formats the files with prettier.
+The generator asks which kind of extension to create, searches npm for the package, and suggests the rest from the package. It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`, a starter `package.json`, `README.md`, `LICENSE` and a sample. Then it installs the package and runs `npm run sync:extensions`, which writes the rest, as for every other extension.
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for a description of each question.
+Afterwards, replace the text in `samples/seattle.md` and edit the README.
 
 ### Without questions
 
@@ -25,21 +26,21 @@ Options answer the questions; only the rest are asked. With `--yes` nothing is a
 ```bash
 npm run create:extension -- @cspell/dict-sv --yes
 npm run create:extension -- @cspell/dict-fr-reforme --name french-reforme --locale fr-90 --yes
-npm run create:extension -- @cspell/parser-typescript --yes
-npm run create:extension -- --kind scaffold --toggle dictionary --name my-words --yes
+npm run create:extension -- @cspell/parser-typescript --description "Spell checks TypeScript." --yes
 ```
 
-| Option                                              | Answers                                                                                     |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `[package]`                                         | The `@cspell/dict-*` or `@cspell/parser-*` package. It implies the kind.                    |
-| `--kind <dictionary\|parser\|scaffold>`             | The kind of extension. Only needed for a scaffold.                                          |
-| `--natural-language`, `--no-natural-language`       | Whether a dictionary is enabled by locale or by name. Detected from the package's config.   |
-| `--locale <locale>`                                 | The locale to toggle. Defaults to the package's most specific locale.                       |
-| `--toggle <locale\|dictionary\|file-type>`          | What a scaffold's commands toggle.                                                          |
-| `--name <name>`                                     | The extension directory and command ID prefix. Defaults to a name derived from the package. |
-| `--friendly-name <name>`                            | The name shown to people.                                                                   |
-| `--display-name`, `--description`, `--command-name` | Override the values derived from the friendly name.                                         |
-| `-y, --yes`                                         | Never ask.                                                                                  |
+| Option                                        | Answers                                                                                        |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `[package]`                                   | The `@cspell/dict-*` or `@cspell/parser-*` package. It implies the kind.                       |
+| `--kind <dictionary\|parser>`                 | The kind of extension, when no package is given.                                               |
+| `--natural-language`, `--no-natural-language` | Whether a dictionary is a natural language or a word list. Detected from the package's config. |
+| `--locale <locale>`                           | A language's locale. Defaults to the package's most specific locale.                           |
+| `--native-name <name>`                        | The language in the language itself. Defaults to the name `Intl` gives it; empty for none.     |
+| `--name <name>`                               | The extension directory and command ID prefix. Defaults to a name derived from the package.    |
+| `--friendly-name <name>`                      | The name shown to people.                                                                      |
+| `--display-name <name>`                       | The Marketplace name. Default: `<friendly name> - Code Spell Checker`.                         |
+| `--description <text>`                        | The Marketplace description. Required for a parser; the other kinds have a default.            |
+| `-y, --yes`                                   | Never ask.                                                                                     |
 
 ## Development
 
@@ -49,21 +50,15 @@ The generator is written in TypeScript and runs directly with Node.js (type stri
 - `src/app.mts` — the command line and the steps to generate an extension.
 - `src/questions.mts` — the questions, their defaults, and `--yes`.
 - `src/npm.mts` — searches the npm registry for `@cspell/*` packages.
-- `src/cspellExt.mts` — reads a dictionary's `cspell-ext.json` (from jsDelivr): natural language or not, its locales and dictionary names.
+- `src/cspellExt.mts` — reads a dictionary's `cspell-ext.json` (from jsDelivr): natural language or not, and its locales.
 - `src/names.mts` — derives the extension name.
-- `src/writeExtension.mts` — renders and copies the files in `templates/`.
+- `src/locales.mts` — writes locales as BCP 47 and suggests a language's native name.
+- `src/writeExtension.mts` — writes `extension.config.json` and the starter files.
 - `src/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.
-- `src/render.mts` — renders the template syntax: `<%= value %>` inserts a value (HTML escaped), `<%- value %>` inserts it as is, and `<% if (value) { %> … <% } else { %> … <% } %>` includes text conditionally. A line holding only an `if`, `else` or end tag is removed.
 
 ```bash
 npm test             # unit tests (node:test)
 npm run check-types  # type check
-```
-
-After changing a template, update the test snapshots with:
-
-```bash
-node --test --test-update-snapshots "src/**/*.test.mts"
 ```
 
 ## License

@@ -4,44 +4,35 @@ import { styleText } from 'node:util';
 
 import { classify, cspellExtUrl, type CSpellExt, type DictionaryInfo, mostSpecificLocale } from './cspellExt.mts';
 import { type FetchJson, packageInfo, type PackageSummary, searchPackages } from './npm.mts';
-import { nameFromDescription, nameFromParserPackage, normalizeName, title, toFriendlyName } from './names.mts';
+import { canonicalLocale, languageOf, nativeLanguageName } from './locales.mts';
+import { nameFromDescription, nameFromParserPackage, normalizeName, toFriendlyName } from './names.mts';
 import type { Choice, Prompter } from './prompt.mts';
 
 /**
  * - `dictionary`: wraps a `@cspell/dict-*` package from cspell-dicts.
  * - `parser`: wraps a `@cspell/parser-*` package from cspell-parsers.
- * - `scaffold`: the extension without a package, for the contributor to fill in.
  */
-export type Kind = 'dictionary' | 'parser' | 'scaffold';
-export const kinds: readonly Kind[] = ['dictionary', 'parser', 'scaffold'];
+export type Kind = 'dictionary' | 'parser';
+export const kinds: readonly Kind[] = ['dictionary', 'parser'];
 
-/**
- * What the enable / disable commands toggle.
- * - `locale`: a locale in `cSpell.language`.
- * - `dictionary`: dictionary names in `cSpell.dictionaries`.
- * - `file-type`: file types, through Code Spell Checker's `enableLanguageId`.
- * - `none`: no commands; VS Code's Disable / Disable (Workspace) turns the extension off.
- */
-export type Toggle = 'locale' | 'dictionary' | 'file-type' | 'none';
-export type ScaffoldToggle = Exclude<Toggle, 'none'>;
-export const scaffoldToggles: readonly ScaffoldToggle[] = ['locale', 'dictionary', 'file-type'];
+/** The `kind` in `extension.config.json`. A dictionary is a natural language or a word list. */
+export type ConfigKind = 'language' | 'wordList' | 'parser';
 
 export interface Answers {
-    kind: Kind;
-    /** The `@cspell/*` package, i.e. `@cspell/dict-sv`. Empty for a scaffold. */
+    kind: ConfigKind;
+    /** The `@cspell/*` package, i.e. `@cspell/dict-sv`. */
     packageName: string;
-    toggle: Toggle;
-    /** The locale to toggle, i.e. `sv_SE`. Empty unless `toggle` is `locale`; a scaffold may leave it empty. */
+    /** A language's locale as a BCP 47 tag, i.e. `sv-SE`. Empty for other kinds. */
     locale: string;
-    /** The dictionaries to toggle. Empty unless `toggle` is `dictionary`; a scaffold may leave it empty. */
-    dictionaries: string[];
+    /** A language's name in the language itself, i.e. `svenska`. Empty when there is none. */
+    nativeName: string;
     /** The extension directory name and command ID prefix, i.e. `swedish`. */
     name: string;
     friendlyName: string;
+    /** Empty for the default, `<friendlyName> - Code Spell Checker`. */
     displayName: string;
+    /** Empty for the default of a language or a word list. A parser has no default. */
     description: string;
-    /** Used in the command titles. */
-    commandName: string;
 }
 
 /** Values given on the command line. */
@@ -50,12 +41,11 @@ export interface Options {
     kind?: Kind | undefined;
     naturalLanguage?: boolean | undefined;
     locale?: string | undefined;
-    toggle?: ScaffoldToggle | undefined;
+    nativeName?: string | undefined;
     name?: string | undefined;
     friendlyName?: string | undefined;
     displayName?: string | undefined;
     description?: string | undefined;
-    commandName?: string | undefined;
     /** Never ask: use the options and defaults, and fail when a required value is missing. */
     yes?: boolean | undefined;
 }
@@ -73,7 +63,7 @@ export interface Context {
 /** A problem with the command line options. */
 export class UsageError extends Error {}
 
-const packagePrefixes: Record<Exclude<Kind, 'scaffold'>, string> = {
+const packagePrefixes: Record<Kind, string> = {
     dictionary: '@cspell/dict-',
     parser: '@cspell/parser-',
 };
@@ -94,26 +84,16 @@ export async function askQuestions(options: Options, ctx: Context): Promise<Answ
     const kind = await askKind(options, ctx);
     checkOptionsFor(kind, options);
 
-    let pkg: PackageSummary | undefined;
-    let toggle: Toggle = 'none';
+    const pkg = await askPackage(kind, options, ctx);
+    let configKind: ConfigKind = 'parser';
     let locale = '';
-    let dictionaries: string[] = [];
-
-    if (kind === 'scaffold') {
-        toggle = await askScaffoldToggle(options, ctx);
-        locale = toggle === 'locale' ? (options.locale ?? '') : '';
-    } else {
-        pkg = await askPackage(kind, options, ctx);
-        if (kind === 'dictionary') {
-            const info = await readDictionaryInfo(pkg.name, ctx);
-            const natural = await askNaturalLanguage(info, options, ctx);
-            if (natural) {
-                toggle = 'locale';
-                locale = await askLocale(info?.locales ?? [], options, ctx);
-            } else {
-                toggle = 'dictionary';
-                dictionaries = await askDictionaries(info, options, ctx);
-            }
+    if (kind === 'dictionary') {
+        const info = await readDictionaryInfo(pkg.name, ctx);
+        if (await askNaturalLanguage(info, options, ctx)) {
+            configKind = 'language';
+            locale = canonicalLocale(await askLocale(info?.locales ?? [], options, ctx));
+        } else {
+            configKind = 'wordList';
         }
     }
 
@@ -122,20 +102,17 @@ export async function askQuestions(options: Options, ctx: Context): Promise<Answ
     const friendlyName =
         options.friendlyName ??
         (yes ? toFriendlyName(name) : await prompter.input('Friendly Name:', toFriendlyName(name)));
-    const friendly = title(friendlyName);
-    const what = { dictionary: 'dictionary extension', parser: 'parser extension', scaffold: 'extension' }[kind];
+    const nativeName = configKind === 'language' ? await askNativeName(locale, options, ctx) : '';
 
     return {
-        kind,
-        packageName: pkg?.name ?? '',
-        toggle,
+        kind: configKind,
+        packageName: pkg.name,
         locale,
-        dictionaries,
+        nativeName,
         name,
         friendlyName,
-        displayName: options.displayName ?? `${friendly} - Code Spell Checker`,
-        description: options.description ?? `${friendly} ${what} for VS Code.`,
-        commandName: options.commandName ?? friendly,
+        displayName: options.displayName ?? '',
+        description: configKind === 'parser' ? await askDescription(options, ctx) : (options.description ?? ''),
     };
 }
 
@@ -152,9 +129,6 @@ export function kindOfPackage(packageName: string): Kind | undefined {
 
 async function askKind(options: Options, ctx: Context): Promise<Kind> {
     const fromPackage = options.package ? kindOfPackage(options.package) : undefined;
-    if (options.kind === 'scaffold' && options.package) {
-        throw new UsageError('A scaffold has no package. Remove the package or --kind scaffold.');
-    }
     if (options.package && !fromPackage) {
         throw new UsageError(
             `${options.package} is not a @cspell/dict-* or @cspell/parser-* package. ` +
@@ -167,7 +141,7 @@ async function askKind(options: Options, ctx: Context): Promise<Kind> {
     const kind = options.kind ?? fromPackage;
     if (kind) return kind;
     if (options.yes) {
-        return missing('package', 'pass a @cspell/dict-* or @cspell/parser-* package, or --kind scaffold');
+        return missing('package', 'pass a @cspell/dict-* or @cspell/parser-* package');
     }
 
     const choices: Choice<Kind>[] = [
@@ -181,11 +155,6 @@ async function askKind(options: Options, ctx: Context): Promise<Kind> {
             value: 'parser',
             description: `A @cspell/parser-* package from cspell-parsers. Not published yet? ${notPublished.parser}`,
         },
-        {
-            name: 'Scaffold',
-            value: 'scaffold',
-            description: 'The extension without a package, with enable / disable commands to fill in.',
-        },
     ];
     return ctx.prompter.select('What kind of extension?', choices, 'dictionary');
 }
@@ -195,35 +164,20 @@ function checkOptionsFor(kind: Kind, options: Options): void {
     const notFor = (option: string, what: string): never => {
         throw new UsageError(`${option} only applies to ${what}.`);
     };
-    if (options.toggle && kind !== 'scaffold') notFor('--toggle', 'a scaffold');
     if (options.naturalLanguage !== undefined && kind !== 'dictionary') {
         notFor(options.naturalLanguage ? '--natural-language' : '--no-natural-language', 'a dictionary');
     }
-    if (options.locale && kind === 'parser') notFor('--locale', 'a dictionary or a scaffold');
-    if (options.locale && kind === 'scaffold' && options.toggle && options.toggle !== 'locale') {
-        notFor('--locale', 'a scaffold with --toggle locale');
-    }
-    if (options.locale && options.naturalLanguage === false) {
-        notFor('--locale', 'a natural language dictionary');
+    for (const [option, value] of [
+        ['--locale', options.locale],
+        ['--native-name', options.nativeName],
+    ] as const) {
+        if (value !== undefined && (kind === 'parser' || options.naturalLanguage === false)) {
+            notFor(option, 'a natural language dictionary');
+        }
     }
 }
 
-async function askScaffoldToggle(options: Options, ctx: Context): Promise<ScaffoldToggle> {
-    if (options.toggle) return options.toggle;
-    if (options.yes) return missing('--toggle', 'a scaffold needs the kind of toggle: locale, dictionary or file-type');
-    const descriptions: Record<ScaffoldToggle, string> = {
-        locale: 'Add or remove a locale in cSpell.language.',
-        dictionary: 'Add or remove dictionaries in cSpell.dictionaries.',
-        'file-type': 'Enable or disable spell checking of file types.',
-    };
-    return ctx.prompter.select(
-        'What should the enable / disable commands toggle? The value is filled in later.',
-        scaffoldToggles.map((value) => ({ name: value, value, description: descriptions[value] })),
-        'locale',
-    );
-}
-
-async function askPackage(kind: 'dictionary' | 'parser', options: Options, ctx: Context): Promise<PackageSummary> {
+async function askPackage(kind: Kind, options: Options, ctx: Context): Promise<PackageSummary> {
     const prefix = packagePrefixes[kind];
     if (options.package) return checkPackage(options.package, kind, ctx);
 
@@ -268,7 +222,7 @@ export function filterPackages(
 }
 
 /** Check that the package exists. Without a network connection, continue: `npm install` checks it later. */
-async function checkPackage(name: string, kind: 'dictionary' | 'parser', ctx: Context): Promise<PackageSummary> {
+async function checkPackage(name: string, kind: Kind, ctx: Context): Promise<PackageSummary> {
     let info: PackageSummary | undefined;
     try {
         info = await packageInfo(name, ctx.fetchJson);
@@ -319,23 +273,32 @@ async function askLocale(locales: string[], options: Options, ctx: Context): Pro
     );
 }
 
-async function askDictionaries(info: DictionaryInfo | undefined, options: Options, ctx: Context): Promise<string[]> {
-    if (info?.dictionaries.length) return info.dictionaries;
-    if (options.yes) throw new UsageError('Could not find the dictionary names in the cspell-ext.json of the package.');
-    const answer = await ctx.prompter.input('Dictionary names to toggle, separated by commas:', undefined, (text) =>
-        splitList(text).length ? true : 'Please enter at least one dictionary name.',
+/**
+ * Ask for the language's name in the language itself. The default is the name `Intl` gives the language, i.e.
+ * `svenska` for `sv-SE`. An empty answer leaves it out.
+ */
+async function askNativeName(locale: string, options: Options, ctx: Context): Promise<string> {
+    if (options.nativeName !== undefined) return options.nativeName.trim();
+    const suggested = nativeLanguageName(languageOf(locale)) ?? '';
+    if (options.yes) return suggested;
+    const answer = await ctx.prompter.input(
+        'Native name (the language in the language itself; empty for none):',
+        suggested || undefined,
     );
-    return splitList(answer);
+    return answer.trim();
 }
 
-function splitList(text: string): string[] {
-    return text
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean);
+/** A parser's Marketplace description has no default. */
+async function askDescription(options: Options, ctx: Context): Promise<string> {
+    if (options.description) return options.description;
+    if (options.yes) return missing('--description', 'a parser has no default description');
+    const answer = await ctx.prompter.input('Marketplace description:', undefined, (text) =>
+        text.trim() ? true : 'Please enter a description.',
+    );
+    return answer.trim();
 }
 
-async function askName(kind: Kind, pkg: PackageSummary | undefined, options: Options, ctx: Context): Promise<string> {
+async function askName(kind: Kind, pkg: PackageSummary, options: Options, ctx: Context): Promise<string> {
     const check = (name: string): true | string => {
         if (!name) return 'Please enter a name.';
         return existsSync(path.join(ctx.extensionsDir, name))
@@ -350,15 +313,10 @@ async function askName(kind: Kind, pkg: PackageSummary | undefined, options: Opt
         return name;
     }
 
-    const derived =
-        kind === 'parser' && pkg
-            ? nameFromParserPackage(pkg.name)
-            : pkg?.description
-              ? nameFromDescription(pkg.description)
-              : '';
+    const derived = kind === 'parser' ? nameFromParserPackage(pkg.name) : nameFromDescription(pkg.description);
     if (options.yes) {
         if (!derived) {
-            return missing('--name', kind === 'scaffold' ? 'a scaffold needs a name' : 'no name could be derived');
+            return missing('--name', 'no name could be derived');
         }
         const result = check(derived);
         if (result !== true) throw new UsageError(`${result} Pass --name.`);

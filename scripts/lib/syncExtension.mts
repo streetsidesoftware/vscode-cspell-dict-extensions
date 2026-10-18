@@ -190,7 +190,8 @@ interface DictionaryExt {
     engines?: Record<string, string>;
     dictionaryDefinitions?: { name: string }[];
     dictionaries?: string[];
-    languageSettings?: { languageId?: string; locale?: string; dictionaries?: string[] }[];
+    // cspell takes a comma-separated list or an array.
+    languageSettings?: { languageId?: string | string[]; locale?: string | string[]; dictionaries?: string[] }[];
 }
 
 /** The `cspell-ext.json` of each dictionary in `cspell.import`, read from the extension's `node_modules`. */
@@ -238,9 +239,10 @@ async function dictionariesTable(extensionDir: string, config: ExtensionConfig):
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
 }
 
-function splitList(list: string | undefined): string[] {
-    return (list ?? '')
-        .split(',')
+function splitList(list: string | string[] | undefined): string[] {
+    return [list ?? '']
+        .flat()
+        .flatMap((item) => item.split(','))
         .map((item) => item.trim())
         .filter(Boolean);
 }

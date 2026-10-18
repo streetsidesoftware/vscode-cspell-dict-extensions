@@ -6,7 +6,7 @@
 - Most extension packages have the same shape: `package.json`, `src/extension.ts`, `cspell-ext.json`, `samples/`, and local build/test scripts.
 - Synced extensions (those with an `extension.config.json`) have no `src/extension.ts`: their code is in `extension-runtime/`, their data in `extension.config.json`, and `npm run sync:extensions` writes their tool configs, `static/` files, derived `package.json` fields and README injections. Edit the config or the shared files, never the written files. See "Synced extensions" in `CONTRIBUTING.md`.
 - There are three important support packages:
-  - `generator-cspell-dicts-extensions/` — scaffolds new extensions; prefer `npm run create:extension` instead of copying an existing extension by hand. It is TypeScript (`.mts`) run directly by Node, using `@inquirer/prompts` and `commander`. The extension files come from `templates/`, which use a small EJS subset (`<%= value %>`, `<%- value %>` and `<% if (value) { %> … <% } else { %> … <% } %>`) rendered by `src/render.mts`. Run its unit tests with `npm test` inside the generator directory.
+  - `generator-cspell-dicts-extensions/` — scaffolds new extensions; prefer `npm run create:extension` instead of copying an existing extension by hand. It is TypeScript (`.mts`) run directly by Node, using `@inquirer/prompts` and `commander`. It writes `extension.config.json` and the starter files a person owns, then runs `npm run sync:extensions`, which writes the rest. Run its unit tests with `npm test` inside the generator directory.
   - `test-runner/` — shared VS Code integration test harness.
   - `scripts/` — repo maintenance and generation scripts, including `sync-extensions.mts`. They are TypeScript (`.mts`) run directly by Node; keep new scripts the same, not shell, `jq` or `.mjs`.
   - `extension-runtime/` — the shared code, the `ExtensionConfig` type (source of `static/extension.config.schema.json`), and the templates of the synced extensions.
@@ -25,7 +25,7 @@
   - `npm run lint:code` → runs oxlint with type-aware rules; warnings fail the check
   - `npm run check-types` → type-checks `test-runner` and the generator
   - `npm run test:cspell` → runs sample spelling checks across extensions
-  - `npm run create:extension` → scaffold a new extension (dictionary, parser, or scaffold); run it without prompts with `npm run create:extension -- <package> --yes`, i.e. `@cspell/dict-sv` or `@cspell/parser-typescript`. See `generator-cspell-dicts-extensions/README.md` for the options.
+  - `npm run create:extension` → create a new extension (dictionary or parser); run it without prompts with `npm run create:extension -- <package> --yes`, i.e. `@cspell/dict-sv` (a parser also needs `--description`). See `generator-cspell-dicts-extensions/README.md` for the options.
   - `npm run gen:readme` → regenerate workspace metadata, extension lists, README injections, and normalize extension manifests
   - `npm run gen:release-please` → regenerate release-please config
   - `npm run gen:workflow` → regenerate the extension choice lists in `.github/workflows/manual-publish.yml` and `set-prerelease.yml`
