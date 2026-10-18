@@ -19,6 +19,47 @@ env:
   NPM_CONFIG_AUDIT: false
 
 jobs:
+  # Pull requests test only what their changes can affect. Pushes and manual runs test everything.
+  list_extensions:
+    runs-on: ubuntu-latest
+    outputs:
+      extension_list: ${{ steps.get-extensions.outputs.extensions }}
+      shared: ${{ steps.get-extensions.outputs.shared }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          # The merge commit and its first parent, the base branch, to list the changed files.
+          fetch-depth: 2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+
+      - name: From Script
+        id: get-extensions
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            # A separate command: in a pipe, a failing `git diff` would not fail the step.
+            git diff --name-only HEAD^1 HEAD > "$RUNNER_TEMP/changed-files.txt"
+            ./scripts/list-affected-extensions.mts < "$RUNNER_TEMP/changed-files.txt" >> $GITHUB_OUTPUT
+          else
+            ./scripts/list-affected-extensions.mts --all >> $GITHUB_OUTPUT
+          fi
+
+      - name: Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            ### List Extensions
+            - Shared: ${{ steps.get-extensions.outputs.shared }}
+            ```
+            ${{ steps.get-extensions.outputs.extensions }}
+            ```
+
   download-vscode:
     runs-on: ubuntu-latest
     needs:
@@ -81,47 +122,6 @@ jobs:
           # ```json
           # ${{ toJson(github.event) }}
           # ```
-
-  # Pull requests test only what their changes can affect. Pushes and manual runs test everything.
-  list_extensions:
-    runs-on: ubuntu-latest
-    outputs:
-      extension_list: ${{ steps.get-extensions.outputs.extensions }}
-      shared: ${{ steps.get-extensions.outputs.shared }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-        with:
-          # The merge commit and its first parent, the base branch, to list the changed files.
-          fetch-depth: 2
-
-      - name: Use Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version-file: .tool-versions
-
-      - name: From Script
-        id: get-extensions
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-        run: |
-          if [[ "$EVENT_NAME" == "pull_request" ]]; then
-            # A separate command: in a pipe, a failing `git diff` would not fail the step.
-            git diff --name-only HEAD^1 HEAD > "$RUNNER_TEMP/changed-files.txt"
-            ./scripts/list-affected-extensions.mts < "$RUNNER_TEMP/changed-files.txt" >> $GITHUB_OUTPUT
-          else
-            ./scripts/list-affected-extensions.mts --all >> $GITHUB_OUTPUT
-          fi
-
-      - name: Summary
-        uses: streetsidesoftware/actions/public/summary@v1
-        with:
-          text: |
-            ### List Extensions
-            - Shared: ${{ steps.get-extensions.outputs.shared }}
-            ```
-            ${{ steps.get-extensions.outputs.extensions }}
-            ```
 
   build-test:
     runs-on: ubuntu-latest
