@@ -1,7 +1,0 @@
-{
-    "version": "0.2",
-    "noConfigSearch": true,
-    "import": [
-        "./static/cspell-ext.json"
-    ]
-}

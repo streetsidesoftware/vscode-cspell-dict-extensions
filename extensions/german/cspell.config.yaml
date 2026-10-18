@@ -1,0 +1,5 @@
+import:
+  - ./static/cspell-ext.json
+ignorePaths:
+  - /out
+  - samples/**

@@ -1,0 +1,4 @@
+import:
+  - ./static/cspell-ext.json
+words:
+  - Београд

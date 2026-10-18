@@ -1,0 +1,13 @@
+import:
+  - ./static/cspell-ext.json
+language: en,nl
+words:
+  - Changelog
+  - Nederlands
+  - streetsidesoftware
+ignoreWords:
+  - but
+languageSettings:
+  - locale: "*"
+    languageId: "*"
+    caseSensitive: false
