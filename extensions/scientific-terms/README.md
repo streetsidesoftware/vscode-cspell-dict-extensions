@@ -10,6 +10,19 @@ Once this extension is installed, the Scientific Terms dictionary is automatical
 
 The name of the dictionary is `scientific-terms-us`.
 
+## Dictionaries
+
+The dictionaries this extension adds, and the file types they check:
+
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary             | File types |
+| ---------------------- | ---------- |
+| `scientific-terms-us`  | all        |
+| `mathematics-terms-us` | all        |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 ## Requirements

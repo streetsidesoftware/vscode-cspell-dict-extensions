@@ -43,6 +43,18 @@ To include both the American and British English spellings, use:
 "cSpell.language": "en,en-GB",
 ```
 
+## Dictionaries
+
+The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary | Locales |
+| ---------- | ------- |
+| `en-gb`    | `en-GB` |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 ## Requirements

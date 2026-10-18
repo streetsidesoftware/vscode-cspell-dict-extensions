@@ -34,6 +34,18 @@ Example using both English and Spanish dictionaries:
 "cSpell.language": "en,es",
 ```
 
+## Dictionaries
+
+The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary | Locales       |
+| ---------- | ------------- |
+| `es-es`    | `es`, `es-ES` |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 ## Requirements
