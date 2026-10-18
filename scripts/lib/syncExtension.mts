@@ -27,7 +27,7 @@ import {
 import type { PackageJson } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { format, injectProblems } from './format.mts';
-import { exists, extensionsDir, readJson, repoRoot, writeIfChanged } from './repo.mts';
+import { exists, readJson, repoRoot, writeIfChanged } from './repo.mts';
 
 export const configFileName = 'extension.config.json';
 const templateDir = path.join(repoRoot, 'extension-runtime/template');
@@ -108,7 +108,7 @@ async function writeFiles(
 ): Promise<FileChange[]> {
     const changes: FileChange[] = [];
     for (const [file, content] of files) {
-        const formatted = await format(repoPath(extensionDir, file), content);
+        const formatted = await format(path.join(extensionDir, file), content);
         if (await writeIfChanged(path.join(extensionDir, file), formatted, check)) {
             changes.push({ file, action: 'update' });
         }
@@ -135,16 +135,8 @@ async function removeObsoleteFiles(
 async function syncReadme(extensionDir: string, check: boolean | undefined): Promise<FileChange[]> {
     const readme = path.join(extensionDir, 'README.md');
     if (!(await exists(readme))) return [];
-    const injected = await format(repoPath(extensionDir, 'README.md'), await injectReadme(readme));
+    const injected = await format(readme, await injectReadme(readme));
     return (await writeIfChanged(readme, injected, check)) ? [{ file: 'README.md', action: 'update' }] : [];
-}
-
-/**
- * Where a file of the extension is in the repository, which picks its prettier options. The extension can be
- * elsewhere, as in the tests.
- */
-function repoPath(extensionDir: string, file: string): string {
-    return path.join(extensionsDir, path.basename(extensionDir), file);
 }
 
 async function readTemplateFiles(): Promise<[string, string][]> {
