@@ -41,21 +41,22 @@ You can also use the following commands (`F1` or _View -> Command Palette..._) t
 
 ![Commands dropdown for enabling and disabling Serbian dictionaries](https://i.imgur.com/3DPWwFV.png)
 
+<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
+
 ### Manual Settings
 
 This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `sr` to the `cSpell.language` setting, will enable the Serbian dictionaries, both Cyrillic and Latin.
-
+Adding `sr` to the `cSpell.language` setting, will enable the Serbian dictionary.
 Example using both English and Serbian dictionaries:
 
 ```javascript
 "cSpell.language": "en,sr",
 ```
 
-To enable only Cyrillic or Latin, use the specific locales: `sr-Cyrl` or `sr-Latn`.
+<!--- @@inject-end: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
 
 ## Dictionaries
 
