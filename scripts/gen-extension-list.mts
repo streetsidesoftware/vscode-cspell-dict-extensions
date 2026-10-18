@@ -42,7 +42,7 @@ function folderListItem(extensionInfo: ExtensionInfo): ListItem {
 }
 
 function marketplaceListItem(extensionInfo: ExtensionInfo): ListItem {
-    const url = `https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.${extensionInfo.name}`;
+    const url = `https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.${extensionInfo.packageName}`;
     return extensionListItem(url, extensionInfo);
 }
 

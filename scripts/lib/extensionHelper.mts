@@ -23,11 +23,12 @@ const defaultRepository: Repository = {
 };
 
 export interface ExtensionInfo {
-    name: string;
+    packageName: string;
     displayName: string;
     displayNameShort: string;
     version: string;
     description: string;
+    /** The extension's directory as a repo path, e.g. `extensions/swedish`. */
     repoPath: string;
     dictionaryType: string;
     /** `vsce.preRelease` in the extension's package.json */
@@ -38,7 +39,7 @@ export async function getExtensionInfo(repoPath: string): Promise<ExtensionInfo>
     const pkg = await readExtensionPackageJson(repoPath);
 
     const info: ExtensionInfo = {
-        name: pkg.name,
+        packageName: pkg.name,
         description: pkg.description,
         displayName: pkg.displayName,
         displayNameShort: pkg.displayName.replace(/ -.*/, '').trim(),
