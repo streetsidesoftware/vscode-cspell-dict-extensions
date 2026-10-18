@@ -8,7 +8,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import yaml from 'yaml';
 
-import { listExtensionDirs, repoRoot, run } from './lib/repo.mts';
+import { format } from './lib/format.mts';
+import { listExtensionRepoPaths, repoRoot } from './lib/repo.mts';
 
 const workflowsDir = path.join(repoRoot, '.github/workflows');
 
@@ -16,18 +17,16 @@ const workflowsDir = path.join(repoRoot, '.github/workflows');
 const intl = new Intl.Collator('en');
 
 async function main(): Promise<void> {
-    const extensions = (await listExtensionDirs()).sort(intl.compare);
+    const repoPaths = (await listExtensionRepoPaths()).sort(intl.compare);
 
-    // Manual Publish takes the extension path, i.e. `extensions/swedish`.
-    await updateExtensionOptions('manual-publish.yml', ['none', 'all', ...extensions]);
+    // Manual Publish takes the repo path, e.g. `extensions/swedish`.
+    await updateExtensionOptions('manual-publish.yml', ['none', 'all', ...repoPaths]);
 
-    // Set Prerelease takes the directory name in `extensions/`, i.e. `swedish`.
+    // Set Prerelease takes the name, e.g. `swedish`.
     await updateExtensionOptions(
         'set-prerelease.yml',
-        extensions.map((ext) => path.posix.basename(ext)),
+        repoPaths.map((repoPath) => path.posix.basename(repoPath)),
     );
-
-    run('npx', ['prettier', '-w', '.github/workflows/manual-publish.yml', '.github/workflows/set-prerelease.yml']);
 }
 
 /**
@@ -48,7 +47,7 @@ async function updateExtensionOptions(workflowFile: string, values: string[]): P
     options.items = values.map((value) => doc.createNode(value));
     options.flow = false;
 
-    await fs.writeFile(workflow, doc.toString({ lineWidth: 120 }), 'utf8');
+    await fs.writeFile(workflow, await format(workflow, doc.toString({ lineWidth: 120 })));
 }
 
 function assertYAMLSeq(value: unknown): asserts value is yaml.YAMLSeq<yaml.Scalar> {

@@ -15,8 +15,9 @@ import path from 'node:path';
 import { parseArgs, styleText } from 'node:util';
 
 import { createExtensionConfigValidator, generateExtensionSchema, schemaPath } from './lib/extensionSchema.mts';
-import { readVscodeEngine } from './lib/repo.mts';
-import { configFileName, format, repoRoot, syncExtension, writeIfChanged } from './lib/syncExtension.mts';
+import { format } from './lib/format.mts';
+import { exists, extensionsDir, readVscodeEngine, repoRoot, writeIfChanged } from './lib/repo.mts';
+import { configFileName, syncExtension } from './lib/syncExtension.mts';
 
 async function run(): Promise<void> {
     const { values, positionals } = parseArgs({
@@ -24,7 +25,6 @@ async function run(): Promise<void> {
         allowPositionals: true,
     });
 
-    const extensionsDir = path.join(repoRoot, 'extensions');
     const names = positionals.length ? positionals : (await fs.readdir(extensionsDir)).sort();
     const vscodeEngine = await readVscodeEngine();
 
@@ -41,13 +41,13 @@ async function run(): Promise<void> {
 
     let synced = 0;
     for (const name of names) {
-        const dir = path.join(extensionsDir, name);
-        if (!(await isFile(path.join(dir, configFileName)))) {
+        const extensionDir = path.join(extensionsDir, name);
+        if (!(await exists(path.join(extensionDir, configFileName)))) {
             if (positionals.length) throw new Error(`extensions/${name}/${configFileName} not found.`);
             continue;
         }
         ++synced;
-        const changed = await syncExtension(dir, { check: values.check, vscodeEngine, validate });
+        const changed = await syncExtension(extensionDir, { check: values.check, vscodeEngine, validate });
         for (const { file, action } of changed) {
             const verb = values.check ? 'Out of date' : action === 'remove' ? 'Removed' : 'Updated';
             console.log(`${verb}: extensions/${name}/${file}`);
@@ -61,14 +61,6 @@ async function run(): Promise<void> {
             styleText('red', 'Run `npm run sync:extensions` and commit the changes.', { stream: process.stderr }),
         );
         process.exitCode = 1;
-    }
-}
-
-async function isFile(file: string): Promise<boolean> {
-    try {
-        return (await fs.stat(file)).isFile();
-    } catch {
-        return false;
     }
 }
 
