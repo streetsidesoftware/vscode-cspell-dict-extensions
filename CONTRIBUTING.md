@@ -6,88 +6,11 @@ Same steps works on Windows (powershell) and Linux. Just needs Node.js installed
 
 ## How to create a new extension
 
-Please fork this repository to add new dictionaries.
-
-#### Running the generator
-
-In the `vscode-cspell-dict-extensions` repository root directory
-
-```sh
-npm run create:extension
-```
-
-The generator asks which kind of extension to create, then helps you find the package on npm. Press enter to accept a suggested answer.
-
-| Question           | Description                                                                                                                                                                                                                                                                                                                                                                          |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Kind**           | `Dictionary` for a `@cspell/dict-*` package from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts), `Parser` for a `@cspell/parser-*` package from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers), or `Scaffold` for an extension without a package. A dictionary or parser that isn't published yet must be added to its repository first. |
-| **Package**        | Type a language or topic, i.e. `swedish`, and pick the package. Packages that already have an extension are marked.                                                                                                                                                                                                                                                                  |
-| Natural language   | Dictionaries only. Suggested from the package: a natural language, like Swedish, is enabled by locale; a word list, like `medical terms`, is enabled by name.                                                                                                                                                                                                                        |
-| Locale             | Natural languages only. The locale the enable / disable commands toggle. The most specific one, i.e. `fr-90` rather than `fr`, avoids also enabling other dictionaries for the language.                                                                                                                                                                                             |
-| Toggle             | Scaffolds only. What the enable / disable commands toggle: a locale, dictionaries or file types. The value is filled in later.                                                                                                                                                                                                                                                       |
-| **Extension name** | The directory in `extensions/` and the command ID prefix, i.e. `swedish`. Suggested from the package. The directory must not exist yet.                                                                                                                                                                                                                                              |
-| Friendly name      | The name shown to people, i.e. `Swedish`. It is used for the display name (`Swedish - Code Spell Checker`), the description, and the command titles.                                                                                                                                                                                                                                 |
-
-A parser extension has no enable / disable commands: disable the extension in VS Code to turn the parser off.
-
-##### Without questions
-
-Pass the package and `--yes` to use the suggested answers:
-
-```sh
-npm run create:extension -- @cspell/dict-sv --yes
-```
-
-With `--yes` the generator never asks; it stops with an error when a value has no default, i.e. `--name` for a scaffold. Run `npm run create:extension -- --help` for all options.
-
-After all the information is entered, the extension should be generated.
-
-Please fix any errors and make sure the following two commands run:
-
-```sh
-cd extensions/<language>
-npm ci
-npm run build
-```
-
-Please update files:
-
-- `README.md`
-
-  - Add yourself as contributor under `## Contributors` header
-
-    ```txt
-    _Language_ - [Username](https://github.com/Username)
-    ```
-
-- `extensions/<language>/samples/seattle.md`
-  - Go to Seattle wikipedia page translated to your language and copy some content to `seattle.md`. It's later used to test if plugin recognizes words
-
-Please update files if necessary (leave it as unless you know why you're changing it):
-
-- `extensions/<language>/README.md`
-- `extensions/<language>/package.json`
-- `extensions/<language>/LICENSE`
-
-There are other `.json` and `README` files where new extension is referenced but those are automatically generated after pull request so don't edit any other files.
+Please fork this repository to add new dictionaries, then follow [Create an extension](./extension-runtime/README.md#create-an-extension).
 
 ## Synced extensions
 
-Extensions with an `extension.config.json` are maintained centrally; the two without one, hunspell-syntax and timestamp-hover, are maintained by hand. The synced ones have no `src/extension.ts`: their code is shared in [`extension-runtime/`](./extension-runtime), and their data is in `extension.config.json` (see [the schema](./static/extension.config.schema.json), generated from the `ExtensionConfig` type in [`extension-runtime/src/config.ts`](./extension-runtime/src/config.ts)). `npm run sync:extensions` writes their files:
-
-- **Tool configs, overwritten:** `tsconfig.json`, `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from `extension-runtime/template/`.
-- **Generated into `static/`:** `static/cspell-ext.json`, which the extension registers with Code Spell Checker, `static/commands.json` and `static/dictionaries.json` (each dictionary with the locales or file types that turn it on, read from the installed dictionaries; not for a bundle). The minimum `engines` versions default to [`static/engines.json`](./static/engines.json). The sync puts the `engines` the imported dictionaries declare into `static/cspell-ext.json`, and `cspell.engines` in `extension.config.json` overrides them, as in cspell-dicts.
-- **Derived:** the `name`, `displayName`, `description`, `type`, `engines.vscode`, `main`, `contributes.commands` and `scripts` fields of `package.json` (the other fields are kept), and the README sections between `@@inject` markers. Those are filled from shared templates in the root [`static/`](./static) (for example `requirements.md`, with `{@ engines.cspell @}` placeholders) and from the extension's `static/` data, using [inject-markdown](https://github.com/streetsidesoftware/inject-markdown):
-  - `<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->`
-  - `<!--- @@inject-table: ./static/commands.json --->`
-  - `<!--- @@inject-table: ./static/dictionaries.json#markdown --->`
-  - `<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->`, the Manual Settings of a language extension, filled from its `locale` and `friendlyName`. English variants use `manual-settings.english.md` instead, which advises replacing `en`.
-- **Created when missing:** `cspell.config.yaml`, which imports `./static/cspell-ext.json` so the extension's dictionaries are available when you open its folder in VS Code. After that, the file belongs to the extension; add its `words`, `language` or other settings there.
-- **Never touched:** the rest of the README, `samples/`, `CHANGELOG.md`, `LICENSE`, images, and an optional `src/custom.ts` for code only that extension needs.
-
-To change a synced extension, edit its `extension.config.json` or the shared files, then run `npm run sync:extensions` and commit the result. The sync first regenerates the schema from the types and checks every `extension.config.json` against it. CI checks that the schema and the extensions are in sync.
-
-Each extension is bundled into one ESM file, `out/extension.js`, with [tsdown](https://tsdown.dev). The shared config in [`.config/tsdown.extension.config.mts`](./.config/tsdown.extension.config.mts) builds the entry `extension-runtime/src/entry.ts`, with the extension's `extension.config.json` and `src/custom.ts` filled in.
+Extensions with an `extension.config.json` are maintained centrally; the two without one, hunspell-syntax and timestamp-hover, are maintained by hand. To change a synced extension, edit its `extension.config.json` or the shared files, then run `npm run sync:extensions` and commit the result. [What the sync maintains](./extension-runtime/README.md#what-the-sync-maintains) lists the files it writes.
 
 ### Pre-release mode
 
