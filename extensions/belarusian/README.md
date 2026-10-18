@@ -42,6 +42,18 @@ Example using both English and Belarusian dictionaries:
 
 <!--- @@inject-end: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
 
+## Dictionaries
+
+The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary | Locales       |
+| ---------- | ------------- |
+| `be-by`    | `be`, `be-BY` |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 ## Requirements

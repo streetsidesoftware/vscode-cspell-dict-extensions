@@ -40,6 +40,18 @@ Example using both English and French Réforme 90 dictionaries:
 
 <!--- @@inject-end: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
 
+## Dictionaries
+
+The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary | Locales                |
+| ---------- | ---------------------- |
+| `fr-fr-90` | `fr`, `fr-FR`, `fr-90` |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 ## Requirements
