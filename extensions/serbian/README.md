@@ -57,6 +57,19 @@ Example using both English and Serbian dictionaries:
 
 To enable only Cyrillic or Latin, use the specific locales: `sr-Cyrl` or `sr-Latn`.
 
+## Dictionaries
+
+The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary | Locales         |
+| ---------- | --------------- |
+| `sr-cyrl`  | `sr`, `sr-Cyrl` |
+| `sr-latn`  | `sr`, `sr-Latn` |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 ## Requirements

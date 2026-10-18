@@ -148,6 +148,50 @@ describe('syncExtension', () => {
         assert.equal(await exists('cspell-ext.json'), false);
     });
 
+    it('lists the locales that turn each dictionary on for a language', async () => {
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'demo' }, { name: 'unused' }],
+            languageSettings: [{ languageId: '*', locale: 'xx, xx_YY,xx-90', dictionaries: ['demo'] }],
+        });
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
+            { Dictionary: '`demo`', Locales: '`xx`, `xx-YY`, `xx-90`' },
+        ]);
+    });
+
+    it('lists the file types that turn each dictionary on for the other kinds', async () => {
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'c-only' }, { name: 'any' }, { name: 'always' }],
+            dictionaries: ['always'],
+            languageSettings: [
+                { languageId: 'c,cpp', locale: '*', dictionaries: ['c-only'] },
+                { languageId: '*', locale: '*', dictionaries: ['any'] },
+            ],
+        });
+        const { locale: _locale, ...rest } = config;
+        await writeJson('extension.config.json', { ...rest, kind: 'wordList', commands: [] });
+        await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
+            { Dictionary: '`c-only`', 'File types': '`c`, `cpp`' },
+            { Dictionary: '`any`', 'File types': 'all' },
+            { Dictionary: '`always`', 'File types': 'all' },
+        ]);
+    });
+
+    it('has no static/dictionaries.json for a bundle', async () => {
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'demo' }],
+            dictionaries: ['demo'],
+        });
+        await syncExtension(dir, options);
+        const { locale: _locale, ...rest } = config;
+        await writeJson('extension.config.json', { ...rest, kind: 'bundle', description: 'D', commands: [] });
+        await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
+        const changes = await syncExtension(dir, options);
+        assert.deepEqual(files(changes, 'remove'), ['static/commands.json', 'static/dictionaries.json']);
+    });
+
     it('has no static/commands.json without commands', async () => {
         await syncExtension(dir, options);
         await writeJson('extension.config.json', { ...config, commands: [] });
