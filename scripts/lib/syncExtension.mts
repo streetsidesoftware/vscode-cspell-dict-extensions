@@ -7,9 +7,9 @@
  *   the installed dictionaries;
  * - some fields of `package.json`, and the `@@inject` sections of `README.md`.
  *
- * It removes the old files these replace, such as `src/extension.ts`, and a generated file the extension no longer
- * has. It creates `cspell.config.yaml` when it's missing; after that, the file belongs to the extension. It leaves
- * every other file alone. "Synced extensions" in CONTRIBUTING.md has the details.
+ * It removes a generated file the extension no longer has. It creates `cspell.config.yaml` when it's missing; after
+ * that, the file belongs to the extension. It leaves every other file alone. "Synced extensions" in CONTRIBUTING.md
+ * has the details.
  */
 
 import fs from 'node:fs/promises';
@@ -38,9 +38,6 @@ const templateDir = path.join(repoRoot, 'extension-runtime/template');
 const renamedTemplateFiles: Record<string, string> = {
     gitignore: '.gitignore',
 };
-
-/** Files replaced by the shared entry, `static/cspell-ext.json` and the shared README templates. */
-const obsoleteFiles = ['src/extension.ts', 'cspell-ext.json', 'static/commands.md', 'static/requirements.md'];
 
 /** Files the sync creates when they're missing. After that, they belong to the extension. */
 const starterFiles: Record<string, string> = {
@@ -74,7 +71,7 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
     const changes = [
         ...(await writeFiles(extensionDir, files, options.check)),
         ...(await createMissingFiles(extensionDir, options.check)),
-        ...(await removeObsoleteFiles(extensionDir, files, options.check)),
+        ...(await removeUnusedFiles(extensionDir, files, options.check)),
     ];
     // The README is filled from the files in `static/`. With `check`, they aren't written, so when they're out of
     // date the README can't be checked yet; the check fails on them anyway.
@@ -138,16 +135,15 @@ async function createMissingFiles(extensionDir: string, check: boolean | undefin
     return changes;
 }
 
-async function removeObsoleteFiles(
+/** Removes a generated file the extension no longer has. */
+async function removeUnusedFiles(
     extensionDir: string,
     files: Map<string, string>,
     check: boolean | undefined,
 ): Promise<FileChange[]> {
-    // A generated file the extension no longer has is removed too.
-    const generated = ['static/commands.json', 'static/dictionaries.json'].filter((file) => !files.has(file));
-    const obsolete = [...obsoleteFiles, ...generated];
+    const unused = ['static/commands.json', 'static/dictionaries.json'].filter((file) => !files.has(file));
     const changes: FileChange[] = [];
-    for (const file of obsolete) {
+    for (const file of unused) {
         const target = path.join(extensionDir, file);
         if (!(await exists(target))) continue;
         changes.push({ file, action: 'remove' });

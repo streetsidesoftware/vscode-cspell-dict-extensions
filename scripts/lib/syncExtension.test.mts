@@ -146,18 +146,6 @@ describe('syncExtension', () => {
         assert.equal(await read('cspell.config.yaml'), 'words: [demo]\n');
     });
 
-    it('removes the files the shared entry, static/ and the templates replace', async () => {
-        await fs.mkdir(path.join(dir, 'src'));
-        await fs.mkdir(path.join(dir, 'static'));
-        await fs.writeFile(path.join(dir, 'src/extension.ts'), 'old\n');
-        await fs.writeFile(path.join(dir, 'cspell-ext.json'), '{}\n');
-        await fs.writeFile(path.join(dir, 'static/commands.md'), 'old\n');
-        const changes = await syncExtension(dir, options);
-        assert.deepEqual(files(changes, 'remove'), ['cspell-ext.json', 'src/extension.ts', 'static/commands.md']);
-        assert.equal(await exists('src/extension.ts'), false);
-        assert.equal(await exists('cspell-ext.json'), false);
-    });
-
     it('lists the locales that turn each dictionary on for a language', async () => {
         await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
             dictionaryDefinitions: [{ name: 'demo' }, { name: 'unused' }],
@@ -293,13 +281,6 @@ describe('syncExtension', () => {
 
     async function read(file: string): Promise<string> {
         return fs.readFile(path.join(dir, file), 'utf8');
-    }
-
-    async function exists(file: string): Promise<boolean> {
-        return fs.access(path.join(dir, file)).then(
-            () => true,
-            () => false,
-        );
     }
 });
 
