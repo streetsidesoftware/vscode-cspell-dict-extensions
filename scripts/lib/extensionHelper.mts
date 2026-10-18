@@ -1,10 +1,7 @@
 import fs from 'node:fs/promises';
-import pathPosix from 'node:path/posix';
-import { sortPackageJson } from 'sort-package-json';
-import type { IPackageOptions } from '@vscode/vsce';
+import path from 'node:path';
 
-const rootUrl = new URL('../../', import.meta.url);
-const extensionsUrl = new URL('extensions/', rootUrl);
+import { readJson, repoRoot } from './repo.mts';
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');
 const repositoryRawUrl = new URL(
@@ -22,46 +19,30 @@ const defaultRepository: Repository = {
     url: repositoryUrl.href,
 };
 
-export async function getExtensionList(): Promise<string[]> {
-    const extensionFolders = await fs.readdir(extensionsUrl, { withFileTypes: true });
-    return extensionFolders
-        .filter((f) => f.isDirectory())
-        .map((f) => new URL(f.name + '/', extensionsUrl))
-        .map((u) => urlRelativeToRoot(u));
-}
-
-/**
- * return a relative path to the repository root.
- */
-export function urlRelativeToRoot(url: URL): string {
-    const addSlash = url.pathname.endsWith('/') ? '/' : '';
-    return pathPosix.relative(rootUrl.pathname, url.pathname) + addSlash;
-}
-
 export interface ExtensionInfo {
-    name: string;
+    packageName: string;
     displayName: string;
     displayNameShort: string;
     version: string;
     description: string;
-    extensionPath: string;
+    /** The extension's directory as a repo path, e.g. `extensions/swedish`. */
+    repoPath: string;
     dictionaryType: string;
     /** `vsce.preRelease` in the extension's package.json */
     preRelease: boolean;
 }
 
-export async function getExtensionInfo(extensionPath: string): Promise<ExtensionInfo> {
-    const pkgUrl = new URL(pathPosix.join(extensionPath, 'package.json'), rootUrl);
-    const pkg = JSON.parse(await fs.readFile(pkgUrl, 'utf8'));
+export async function getExtensionInfo(repoPath: string): Promise<ExtensionInfo> {
+    const pkg = await readExtensionPackageJson(repoPath);
 
     const info: ExtensionInfo = {
-        name: pkg.name,
+        packageName: pkg.name,
         description: pkg.description,
         displayName: pkg.displayName,
         displayNameShort: pkg.displayName.replace(/ -.*/, '').trim(),
         version: pkg.version,
-        extensionPath,
-        dictionaryType: lookUpDictionaryType(extensionPath),
+        repoPath,
+        dictionaryType: await lookUpDictionaryType(repoPath),
         preRelease: pkg.vsce?.preRelease === true,
     };
     return info;
@@ -72,21 +53,24 @@ interface DictionaryTypesConfig {
     default: string;
 }
 
-const dictionaryTypes: DictionaryTypesConfig = JSON.parse(
-    await fs.readFile(new URL('static/dictionary-types.json', rootUrl), 'utf8'),
-);
+let dictionaryTypes: Promise<DictionaryTypesConfig> | undefined;
 
-function lookUpDictionaryType(extensionPath: string): string {
-    for (const [category, extensions] of Object.entries(dictionaryTypes.types)) {
-        if (extensions.includes(extensionPath)) return category;
+async function lookUpDictionaryType(repoPath: string): Promise<string> {
+    const { types, default: defaultType } = await (dictionaryTypes ??= readJson('static/dictionary-types.json'));
+    for (const [category, extensions] of Object.entries(types)) {
+        if (extensions.includes(repoPath)) return category;
     }
 
-    return dictionaryTypes.default;
+    return defaultType;
 }
 
-type Writable<T> = { -readonly [P in keyof T]: T[P] };
-
-export type VSCEPackageOptions = Writable<IPackageOptions>;
+/** The `vsce` options the scripts set or read; the others are kept as they are. */
+export interface VsceOptions {
+    baseContentUrl?: string;
+    baseImagesUrl?: string;
+    preRelease?: boolean;
+    [option: string]: unknown;
+}
 
 export interface PackageJson {
     name: string;
@@ -99,50 +83,42 @@ export interface PackageJson {
     publisher?: string;
     author?: string;
     contributors?: string[];
-    vsce?: VSCEPackageOptions;
+    vsce?: VsceOptions;
     private: boolean;
     preview?: boolean | undefined;
     bugs?: { url: string };
     engines?: { [engine: string]: string };
 }
 
-export async function readPackageJson(pkgUrl: URL | string): Promise<PackageJson> {
-    return JSON.parse(await fs.readFile(pkgUrl, 'utf8'));
+export async function readExtensionPackageJson(repoPath: string): Promise<PackageJson> {
+    return readJson(`${repoPath}/package.json`);
 }
 
-export async function readExtensionPackageJson(extensionPath: string | URL): Promise<PackageJson> {
-    const extUrl = new URL(extensionPath, rootUrl);
-    const pkgUrl = new URL('package.json', extUrl);
-    return readPackageJson(pkgUrl);
+export async function writeExtensionPackageJson(repoPath: string, pkg: PackageJson): Promise<void> {
+    await fs.writeFile(path.join(repoRoot, repoPath, 'package.json'), JSON.stringify(pkg, null, 2) + '\n');
 }
 
-export async function writeExtensionPackageJson(extensionPath: string | URL, pkg: PackageJson): Promise<void> {
-    const extUrl = new URL(extensionPath, rootUrl);
-    const pkgUrl = new URL('package.json', extUrl);
-    await fs.writeFile(pkgUrl, JSON.stringify(pkg, null, 2) + '\n');
-}
-
+/**
+ * The extension's `package.json` with the fields every extension shares.
+ */
 export function fixExtensionPackageJson(
-    extensionDir: string | URL,
+    repoPath: string,
     pkg: PackageJson,
     overrides: Partial<PackageJson>,
 ): PackageJson {
-    Object.assign(pkg, overrides);
-
-    const extensionDirStr = urlRelativeToRoot(new URL(extensionDir, rootUrl));
-    pkg.private = true;
-    pkg.preview = undefined;
-    pkg.repository = pkg.repository || { ...defaultRepository };
-    pkg.repository.directory = extensionDirStr.replace(/\/$/, '');
-    pkg.publisher = 'streetsidesoftware';
-    pkg.author = 'Street Side Software <support@streetsidesoftware.nl>';
-    pkg.contributors = pkg.contributors || [];
-    pkg.vsce = pkg.vsce || {};
-    pkg.vsce.baseContentUrl = new URL(extensionDirStr, repositoryRawUrl).href;
-    pkg.vsce.baseImagesUrl = new URL(extensionDirStr, repositoryRawUrl).href;
-    pkg.bugs = {
-        url: 'https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues',
+    const baseUrl = new URL(`${repoPath}/`, repositoryRawUrl).href;
+    return {
+        ...pkg,
+        ...overrides,
+        private: true,
+        preview: undefined,
+        repository: { ...(pkg.repository ?? defaultRepository), directory: repoPath },
+        publisher: 'streetsidesoftware',
+        author: 'Street Side Software <support@streetsidesoftware.nl>',
+        contributors: pkg.contributors ?? [],
+        vsce: { ...pkg.vsce, baseContentUrl: baseUrl, baseImagesUrl: baseUrl },
+        bugs: {
+            url: 'https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues',
+        },
     };
-
-    return sortPackageJson(pkg);
 }

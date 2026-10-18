@@ -75,6 +75,18 @@ Example using both English and Mongolian dictionaries:
 "cSpell.language": "en,mn-mn",
 ```
 
+## Толь бичиг | Dictionaries
+
+The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary | Locales       |
+| ---------- | ------------- |
+| `mn-mn`    | `mn`, `mn-MN` |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 ## Шаардлага | Requirements
 
 Энэ өргөтгөл нь [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) өргөтгөлийг автоматаар суулгах болно.
@@ -82,6 +94,15 @@ Example using both English and Mongolian dictionaries:
 ---
 
 This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+
+<!--- @@inject: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+
+| Tool                                                                                                            | Version   |
+| --------------------------------------------------------------------------------------------------------------- | --------- |
+| [cspell](https://github.com/streetsidesoftware/cspell)                                                          | `>=10`    |
+| [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) | `>=4.7.0` |
+
+<!--- @@inject-end: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 
 ## Хувь нэмэр оруулагчид | Contributors
 

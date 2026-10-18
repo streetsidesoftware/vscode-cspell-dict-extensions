@@ -1,12 +1,14 @@
 /**
- * Write the files of an extension that come from `extension-runtime/` or from its `extension.config.json`.
+ * Sync one extension with `extension-runtime/` and its `extension.config.json`.
  *
- * - Owned: the tool configs copied from `extension-runtime/template/`.
- * - Generated into `static/`: `cspell-ext.json` and `commands.json`, the data the README templates read.
- *   `cspell-ext.json` gets the `engines` the imported dictionaries declare, unless `cspell.engines` sets them.
- * - Derived: some fields of `package.json` (the other fields are kept) and the injected sections of `README.md`,
- *   filled from the shared templates in `<repo>/static/` and the extension's `static/` data.
- * - Everything else (the rest of the README, samples, CHANGELOG, LICENSE, images, `src/custom.ts`) is never touched.
+ * The sync writes:
+ * - the tool configs, copied from `extension-runtime/template/`;
+ * - `static/cspell-ext.json`, `static/commands.json` and `static/dictionaries.json`, generated from the config and
+ *   the installed dictionaries;
+ * - some fields of `package.json`, and the `@@inject` sections of `README.md`.
+ *
+ * It removes the old files these replace, such as `src/extension.ts`, and leaves every other file alone.
+ * "Synced extensions" in CONTRIBUTING.md has the details.
  */
 
 import fs from 'node:fs/promises';
@@ -15,7 +17,6 @@ import path from 'node:path';
 
 import { injectMarkdown } from 'inject-markdown';
 import { parse as parseJsonc } from 'jsonc-parser';
-import * as prettier from 'prettier';
 
 import {
     cspellExtPath,
@@ -26,8 +27,9 @@ import {
 } from '../../extension-runtime/src/config.ts';
 import type { PackageJson } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
+import { format, injectProblems } from './format.mts';
+import { exists, readJson, repoRoot, writeIfChanged } from './repo.mts';
 
-export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
 export const configFileName = 'extension.config.json';
 const templateDir = path.join(repoRoot, 'extension-runtime/template');
 
@@ -56,57 +58,105 @@ export interface FileChange {
 
 /**
  * Sync one extension.
- * @param extensionDir - the extension's directory.
+ * @param extensionDir - the extension's directory, as an absolute path.
  * @returns the files that changed (or would change with `check`).
  */
 export async function syncExtension(extensionDir: string, options: SyncOptions): Promise<FileChange[]> {
+    const config = await readConfig(extensionDir, options.validate);
+    const files = await extensionFiles(extensionDir, config, options.vscodeEngine);
+    const changes = [
+        ...(await writeFiles(extensionDir, files, options.check)),
+        ...(await removeObsoleteFiles(extensionDir, files, options.check)),
+    ];
+    // The README is filled from the files in `static/`. With `check`, they aren't written, so when they're out of
+    // date the README can't be checked yet; the check fails on them anyway.
+    if (!(options.check && changes.length)) changes.push(...(await syncReadme(extensionDir, options.check)));
+    return changes;
+}
+
+async function readConfig(extensionDir: string, validate: ExtensionConfigValidator): Promise<ExtensionConfig> {
     const name = path.basename(extensionDir);
     const configFile = `extensions/${name}/${configFileName}`;
-    const config = options.validate(await readJson(path.join(extensionDir, configFileName)), configFile);
+    const config = validate(await readJson(path.join(extensionDir, configFileName)), configFile);
     if (config.name !== name) {
         throw new Error(`${configFile}: "name" must be "${name}", not "${config.name}".`);
     }
+    return config;
+}
 
-    const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
+/**
+ * The files the sync owns or derives, by their path relative to the extension.
+ */
+async function extensionFiles(
+    extensionDir: string,
+    config: ExtensionConfig,
+    vscodeEngine: string,
+): Promise<Map<string, string>> {
     const files = new Map<string, string>(await readTemplateFiles());
     files.set(cspellExtPath, JSON.stringify(await cspellExt(extensionDir, config), null, 4) + '\n');
     const commands = commandsTable(config);
     if (commands) files.set('static/commands.json', commands);
-    const pkg = (await readJson(path.join(extensionDir, 'package.json'))) as PackageJson;
-    files.set('package.json', packageJsonSource(config, pkg, options.vscodeEngine, hasCustom));
+    const dictionaries = await dictionariesTable(extensionDir, config);
+    if (dictionaries) files.set('static/dictionaries.json', dictionaries);
+    const pkg = await readJson<PackageJson>(path.join(extensionDir, 'package.json'));
+    const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
+    files.set('package.json', packageJsonSource(config, pkg, vscodeEngine, hasCustom));
+    return files;
+}
 
+async function writeFiles(
+    extensionDir: string,
+    files: Map<string, string>,
+    check: boolean | undefined,
+): Promise<FileChange[]> {
     const changes: FileChange[] = [];
     for (const [file, content] of files) {
-        const formatted = await format(path.join(repoRoot, 'extensions', name, file), content);
-        if (await writeIfChanged(path.join(extensionDir, file), formatted, options.check)) {
+        const formatted = await format(path.join(extensionDir, file), content);
+        if (await writeIfChanged(path.join(extensionDir, file), formatted, check)) {
             changes.push({ file, action: 'update' });
         }
     }
-
-    const remove = commands ? obsoleteFiles : [...obsoleteFiles, 'static/commands.json'];
-    for (const file of remove) {
-        const target = path.join(extensionDir, file);
-        if (!(await exists(target))) continue;
-        changes.push({ file, action: 'remove' });
-        if (!options.check) await fs.rm(target);
-    }
-
-    // The README is filled from the files in `static/`. With `check`, they aren't written, so when they're out of
-    // date the README can't be checked yet; the check fails on them anyway.
-    const readme = path.join(extensionDir, 'README.md');
-    if ((await exists(readme)) && !(options.check && changes.length)) {
-        const injected = await format(path.join(repoRoot, 'extensions', name, 'README.md'), await injectReadme(readme));
-        if (await writeIfChanged(readme, injected, options.check))
-            changes.push({ file: 'README.md', action: 'update' });
-    }
-
     return changes;
 }
 
-/**
- * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`.
- * @returns `undefined` when the extension has no commands.
- */
+async function removeObsoleteFiles(
+    extensionDir: string,
+    files: Map<string, string>,
+    check: boolean | undefined,
+): Promise<FileChange[]> {
+    // A generated file the extension no longer has is removed too.
+    const generated = ['static/commands.json', 'static/dictionaries.json'].filter((file) => !files.has(file));
+    const obsolete = [...obsoleteFiles, ...generated];
+    const changes: FileChange[] = [];
+    for (const file of obsolete) {
+        const target = path.join(extensionDir, file);
+        if (!(await exists(target))) continue;
+        changes.push({ file, action: 'remove' });
+        if (!check) await fs.rm(target);
+    }
+    return changes;
+}
+
+async function syncReadme(extensionDir: string, check: boolean | undefined): Promise<FileChange[]> {
+    const readme = path.join(extensionDir, 'README.md');
+    if (!(await exists(readme))) return [];
+    const injected = await format(readme, await injectReadme(readme));
+    return (await writeIfChanged(readme, injected, check)) ? [{ file: 'README.md', action: 'update' }] : [];
+}
+
+async function readTemplateFiles(): Promise<[string, string][]> {
+    const entries = await fs.readdir(templateDir, { recursive: true, withFileTypes: true });
+    const files: [string, string][] = [];
+    for (const entry of entries) {
+        if (!entry.isFile()) continue;
+        const source = path.join(entry.parentPath, entry.name);
+        const relative = path.relative(templateDir, source).split(path.sep).join('/');
+        const target = path.posix.join(path.posix.dirname(relative), renamedTemplateFiles[entry.name] ?? entry.name);
+        files.push([target, await fs.readFile(source, 'utf8')]);
+    }
+    return files.sort(([a], [b]) => a.localeCompare(b));
+}
+
 /**
  * The content of `static/cspell-ext.json`: `cspell` from the config, with the `engines` the imported dictionaries
  * declare. An engine set in `cspell.engines` wins over the dictionaries.
@@ -118,22 +168,11 @@ async function cspellExt(extensionDir: string, config: ExtensionConfig): Promise
     return Object.keys(merged).length ? { ...cspell, engines: merged } : cspell;
 }
 
-/** The `engines` declared by the dictionaries in `cspell.import`, read from the extension's `node_modules`. */
+/** The `engines` declared by the dictionaries in `cspell.import`. */
 async function dictionaryEngines(extensionDir: string, config: ExtensionConfig): Promise<Record<string, string>> {
-    const imports = (config.cspell as { import?: string[] }).import ?? [];
-    const require = createRequire(path.join(extensionDir, 'package.json'));
     const engines: Record<string, string> = {};
-    for (const spec of imports.filter((spec) => !spec.startsWith('.'))) {
-        let file: string;
-        try {
-            file = require.resolve(spec);
-        } catch {
-            throw new Error(`extensions/${config.name}: can't find "${spec}". Run \`npm install\` first.`);
-        }
-        // A dictionary's cspell-ext.json may have comments.
-        const ext = parseJsonc(await fs.readFile(file, 'utf8')) as { engines?: Record<string, string> };
-        const declared = ext.engines ?? {};
-        for (const [engine, range] of Object.entries(declared)) {
+    for (const ext of await readDictionaries(extensionDir, config)) {
+        for (const [engine, range] of Object.entries(ext.engines ?? {})) {
             if (engines[engine] !== undefined && engines[engine] !== range) {
                 throw new Error(
                     `extensions/${config.name}: the dictionaries need different ${engine} versions ` +
@@ -146,7 +185,88 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
     return engines;
 }
 
-export function commandsTable(config: ExtensionConfig): string | undefined {
+/** The parts of a dictionary's `cspell-ext.json` the sync reads. */
+interface DictionaryExt {
+    engines?: Record<string, string>;
+    dictionaryDefinitions?: { name: string }[];
+    dictionaries?: string[];
+    languageSettings?: { languageId?: string; locale?: string; dictionaries?: string[] }[];
+}
+
+/** The `cspell-ext.json` of each dictionary in `cspell.import`, read from the extension's `node_modules`. */
+async function readDictionaries(extensionDir: string, config: ExtensionConfig): Promise<DictionaryExt[]> {
+    const imports = (config.cspell as { import?: string[] }).import ?? [];
+    const require = createRequire(path.join(extensionDir, 'package.json'));
+    const exts: DictionaryExt[] = [];
+    for (const spec of imports.filter((spec) => !spec.startsWith('.'))) {
+        let file: string;
+        try {
+            file = require.resolve(spec);
+        } catch {
+            throw new Error(`extensions/${config.name}: can't find "${spec}". Run \`npm install\` first.`);
+        }
+        // A dictionary's cspell-ext.json may have comments.
+        exts.push(parseJsonc(await fs.readFile(file, 'utf8')) as DictionaryExt);
+    }
+    return exts;
+}
+
+/**
+ * The dictionaries the extension adds, as table rows, injected into the README with
+ * `<!--- @@inject-table: ./static/dictionaries.json --->`. A language lists the locales that turn each dictionary on;
+ * the other kinds list the file types.
+ * @returns `undefined` for a bundle, or when the dictionaries define nothing.
+ */
+async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
+    if (config.kind === 'bundle') return undefined;
+    const rows: Record<string, string>[] = [];
+    for (const ext of await readDictionaries(extensionDir, config)) {
+        for (const { name } of ext.dictionaryDefinitions ?? []) {
+            const settings = (ext.languageSettings ?? []).filter((s) => s.dictionaries?.includes(name));
+            const always = ext.dictionaries?.includes(name) ?? false;
+            if (!settings.length && !always) continue;
+            if (config.kind === 'language') {
+                const locales = unique(settings.flatMap((s) => splitList(s.locale)).map(canonicalLocale));
+                rows.push({ Dictionary: code(name), Locales: locales.map(code).join(', ') });
+            } else {
+                const ids = unique(settings.flatMap((s) => splitList(s.languageId)));
+                const all = always || !ids.length || ids.includes('*');
+                rows.push({ Dictionary: code(name), 'File types': all ? 'all' : ids.map(code).join(', ') });
+            }
+        }
+    }
+    return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
+}
+
+function splitList(list: string | undefined): string[] {
+    return (list ?? '')
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean);
+}
+
+/** A locale as canonical BCP 47 (i.e. `sv_SE` → `sv-SE`), or as written when it isn't a valid tag (i.e. `fr-90`). */
+function canonicalLocale(locale: string): string {
+    try {
+        return Intl.getCanonicalLocales(locale.replaceAll('_', '-'))[0] ?? locale;
+    } catch {
+        return locale;
+    }
+}
+
+function unique(values: string[]): string[] {
+    return [...new Set(values)];
+}
+
+function code(text: string): string {
+    return `\`${text}\``;
+}
+
+/**
+ * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`.
+ * @returns `undefined` when the extension has no commands.
+ */
+function commandsTable(config: ExtensionConfig): string | undefined {
     const commands = resolveCommands(config).filter((command) => command.contributes);
     if (!commands.length) return undefined;
     return (
@@ -159,36 +279,9 @@ export function commandsTable(config: ExtensionConfig): string | undefined {
 }
 
 /**
- * Fill in a README's `@@inject` sections.
- *
- * It runs from the directory above `extensions/` (the repository root), because inject-markdown only reads files
- * inside that root, and READMEs inject the shared templates in `../../static/`.
- * @returns the README with its `@@inject` sections filled in.
- */
-async function injectReadme(readme: string): Promise<string> {
-    const cwd = path.resolve(path.dirname(readme), '../..');
-    const file = path.relative(cwd, readme);
-    const result = await injectMarkdown({ file, content: await fs.readFile(readme, 'utf8') }, { cwd });
-    if (result.errors.length) {
-        const messages = result.errors.map((e) => `${file}:${e.line ?? 0}: ${e.message}`);
-        throw new Error(`inject-markdown failed:\n${messages.join('\n')}`);
-    }
-    return result.document.content;
-}
-
-export async function writeIfChanged(target: string, content: string, check: boolean | undefined): Promise<boolean> {
-    if ((await readText(target)) === content) return false;
-    if (!check) {
-        await fs.mkdir(path.dirname(target), { recursive: true });
-        await fs.writeFile(target, content);
-    }
-    return true;
-}
-
-/**
  * Update the derived fields of an extension's `package.json` and keep the others, in their order.
  */
-export function packageJsonSource(
+function packageJsonSource(
     config: ExtensionConfig,
     pkg: PackageJson,
     vscodeEngine: string,
@@ -224,42 +317,18 @@ export function packageJsonSource(
     return JSON.stringify({ ...pkg, ...derived }, null, 2) + '\n';
 }
 
-async function readTemplateFiles(): Promise<[string, string][]> {
-    const entries = await fs.readdir(templateDir, { recursive: true, withFileTypes: true });
-    const files: [string, string][] = [];
-    for (const entry of entries) {
-        if (!entry.isFile()) continue;
-        const source = path.join(entry.parentPath, entry.name);
-        const relative = path.relative(templateDir, source).split(path.sep).join('/');
-        const target = path.posix.join(path.posix.dirname(relative), renamedTemplateFiles[entry.name] ?? entry.name);
-        files.push([target, await fs.readFile(source, 'utf8')]);
-    }
-    return files.sort(([a], [b]) => a.localeCompare(b));
-}
-
 /**
- * Format a file the way `prettier` in this repo would.
- * @param repoPath - where the file is in the repository, which picks the prettier options.
+ * Fill in a README's `@@inject` sections.
+ *
+ * It runs from the directory above `extensions/` (the repository root), because inject-markdown only reads files
+ * inside that root, and READMEs inject the shared templates in `../../static/`.
+ * @returns the README with its `@@inject` sections filled in.
  */
-export async function format(repoPath: string, content: string): Promise<string> {
-    const info = await prettier.getFileInfo(repoPath, { ignorePath: path.join(repoRoot, '.prettierignore') });
-    if (info.ignored || !info.inferredParser) return content;
-    const options = await prettier.resolveConfig(repoPath, { editorconfig: true });
-    return prettier.format(content, { ...options, filepath: repoPath });
-}
-
-async function readJson(file: string): Promise<unknown> {
-    return JSON.parse(await fs.readFile(file, 'utf8'));
-}
-
-async function readText(file: string): Promise<string | undefined> {
-    try {
-        return await fs.readFile(file, 'utf8');
-    } catch {
-        return undefined;
-    }
-}
-
-async function exists(file: string): Promise<boolean> {
-    return (await readText(file)) !== undefined;
+async function injectReadme(readme: string): Promise<string> {
+    const cwd = path.resolve(path.dirname(readme), '../..');
+    const file = path.relative(cwd, readme);
+    const result = await injectMarkdown({ file, content: await fs.readFile(readme, 'utf8') }, { cwd });
+    const problems = injectProblems(result);
+    if (problems.length) throw new Error(`inject-markdown failed:\n${problems.join('\n')}`);
+    return result.document.content;
 }

@@ -1,34 +1,27 @@
 #!/usr/bin/env node
 
 /**
- * Fix extensions of files.
+ * Give every extension's `package.json` the fields the extensions share, and sort it.
  */
+
+import { sortPackageJson } from 'sort-package-json';
 
 import {
     fixExtensionPackageJson,
-    getExtensionList,
-    type PackageJson,
     readExtensionPackageJson,
-    readPackageJson,
     writeExtensionPackageJson,
 } from './lib/extensionHelper.mts';
+import { listExtensionRepoPaths, readVscodeEngine } from './lib/repo.mts';
 
-async function run() {
+export async function fixExtensions(): Promise<void> {
     console.log('Fixing extensions...');
-    const extensions = await getExtensionList();
+    const overrides = { engines: { vscode: await readVscodeEngine() } };
 
-    const rootPkg = await readPackageJson(new URL('../package.json', import.meta.url));
-
-    const vscodeEngine = rootPkg.engines?.vscode || '^1.125.0';
-
-    const overrides: Partial<PackageJson> = {
-        engines: { vscode: vscodeEngine },
-    };
-
-    for (const ext of extensions) {
-        const pkg = await readExtensionPackageJson(ext);
-        await writeExtensionPackageJson(ext, fixExtensionPackageJson(ext, pkg, overrides));
+    for (const repoPath of await listExtensionRepoPaths()) {
+        const pkg = await readExtensionPackageJson(repoPath);
+        const fixed = fixExtensionPackageJson(repoPath, pkg, overrides);
+        await writeExtensionPackageJson(repoPath, sortPackageJson(fixed));
     }
 }
 
-await run();
+if (import.meta.main) await fixExtensions();

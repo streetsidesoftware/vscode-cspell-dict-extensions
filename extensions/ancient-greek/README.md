@@ -23,18 +23,34 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-end: ./static/commands.json --->
 
+<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
+
 ### Manual Settings
 
 This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `grc` to the `cSpell.language` setting, will enable the Ancient_greek dictionary.
+Adding `grc-GR` to the `cSpell.language` setting, will enable the Ancient Greek dictionary.
 Example using both English and Ancient Greek dictionaries:
 
 ```javascript
-"cSpell.language": "en,grc",
+"cSpell.language": "en,grc-GR",
 ```
+
+<!--- @@inject-end: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->
+
+## Dictionaries
+
+The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary | Locales                         |
+| ---------- | ------------------------------- |
+| `grc`      | `grc`, `grc-GR`, `gr`, `el-GRC` |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
 
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 

@@ -4,13 +4,10 @@ import * as path from 'path';
 import { promises as fs } from 'node:fs';
 import { downloadAndUnzipVSCode, resolveCliArgsFromVSCodeExecutablePath } from '@vscode/test-electron';
 import { Command, CommanderError } from 'commander';
-import { fileURLToPath } from 'url';
 import { styleText } from 'node:util';
 import { installExtension, installFailure } from './lib/installExtension.mts';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const root = path.join(__dirname, '..');
+const root = path.join(import.meta.dirname, '..');
 const cacheDirVscodeTest = '.vscode-test';
 const cachePath = path.join(root, cacheDirVscodeTest);
 

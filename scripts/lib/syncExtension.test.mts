@@ -83,13 +83,13 @@ describe('syncExtension', () => {
 
     it('takes the engines from static/engines.json, overridden in static/cspell-ext.json', async () => {
         await syncExtension(dir, options);
-        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')), config.cspell);
+        assert.deepEqual(await readJson('static/cspell-ext.json'), config.cspell);
         assert.match(await read('README.md'), /cspell `>=10`/);
 
         const cspell = { ...config.cspell, engines: { cspell: '>=10.4.0' } };
         await writeJson('extension.config.json', { ...config, cspell });
         await syncExtension(dir, options);
-        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')), cspell);
+        assert.deepEqual(await readJson('static/cspell-ext.json'), cspell);
         assert.match(await read('README.md'), /cspell `>=10\.4\.0`/);
     });
 
@@ -97,13 +97,13 @@ describe('syncExtension', () => {
         const engines = { cspell: '>=10.4.0', 'code-spell-checker': '>=4.10.0' };
         await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', { engines });
         await syncExtension(dir, options);
-        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')), { ...config.cspell, engines });
+        assert.deepEqual(await readJson('static/cspell-ext.json'), { ...config.cspell, engines });
         assert.match(await read('README.md'), /cspell `>=10\.4\.0`/);
 
         const cspell = { ...config.cspell, engines: { cspell: '>=10.5.0' } };
         await writeJson('extension.config.json', { ...config, cspell });
         await syncExtension(dir, options);
-        assert.deepEqual(JSON.parse(await read('static/cspell-ext.json')).engines, {
+        assert.deepEqual((await readJson('static/cspell-ext.json')).engines, {
             cspell: '>=10.5.0',
             'code-spell-checker': '>=4.10.0',
         });
@@ -124,6 +124,18 @@ describe('syncExtension', () => {
         assert.match(result, /cspell `>=10`/);
     });
 
+    it('fails on an unresolved placeholder or a missing file in the README', async () => {
+        const root = path.resolve(dir, '../..');
+        await fs.writeFile(path.join(root, 'static/requirements.md'), 'cspell `{@ engines.missing @}`\n');
+        await assert.rejects(syncExtension(dir, options), /README\.md:\d+: .*engines\.missing/);
+
+        await fs.writeFile(
+            path.join(dir, 'README.md'),
+            '<!--- @@inject: ./missing.md --->\n<!--- @@inject-end: ./missing.md --->\n',
+        );
+        await assert.rejects(syncExtension(dir, options), /README\.md:\d+: .*missing\.md/);
+    });
+
     it('removes the files the shared entry, static/ and the templates replace', async () => {
         await fs.mkdir(path.join(dir, 'src'));
         await fs.mkdir(path.join(dir, 'static'));
@@ -136,6 +148,50 @@ describe('syncExtension', () => {
         assert.equal(await exists('cspell-ext.json'), false);
     });
 
+    it('lists the locales that turn each dictionary on for a language', async () => {
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'demo' }, { name: 'unused' }],
+            languageSettings: [{ languageId: '*', locale: 'xx, xx_YY,xx-90', dictionaries: ['demo'] }],
+        });
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
+            { Dictionary: '`demo`', Locales: '`xx`, `xx-YY`, `xx-90`' },
+        ]);
+    });
+
+    it('lists the file types that turn each dictionary on for the other kinds', async () => {
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'c-only' }, { name: 'any' }, { name: 'always' }],
+            dictionaries: ['always'],
+            languageSettings: [
+                { languageId: 'c,cpp', locale: '*', dictionaries: ['c-only'] },
+                { languageId: '*', locale: '*', dictionaries: ['any'] },
+            ],
+        });
+        const { locale: _locale, ...rest } = config;
+        await writeJson('extension.config.json', { ...rest, kind: 'wordList', commands: [] });
+        await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
+            { Dictionary: '`c-only`', 'File types': '`c`, `cpp`' },
+            { Dictionary: '`any`', 'File types': 'all' },
+            { Dictionary: '`always`', 'File types': 'all' },
+        ]);
+    });
+
+    it('has no static/dictionaries.json for a bundle', async () => {
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'demo' }],
+            dictionaries: ['demo'],
+        });
+        await syncExtension(dir, options);
+        const { locale: _locale, ...rest } = config;
+        await writeJson('extension.config.json', { ...rest, kind: 'bundle', description: 'D', commands: [] });
+        await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
+        const changes = await syncExtension(dir, options);
+        assert.deepEqual(files(changes, 'remove'), ['static/commands.json', 'static/dictionaries.json']);
+    });
+
     it('has no static/commands.json without commands', async () => {
         await syncExtension(dir, options);
         await writeJson('extension.config.json', { ...config, commands: [] });
@@ -146,7 +202,7 @@ describe('syncExtension', () => {
 
     it('derives package.json fields and keeps the others in order', async () => {
         await syncExtension(dir, options);
-        const result = JSON.parse(await read('package.json'));
+        const result = await readJson('package.json');
         assert.equal(result.name, 'code-spell-checker-demo');
         assert.equal(result.displayName, 'Demo - Code Spell Checker');
         assert.equal(result.version, '1.2.3');
@@ -176,7 +232,7 @@ describe('syncExtension', () => {
         await fs.mkdir(path.join(dir, 'src'));
         await fs.writeFile(path.join(dir, 'src/custom.ts'), 'export {};\n');
         await syncExtension(dir, options);
-        assert.equal(JSON.parse(await read('package.json')).scripts['check-types'], 'tsc -p .');
+        assert.equal((await readJson('package.json')).scripts['check-types'], 'tsc -p .');
         assert.equal(await read('src/custom.ts'), 'export {};\n');
     });
 
@@ -192,11 +248,11 @@ describe('syncExtension', () => {
         };
         await writeJson('extension.config.json', { ...config, commands: [...config.commands, legacy] });
         await syncExtension(dir, options);
-        const contributed = JSON.parse(await read('package.json')).contributes.commands.map(
+        const contributed = (await readJson('package.json')).contributes.commands.map(
             (c: { command: string }) => c.command,
         );
         assert.deepEqual(contributed, ['cSpellExt_demo.enable', 'cSpellExt_demo.disableWorkspace']);
-        assert.equal(JSON.parse(await read('static/commands.json')).length, 2);
+        assert.equal((await readJson('static/commands.json')).length, 2);
     });
 
     it('changes nothing the second time', async () => {
@@ -207,7 +263,7 @@ describe('syncExtension', () => {
     it('only reports with check', async () => {
         const changes = await syncExtension(dir, { ...options, check: true });
         assert.ok(files(changes, 'update').includes('package.json'));
-        assert.equal(JSON.parse(await read('package.json')).name, 'old-name');
+        assert.equal((await readJson('package.json')).name, 'old-name');
         assert.equal(await read('README.md'), readme);
     });
 
@@ -219,6 +275,10 @@ describe('syncExtension', () => {
     async function writeJson(file: string, data: unknown): Promise<void> {
         await fs.mkdir(path.dirname(path.join(dir, file)), { recursive: true });
         await fs.writeFile(path.join(dir, file), JSON.stringify(data, null, 2) + '\n');
+    }
+
+    async function readJson(file: string): Promise<any> {
+        return JSON.parse(await read(file));
     }
 
     async function read(file: string): Promise<string> {
