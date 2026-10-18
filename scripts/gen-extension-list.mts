@@ -10,7 +10,7 @@ import type { Options } from 'mdast-util-to-markdown';
 import { root, paragraph, text, strong, heading, list, listItem, link, newLineText } from './lib/mdastBuilder.mts';
 import { getExtensionInfo } from './lib/extensionHelper.mts';
 import type { ExtensionInfo } from './lib/extensionHelper.mts';
-import type { CodeWorkspace } from './lib/types.ts';
+import { listExtensionDirs } from './lib/repo.mts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -137,13 +137,7 @@ function groupExtensionsByType(extensionInfos: ExtensionInfo[]): Map<string, Ext
 }
 
 async function main(): Promise<void> {
-    const workspace: CodeWorkspace = JSON.parse(
-        await fs.readFile(path.resolve(__root, 'dict-extensions.code-workspace'), 'utf-8'),
-    );
-
-    const allFolders: string[] = workspace.folders.map((f) => f.path);
-
-    const extensions = allFolders.filter((f) => f.startsWith('extension'));
+    const extensions = await listExtensionDirs();
     const extensionInfos = await Promise.all(extensions.map(getExtensionInfo));
 
     await generateExtensionFolderListMarkdown(extensionInfos);

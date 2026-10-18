@@ -6,23 +6,19 @@
 
 import {
     fixExtensionPackageJson,
-    getExtensionList,
     type PackageJson,
     readExtensionPackageJson,
-    readPackageJson,
     writeExtensionPackageJson,
 } from './lib/extensionHelper.mts';
+import { listExtensionDirs, readVscodeEngine } from './lib/repo.mts';
 
 async function run() {
     console.log('Fixing extensions...');
-    const extensions = await getExtensionList();
-
-    const rootPkg = await readPackageJson(new URL('../package.json', import.meta.url));
-
-    const vscodeEngine = rootPkg.engines?.vscode || '^1.125.0';
+    // The helpers take the directory as a URL path, with a trailing slash.
+    const extensions = (await listExtensionDirs()).map((dir) => dir + '/');
 
     const overrides: Partial<PackageJson> = {
-        engines: { vscode: vscodeEngine },
+        engines: { vscode: await readVscodeEngine() },
     };
 
     for (const ext of extensions) {

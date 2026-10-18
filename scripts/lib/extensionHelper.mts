@@ -4,7 +4,6 @@ import { sortPackageJson } from 'sort-package-json';
 import type { IPackageOptions } from '@vscode/vsce';
 
 const rootUrl = new URL('../../', import.meta.url);
-const extensionsUrl = new URL('extensions/', rootUrl);
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');
 const repositoryRawUrl = new URL(
@@ -21,14 +20,6 @@ const defaultRepository: Repository = {
     type: 'git',
     url: repositoryUrl.href,
 };
-
-export async function getExtensionList(): Promise<string[]> {
-    const extensionFolders = await fs.readdir(extensionsUrl, { withFileTypes: true });
-    return extensionFolders
-        .filter((f) => f.isDirectory())
-        .map((f) => new URL(f.name + '/', extensionsUrl))
-        .map((u) => urlRelativeToRoot(u));
-}
 
 /**
  * return a relative path to the repository root.
