@@ -24,24 +24,27 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-end: ./static/commands.json --->
 
+<!--- @@inject: ../../static/manual-settings.english.md#values-file=:./extension.config.json --->
+
 ### Manual Settings
 
 This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `en-gb` to the `cSpell.language` setting, will enable the British English `-ise` dictionary.
-Example using both English and British English -ise dictionaries:
+Replacing `en` with `en-GB` in the `cSpell.language` setting will check British English -ise spelling instead of American English:
 
 ```javascript
-"cSpell.language": "en-gb",
+"cSpell.language": "en-GB",
 ```
 
-To include both the American and British English spellings, use:
+To accept both the American and the British English -ise spellings:
 
-```json
+```javascript
 "cSpell.language": "en,en-GB",
 ```
+
+<!--- @@inject-end: ../../static/manual-settings.english.md#values-file=:./extension.config.json --->
 
 ## Dictionaries
 
