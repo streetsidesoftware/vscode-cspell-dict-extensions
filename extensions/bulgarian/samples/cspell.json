@@ -1,6 +1,6 @@
 {
     "import": [
-        "../cspell.json"
+        "../cspell.config.yaml"
     ],
     "words": [
         "биотехнологиите",

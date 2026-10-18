@@ -1,0 +1,3 @@
+import:
+  - ./static/cspell-ext.json
+noConfigSearch: true
