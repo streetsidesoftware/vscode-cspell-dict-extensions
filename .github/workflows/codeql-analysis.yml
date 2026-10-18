@@ -9,16 +9,8 @@ on:
   push:
     branches: [main]
   pull_request:
-    # Markdown has no code to analyze.
-    paths-ignore:
-      - "**/*.md"
   schedule:
     - cron: "0 0 * * 2"
-
-# A new push to a pull request cancels its older run. Other runs never share a group.
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
-  cancel-in-progress: true
 
 permissions:
   actions: read

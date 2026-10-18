@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 /*
- * Only `node:` modules here: `list-extensions.mts` and `list-affected-extensions.mts` run in workflows before `npm ci`.
+ * Only `node:` modules here: `list-extensions.mts` runs in workflows before `npm ci`.
  */
 
 export const repoRoot: string = path.resolve(import.meta.dirname, '../..');

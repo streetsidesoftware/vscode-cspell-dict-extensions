@@ -7,7 +7,7 @@
  *   the installed dictionaries;
  * - some fields of `package.json`, and the `@@inject` sections of `README.md`.
  *
- * It removes the old files these replace, such as `src/extension.ts`, and leaves every other file alone.
+ * It creates `cspell.config.yaml` when it's missing; after that, the file belongs to the extension. It removes the old files these replace, such as `src/extension.ts`, and leaves every other file alone.
  * "Synced extensions" in CONTRIBUTING.md has the details.
  */
 
@@ -41,6 +41,12 @@ const renamedTemplateFiles: Record<string, string> = {
 /** Files replaced by the shared entry, `static/cspell-ext.json` and the shared README templates. */
 const obsoleteFiles = ['src/extension.ts', 'cspell-ext.json', 'static/commands.md', 'static/requirements.md'];
 
+/** Files the sync creates when they're missing. After that, they belong to the extension. */
+const starterFiles: Record<string, string> = {
+    // Lint checks the extension's own files with its dictionaries.
+    'cspell.config.yaml': 'import:\n  - ./static/cspell-ext.json\n',
+};
+
 export interface SyncOptions {
     /** Only report the files that would change. */
     check?: boolean;
@@ -53,7 +59,7 @@ export interface SyncOptions {
 export interface FileChange {
     /** The path relative to the extension. */
     file: string;
-    action: 'update' | 'remove';
+    action: 'create' | 'update' | 'remove';
 }
 
 /**
@@ -66,6 +72,7 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
     const files = await extensionFiles(extensionDir, config, options.vscodeEngine);
     const changes = [
         ...(await writeFiles(extensionDir, files, options.check)),
+        ...(await createMissingFiles(extensionDir, options.check)),
         ...(await removeObsoleteFiles(extensionDir, files, options.check)),
     ];
     // The README is filled from the files in `static/`. With `check`, they aren't written, so when they're out of
@@ -115,6 +122,17 @@ async function writeFiles(
         if (await writeIfChanged(path.join(extensionDir, file), formatted, check)) {
             changes.push({ file, action: 'update' });
         }
+    }
+    return changes;
+}
+
+async function createMissingFiles(extensionDir: string, check: boolean | undefined): Promise<FileChange[]> {
+    const changes: FileChange[] = [];
+    for (const [file, content] of Object.entries(starterFiles)) {
+        const target = path.join(extensionDir, file);
+        if (await exists(target)) continue;
+        changes.push({ file, action: 'create' });
+        if (!check) await fs.writeFile(target, content);
     }
     return changes;
 }

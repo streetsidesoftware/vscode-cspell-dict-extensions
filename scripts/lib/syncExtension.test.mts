@@ -136,6 +136,16 @@ describe('syncExtension', () => {
         await assert.rejects(syncExtension(dir, options), /README\.md:\d+: .*missing\.md/);
     });
 
+    it('creates cspell.config.yaml when missing and keeps an existing one', async () => {
+        const changes = await syncExtension(dir, options);
+        assert.deepEqual(files(changes, 'create'), ['cspell.config.yaml']);
+        assert.equal(await read('cspell.config.yaml'), 'import:\n  - ./static/cspell-ext.json\n');
+
+        await fs.writeFile(path.join(dir, 'cspell.config.yaml'), 'words: [demo]\n');
+        assert.deepEqual(await syncExtension(dir, options), []);
+        assert.equal(await read('cspell.config.yaml'), 'words: [demo]\n');
+    });
+
     it('removes the files the shared entry, static/ and the templates replace', async () => {
         await fs.mkdir(path.join(dir, 'src'));
         await fs.mkdir(path.join(dir, 'static'));

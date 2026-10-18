@@ -49,7 +49,9 @@ async function run(): Promise<void> {
         ++synced;
         const changed = await syncExtension(extensionDir, { check: values.check, vscodeEngine, validate });
         for (const { file, action } of changed) {
-            const verb = values.check ? 'Out of date' : action === 'remove' ? 'Removed' : 'Updated';
+            const verb = values.check
+                ? 'Out of date'
+                : { create: 'Created', update: 'Updated', remove: 'Removed' }[action];
             console.log(`${verb}: extensions/${name}/${file}`);
         }
         outOfDate += changed.length;

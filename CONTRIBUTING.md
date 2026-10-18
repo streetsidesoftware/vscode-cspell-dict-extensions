@@ -83,6 +83,7 @@ Extensions with an `extension.config.json` are maintained centrally. They have n
   - `<!--- @@inject-table: ./static/commands.json --->`
   - `<!--- @@inject-table: ./static/dictionaries.json#markdown --->`
   - `<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->`, the Manual Settings of a language extension, filled from its `locale` and `friendlyName`. English variants use `manual-settings.english.md` instead, which advises replacing `en`.
+- **Created when missing:** `cspell.config.yaml`, which imports `./static/cspell-ext.json` so the extension's dictionaries are available when you open its folder in VS Code. After that, the file belongs to the extension; add its `words`, `language` or other settings there.
 - **Never touched:** the rest of the README, `samples/`, `CHANGELOG.md`, `LICENSE`, images, and an optional `src/custom.ts` for code only that extension needs.
 
 To change a synced extension, edit its `extension.config.json` or the shared files, then run `npm run sync:extensions` and commit the result. The sync first regenerates the schema from the types and checks every `extension.config.json` against it. CI checks that the schema and the extensions are in sync.

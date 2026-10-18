@@ -1,0 +1,15 @@
+import:
+  - ./static/cspell-ext.json
+ignorePaths:
+  - /out
+language: en,nb
+noConfigSearch: true
+overrides:
+  - filename: "*.md"
+    caseSensitive: true
+words:
+  - bokmal
+  - Bokmål
+  - norwegian
+  - testrunner
+  - uncommenting
