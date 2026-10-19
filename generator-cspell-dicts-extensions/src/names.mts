@@ -4,7 +4,7 @@
 export function normalizeName(name: string): string {
     return name
         .normalize('NFD')
-        .replaceAll(/[̀-ͯ]/g, '')
+        .replaceAll(/\p{M}/gu, '')
         .toLowerCase()
         .replaceAll(/[^a-z0-9]+/g, '-')
         .replaceAll(/^-+|-+$/g, '');
