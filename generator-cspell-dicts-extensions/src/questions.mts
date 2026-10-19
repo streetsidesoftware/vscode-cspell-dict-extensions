@@ -288,8 +288,8 @@ async function askKind(packages: PackageKind[], options: Options, ctx: Context):
     return ctx.prompter.select(
         'What kind of extension?',
         [
-            { name: 'Language', value: 'language', description: 'A natural language, enabled by its locale.' },
-            { name: 'Word list', value: 'wordList', description: 'A word list, on once installed.' },
+            { name: 'Natural Language', value: 'language', description: 'Enabled by its locale, i.e. Swedish.' },
+            { name: 'Word List', value: 'wordList', description: 'A word list, on once installed.' },
         ],
         derived,
     );
