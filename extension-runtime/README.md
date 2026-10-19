@@ -34,7 +34,7 @@ The data is in `extension.config.json`, checked against [the schema](../static/e
 
 - **Tool configs, overwritten:** `tsconfig.json`, `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from [`template/`](./template).
 - **Generated into `static/`:** `static/cspell-ext.json`, which the extension registers with Code Spell Checker, `static/commands.json` and `static/dictionaries.json` (each dictionary with the locales or file types that turn it on, read from the installed dictionaries; not for a bundle). The minimum `engines` versions default to [`static/engines.json`](../static/engines.json). The sync puts the `engines` the imported dictionaries declare into `static/cspell-ext.json`, and `cspell.engines` in `extension.config.json` overrides them, as in cspell-dicts.
-- **Derived:** the `name`, `displayName`, `description`, `type`, `engines.vscode`, `main`, `contributes.commands` and `scripts` fields of `package.json` (the other fields are kept), and the README sections between `@@inject` markers. Those are filled from shared templates in the root [`static/`](../static) (for example `requirements.md`, with `{@ engines.cspell @}` placeholders) and from the extension's `static/` data, using [inject-markdown](https://github.com/streetsidesoftware/inject-markdown):
+- **Derived:** the `name`, `displayName`, `description`, `type`, `engines.vscode`, `main`, `contributes.commands` and `scripts` fields of `package.json`, and the `devDependencies` entry `"@internal/extension-runtime": "file:../../extension-runtime"` (the other fields are kept), and the README sections between `@@inject` markers. Those are filled from shared templates in the root [`static/`](../static) (for example `requirements.md`, with `{@ engines.cspell @}` placeholders) and from the extension's `static/` data, using [inject-markdown](https://github.com/streetsidesoftware/inject-markdown):
   - `<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->`
   - `<!--- @@inject-table: ./static/commands.json --->`
   - `<!--- @@inject-table: ./static/dictionaries.json#markdown --->`
@@ -45,3 +45,7 @@ The data is in `extension.config.json`, checked against [the schema](../static/e
 The sync first regenerates the schema from the types and checks every `extension.config.json` against it. CI checks that the schema and the extensions are in sync.
 
 Each extension is bundled into one ESM file, `out/extension.js`, with [tsdown](https://tsdown.dev). The shared config in [`.config/tsdown.extension.config.mts`](../.config/tsdown.extension.config.mts) builds the entry [`src/entry.ts`](./src/entry.ts), with the extension's `extension.config.json` and `src/custom.ts` filled in.
+
+## Releasing a runtime change
+
+Every extension bundles the runtime, so a change to it reaches people only when the extensions are released. The runtime is a release-please package, and each extension lists it in `devDependencies`. A `fix:` or `feat:` commit that changes `extension-runtime/` releases the runtime, and release-please's `node-workspace` plugin then releases every extension with it. A `chore:` commit releases nothing.

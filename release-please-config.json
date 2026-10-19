@@ -67,9 +67,18 @@
             "hidden": true
         }
     ],
+    "plugins": [
+        {
+            "type": "node-workspace"
+        }
+    ],
     "packages": {
         ".": {
             "component": "vscode-cspell-dict-extensions",
+            "releaseType": "node"
+        },
+        "extension-runtime": {
+            "component": "@internal/extension-runtime",
             "releaseType": "node"
         },
         "extensions/ancient-greek": {

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Update the `packages` in `release-please-config.json`: the root and each extension.
+ * Update the `packages` in `release-please-config.json`: the root, the extension runtime and each extension.
  */
 
 import fs from 'node:fs/promises';
@@ -18,7 +18,7 @@ interface PackageConfig {
 }
 
 async function main(): Promise<void> {
-    const repoPaths = ['.', ...(await listExtensionRepoPaths())];
+    const repoPaths = ['.', 'extension-runtime', ...(await listExtensionRepoPaths())];
 
     const packages: Record<string, PackageConfig> = {};
     for (const repoPath of repoPaths) {

@@ -225,6 +225,7 @@ describe('syncExtension', () => {
         assert.equal(result.scripts['test:vscode'], 'node ../../test-runner/bin.mjs . --sample samples/demo.md');
         assert.equal(result.scripts.extra, undefined);
         assert.deepEqual(result.dependencies, pkg.dependencies);
+        assert.deepEqual(result.devDependencies, { '@internal/extension-runtime': 'file:../../extension-runtime' });
         assert.deepEqual(Object.keys(result).slice(0, 5), ['name', 'version', 'type', 'contributes', 'scripts']);
     });
 

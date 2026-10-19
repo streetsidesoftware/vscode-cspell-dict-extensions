@@ -68,6 +68,9 @@
   "dependencies": {
     "@cspell/dict-fr-reforme": "^2.3.2"
   },
+  "devDependencies": {
+    "@internal/extension-runtime": "file:../../extension-runtime"
+  },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
   ],
