@@ -41,3 +41,22 @@ export function nativeLanguageName(language: string): string | undefined {
         return undefined;
     }
 }
+
+/**
+ * The most specific locale: the one with the most parts, the last one on a tie.
+ *
+ * - `['sv', 'sv_SE']` -> `sv_SE`
+ * - `['fr', 'fr-fr', 'fr-90']` -> `fr-90`
+ */
+export function mostSpecificLocale(locales: readonly string[]): string | undefined {
+    let best: string | undefined;
+    let bestParts = 0;
+    for (const locale of locales) {
+        const parts = locale.split(/[-_]/).length;
+        if (parts >= bestParts) {
+            best = locale;
+            bestParts = parts;
+        }
+    }
+    return best;
+}

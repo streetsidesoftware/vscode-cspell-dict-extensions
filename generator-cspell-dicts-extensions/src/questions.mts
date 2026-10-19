@@ -2,10 +2,15 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
-import { classify, cspellExtUrl, type CSpellExt, type DictionaryInfo, mostSpecificLocale } from './cspellExt.mts';
-import { canonicalLocale, englishLanguageName, languageOf, nativeLanguageName } from './locales.mts';
+import { type CSpellPackage, filterPackages as matchPackages } from '../../scripts/lib/cspellPackages.mts';
+import {
+    canonicalLocale,
+    englishLanguageName,
+    languageOf,
+    mostSpecificLocale,
+    nativeLanguageName,
+} from './locales.mts';
 import { normalizeName, toFriendlyName } from './names.mts';
-import { type FetchJson, packageInfo, type PackageSummary, searchPackages } from './npm.mts';
 import type { Prompter } from './prompt.mts';
 
 /**
@@ -69,7 +74,8 @@ export interface Options {
 
 export interface Context {
     prompter: Prompter;
-    fetchJson: FetchJson;
+    /** The dictionaries and parsers that can be wrapped. Undefined when the lists could not be fetched. */
+    packages: readonly CSpellPackage[] | undefined;
     /** Where the extensions are, i.e. `<repo>/extensions`. */
     extensionsDir: string;
     /** Packages that already have an extension, mapped to the extension directory name. */
@@ -86,12 +92,12 @@ const notPublished =
     'Add a dictionary to https://github.com/streetsidesoftware/cspell-dicts, ' +
     'or a parser to https://github.com/streetsidesoftware/cspell-parsers, first.';
 
-/** What a package is, read from its name and its `cspell-ext.json`. */
+/** What a package is, from the package lists. */
 interface PackageKind {
     name: string;
     parser: boolean;
-    /** A dictionary's `cspell-ext.json`, when it could be read. */
-    info?: DictionaryInfo | undefined;
+    /** A dictionary's kind and locales, when the lists could be fetched. */
+    info?: { naturalLanguage: boolean; locales: string[] } | undefined;
 }
 
 /**
@@ -106,7 +112,7 @@ export async function askQuestions(options: Options, ctx: Context): Promise<Answ
         (yes ? toFriendlyName(name) : await ctx.prompter.input('Friendly name:', toFriendlyName(name)));
 
     const packages = await askPackages(name, options, ctx);
-    const kinds = await Promise.all(packages.map((pkg) => readPackageKind(pkg, ctx)));
+    const kinds = packages.map((pkg) => packageKind(pkg, ctx));
     const kind = await askKind(kinds, options, ctx);
     if (kind !== 'language') {
         for (const [option, value] of [
@@ -171,18 +177,12 @@ async function askName(options: Options, ctx: Context): Promise<string> {
  */
 async function askPackages(name: string, options: Options, ctx: Context): Promise<string[]> {
     if (options.packages?.length) {
-        for (const pkg of options.packages) await checkPackage(pkg, ctx);
+        for (const pkg of options.packages) checkPackage(pkg, ctx);
         return unique(options.packages);
     }
     if (options.yes) return missing('--package', 'a @cspell/dict-* or @cspell/parser-* package');
 
-    let list: PackageSummary[] | undefined;
-    try {
-        list = await searchPackages(packagePrefixes, ctx.fetchJson);
-    } catch (e) {
-        ctx.log(styleText('yellow', `Could not search npm (${errorMessage(e)}). Type the package names instead.`));
-    }
-
+    const list = ctx.packages;
     if (!list?.length) {
         const typed = await ctx.prompter.input('Package names, separated by commas:', undefined, (answer) => {
             const names = splitList(answer);
@@ -191,22 +191,24 @@ async function askPackages(name: string, options: Options, ctx: Context): Promis
             return wrong ? `${wrong} is not a @cspell/dict-* or @cspell/parser-* package.` : true;
         });
         const packages = unique(splitList(typed));
-        for (const pkg of packages) await checkPackage(pkg, ctx);
+        for (const pkg of packages) checkPackage(pkg, ctx);
         return packages;
     }
 
     const picked: string[] = [];
     let term = name.replaceAll('-', ' ');
     for (;;) {
-        const matches = filterPackages(list, term, ctx.existing).filter((pkg) => !picked.includes(pkg.name));
+        const matches = filterPackages(list, term, ctx.existing).filter((pkg) => !picked.includes(pkg.packageName));
         if (!matches.length) {
             ctx.log(`No package matches "${term}".`);
         } else {
             const chosen = await ctx.prompter.checkbox(
                 `Packages that match "${term}":`,
                 matches.map((pkg) => ({
-                    name: pkg.name + (ctx.existing.has(pkg.name) ? styleText('gray', ' (has an extension)') : ''),
-                    value: pkg.name,
+                    name:
+                        `${pkg.packageName}: ${pkg.name}` +
+                        (ctx.existing.has(pkg.packageName) ? styleText('gray', ' (has an extension)') : ''),
+                    value: pkg.packageName,
                     description: pkg.description,
                     checked: true,
                 })),
@@ -225,43 +227,37 @@ function isCSpellPackage(name: string): boolean {
 }
 
 /**
- * The packages that match the search term, by name or description. Packages that already have an extension come last.
+ * The packages that match the search term, by package name, name or description. Packages that already have an
+ * extension come last.
  */
 export function filterPackages(
-    packages: readonly PackageSummary[],
+    packages: readonly CSpellPackage[],
     term: string,
     existing: ReadonlyMap<string, string>,
-): PackageSummary[] {
-    const words = term.toLowerCase().split(/\s+/).filter(Boolean);
-    const matches = packages.filter((pkg) => {
-        const text = `${pkg.name} ${pkg.description}`.toLowerCase();
-        return words.every((word) => text.includes(word));
-    });
-    return [...matches.filter((pkg) => !existing.has(pkg.name)), ...matches.filter((pkg) => existing.has(pkg.name))];
+): CSpellPackage[] {
+    const matches = matchPackages(packages, [term]);
+    return [
+        ...matches.filter((pkg) => !existing.has(pkg.packageName)),
+        ...matches.filter((pkg) => existing.has(pkg.packageName)),
+    ];
 }
 
-/** Check that the package exists. Without a network connection, continue: `npm install` checks it later. */
-async function checkPackage(name: string, ctx: Context): Promise<void> {
+/** Check the package is in the lists. Without them, continue: `npm install` checks it later. */
+function checkPackage(name: string, ctx: Context): void {
     if (!isCSpellPackage(name)) {
         throw new UsageError(`${name} is not a @cspell/dict-* or @cspell/parser-* package. ${notPublished}`);
     }
-    try {
-        if (!(await packageInfo(name, ctx.fetchJson)))
-            throw new UsageError(`${name} was not found on npm. ${notPublished}`);
-    } catch (e) {
-        if (e instanceof UsageError) throw e;
-        ctx.log(styleText('yellow', `Could not check ${name} on npm (${errorMessage(e)}).`));
+    if (ctx.packages && !ctx.packages.some((pkg) => pkg.packageName === name)) {
+        throw new UsageError(`${name} is not in cspell-dicts or cspell-parsers. ${notPublished}`);
     }
 }
 
-async function readPackageKind(name: string, ctx: Context): Promise<PackageKind> {
+function packageKind(name: string, ctx: Context): PackageKind {
+    const pkg = ctx.packages?.find((p) => p.packageName === name);
+    if (pkg?.kind === 'bundle') throw new UsageError(`${name} is a bundle; the generator does not make bundles.`);
     if (name.startsWith('@cspell/parser-')) return { name, parser: true };
-    try {
-        return { name, parser: false, info: classify((await ctx.fetchJson(cspellExtUrl(name))) as CSpellExt) };
-    } catch (e) {
-        ctx.log(styleText('yellow', `Could not read the cspell-ext.json of ${name} (${errorMessage(e)}).`));
-        return { name, parser: false };
-    }
+    if (!pkg) return { name, parser: false };
+    return { name, parser: false, info: { naturalLanguage: pkg.kind === 'language', locales: pkg.locales } };
 }
 
 /**
@@ -382,8 +378,4 @@ function splitList(text: string): string[] {
 
 function unique<T>(values: T[]): T[] {
     return [...new Set(values)];
-}
-
-function errorMessage(e: unknown): string {
-    return e instanceof Error ? e.message : String(e);
 }

@@ -17,6 +17,8 @@ const sample = 'samples/seattle.md';
 export interface WriteOptions {
     /** Defaults to the generator's `templates` directory. */
     templateDir?: string;
+    /** The sample's text, i.e. a Wikipedia article. Default: a placeholder to replace. */
+    sample?: string | undefined;
     log?: (message: string) => void;
 }
 
@@ -42,7 +44,7 @@ export async function writeExtension(destDir: string, answers: Answers, options:
         ['extension.config.json', json(extensionConfig(answers))],
         ['package.json', json(packageJson(answers))],
         ['README.md', readme(answers)],
-        [sample, sampleText(answers)],
+        [sample, options.sample ?? sampleText(answers)],
         ['samples/cspell.json', json(sampleConfig(answers))],
     ];
     for (const [file, content] of files) {

@@ -28,7 +28,10 @@
     "tool:gen-extension-list": "node ./scripts/gen-extension-list.mts",
     "lint": "npm run cspell",
     "update-dictionaries": "lerna exec \"npx npm-check-updates -t latest -u -f \\\"@cspell*\\\" \" && npm i && npm run sync:extensions",
-    "update-packages": "npm ci && npx npm-check-updates -t semver -u && npm i && lerna exec \"npx npm-check-updates -t semver -u && rm -rf node_modules package-lock.json && npm i\" && npm i && npm run sync:extensions"
+    "update-packages": "npm ci && npx npm-check-updates -t semver -u && npm i && lerna exec \"npx npm-check-updates -t semver -u && rm -rf node_modules package-lock.json && npm i\" && npm i && npm run sync:extensions",
+    "list:packages": "node ./scripts/list-packages.mts",
+    "fetch:sample": "node ./scripts/fetch-sample.mts",
+    "check:extension": "node ./scripts/check-extension.mts"
   },
   "type": "commonjs",
   "devEngines": {
