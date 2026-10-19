@@ -1,6 +1,0 @@
-{
-    <% if (locale) { %>
-    "language": "<%= locale %>",
-    <% } %>
-    "dictionaries": []
-}

@@ -1,5 +1,0 @@
-{
-    "import": [
-        "<%= dictionarySrc %>/cspell-ext.json"
-    ]
-}
