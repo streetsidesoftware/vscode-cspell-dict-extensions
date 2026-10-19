@@ -8,7 +8,7 @@ import { stripVTControlCharacters } from 'node:util';
 import { cspellExtUrl } from './cspellExt.mts';
 import type { FetchJson } from './npm.mts';
 import { noPrompter, type Prompter } from './prompt.mts';
-import { type Answers, askQuestions, type Context, filterPackages, type Options } from './questions.mts';
+import { type Answers, askQuestions, type Context, filterPackages, type Options, UsageError } from './questions.mts';
 import { fakeFetch, scriptedPrompter } from './test-helpers.mts';
 
 const packages = {
@@ -215,6 +215,7 @@ describe('askQuestions', () => {
 
         it('fails when a required value is missing', async () => {
             await assert.rejects(yes({}), /Missing package/);
+            await assert.rejects(yes({ kind: 'dictionary' }), UsageError);
             await assert.rejects(yes({ package: '@cspell/parser-typescript' }), /Missing --description/);
         });
 

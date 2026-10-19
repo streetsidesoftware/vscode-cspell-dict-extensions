@@ -180,6 +180,7 @@ function checkOptionsFor(kind: Kind, options: Options): void {
 async function askPackage(kind: Kind, options: Options, ctx: Context): Promise<PackageSummary> {
     const prefix = packagePrefixes[kind];
     if (options.package) return checkPackage(options.package, kind, ctx);
+    if (options.yes) return missing('package', 'pass a @cspell/dict-* or @cspell/parser-* package');
 
     let list: PackageSummary[] | undefined;
     try {
