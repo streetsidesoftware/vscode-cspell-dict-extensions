@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs';
+import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
@@ -36,6 +38,7 @@ export async function run(argv: string[] = process.argv): Promise<void> {
         .option('--display-name <name>', 'the Marketplace name (default: "<friendly name> - Code Spell Checker")')
         .option('--description <text>', 'the Marketplace description (required for a parser)')
         .option('--license <spdx>', `the extension's license (default: ${defaultLicense})`)
+        .option('-f, --force', 'replace the extension directory when it exists')
         .option('-y, --yes', 'never ask: use the defaults, and fail when a required value is missing')
         .showHelpAfterError(true)
         .action(generate);
@@ -63,6 +66,10 @@ async function generate(
     );
 
     const destDir = path.join(extensionsDir, answers.name);
+    if (options.force && existsSync(destDir)) {
+        console.log(`Removing extensions/${answers.name}`);
+        await rm(destDir, { recursive: true });
+    }
     console.log(`Creating extensions/${answers.name}`);
     await writeExtension(destDir, answers, { log: (message) => console.log(message) });
 

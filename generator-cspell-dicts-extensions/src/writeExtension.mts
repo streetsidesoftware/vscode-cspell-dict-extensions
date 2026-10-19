@@ -43,7 +43,7 @@ export async function writeExtension(destDir: string, answers: Answers, options:
         ['package.json', json(packageJson(answers))],
         ['README.md', readme(answers)],
         [sample, sampleText(answers)],
-        ['samples/cspell.json', json({})],
+        ['samples/cspell.json', json(sampleConfig(answers))],
     ];
     for (const [file, content] of files) {
         await create(file, (dest) => writeFile(dest, content, { flag: 'wx' }));
@@ -210,11 +210,18 @@ export function readme(answers: Answers): string {
     }
 }
 
-/** The sample the tests spell check. A language's sample turns its locale on. */
+/**
+ * The cspell config of the samples. For a language, it turns the locale on, so the tests check the sample in the
+ * language. (An inline locale comment in the sample fails for languages that use word segmentation, such as Thai.)
+ */
+export function sampleConfig(answers: Answers): Record<string, unknown> {
+    return answers.kind === 'language' ? { language: `${answers.locale},en` } : {};
+}
+
+/** The sample the tests spell check. */
 export function sampleText(answers: Answers): string {
     const language = answers.kind === 'language' ? languageOf(answers.locale) : 'en';
     const lines = [
-        ...(answers.kind === 'language' ? [`<!-- cspell:locale ${language},en -->`, ''] : []),
         '# Seattle',
         '',
         `Replace this text with the Wikipedia article about Seattle: https://${language}.wikipedia.org/wiki/Seattle`,

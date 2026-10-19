@@ -177,7 +177,11 @@ describe('askQuestions', () => {
             await askQuestions({}, context(prompter, fakeFetch({})));
             assert.deepEqual(
                 prompter.asked.filter((q) => q.message.startsWith('Extension name')).map((q) => q.error),
-                ['Please enter a name.', 'extensions/swedish already exists. Choose another name.', undefined],
+                [
+                    'Please enter a name.',
+                    'extensions/swedish already exists. Choose another name, or pass --force to replace it.',
+                    undefined,
+                ],
             );
         });
 
@@ -250,8 +254,12 @@ describe('askQuestions', () => {
             );
         });
 
-        it('fails when the name is taken', async () => {
-            await assert.rejects(yes({ name: 'swedish', packages: ['@cspell/dict-sv'] }), /--name swedish:/);
+        it('fails when the name is taken, unless --force replaces it', async () => {
+            await assert.rejects(
+                yes({ name: 'swedish', packages: ['@cspell/dict-sv'] }),
+                /extensions\/swedish already exists.*--force/,
+            );
+            assert.equal((await yes({ name: 'swedish', packages: ['@cspell/dict-sv'], force: true })).name, 'swedish');
         });
 
         it('fails without network unless the kind and locale are given', async () => {

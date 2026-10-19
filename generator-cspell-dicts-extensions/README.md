@@ -43,6 +43,7 @@ npm run create:extension -- typescript-parser --package @cspell/parser-typescrip
 | `--display-name <name>`               | The Marketplace name. Default: `<friendly name> - Code Spell Checker`.                                  |
 | `--description <text>`                | The Marketplace description. Required for a parser; the other kinds have a default.                     |
 | `--license <spdx>`                    | The extension's license. Default: `GPL-3.0-or-later`. For another license, add its text to `LICENSE`.   |
+| `-f, --force`                         | Replace the extension's directory when it exists.                                                       |
 | `-y, --yes`                           | Never ask.                                                                                              |
 
 ## Development

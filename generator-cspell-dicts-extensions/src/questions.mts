@@ -61,6 +61,8 @@ export interface Options {
     displayName?: string | undefined;
     description?: string | undefined;
     license?: string | undefined;
+    /** Replace the extension's directory when it exists. */
+    force?: boolean | undefined;
     /** Never ask: use the options and defaults, and fail when a required value is missing. */
     yes?: boolean | undefined;
 }
@@ -142,15 +144,15 @@ function missing(option: string, why: string): never {
 async function askName(options: Options, ctx: Context): Promise<string> {
     const check = (name: string): true | string => {
         if (!name) return 'Please enter a name.';
-        return existsSync(path.join(ctx.extensionsDir, name))
-            ? `extensions/${name} already exists. Choose another name.`
+        return !options.force && existsSync(path.join(ctx.extensionsDir, name))
+            ? `extensions/${name} already exists. Choose another name, or pass --force to replace it.`
             : true;
     };
 
     if (options.name !== undefined) {
         const name = normalizeName(options.name);
         const result = check(name);
-        if (result !== true) throw new UsageError(`--name ${options.name}: ${result}`);
+        if (result !== true) throw new UsageError(result);
         return name;
     }
     if (options.yes) return missing('--name', 'the extension name, i.e. swedish');

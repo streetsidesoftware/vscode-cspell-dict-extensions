@@ -5,7 +5,14 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import type { Answers } from './questions.mts';
-import { extensionConfig, localeCommands, readme, sampleText, writeExtension } from './writeExtension.mts';
+import {
+    extensionConfig,
+    localeCommands,
+    readme,
+    sampleConfig,
+    sampleText,
+    writeExtension,
+} from './writeExtension.mts';
 
 const swedish: Answers = {
     name: 'swedish',
@@ -178,11 +185,11 @@ describe('readme', () => {
     });
 });
 
-describe('sampleText', () => {
+describe('samples', () => {
     it('turns on the locale of a language, and links its Wikipedia', () => {
-        assert.match(sampleText(swedish), /^<!-- cspell:locale sv,en -->\n/);
+        assert.deepEqual(sampleConfig(swedish), { language: 'sv-SE,en' });
+        assert.deepEqual(sampleConfig(medicalTerms), {});
         assert.match(sampleText(swedish), /https:\/\/sv\.wikipedia\.org\/wiki\/Seattle/);
-        assert.doesNotMatch(sampleText(medicalTerms), /cspell:locale/);
     });
 });
 
