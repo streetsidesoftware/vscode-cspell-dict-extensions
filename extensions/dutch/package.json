@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-dutch",
   "displayName": "Dutch - Code Spell Checker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Adds Dutch (Nederlands) spell checking to Code Spell Checker.",
   "categories": [

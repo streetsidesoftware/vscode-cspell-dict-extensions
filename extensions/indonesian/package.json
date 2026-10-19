@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-indonesian",
   "displayName": "Indonesian - Code Spell Checker",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "description": "Adds Indonesian (Indonesia) spell checking to Code Spell Checker.",
   "categories": [

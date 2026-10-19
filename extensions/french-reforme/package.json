@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-french-reforme",
   "displayName": "French Réforme 90 - Code Spell Checker",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "description": "Adds French Réforme 90 (français) spell checking to Code Spell Checker.",
   "categories": [
