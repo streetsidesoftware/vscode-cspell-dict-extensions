@@ -11,9 +11,10 @@ describe('findExistingExtensions', () => {
 
     before(async () => {
         dir = await mkdtemp(path.join(tmpdir(), 'cspell-dict-ext-existing-'));
-        const add = async (name: string, config?: unknown) => {
+        const add = async (name: string, cspell?: unknown) => {
             await mkdir(path.join(dir, name));
-            if (config) await writeFile(path.join(dir, name, 'cspell-ext.json'), JSON.stringify(config));
+            if (cspell)
+                await writeFile(path.join(dir, name, 'extension.config.json'), JSON.stringify({ name, cspell }));
         };
         await add('swedish', { import: ['@cspell/dict-sv/cspell-ext.json'] });
         await add('typescript-parser', { import: ['@cspell/parser-typescript/recommended'] });
