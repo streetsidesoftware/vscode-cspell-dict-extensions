@@ -289,7 +289,7 @@ async function askKind(packages: PackageKind[], options: Options, ctx: Context):
         'What kind of extension?',
         [
             { name: 'Natural Language', value: 'language', description: 'Enabled by its locale, i.e. Swedish.' },
-            { name: 'Word List', value: 'wordList', description: 'A word list, on once installed.' },
+            { name: 'Word List', value: 'wordList', description: 'On once installed, i.e. Medical Terms.' },
         ],
         derived,
     );
