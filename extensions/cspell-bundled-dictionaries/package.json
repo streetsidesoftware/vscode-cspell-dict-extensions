@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-cspell-bundled-dictionaries",
   "displayName": "CSpell Bundled Dictionaries - Code Spell Checker",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "description": "Adds the dictionaries bundled with CSpell to Code Spell Checker.",
   "categories": [

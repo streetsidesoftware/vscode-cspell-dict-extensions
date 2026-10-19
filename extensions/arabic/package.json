@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-arabic",
   "displayName": "Arabic - Code Spell Checker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Adds Arabic (العربية) spell checking to Code Spell Checker.",
   "categories": [

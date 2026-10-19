@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-norwegian-bokmal",
   "displayName": "Norwegian Bokmål - Code Spell Checker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Adds Norwegian Bokmål (norsk bokmål) spell checking to Code Spell Checker.",
   "categories": [

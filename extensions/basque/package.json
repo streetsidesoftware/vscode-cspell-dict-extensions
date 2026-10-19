@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-basque",
   "displayName": "Basque - Code Spell Checker",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "description": "Adds Basque (euskara) spell checking to Code Spell Checker.",
   "categories": [
