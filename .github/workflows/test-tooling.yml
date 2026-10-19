@@ -6,6 +6,10 @@ on:
     paths:
       - "extension-runtime/**"
       - "scripts/**"
+      - ".tool-versions"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.json"
       - ".github/workflows/test-tooling.yml"
   push:
     branches:
@@ -13,6 +17,10 @@ on:
     paths:
       - "extension-runtime/**"
       - "scripts/**"
+      - ".tool-versions"
+      - "package.json"
+      - "package-lock.json"
+      - "tsconfig.json"
       - ".github/workflows/test-tooling.yml"
 
 permissions:
