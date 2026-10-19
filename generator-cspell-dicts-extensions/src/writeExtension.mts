@@ -212,8 +212,8 @@ export function readme(answers: Answers): string {
 
 /**
  * The cspell config of the samples. For a language, it turns the locale on, so the tests check the sample in the
- * language. (In an inline locale comment, text after the locales on the same line, such as an HTML comment's end, is read
- * as a locale, which breaks languages that use word segmentation, such as Thai.)
+ * language. (In an inline locale comment, text after the locales on the same line, such as an HTML comment's end, is
+ * read as a locale, which breaks languages that use word segmentation, such as Thai.)
  */
 export function sampleConfig(answers: Answers): Record<string, unknown> {
     return answers.kind === 'language' ? { language: `${answers.locale},en` } : {};
