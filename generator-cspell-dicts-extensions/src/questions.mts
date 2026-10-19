@@ -291,7 +291,8 @@ async function askNativeName(locale: string, options: Options, ctx: Context): Pr
 
 /** A parser's Marketplace description has no default. */
 async function askDescription(options: Options, ctx: Context): Promise<string> {
-    if (options.description) return options.description;
+    const given = options.description?.trim();
+    if (given) return given;
     if (options.yes) return missing('--description', 'a parser has no default description');
     const answer = await ctx.prompter.input('Marketplace description:', undefined, (text) =>
         text.trim() ? true : 'Please enter a description.',

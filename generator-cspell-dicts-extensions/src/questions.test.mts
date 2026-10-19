@@ -217,6 +217,10 @@ describe('askQuestions', () => {
             await assert.rejects(yes({}), /Missing package/);
             await assert.rejects(yes({ kind: 'dictionary' }), UsageError);
             await assert.rejects(yes({ package: '@cspell/parser-typescript' }), /Missing --description/);
+            await assert.rejects(
+                yes({ package: '@cspell/parser-typescript', description: '   ' }),
+                /Missing --description/,
+            );
         });
 
         it('fails when the derived name is taken', async () => {
