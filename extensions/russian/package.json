@@ -61,6 +61,9 @@
   "dependencies": {
     "@cspell/dict-ru_ru": "^2.3.4"
   },
+  "devDependencies": {
+    "@internal/extension-runtime": "file:../../extension-runtime"
+  },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
   ],

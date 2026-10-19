@@ -68,6 +68,9 @@
   "dependencies": {
     "@cspell/dict-be-by": "^1.0.2"
   },
+  "devDependencies": {
+    "@internal/extension-runtime": "file:../../extension-runtime"
+  },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
   ],

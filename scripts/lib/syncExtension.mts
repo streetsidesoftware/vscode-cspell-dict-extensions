@@ -33,6 +33,7 @@ import { exists, readJson, repoRoot, writeIfChanged } from './repo.mts';
 
 export const configFileName = 'extension.config.json';
 const templateDir = path.join(repoRoot, 'extension-runtime/template');
+const runtimePackage = '@internal/extension-runtime';
 
 /** Template files whose names can't be used in `extension-runtime/template/`. */
 const renamedTemplateFiles: Record<string, string> = {
@@ -316,6 +317,9 @@ function packageJsonSource(
         engines: { ...pkg.engines, vscode: vscodeEngine },
         main: './out/extension.js',
         contributes: { ...contributes, commands },
+        // Each extension bundles the runtime. The dependency lets release-please's node-workspace plugin release every
+        // extension when the runtime is released.
+        devDependencies: { ...pkg.devDependencies, [runtimePackage]: 'file:../../extension-runtime' },
         scripts: {
             build: 'tsdown',
             // Only `src/custom.ts` is the extension's own code; the shared code is checked in `extension-runtime/`.

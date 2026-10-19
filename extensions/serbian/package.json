@@ -85,6 +85,9 @@
     "@cspell/dict-sr-cyrl": "^1.1.8",
     "@cspell/dict-sr-latn": "^1.0.10"
   },
+  "devDependencies": {
+    "@internal/extension-runtime": "file:../../extension-runtime"
+  },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
   ],

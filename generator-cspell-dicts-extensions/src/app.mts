@@ -78,6 +78,8 @@ async function generate(
     // The shared package.json fields, then the files the sync owns or derives.
     npm(['run', 'tool:fix-extensions'], repoRoot);
     npm(['run', 'sync:extensions', '--', answers.name], repoRoot);
+    // Record the runtime dependency the sync added in package-lock.json.
+    npm(['install'], destDir);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
 }

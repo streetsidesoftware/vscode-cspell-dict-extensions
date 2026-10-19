@@ -1,5 +1,6 @@
 {
     ".": "8.1.0",
+    "extension-runtime": "1.0.0",
     "extensions/arabic": "1.0.0",
     "extensions/basque": "2.0.0",
     "extensions/bulgarian": "1.0.0",

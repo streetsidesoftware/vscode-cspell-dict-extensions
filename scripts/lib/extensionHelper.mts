@@ -88,6 +88,7 @@ export interface PackageJson {
     preview?: boolean | undefined;
     bugs?: { url: string };
     engines?: { [engine: string]: string };
+    devDependencies?: { [name: string]: string };
 }
 
 export async function readExtensionPackageJson(repoPath: string): Promise<PackageJson> {
