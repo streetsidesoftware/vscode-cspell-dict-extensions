@@ -1,5 +1,21 @@
 # Changelog
 
+## [8.1.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@8.1.0...vscode-cspell-dict-extensions@8.1.1) (2026-10-19)
+
+
+### Updates and Bug Fixes
+
+* describe each kind of extension in its own words ([#1648](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1648)) ([1b38ab8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/1b38ab80fda1ecb65a953bcf4efaa715b2116637))
+* **medical-terms:** Prepare for Release ([#1637](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1637)) ([3dde8a7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3dde8a79f7d568f011f9886b5e2d0bcd56999cab))
+* release every extension when the runtime is released ([#1682](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1682)) ([f4d1b29](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f4d1b29deb26e3913d954f75c59047e6c30b0c45))
+* **serbian:** Prepare for Release ([#1635](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1635)) ([6856069](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/68560698ec011789c73151afc00320ff6cc00d30))
+* **swedish:** Prepare for Release ([#1636](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1636)) ([01e1d4b](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/01e1d4b0da4e1381a1ae6dc9359cf7bc00c58fcf))
+
+
+### Code Refactoring
+
+* **generator:** build on the sync; --yes for agents ([#1598](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1598)) ([7157de6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/7157de684782ce23400e400743d4b1a6a3aaf35a))
+
 ## [8.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@8.0.0...vscode-cspell-dict-extensions@8.1.0) (2026-10-17)
 
 

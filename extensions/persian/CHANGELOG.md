@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-persian@3.0.0...code-spell-checker-persian@3.0.1) (2026-10-19)
+
+
+### Updates and Bug Fixes
+
+* describe each kind of extension in its own words ([#1648](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1648)) ([1b38ab8](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/1b38ab80fda1ecb65a953bcf4efaa715b2116637))
+* release every extension when the runtime is released ([#1682](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1682)) ([f4d1b29](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/f4d1b29deb26e3913d954f75c59047e6c30b0c45))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @internal/extension-runtime bumped from file:../../extension-runtime to 1.0.0
+
 ## [3.0.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-persian@2.0.5...code-spell-checker-persian@3.0.0) (2026-10-16)
 
 

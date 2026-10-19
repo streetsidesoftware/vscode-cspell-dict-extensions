@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-spanish",
   "displayName": "Spanish - Code Spell Checker",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "description": "Adds Spanish (español) spell checking to Code Spell Checker.",
   "categories": [

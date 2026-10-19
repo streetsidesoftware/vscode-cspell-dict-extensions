@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-polish",
   "displayName": "Polish - Code Spell Checker",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "description": "Adds Polish (polski) spell checking to Code Spell Checker.",
   "categories": [

@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-medical-terms",
   "displayName": "Medical Terms - Code Spell Checker",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "private": true,
   "description": "Adds the Medical Terms dictionary to Code Spell Checker.",
   "categories": [

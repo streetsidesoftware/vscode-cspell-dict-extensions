@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-vietnamese",
   "displayName": "Vietnamese - Code Spell Checker",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "description": "Adds Vietnamese (Tiếng Việt) spell checking to Code Spell Checker.",
   "categories": [
