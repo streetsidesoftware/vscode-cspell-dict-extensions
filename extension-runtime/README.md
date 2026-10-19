@@ -12,7 +12,7 @@ The code, tool configs and data format shared by every extension in [`extensions
    npm run create:extension
    ```
 
-   It finds the package on npm and suggests every answer. With the package and `--yes`, it asks nothing: `npm run create:extension -- @cspell/dict-sv --yes`. The [generator README](../generator-cspell-dicts-extensions/README.md) lists the options. It writes `extension.config.json` and the starter files into `extensions/<name>/`, installs the package and runs the sync.
+   It asks for the extension's name, i.e. `swedish`, offers the packages that match it, and suggests the rest from the packages. With the name, the packages and `--yes`, it asks nothing: `npm run create:extension -- swedish --package @cspell/dict-sv --yes`. The [generator README](../generator-cspell-dicts-extensions/README.md) lists the options. It writes `extension.config.json` and the starter files into `extensions/<name>/`, installs the package and runs the sync.
 
 3. **Replace the sample.** Put a text in the language in `samples/seattle.md`, such as the Wikipedia article about Seattle, below its first line, which turns the language on for the spell check. The tests check that the dictionary recognizes it. Add any words it doesn't know to `samples/cspell.json`.
 

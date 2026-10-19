@@ -8,21 +8,38 @@ import type { Answers } from './questions.mts';
 import { extensionConfig, localeCommands, readme, sampleText, writeExtension } from './writeExtension.mts';
 
 const swedish: Answers = {
-    kind: 'language',
-    packageName: '@cspell/dict-sv',
-    locale: 'sv-SE',
-    nativeName: 'svenska',
     name: 'swedish',
     friendlyName: 'Swedish',
+    kind: 'language',
+    packages: ['@cspell/dict-sv'],
+    locale: 'sv-SE',
+    locales: ['sv', 'sv-SE'],
+    languages: [],
+    nativeName: 'svenska',
     displayName: '',
     description: '',
+    license: 'GPL-3.0-or-later',
+};
+
+const serbian: Answers = {
+    ...swedish,
+    name: 'serbian',
+    friendlyName: 'Serbian',
+    packages: ['@cspell/dict-sr-cyrl', '@cspell/dict-sr-latn'],
+    locale: 'sr',
+    locales: ['sr', 'sr-Cyrl', 'sr-Latn'],
+    languages: [
+        { locale: 'sr-Cyrl', name: 'Serbian (Cyrillic)' },
+        { locale: 'sr-Latn', name: 'Serbian (Latin)' },
+    ],
 };
 
 const medicalTerms: Answers = {
     ...swedish,
     kind: 'wordList',
-    packageName: '@cspell/dict-medicalterms',
+    packages: ['@cspell/dict-medicalterms'],
     locale: '',
+    locales: [],
     nativeName: '',
     name: 'medical-terms',
     friendlyName: 'Medical Terms',
@@ -31,7 +48,7 @@ const medicalTerms: Answers = {
 const parser: Answers = {
     ...medicalTerms,
     kind: 'parser',
-    packageName: '@cspell/parser-typescript',
+    packages: ['@cspell/parser-typescript'],
     name: 'typescript-parser',
     friendlyName: 'TypeScript Parser',
     description: 'Spell checks TypeScript.',
@@ -48,7 +65,10 @@ describe('extensionConfig', () => {
             locale: 'sv-SE',
             sample: 'samples/seattle.md',
             cspell: { import: ['@cspell/dict-sv/cspell-ext.json'] },
-            commands: localeCommands('sv-SE'),
+            commands: localeCommands(swedish),
+        });
+        assert.deepEqual(extensionConfig(serbian).cspell, {
+            import: ['@cspell/dict-sr-cyrl/cspell-ext.json', '@cspell/dict-sr-latn/cspell-ext.json'],
         });
     });
 
@@ -90,17 +110,54 @@ describe('extensionConfig', () => {
 });
 
 describe('localeCommands', () => {
-    it('enables the locale, and disables it with its language', () => {
-        assert.deepEqual(localeCommands('sv-SE'), [
+    it('enables the locale, and disables every locale the packages declare', () => {
+        assert.deepEqual(localeCommands(swedish), [
             { action: 'enable', toggle: 'locale', value: 'sv-SE' },
             { action: 'disable', toggle: 'locale', value: 'sv,sv-SE' },
             { action: 'enable', toggle: 'locale', value: 'sv-SE', scope: 'workspace' },
             { action: 'disable', toggle: 'locale', value: 'sv,sv-SE', scope: 'workspace' },
         ]);
+    });
+
+    it('gives each of several languages its own commands', () => {
+        const commands = localeCommands(serbian);
         assert.deepEqual(
-            localeCommands('bn').map((c) => c.value),
-            ['bn', 'bn', 'bn', 'bn'],
+            commands.slice(0, 2).map((c) => c.value),
+            ['sr', 'sr,sr-Cyrl,sr-Latn'],
         );
+        assert.deepEqual(commands.slice(4, 8), [
+            {
+                action: 'enable',
+                toggle: 'locale',
+                value: 'sr-Cyrl',
+                id: 'cSpellExt_serbian.enableCyrl',
+                title: 'Enable Serbian (Cyrillic) Spell Checker Dictionary',
+            },
+            {
+                action: 'disable',
+                toggle: 'locale',
+                value: 'sr-Cyrl',
+                id: 'cSpellExt_serbian.disableCyrl',
+                title: 'Disable Serbian (Cyrillic) Spell Checker Dictionary',
+            },
+            {
+                action: 'enable',
+                toggle: 'locale',
+                value: 'sr-Cyrl',
+                scope: 'workspace',
+                id: 'cSpellExt_serbian.enableCyrlWorkspace',
+                title: 'Enable Serbian (Cyrillic) Spell Checker Dictionary in Workspace',
+            },
+            {
+                action: 'disable',
+                toggle: 'locale',
+                value: 'sr-Cyrl',
+                scope: 'workspace',
+                id: 'cSpellExt_serbian.disableCyrlWorkspace',
+                title: 'Disable Serbian (Cyrillic) Spell Checker Dictionary in Workspace',
+            },
+        ]);
+        assert.equal(commands.length, 12);
     });
 });
 
@@ -153,6 +210,15 @@ describe('writeExtension', () => {
         assert.deepEqual(config, extensionConfig(swedish));
         const pkg = JSON.parse(await readFile(path.join(destDir, 'package.json'), 'utf8')) as { name: string };
         assert.equal(pkg.name, 'code-spell-checker-swedish');
+    });
+
+    it('writes the GPL text only for the default license', async () => {
+        const logged: string[] = [];
+        const written = await writeExtension(destDir, { ...swedish, license: 'MIT' }, { log: (m) => logged.push(m) });
+        assert.ok(!written.includes('LICENSE'));
+        assert.ok(logged.includes('Add the text of the MIT license to LICENSE.'));
+        const pkg = JSON.parse(await readFile(path.join(destDir, 'package.json'), 'utf8')) as { license: string };
+        assert.equal(pkg.license, 'MIT');
     });
 
     it('never overwrites a file', async () => {

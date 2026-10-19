@@ -15,7 +15,7 @@ export interface AskedQuestion {
  * - An empty or missing answer selects the default, like pressing Enter.
  * - A rejected `input` answer asks the question again, like inquirer.
  * - A `select` answer is the value to pick.
- * - A `search` answer is the text to type; the first match is picked.
+ * - A `checkbox` answer is the list of values to pick; the default is the checked ones.
  */
 export function scriptedPrompter(answers: readonly unknown[]): Prompter & { asked: AskedQuestion[] } {
     const remaining = [...answers];
@@ -47,14 +47,13 @@ export function scriptedPrompter(answers: readonly unknown[]): Prompter & { aske
         return Promise.resolve(choice.value);
     }
 
-    function search<T>(message: string, source: (term: string) => Choice<T>[]): Promise<T> {
-        const question = next(message, '');
-        const term = typeof question.answer === 'string' ? question.answer : '';
-        const choices = source(term);
+    function checkbox<T>(message: string, choices: Choice<T>[]): Promise<T[]> {
+        const question = next(
+            message,
+            choices.filter((c) => c.checked).map((c) => c.value),
+        );
         question.choices = choices.map((c) => c.name);
-        const first = choices[0];
-        if (!first) return Promise.reject(new Error(`Nothing matches "${term}" for: ${message}`));
-        return Promise.resolve(first.value);
+        return Promise.resolve(question.answer as T[]);
     }
 
     return {
@@ -62,7 +61,7 @@ export function scriptedPrompter(answers: readonly unknown[]): Prompter & { aske
         input,
         confirm: (message, defaultValue) => Promise.resolve(next(message, defaultValue).answer === true),
         select,
-        search,
+        checkbox,
     };
 }
 

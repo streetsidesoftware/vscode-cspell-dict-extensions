@@ -11,7 +11,7 @@ function searchUrl(from: number): string {
 const pkg = (name: string, description?: string) => ({ package: { name, description } });
 
 describe('searchPackages', () => {
-    it('reads every page and keeps the packages with the prefix, sorted', async () => {
+    it('reads every page and keeps the packages with the prefixes, sorted', async () => {
         const fetch = fakeFetch({
             [searchUrl(0)]: {
                 total: 300,
@@ -19,18 +19,18 @@ describe('searchPackages', () => {
             },
             [searchUrl(250)]: { total: 300, objects: [pkg('@cspell/dict-bn'), pkg('@cspell/parser-typescript')] },
         });
-        assert.deepEqual(await searchPackages('@cspell/dict-', fetch), [
+        assert.deepEqual(await searchPackages(['@cspell/dict-'], fetch), [
             { name: '@cspell/dict-bn', description: '' },
             { name: '@cspell/dict-sv', description: 'Swedish dictionary for CSpell.' },
         ]);
         assert.deepEqual(
-            (await searchPackages('@cspell/parser-', fetch)).map((p) => p.name),
-            ['@cspell/parser-typescript'],
+            (await searchPackages(['@cspell/dict-', '@cspell/parser-'], fetch)).map((p) => p.name),
+            ['@cspell/dict-bn', '@cspell/dict-sv', '@cspell/parser-typescript'],
         );
     });
 
     it('fails when the registry cannot be reached', async () => {
-        await assert.rejects(searchPackages('@cspell/dict-', fakeFetch({})), /offline/);
+        await assert.rejects(searchPackages(['@cspell/dict-'], fakeFetch({})), /offline/);
     });
 });
 

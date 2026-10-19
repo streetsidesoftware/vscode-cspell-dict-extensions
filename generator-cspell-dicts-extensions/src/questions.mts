@@ -3,49 +3,64 @@ import path from 'node:path';
 import { styleText } from 'node:util';
 
 import { classify, cspellExtUrl, type CSpellExt, type DictionaryInfo, mostSpecificLocale } from './cspellExt.mts';
+import { canonicalLocale, englishLanguageName, languageOf, nativeLanguageName } from './locales.mts';
+import { normalizeName, toFriendlyName } from './names.mts';
 import { type FetchJson, packageInfo, type PackageSummary, searchPackages } from './npm.mts';
-import { canonicalLocale, languageOf, nativeLanguageName } from './locales.mts';
-import { nameFromDescription, nameFromParserPackage, normalizeName, toFriendlyName } from './names.mts';
-import type { Choice, Prompter } from './prompt.mts';
+import type { Prompter } from './prompt.mts';
 
 /**
- * - `dictionary`: wraps a `@cspell/dict-*` package from cspell-dicts.
- * - `parser`: wraps a `@cspell/parser-*` package from cspell-parsers.
+ * The `kind` in `extension.config.json`:
+ * - `language`: a natural language, enabled by its locale.
+ * - `wordList`: a word list, on once installed.
+ * - `parser`: a cspell parser.
  */
-export type Kind = 'dictionary' | 'parser';
-export const kinds: readonly Kind[] = ['dictionary', 'parser'];
+export type Kind = 'language' | 'wordList' | 'parser';
+export const kinds: readonly Kind[] = ['language', 'wordList', 'parser'];
 
-/** The `kind` in `extension.config.json`. A dictionary is a natural language or a word list. */
-export type ConfigKind = 'language' | 'wordList' | 'parser';
+export const defaultLicense = 'GPL-3.0-or-later';
+
+/** One language of an extension with several, i.e. Serbian Cyrillic. */
+export interface Language {
+    /** The language's most specific locale, i.e. `sr-Cyrl`. */
+    locale: string;
+    /** Its name in English, used in the titles of its commands, i.e. `Serbian (Cyrillic)`. */
+    name: string;
+}
 
 export interface Answers {
-    kind: ConfigKind;
-    /** The `@cspell/*` package, i.e. `@cspell/dict-sv`. */
-    packageName: string;
-    /** A language's locale as a BCP 47 tag, i.e. `sv-SE`. Empty for other kinds. */
-    locale: string;
-    /** A language's name in the language itself, i.e. `svenska`. Empty when there is none. */
-    nativeName: string;
     /** The extension directory name and command ID prefix, i.e. `swedish`. */
     name: string;
     friendlyName: string;
+    kind: Kind;
+    /** The `@cspell/*` packages, i.e. `['@cspell/dict-sv']`. */
+    packages: string[];
+    /** A language's locale as a BCP 47 tag, i.e. `sv-SE`. Empty for other kinds. */
+    locale: string;
+    /** Every locale the packages declare, i.e. `['sv', 'sv-SE']`. The disable commands turn them all off. */
+    locales: string[];
+    /** The languages that get their own commands. Empty unless there are several. */
+    languages: Language[];
+    /** A language's name in the language itself, i.e. `svenska`. Empty when there is none. */
+    nativeName: string;
     /** Empty for the default, `<friendlyName> - Code Spell Checker`. */
     displayName: string;
     /** Empty for the default of a language or a word list. A parser has no default. */
     description: string;
+    /** An SPDX license ID. */
+    license: string;
 }
 
 /** Values given on the command line. */
 export interface Options {
-    package?: string | undefined;
+    name?: string | undefined;
+    packages?: string[] | undefined;
     kind?: Kind | undefined;
-    naturalLanguage?: boolean | undefined;
     locale?: string | undefined;
     nativeName?: string | undefined;
-    name?: string | undefined;
     friendlyName?: string | undefined;
     displayName?: string | undefined;
     description?: string | undefined;
+    license?: string | undefined;
     /** Never ask: use the options and defaults, and fail when a required value is missing. */
     yes?: boolean | undefined;
 }
@@ -63,56 +78,60 @@ export interface Context {
 /** A problem with the command line options. */
 export class UsageError extends Error {}
 
-const packagePrefixes: Record<Kind, string> = {
-    dictionary: '@cspell/dict-',
-    parser: '@cspell/parser-',
-};
+const packagePrefixes = ['@cspell/dict-', '@cspell/parser-'] as const;
 
-const notPublished = {
-    dictionary:
-        'Add the dictionary to https://github.com/streetsidesoftware/cspell-dicts first (see its create-dictionary).',
-    parser: 'Add the parser to https://github.com/streetsidesoftware/cspell-parsers first.',
-};
+const notPublished =
+    'Add a dictionary to https://github.com/streetsidesoftware/cspell-dicts, ' +
+    'or a parser to https://github.com/streetsidesoftware/cspell-parsers, first.';
+
+/** What a package is, read from its name and its `cspell-ext.json`. */
+interface PackageKind {
+    name: string;
+    parser: boolean;
+    /** A dictionary's `cspell-ext.json`, when it could be read. */
+    info?: DictionaryInfo | undefined;
+}
 
 /**
  * Ask the questions needed to generate an extension. Values given as options are not asked.
  */
 export async function askQuestions(options: Options, ctx: Context): Promise<Answers> {
-    const { prompter } = ctx;
     const yes = !!options.yes;
 
-    const kind = await askKind(options, ctx);
-    checkOptionsFor(kind, options);
+    const name = await askName(options, ctx);
+    const friendlyName =
+        options.friendlyName ??
+        (yes ? toFriendlyName(name) : await ctx.prompter.input('Friendly name:', toFriendlyName(name)));
 
-    const pkg = await askPackage(kind, options, ctx);
-    let configKind: ConfigKind = 'parser';
-    let locale = '';
-    if (kind === 'dictionary') {
-        const info = await readDictionaryInfo(pkg.name, ctx);
-        if (await askNaturalLanguage(info, options, ctx)) {
-            configKind = 'language';
-            locale = canonicalLocale(await askLocale(info?.locales ?? [], options, ctx));
-        } else {
-            configKind = 'wordList';
+    const packages = await askPackages(name, options, ctx);
+    const kinds = await Promise.all(packages.map((pkg) => readPackageKind(pkg, ctx)));
+    const kind = await askKind(kinds, options, ctx);
+    if (kind !== 'language') {
+        for (const [option, value] of [
+            ['--locale', options.locale],
+            ['--native-name', options.nativeName],
+        ] as const) {
+            if (value !== undefined) throw new UsageError(`${option} only applies to a language.`);
         }
     }
 
-    const name = await askName(kind, pkg, options, ctx);
-
-    const friendlyName =
-        options.friendlyName ??
-        (yes ? toFriendlyName(name) : await prompter.input('Friendly Name:', toFriendlyName(name)));
-    const nativeName = configKind === 'language' ? await askNativeName(locale, options, ctx) : '';
+    const declared = kind === 'language' ? languageLocales(kinds) : [];
+    const locale = kind === 'language' ? await askLocale(declared, options, ctx) : '';
+    const locales = kind === 'language' ? unique([...declared.flat(), locale]) : [];
+    const languages = declared.length > 1 ? await askLanguages(declared, options, ctx) : [];
 
     return {
-        kind: configKind,
-        packageName: pkg.name,
-        locale,
-        nativeName,
         name,
         friendlyName,
-        displayName: options.displayName ?? '',
-        description: configKind === 'parser' ? await askDescription(options, ctx) : (options.description ?? ''),
+        kind,
+        packages,
+        locale,
+        locales,
+        languages,
+        nativeName: kind === 'language' ? await askNativeName(locale, options, ctx) : '',
+        displayName: options.displayName?.trim() ?? '',
+        description: kind === 'parser' ? await askDescription(options, ctx) : (options.description?.trim() ?? ''),
+        license: options.license?.trim() || defaultLicense,
     };
 }
 
@@ -120,90 +139,87 @@ function missing(option: string, why: string): never {
     throw new UsageError(`Missing ${option}: ${why}.`);
 }
 
-/** The kind of a package, from its name. */
-export function kindOfPackage(packageName: string): Kind | undefined {
-    if (packageName.startsWith(packagePrefixes.dictionary)) return 'dictionary';
-    if (packageName.startsWith(packagePrefixes.parser)) return 'parser';
-    return undefined;
-}
-
-async function askKind(options: Options, ctx: Context): Promise<Kind> {
-    const fromPackage = options.package ? kindOfPackage(options.package) : undefined;
-    if (options.package && !fromPackage) {
-        throw new UsageError(
-            `${options.package} is not a @cspell/dict-* or @cspell/parser-* package. ` +
-                `${notPublished.dictionary} ${notPublished.parser}`,
-        );
-    }
-    if (options.kind && fromPackage && options.kind !== fromPackage) {
-        throw new UsageError(`--kind ${options.kind} does not match the package ${options.package}.`);
-    }
-    const kind = options.kind ?? fromPackage;
-    if (kind) return kind;
-    if (options.yes) {
-        return missing('package', 'pass a @cspell/dict-* or @cspell/parser-* package');
-    }
-
-    const choices: Choice<Kind>[] = [
-        {
-            name: 'Dictionary',
-            value: 'dictionary',
-            description: `A @cspell/dict-* package from cspell-dicts. Not published yet? ${notPublished.dictionary}`,
-        },
-        {
-            name: 'Parser',
-            value: 'parser',
-            description: `A @cspell/parser-* package from cspell-parsers. Not published yet? ${notPublished.parser}`,
-        },
-    ];
-    return ctx.prompter.select('What kind of extension?', choices, 'dictionary');
-}
-
-/** Reject options that do not apply to the kind. */
-function checkOptionsFor(kind: Kind, options: Options): void {
-    const notFor = (option: string, what: string): never => {
-        throw new UsageError(`${option} only applies to ${what}.`);
+async function askName(options: Options, ctx: Context): Promise<string> {
+    const check = (name: string): true | string => {
+        if (!name) return 'Please enter a name.';
+        return existsSync(path.join(ctx.extensionsDir, name))
+            ? `extensions/${name} already exists. Choose another name.`
+            : true;
     };
-    if (options.naturalLanguage !== undefined && kind !== 'dictionary') {
-        notFor(options.naturalLanguage ? '--natural-language' : '--no-natural-language', 'a dictionary');
+
+    if (options.name !== undefined) {
+        const name = normalizeName(options.name);
+        const result = check(name);
+        if (result !== true) throw new UsageError(`--name ${options.name}: ${result}`);
+        return name;
     }
-    for (const [option, value] of [
-        ['--locale', options.locale],
-        ['--native-name', options.nativeName],
-    ] as const) {
-        if (value !== undefined && (kind === 'parser' || options.naturalLanguage === false)) {
-            notFor(option, 'a natural language dictionary');
-        }
-    }
+    if (options.yes) return missing('--name', 'the extension name, i.e. swedish');
+
+    const answer = await ctx.prompter.input(
+        'Extension name, i.e. "swedish" (the directory in extensions/ and the command ID prefix):',
+        undefined,
+        (text) => check(normalizeName(text)),
+    );
+    return normalizeName(answer);
 }
 
-async function askPackage(kind: Kind, options: Options, ctx: Context): Promise<PackageSummary> {
-    const prefix = packagePrefixes[kind];
-    if (options.package) return checkPackage(options.package, kind, ctx);
-    if (options.yes) return missing('package', 'pass a @cspell/dict-* or @cspell/parser-* package');
+/**
+ * The packages the extension wraps. Interactively, the packages that match the extension name are offered first, and
+ * the person can search with other words.
+ */
+async function askPackages(name: string, options: Options, ctx: Context): Promise<string[]> {
+    if (options.packages?.length) {
+        for (const pkg of options.packages) await checkPackage(pkg, ctx);
+        return unique(options.packages);
+    }
+    if (options.yes) return missing('--package', 'a @cspell/dict-* or @cspell/parser-* package');
 
     let list: PackageSummary[] | undefined;
     try {
-        list = await searchPackages(prefix, ctx.fetchJson);
+        list = await searchPackages(packagePrefixes, ctx.fetchJson);
     } catch (e) {
-        ctx.log(styleText('yellow', `Could not search npm (${errorMessage(e)}). Type the package name instead.`));
+        ctx.log(styleText('yellow', `Could not search npm (${errorMessage(e)}). Type the package names instead.`));
     }
 
     if (!list?.length) {
-        const typed = await ctx.prompter.input(`Package name (${prefix}<name>):`, undefined, (answer) =>
-            answer.trim().startsWith(prefix) ? true : `The package name starts with ${prefix}`,
-        );
-        return checkPackage(typed.trim(), kind, ctx);
+        const typed = await ctx.prompter.input('Package names, separated by commas:', undefined, (answer) => {
+            const names = splitList(answer);
+            if (!names.length) return 'Please enter at least one package.';
+            const wrong = names.find((pkg) => !isCSpellPackage(pkg));
+            return wrong ? `${wrong} is not a @cspell/dict-* or @cspell/parser-* package.` : true;
+        });
+        const packages = unique(splitList(typed));
+        for (const pkg of packages) await checkPackage(pkg, ctx);
+        return packages;
     }
 
-    const packages = list;
-    return ctx.prompter.search(`Search for the ${kind} (type a language or topic):`, (term) =>
-        filterPackages(packages, term, ctx.existing).map((pkg) => ({
-            name: pkg.name + (ctx.existing.has(pkg.name) ? styleText('gray', ' (has an extension)') : ''),
-            value: pkg,
-            description: pkg.description,
-        })),
-    );
+    const picked: string[] = [];
+    let term = name.replaceAll('-', ' ');
+    for (;;) {
+        const matches = filterPackages(list, term, ctx.existing).filter((pkg) => !picked.includes(pkg.name));
+        if (!matches.length) {
+            ctx.log(`No package matches "${term}".`);
+        } else {
+            const chosen = await ctx.prompter.checkbox(
+                `Packages that match "${term}":`,
+                matches.map((pkg) => ({
+                    name: pkg.name + (ctx.existing.has(pkg.name) ? styleText('gray', ' (has an extension)') : ''),
+                    value: pkg.name,
+                    description: pkg.description,
+                    checked: true,
+                })),
+            );
+            picked.push(...chosen);
+        }
+        if (picked.length && !(await ctx.prompter.confirm('Search for more packages?', false))) return picked;
+        term = await ctx.prompter.input('Search for packages (a language or topic):', undefined, (text) =>
+            text.trim() ? true : 'Please enter a word to search for.',
+        );
+    }
+}
+
+function isCSpellPackage(name: string): boolean {
+    return packagePrefixes.some((prefix) => name.startsWith(prefix));
 }
 
 /**
@@ -223,55 +239,110 @@ export function filterPackages(
 }
 
 /** Check that the package exists. Without a network connection, continue: `npm install` checks it later. */
-async function checkPackage(name: string, kind: Kind, ctx: Context): Promise<PackageSummary> {
-    let info: PackageSummary | undefined;
+async function checkPackage(name: string, ctx: Context): Promise<void> {
+    if (!isCSpellPackage(name)) {
+        throw new UsageError(`${name} is not a @cspell/dict-* or @cspell/parser-* package. ${notPublished}`);
+    }
     try {
-        info = await packageInfo(name, ctx.fetchJson);
+        if (!(await packageInfo(name, ctx.fetchJson)))
+            throw new UsageError(`${name} was not found on npm. ${notPublished}`);
     } catch (e) {
+        if (e instanceof UsageError) throw e;
         ctx.log(styleText('yellow', `Could not check ${name} on npm (${errorMessage(e)}).`));
-        return { name, description: '' };
     }
-    if (!info) throw new UsageError(`${name} was not found on npm. ${notPublished[kind]}`);
-    return info;
 }
 
-async function readDictionaryInfo(packageName: string, ctx: Context): Promise<DictionaryInfo | undefined> {
+async function readPackageKind(name: string, ctx: Context): Promise<PackageKind> {
+    if (name.startsWith('@cspell/parser-')) return { name, parser: true };
     try {
-        return classify((await ctx.fetchJson(cspellExtUrl(packageName))) as CSpellExt);
+        return { name, parser: false, info: classify((await ctx.fetchJson(cspellExtUrl(name))) as CSpellExt) };
     } catch (e) {
-        ctx.log(styleText('yellow', `Could not read the cspell-ext.json of ${packageName} (${errorMessage(e)}).`));
-        return undefined;
+        ctx.log(styleText('yellow', `Could not read the cspell-ext.json of ${name} (${errorMessage(e)}).`));
+        return { name, parser: false };
     }
 }
 
-async function askNaturalLanguage(info: DictionaryInfo | undefined, options: Options, ctx: Context): Promise<boolean> {
-    if (options.naturalLanguage !== undefined) return options.naturalLanguage;
-    if (options.locale) return true;
-    if (options.yes) {
-        return info
-            ? info.naturalLanguage
-            : missing('--natural-language or --no-natural-language', 'the cspell-ext.json could not be read');
+/**
+ * The kind, from the packages: a parser when they are all parsers, a language when any dictionary is a natural
+ * language, and otherwise a word list.
+ */
+async function askKind(packages: PackageKind[], options: Options, ctx: Context): Promise<Kind> {
+    const parsers = packages.filter((pkg) => pkg.parser).length;
+    if (parsers && parsers < packages.length) {
+        throw new UsageError('An extension wraps either parsers or dictionaries, not both.');
     }
-    return ctx.prompter.confirm(
-        'Is it a natural language dictionary? (Enabled by locale, rather than a word list.)',
-        info?.naturalLanguage ?? true,
+    if (parsers) {
+        if (options.kind && options.kind !== 'parser') {
+            throw new UsageError(`--kind ${options.kind} does not match the parser packages.`);
+        }
+        return 'parser';
+    }
+    if (options.kind === 'parser') throw new UsageError('--kind parser does not match the dictionary packages.');
+    if (options.kind) return options.kind;
+
+    const known = packages.every((pkg) => pkg.info);
+    const derived: Kind = packages.some((pkg) => pkg.info?.naturalLanguage) ? 'language' : 'wordList';
+    if (options.yes) return known ? derived : missing('--kind', 'the cspell-ext.json could not be read');
+    return ctx.prompter.select(
+        'What kind of extension?',
+        [
+            { name: 'Language', value: 'language', description: 'A natural language, enabled by its locale.' },
+            { name: 'Word list', value: 'wordList', description: 'A word list, on once installed.' },
+        ],
+        derived,
     );
 }
 
-async function askLocale(locales: string[], options: Options, ctx: Context): Promise<string> {
-    if (options.locale) return options.locale;
-    const best = mostSpecificLocale(locales);
-    if (options.yes) return best ?? missing('--locale', 'the dictionary does not declare a locale');
-    if (!best) {
-        return ctx.prompter.input('Locale to enable (i.e. "sv" or "fr-90"):', undefined, (answer) =>
-            answer.trim() ? true : 'Please enter a locale.',
+/** The locales of each natural language package, as BCP 47 tags. */
+function languageLocales(packages: PackageKind[]): string[][] {
+    return packages
+        .map((pkg) => unique((pkg.info?.locales ?? []).map(canonicalLocale)))
+        .filter((locales) => locales.length);
+}
+
+/**
+ * The locale that enables the language. The default is the most specific locale every package declares, i.e. `sv-SE`
+ * for `sv,sv_SE`, and `sr` for Serbian Cyrillic (`sr,sr-Cyrl`) with Serbian Latin (`sr,sr-Latn`).
+ */
+async function askLocale(declared: string[][], options: Options, ctx: Context): Promise<string> {
+    if (options.locale) return canonicalLocale(options.locale);
+    const shared = declared.reduce<string[]>(
+        (common, locales) => common.filter((locale) => locales.includes(locale)),
+        declared[0] ?? [],
+    );
+    const best = mostSpecificLocale(shared);
+    if (options.yes) return best ?? missing('--locale', 'the packages share no locale');
+    const all = unique(declared.flat());
+    if (!all.length) {
+        const answer = await ctx.prompter.input('Locale that enables the language, i.e. "sv-SE":', undefined, (text) =>
+            text.trim() ? true : 'Please enter a locale.',
         );
+        return canonicalLocale(answer);
     }
     return ctx.prompter.select(
-        'Locale for the enable / disable commands (the most specific one avoids enabling other dictionaries):',
-        locales.map((locale) => ({ name: locale, value: locale })),
+        'Locale that enables the language:',
+        all.map((locale) => ({ name: locale, value: locale })),
         best,
     );
+}
+
+/**
+ * With several language packages, each gets its own commands, named after its most specific locale: `sr-Cyrl` is
+ * `Serbian (Cyrillic)`.
+ */
+async function askLanguages(declared: string[][], options: Options, ctx: Context): Promise<Language[]> {
+    const languages: Language[] = [];
+    for (const locales of declared) {
+        const locale = mostSpecificLocale(locales) ?? '';
+        const suggested = englishLanguageName(locale) ?? locale;
+        const name = options.yes
+            ? suggested
+            : await ctx.prompter.input(`Name of ${locale} in its command titles:`, suggested, (text) =>
+                  text.trim() ? true : 'Please enter a name.',
+              );
+        languages.push({ locale, name: name.trim() });
+    }
+    return languages;
 }
 
 /**
@@ -300,37 +371,15 @@ async function askDescription(options: Options, ctx: Context): Promise<string> {
     return answer.trim();
 }
 
-async function askName(kind: Kind, pkg: PackageSummary, options: Options, ctx: Context): Promise<string> {
-    const check = (name: string): true | string => {
-        if (!name) return 'Please enter a name.';
-        return existsSync(path.join(ctx.extensionsDir, name))
-            ? `extensions/${name} already exists. Choose another name.`
-            : true;
-    };
+function splitList(text: string): string[] {
+    return text
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean);
+}
 
-    if (options.name !== undefined) {
-        const name = normalizeName(options.name);
-        const result = check(name);
-        if (result !== true) throw new UsageError(`--name ${options.name}: ${result}`);
-        return name;
-    }
-
-    const derived = kind === 'parser' ? nameFromParserPackage(pkg.name) : nameFromDescription(pkg.description);
-    if (options.yes) {
-        if (!derived) {
-            return missing('--name', 'no name could be derived');
-        }
-        const result = check(derived);
-        if (result !== true) throw new UsageError(`${result} Pass --name.`);
-        return derived;
-    }
-
-    const answer = await ctx.prompter.input(
-        'Extension name (the directory in extensions/ and the command ID prefix):',
-        derived || undefined,
-        (text) => check(normalizeName(text)),
-    );
-    return normalizeName(answer);
+function unique<T>(values: T[]): T[] {
+    return [...new Set(values)];
 }
 
 function errorMessage(e: unknown): string {

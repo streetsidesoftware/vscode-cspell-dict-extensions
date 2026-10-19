@@ -4,12 +4,12 @@ import path from 'node:path';
 
 import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/src/config.ts';
 import { languageOf } from './locales.mts';
-import type { Answers } from './questions.mts';
+import { type Answers, defaultLicense, type Language } from './questions.mts';
 
 export const templateDir: string = path.join(import.meta.dirname, '..', 'templates');
 
-/** Files copied as is from the generator's `templates` directory. */
-const copies = ['LICENSE', 'images/SpellCheck.png'];
+/** Files copied as is from the generator's `templates` directory. `LICENSE` holds the text of the default license. */
+const copies = ['images/SpellCheck.png'];
 
 /** The sample the VS Code test opens. */
 const sample = 'samples/seattle.md';
@@ -48,7 +48,9 @@ export async function writeExtension(destDir: string, answers: Answers, options:
     for (const [file, content] of files) {
         await create(file, (dest) => writeFile(dest, content, { flag: 'wx' }));
     }
-    for (const file of copies) {
+    const licenseText = answers.license === defaultLicense ? ['LICENSE'] : [];
+    if (!licenseText.length) log(`Add the text of the ${answers.license} license to LICENSE.`);
+    for (const file of [...licenseText, ...copies]) {
         await create(file, (dest) => copyFile(path.join(srcDir, file), dest, constants.COPYFILE_EXCL));
     }
     return written;
@@ -63,13 +65,15 @@ function json(value: unknown): string {
  * only written when they are given.
  */
 export function extensionConfig(answers: Answers): ExtensionConfig {
-    const { kind, packageName } = answers;
+    const { kind, packages } = answers;
     const optional = (key: string, value: string) => (value ? { [key]: value } : {});
     const head = { $schema: '../../static/extension.config.schema.json', name: answers.name };
     const names = { friendlyName: answers.friendlyName, ...optional('displayName', answers.displayName) };
     const tail = {
         sample,
-        cspell: { import: [kind === 'parser' ? `${packageName}/recommended` : `${packageName}/cspell-ext.json`] },
+        cspell: {
+            import: packages.map((pkg) => (kind === 'parser' ? `${pkg}/recommended` : `${pkg}/cspell-ext.json`)),
+        },
     };
     switch (kind) {
         case 'language':
@@ -81,7 +85,7 @@ export function extensionConfig(answers: Answers): ExtensionConfig {
                 locale: answers.locale,
                 ...optional('description', answers.description),
                 ...tail,
-                commands: localeCommands(answers.locale),
+                commands: localeCommands(answers),
             };
         case 'wordList':
             return { ...head, kind, ...names, ...optional('description', answers.description), ...tail, commands: [] };
@@ -91,16 +95,45 @@ export function extensionConfig(answers: Answers): ExtensionConfig {
 }
 
 /**
- * Enable the locale, and disable it together with its language, globally and in the workspace, as most language
- * extensions do: `sv-SE` is enabled with `sv-SE`, and disabled with `sv,sv-SE`.
+ * Enable the locale, and disable every locale the packages declare, globally and in the workspace: `sv-SE` is enabled
+ * with `sv-SE` and disabled with `sv,sv-SE`. With several languages, each also gets its own commands.
  */
-export function localeCommands(locale: string): CommandConfig[] {
-    const language = languageOf(locale);
-    const disable = language === locale ? locale : `${language},${locale}`;
-    return (['global', 'workspace'] as const).flatMap((scope) => [
-        { action: 'enable', toggle: 'locale', value: locale, ...(scope === 'workspace' ? { scope } : {}) },
-        { action: 'disable', toggle: 'locale', value: disable, ...(scope === 'workspace' ? { scope } : {}) },
+export function localeCommands(answers: Pick<Answers, 'name' | 'locale' | 'locales' | 'languages'>): CommandConfig[] {
+    const disable = answers.locales.join(',');
+    const main = scopes.flatMap((scope): CommandConfig[] => [
+        { action: 'enable', toggle: 'locale', value: answers.locale, ...workspace(scope) },
+        { action: 'disable', toggle: 'locale', value: disable, ...workspace(scope) },
     ]);
+    return [...main, ...answers.languages.flatMap((language) => languageCommands(answers.name, language))];
+}
+
+const scopes = ['global', 'workspace'] as const;
+
+function workspace(scope: (typeof scopes)[number]): { scope?: 'workspace' } {
+    return scope === 'workspace' ? { scope } : {};
+}
+
+/**
+ * The commands of one language, i.e. `cSpellExt_serbian.enableCyrl` titled `Enable Serbian (Cyrillic) Spell Checker
+ * Dictionary`. The ID ends with the locale's subtags after the language, or the language when there are none.
+ */
+export function languageCommands(name: string, language: Language): CommandConfig[] {
+    const subtags = language.locale.split('-').slice(1).join('') || languageOf(language.locale);
+    const suffix = subtags.slice(0, 1).toUpperCase() + subtags.slice(1);
+    return scopes.flatMap((scope) =>
+        (['enable', 'disable'] as const).map((action): CommandConfig => {
+            const inWorkspace = scope === 'workspace' ? 'Workspace' : '';
+            const verb = action === 'enable' ? 'Enable' : 'Disable';
+            return {
+                action,
+                toggle: 'locale',
+                value: language.locale,
+                ...workspace(scope),
+                id: `cSpellExt_${name}.${action}${suffix}${inWorkspace}`,
+                title: `${verb} ${language.name} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
+            };
+        }),
+    );
 }
 
 /**
@@ -111,7 +144,7 @@ export function packageJson(answers: Answers): Record<string, unknown> {
     return {
         name: `code-spell-checker-${answers.name}`,
         version: '0.0.1',
-        license: 'GPL-3.0-or-later',
+        license: answers.license,
         icon: 'images/SpellCheck.png',
         sponsor: { url: 'https://github.com/sponsors/streetsidesoftware' },
         extensionKind: ['workspace'],

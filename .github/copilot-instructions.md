@@ -25,7 +25,7 @@
   - `npm run lint:code` → runs oxlint with type-aware rules; warnings fail the check
   - `npm run check-types` → type-checks `test-runner` and the generator
   - `npm run test:cspell` → runs sample spelling checks across extensions
-  - `npm run create:extension` → create a new extension (dictionary or parser); run it without prompts with `npm run create:extension -- <package> --yes`, i.e. `@cspell/dict-sv` (a parser also needs `--description`). See `generator-cspell-dicts-extensions/README.md` for the options.
+  - `npm run create:extension` → create a new extension (dictionary or parser); run it without prompts with `npm run create:extension -- <name> --package <package> --yes`, i.e. `swedish --package @cspell/dict-sv` (repeat `--package` for several; a parser also needs `--description`). See `generator-cspell-dicts-extensions/README.md` for the options.
   - `npm run gen:readme` → regenerate workspace metadata, extension lists, README injections, and normalize extension manifests
   - `npm run gen:release-please` → regenerate release-please config
   - `npm run gen:workflow` → regenerate the extension choice lists in `.github/workflows/manual-publish.yml` and `set-prerelease.yml`
@@ -38,7 +38,7 @@
   - `npm run test:vscode`
 - Use root-level commands only when you need cross-repo validation or you changed shared tooling/scripts.
 - Prefer `rg`/`glob` over opening the whole monorepo; there are many nearly identical extension packages.
-- If the task is “add a new dictionary extension” (or parser extension), run the generator with the package and `--yes`. If the suggested name is taken, look at that extension first: it may already wrap the package. Pass `--name` to choose another name, then review the generated files instead of creating files manually. Replace the sample text in `samples/seattle.md` with text in the extension's language.
+- If the task is “add a new dictionary extension” (or parser extension), run the generator with the name, the packages and `--yes`. If the name is taken, look at that extension first: it may already wrap the package. Then review the generated files instead of creating files manually. Replace the sample text in `samples/seattle.md` with text in the extension's language.
 - If the task is “add words to an existing language”, check whether the real source of truth is upstream in `streetsidesoftware/cspell-dicts`; `CONTRIBUTING.md` explicitly says many dictionary word additions belong there first.
 
 ## Generated or normalized files

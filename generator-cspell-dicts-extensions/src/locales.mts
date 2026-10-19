@@ -17,6 +17,19 @@ export function languageOf(locale: string): string {
 }
 
 /**
+ * The English name of a locale, i.e. `Serbian (Cyrillic)` for `sr-Cyrl`.
+ * @returns `undefined` when `Intl` doesn't know the locale.
+ */
+export function englishLanguageName(locale: string): string | undefined {
+    try {
+        const name = new Intl.DisplayNames(['en'], { type: 'language', fallback: 'none' }).of(locale);
+        return name && name !== locale ? name : undefined;
+    } catch {
+        return undefined;
+    }
+}
+
+/**
  * The name of a language in the language itself, i.e. `svenska` for `sv`.
  * @returns `undefined` when `Intl` doesn't know the language.
  */

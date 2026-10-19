@@ -41,16 +41,19 @@ interface SearchResult {
 }
 
 /**
- * List the `@cspell/*` packages whose names start with `prefix`, i.e. `@cspell/dict-`.
+ * List the `@cspell/*` packages whose names start with one of `prefixes`, i.e. `@cspell/dict-`.
  */
-export async function searchPackages(prefix: string, fetch: FetchJson = fetchJson): Promise<PackageSummary[]> {
+export async function searchPackages(
+    prefixes: readonly string[],
+    fetch: FetchJson = fetchJson,
+): Promise<PackageSummary[]> {
     const found = new Map<string, PackageSummary>();
     for (let page = 0; page < maxPages; page++) {
         const from = page * pageSize;
         const url = `${registry}/-/v1/search?text=${encodeURIComponent(searchText)}&size=${pageSize}&from=${from}`;
         const result = (await fetch(url)) as SearchResult;
         for (const { package: pkg } of result.objects) {
-            if (!pkg.name.startsWith(prefix)) continue;
+            if (!prefixes.some((prefix) => pkg.name.startsWith(prefix))) continue;
             found.set(pkg.name, { name: pkg.name, description: pkg.description ?? '' });
         }
         if (from + pageSize >= result.total) break;
