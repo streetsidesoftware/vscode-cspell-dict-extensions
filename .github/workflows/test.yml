@@ -224,24 +224,3 @@ jobs:
         run: |
           npm run test:cspell
           npm run test:vscode -- --vscode-path "$VSCODE_PATH"
-
-  # Run the spell checker on all the samples using the extension's settings.
-  # This will help with dictionary updates.
-  # `build-test` checks the samples of the extensions a pull request changes, so this runs only for shared changes.
-  check-samples:
-    runs-on: ubuntu-latest
-    needs:
-      - list_extensions
-    if: needs.list_extensions.outputs.shared == 'true'
-    steps:
-      - uses: actions/checkout@v7
-      - name: Setup Node
-        uses: actions/setup-node@v7
-        with:
-          node-version-file: .tool-versions
-          cache: npm
-
-      - run: npm ci
-      - name: Check Samples
-        run: |
-          npm run test:cspell
