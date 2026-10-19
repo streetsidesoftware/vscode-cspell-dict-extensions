@@ -32,6 +32,17 @@ describe('classify', () => {
         ]);
     });
 
+    it('reads languageId and locale given as arrays', () => {
+        assert.deepEqual(classify({ languageSettings: [{ languageId: ['*'], locale: ['sv', 'sv_SE'] }] }).locales, [
+            'sv',
+            'sv_SE',
+        ]);
+        assert.equal(
+            classify({ languageSettings: [{ languageId: ['html', 'css'], locale: '*' }] }).naturalLanguage,
+            false,
+        );
+    });
+
     it('finds the names of other dictionaries', () => {
         assert.deepEqual(classify(medicalterms), {
             naturalLanguage: false,

@@ -5,7 +5,8 @@
 /** The parts of a `cspell-ext.json` that matter here. */
 export interface CSpellExt {
     dictionaryDefinitions?: { name?: string }[];
-    languageSettings?: { languageId?: string; locale?: string }[];
+    // cspell takes a comma-separated list or an array.
+    languageSettings?: { languageId?: string | string[]; locale?: string | string[] }[];
 }
 
 export interface DictionaryInfo {
@@ -26,15 +27,20 @@ export interface DictionaryInfo {
  */
 export function classify(cspellExt: CSpellExt): DictionaryInfo {
     const dictionaries = (cspellExt.dictionaryDefinitions ?? []).flatMap((def) => (def.name ? [def.name] : []));
-    const setting = (cspellExt.languageSettings ?? []).find(
-        (ls) => ls.languageId === '*' && !!ls.locale && ls.locale.trim() !== '*',
-    );
     const locales =
-        setting?.locale
-            ?.split(',')
-            .map((locale) => locale.trim())
-            .filter(Boolean) ?? [];
+        (cspellExt.languageSettings ?? [])
+            .filter((ls) => splitList(ls.languageId).includes('*'))
+            .map((ls) => splitList(ls.locale).filter((locale) => locale !== '*'))
+            .find((list) => list.length) ?? [];
     return { naturalLanguage: locales.length > 0, locales, dictionaries };
+}
+
+function splitList(list: string | string[] | undefined): string[] {
+    return [list ?? '']
+        .flat()
+        .flatMap((item) => item.split(','))
+        .map((item) => item.trim())
+        .filter(Boolean);
 }
 
 /**
