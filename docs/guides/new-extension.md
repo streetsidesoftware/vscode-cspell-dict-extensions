@@ -35,11 +35,25 @@ npm run list:packages -- --missing   # the packages no extension includes yet
 
 ## Create an extension
 
-The package must be published first. If it isn't, add it to cspell-dicts or cspell-parsers.
+<!--- @@inject: ../templates/package-must-be-published.md --->
+
+The package must be published first. To create a dictionary, see [Creating a dictionary](https://github.com/streetsidesoftware/cspell-dicts/blob/main/docs/guides/new-dictionary.md) in cspell-dicts. To create a parser, see [Adding a parser package](https://github.com/streetsidesoftware/cspell-parsers/blob/main/docs/guides/new-parser-package.md) in cspell-parsers.
+
+<!--- @@inject-end: ../templates/package-must-be-published.md --->
+
+<!--- @@inject: ../templates/prerequisites.md#values-file=:../../package.json --->
+
+You need:
+
+- [git](https://git-scm.com)
+- [VS Code](https://code.visualstudio.com)
+- [Node.js](https://nodejs.org) `>=24.11.0`
+
+<!--- @@inject-end: ../templates/prerequisites.md#values-file=:../../package.json --->
 
 Follow these steps in order:
 
-1. **Install.** You need git, VS Code and Node.js. Use the Node.js version in [`.tool-versions`](../../.tool-versions). Fork and clone the repository. Then, in its root, run `npm ci`.
+1. **Install.** Fork and clone the repository. Then, in its root, run `npm ci`.
 
 2. **Run the generator.** It asks a few questions, then creates the extension.
 

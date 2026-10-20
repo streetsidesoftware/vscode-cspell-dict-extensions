@@ -9,7 +9,17 @@ level: any
 > [!NOTE]
 > Where to start, for anyone who wants to change this repository.
 
-Contributions are very welcome. The steps work on Windows (PowerShell), macOS and Linux, and only need Node.js.
+Contributions are very welcome. The steps work on Windows (PowerShell), macOS and Linux.
+
+<!--- @@inject: ./docs/templates/prerequisites.md#values-file=:./package.json --->
+
+You need:
+
+- [git](https://git-scm.com)
+- [VS Code](https://code.visualstudio.com)
+- [Node.js](https://nodejs.org) `>=24.11.0`
+
+<!--- @@inject-end: ./docs/templates/prerequisites.md#values-file=:./package.json --->
 
 ## Docs
 
