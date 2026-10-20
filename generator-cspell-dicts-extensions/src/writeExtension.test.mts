@@ -6,7 +6,14 @@ import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import type { Answers } from './questions.mts';
 import type { Sample } from './sample.mts';
-import { extensionConfig, localeCommands, readme, sampleConfig, writeExtension } from './writeExtension.mts';
+import {
+    dictionaryCommands,
+    extensionConfig,
+    localeCommands,
+    readme,
+    sampleConfig,
+    writeExtension,
+} from './writeExtension.mts';
 
 const seattle: Sample = { file: 'samples/seattle.md', text: '# Seattle\n\nText.\n' };
 
@@ -184,6 +191,37 @@ describe('readme', () => {
         assert.ok(!markers(readme(parser)).includes('./static/dictionaries.json#markdown'));
         assert.match(readme(swedish), /^# Swedish - Code Spell Checker\n/);
         assert.match(readme({ ...swedish, displayName: 'Svenska' }), /^# Svenska\n/);
+    });
+});
+
+describe('dictionaryCommands', () => {
+    it('turns one dictionary on and off, globally and in the workspace, with the default IDs', () => {
+        assert.deepEqual(dictionaryCommands('vim', ['vim']), [
+            { action: 'enable', toggle: 'dictionary', value: 'vim' },
+            { action: 'disable', toggle: 'dictionary', value: 'vim' },
+            { action: 'enable', toggle: 'dictionary', value: 'vim', scope: 'workspace' },
+            { action: 'disable', toggle: 'dictionary', value: 'vim', scope: 'workspace' },
+        ]);
+    });
+
+    it('names the commands after each dictionary when there are several', () => {
+        const commands = dictionaryCommands('demo', ['vim', 'vim-script']);
+        assert.deepEqual(
+            commands.map((c) => [c.id, c.title]),
+            [
+                ['cSpellExt_demo.enableVim', 'Enable vim Spell Checker Dictionary'],
+                ['cSpellExt_demo.disableVim', 'Disable vim Spell Checker Dictionary'],
+                ['cSpellExt_demo.enableVimWorkspace', 'Enable vim Spell Checker Dictionary in Workspace'],
+                ['cSpellExt_demo.disableVimWorkspace', 'Disable vim Spell Checker Dictionary in Workspace'],
+                ['cSpellExt_demo.enableVimScript', 'Enable vim-script Spell Checker Dictionary'],
+                ['cSpellExt_demo.disableVimScript', 'Disable vim-script Spell Checker Dictionary'],
+                ['cSpellExt_demo.enableVimScriptWorkspace', 'Enable vim-script Spell Checker Dictionary in Workspace'],
+                [
+                    'cSpellExt_demo.disableVimScriptWorkspace',
+                    'Disable vim-script Spell Checker Dictionary in Workspace',
+                ],
+            ],
+        );
     });
 });
 

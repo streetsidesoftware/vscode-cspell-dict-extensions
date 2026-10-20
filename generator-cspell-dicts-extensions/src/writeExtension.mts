@@ -60,7 +60,7 @@ export async function writeExtension(
     return written;
 }
 
-function json(value: unknown): string {
+export function json(value: unknown): string {
     return JSON.stringify(value, null, 4) + '\n';
 }
 
@@ -137,6 +137,34 @@ export function languageCommands(name: string, language: Language): CommandConfi
                 title: `${verb} ${language.name} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
             };
         }),
+    );
+}
+
+/**
+ * Turn on and off the dictionaries that nothing turns on, globally and in the workspace. One dictionary gets the
+ * default IDs and titles; with several, each gets its own, i.e. `cSpellExt_vim.enableVimScript` and `Enable vim-script
+ * Spell Checker Dictionary`.
+ * @param dictionaries - the dictionary names, i.e. `['vim']`.
+ */
+export function dictionaryCommands(name: string, dictionaries: readonly string[]): CommandConfig[] {
+    return dictionaries.flatMap((dictionary) =>
+        scopes.flatMap((scope) =>
+            (['enable', 'disable'] as const).map((action): CommandConfig => {
+                const command: CommandConfig = { action, toggle: 'dictionary', value: dictionary, ...workspace(scope) };
+                if (dictionaries.length === 1) return command;
+                const inWorkspace = scope === 'workspace' ? 'Workspace' : '';
+                const verb = action === 'enable' ? 'Enable' : 'Disable';
+                const suffix = dictionary
+                    .split(/[^\p{L}\p{N}]+/u)
+                    .map((part) => part.slice(0, 1).toUpperCase() + part.slice(1))
+                    .join('');
+                return {
+                    ...command,
+                    id: `cSpellExt_${name}.${action}${suffix}${inWorkspace}`,
+                    title: `${verb} ${dictionary} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
+                };
+            }),
+        ),
     );
 }
 

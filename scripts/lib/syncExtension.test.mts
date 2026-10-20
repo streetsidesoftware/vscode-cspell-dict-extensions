@@ -5,7 +5,7 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import { createExtensionConfigValidator, generateExtensionSchema } from './extensionSchema.mts';
-import { type FileChange, syncExtension } from './syncExtension.mts';
+import { dictionariesOff, type FileChange, syncExtension } from './syncExtension.mts';
 
 const config = {
     name: 'demo',
@@ -158,7 +158,13 @@ describe('syncExtension', () => {
 
     it('lists the file types that turn each dictionary on for the other kinds', async () => {
         await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
-            dictionaryDefinitions: [{ name: 'c-only' }, { name: 'web' }, { name: 'any' }, { name: 'always' }],
+            dictionaryDefinitions: [
+                { name: 'c-only' },
+                { name: 'web' },
+                { name: 'any' },
+                { name: 'always' },
+                { name: 'off' },
+            ],
             dictionaries: ['always'],
             languageSettings: [
                 { languageId: 'c,cpp', locale: '*', dictionaries: ['c-only'] },
@@ -175,7 +181,9 @@ describe('syncExtension', () => {
             { Dictionary: '`web`', 'File types': '`html`, `css`' },
             { Dictionary: '`any`', 'File types': 'all' },
             { Dictionary: '`always`', 'File types': 'all' },
+            { Dictionary: '`off`', 'File types': 'off until turned on' },
         ]);
+        assert.deepEqual(await dictionariesOff(dir, await readJson('extension.config.json')), ['off']);
     });
 
     it('has no static/dictionaries.json for a bundle', async () => {

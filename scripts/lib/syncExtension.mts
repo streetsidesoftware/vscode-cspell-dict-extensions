@@ -210,8 +210,14 @@ interface DictionaryExt {
     engines?: Record<string, string>;
     dictionaryDefinitions?: { name: string }[];
     dictionaries?: string[];
+    languageSettings?: LanguageSetting[];
+}
+
+interface LanguageSetting {
     // cspell takes a comma-separated list or an array.
-    languageSettings?: { languageId?: string | string[]; locale?: string | string[]; dictionaries?: string[] }[];
+    languageId?: string | string[];
+    locale?: string | string[];
+    dictionaries?: string[];
 }
 
 /** The `cspell-ext.json` of each dictionary in `cspell.import`, read from the extension's `node_modules`. */
@@ -235,28 +241,53 @@ async function readDictionaries(extensionDir: string, config: ExtensionConfig): 
 /**
  * The dictionaries the extension adds, as table rows, injected into the README with
  * `<!--- @@inject-table: ./static/dictionaries.json --->`. A language lists the locales that turn each dictionary on;
- * the other kinds list the file types.
+ * the other kinds list the file types, or that a dictionary is off until turned on, i.e. by the extension's commands.
  * @returns `undefined` for a bundle, or when the dictionaries define nothing.
  */
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
     const rows: Record<string, string>[] = [];
-    for (const ext of await readDictionaries(extensionDir, config)) {
+    const exts = await readDictionaries(extensionDir, config);
+    for (const ext of exts) {
         for (const { name } of ext.dictionaryDefinitions ?? []) {
-            const settings = (ext.languageSettings ?? []).filter((s) => s.dictionaries?.includes(name));
-            const always = ext.dictionaries?.includes(name) ?? false;
-            if (!settings.length && !always) continue;
+            const { settings, always } = turnedOnBy(name, [...exts, config.cspell as DictionaryExt]);
+            const off = !settings.length && !always;
             if (config.kind === 'language') {
+                if (off) continue;
                 const locales = unique(settings.flatMap((s) => splitList(s.locale)).map(canonicalLocale));
                 rows.push({ Dictionary: code(name), Locales: locales.map(code).join(', ') });
             } else {
                 const ids = unique(settings.flatMap((s) => splitList(s.languageId)));
                 const all = always || !ids.length || ids.includes('*');
-                rows.push({ Dictionary: code(name), 'File types': all ? 'all' : ids.map(code).join(', ') });
+                const fileTypes = off ? 'off until turned on' : all ? 'all' : ids.map(code).join(', ');
+                rows.push({ Dictionary: code(name), 'File types': fileTypes });
             }
         }
     }
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
+}
+
+/**
+ * The dictionaries in `cspell.import` that nothing turns on: neither the dictionaries' own settings nor the
+ * extension's `cspell`. Users turn them on in their settings, or with the extension's commands.
+ */
+export async function dictionariesOff(extensionDir: string, config: ExtensionConfig): Promise<string[]> {
+    const exts = await readDictionaries(extensionDir, config);
+    return exts
+        .flatMap((ext) => ext.dictionaryDefinitions ?? [])
+        .map(({ name }) => name)
+        .filter((name) => {
+            const { settings, always } = turnedOnBy(name, [...exts, config.cspell as DictionaryExt]);
+            return !settings.length && !always;
+        });
+}
+
+/** What turns a dictionary on: the language settings that list it, and whether `dictionaries` does, for every file. */
+function turnedOnBy(name: string, exts: DictionaryExt[]): { settings: LanguageSetting[]; always: boolean } {
+    return {
+        settings: exts.flatMap((ext) => ext.languageSettings ?? []).filter((s) => s.dictionaries?.includes(name)),
+        always: exts.some((ext) => ext.dictionaries?.includes(name)),
+    };
 }
 
 function splitList(list: string | string[] | undefined): string[] {

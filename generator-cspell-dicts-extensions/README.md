@@ -15,7 +15,7 @@ In the `vscode-cspell-dict-extensions` repository root directory:
 npm run create:extension
 ```
 
-The generator starts from the extension's name, i.e. `serbian`, and offers the packages that match it, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them), such as `@cspell/dict-sr-cyrl` and `@cspell/dict-sr-latn`; you can search with other words too. From the packages it suggests the kind and the locale. With several languages, as for Serbian, each also gets its own enable and disable commands.
+The generator starts from the extension's name, i.e. `serbian`, and offers the packages that match it, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them), such as `@cspell/dict-sr-cyrl` and `@cspell/dict-sr-latn`; you can search with other words too. From the packages it suggests the kind and the locale. With several languages, as for Serbian, each also gets its own enable and disable commands. A word list's dictionary can be off until someone turns it on, as in `@cspell/dict-vim`: then it gets enable and disable commands, and `samples/cspell.json` turns it on for the tests.
 
 It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`, a starter `package.json`, `README.md`, `LICENSE` and a sample. Then it installs the packages and runs `npm run sync:extensions`, which writes the rest, as for every other extension.
 
