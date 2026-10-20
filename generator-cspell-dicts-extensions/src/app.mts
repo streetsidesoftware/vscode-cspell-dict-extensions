@@ -30,16 +30,19 @@ export async function run(argv: string[] = process.argv): Promise<void> {
     program
         .name('create:extension')
         .description('Generate a VS Code extension for Code Spell Checker.')
-        .argument('[name]', 'the extension name: its directory in extensions/ and its command ID prefix, i.e. swedish')
+        .argument('[name]', 'the extension name: its directory in extensions/ and its command ID prefix, e.g. swedish')
         .option(
             '-p, --package <package>',
-            'a @cspell/dict-* or @cspell/parser-* package to include, i.e. @cspell/dict-sv; repeat it for several',
+            'a @cspell/dict-* or @cspell/parser-* package to include, e.g. @cspell/dict-sv; repeat it for several',
             (value: string, previous: string[] | undefined) => [...(previous ?? []), value],
         )
         .addOption(new Option('--kind <kind>', 'the kind of extension (default: from the packages)').choices(kinds))
-        .option('--locale <locale>', 'the locale that enables a language, i.e. sv-SE (default: from the packages)')
-        .option('--native-name <name>', 'the language in the language itself, i.e. "svenska" (default: from Intl)')
-        .option('--friendly-name <name>', 'the name shown to people (default: from the name, i.e. "Swedish")')
+        .option('--locale <locale>', 'the locale that enables a language, e.g. sv-SE (default: from the packages)')
+        .option('--native-name <name>', 'the language in the language itself, e.g. "svenska" (default: from Intl)')
+        .option(
+            '--friendly-name <name>',
+            'the name shown in VS Code and the Marketplace (default: from the name, e.g. "Swedish")',
+        )
         .option('--display-name <name>', 'the Marketplace name (default: "<friendly name> - Code Spell Checker")')
         .option('--description <text>', 'the Marketplace description (required for a parser)')
         .option('--license <spdx>', `the extension's license (default: ${defaultLicense})`)
@@ -142,7 +145,7 @@ async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
 
 /**
  * Give each of a word list's dictionaries commands to turn it on and off. A dictionary may be off until someone turns
- * it on, i.e. `@cspell/dict-vim`: the samples turn it on. Only the installed packages tell.
+ * it on, e.g. `@cspell/dict-vim`: the samples turn it on. Only the installed packages tell.
  */
 async function addDictionaryCommands(destDir: string, config: ExtensionConfig): Promise<void> {
     const dictionaries = await dictionaryStates(destDir, config);
