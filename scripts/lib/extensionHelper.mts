@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
+import { type DictionaryTypesConfig, dictionaryTypesFile } from './dictionaryTypes.mts';
 import { readJson, repoRoot } from './repo.mts';
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');
@@ -48,15 +49,10 @@ export async function getExtensionInfo(repoPath: string): Promise<ExtensionInfo>
     return info;
 }
 
-interface DictionaryTypesConfig {
-    types: Record<string, string[]>;
-    default: string;
-}
-
 let dictionaryTypes: Promise<DictionaryTypesConfig> | undefined;
 
 async function lookUpDictionaryType(repoPath: string): Promise<string> {
-    const { types, default: defaultType } = await (dictionaryTypes ??= readJson('static/dictionary-types.json'));
+    const { types, default: defaultType } = await (dictionaryTypes ??= readJson(dictionaryTypesFile));
     for (const [category, extensions] of Object.entries(types)) {
         if (extensions.includes(repoPath)) return category;
     }
