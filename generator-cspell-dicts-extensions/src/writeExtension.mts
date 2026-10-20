@@ -118,7 +118,7 @@ function workspace(scope: (typeof scopes)[number]): { scope?: 'workspace' } {
 }
 
 /**
- * The commands of one language, i.e. `cSpellExt_serbian.enableCyrl` titled `Enable Serbian (Cyrillic) Spell Checker
+ * The commands of one language, e.g. `cSpellExt_serbian.enableCyrl` titled `Enable Serbian (Cyrillic) Spell Checker
  * Dictionary`. The ID ends with the locale's subtags after the language, or the language when there are none.
  */
 export function languageCommands(name: string, language: Language): CommandConfig[] {
@@ -142,9 +142,9 @@ export function languageCommands(name: string, language: Language): CommandConfi
 
 /**
  * Turn a word list's dictionaries on and off, globally and in the workspace. One dictionary gets the
- * default IDs and titles; with several, each gets its own, i.e. `cSpellExt_vim.enableVimScript` and `Enable vim-script
+ * default IDs and titles; with several, each gets its own, e.g. `cSpellExt_vim.enableVimScript` and `Enable vim-script
  * Spell Checker Dictionary`.
- * @param dictionaries - the dictionary names, i.e. `['vim']`.
+ * @param dictionaries - the dictionary names, e.g. `['vim']`.
  */
 export function dictionaryCommands(name: string, dictionaries: readonly string[]): CommandConfig[] {
     return dictionaries.flatMap((dictionary) =>

@@ -17,7 +17,7 @@ import { findExistingExtensions } from './lib/existingExtensions.mts';
 import { extensionsDir } from './lib/repo.mts';
 
 export interface ListedPackage extends CSpellPackage {
-    /** The extension that includes the package, i.e. `swedish`, or `ships with cspell`. Empty when there is none. */
+    /** The extension that includes the package, e.g. `swedish`, or `ships with cspell`. Empty when there is none. */
     extension: string;
 }
 

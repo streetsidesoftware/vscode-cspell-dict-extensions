@@ -24,28 +24,28 @@ export const kinds: readonly Kind[] = ['language', 'wordList', 'parser'];
 
 export const defaultLicense = 'GPL-3.0-or-later';
 
-/** One language of an extension with several, i.e. Serbian Cyrillic. */
+/** One language of an extension with several, e.g. Serbian Cyrillic. */
 export interface Language {
-    /** The language's most specific locale, i.e. `sr-Cyrl`. */
+    /** The language's most specific locale, e.g. `sr-Cyrl`. */
     locale: string;
-    /** Its name in English, used in the titles of its commands, i.e. `Serbian (Cyrillic)`. */
+    /** Its name in English, used in the titles of its commands, e.g. `Serbian (Cyrillic)`. */
     name: string;
 }
 
 export interface Answers {
-    /** The extension directory name and command ID prefix, i.e. `swedish`. */
+    /** The extension directory name and command ID prefix, e.g. `swedish`. */
     name: string;
     friendlyName: string;
     kind: Kind;
-    /** The `@cspell/*` packages, i.e. `['@cspell/dict-sv']`. */
+    /** The `@cspell/*` packages, e.g. `['@cspell/dict-sv']`. */
     packages: string[];
-    /** A language's locale as a BCP 47 tag, i.e. `sv-SE`. Empty for other kinds. */
+    /** A language's locale as a BCP 47 tag, e.g. `sv-SE`. Empty for other kinds. */
     locale: string;
-    /** Every locale the packages declare, i.e. `['sv', 'sv-SE']`. The disable commands turn them all off. */
+    /** Every locale the packages declare, e.g. `['sv', 'sv-SE']`. The disable commands turn them all off. */
     locales: string[];
     /** The languages that get their own commands. Empty unless there are several. */
     languages: Language[];
-    /** A language's name in the language itself, i.e. `svenska`. Empty when there is none. */
+    /** A language's name in the language itself, e.g. `svenska`. Empty when there is none. */
     nativeName: string;
     /** Empty for the default, `<friendlyName> - Code Spell Checker`. */
     displayName: string;
@@ -76,7 +76,7 @@ export interface Context {
     prompter: Prompter;
     /** The dictionaries and parsers that can be included. Undefined when the lists could not be fetched. */
     packages: readonly CSpellPackage[] | undefined;
-    /** Where the extensions are, i.e. `<repo>/extensions`. */
+    /** Where the extensions are, e.g. `<repo>/extensions`. */
     extensionsDir: string;
     /** Packages that already have an extension, mapped to the extension directory name. */
     existing: ReadonlyMap<string, string>;
@@ -161,10 +161,10 @@ async function askName(options: Options, ctx: Context): Promise<string> {
         if (result !== true) throw new UsageError(result);
         return name;
     }
-    if (options.yes) return missing('--name', 'the extension name, i.e. swedish');
+    if (options.yes) return missing('--name', 'the extension name, e.g. swedish');
 
     const answer = await ctx.prompter.input(
-        'Extension name, i.e. "swedish" (the directory in extensions/ and the command ID prefix):',
+        'Extension name, e.g. "swedish" (the directory in extensions/ and the command ID prefix):',
         undefined,
         (text) => check(normalizeName(text)),
     );
@@ -317,7 +317,7 @@ function languageLocales(packages: PackageKind[]): string[][] {
 }
 
 /**
- * The locale that enables the language. The default is the most specific locale every package declares, i.e. `sv-SE`
+ * The locale that enables the language. The default is the most specific locale every package declares, e.g. `sv-SE`
  * for `sv,sv_SE`, and `sr` for Serbian Cyrillic (`sr,sr-Cyrl`) with Serbian Latin (`sr,sr-Latn`).
  */
 async function askLocale(declared: string[][], options: Options, ctx: Context): Promise<string> {
@@ -330,7 +330,7 @@ async function askLocale(declared: string[][], options: Options, ctx: Context): 
     if (options.yes) return best ?? missing('--locale', 'the packages share no locale');
     const all = unique(declared.flat());
     if (!all.length) {
-        const answer = await ctx.prompter.input('Locale that enables the language, i.e. "sv-SE":', undefined, (text) =>
+        const answer = await ctx.prompter.input('Locale that enables the language, e.g. "sv-SE":', undefined, (text) =>
             text.trim() ? true : 'Please enter a locale.',
         );
         return canonicalLocale(answer);
@@ -362,7 +362,7 @@ async function askLanguages(declared: string[][], options: Options, ctx: Context
 }
 
 /**
- * Ask for the language's name in the language itself. The default is the name `Intl` gives the language, i.e.
+ * Ask for the language's name in the language itself. The default is the name `Intl` gives the language, e.g.
  * `svenska` for `sv-SE`. An empty answer leaves it out.
  */
 async function askNativeName(locale: string, options: Options, ctx: Context): Promise<string> {

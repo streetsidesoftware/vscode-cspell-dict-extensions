@@ -10,7 +10,7 @@ import { UsageError } from './questions.mts';
 
 /** A sample the tests spell check. The VS Code test opens the first one. */
 export interface Sample {
-    /** The path relative to the extension, i.e. `samples/seattle.md`. */
+    /** The path relative to the extension, e.g. `samples/seattle.md`. */
     file: string;
     text: string;
 }
@@ -33,7 +33,7 @@ export interface SampleContext {
  * - With titles from `--sample-title`, those. A missing article is an error with `--yes`, and asked again otherwise.
  * - Without, `--yes` takes Seattle. Otherwise ask for an article, with Seattle as the default, then for more until the
  *   answer is empty.
- * @param language - the Wikipedia language, i.e. `th`.
+ * @param language - the Wikipedia language, e.g. `th`.
  */
 export async function languageSamples(
     language: string,

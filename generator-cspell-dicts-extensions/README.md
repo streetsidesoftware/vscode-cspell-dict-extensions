@@ -2,7 +2,7 @@
 
 Generate a VS Code extension for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). An extension includes one or more published packages:
 
-- **Dictionaries:** `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A natural language is enabled by its locale. A word list is on once installed, unless its dictionary is off until turned on, as `@cspell/dict-vim` is; its commands turn it on and off.
+- **Dictionaries:** `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A natural language is enabled by its locale. A word list's dictionaries are on for their file types, or off until turned on. The extension's commands turn them on and off.
 - **Parsers:** `@cspell/parser-*` packages from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
 
 <!--- @@inject: ../docs/templates/package-must-be-published.md --->
@@ -19,7 +19,7 @@ In the `vscode-cspell-dict-extensions` repository root directory:
 npm run create:extension
 ```
 
-The generator starts from the extension's name, i.e. `serbian`, and offers the packages that match it, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them), such as `@cspell/dict-sr-cyrl` and `@cspell/dict-sr-latn`; you can search with other words too. From the packages it suggests the kind and the locale. With several languages, as for Serbian, each also gets its own enable and disable commands. Each dictionary of a word list gets enable and disable commands. A dictionary can be off until someone turns it on, as in `@cspell/dict-vim`; then `samples/cspell.json` turns it on for the tests.
+The generator starts from the extension's name, e.g. `serbian`, and offers the packages that match it, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them), such as `@cspell/dict-sr-cyrl` and `@cspell/dict-sr-latn`; you can search with other words too. From the packages it suggests the kind and the locale. With several languages, as for Serbian, each also gets its own enable and disable commands. Each dictionary of a word list gets enable and disable commands. A dictionary can be off until someone turns it on, as in `@cspell/dict-vim`; then `samples/cspell.json` turns it on for the tests.
 
 It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`, a starter `package.json`, `README.md`, `LICENSE` and a sample. Then it installs the packages and runs `npm run sync:extensions`, which writes the rest, as for every other extension.
 
@@ -34,24 +34,32 @@ Afterwards, add the sample's unknown words to `samples/cspell.json`, edit the RE
 
 ### Without questions
 
-Options answer the questions; only the rest are asked. With `--yes` nothing is asked: the name and the packages are required, a word list or a parser needs `--sample-file`, the other values come from the packages, and a missing value without a default is an error.
+Options answer the questions. Only the rest are asked. A few options, such as `--license`, set values the generator doesn't ask about.
+
+With `--yes`, nothing is asked:
+
+- The name and the packages are required.
+- A word list or a parser needs `--sample-file`.
+- A parser needs `--description`.
+- The other values come from the packages, or have defaults.
+- A missing value without a default is an error.
 
 ```bash
 npm run create:extension -- swedish --package @cspell/dict-sv --yes
 npm run create:extension -- serbian --package @cspell/dict-sr-cyrl --package @cspell/dict-sr-latn --yes
 npm run create:extension -- french-reforme --package @cspell/dict-fr-reforme --friendly-name "French Réforme 90" --yes
 npm run create:extension -- medical-terms --package @cspell/dict-medicalterms --sample-file terms.md --yes
-npm run create:extension -- typescript-parser --package @cspell/parser-typescript --description "Spell checks TypeScript." --sample-file sample.ts --yes
+npm run create:extension -- typescript-parser --package @cspell/parser-typescript --description "Tags the comments, strings and identifiers of TypeScript files." --sample-file sample.ts --yes
 ```
 
 | Option                                | Answers                                                                                                                                               |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `[name]`                              | The extension directory and command ID prefix, i.e. `swedish`. Required with `--yes`.                                                                 |
+| `[name]`                              | The extension directory and command ID prefix, e.g. `swedish`. Required with `--yes`.                                                                 |
 | `-p, --package <package>`             | A `@cspell/dict-*` or `@cspell/parser-*` package to include. Repeat it for several. Required with `--yes`.                                            |
 | `--kind <language\|wordList\|parser>` | The kind of extension. Default: from the packages.                                                                                                    |
 | `--locale <locale>`                   | A language's locale. Default: the most specific locale the packages share.                                                                            |
 | `--native-name <name>`                | The language in the language itself. Default: the name `Intl` gives it; empty for none.                                                               |
-| `--friendly-name <name>`              | The name shown to people. Default: from the name, i.e. `Swedish`.                                                                                     |
+| `--friendly-name <name>`              | The name shown in VS Code and the Marketplace. Default: from the name, e.g. `Swedish`.                                                                |
 | `--display-name <name>`               | The Marketplace name. Default: `<friendly name> - Code Spell Checker`.                                                                                |
 | `--description <text>`                | The Marketplace description. Required for a parser; the other kinds have a default.                                                                   |
 | `--license <spdx>`                    | The extension's license. Default: `GPL-3.0-or-later`. For another license, add its text to `LICENSE`.                                                 |

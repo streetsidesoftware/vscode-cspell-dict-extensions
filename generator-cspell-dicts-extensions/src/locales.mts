@@ -1,5 +1,5 @@
 /**
- * A locale as a BCP 47 tag, i.e. `sv_SE` -> `sv-SE`. A locale that isn't valid BCP 47, i.e. `fr-90`, is kept as
+ * A locale as a BCP 47 tag, e.g. `sv_SE` -> `sv-SE`. A locale that isn't valid BCP 47, e.g. `fr-90`, is kept as
  * written, with `_` replaced by `-`.
  */
 export function canonicalLocale(locale: string): string {
@@ -11,13 +11,13 @@ export function canonicalLocale(locale: string): string {
     }
 }
 
-/** The language part of a locale, i.e. `sv` for `sv-SE`. */
+/** The language part of a locale, e.g. `sv` for `sv-SE`. */
 export function languageOf(locale: string): string {
     return locale.split('-')[0] ?? locale;
 }
 
 /**
- * The English name of a locale, i.e. `Serbian (Cyrillic)` for `sr-Cyrl`.
+ * The English name of a locale, e.g. `Serbian (Cyrillic)` for `sr-Cyrl`.
  * @returns `undefined` when `Intl` doesn't know the locale.
  */
 export function englishLanguageName(locale: string): string | undefined {
@@ -30,7 +30,7 @@ export function englishLanguageName(locale: string): string | undefined {
 }
 
 /**
- * The name of a language in the language itself, i.e. `svenska` for `sv`.
+ * The name of a language in the language itself, e.g. `svenska` for `sv`.
  * @returns `undefined` when `Intl` doesn't know the language.
  */
 export function nativeLanguageName(language: string): string | undefined {
