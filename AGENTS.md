@@ -2,7 +2,7 @@
 
 Guidance for AI coding agents (Claude Code, Copilot, and others) working in this repository. `CLAUDE.md` and `.github/copilot-instructions.md` point here.
 
-This repo is **vscode-cspell-dict-extensions**: an npm + lerna-lite monorepo of VS Code extensions that add cspell dictionaries and parsers to [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). Each extension in `extensions/` wraps published `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts) or `@cspell/parser-*` packages from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
+This repo is **vscode-cspell-dict-extensions**: an npm + lerna-lite monorepo of VS Code extensions that add cspell dictionaries and parsers to [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). Each extension in `extensions/` includes published `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts) or `@cspell/parser-*` packages from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
 
 ## Commands
 
@@ -46,11 +46,11 @@ Read the doc before changing that area. These are written for people too; [`CONT
 ## Rules
 
 - **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Edit that file or the shared files in `extension-runtime/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [What the sync maintains](docs/synced-extensions.md#what-the-sync-maintains) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand.
-- **New extensions:** create them with the generator, never by copying an extension. A new dictionary is added to cspell-dicts first.
+- **New extensions:** create them with the generator, never by copying an extension, by following the `new-extension` skill: [`.claude/skills/new-extension/SKILL.md`](.claude/skills/new-extension/SKILL.md). A new dictionary is added to cspell-dicts first.
 - **Words:** words a dictionary lacks belong upstream in cspell-dicts (see [Adding words](CONTRIBUTING.md#adding-words-to-a-language-dictionary)). A sample's names and other non-words go in its `samples/cspell.json`.
 - **Generated after merge:** never edit or regenerate the root README lists, `static/generated/`, `dict-extensions.code-workspace`, `release-please-config.json` or the extension lists in `.github/workflows/`. A workflow runs `gen:readme`, `gen:release-please` and `gen:workflow` after a PR merges.
 - **Releases:** never edit `.release-please-manifest.json`; release-please adds new packages to it.
-- **Licenses:** an extension bundles its dictionaries, so its license must fit theirs (see [Licenses](docs/licenses.md)). If it doesn't, or it's unclear, stop and tell the user.
+- **Licenses:** an extension includes its packages unchanged, and each keeps its own license; the extension's license covers its own code. A new extension gets `GPL-3.0-or-later` unless the user asks for another (`--license`).
 - **Docs:** before editing a doc in `docs/` or `CONTRIBUTING.md`, read the audience header under its title and write for that reader. A new doc gets a header. See [Writing docs](docs/style.md).
 - **Docs for people** never point to `AGENTS.md` or `CLAUDE.md`. If a guide needs something that's only here, move it into a doc under `docs/` and link to it from both.
 - **Scripts:** write them in TypeScript (`.mts`, run directly by Node), not shell, `jq` or `.mjs`.
