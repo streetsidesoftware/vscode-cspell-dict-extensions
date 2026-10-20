@@ -287,12 +287,18 @@ async function askKind(packages: PackageKind[], options: Options, ctx: Context):
 
     const known = packages.every((pkg) => pkg.info);
     const derived: Kind = packages.some((pkg) => pkg.info?.naturalLanguage) ? 'language' : 'wordList';
-    if (options.yes) return known ? derived : missing('--kind', 'the cspell-ext.json could not be read');
+    if (options.yes) return known ? derived : missing('--kind', 'the package lists could not be fetched');
+    const locales = unique(languageLocales(packages).flat());
+    const localeList = locales.length ? ` (${locales.join(', ')})` : '';
     return ctx.prompter.select(
         'What kind of extension?',
         [
-            { name: 'Natural Language', value: 'language', description: 'Enabled by its locale, i.e. Swedish.' },
-            { name: 'Word List', value: 'wordList', description: 'On once installed, i.e. Medical Terms.' },
+            {
+                name: 'Natural Language',
+                value: 'language',
+                description: `Turned on by adding its locale${localeList} to cSpell.language.`,
+            },
+            { name: 'Word List', value: 'wordList', description: 'On once installed.' },
         ],
         derived,
     );
