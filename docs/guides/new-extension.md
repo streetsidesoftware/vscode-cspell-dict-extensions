@@ -69,7 +69,7 @@ Follow these steps in order:
 
 3. **Check the sample.** `samples/cspell.json` turns the language on, and the tests check that the dictionary recognizes the sample. Add the words it doesn't know, such as names, to `samples/cspell.json`, or shorten the sample. For another article, run `npm run fetch:sample -- <locale> [title] --out extensions/<name>/samples/seattle.md`.
 
-4. **Edit `README.md`.** Change the text, and keep the `@@inject` markers: the sync fills those sections in.
+4. **Review `README.md`.** It becomes the extension's page on the VS Code Marketplace. The generator writes a complete README. Add anything users should know, such as where the words come from. Don't edit the sections between the `<!--- @@inject … --->` comments. They're filled in for you.
 
 5. **Try it in VS Code.** Open the extension's folder:
 
