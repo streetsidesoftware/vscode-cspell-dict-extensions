@@ -31,7 +31,7 @@
                 },
                 "friendlyName": {
                     "type": "string",
-                    "description": "The name shown to people, i.e. `Swedish`.",
+                    "description": "The name shown in VS Code and the Marketplace, e.g. `Swedish`.",
                     "minLength": 1
                 },
                 "displayName": {
@@ -72,18 +72,18 @@
                 },
                 "locale": {
                     "type": "string",
-                    "description": "The locale people add to `cSpell.language` to use this language, as a BCP 47 tag (i.e. `sv-SE`) or a comma-separated list of them.",
+                    "description": "The locale users add to `cSpell.language` to use this language, as a BCP 47 tag (e.g. `sv-SE`) or a comma-separated list of them.",
                     "minLength": 1
                 },
                 "nativeName": {
                     "type": "string",
-                    "description": "The language's name in the language itself, i.e. `svenska`.",
+                    "description": "The language's name in the language itself, e.g. `svenska`.",
                     "minLength": 1
                 }
             },
             "required": ["commands", "cspell", "friendlyName", "kind", "locale", "name", "sample"],
             "additionalProperties": false,
-            "description": "A natural language, enabled by its locale, i.e. Swedish."
+            "description": "A natural language, enabled by its locale, e.g. Swedish."
         },
         "CommandConfig": {
             "anyOf": [
@@ -211,7 +211,7 @@
                 },
                 "friendlyName": {
                     "type": "string",
-                    "description": "The name shown to people, i.e. `Swedish`.",
+                    "description": "The name shown in VS Code and the Marketplace, e.g. `Swedish`.",
                     "minLength": 1
                 },
                 "displayName": {
@@ -253,7 +253,7 @@
             },
             "required": ["commands", "cspell", "friendlyName", "kind", "name", "sample"],
             "additionalProperties": false,
-            "description": "A list of words, enabled by dictionary name, i.e. medical terms."
+            "description": "A list of words, enabled by dictionary name, e.g. medical terms."
         },
         "BundleExtensionConfig": {
             "type": "object",
@@ -269,7 +269,7 @@
                 },
                 "friendlyName": {
                     "type": "string",
-                    "description": "The name shown to people, i.e. `Swedish`.",
+                    "description": "The name shown in VS Code and the Marketplace, e.g. `Swedish`.",
                     "minLength": 1
                 },
                 "displayName": {
@@ -311,7 +311,7 @@
             },
             "required": ["commands", "cspell", "description", "friendlyName", "kind", "name", "sample"],
             "additionalProperties": false,
-            "description": "A collection of dictionaries, i.e. the latest copies of the dictionaries Code Spell Checker bundles."
+            "description": "A collection of dictionaries, e.g. the latest copies of the dictionaries Code Spell Checker bundles."
         },
         "ParserExtensionConfig": {
             "type": "object",
@@ -327,7 +327,7 @@
                 },
                 "friendlyName": {
                     "type": "string",
-                    "description": "The name shown to people, i.e. `Swedish`.",
+                    "description": "The name shown in VS Code and the Marketplace, e.g. `Swedish`.",
                     "minLength": 1
                 },
                 "displayName": {

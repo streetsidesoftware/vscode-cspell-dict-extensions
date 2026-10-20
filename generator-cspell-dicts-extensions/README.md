@@ -2,7 +2,7 @@
 
 Generate a VS Code extension for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). An extension includes one or more published packages:
 
-- **Dictionaries:** `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A natural language is enabled by its locale. A word list's dictionaries are on for their file types, or off until turned on. Its commands turn them on and off.
+- **Dictionaries:** `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A natural language is enabled by its locale. A word list's dictionaries are on for their file types, or off until turned on. The extension's commands turn them on and off.
 - **Parsers:** `@cspell/parser-*` packages from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
 
 <!--- @@inject: ../docs/templates/package-must-be-published.md --->
@@ -40,6 +40,7 @@ With `--yes`, nothing is asked:
 
 - The name and the packages are required.
 - A word list or a parser needs `--sample-file`.
+- A parser needs `--description`.
 - The other values come from the packages, or have defaults.
 - A missing value without a default is an error.
 
