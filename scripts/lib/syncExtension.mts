@@ -331,7 +331,7 @@ function languageSettingRule(setting: LanguageSetting, filePatterns: string[] = 
  */
 function overrideRules(override: Override): Rule[] {
     const { dictionaries = [], filename = [], languageSettings = [] } = override;
-    const filePatterns = [filename ?? []].flat().filter((glob) => glob.startsWith('**/'));
+    const filePatterns = [filename].flat().filter((glob) => glob.startsWith('**/'));
     if (!filePatterns.length) return [];
     const overrideRule: Rule = { dictionaries, fileTypes: [], filePatterns, locales: [] };
     const languageSettingsRules = languageSettings.map((s) => languageSettingRule(s, filePatterns));
