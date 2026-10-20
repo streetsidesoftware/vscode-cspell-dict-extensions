@@ -28,10 +28,11 @@ In a clone of this repository, list the packages, with the extension that alread
 
 ```sh
 npm run list:packages -- thai        # the packages that match the word thai
+npm run list:packages -- gaelic irish --any   # the packages that match either word
 npm run list:packages -- --missing   # the packages no extension includes yet
 ```
 
-`--json` prints JSON.
+With several words, a package must match every word, unless you add `--any`. `--json` prints JSON.
 
 ## Create an extension
 
