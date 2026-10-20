@@ -310,8 +310,8 @@ function rules(exts: readonly DictionaryExt[]): Rule[] {
 }
 
 /** `dictionaries` turns its dictionaries on for every file. */
-function dictionariesRule(settings: { dictionaries?: string[] }): Rule {
-    return { dictionaries: settings.dictionaries ?? [], fileTypes: [], filePatterns: [], locales: [] };
+function dictionariesRule(ext: DictionaryExt): Rule {
+    return { dictionaries: ext.dictionaries ?? [], fileTypes: [], filePatterns: [], locales: [] };
 }
 
 /** A language setting turns its dictionaries on for its file types and locales. */
@@ -329,13 +329,14 @@ function languageSettingRule(setting: LanguageSetting): Rule {
  * dictionary's config is relative to the dictionary's folder, so only `**\/…` reaches the user's files.
  */
 function overrideRules(override: Override): Rule[] {
-    const globs = [override.filename ?? []].flat().filter((glob) => glob.startsWith('**/'));
-    if (!globs.length) return [];
-    const forFiles = (rule: Rule): Rule => ({ ...rule, fileTypes: [], filePatterns: globs });
-    return [
-        forFiles(dictionariesRule(override)),
-        ...(override.languageSettings ?? []).map((setting) => forFiles(languageSettingRule(setting))),
-    ];
+    const filePatterns = [override.filename ?? []].flat().filter((glob) => glob.startsWith('**/'));
+    if (!filePatterns.length) return [];
+    return [override, ...(override.languageSettings ?? [])].map((settings) => ({
+        dictionaries: settings.dictionaries ?? [],
+        fileTypes: [],
+        filePatterns,
+        locales: [],
+    }));
 }
 
 /**
