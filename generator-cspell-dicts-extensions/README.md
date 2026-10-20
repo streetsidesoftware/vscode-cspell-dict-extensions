@@ -30,7 +30,7 @@ Without `--sample-file`:
 - **A language:** Wikipedia articles in that language, with their source and license, one file each, named after the title: `Seattle` is `samples/seattle.md`, and `Lingua Latina` is `samples/lingua-latina.md`. The generator asks for an article, with Seattle as the default, then for more until the answer is empty. `--sample-title <title>`, once for each article, names them instead; with `--yes` and no `--sample-title`, it's Seattle. A missing article is asked again, or with `--yes` stops the generator. Without Wikipedia, the generator stops before writing anything.
 - **A word list or a parser:** there's no default. With `--yes`, `--sample-file` is required. Otherwise the generator asks for a sample file; without one, it writes `samples/sample.md`, a line to replace with a deliberate misspelling, so the spell check fails until you replace it.
 
-Afterwards, add the sample's unknown words to `samples/cspell.json`, edit the README, and run `npm run check:extension -- <name>`.
+Afterwards, list the sample's unknown words at its end. Put real words on a `cspell:words` comment line. Put names and other non-words on a `cspell:ignore` line. For a natural language, keep the `language` setting in `samples/cspell.json`. Then review the README, and run `npm run check:extension -- <name>`.
 
 ### Without questions
 
