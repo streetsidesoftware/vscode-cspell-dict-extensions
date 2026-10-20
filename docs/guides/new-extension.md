@@ -71,13 +71,7 @@ Follow these steps in order:
 
 4. **Edit `README.md`.** Change the text, and keep the `@@inject` markers: the sync fills those sections in.
 
-5. **Run the checks:** the build, the sample check, the sync check, Prettier and the spell check, with `--vscode` for the VS Code test too:
-
-   ```sh
-   npm run check:extension -- <name> --vscode
-   ```
-
-6. **Try it in VS Code.** Open the extension's folder:
+5. **Try it in VS Code.** Open the extension's folder:
 
    ```sh
    code extensions/<name>
@@ -89,4 +83,10 @@ Follow these steps in order:
 
    ![Debug extension](../../images/debug-extension.png)
 
-7. **Open a pull request** to `main`. After it's merged, the maintainers add the extension to the lists and release it. You don't need to do anything else.
+6. **Open a pull request** to `main`. The pull request runs the checks. To run them before you open it:
+
+   ```sh
+   npm run check:extension -- <name>
+   ```
+
+   After the pull request is merged, the maintainers add the extension to the lists and release it. You don't need to do anything else.
