@@ -8,7 +8,7 @@
  * - some fields of `package.json`, and the `@@inject` sections of `README.md`.
  *
  * It removes a generated file the extension no longer has. It creates `cspell.config.yaml` when it's missing; after
- * that, the file belongs to the extension. It leaves every other file alone. "Synced extensions" in CONTRIBUTING.md
+ * that, the file belongs to the extension. It leaves every other file alone. docs/synced-extensions.md
  * has the details.
  */
 
