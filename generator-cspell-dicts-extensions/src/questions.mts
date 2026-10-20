@@ -215,10 +215,15 @@ async function askPackages(name: string, options: Options, ctx: Context): Promis
             );
             picked.push(...chosen);
         }
-        if (picked.length && !(await ctx.prompter.confirm('Search for more packages?', false))) return picked;
-        term = await ctx.prompter.input('Search for packages (a language or topic):', undefined, (text) =>
-            text.trim() ? true : 'Please enter a word to search for.',
-        );
+        const message = picked.length
+            ? 'Search for more packages (a language or topic; empty to finish):'
+            : 'Search for packages (a language or topic):';
+        term = (
+            await ctx.prompter.input(message, undefined, (text) =>
+                text.trim() || picked.length ? true : 'Please enter a word to search for.',
+            )
+        ).trim();
+        if (!term) return picked;
     }
 }
 

@@ -148,6 +148,20 @@ describe('askQuestions', () => {
             assert.deepEqual(answers.locales, ['fr', 'fr-FR', 'fr-90']);
         });
 
+        it('searches again with the words typed after a pick, and an empty answer finishes', async () => {
+            const prompter = scriptedPrompter(['medical-terms', '', '', 'swedish']);
+            const answers = await askQuestions({}, context(prompter));
+            assert.deepEqual(answers.packages, ['@cspell/dict-medicalterms', '@cspell/dict-sv']);
+            const searches = prompter.asked.filter((q) => q.message.startsWith('Search'));
+            assert.deepEqual(
+                searches.map((q) => q.message),
+                [
+                    'Search for more packages (a language or topic; empty to finish):',
+                    'Search for more packages (a language or topic; empty to finish):',
+                ],
+            );
+        });
+
         it('makes a word list of a dictionary without a locale', async () => {
             const prompter = scriptedPrompter(['medical-terms']);
             const answers = await askQuestions({}, context(prompter));
