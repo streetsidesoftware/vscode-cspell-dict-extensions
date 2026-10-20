@@ -222,20 +222,22 @@ describe('syncExtension', () => {
         ]);
     });
 
-    it('fails on an override it does not support', async () => {
+    it("reads an override's globs and language settings, but only globs that reach the user's files", async () => {
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'ada' }, { name: 'web' }],
+            overrides: [
+                { filename: '*.adb', dictionaries: ['ada'] },
+                { filename: '**/*.html', languageSettings: [{ languageId: '*', dictionaries: ['web'] }] },
+            ],
+        });
         const { locale: _locale, ...rest } = config;
         await writeJson('extension.config.json', { ...rest, kind: 'wordList', commands: [] });
-        for (const override of [
-            { filename: '*.adb', dictionaries: ['demo'] },
-            { filename: '**/*.html', languageSettings: [{ languageId: '*', dictionaries: ['demo'] }] },
-        ]) {
-            await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
-                name: 'Demo',
-                dictionaryDefinitions: [{ name: 'demo' }],
-                overrides: [override],
-            });
-            await assert.rejects(syncExtension(dir, options), /^AssertionError.*Demo: .* supported/s);
-        }
+        await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
+            { Dictionary: '`ada`', 'File types': 'off until turned on' },
+            { Dictionary: '`web`', 'File types': '`.html` files' },
+        ]);
     });
 
     it('has no static/dictionaries.json for a bundle', async () => {
