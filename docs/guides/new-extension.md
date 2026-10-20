@@ -66,20 +66,20 @@ Follow these steps in order:
    | Extension name                   | A short lowercase name in English, such as `swedish`. It becomes the folder `extensions/swedish/`.                                                                                                                              |
    | Friendly name                    | The name shown in VS Code and the Marketplace, such as `Swedish`. Press Enter to accept the suggestion.                                                                                                                         |
    | Packages that match              | The dictionaries or parsers to include. All matches start checked. Uncheck the ones you don't want. "(has an extension)" means another extension already includes the package.                                                  |
-   | Search for packages              | Asked when nothing matches the name, and after you pick packages. Type a word to search for, such as a language or a topic. Press Enter to finish. You can't finish before you pick a package.                                  |
+   | Search for packages              | Asked when nothing matches the name, and after each list of matches. Type a word to search for, such as a language or a topic. To finish, press Enter with no word. You can finish only once you've picked a package.           |
    | What kind of extension?          | **Natural Language** for a language such as Swedish, which users turn on in their settings. **Word List** for a set of terms, such as medical terms or Vim's keywords. The suggestion is usually right. Not asked for a parser. |
    | Locale that enables the language | The language code users add to Code Spell Checker's `cSpell.language` setting, such as `sv-SE`. Natural languages only.                                                                                                         |
-   | Name of … in its command titles  | Only when the extension has several languages, such as Serbian in Cyrillic and Latin script. Each language gets its own commands to turn it on and off. This name goes in their titles. Accept the suggestion.                  |
+   | Name of … in its command titles  | Only when the extension has several languages, such as Serbian in Cyrillic and Latin script. Each language gets its own commands to turn it on and off. The name goes in the titles of those commands. Accept the suggestion.   |
    | Native name                      | The language's name in that language, such as `svenska`. Natural languages only.                                                                                                                                                |
    | Marketplace description          | One sentence for the VS Code Marketplace. Parsers only.                                                                                                                                                                         |
    | Sample file                      | Word lists and parsers only. A file with some of the dictionary's words, or code the parser tags. Press Enter for a starter `samples/sample.md`. The checks fail until you replace its text.                                    |
    | Wikipedia article for the sample | Natural languages only. Press Enter for Seattle, or name another article, in English or the language. Then add more articles, or press Enter to finish. Each article becomes its own sample file, such as `samples/seattle.md`. |
 
-   Without a network connection, the generator can't list the packages. It asks for the package names instead, such as `@cspell/dict-sv`. A natural language also needs the network for its Wikipedia sample.
-
-   The generator then creates `extensions/<name>/` with all of the extension's files. It installs the dictionaries or parsers, which takes a minute or two. It ends with **Created extensions/<name>** in green.
+   The generator needs a network connection. It lists the packages, fetches the Wikipedia articles and installs the packages.
 
    For a natural language, the generator fetches the articles you named from that language's Wikipedia, with their source and license.
+
+   The generator then creates `extensions/<name>/` with all of the extension's files. It installs the dictionaries or parsers, which can take a minute or two. It ends with **Created extensions/<name>** in green.
 
    If you already know every answer, the [generator README](../../generator-cspell-dicts-extensions/README.md) shows how to give them as options.
 
