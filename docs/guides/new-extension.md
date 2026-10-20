@@ -59,11 +59,11 @@ Follow these steps in order:
    | Native name                      | The language's name in that language, such as `svenska`. Natural languages only.                                                                                                                                                |
    | Marketplace description          | One sentence for the VS Code Marketplace. Parsers only.                                                                                                                                                                         |
    | Sample file                      | Word lists and parsers only. A file with some of the dictionary's words, or code the parser tags. Press Enter for a starter `samples/sample.md`; the checks fail until you replace its text.                                    |
-   | Another article                  | Natural languages only, when Wikipedia has no article about Seattle in that language. The title of another article, in English or the language.                                                                                 |
+   | Wikipedia article for the sample | Natural languages only. Press Enter for Seattle, or name another article, in English or the language. Then add more articles, or press Enter to finish. Each article becomes its own sample file, such as `samples/seattle.md`. |
 
    The generator then creates `extensions/<name>/` with all of the extension's files, and installs the dictionaries or parsers.
 
-   For a natural language, the generator also fetches a sample text: the Wikipedia article about Seattle in that language, saved as `samples/seattle.md`.
+   For a natural language, the generator fetches the articles you named from that language's Wikipedia, with their source and license.
 
    If you already know every answer, the [generator README](../../generator-cspell-dicts-extensions/README.md) shows how to give them as options.
 

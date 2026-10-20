@@ -11,7 +11,7 @@ import { noPrompter } from './prompt.mts';
 import {
     askSampleFile,
     fileSamples,
-    languageSample,
+    languageSamples,
     sampleFile,
     type SampleContext,
     starterMarker,
@@ -35,47 +35,79 @@ function context(titles: string[], overrides: Partial<SampleContext> = {}): Samp
     };
 }
 
-describe('languageSample', () => {
-    it('fetches the article, and names the file after the title given', async () => {
-        const sample = await languageSample('gd', 'Seattle', context(['Seattle']));
-        assert.equal(sample.file, 'samples/seattle.md');
-        assert.match(sample.text, /^# Seattle\n\nText\.\n\nSource: \[Wikipedia: Seattle\]/);
+describe('languageSamples', () => {
+    const first = 'Wikipedia article for the sample, in English or the language:';
+    const more = 'Another article (empty to finish):';
+
+    it('takes Seattle with --yes, and names the file after the title', async () => {
+        const samples = await languageSamples('gd', undefined, context(['Seattle']));
+        assert.deepEqual(
+            samples.map((s) => s.file),
+            ['samples/seattle.md'],
+        );
+        assert.match(samples[0]?.text ?? '', /^# Seattle\n\nText\.\n\nSource: \[Wikipedia: Seattle\]/);
     });
 
-    it('fails without an article with --yes, and says how to name another', async () => {
+    it('takes the titles given, in order, and fails on a missing one with --yes', async () => {
+        const samples = await languageSamples(
+            'gd',
+            ['Lingua Latina', 'Seattle'],
+            context(['Seattle', 'Lingua Latina']),
+        );
+        assert.deepEqual(
+            samples.map((s) => s.file),
+            ['samples/lingua-latina.md', 'samples/seattle.md'],
+        );
         await assert.rejects(
-            languageSample('gd', 'Seattle', context([])),
+            languageSamples('gd', undefined, context([])),
             /No gd\.wikipedia\.org article about "Seattle"\. Name another article with --sample-title <title>\./,
         );
     });
 
-    it('asks for another article until one is found', async () => {
-        const prompter = scriptedPrompter(['', 'Nowhere', 'Lingua Latina']);
-        const sample = await languageSample('gd', 'Seattle', context(['Lingua Latina'], { prompter, yes: false }));
-        assert.equal(sample.file, 'samples/lingua-latina.md');
+    it('asks for an article with Seattle as the default, then for more until the answer is empty', async () => {
+        const logged: string[] = [];
+        const prompter = scriptedPrompter(['', 'Nowhere', 'Lingua Latina', 'Seattle', '']);
+        const ctx = context(['Seattle', 'Lingua Latina'], { prompter, yes: false, log: (m) => logged.push(m) });
+        const samples = await languageSamples('gd', undefined, ctx);
         assert.deepEqual(
-            prompter.asked.map((q) => [q.message, q.error]),
+            samples.map((s) => s.file),
+            ['samples/seattle.md', 'samples/lingua-latina.md'],
+        );
+        assert.deepEqual(
+            prompter.asked.map((q) => [q.message, q.defaultValue]),
             [
-                [
-                    'No gd.wikipedia.org article about "Seattle". Another article, in English or the language:',
-                    'Enter an article title.',
-                ],
-                [
-                    'No gd.wikipedia.org article about "Seattle". Another article, in English or the language:',
-                    undefined,
-                ],
-                [
-                    'No gd.wikipedia.org article about "Nowhere". Another article, in English or the language:',
-                    undefined,
-                ],
+                [first, 'Seattle'],
+                [more, undefined],
+                [more, undefined],
+                [more, undefined],
+                [more, undefined],
             ],
+        );
+        assert.ok(logged.includes('No gd.wikipedia.org article about "Nowhere".'));
+        assert.ok(logged.includes('samples/seattle.md is already a sample.'));
+    });
+
+    it('asks the first question again when the article is missing', async () => {
+        const prompter = scriptedPrompter(['', 'Lingua Latina', '']);
+        const samples = await languageSamples('gd', undefined, context(['Lingua Latina'], { prompter, yes: false }));
+        assert.deepEqual(
+            samples.map((s) => s.file),
+            ['samples/lingua-latina.md'],
+        );
+        assert.deepEqual(
+            prompter.asked.map((q) => q.message),
+            [first, first, more],
         );
     });
 
     it('fails when Wikipedia cannot be reached', async () => {
         const fetchArticle = () => Promise.reject(new Error('Could not reach gd.wikipedia.org: timeout'));
         await assert.rejects(
-            languageSample('gd', 'Seattle', context([], { fetchArticle, yes: false })),
+            languageSamples(
+                'gd',
+                undefined,
+                context([], { fetchArticle, yes: false, prompter: scriptedPrompter(['']) }),
+            ),
             /Could not fetch the sample from Wikipedia: Could not reach gd\.wikipedia\.org: timeout/,
         );
     });

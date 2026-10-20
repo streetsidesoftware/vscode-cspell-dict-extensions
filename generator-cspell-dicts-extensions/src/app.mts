@@ -14,7 +14,7 @@ import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
 import { askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
-import { askSampleFile, defaultSampleTitle, fileSamples, languageSample, starterMarker } from './sample.mts';
+import { askSampleFile, defaultSampleTitle, fileSamples, languageSamples, starterMarker } from './sample.mts';
 import { dictionaryCommands, extensionConfig, json, writeExtension } from './writeExtension.mts';
 
 /** The repository root. */
@@ -45,7 +45,8 @@ export async function run(argv: string[] = process.argv): Promise<void> {
         .option('--license <spdx>', `the extension's license (default: ${defaultLicense})`)
         .option(
             '--sample-title <title>',
-            `the Wikipedia article for a language's sample, in English or the language (default: ${defaultSampleTitle})`,
+            `a Wikipedia article for a language's sample, in English or the language; repeat it for several (default: ${defaultSampleTitle})`,
+            (value: string, previous: string[] | undefined) => [...(previous ?? []), value],
         )
         .addOption(
             new Option(
@@ -70,7 +71,7 @@ async function generate(
         sampleTitle,
         sampleFile: sampleFiles,
         ...options
-    }: Omit<Options, 'name' | 'packages'> & { package?: string[]; sampleTitle?: string; sampleFile?: string[] },
+    }: Omit<Options, 'name' | 'packages'> & { package?: string[]; sampleTitle?: string[]; sampleFile?: string[] },
 ): Promise<void> {
     if (!options.yes) {
         console.log(styleText('bold', '\nWelcome to the VS Code Spelling Dictionary Extension generator!\n'));
@@ -100,7 +101,7 @@ async function generate(
     const samples = sampleFiles
         ? await fileSamples(sampleFiles, sampleContext.cwd)
         : answers.kind === 'language'
-          ? [await languageSample(languageOf(answers.locale), sampleTitle ?? defaultSampleTitle, sampleContext)]
+          ? await languageSamples(languageOf(answers.locale), sampleTitle, sampleContext)
           : await askSampleFile(answers.friendlyName, sampleContext);
     const [firstSample, ...moreSamples] = samples;
     if (!firstSample) throw new Error('No sample.');
