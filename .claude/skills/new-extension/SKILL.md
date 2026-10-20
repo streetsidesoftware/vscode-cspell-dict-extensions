@@ -92,6 +92,8 @@ generator README lists them.
 - **If it fails:**
   - On a missing or invalid value, nothing was written. Fix that option and run it again.
   - If `extensions/<name>/` exists, ask before passing `--force`, which replaces it.
+  - If it refuses a sample file because the file turns on no dictionary, it names the file types it expects and
+    removes the folder. Ask the user for a file of one of those types, and run it again.
   - If it fails after creating the folder (installing or the sync), show the user the error, and stop. Leave the
     folder for them to look at.
 
