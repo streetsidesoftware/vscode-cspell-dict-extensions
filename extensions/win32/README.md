@@ -4,6 +4,23 @@ Win32 dictionary extension for VS Code.
 
 Imports the Win32 spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
+## Installation
+
+### Enable or Disable the Dictionary
+
+Run these commands with `F1` or _View -> Command Palette..._:
+
+<!--- @@inject-table: ./static/commands.json --->
+
+| Command                                             |
+| --------------------------------------------------- |
+| Enable Win32 Spell Checker Dictionary               |
+| Disable Win32 Spell Checker Dictionary              |
+| Enable Win32 Spell Checker Dictionary in Workspace  |
+| Disable Win32 Spell Checker Dictionary in Workspace |
+
+<!--- @@inject-end: ./static/commands.json --->
+
 ## Dictionaries
 
 The dictionaries this extension adds, and the file types they check:
@@ -31,7 +48,7 @@ This extension will automatically include the [Code Spell Checker](https://marke
 
 ## Getting Started
 
-By default the `win32` dictionary is enabled for `C` and `C++` file types. To enable it for other file types, it is necessary to add it to the `dictionaries` section of the configuration or include it as an inline CSpell directive: `cspell:dictionaries win32`.
+By default the `win32` dictionary is enabled for `C` and `C++` file types. To enable it for other file types, run **Enable Win32 Spell Checker Dictionary**, add it to the `dictionaries` section of the configuration, or include it as an inline CSpell directive: `cspell:dictionaries win32`.
 
 Example: `example.md`
 

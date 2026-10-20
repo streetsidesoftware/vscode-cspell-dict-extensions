@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Medical Terms Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Medical Terms Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Medical Terms Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Medical Terms Spell Checker Dictionary in Workspace"
+    }
+]
