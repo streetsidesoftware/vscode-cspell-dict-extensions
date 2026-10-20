@@ -131,4 +131,4 @@ generator README lists them.
 
 - **Words missing from a dictionary:** they belong upstream, in cspell-dicts. Say so.
 - **Changing an existing extension:** edit its `extension.config.json` and run `npm run sync:extensions`, as
-  `docs/synced-extensions.md` describes.
+  `docs/extension-anatomy.md` describes.

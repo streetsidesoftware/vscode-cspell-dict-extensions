@@ -36,8 +36,7 @@ Before finishing, run `npm run lint`, `npm run check-types`, `npm run lint:code`
 Read the doc before changing that area. These are written for people too; [`CONTRIBUTING.md`](CONTRIBUTING.md) lists them.
 
 - [`docs/guides/new-extension.md`](docs/guides/new-extension.md): creating an extension.
-- [`docs/licenses.md`](docs/licenses.md): which license an extension can have.
-- [`docs/synced-extensions.md`](docs/synced-extensions.md): how the extensions are maintained centrally, and the files the sync writes.
+- [`docs/extension-anatomy.md`](docs/extension-anatomy.md): how the extensions are maintained centrally, and the files the sync writes.
 - [`docs/releasing.md`](docs/releasing.md): release-please, pre-release mode, runtime releases and publishing.
 - [`docs/style.md`](docs/style.md): where docs go, and their audiences.
 - [`generator-cspell-dicts-extensions/README.md`](generator-cspell-dicts-extensions/README.md): the generator's options.
@@ -45,12 +44,12 @@ Read the doc before changing that area. These are written for people too; [`CONT
 
 ## Rules
 
-- **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Edit that file or the shared files in `extension-runtime/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [What the sync maintains](docs/synced-extensions.md#what-the-sync-maintains) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand.
+- **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Edit that file or the shared files in `extension-runtime/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [Files the sync writes](docs/extension-anatomy.md#files-the-sync-writes) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand.
 - **New extensions:** create them with the generator, never by copying an extension, by following the `new-extension` skill: [`.claude/skills/new-extension/SKILL.md`](.claude/skills/new-extension/SKILL.md). A new dictionary is added to cspell-dicts first.
 - **Words:** words a dictionary lacks belong upstream in cspell-dicts (see [Adding words](CONTRIBUTING.md#adding-words-to-a-language-dictionary)). A sample's names and other non-words go in its `samples/cspell.json`.
 - **Generated after merge:** never edit or regenerate the root README lists, `static/generated/`, `static/dictionary-types.json`, `dict-extensions.code-workspace`, `release-please-config.json` or the extension lists in `.github/workflows/`. A workflow runs `gen:readme`, `gen:release-please` and `gen:workflow` after a PR merges.
 - **Releases:** never edit `.release-please-manifest.json`; release-please adds new packages to it.
-- **Licenses:** an extension includes its packages unchanged, and each keeps its own license; the extension's license covers its own code. A new extension gets `GPL-3.0-or-later` unless the user asks for another (`--license`).
+- **Licenses:** an extension includes its packages unchanged, and each keeps its own license; the extension's license covers its own code (see [Files you edit](docs/extension-anatomy.md#files-you-edit)). A new extension gets `GPL-3.0-or-later` unless the user asks for another (`--license`).
 - **Docs:** before editing a doc in `docs/` or `CONTRIBUTING.md`, read the audience header under its title and write for that reader. A new doc gets a header. See [Writing docs](docs/style.md).
 - **Docs for people** never point to `AGENTS.md` or `CLAUDE.md`. If a guide needs something that's only here, move it into a doc under `docs/` and link to it from both.
 - **Scripts:** write them in TypeScript (`.mts`, run directly by Node), not shell, `jq` or `.mjs`.
