@@ -24,7 +24,7 @@ An extension includes a published package and tells Code Spell Checker where to 
 
 ## How to find dictionaries and parsers
 
-In a clone of this repository, after `npm ci`, list the packages, with the extension that already includes each one:
+In a clone of this repository, list the packages, with the extension that already includes each one:
 
 ```sh
 npm run list:packages -- thai        # the packages that match the words
