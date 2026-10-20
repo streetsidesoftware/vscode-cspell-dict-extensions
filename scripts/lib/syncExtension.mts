@@ -268,17 +268,19 @@ async function dictionariesTable(extensionDir: string, config: ExtensionConfig):
 }
 
 /**
- * The dictionaries in `cspell.import` that nothing turns on: neither the dictionaries' own settings nor the
- * extension's `cspell`. Users turn them on in their settings, or with the extension's commands.
+ * The dictionaries in `cspell.import`, and whether each is off until turned on: neither the dictionaries' own settings
+ * nor the extension's `cspell` turn it on. Users turn it on in their settings, or with the extension's commands.
  */
-export async function dictionariesOff(extensionDir: string, config: ExtensionConfig): Promise<string[]> {
+export async function dictionaryStates(
+    extensionDir: string,
+    config: ExtensionConfig,
+): Promise<{ name: string; off: boolean }[]> {
     const exts = await readDictionaries(extensionDir, config);
     return exts
         .flatMap((ext) => ext.dictionaryDefinitions ?? [])
-        .map(({ name }) => name)
-        .filter((name) => {
+        .map(({ name }) => {
             const { settings, always } = turnedOnBy(name, [...exts, config.cspell as DictionaryExt]);
-            return !settings.length && !always;
+            return { name, off: !settings.length && !always };
         });
 }
 
