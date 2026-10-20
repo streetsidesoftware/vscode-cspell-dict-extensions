@@ -5,9 +5,9 @@ description: 'Creates a new extension in this repo, from request to one pull req
 
 # new-extension
 
-Takes a request such as "add an extension for Thai" to one pull request. The steps for people are in
-`docs/guides/new-extension.md`, and the generator's options in `generator-cspell-dicts-extensions/README.md`; read
-both first. This skill runs the generator without questions (`--yes`) and adds the points where you stop and ask the
+Takes a request such as "add an extension for Thai" to one pull request. The steps for contributors are in
+`docs/guides/new-extension.md`, and the generator's options are in `generator-cspell-dicts-extensions/README.md`. Read
+both first. This skill runs the generator without questions (`--yes`), and adds the points where you stop and ask the
 user.
 
 ## Workflow
@@ -20,15 +20,20 @@ user.
   npm ci
   ```
 
+  The generator and `list:packages` need a network connection: they read the npm registry, the package lists of
+  cspell-dicts and cspell-parsers, and Wikipedia.
+
 ### 2. Find the package
 
 An extension includes a published package, unchanged. Find the one the request means.
 
-- **Do:** search one word at a time (several words match nothing): the English name, the language's own name, its
-  language code, or the topic.
+- **Do:** search for the English name, the natural language's own name, its language code, or the topic. Several
+  words must all match, so pass `--any` to match any of them. The guide's "How to find dictionaries and parsers"
+  describes the columns.
 
   ```sh
-  npm run list:packages -- <word>
+  npm run list:packages -- <word>...
+  npm run list:packages -- gaelic irish --any
   ```
 
 - **Stop and ask** when:
@@ -56,10 +61,12 @@ generator README lists them.
 - **Name:** a short lowercase English name, such as `thai` or `scottish-gaelic`. It's the folder `extensions/<name>/`,
   the package `code-spell-checker-<name>` and the commands' ID prefix, so it can't change after release. Ask when the request doesn't make it obvious.
 - **Sample:**
-  - **A language:** the generator fetches the Wikipedia article about Seattle in that language. If that language's
-    Wikipedia has none, the generator stops: ask the user for another article, and pass `--sample-title <title>`.
+  - **A natural language:** the generator fetches the Wikipedia article about Seattle in that language. If that
+    language's Wikipedia has none, the generator stops with an error. Ask the user for another article, and pass
+    `--sample-title <title>`, once for each article.
   - **A word list or a parser:** ask the user for a sample file: text that uses the list's words, or code for the
-    parser, such as a file from the parser's `fixtures` in cspell-parsers. Pass it with `--sample-file <file>`.
+    parser, such as a file from the parser's `fixtures` in cspell-parsers. Pass it with `--sample-file <file>`, once
+    for each file. It can't be combined with `--sample-title`.
 - **Description:** a parser needs `--description`, one sentence for the Marketplace. Ask the user.
 - **License:** the default, `GPL-3.0-or-later`, unless the user asks for another (`--license <spdx>`). It covers the
   extension's own code; each package keeps its own license.
@@ -97,7 +104,7 @@ generator README lists them.
 ### 7. Edit the README
 
 - **Check** when each dictionary is on, in `extensions/<name>/static/dictionaries.json`: for some locales, for some
-  file types, for all, or "off until turned on" (such as `@cspell/dict-vim`), which people turn on with the
+  file types, for all, or "off until turned on" (such as `@cspell/dict-vim`), which users turn on with the
   extension's commands.
 - **Do:** in `extensions/<name>/README.md`, change the text outside the `@@inject` markers: what the extension adds,
   who it's for, and whether it's on once installed, matching that check. Keep the markers and the commands section;
