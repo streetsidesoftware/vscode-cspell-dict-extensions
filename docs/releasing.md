@@ -15,7 +15,7 @@ A `feat:` or `fix:` commit releases the extensions it changes. A `chore:`, `ci:`
 
 ## A new extension
 
-After a new extension's pull request merges, the " 🔗 Update Extension Lists" workflow opens a `ci: Update README / Extensions List` PR. It adds the extension to the README lists and to `release-please-config.json`. Once that PR merges, release-please releases the extension.
+After a new extension's pull request merges, the " 🔗 Update Extension Lists" workflow opens a `ci: Update README / Extensions List` PR. It adds the extension to the README lists and to `release-please-config.json`. It also adds the extension to the Manual Publish and Set Prerelease workflows. That PR releases nothing. Once it merges, release-please includes the extension in its next release PR, with the extension's first `feat:` commit. Merging that release PR publishes the first release.
 
 ## Pre-release mode
 
@@ -23,7 +23,7 @@ While an extension's `package.json` has `"vsce": { "preRelease": true }`, every 
 
 ## Releasing a runtime change
 
-Every synced extension bundles the runtime, so a change to it reaches users only when the extensions are released. `hunspell-syntax` and `timestamp-hover` don't use it. The runtime is a release-please package, and each extension lists it in `devDependencies`. A `fix:` or `feat:` commit that changes `extension-runtime/` releases the runtime, and release-please's `node-workspace` plugin then releases every extension with it. A `chore:` commit releases nothing.
+Every synced extension bundles the runtime, so a change to it reaches users only when the extensions are released. `hunspell-syntax` and `timestamp-hover` don't use it. The runtime is a release-please package, and each extension lists it in `devDependencies`. A `fix:` or `feat:` commit that changes `extension-runtime/` releases the runtime. release-please's `node-workspace` plugin then releases every extension that depends on it. A `chore:` commit releases nothing.
 
 ## Manual publishing
 
