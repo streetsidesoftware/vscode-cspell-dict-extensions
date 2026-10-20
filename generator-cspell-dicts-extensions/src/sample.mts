@@ -1,8 +1,12 @@
+// cspell:ignore replacme
+
+import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { type Article, articleMarkdown } from '../../scripts/lib/wikipedia.mts';
 import type { Prompter } from './prompt.mts';
+import { UsageError } from './questions.mts';
 
 /** A sample the tests spell check. The VS Code test opens the first one. */
 export interface Sample {
@@ -15,8 +19,10 @@ export const defaultSampleTitle = 'Seattle';
 
 export interface SampleContext {
     prompter: Prompter;
-    /** Never ask: a missing article is an error. */
+    /** Never ask: a missing article or sample file is an error. */
     yes: boolean;
+    /** Where sample file paths are relative to. */
+    cwd: string;
     /** Resolves undefined when there's no article; rejects when Wikipedia can't be reached. */
     fetchArticle: (language: string, title: string) => Promise<Article | undefined>;
     log: (message: string) => void;
@@ -68,12 +74,35 @@ export async function fileSamples(files: readonly string[], cwd: string): Promis
     return samples;
 }
 
+/**
+ * A word list's or a parser's sample, which has no default: with `--yes`, `--sample-file` is required. Otherwise,
+ * ask for a file, and without one, write the starter sample.
+ */
+export async function askSampleFile(friendlyName: string, ctx: SampleContext): Promise<Sample[]> {
+    if (ctx.yes) {
+        throw new UsageError(
+            'Missing --sample-file: a word list or a parser needs a sample, such as some of its words or code.',
+        );
+    }
+    const answer = await ctx.prompter.input(
+        'Sample file, such as some of its words or code (empty for a starter samples/sample.md to replace):',
+        undefined,
+        (text) => !text.trim() || existsSync(path.resolve(ctx.cwd, text.trim())) || `${text.trim()} not found.`,
+    );
+    return answer.trim() ? fileSamples([answer.trim()], ctx.cwd) : [starterSample(friendlyName)];
+}
+
+/** The word the starter sample misspells on purpose, so the spell check fails until it's replaced. */
+export const starterMarker = 'replacme';
+
 /** The sample of a word list or a parser, for the person to replace. */
 export function starterSample(friendlyName: string): Sample {
     const text = [
         `# ${friendlyName}`,
         '',
         'Replace this text with what the extension should check: words people write that the dictionary knows, or for a parser, code in its language.',
+        '',
+        `Until you do, the spell check fails on this misspelling: ${starterMarker}`,
         '',
     ].join('\n');
     return { file: 'samples/sample.md', text };

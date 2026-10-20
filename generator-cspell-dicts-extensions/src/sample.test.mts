@@ -8,7 +8,15 @@ import { describe, it } from 'node:test';
 
 import type { Article } from '../../scripts/lib/wikipedia.mts';
 import { noPrompter } from './prompt.mts';
-import { fileSamples, languageSample, sampleFile, type SampleContext, starterSample } from './sample.mts';
+import {
+    askSampleFile,
+    fileSamples,
+    languageSample,
+    sampleFile,
+    type SampleContext,
+    starterMarker,
+    starterSample,
+} from './sample.mts';
 import { scriptedPrompter } from './test-helpers.mts';
 
 function article(title: string): Article {
@@ -20,6 +28,7 @@ function context(titles: string[], overrides: Partial<SampleContext> = {}): Samp
     return {
         prompter: noPrompter,
         yes: true,
+        cwd: '',
         fetchArticle: (_language, title) => Promise.resolve(titles.includes(title) ? article(title) : undefined),
         log: () => undefined,
         ...overrides,
@@ -94,11 +103,40 @@ describe('fileSamples', () => {
     });
 });
 
+describe('askSampleFile', () => {
+    it('requires --sample-file with --yes', async () => {
+        await assert.rejects(askSampleFile('Medical Terms', context([])), /Missing --sample-file/);
+    });
+
+    it('asks for a sample file, and copies it in', async () => {
+        const dir = await mkdtemp(path.join(tmpdir(), 'cspell-samples-'));
+        try {
+            await writeFile(path.join(dir, 'terms.md'), '# Terms\n');
+            const prompter = scriptedPrompter(['missing.md', 'terms.md']);
+            const samples = await askSampleFile('Medical Terms', context([], { prompter, yes: false, cwd: dir }));
+            assert.deepEqual(samples, [{ file: 'samples/terms.md', text: '# Terms\n' }]);
+            assert.deepEqual(
+                prompter.asked.map((q) => q.error),
+                ['missing.md not found.', undefined],
+            );
+        } finally {
+            await rm(dir, { recursive: true, force: true });
+        }
+    });
+
+    it('writes the starter sample without one', async () => {
+        const prompter = scriptedPrompter(['']);
+        const samples = await askSampleFile('Medical Terms', context([], { prompter, yes: false }));
+        assert.deepEqual(samples, [starterSample('Medical Terms')]);
+    });
+});
+
 describe('starterSample', () => {
-    it('is samples/sample.md, for the person to replace', () => {
+    it('is samples/sample.md, with a misspelling so the spell check fails until it is replaced', () => {
         const sample = starterSample('Medical Terms');
         assert.equal(sample.file, 'samples/sample.md');
         assert.match(sample.text, /^# Medical Terms\n\nReplace this text/);
+        assert.ok(sample.text.includes(starterMarker));
     });
 });
 

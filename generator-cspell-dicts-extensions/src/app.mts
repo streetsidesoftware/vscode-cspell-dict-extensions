@@ -12,7 +12,7 @@ import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
 import { askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
-import { defaultSampleTitle, fileSamples, languageSample, type Sample, starterSample } from './sample.mts';
+import { askSampleFile, defaultSampleTitle, fileSamples, languageSample, starterMarker } from './sample.mts';
 import { writeExtension } from './writeExtension.mts';
 
 /** The repository root. */
@@ -87,20 +87,21 @@ async function generate(
         },
     );
 
-    // `npm run` starts in the repository root; INIT_CWD is where it was run from.
-    const given = sampleFiles && (await fileSamples(sampleFiles, process.env['INIT_CWD'] ?? process.cwd()));
-    const samples: [Sample, ...Sample[]] = given?.[0]
-        ? [given[0], ...given.slice(1)]
-        : [
-              answers.kind === 'language'
-                  ? await languageSample(languageOf(answers.locale), sampleTitle ?? defaultSampleTitle, {
-                        prompter,
-                        yes: !!options.yes,
-                        fetchArticle,
-                        log,
-                    })
-                  : starterSample(answers.friendlyName),
-          ];
+    const sampleContext = {
+        prompter,
+        yes: !!options.yes,
+        // `npm run` starts in the repository root; INIT_CWD is where it was run from.
+        cwd: process.env['INIT_CWD'] ?? process.cwd(),
+        fetchArticle,
+        log,
+    };
+    const samples = sampleFiles
+        ? await fileSamples(sampleFiles, sampleContext.cwd)
+        : answers.kind === 'language'
+          ? [await languageSample(languageOf(answers.locale), sampleTitle ?? defaultSampleTitle, sampleContext)]
+          : await askSampleFile(answers.friendlyName, sampleContext);
+    const [firstSample, ...moreSamples] = samples;
+    if (!firstSample) throw new Error('No sample.');
 
     const destDir = path.join(extensionsDir, answers.name);
     if (options.force && existsSync(destDir)) {
@@ -108,7 +109,7 @@ async function generate(
         await rm(destDir, { recursive: true });
     }
     console.log(`Creating extensions/${answers.name}`);
-    await writeExtension(destDir, answers, samples, { log });
+    await writeExtension(destDir, answers, [firstSample, ...moreSamples], { log });
 
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     npm(['install', '-S', ...answers.packages], destDir);
@@ -119,8 +120,8 @@ async function generate(
     npm(['install'], destDir);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
-    if (!given && answers.kind !== 'language') {
-        console.log(styleText('yellow', `Replace the text in extensions/${answers.name}/${samples[0].file}.`));
+    if (firstSample.text.includes(starterMarker)) {
+        console.log(styleText('yellow', `Replace the text in extensions/${answers.name}/${firstSample.file}.`));
     }
 }
 
