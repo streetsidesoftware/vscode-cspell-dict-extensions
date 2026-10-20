@@ -36,7 +36,24 @@
     "watch": "tsdown --watch"
   },
   "contributes": {
-    "commands": []
+    "commands": [
+      {
+        "command": "cSpellExt_medical-terms.enable",
+        "title": "Enable Medical Terms Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_medical-terms.disable",
+        "title": "Disable Medical Terms Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_medical-terms.enableWorkspace",
+        "title": "Enable Medical Terms Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_medical-terms.disableWorkspace",
+        "title": "Disable Medical Terms Spell Checker Dictionary in Workspace"
+      }
+    ]
   },
   "activationEvents": [
     "onStartupFinished"

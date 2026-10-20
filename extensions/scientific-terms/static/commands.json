@@ -1,0 +1,26 @@
+[
+    {
+        "Command": "Enable Scientific Terms Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Scientific Terms Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Scientific Terms Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Scientific Terms Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Enable Mathematics Terms Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Mathematics Terms Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Mathematics Terms Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Mathematics Terms Spell Checker Dictionary in Workspace"
+    }
+]

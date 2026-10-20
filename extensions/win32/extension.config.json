@@ -7,5 +7,28 @@
     "cspell": {
         "import": ["@cspell/dict-win32/cspell-ext.json"]
     },
-    "commands": []
+    "commands": [
+        {
+            "action": "enable",
+            "toggle": "dictionary",
+            "value": "win32"
+        },
+        {
+            "action": "disable",
+            "toggle": "dictionary",
+            "value": "win32"
+        },
+        {
+            "action": "enable",
+            "toggle": "dictionary",
+            "value": "win32",
+            "scope": "workspace"
+        },
+        {
+            "action": "disable",
+            "toggle": "dictionary",
+            "value": "win32",
+            "scope": "workspace"
+        }
+    ]
 }

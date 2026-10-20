@@ -43,7 +43,24 @@
     "watch": "tsdown --watch"
   },
   "contributes": {
-    "commands": []
+    "commands": [
+      {
+        "command": "cSpellExt_win32.enable",
+        "title": "Enable Win32 Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_win32.disable",
+        "title": "Disable Win32 Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_win32.enableWorkspace",
+        "title": "Enable Win32 Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_win32.disableWorkspace",
+        "title": "Disable Win32 Spell Checker Dictionary in Workspace"
+      }
+    ]
   },
   "activationEvents": [
     "onStartupFinished"
