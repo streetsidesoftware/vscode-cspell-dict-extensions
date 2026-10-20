@@ -8,14 +8,14 @@ import { Command, Option } from 'commander';
 import type { ExtensionConfig } from '../../extension-runtime/src/config.ts';
 import { type CSpellPackage, fetchCSpellPackages } from '../../scripts/lib/cspellPackages.mts';
 import { findExistingExtensions } from '../../scripts/lib/existingExtensions.mts';
-import { dictionariesOff } from '../../scripts/lib/syncExtension.mts';
+import { dictionaryStates } from '../../scripts/lib/syncExtension.mts';
 import { fetchArticle } from '../../scripts/lib/wikipedia.mts';
 import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
-import { type Answers, askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
+import { askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
 import { askSampleFile, defaultSampleTitle, fileSamples, languageSample, starterMarker } from './sample.mts';
-import { dictionaryCommands, extensionConfig, json, readme, writeExtension } from './writeExtension.mts';
+import { dictionaryCommands, extensionConfig, json, writeExtension } from './writeExtension.mts';
 
 /** The repository root. */
 const repoRoot = path.resolve(import.meta.dirname, '../..');
@@ -115,7 +115,7 @@ async function generate(
 
     npm(['install', '-S', ...answers.packages], destDir);
     if (answers.kind === 'wordList') {
-        await addDictionaryCommands(destDir, answers, extensionConfig(answers, firstSample.file));
+        await addDictionaryCommands(destDir, extensionConfig(answers, firstSample.file));
     }
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     // The shared package.json fields, then the files the sync owns or derives.
@@ -140,18 +140,21 @@ async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
 }
 
 /**
- * A word list's dictionaries may be off until someone turns them on, i.e. `@cspell/dict-vim`. Give each such
- * dictionary commands to turn it on and off, list them in the README, and turn it on for the samples. Only the
- * installed packages tell.
+ * Give each of a word list's dictionaries commands to turn it on and off. A dictionary may be off until someone turns
+ * it on, i.e. `@cspell/dict-vim`: the samples turn it on. Only the installed packages tell.
  */
-async function addDictionaryCommands(destDir: string, answers: Answers, config: ExtensionConfig): Promise<void> {
-    const off = await dictionariesOff(destDir, config);
-    if (!off.length) return;
-    console.log(`Off until turned on, with commands: ${off.join(', ')}`);
-    const commands = dictionaryCommands(config.name, off);
+async function addDictionaryCommands(destDir: string, config: ExtensionConfig): Promise<void> {
+    const dictionaries = await dictionaryStates(destDir, config);
+    const commands = dictionaryCommands(
+        config.name,
+        dictionaries.map((d) => d.name),
+    );
     await writeFile(path.join(destDir, 'extension.config.json'), json({ ...config, commands }));
-    await writeFile(path.join(destDir, 'samples/cspell.json'), json({ dictionaries: off }));
-    await writeFile(path.join(destDir, 'README.md'), readme(answers, true));
+    const off = dictionaries.filter((d) => d.off).map((d) => d.name);
+    if (off.length) {
+        console.log(`Off until turned on: ${off.join(', ')}`);
+        await writeFile(path.join(destDir, 'samples/cspell.json'), json({ dictionaries: off }));
+    }
 }
 
 function errorMessage(e: unknown): string {
