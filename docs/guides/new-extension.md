@@ -105,11 +105,20 @@ Follow these steps in order:
    ```
 
    It prints each unknown word with its file and line. For each one:
-   - For a name or a word that isn't real, add it to `words` in `samples/cspell.json`.
-   - For a real word, add it to `words` too. Then ask for it in cspell-dicts. See [Adding words](../../CONTRIBUTING.md#adding-words-to-a-language-dictionary).
+   - For a real word the dictionary lacks, list it on a `words` line at the end of the sample. Then ask for it in cspell-dicts. See [Adding words](../../CONTRIBUTING.md#adding-words-to-a-language-dictionary).
+   - For a name or a word that isn't real, list it on an `ignore` line at the end of the sample.
    - Or delete the sentence from the sample.
 
-   For a natural language, keep the `language` setting in `samples/cspell.json`. It turns the language on for the samples.
+   The lines are comments, so they don't show on the page. In Markdown:
+
+   ```markdown
+   <!-- cspell:words Seattleites -->
+   <!-- cspell:ignore Siatail Snohomish -->
+   ```
+
+   In a code file, use the language's line comment, such as `// cspell:words` or, in Lisp, `; cspell:ignore`.
+
+   Don't change `samples/cspell.json`. The generator wrote it. For a natural language, it turns the language on for the samples.
 
 6. **Send your extension to the maintainers.**
    - Commit the new `extensions/<name>/` folder. Push it to your fork.
