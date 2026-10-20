@@ -2,7 +2,7 @@
 
 Generate a VS Code extension for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). An extension includes one or more published packages:
 
-- **Dictionaries:** `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A natural language is enabled by its locale; a word list is on once installed.
+- **Dictionaries:** `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A natural language is enabled by its locale. A word list is on once installed, unless its dictionary is off until turned on, as `@cspell/dict-vim` is; then the extension has commands to turn it on.
 - **Parsers:** `@cspell/parser-*` packages from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
 
 The packages must be published first. To add a new dictionary, add it to cspell-dicts.

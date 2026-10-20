@@ -41,7 +41,8 @@ async function run(): Promise<void> {
         pkg.packageName,
         pkg.name,
         pkg.kind,
-        (pkg.locales.length ? pkg.locales : pkg.fileTypes).join(', ') || 'all',
+        // The list doesn't say whether a dictionary without file types is on for every file or off until turned on.
+        (pkg.locales.length ? pkg.locales : pkg.fileTypes).join(', '),
         pkg.extension,
     ]);
     printTable(['Package', 'Name', 'Kind', 'Locales / file types', 'Extension'], rows);

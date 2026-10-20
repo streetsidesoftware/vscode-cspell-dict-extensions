@@ -13,9 +13,9 @@ import { fetchArticle } from '../../scripts/lib/wikipedia.mts';
 import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
-import { askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
+import { type Answers, askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
 import { askSampleFile, defaultSampleTitle, fileSamples, languageSample, starterMarker } from './sample.mts';
-import { dictionaryCommands, extensionConfig, json, writeExtension } from './writeExtension.mts';
+import { dictionaryCommands, extensionConfig, json, readme, writeExtension } from './writeExtension.mts';
 
 /** The repository root. */
 const repoRoot = path.resolve(import.meta.dirname, '../..');
@@ -114,7 +114,9 @@ async function generate(
     await writeExtension(destDir, answers, [firstSample, ...moreSamples], { log });
 
     npm(['install', '-S', ...answers.packages], destDir);
-    if (answers.kind === 'wordList') await addDictionaryCommands(destDir, extensionConfig(answers, firstSample.file));
+    if (answers.kind === 'wordList') {
+        await addDictionaryCommands(destDir, answers, extensionConfig(answers, firstSample.file));
+    }
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     // The shared package.json fields, then the files the sync owns or derives.
     npm(['run', 'tool:fix-extensions'], repoRoot);
@@ -139,15 +141,17 @@ async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
 
 /**
  * A word list's dictionaries may be off until someone turns them on, i.e. `@cspell/dict-vim`. Give each such
- * dictionary commands to turn it on and off, and turn it on for the samples. Only the installed packages tell.
+ * dictionary commands to turn it on and off, list them in the README, and turn it on for the samples. Only the
+ * installed packages tell.
  */
-async function addDictionaryCommands(destDir: string, config: ExtensionConfig): Promise<void> {
+async function addDictionaryCommands(destDir: string, answers: Answers, config: ExtensionConfig): Promise<void> {
     const off = await dictionariesOff(destDir, config);
     if (!off.length) return;
     console.log(`Off until turned on, with commands: ${off.join(', ')}`);
     const commands = dictionaryCommands(config.name, off);
     await writeFile(path.join(destDir, 'extension.config.json'), json({ ...config, commands }));
     await writeFile(path.join(destDir, 'samples/cspell.json'), json({ dictionaries: off }));
+    await writeFile(path.join(destDir, 'README.md'), readme(answers, true));
 }
 
 function errorMessage(e: unknown): string {
