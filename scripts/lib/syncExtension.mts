@@ -285,7 +285,9 @@ export async function dictionaryStates(extensionDir: string, config: ExtensionCo
                             o.languageSettings?.some((s) => s.dictionaries?.includes(name)),
                     )
                     .flatMap((o) => [o.filename ?? []].flat())
-                    .filter((pattern) => !pattern.startsWith('!')),
+                    // A glob in a dictionary's config is relative to the dictionary's folder: only one that starts
+                    // with `**` reaches the user's files. A negated glob turns nothing on.
+                    .filter((pattern) => pattern.startsWith('**')),
             );
             const fileTypes = unique(settings.flatMap((s) => splitList(s.languageId)));
             const all =
@@ -311,13 +313,8 @@ export function sampleTurnsOn(file: string, states: readonly DictionaryState[]):
             state.all ||
             state.off ||
             state.fileTypes.some((id) => fileTypes.includes(id)) ||
-            state.filePatterns.some((pattern) => path.posix.matchesGlob(posixFile, cspellGlob(pattern))),
+            state.filePatterns.some((pattern) => path.posix.matchesGlob(posixFile, pattern)),
     );
-}
-
-/** As cspell reads a glob, gitignore style: one without a `/`, such as `*.vim`, matches a file in any folder. */
-function cspellGlob(pattern: string): string {
-    return pattern.includes('/') ? pattern : `**/${pattern}`;
 }
 
 function splitList(list: string | string[] | undefined): string[] {

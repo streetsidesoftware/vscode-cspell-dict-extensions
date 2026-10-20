@@ -173,7 +173,8 @@ describe('syncExtension', () => {
             ],
             dictionaries: ['always'],
             overrides: [
-                { filename: ['**/*.{el,lisp}', '!**/*.lisp.bak'], dictionaries: ['lisp'] },
+                // Only a glob that starts with `**` reaches the user's files.
+                { filename: ['**/*.{el,lisp}', '!**/*.lisp.bak', '*.lsp', '/x.l'], dictionaries: ['lisp'] },
                 { filename: '**/*.html', languageSettings: [{ languageId: '*', dictionaries: ['web-only'] }] },
             ],
             languageSettings: [
@@ -374,10 +375,10 @@ describe('sampleTurnsOn', () => {
         assert.equal(sampleTurnsOn('samples/a.txt', [state({ off: true })]), true);
     });
 
-    it('matches a file type, or a glob as cspell reads it', () => {
+    it('matches a file type or a glob', () => {
         assert.equal(sampleTurnsOn('samples/a.clj', [state({ fileTypes: ['clojure'] })]), true);
         assert.equal(sampleTurnsOn('samples/a.txt', [state({ fileTypes: ['clojure'] })]), false);
-        const vim = [state({ filePatterns: ['*.vim'] })];
+        const vim = [state({ filePatterns: ['**/*.vim'] })];
         assert.equal(sampleTurnsOn('samples/a.vim', vim), true);
         assert.equal(sampleTurnsOn(path.join('samples', 'a.vim'), vim), true);
         assert.equal(sampleTurnsOn('samples/a.vimx', vim), false);
