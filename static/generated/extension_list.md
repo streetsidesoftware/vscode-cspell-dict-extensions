@@ -55,16 +55,13 @@
 
 - [CSpell Bundled Dictionaries](../../extensions/cspell-bundled-dictionaries#readme) - Adds the dictionaries bundled with CSpell to Code Spell Checker.
 
-### Syntax Highlighters
+### Other
 
 - [hunspell](../../extensions/hunspell-syntax#readme) - Hunspell Syntax Highlighting support
+- [Timestamp Hover](../../extensions/timestamp-hover#readme) - Display the date and time of a timestamp.
 
 ### Technical Terms
 
 - [Medical Terms](../../extensions/medical-terms#readme) - Adds the Medical Terms dictionary to Code Spell Checker.
 - [Scientific Terms](../../extensions/scientific-terms#readme) - Adds the Scientific Terms dictionary to Code Spell Checker.
 - [Win32](../../extensions/win32#readme) - Adds the Win32 dictionary to Code Spell Checker.
-
-### Other
-
-- [Timestamp Hover](../../extensions/timestamp-hover#readme) - Display the date and time of a timestamp.

@@ -68,19 +68,16 @@ See Also:
 
 - [CSpell Bundled Dictionaries](extensions/cspell-bundled-dictionaries#readme) - Adds the dictionaries bundled with CSpell to Code Spell Checker.
 
-### Syntax Highlighters
+### Other
 
 - [hunspell](extensions/hunspell-syntax#readme) - Hunspell Syntax Highlighting support
+- [Timestamp Hover](extensions/timestamp-hover#readme) - Display the date and time of a timestamp.
 
 ### Technical Terms
 
 - [Medical Terms](extensions/medical-terms#readme) - Adds the Medical Terms dictionary to Code Spell Checker.
 - [Scientific Terms](extensions/scientific-terms#readme) - Adds the Scientific Terms dictionary to Code Spell Checker.
 - [Win32](extensions/win32#readme) - Adds the Win32 dictionary to Code Spell Checker.
-
-### Other
-
-- [Timestamp Hover](extensions/timestamp-hover#readme) - Display the date and time of a timestamp.
 
 <!--- @@inject-end: static/generated/extension_list.md --->
 
@@ -145,19 +142,16 @@ See Also:
 
 - [CSpell Bundled Dictionaries](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-cspell-bundled-dictionaries) - Adds the dictionaries bundled with CSpell to Code Spell Checker.
 
-### Syntax Highlighters
+### Other
 
 - [hunspell](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.hunspell) - Hunspell Syntax Highlighting support
+- [Timestamp Hover](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.timestamp-hover) - Display the date and time of a timestamp.
 
 ### Technical Terms
 
 - [Medical Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-medical-terms) - Adds the Medical Terms dictionary to Code Spell Checker.
 - [Scientific Terms](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-scientific-terms) - Adds the Scientific Terms dictionary to Code Spell Checker.
 - [Win32](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-win32) - Adds the Win32 dictionary to Code Spell Checker.
-
-### Other
-
-- [Timestamp Hover](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.timestamp-hover) - Display the date and time of a timestamp.
 
 <!--- @@inject-end: static/generated/marketplace_extensions.md --->
 
