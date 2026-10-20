@@ -348,14 +348,15 @@ function overrideRule(override: Override, source: string): Rule {
  */
 export function sampleTurnsOn(file: string, states: readonly DictionaryState[]): boolean {
     const posixFile = file.split(path.sep).join('/');
-    const fileTypes = findMatchingFileTypes(posixFile);
-    return states.some(
-        (state) =>
-            state.all ||
-            state.off ||
-            state.fileTypes.some((id) => fileTypes.includes(id)) ||
-            state.filePatterns.some((pattern) => path.posix.matchesGlob(posixFile, pattern)),
-    );
+    return states.some((state) => turnsOn(state, posixFile));
+}
+
+/** Whether a file turns a dictionary on, by its file type or its name. */
+function turnsOn(state: DictionaryState, file: string): boolean {
+    if (state.all || state.off) return true;
+    const fileTypes = findMatchingFileTypes(file);
+    if (state.fileTypes.some((id) => fileTypes.includes(id))) return true;
+    return state.filePatterns.some((pattern) => path.posix.matchesGlob(file, pattern));
 }
 
 function splitList(list: string | string[] | undefined): string[] {

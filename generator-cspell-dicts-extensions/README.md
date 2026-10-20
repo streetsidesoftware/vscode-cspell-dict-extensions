@@ -79,6 +79,7 @@ The generator is written in TypeScript and runs directly with Node.js (type stri
 - `src/locales.mts` — writes locales as BCP 47, and suggests a language's native and English names.
 - `src/sample.mts` — chooses the samples: the files given, a language's Wikipedia article, or a starter file to replace.
 - `src/writeExtension.mts` — writes `extension.config.json` and the starter files.
+- `src/wordList.mts` — sets up a word list from its installed packages: the sample check, the commands, the README sentence and the words from the package names.
 - `../scripts/lib/cspellPackages.mts`, `wikipedia.mts` and `existingExtensions.mts` — the package lists, the Wikipedia sample and the packages that already have an extension, shared with `npm run list:packages` and `fetch:sample`.
 - `src/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.
 

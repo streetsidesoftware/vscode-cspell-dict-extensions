@@ -35,23 +35,28 @@ export function describeFileTypes(state: DictionaryState): string {
 export function whenOn(state: DictionaryState): string {
     if (state.off) return 'off until you turn it on';
     if (state.all) return 'on for every file';
-    const types = state.fileTypes.map(code);
-    const byType = types.length ? `${andList(types)} files` : '';
-    const byName = describeFilePatterns(state.filePatterns);
-    return `on for ${[byType, byName].filter(Boolean).join(', and for ')}`;
+    const byFileType = state.fileTypes.length ? `${andList(state.fileTypes.map(code))} files` : '';
+    const byFileName = describeFilePatterns(state.filePatterns);
+    return `on for ${[byFileType, byFileName].filter(Boolean).join(', and for ')}`;
 }
 
 /** File name globs as files: `**\/*.{el,lisp}` is "`.el` and `.lisp` files". Other globs are shown as they are. */
 export function describeFilePatterns(patterns: readonly string[]): string {
-    const names = patterns.flatMap((pattern) => {
-        const ext = /^(?:\*\*\/)?\*\.(?:\{([\w.,-]+)\}|([\w.-]+))$/.exec(pattern);
-        if (!ext) return [code(pattern)];
-        return (ext[1] ?? ext[2] ?? '').split(',').map((e) => code(`.${e.trim()}`));
-    });
+    const names = patterns.flatMap(
+        (pattern) => extensionsOf(pattern)?.map((ext) => code(`.${ext}`)) ?? [code(pattern)],
+    );
     return names.length ? `${andList(names)} files` : '';
 }
 
-function andList(items: readonly string[]): string {
+/** The file extensions a glob matches, such as `['el', 'lisp']` for `**\/*.{el,lisp}`. Undefined for other globs. */
+function extensionsOf(pattern: string): string[] | undefined {
+    const match = /^(?:\*\*\/)?\*\.(?:\{(?<list>[\w.,-]+)\}|(?<one>[\w.-]+))$/.exec(pattern);
+    if (!match?.groups) return undefined;
+    return (match.groups['list'] ?? match.groups['one'] ?? '').split(',');
+}
+
+/** `a`, `a and b`, or `a, b and c`. */
+export function andList(items: readonly string[]): string {
     return items.length > 1 ? `${items.slice(0, -1).join(', ')} and ${items.at(-1)}` : (items[0] ?? '');
 }
 

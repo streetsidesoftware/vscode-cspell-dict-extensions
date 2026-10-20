@@ -5,7 +5,7 @@ import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/src/config.ts';
-import { type DictionaryState, whenOn } from '../../scripts/lib/dictionaryState.mts';
+import { andList, type DictionaryState, whenOn } from '../../scripts/lib/dictionaryState.mts';
 import { languageOf } from './locales.mts';
 import { type Answers, defaultLicense, type Language } from './questions.mts';
 import type { Sample } from './sample.mts';
@@ -206,17 +206,22 @@ function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): str
  * same way share a clause.
  */
 export function installedSentence(dictionaries: readonly DictionaryState[]): string {
-    const groups = new Map<string, string[]>();
-    for (const d of dictionaries) groups.set(whenOn(d), [...(groups.get(whenOn(d)) ?? []), `\`${d.name}\``]);
-    const clauses = [...groups].map(([when, names]) =>
-        names.length > 1 ? `the ${andList(names)} dictionaries are ${when}` : `the ${names[0]} dictionary is ${when}`,
+    const byWhen = Map.groupBy(dictionaries, whenOn);
+    const clauses = [...byWhen].map(([when, group]) =>
+        clause(
+            group.map((d) => `\`${d.name}\``),
+            when,
+        ),
     );
     const joined = clauses.length > 1 ? `${clauses.slice(0, -1).join(', ')}, and ${clauses.at(-1)}` : clauses[0];
     return `Once this extension is installed, ${joined}.`;
 }
 
-function andList(items: readonly string[]): string {
-    return items.length > 1 ? `${items.slice(0, -1).join(', ')} and ${items.at(-1)}` : (items[0] ?? '');
+/** "the `a` dictionary is …", or "the `a` and `b` dictionaries are …". */
+function clause(names: string[], when: string): string {
+    return names.length > 1
+        ? `the ${andList(names)} dictionaries are ${when}`
+        : `the ${names[0]} dictionary is ${when}`;
 }
 
 /**

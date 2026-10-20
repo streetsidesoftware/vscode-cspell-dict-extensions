@@ -1,22 +1,19 @@
 // cspell:ignore elisp
 
 import { existsSync } from 'node:fs';
-import { readFile, rm, writeFile } from 'node:fs/promises';
+import { rm } from 'node:fs/promises';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
 import { Command, Option } from 'commander';
 
-import type { ExtensionConfig } from '../../extension-runtime/src/config.ts';
 import { type CSpellPackage, fetchCSpellPackages } from '../../scripts/lib/cspellPackages.mts';
 import { findExistingExtensions } from '../../scripts/lib/existingExtensions.mts';
-import { describeFileTypes } from '../../scripts/lib/dictionaryState.mts';
-import { dictionaryStates, sampleTurnsOn } from '../../scripts/lib/syncExtension.mts';
 import { fetchArticle } from '../../scripts/lib/wikipedia.mts';
-import { npm, npmOutput } from './exec.mts';
+import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
-import { inquirerPrompter, noPrompter } from './prompt.mts';
-import { type Answers, askQuestions, defaultLicense, kinds, type Options, UsageError } from './questions.mts';
+import { inquirerPrompter, noPrompter, type Prompter } from './prompt.mts';
+import { type Answers, askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
 import {
     askSampleFile,
     defaultSampleTitle,
@@ -25,14 +22,8 @@ import {
     type Sample,
     starterMarker,
 } from './sample.mts';
-import {
-    dictionaryCommands,
-    extensionConfig,
-    installedSentence,
-    json,
-    readme,
-    writeExtension,
-} from './writeExtension.mts';
+import { addNameWords, setUpWordList } from './wordList.mts';
+import { extensionConfig, writeExtension } from './writeExtension.mts';
 
 /** The repository root. */
 const repoRoot = path.resolve(import.meta.dirname, '../..');
@@ -110,19 +101,7 @@ async function generate(
         },
     );
 
-    const sampleContext = {
-        prompter,
-        yes: !!options.yes,
-        // `npm run` starts in the repository root; INIT_CWD is where it was run from.
-        cwd: process.env['INIT_CWD'] ?? process.cwd(),
-        fetchArticle,
-        log,
-    };
-    const samples = sampleFiles
-        ? await fileSamples(sampleFiles, sampleContext.cwd)
-        : answers.kind === 'language'
-          ? await languageSamples(languageOf(answers.locale), sampleTitle, sampleContext)
-          : await askSampleFile(answers.friendlyName, sampleContext);
+    const samples = await chooseSamples(answers, sampleFiles, sampleTitle, prompter, !!options.yes);
     const [firstSample, ...moreSamples] = samples;
     if (!firstSample) throw new Error('No sample.');
 
@@ -137,7 +116,6 @@ async function generate(
     npm(['install', '-S', ...answers.packages], destDir);
     const config = extensionConfig(answers, firstSample.file);
     if (answers.kind === 'wordList') {
-        // The samples the user gave, on the command line or at the prompt; not the starter sample.
         const given = samples.filter((sample) => !sample.text.includes(starterMarker));
         await setUpWordList(destDir, answers, config, given);
     }
@@ -147,12 +125,31 @@ async function generate(
     npm(['run', 'sync:extensions', '--', answers.name], repoRoot);
     // Record the runtime dependency the sync added in package-lock.json.
     npm(['install'], destDir);
-    await addNameWords(destDir, answers, config);
+    await addNameWords(destDir, config, repoRoot);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
     if (firstSample.text.includes(starterMarker)) {
         console.log(styleText('yellow', `Replace the text in extensions/${answers.name}/${firstSample.file}.`));
     }
+}
+
+/**
+ * The extension's samples: the files given with `--sample-file`; for a natural language, Wikipedia articles; for a word
+ * list or a parser, a file asked for, or the starter sample.
+ */
+async function chooseSamples(
+    answers: Answers,
+    sampleFiles: string[] | undefined,
+    sampleTitles: string[] | undefined,
+    prompter: Prompter,
+    yes: boolean,
+): Promise<Sample[]> {
+    // `npm run` starts in the repository root; INIT_CWD is where it was run from.
+    const cwd = process.env['INIT_CWD'] ?? process.cwd();
+    const context = { prompter, yes, cwd, fetchArticle, log: (message: string) => console.log(message) };
+    if (sampleFiles) return fileSamples(sampleFiles, cwd);
+    if (answers.kind === 'language') return languageSamples(languageOf(answers.locale), sampleTitles, context);
+    return askSampleFile(answers.friendlyName, context);
 }
 
 async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
@@ -162,90 +159,6 @@ async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
         console.log(styleText('yellow', `Could not fetch the package lists (${errorMessage(e)}).`));
         return undefined;
     }
-}
-
-/**
- * A word list's setup, from its installed packages, which alone tell what turns each dictionary on:
- * - a given sample must be a file that turns a dictionary on, such as `.el` for `@cspell/dict-elisp`;
- * - each dictionary gets commands to turn it on and off;
- * - a dictionary that's off until turned on, such as `@cspell/dict-vim`'s, is turned on for the samples;
- * - the README says when each dictionary is on.
- * @param given - the samples the user gave, with `--sample-file` or at the prompt.
- */
-async function setUpWordList(
-    destDir: string,
-    answers: Answers,
-    config: ExtensionConfig,
-    given: readonly Sample[],
-): Promise<void> {
-    const dictionaries = await dictionaryStates(destDir, config);
-    const wrong = given.filter((sample) => !sampleTurnsOn(sample.file, dictionaries));
-    if (wrong.length) {
-        await rm(destDir, { recursive: true });
-        const when = dictionaries.map((d) => `${d.name}: ${describeFileTypes(d).replaceAll('`', '')}`).join('; ');
-        throw new UsageError(
-            `${wrong.map((s) => path.basename(s.file)).join(', ')} turns on no dictionary of this extension (${when}). ` +
-                "Give a --sample-file of one of those file types. The extension's folder was removed.",
-        );
-    }
-    const commands = dictionaryCommands(
-        config.name,
-        dictionaries.map((d) => d.name),
-    );
-    await writeFile(path.join(destDir, 'extension.config.json'), json({ ...config, commands }));
-    const off = dictionaries.filter((d) => d.off).map((d) => d.name);
-    if (off.length) {
-        console.log(`Off until turned on: ${off.join(', ')}`);
-        await writeFile(path.join(destDir, 'samples/cspell.json'), json({ dictionaries: off }));
-    }
-    await writeFile(path.join(destDir, 'README.md'), readme(answers, installedSentence(dictionaries)));
-}
-
-/**
- * Add the words of the dictionary and package names that cspell doesn't know, such as `elisp`, to `words` in the
- * extension's `cspell.config.yaml`, so its own spell check passes.
- */
-async function addNameWords(destDir: string, answers: Answers, config: ExtensionConfig): Promise<void> {
-    const names = [...answers.packages, ...(await dictionaryStates(destDir, config)).map((d) => d.name)];
-    const nameWords = new Set(names.flatMap((n) => n.toLowerCase().split(/[^\p{L}]+/u)).filter(Boolean));
-    const relative = path.relative(repoRoot, destDir).split(path.sep).join('/');
-    const { stdout, stderr, status } = npmOutput(
-        [
-            'exec',
-            '--',
-            'cspell',
-            '--no-progress',
-            '--no-summary',
-            '--words-only',
-            '--unique',
-            '--dot',
-            `${relative}/**`,
-        ],
-        repoRoot,
-    );
-    if (status !== 0 && status !== 1) {
-        console.log(styleText('yellow', `Could not spell check the extension's files: ${stderr.trim()}`));
-        return;
-    }
-    const unknown = unique(stdout.split(/\r?\n/).map((w) => w.trim()))
-        .filter((w) => nameWords.has(w.toLowerCase()))
-        .toSorted();
-    if (!unknown.length) return;
-    const file = path.join(destDir, 'cspell.config.yaml');
-    const yaml = await readFile(file, 'utf8');
-    if (/^words:/m.test(yaml)) {
-        console.log(
-            styleText('yellow', `Add to words in extensions/${answers.name}/cspell.config.yaml: ${unknown.join(', ')}`),
-        );
-        return;
-    }
-    console.log(`Words from the package names, added to cspell.config.yaml: ${unknown.join(', ')}`);
-    const words = `words:\n${unknown.map((w) => `  - ${w}\n`).join('')}`;
-    await writeFile(file, `${yaml}${yaml.endsWith('\n') ? '' : '\n'}${words}`);
-}
-
-function unique(values: string[]): string[] {
-    return [...new Set(values)].filter(Boolean);
 }
 
 function errorMessage(e: unknown): string {
