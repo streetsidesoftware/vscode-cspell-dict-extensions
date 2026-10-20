@@ -15,6 +15,7 @@ const dictionaries = JSON.stringify([
         name: 'Thai Language',
         packageName: '@cspell/dict-th-th',
         description: 'Thai Language dictionary for cspell.',
+        cspell: false,
         categories: ['natural-language'],
         dictionaries: [{ name: 'th-th', locales: ['th', 'th-th'] }],
     },
@@ -22,6 +23,7 @@ const dictionaries = JSON.stringify([
         name: 'Fullstack',
         packageName: '@cspell/dict-fullstack',
         description: 'Common words encountered during fullstack development.',
+        cspell: true,
         categories: ['programming'],
         dictionaries: [{ name: 'fullstack', fileTypes: ['css', 'html'] }],
     },
@@ -49,6 +51,7 @@ describe('cspellPackages', () => {
                 kind: 'language',
                 locales: ['th', 'th-th'],
                 fileTypes: [],
+                withCSpell: false,
             },
             {
                 packageName: '@cspell/dict-fullstack',
@@ -57,6 +60,7 @@ describe('cspellPackages', () => {
                 kind: 'wordList',
                 locales: [],
                 fileTypes: ['css', 'html'],
+                withCSpell: true,
             },
             {
                 packageName: '@cspell/dict-cspell-bundle',
@@ -65,6 +69,7 @@ describe('cspellPackages', () => {
                 kind: 'bundle',
                 locales: [],
                 fileTypes: [],
+                withCSpell: false,
             },
         ]);
     });

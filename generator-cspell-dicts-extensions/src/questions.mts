@@ -227,15 +227,15 @@ function isCSpellPackage(name: string): boolean {
 }
 
 /**
- * The packages that match the search term, by package name, name or description. Packages that already have an
- * extension come last.
+ * The packages that match the search term, by package name, name or description, leaving out those that ship with
+ * cspell. Packages that already have an extension come last.
  */
 export function filterPackages(
     packages: readonly CSpellPackage[],
     term: string,
     existing: ReadonlyMap<string, string>,
 ): CSpellPackage[] {
-    const matches = matchPackages(packages, [term]);
+    const matches = matchPackages(packages, [term]).filter((pkg) => !pkg.withCSpell);
     return [
         ...matches.filter((pkg) => !existing.has(pkg.packageName)),
         ...matches.filter((pkg) => existing.has(pkg.packageName)),
@@ -247,9 +247,11 @@ function checkPackage(name: string, ctx: Context): void {
     if (!isCSpellPackage(name)) {
         throw new UsageError(`${name} is not a @cspell/dict-* or @cspell/parser-* package. ${notPublished}`);
     }
-    if (ctx.packages && !ctx.packages.some((pkg) => pkg.packageName === name)) {
+    const pkg = ctx.packages?.find((p) => p.packageName === name);
+    if (ctx.packages && !pkg) {
         throw new UsageError(`${name} is not in cspell-dicts or cspell-parsers. ${notPublished}`);
     }
+    if (pkg?.withCSpell) throw new UsageError(`${name} ships with cspell, so it needs no extension.`);
 }
 
 function packageKind(name: string, ctx: Context): PackageKind {

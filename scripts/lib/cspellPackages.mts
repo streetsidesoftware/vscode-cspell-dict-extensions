@@ -22,6 +22,8 @@ export interface CSpellPackage {
     locales: string[];
     /** The file types it is for. Empty when it is for every file type. */
     fileTypes: string[];
+    /** It ships with cspell, so it needs no extension. */
+    withCSpell: boolean;
 }
 
 /** Fetch a URL as text. Rejects on a network error or an HTTP error status. */
@@ -38,6 +40,8 @@ interface DictionaryPackageEntry {
     name: string;
     packageName: string;
     description?: string;
+    /** True when the package ships with cspell. */
+    cspell?: boolean;
     categories?: string[];
     isBundle?: boolean;
     dictionaries?: { locales?: string[]; fileTypes?: string[] }[];
@@ -66,6 +70,7 @@ export function parseDictionaryPackages(json: string): CSpellPackage[] {
             kind,
             locales: kind === 'language' ? unique(dictionaries.flatMap((d) => d.locales ?? [])) : [],
             fileTypes: unique(dictionaries.flatMap((d) => d.fileTypes ?? [])),
+            withCSpell: entry.cspell === true,
         };
     });
 }
@@ -88,6 +93,7 @@ export function parseParserPackages(csv: string): CSpellPackage[] {
                 kind: 'parser' as const,
                 locales: [],
                 fileTypes,
+                withCSpell: false,
             },
         ];
     });

@@ -17,6 +17,7 @@ const language = (packageName: string, name: string, locales: string[]): CSpellP
     kind: 'language',
     locales,
     fileTypes: [],
+    withCSpell: false,
 });
 
 /** The package lists, as cspell-dicts and cspell-parsers publish them. */
@@ -33,6 +34,7 @@ const packages: CSpellPackage[] = [
         kind: 'wordList',
         locales: [],
         fileTypes: [],
+        withCSpell: false,
     },
     {
         packageName: '@cspell/dict-cspell-bundle',
@@ -41,6 +43,16 @@ const packages: CSpellPackage[] = [
         kind: 'bundle',
         locales: [],
         fileTypes: [],
+        withCSpell: false,
+    },
+    {
+        packageName: '@cspell/dict-en_us',
+        name: 'English - American',
+        description: 'American English dictionary for cspell.',
+        kind: 'language',
+        locales: ['en', 'en-US'],
+        fileTypes: [],
+        withCSpell: true,
     },
     {
         packageName: '@cspell/parser-typescript',
@@ -49,6 +61,7 @@ const packages: CSpellPackage[] = [
         kind: 'parser',
         locales: [],
         fileTypes: ['typescript'],
+        withCSpell: false,
     },
 ];
 
@@ -282,6 +295,7 @@ describe('askQuestions', () => {
                 /not in cspell-dicts or cspell-parsers/,
             );
             await assert.rejects(ask({ packages: ['@cspell/dict-cspell-bundle'], yes: true }), /is a bundle/);
+            await assert.rejects(ask({ packages: ['@cspell/dict-en_us'], yes: true }), /ships with cspell/);
         });
 
         it('rejects options that do not fit', async () => {

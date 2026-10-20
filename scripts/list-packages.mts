@@ -5,7 +5,7 @@
  *
  * Usage: `npm run list:packages -- [words…] [--missing] [--json]`
  * - `words`: only the packages whose name, English name or description contains every word, i.e. `thai`.
- * - `--missing`: only the packages no extension wraps yet.
+ * - `--missing`: only the packages no extension wraps yet, leaving out those that ship with cspell.
  * - `--json`: print JSON instead of a table.
  */
 
@@ -16,7 +16,7 @@ import { findExistingExtensions } from './lib/existingExtensions.mts';
 import { extensionsDir } from './lib/repo.mts';
 
 export interface ListedPackage extends CSpellPackage {
-    /** The extension that wraps the package, i.e. `swedish`. Empty when there is none. */
+    /** The extension that wraps the package, i.e. `swedish`, or `ships with cspell`. Empty when there is none. */
     extension: string;
 }
 
@@ -27,7 +27,10 @@ async function run(): Promise<void> {
     });
     const existing = await findExistingExtensions(extensionsDir);
     const listed: ListedPackage[] = filterPackages(await fetchCSpellPackages(), positionals)
-        .map((pkg) => ({ ...pkg, extension: existing.get(pkg.packageName) ?? '' }))
+        .map((pkg) => ({
+            ...pkg,
+            extension: existing.get(pkg.packageName) ?? (pkg.withCSpell ? 'ships with cspell' : ''),
+        }))
         .filter((pkg) => !values.missing || !pkg.extension);
 
     if (values.json) {
