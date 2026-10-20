@@ -5,9 +5,11 @@ import { styleText } from 'node:util';
 
 import { Command, Option } from 'commander';
 
+import { type CSpellPackage, fetchCSpellPackages } from '../../scripts/lib/cspellPackages.mts';
+import { findExistingExtensions } from '../../scripts/lib/existingExtensions.mts';
+import { articleMarkdown, fetchArticle } from '../../scripts/lib/wikipedia.mts';
 import { npm } from './exec.mts';
-import { findExistingExtensions } from './existingExtensions.mts';
-import { fetchJson } from './npm.mts';
+import { languageOf } from './locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
 import { askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
 import { writeExtension } from './writeExtension.mts';
@@ -58,7 +60,7 @@ async function generate(
         { ...options, name, packages },
         {
             prompter: options.yes ? noPrompter : inquirerPrompter,
-            fetchJson,
+            packages: await readPackageLists(),
             extensionsDir,
             existing: await findExistingExtensions(extensionsDir),
             log: (message) => console.log(message),
@@ -71,7 +73,8 @@ async function generate(
         await rm(destDir, { recursive: true });
     }
     console.log(`Creating extensions/${answers.name}`);
-    await writeExtension(destDir, answers, { log: (message) => console.log(message) });
+    const sample = answers.kind === 'language' ? await fetchSample(languageOf(answers.locale)) : undefined;
+    await writeExtension(destDir, answers, { sample, log: (message) => console.log(message) });
 
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     npm(['install', '-S', ...answers.packages], destDir);
@@ -82,4 +85,34 @@ async function generate(
     npm(['install'], destDir);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
+}
+
+async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
+    try {
+        return await fetchCSpellPackages();
+    } catch (e) {
+        console.log(styleText('yellow', `Could not fetch the package lists (${errorMessage(e)}).`));
+        return undefined;
+    }
+}
+
+/** The Wikipedia article about Seattle in the language, as the sample. */
+async function fetchSample(language: string): Promise<string | undefined> {
+    try {
+        const article = await fetchArticle(language, 'Seattle');
+        if (article) {
+            console.log(`Sample: ${article.url}`);
+            return articleMarkdown(article);
+        }
+        console.log(
+            styleText('yellow', `No ${language}.wikipedia.org article about Seattle; write the sample by hand.`),
+        );
+    } catch (e) {
+        console.log(styleText('yellow', `Could not fetch a sample from Wikipedia (${errorMessage(e)}).`));
+    }
+    return undefined;
+}
+
+function errorMessage(e: unknown): string {
+    return e instanceof Error ? e.message : String(e);
 }

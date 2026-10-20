@@ -5,60 +5,65 @@ import path from 'node:path';
 import { after, before, describe, it } from 'node:test';
 import { stripVTControlCharacters } from 'node:util';
 
-import { cspellExtUrl } from './cspellExt.mts';
-import type { FetchJson } from './npm.mts';
+import type { CSpellPackage } from '../../scripts/lib/cspellPackages.mts';
 import { noPrompter, type Prompter } from './prompt.mts';
 import { type Answers, askQuestions, type Context, filterPackages, type Options, UsageError } from './questions.mts';
-import { fakeFetch, scriptedPrompter } from './test-helpers.mts';
+import { scriptedPrompter } from './test-helpers.mts';
 
-const packages = {
-    '@cspell/dict-bn': {
-        description: 'Bengali dictionary for cspell.',
-        cspellExt: { languageSettings: [{ languageId: '*', locale: 'bn', dictionaries: ['bn'] }] },
-    },
-    '@cspell/dict-sv': {
-        description: 'Swedish dictionary for CSpell.',
-        cspellExt: { languageSettings: [{ languageId: '*', locale: 'sv,sv_SE', dictionaries: ['sv'] }] },
-    },
-    '@cspell/dict-fr-reforme': {
-        description: 'Français Réforme 1990 dictionary for cspell.',
-        cspellExt: { languageSettings: [{ languageId: '*', locale: 'fr,fr-fr,fr-90', dictionaries: ['fr-90'] }] },
-    },
-    '@cspell/dict-sr-cyrl': {
-        description: 'Serbian Cyrillic dictionary for cspell.',
-        cspellExt: { languageSettings: [{ languageId: '*', locale: 'sr,sr-Cyrl', dictionaries: ['sr-cyrl'] }] },
-    },
-    '@cspell/dict-sr-latn': {
-        description: 'Serbian Latin dictionary for cspell.',
-        cspellExt: { languageSettings: [{ languageId: ['*'], locale: ['sr', 'sr-Latn'], dictionaries: ['sr-latn'] }] },
-    },
-    '@cspell/dict-medicalterms': {
+const language = (packageName: string, name: string, locales: string[]): CSpellPackage => ({
+    packageName,
+    name,
+    description: `${name} dictionary for cspell.`,
+    kind: 'language',
+    locales,
+    fileTypes: [],
+    withCSpell: false,
+});
+
+/** The package lists, as cspell-dicts and cspell-parsers publish them. */
+const packages: CSpellPackage[] = [
+    language('@cspell/dict-bn', 'Bengali', ['bn']),
+    language('@cspell/dict-sv', 'Swedish', ['sv', 'sv_SE']),
+    language('@cspell/dict-fr-reforme', 'Français Réforme 1990', ['fr', 'fr-fr', 'fr-90']),
+    language('@cspell/dict-sr-cyrl', 'Serbian (Cyrillic)', ['sr', 'sr-Cyrl']),
+    language('@cspell/dict-sr-latn', 'Serbian (Latin)', ['sr', 'sr-Latn']),
+    {
+        packageName: '@cspell/dict-medicalterms',
+        name: 'Medical Terms',
         description: 'Medical Terms dictionary for cspell.',
-        cspellExt: { dictionaryDefinitions: [{ name: 'medical terms' }], dictionaries: ['medical terms'] },
+        kind: 'wordList',
+        locales: [],
+        fileTypes: [],
+        withCSpell: false,
     },
-    '@cspell/parser-typescript': { description: 'A TypeScript parser plugin for cspell.', cspellExt: undefined },
-    '@cspell/parser-python-strings-comments': {
-        description: 'A strings-and-comments parser plugin for cspell covering Python.',
-        cspellExt: undefined,
+    {
+        packageName: '@cspell/dict-cspell-bundle',
+        name: 'CSpell Bundle',
+        description: 'Dictionaries bundled with cspell.',
+        kind: 'bundle',
+        locales: [],
+        fileTypes: [],
+        withCSpell: false,
     },
-};
-
-const searchUrl = 'https://registry.npmjs.org/-/v1/search?text=scope%3Acspell%20keywords%3Acspell&size=250&from=0';
-
-function registry(): Record<string, unknown> {
-    const responses: Record<string, unknown> = {
-        [searchUrl]: {
-            total: 8,
-            objects: Object.entries(packages).map(([name, p]) => ({ package: { name, description: p.description } })),
-        },
-    };
-    for (const [name, p] of Object.entries(packages)) {
-        responses[`https://registry.npmjs.org/${name.replaceAll('/', '%2f')}`] = { name, description: p.description };
-        if (p.cspellExt) responses[cspellExtUrl(name)] = p.cspellExt;
-    }
-    responses['https://registry.npmjs.org/@cspell%2fdict-missing'] = 404;
-    return responses;
-}
+    {
+        packageName: '@cspell/dict-en_us',
+        name: 'English - American',
+        description: 'American English dictionary for cspell.',
+        kind: 'language',
+        locales: ['en', 'en-US'],
+        fileTypes: [],
+        withCSpell: true,
+    },
+    {
+        packageName: '@cspell/parser-typescript',
+        name: 'typescript',
+        description: 'Parser for typescript.',
+        kind: 'parser',
+        locales: [],
+        fileTypes: ['typescript'],
+        withCSpell: false,
+    },
+];
 
 describe('askQuestions', () => {
     let extensionsDir = '';
@@ -70,11 +75,14 @@ describe('askQuestions', () => {
 
     after(() => rm(extensionsDir, { recursive: true, force: true }));
 
-    function context(prompter: Prompter, fetch: FetchJson = fakeFetch(registry())): Context & { logged: string[] } {
+    function context(
+        prompter: Prompter,
+        lists: readonly CSpellPackage[] | 'offline' = packages,
+    ): Context & { logged: string[] } {
         const logged: string[] = [];
         return {
             prompter,
-            fetchJson: fetch,
+            packages: lists === 'offline' ? undefined : lists,
             extensionsDir,
             existing: new Map([['@cspell/dict-sv', 'swedish']]),
             log: (message) => logged.push(stripVTControlCharacters(message)),
@@ -140,6 +148,20 @@ describe('askQuestions', () => {
             assert.deepEqual(answers.locales, ['fr', 'fr-FR', 'fr-90']);
         });
 
+        it('searches again with the words typed after a pick, and an empty answer finishes', async () => {
+            const prompter = scriptedPrompter(['medical-terms', '', '', 'swedish']);
+            const answers = await askQuestions({}, context(prompter));
+            assert.deepEqual(answers.packages, ['@cspell/dict-medicalterms', '@cspell/dict-sv']);
+            const searches = prompter.asked.filter((q) => q.message.startsWith('Search'));
+            assert.deepEqual(
+                searches.map((q) => q.message),
+                [
+                    'Search for more packages (a language or topic; empty to finish):',
+                    'Search for more packages (a language or topic; empty to finish):',
+                ],
+            );
+        });
+
         it('makes a word list of a dictionary without a locale', async () => {
             const prompter = scriptedPrompter(['medical-terms']);
             const answers = await askQuestions({}, context(prompter));
@@ -168,13 +190,13 @@ describe('askQuestions', () => {
             const prompter = scriptedPrompter(['dictionary', '', ['@cspell/dict-bn']]);
             await askQuestions({}, context(prompter));
             const choices = prompter.asked[2]?.choices?.map((c) => stripVTControlCharacters(c));
-            assert.equal(choices?.at(-1), '@cspell/dict-sv (has an extension)');
+            assert.equal(choices?.at(-1), '@cspell/dict-sv: Swedish (has an extension)');
             assert.equal(choices?.filter((c) => c.includes('has an extension')).length, 1);
         });
 
         it('rejects a name that is taken', async () => {
             const prompter = scriptedPrompter(['', 'swedish', 'svenska', '', '@cspell/dict-sv', 'language', 'sv']);
-            await askQuestions({}, context(prompter, fakeFetch({})));
+            await askQuestions({}, context(prompter, 'offline'));
             assert.deepEqual(
                 prompter.asked.filter((q) => q.message.startsWith('Extension name')).map((q) => q.error),
                 [
@@ -187,10 +209,9 @@ describe('askQuestions', () => {
 
         it('asks for the package names and the kind when offline', async () => {
             const prompter = scriptedPrompter(['svenska', '', '@cspell/dict-sv', 'language', 'sv']);
-            const ctx = context(prompter, fakeFetch({}));
+            const ctx = context(prompter, 'offline');
             const answers = await askQuestions({}, ctx);
             assert.deepEqual([answers.packages, answers.kind, answers.locale], [['@cspell/dict-sv'], 'language', 'sv']);
-            assert.match(ctx.logged[0] ?? '', /Could not search npm/);
         });
 
         it('only asks what the options do not answer', async () => {
@@ -262,9 +283,9 @@ describe('askQuestions', () => {
             assert.equal((await yes({ name: 'swedish', packages: ['@cspell/dict-sv'], force: true })).name, 'swedish');
         });
 
-        it('fails without network unless the kind and locale are given', async () => {
+        it('fails without the package lists unless the kind and locale are given', async () => {
             const offline = (options: Options) =>
-                askQuestions({ ...options, yes: true }, context(noPrompter, fakeFetch({})));
+                askQuestions({ ...options, yes: true }, context(noPrompter, 'offline'));
             const sv = { name: 'svenska', packages: ['@cspell/dict-sv'] };
             await assert.rejects(offline(sv), /Missing --kind/);
             await assert.rejects(offline({ ...sv, kind: 'language' }), /Missing --locale/);
@@ -283,7 +304,12 @@ describe('askQuestions', () => {
                 ask({ packages: ['cspell-dict-foo'] }),
                 /not a @cspell\/dict-\* or @cspell\/parser-\*/,
             );
-            await assert.rejects(ask({ packages: ['@cspell/dict-missing'], yes: true }), /not found on npm/);
+            await assert.rejects(
+                ask({ packages: ['@cspell/dict-missing'], yes: true }),
+                /not in cspell-dicts or cspell-parsers/,
+            );
+            await assert.rejects(ask({ packages: ['@cspell/dict-cspell-bundle'], yes: true }), /is a bundle/);
+            await assert.rejects(ask({ packages: ['@cspell/dict-en_us'], yes: true }), /ships with cspell/);
         });
 
         it('rejects options that do not fit', async () => {
@@ -307,19 +333,19 @@ describe('askQuestions', () => {
 
 describe('filterPackages', () => {
     const list = [
-        { name: '@cspell/dict-sv', description: 'Swedish dictionary for CSpell.' },
-        { name: '@cspell/dict-en-gb', description: 'British English dictionary for cspell.' },
-        { name: '@cspell/dict-en-us', description: 'American English dictionary for cspell.' },
+        language('@cspell/dict-sv', 'Swedish', ['sv']),
+        language('@cspell/dict-en-gb', 'British English', ['en-GB']),
+        language('@cspell/dict-en-us', 'American English', ['en-US']),
     ];
 
     it('matches every word in the name or description, existing extensions last', () => {
         const existing = new Map([['@cspell/dict-en-gb', 'british-english']]);
         assert.deepEqual(
-            filterPackages(list, 'english', existing).map((p) => p.name),
+            filterPackages(list, 'english', existing).map((p) => p.packageName),
             ['@cspell/dict-en-us', '@cspell/dict-en-gb'],
         );
         assert.deepEqual(
-            filterPackages(list, 'BRITISH en-gb', existing).map((p) => p.name),
+            filterPackages(list, 'BRITISH en-gb', existing).map((p) => p.packageName),
             ['@cspell/dict-en-gb'],
         );
         assert.equal(filterPackages(list, '', existing).length, 3);

@@ -15,11 +15,11 @@ In the `vscode-cspell-dict-extensions` repository root directory:
 npm run create:extension
 ```
 
-The generator starts from the extension's name, i.e. `serbian`, and offers the packages that match it, such as `@cspell/dict-sr-cyrl` and `@cspell/dict-sr-latn`; you can search with other words too. From the packages it suggests the kind and the locale. With several languages, as for Serbian, each also gets its own enable and disable commands.
+The generator starts from the extension's name, i.e. `serbian`, and offers the packages that match it, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them), such as `@cspell/dict-sr-cyrl` and `@cspell/dict-sr-latn`; you can search with other words too. From the packages it suggests the kind and the locale. With several languages, as for Serbian, each also gets its own enable and disable commands.
 
 It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`, a starter `package.json`, `README.md`, `LICENSE` and a sample. Then it installs the packages and runs `npm run sync:extensions`, which writes the rest, as for every other extension.
 
-Afterwards, replace the text in `samples/seattle.md` and edit the README.
+For a language, the sample is the Wikipedia article about Seattle in that language, with its source and license. Afterwards, add the sample's unknown words to `samples/cspell.json`, edit the README, and run `npm run check:extension -- <name>`.
 
 ### Without questions
 
@@ -53,11 +53,10 @@ The generator is written in TypeScript and runs directly with Node.js (type stri
 - `run.mts` — the entry point.
 - `src/app.mts` — the command line and the steps to generate an extension.
 - `src/questions.mts` — the questions, their defaults, and `--yes`.
-- `src/npm.mts` — searches the npm registry for `@cspell/*` packages.
-- `src/cspellExt.mts` — reads a dictionary's `cspell-ext.json` (from jsDelivr): natural language or not, and its locales.
 - `src/names.mts` — turns a typed name into a directory name, and suggests the friendly name.
 - `src/locales.mts` — writes locales as BCP 47, and suggests a language's native and English names.
 - `src/writeExtension.mts` — writes `extension.config.json` and the starter files.
+- `../scripts/lib/cspellPackages.mts`, `wikipedia.mts` and `existingExtensions.mts` — the package lists, the Wikipedia sample and the packages that already have an extension, shared with `npm run list:packages` and `fetch:sample`.
 - `src/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.
 
 ```bash

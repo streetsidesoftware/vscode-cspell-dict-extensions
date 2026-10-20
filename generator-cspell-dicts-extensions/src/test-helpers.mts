@@ -1,4 +1,3 @@
-import { type FetchJson, HttpError } from './npm.mts';
 import type { Choice, Prompter, Validate } from './prompt.mts';
 
 export interface AskedQuestion {
@@ -62,18 +61,5 @@ export function scriptedPrompter(answers: readonly unknown[]): Prompter & { aske
         confirm: (message, defaultValue) => Promise.resolve(next(message, defaultValue).answer === true),
         select,
         checkbox,
-    };
-}
-
-/**
- * A `fetchJson` that answers from a map of URL to response. A missing URL is a network error, and a number is an
- * HTTP error status.
- */
-export function fakeFetch(responses: Record<string, unknown>): FetchJson {
-    return (url) => {
-        if (!(url in responses)) return Promise.reject(new Error(`offline: ${url}`));
-        const response = responses[url];
-        if (typeof response === 'number') return Promise.reject(new HttpError(url, response));
-        return Promise.resolve(response);
     };
 }

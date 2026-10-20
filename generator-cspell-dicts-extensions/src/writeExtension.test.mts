@@ -228,6 +228,11 @@ describe('writeExtension', () => {
         assert.equal(pkg.license, 'MIT');
     });
 
+    it('writes the sample it is given, i.e. from Wikipedia', async () => {
+        await writeExtension(destDir, swedish, { sample: '# Seattle\n\nText.\n' });
+        assert.equal(await readFile(path.join(destDir, 'samples/seattle.md'), 'utf8'), '# Seattle\n\nText.\n');
+    });
+
     it('never overwrites a file', async () => {
         await writeFile(path.join(destDir, 'README.md'), 'mine\n');
         await assert.rejects(writeExtension(destDir, swedish), /EEXIST/);
