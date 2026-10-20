@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Update the folders in `dict-extensions.code-workspace`, the generated extension lists and the READMEs, and fix
+ * Update the folders in `dict-extensions.code-workspace`, the generated extension lists, the READMEs and the docs, and fix
  * the extensions' `package.json` files.
  */
 
@@ -29,8 +29,9 @@ async function main(): Promise<void> {
     await fixExtensions();
 
     await formatFiles('static/generated/*.md');
-    await injectFiles('README.md', 'extensions/*/README.md');
-    await formatFiles('README.md', 'extensions/*/README.md');
+    const docs = ['CONTRIBUTING.md', 'docs/**/*.md', 'generator-cspell-dicts-extensions/README.md'];
+    await injectFiles('README.md', 'extensions/*/README.md', ...docs);
+    await formatFiles('README.md', 'extensions/*/README.md', ...docs);
 }
 
 await main();

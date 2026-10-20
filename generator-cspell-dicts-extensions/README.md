@@ -5,7 +5,11 @@ Generate a VS Code extension for [Code Spell Checker](https://marketplace.visual
 - **Dictionaries:** `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A natural language is enabled by its locale. A word list is on once installed, unless its dictionary is off until turned on, as `@cspell/dict-vim` is; its commands turn it on and off.
 - **Parsers:** `@cspell/parser-*` packages from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
 
-The packages must be published first. To add a new dictionary, add it to cspell-dicts.
+<!--- @@inject: ../docs/templates/package-must-be-published.md --->
+
+The package must be published first. To create a dictionary, see [Creating a dictionary](https://github.com/streetsidesoftware/cspell-dicts/blob/main/docs/guides/new-dictionary.md) in cspell-dicts. To create a parser, see [Adding a parser package](https://github.com/streetsidesoftware/cspell-parsers/blob/main/docs/guides/new-parser-package.md) in cspell-parsers.
+
+<!--- @@inject-end: ../docs/templates/package-must-be-published.md --->
 
 ## Usage
 
