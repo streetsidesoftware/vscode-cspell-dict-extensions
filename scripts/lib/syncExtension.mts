@@ -280,7 +280,8 @@ export async function dictionaryStates(extensionDir: string, config: ExtensionCo
         .flatMap((ext) => ext.dictionaryDefinitions ?? [])
         .map(({ name }) => {
             const named = allRules.filter((rule) => rule.dictionaries.includes(name));
-            const fileTypes = unique(named.flatMap((rule) => rule.fileTypes));
+            // `*` is every file type: `all` covers it.
+            const fileTypes = unique(named.flatMap((rule) => rule.fileTypes)).filter((id) => id !== '*');
             const filePatterns = unique(named.flatMap((rule) => rule.filePatterns));
             const locales = unique(named.flatMap((rule) => rule.locales).map(canonicalLocale));
             const all = named.some(
@@ -304,7 +305,7 @@ interface Rule {
 function rules(exts: readonly DictionaryExt[]): Rule[] {
     return exts.flatMap((ext) => [
         dictionariesRule(ext),
-        ...(ext.languageSettings ?? []).map(languageSettingRule),
+        ...(ext.languageSettings ?? []).map((s) => languageSettingRule(s)),
         ...(ext.overrides ?? []).flatMap(overrideRules),
     ]);
 }
@@ -315,11 +316,11 @@ function dictionariesRule(ext: DictionaryExt): Rule {
 }
 
 /** A language setting turns its dictionaries on for its file types and locales. */
-function languageSettingRule(setting: LanguageSetting): Rule {
+function languageSettingRule(setting: LanguageSetting, filePatterns: string[] = []): Rule {
     return {
         dictionaries: setting.dictionaries ?? [],
         fileTypes: splitList(setting.languageId),
-        filePatterns: [],
+        filePatterns,
         locales: splitList(setting.locale),
     };
 }
@@ -329,14 +330,12 @@ function languageSettingRule(setting: LanguageSetting): Rule {
  * dictionary's config is relative to the dictionary's folder, so only `**\/…` reaches the user's files.
  */
 function overrideRules(override: Override): Rule[] {
-    const filePatterns = [override.filename ?? []].flat().filter((glob) => glob.startsWith('**/'));
+    const { dictionaries = [], filename = [] } = override;
+    const filePatterns = [filename ?? []].flat().filter((glob) => glob.startsWith('**/'));
     if (!filePatterns.length) return [];
-    return [override, ...(override.languageSettings ?? [])].map((settings) => ({
-        dictionaries: settings.dictionaries ?? [],
-        fileTypes: [],
-        filePatterns,
-        locales: [],
-    }));
+    const overrideRule: Rule = { dictionaries, fileTypes: [], filePatterns, locales: [] };
+    const languageSettingsRules = (override.languageSettings ?? []).map((s) => languageSettingRule(s, filePatterns));
+    return [overrideRule, ...languageSettingsRules];
 }
 
 /**
