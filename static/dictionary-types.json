@@ -1,19 +1,9 @@
 {
     "types": {
-        "Support": [
-            "extensions/cspell-bundled-dictionaries"
-        ],
-        "Technical Terms": [
-            "extensions/medical-terms",
-            "extensions/scientific-terms",
-            "extensions/win32"
-        ],
-        "Syntax Highlighters": [
-            "extensions/hunspell-syntax"
-        ],
-        "Other": [
-            "extensions/timestamp-hover"
-        ]
+        "Support": ["extensions/cspell-bundled-dictionaries"],
+        "Technical Terms": ["extensions/medical-terms", "extensions/scientific-terms", "extensions/win32"],
+        "Syntax Highlighters": ["extensions/hunspell-syntax"],
+        "Other": ["extensions/timestamp-hover"]
     },
     "default": "Languages"
 }
