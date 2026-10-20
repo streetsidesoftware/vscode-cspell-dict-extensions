@@ -83,7 +83,12 @@ Follow these steps in order:
 
    ![Debug extension](../../images/debug-extension.png)
 
-6. **Open a pull request** to `main`. The pull request runs the checks. To run them before you open it:
+6. **Send your extension to the maintainers.**
+   - Commit the new `extensions/<name>/` folder. Push it to your fork.
+   - On GitHub, open a pull request from your fork. See [Creating a pull request from a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
+   - Title it `feat: add <Language> extension`, such as `feat: add Thai extension`.
+
+   The pull request runs the checks. To run them first:
 
    ```sh
    npm run check:extension -- <name>
