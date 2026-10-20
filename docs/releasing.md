@@ -11,32 +11,29 @@ level: has write access; releases and publishes the extensions
 
 release-please opens a release PR from the Conventional Commits on `main`, one release per extension. Merging it publishes the released extensions to the VS Code Marketplace and Open VSX.
 
+A `feat:` or `fix:` commit releases the extensions it changes. A `chore:`, `ci:` or `docs:` commit releases nothing.
+
+## A new extension
+
+After a new extension's pull request merges, the " 🔗 Update Extension Lists" workflow opens a `ci: Update README / Extensions List` PR. It adds the extension to the README lists and to `release-please-config.json`. It also adds the extension to the Manual Publish and Set Prerelease workflows. That PR releases nothing. Once it merges, release-please includes the extension in its next release PR, with the extension's first `feat:` commit. Merging that release PR publishes the first release.
+
 ## Pre-release mode
 
-While an extension's `package.json` has `"vsce": { "preRelease": true }`, every release of it is published as a pre-release. The " 👀 Set Prerelease" workflow opens a PR that turns the mode on or off for one extension. Turning it off is a `fix:` commit, so the next release is a stable version above the pre-releases.
+While an extension's `package.json` has `"vsce": { "preRelease": true }`, every release of it is published as a pre-release. The " 👀 Set Prerelease" workflow opens a PR that turns the mode on or off for one extension. Turning it on is a `chore:` commit, so it releases nothing. The extension's next `feat:` or `fix:` release is then a pre-release. Turning it off is a `fix:` commit, so the next release is a stable version above the pre-releases.
 
 ## Releasing a runtime change
 
-Every extension bundles the runtime, so a change to it reaches people only when the extensions are released. The runtime is a release-please package, and each extension lists it in `devDependencies`. A `fix:` or `feat:` commit that changes `extension-runtime/` releases the runtime, and release-please's `node-workspace` plugin then releases every extension with it. A `chore:` commit releases nothing.
+Every synced extension bundles the runtime, so a change to it reaches users only when the extensions are released. `hunspell-syntax` and `timestamp-hover` don't use it. The runtime is a release-please package, and each extension lists it in `devDependencies`. A `fix:` or `feat:` commit that changes `extension-runtime/` releases the runtime. release-please's `node-workspace` plugin then releases every extension that depends on it. A `chore:` commit releases nothing.
 
 ## Manual publishing
 
-**Open VSX**
-
-```sh
-OVSX_TOKEN=YOUR_TOKEN npm -p run publish-all-ovsx
-```
-
-**VS Code Marketplace**
-
-```sh
-npm run publish-all
-```
+Run the " 📢 Manual Publish" workflow from the Actions tab. Choose the ref to publish from, and one extension or `all`. It publishes to both the VS Code Marketplace and Open VSX, with each extension's pre-release setting.
 
 ## Tokens
 
-**VS Code Marketplace:** follow [Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension), with the [Street Side Software organization on Azure](https://dev.azure.com/streetsidesoftware/), then:
+The publish workflows use two repository secrets:
 
-```sh
-npx vsce login streetsidesoftware
-```
+- **`VSCE_TOKEN`:** an Azure DevOps personal access token for the VS Code Marketplace, with the **Marketplace (Manage)** scope. Create it in the [Street Side Software organization on Azure](https://dev.azure.com/streetsidesoftware/). See [Publishing Extensions](https://code.visualstudio.com/api/working-with-extensions/publishing-extension#get-a-personal-access-token).
+- **`OVSX_TOKEN`:** an [Open VSX access token](https://open-vsx.org/user-settings/tokens) for the `streetsidesoftware` namespace.
+
+When a token expires, create a new one and update the secret in the repository's settings.
