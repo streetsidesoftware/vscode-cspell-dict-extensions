@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * List the packages an extension can wrap: the dictionaries in cspell-dicts and the parsers in cspell-parsers.
+ * List the packages an extension can include: the dictionaries in cspell-dicts and the parsers in cspell-parsers.
  *
  * Usage: `npm run list:packages -- [words…] [--missing] [--json]`
  * - `words`: only the packages whose name, English name or description contains every word, i.e. `thai`.
- * - `--missing`: only the packages no extension wraps yet, leaving out those that ship with cspell.
+ * - `--missing`: only the packages no extension includes yet, leaving out those that ship with cspell.
  * - `--json`: print JSON instead of a table.
  */
 
@@ -16,7 +16,7 @@ import { findExistingExtensions } from './lib/existingExtensions.mts';
 import { extensionsDir } from './lib/repo.mts';
 
 export interface ListedPackage extends CSpellPackage {
-    /** The extension that wraps the package, i.e. `swedish`, or `ships with cspell`. Empty when there is none. */
+    /** The extension that includes the package, i.e. `swedish`, or `ships with cspell`. Empty when there is none. */
     extension: string;
 }
 

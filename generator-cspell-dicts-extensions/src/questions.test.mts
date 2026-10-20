@@ -124,7 +124,7 @@ describe('askQuestions', () => {
             assert.equal(extensionName?.defaultValue, undefined);
         });
 
-        it('wraps several packages, and names each language for its commands', async () => {
+        it('includes several packages, and names each language for its commands', async () => {
             const prompter = scriptedPrompter(['serbian']);
             const answers = await askQuestions({}, context(prompter));
             assert.deepEqual(answers.packages, ['@cspell/dict-sr-cyrl', '@cspell/dict-sr-latn']);
