@@ -187,8 +187,7 @@ describe('readme', () => {
             '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
             '../../static/footer.md',
         ]);
-        assert.ok(!markers(readme(medicalTerms)).includes('./static/commands.json'));
-        assert.ok(markers(readme(medicalTerms, true)).includes('./static/commands.json'));
+        assert.ok(markers(readme(medicalTerms)).includes('./static/commands.json'));
         assert.ok(!markers(readme(parser)).includes('./static/dictionaries.json#markdown'));
         assert.match(readme(swedish), /^# Swedish - Code Spell Checker\n/);
         assert.match(readme({ ...swedish, displayName: 'Svenska' }), /^# Svenska\n/);

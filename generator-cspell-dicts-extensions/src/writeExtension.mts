@@ -141,7 +141,7 @@ export function languageCommands(name: string, language: Language): CommandConfi
 }
 
 /**
- * Turn on and off the dictionaries that nothing turns on, globally and in the workspace. One dictionary gets the
+ * Turn a word list's dictionaries on and off, globally and in the workspace. One dictionary gets the
  * default IDs and titles; with several, each gets its own, i.e. `cSpellExt_vim.enableVimScript` and `Enable vim-script
  * Spell Checker Dictionary`.
  * @param dictionaries - the dictionary names, i.e. `['vim']`.
@@ -198,11 +198,7 @@ function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): str
 }
 
 /** The starter README, with the `@@inject` sections the sync fills in. */
-/**
- * The starter README.
- * @param withCommands - a word list's dictionaries are off until turned on, and it has commands to turn them on.
- */
-export function readme(answers: Answers, withCommands = false): string {
+export function readme(answers: Answers): string {
     const title = `# ${answers.displayName || `${answers.friendlyName} - Code Spell Checker`}\n`;
     const requirements = inject(
         '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
@@ -229,16 +225,10 @@ export function readme(answers: Answers, withCommands = false): string {
                 title,
                 `Adds the ${answers.friendlyName} dictionary to ${codeSpellChecker}.\n`,
                 '## Installation\n',
-                ...(withCommands
-                    ? [
-                          'After this extension is installed, turn the dictionary on.\n',
-                          '### Enable or Disable the Dictionary\n',
-                          'Run these commands with `F1` or _View -> Command Palette..._:\n',
-                          inject('./static/commands.json', 'inject-table'),
-                      ]
-                    : [
-                          'Once this extension is installed, its dictionaries are used for the file types listed below.\n',
-                      ]),
+                'Once this extension is installed, each dictionary is on for the file types listed below, or off until you turn it on.\n',
+                '### Enable or Disable the Dictionary\n',
+                'Run these commands with `F1` or _View -> Command Palette..._:\n',
+                inject('./static/commands.json', 'inject-table'),
                 dictionaries,
                 requirements,
                 footer,

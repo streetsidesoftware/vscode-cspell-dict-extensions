@@ -5,7 +5,7 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import { createExtensionConfigValidator, generateExtensionSchema } from './extensionSchema.mts';
-import { dictionariesOff, type FileChange, syncExtension } from './syncExtension.mts';
+import { dictionaryStates, type FileChange, syncExtension } from './syncExtension.mts';
 
 const config = {
     name: 'demo',
@@ -183,7 +183,12 @@ describe('syncExtension', () => {
             { Dictionary: '`always`', 'File types': 'all' },
             { Dictionary: '`off`', 'File types': 'off until turned on' },
         ]);
-        assert.deepEqual(await dictionariesOff(dir, await readJson('extension.config.json')), ['off']);
+        const states = await dictionaryStates(dir, await readJson('extension.config.json'));
+        assert.deepEqual(
+            states.filter((d) => d.off).map((d) => d.name),
+            ['off'],
+        );
+        assert.equal(states.length, 5);
     });
 
     it('has no static/dictionaries.json for a bundle', async () => {
