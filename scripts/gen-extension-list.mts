@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Generate the extension lists in `static/generated/`, which READMEs inject.
+ * Generate the extension lists in `static/generated/`, which READMEs inject, and the categories they use as headings
+ * in `static/dictionary-types.json`.
  */
 
 import fs from 'node:fs/promises';
@@ -10,6 +11,7 @@ import path from 'node:path';
 import type { ListItem, PhrasingContent, RootContent } from 'mdast';
 import { toMarkdown } from 'mdast-util-to-markdown';
 
+import { genDictionaryTypes } from './lib/dictionaryTypes.mts';
 import { type ExtensionInfo, getExtensionInfo } from './lib/extensionHelper.mts';
 import { heading, link, list, listItem, paragraph, root, strong, text } from './lib/mdastBuilder.mts';
 import { listExtensionRepoPaths, repoRoot } from './lib/repo.mts';
@@ -81,6 +83,7 @@ function groupExtensionsByType(extensionInfos: ExtensionInfo[]): Map<string, Ext
 }
 
 export async function genExtensionList(): Promise<void> {
+    await genDictionaryTypes();
     const extensionInfos = await Promise.all((await listExtensionRepoPaths()).map(getExtensionInfo));
     const byCategory = groupExtensionsByType(extensionInfos);
 
