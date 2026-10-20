@@ -41,15 +41,17 @@ People install an extension from the VS Code Marketplace.
    | Friendly name                    | The name people see, such as `Swedish`. Press Enter to accept the suggestion.                                                                                                                                                    |
    | Packages that match "swedish"    | The dictionaries or parsers to include. All matches start checked; uncheck the ones you don't want. "(has an extension)" means another extension already includes it.                                                            |
    | Search for more packages         | Another word to search for, such as a topic. Press Enter to finish.                                                                                                                                                              |
-   | What kind of extension?          | **Natural Language** for a language such as Swedish, which people turn on in their settings. **Word List** for terms that are on once installed, such as medical terms. The suggestion is usually right. Not asked for a parser. |
+   | What kind of extension?          | **Natural Language** for a language such as Swedish, which people turn on in their settings. **Word List** for a set of terms, such as medical terms or Vim's keywords. The suggestion is usually right. Not asked for a parser. |
    | Locale that enables the language | The language code people add to Code Spell Checker's `cSpell.language` setting, such as `sv-SE`. Natural languages only.                                                                                                         |
    | Name of … in its command titles  | Only when the extension has several languages, such as Serbian in Cyrillic and Latin script. Accept the suggestion.                                                                                                              |
    | Native name                      | The language's name in that language, such as `svenska`. Natural languages only.                                                                                                                                                 |
    | Marketplace description          | One sentence for the VS Code Marketplace. Parsers only.                                                                                                                                                                          |
+   | Sample file                      | Word lists and parsers only. A file with some of the dictionary's words, or code the parser tags. Press Enter for a starter `samples/sample.md`; the checks fail until you replace its text.                                     |
+   | Another article                  | Natural languages only, when Wikipedia has no article about Seattle in that language. The title of another article, in English or the language.                                                                                  |
 
    The generator then creates `extensions/<name>/` with all of the extension's files, and installs the dictionaries or parsers.
 
-   For a natural language, the generator also fetches a sample text: the Wikipedia article about Seattle in that language. If that article doesn't exist, the generator says so; write a short sample by hand in `samples/seattle.md`.
+   For a natural language, the generator also fetches a sample text: the Wikipedia article about Seattle in that language, saved as `samples/seattle.md`.
 
    If you already know every answer, the [generator README](../../generator-cspell-dicts-extensions/README.md) shows how to give them as options.
 
@@ -71,7 +73,7 @@ People install an extension from the VS Code Marketplace.
 
    Or open the folder with **File > Open Folder**.
 
-   Choose **Run > Start Debugging** with the `Launch Extension` configuration. It opens a new VS Code window with the extension installed. Open `samples/seattle.md` there: most words should have no squiggly line.
+   Choose **Run > Start Debugging** with the `Launch Extension` configuration. It opens a new VS Code window with the extension installed. Open the sample there, such as `seattle.md`: most words should have no squiggly line.
 
    ![Debug extension](../../images/debug-extension.png)
 
