@@ -16,7 +16,7 @@ import type { Prompter } from './prompt.mts';
 /**
  * The `kind` in `extension.config.json`:
  * - `language`: a natural language, enabled by its locale.
- * - `wordList`: a word list, on once installed.
+ * - `wordList`: a word list, on for the file types its dictionaries name, or off until turned on with commands.
  * - `parser`: a cspell parser.
  */
 export type Kind = 'language' | 'wordList' | 'parser';
@@ -298,7 +298,12 @@ async function askKind(packages: PackageKind[], options: Options, ctx: Context):
                 value: 'language',
                 description: `Turned on by adding its locale${localeList} to cSpell.language.`,
             },
-            { name: 'Word List', value: 'wordList', description: 'On once installed.' },
+            {
+                name: 'Word List',
+                value: 'wordList',
+                description:
+                    'Terms such as medical terms. On once installed, unless its dictionary is off until turned on.',
+            },
         ],
         derived,
     );
