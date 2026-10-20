@@ -9,27 +9,39 @@ level: comfortable with basic git and a terminal; doesn't read or write code
 > [!NOTE]
 > For contributors who can fork the repo and follow terminal steps. No coding needed.
 
-**What an extension does:** an extension adds a dictionary or a parser to Code Spell Checker.
+## What an extension does
+
+An extension adds a dictionary or a parser to Code Spell Checker.
 
 - A **dictionary extension** adds words, such as Swedish or medical terms, so Code Spell Checker accepts them.
 - A **parser extension** tags the parts of a document, such as comments, strings and identifiers, so users can choose which parts to spell check.
 
 VS Code users install an extension from the Marketplace.
 
-**How an extension works:** an extension includes a published package and tells Code Spell Checker where to find it. Dictionaries come from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries), and parsers from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers). So the package must be published first. If it isn't, add it to cspell-dicts or cspell-parsers.
+## How an extension works
+
+An extension includes a published package and tells Code Spell Checker where to find it. Dictionaries come from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries), and parsers from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
+
+## How to find dictionaries and parsers
+
+In a clone of this repository, after `npm ci`, list the packages, with the extension that already includes each one:
+
+```sh
+npm run list:packages -- thai        # the packages that match the words
+npm run list:packages -- --missing   # the packages no extension includes yet
+```
+
+`--json` prints JSON.
+
+## Create an extension
+
+The package must be published first. If it isn't, add it to cspell-dicts or cspell-parsers.
+
+Follow these steps in order:
 
 1. **Install.** Fork and clone the repository, then in its root: `npm ci`.
 
-2. **Find the package.** List them, with the extension that already includes each one:
-
-   ```sh
-   npm run list:packages -- thai        # the packages that match the words
-   npm run list:packages -- --missing   # the packages no extension includes yet
-   ```
-
-   `--json` prints JSON.
-
-3. **Run the generator.** It asks a few questions, then creates the extension.
+2. **Run the generator.** It asks a few questions, then creates the extension.
 
    ```sh
    npm run create:extension
@@ -55,17 +67,17 @@ VS Code users install an extension from the Marketplace.
 
    If you already know every answer, the [generator README](../../generator-cspell-dicts-extensions/README.md) shows how to give them as options.
 
-4. **Check the sample.** `samples/cspell.json` turns the language on, and the tests check that the dictionary recognizes the sample. Add the words it doesn't know, such as names, to `samples/cspell.json`, or shorten the sample. For another article, run `npm run fetch:sample -- <locale> [title] --out extensions/<name>/samples/seattle.md`.
+3. **Check the sample.** `samples/cspell.json` turns the language on, and the tests check that the dictionary recognizes the sample. Add the words it doesn't know, such as names, to `samples/cspell.json`, or shorten the sample. For another article, run `npm run fetch:sample -- <locale> [title] --out extensions/<name>/samples/seattle.md`.
 
-5. **Edit `README.md`.** Change the text, and keep the `@@inject` markers: the sync fills those sections in.
+4. **Edit `README.md`.** Change the text, and keep the `@@inject` markers: the sync fills those sections in.
 
-6. **Run the checks:** the build, the sample check, the sync check, Prettier and the spell check, with `--vscode` for the VS Code test too:
+5. **Run the checks:** the build, the sample check, the sync check, Prettier and the spell check, with `--vscode` for the VS Code test too:
 
    ```sh
    npm run check:extension -- <name> --vscode
    ```
 
-7. **Try it in VS Code.** Open the extension's folder:
+6. **Try it in VS Code.** Open the extension's folder:
 
    ```sh
    code extensions/<name>
@@ -77,4 +89,4 @@ VS Code users install an extension from the Marketplace.
 
    ![Debug extension](../../images/debug-extension.png)
 
-8. **Open a pull request** to `main`. After it's merged, the maintainers add the extension to the lists and release it. You don't need to do anything else.
+7. **Open a pull request** to `main`. After it's merged, the maintainers add the extension to the lists and release it. You don't need to do anything else.
