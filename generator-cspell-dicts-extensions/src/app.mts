@@ -7,11 +7,12 @@ import { Command, Option } from 'commander';
 
 import { type CSpellPackage, fetchCSpellPackages } from '../../scripts/lib/cspellPackages.mts';
 import { findExistingExtensions } from '../../scripts/lib/existingExtensions.mts';
-import { articleMarkdown, fetchArticle } from '../../scripts/lib/wikipedia.mts';
+import { fetchArticle } from '../../scripts/lib/wikipedia.mts';
 import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
 import { askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
+import { defaultSampleTitle, languageSample, starterSample } from './sample.mts';
 import { writeExtension } from './writeExtension.mts';
 
 /** The repository root. */
@@ -40,6 +41,10 @@ export async function run(argv: string[] = process.argv): Promise<void> {
         .option('--display-name <name>', 'the Marketplace name (default: "<friendly name> - Code Spell Checker")')
         .option('--description <text>', 'the Marketplace description (required for a parser)')
         .option('--license <spdx>', `the extension's license (default: ${defaultLicense})`)
+        .option(
+            '--sample-title <title>',
+            `the Wikipedia article for a language's sample, in English or the language (default: ${defaultSampleTitle})`,
+        )
         .option('-f, --force', 'replace the extension directory when it exists')
         .option('-y, --yes', 'never ask: use the defaults, and fail when a required value is missing')
         .showHelpAfterError(true)
@@ -50,22 +55,38 @@ export async function run(argv: string[] = process.argv): Promise<void> {
 
 async function generate(
     name: string | undefined,
-    { package: packages, ...options }: Omit<Options, 'name' | 'packages'> & { package?: string[] },
+    {
+        package: packages,
+        sampleTitle,
+        ...options
+    }: Omit<Options, 'name' | 'packages'> & { package?: string[]; sampleTitle?: string },
 ): Promise<void> {
     if (!options.yes) {
         console.log(styleText('bold', '\nWelcome to the VS Code Spelling Dictionary Extension generator!\n'));
     }
 
+    const prompter = options.yes ? noPrompter : inquirerPrompter;
+    const log = (message: string) => console.log(message);
     const answers = await askQuestions(
         { ...options, name, packages },
         {
-            prompter: options.yes ? noPrompter : inquirerPrompter,
+            prompter,
             packages: await readPackageLists(),
             extensionsDir,
             existing: await findExistingExtensions(extensionsDir),
-            log: (message) => console.log(message),
+            log,
         },
     );
+
+    const sample =
+        answers.kind === 'language'
+            ? await languageSample(languageOf(answers.locale), sampleTitle ?? defaultSampleTitle, {
+                  prompter,
+                  yes: !!options.yes,
+                  fetchArticle,
+                  log,
+              })
+            : starterSample(answers.friendlyName);
 
     const destDir = path.join(extensionsDir, answers.name);
     if (options.force && existsSync(destDir)) {
@@ -73,8 +94,7 @@ async function generate(
         await rm(destDir, { recursive: true });
     }
     console.log(`Creating extensions/${answers.name}`);
-    const sample = answers.kind === 'language' ? await fetchSample(languageOf(answers.locale)) : undefined;
-    await writeExtension(destDir, answers, { sample, log: (message) => console.log(message) });
+    await writeExtension(destDir, answers, sample, { log });
 
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     npm(['install', '-S', ...answers.packages], destDir);
@@ -85,6 +105,9 @@ async function generate(
     npm(['install'], destDir);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
+    if (answers.kind !== 'language') {
+        console.log(styleText('yellow', `Replace the text in extensions/${answers.name}/${sample.file}.`));
+    }
 }
 
 async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
@@ -94,23 +117,6 @@ async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
         console.log(styleText('yellow', `Could not fetch the package lists (${errorMessage(e)}).`));
         return undefined;
     }
-}
-
-/** The Wikipedia article about Seattle in the language, as the sample. */
-async function fetchSample(language: string): Promise<string | undefined> {
-    try {
-        const article = await fetchArticle(language, 'Seattle');
-        if (article) {
-            console.log(`Sample: ${article.url}`);
-            return articleMarkdown(article);
-        }
-        console.log(
-            styleText('yellow', `No ${language}.wikipedia.org article about Seattle; write the sample by hand.`),
-        );
-    } catch (e) {
-        console.log(styleText('yellow', `Could not fetch a sample from Wikipedia (${errorMessage(e)}).`));
-    }
-    return undefined;
 }
 
 function errorMessage(e: unknown): string {

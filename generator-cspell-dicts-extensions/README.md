@@ -19,7 +19,11 @@ The generator starts from the extension's name, i.e. `serbian`, and offers the p
 
 It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`, a starter `package.json`, `README.md`, `LICENSE` and a sample. Then it installs the packages and runs `npm run sync:extensions`, which writes the rest, as for every other extension.
 
-For a language, the sample is the Wikipedia article about Seattle in that language, with its source and license. Afterwards, add the sample's unknown words to `samples/cspell.json`, edit the README, and run `npm run check:extension -- <name>`.
+For a language, the sample is the Wikipedia article about Seattle in that language, with its source and license, in `samples/seattle.md`. When that language's Wikipedia has no such article, the generator asks for another one; with `--yes` it stops, and `--sample-title <title>` names another article, in English or the language. The file is named after the title: `--sample-title "Lingua Latina"` writes `samples/lingua-latina.md`. Without Wikipedia, the generator stops before writing anything.
+
+For a word list or a parser, the sample is `samples/sample.md`, with a line to replace: a few words people write that the dictionary knows, or for a parser, code in its language, such as a file from the parser's `fixtures` in cspell-parsers. For code, rename the file to its language's extension, i.e. `sample.go`, and update `sample` in `extension.config.json`.
+
+Afterwards, add the sample's unknown words to `samples/cspell.json`, edit the README, and run `npm run check:extension -- <name>`.
 
 ### Without questions
 
@@ -43,6 +47,7 @@ npm run create:extension -- typescript-parser --package @cspell/parser-typescrip
 | `--display-name <name>`               | The Marketplace name. Default: `<friendly name> - Code Spell Checker`.                                     |
 | `--description <text>`                | The Marketplace description. Required for a parser; the other kinds have a default.                        |
 | `--license <spdx>`                    | The extension's license. Default: `GPL-3.0-or-later`. For another license, add its text to `LICENSE`.      |
+| `--sample-title <title>`              | The Wikipedia article for a language's sample, in English or the language. Default: `Seattle`.             |
 | `-f, --force`                         | Replace the extension's directory when it exists.                                                          |
 | `-y, --yes`                           | Never ask.                                                                                                 |
 
@@ -55,6 +60,7 @@ The generator is written in TypeScript and runs directly with Node.js (type stri
 - `src/questions.mts` — the questions, their defaults, and `--yes`.
 - `src/names.mts` — turns a typed name into a directory name, and suggests the friendly name.
 - `src/locales.mts` — writes locales as BCP 47, and suggests a language's native and English names.
+- `src/sample.mts` — chooses the sample: a language's Wikipedia article, or a starter file to replace.
 - `src/writeExtension.mts` — writes `extension.config.json` and the starter files.
 - `../scripts/lib/cspellPackages.mts`, `wikipedia.mts` and `existingExtensions.mts` — the package lists, the Wikipedia sample and the packages that already have an extension, shared with `npm run list:packages` and `fetch:sample`.
 - `src/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.

@@ -5,14 +5,10 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import type { Answers } from './questions.mts';
-import {
-    extensionConfig,
-    localeCommands,
-    readme,
-    sampleConfig,
-    sampleText,
-    writeExtension,
-} from './writeExtension.mts';
+import type { Sample } from './sample.mts';
+import { extensionConfig, localeCommands, readme, sampleConfig, writeExtension } from './writeExtension.mts';
+
+const seattle: Sample = { file: 'samples/seattle.md', text: '# Seattle\n\nText.\n' };
 
 const swedish: Answers = {
     name: 'swedish',
@@ -63,7 +59,7 @@ const parser: Answers = {
 
 describe('extensionConfig', () => {
     it('describes a language, with commands for its locale', () => {
-        assert.deepEqual(extensionConfig(swedish), {
+        assert.deepEqual(extensionConfig(swedish, seattle.file), {
             $schema: '../../static/extension.config.schema.json',
             name: 'swedish',
             kind: 'language',
@@ -74,13 +70,16 @@ describe('extensionConfig', () => {
             cspell: { import: ['@cspell/dict-sv/cspell-ext.json'] },
             commands: localeCommands(swedish),
         });
-        assert.deepEqual(extensionConfig(serbian).cspell, {
+        assert.deepEqual(extensionConfig(serbian, seattle.file).cspell, {
             import: ['@cspell/dict-sr-cyrl/cspell-ext.json', '@cspell/dict-sr-latn/cspell-ext.json'],
         });
     });
 
     it('orders the fields like the existing configs', () => {
-        const config = extensionConfig({ ...swedish, displayName: 'Svenska', description: 'Swedish words.' });
+        const config = extensionConfig(
+            { ...swedish, displayName: 'Svenska', description: 'Swedish words.' },
+            seattle.file,
+        );
         assert.deepEqual(Object.keys(config), [
             '$schema',
             'name',
@@ -97,18 +96,21 @@ describe('extensionConfig', () => {
     });
 
     it('leaves out the optional fields that are empty, and writes the ones that are given', () => {
-        const config = extensionConfig({ ...swedish, nativeName: '' });
+        const config = extensionConfig({ ...swedish, nativeName: '' }, seattle.file);
         assert.equal('nativeName' in config, false);
         assert.equal('displayName' in config, false);
         assert.equal('description' in config, false);
-        const named = extensionConfig({ ...swedish, displayName: 'Svenska', description: 'Swedish words.' });
+        const named = extensionConfig(
+            { ...swedish, displayName: 'Svenska', description: 'Swedish words.' },
+            seattle.file,
+        );
         assert.deepEqual([named.displayName, named.description], ['Svenska', 'Swedish words.']);
     });
 
     it('gives a word list and a parser no commands', () => {
-        assert.deepEqual(extensionConfig(medicalTerms).commands, []);
-        assert.equal(extensionConfig(medicalTerms).kind, 'wordList');
-        const config = extensionConfig(parser);
+        assert.deepEqual(extensionConfig(medicalTerms, 'samples/sample.md').commands, []);
+        assert.equal(extensionConfig(medicalTerms, 'samples/sample.md').kind, 'wordList');
+        const config = extensionConfig(parser, 'samples/sample.md');
         assert.deepEqual(
             [config.kind, config.description, config.commands, config.cspell],
             ['parser', 'Spell checks TypeScript.', [], { import: ['@cspell/parser-typescript/recommended'] }],
@@ -185,11 +187,10 @@ describe('readme', () => {
     });
 });
 
-describe('samples', () => {
-    it('turns on the locale of a language, and links its Wikipedia', () => {
+describe('sampleConfig', () => {
+    it('turns on the locale of a language', () => {
         assert.deepEqual(sampleConfig(swedish), { language: 'sv-SE,en' });
         assert.deepEqual(sampleConfig(medicalTerms), {});
-        assert.match(sampleText(swedish), /https:\/\/sv\.wikipedia\.org\/wiki\/Seattle/);
     });
 });
 
@@ -203,7 +204,7 @@ describe('writeExtension', () => {
     afterEach(() => rm(destDir, { recursive: true, force: true }));
 
     it('writes only the files a person owns', async () => {
-        const written = await writeExtension(destDir, swedish);
+        const written = await writeExtension(destDir, swedish, seattle);
         assert.deepEqual(written.toSorted(), [
             'LICENSE',
             'README.md',
@@ -214,28 +215,35 @@ describe('writeExtension', () => {
             'samples/seattle.md',
         ]);
         const config: unknown = JSON.parse(await readFile(path.join(destDir, 'extension.config.json'), 'utf8'));
-        assert.deepEqual(config, extensionConfig(swedish));
+        assert.deepEqual(config, extensionConfig(swedish, seattle.file));
         const pkg = JSON.parse(await readFile(path.join(destDir, 'package.json'), 'utf8')) as { name: string };
         assert.equal(pkg.name, 'code-spell-checker-swedish');
     });
 
     it('writes the GPL text only for the default license', async () => {
         const logged: string[] = [];
-        const written = await writeExtension(destDir, { ...swedish, license: 'MIT' }, { log: (m) => logged.push(m) });
+        const written = await writeExtension(destDir, { ...swedish, license: 'MIT' }, seattle, {
+            log: (m) => logged.push(m),
+        });
         assert.ok(!written.includes('LICENSE'));
         assert.ok(logged.includes('Add the text of the MIT license to LICENSE.'));
         const pkg = JSON.parse(await readFile(path.join(destDir, 'package.json'), 'utf8')) as { license: string };
         assert.equal(pkg.license, 'MIT');
     });
 
-    it('writes the sample it is given, i.e. from Wikipedia', async () => {
-        await writeExtension(destDir, swedish, { sample: '# Seattle\n\nText.\n' });
-        assert.equal(await readFile(path.join(destDir, 'samples/seattle.md'), 'utf8'), '# Seattle\n\nText.\n');
+    it('writes the sample it is given, and names it in extension.config.json', async () => {
+        const sample: Sample = { file: 'samples/lingua-latina.md', text: '# Lingua Latina\n' };
+        await writeExtension(destDir, swedish, sample);
+        assert.equal(await readFile(path.join(destDir, sample.file), 'utf8'), sample.text);
+        const config = JSON.parse(await readFile(path.join(destDir, 'extension.config.json'), 'utf8')) as {
+            sample: string;
+        };
+        assert.equal(config.sample, sample.file);
     });
 
     it('never overwrites a file', async () => {
         await writeFile(path.join(destDir, 'README.md'), 'mine\n');
-        await assert.rejects(writeExtension(destDir, swedish), /EEXIST/);
+        await assert.rejects(writeExtension(destDir, swedish, seattle), /EEXIST/);
         assert.equal(await readFile(path.join(destDir, 'README.md'), 'utf8'), 'mine\n');
     });
 });
