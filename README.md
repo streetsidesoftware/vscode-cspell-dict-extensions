@@ -6,8 +6,8 @@ This is a collection of VS Code Spelling Dictionary Extensions.
 
 See Also:
 
-- [How to Create a New Extension](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/blob/main/CONTRIBUTING.md#how-to-create-a-new-extension)
-- [How the Extensions Are Maintained](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/blob/main/CONTRIBUTING.md#synced-extensions)
+- [How to Create a New Extension](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/blob/main/docs/guides/new-extension.md)
+- [How the Extensions Are Maintained](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/blob/main/docs/synced-extensions.md)
 
 <!--- @@inject: static/generated/extension_list.md --->
 

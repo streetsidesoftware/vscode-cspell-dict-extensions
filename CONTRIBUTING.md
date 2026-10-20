@@ -1,48 +1,23 @@
 # Contributing
 
-Contributions are very welcome.
+<!--
+audience: technical contributor, developer, maintainer
+kind: index
+level: any
+-->
 
-Same steps works on Windows (powershell) and Linux. Just needs Node.js installed.
+> [!NOTE]
+> Where to start, for anyone who wants to change this repository.
 
-## How to create a new extension
+Contributions are very welcome. The steps work on Windows (PowerShell), macOS and Linux, and only need Node.js.
 
-Please fork this repository to add new dictionaries, then follow [Create an extension](./extension-runtime/README.md#create-an-extension).
+## Docs
 
-## Synced extensions
-
-Extensions with an `extension.config.json` are maintained centrally; the two without one, hunspell-syntax and timestamp-hover, are maintained by hand. To change a synced extension, edit its `extension.config.json` or the shared files, then run `npm run sync:extensions` and commit the result. [What the sync maintains](./extension-runtime/README.md#what-the-sync-maintains) lists the files it writes.
-
-### Pre-release mode
-
-While an extension's `package.json` has `"vsce": { "preRelease": true }`, every release of it is published as a pre-release. The " 👀 Set Prerelease" workflow opens a PR that turns the mode on or off for one extension. Turning it off is a `fix:` commit, so the next release is a stable version above the pre-releases.
-
-## Licenses
-
-Note: the preferred licenses are either MIT or GPL3.
-
-The safest to use is GPL3, but it is the most sticky.
-
-Since these extensions bundle the dictionary as part of the extension (falls under static linking clauses), the license must match the bundled dictionary / dictionaries.
-If the bundled dictionary is GPL3, then the extension must be GPL3 or later.
-
-## Testing Dictionary Extensions
-
-### Open extension folder in VSCode
-
-```sh
-cd extensions/<language> # Might be already done in in previous step
-code . # Opens vscode in current directory
-```
-
-### Run/Debug extension
-
-Within VS Code `Debug -> Start Debugging` with the `Launch Extension` configuration.
-
-![Debug extension](./images/debug-extension.png)
-
-This will open new VSCode window. Inside it open previously edited `seattle.md`. If most words of your language are now recognized (no blue squiggly line) you can open pull request to `main` branch. Build files are already in .gitignore so you can commit all changes.
-
-Shortly after pull request is merged extension will appear in vscode extensions marketplace.
+- [Creating an extension](./docs/guides/new-extension.md): a new extension for a published dictionary or parser.
+- [Licenses](./docs/licenses.md): which license an extension can have.
+- [Synced extensions](./docs/synced-extensions.md): how the extensions are maintained centrally, and the files the sync writes.
+- [Releasing](./docs/releasing.md): release-please, pre-release mode and publishing. For maintainers.
+- [Writing docs](./docs/style.md): where docs go, and who each one is for.
 
 ## Adding words to a language dictionary
 
