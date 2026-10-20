@@ -13,7 +13,7 @@ level: writes or edits the docs in this repository
 
 - **`docs/`:** docs for contributors and maintainers. Step-by-step guides go in `docs/guides/`.
 - **`CONTRIBUTING.md`:** a short index of `docs/`.
-- **A package's `README.md`:** reference for that package only, such as the generator's options.
+- **A package's `README.md`:** reference for that package only, such as the generator's options. It needs no audience header.
 - **An extension's `README.md`:** for the people who install it. It's the extension's Marketplace page, so links are absolute `https://` URLs.
 
 ## Audience
@@ -33,7 +33,13 @@ level: comfortable with basic git and a terminal; doesn't read or write code
 > For contributors who can fork the repo and follow terminal steps. No coding needed.
 ```
 
-The HTML comment is for writers and AI agents; GitHub doesn't show it. The `> [!NOTE]` below it tells readers whether the doc is for them. A maintainer-only doc uses `> [!WARNING]` instead, to warn others off. Write for the reader the header names, and leave out what they don't need.
+The HTML comment is for writers and AI agents. GitHub doesn't show it. Its fields:
+
+- **`audience`:** who the doc is for, from the list below.
+- **`kind`:** `guide` for steps that do a task, `reference` for facts to look up, or `index` for a list of other docs.
+- **`level`:** what the reader can already do, in a few words.
+
+The `> [!NOTE]` below it tells readers whether the doc is for them. A maintainer-only doc uses `> [!WARNING]` instead, to warn others off. Write for the reader the header names, and leave out what they don't need.
 
 **Audiences:**
 
@@ -44,4 +50,17 @@ The HTML comment is for writers and AI agents; GitHub doesn't show it. The `> [!
 
 ## Guides
 
-Give each step a heading or a numbered item, and list its checks one per item.
+Number the steps. Start each with a bold name, such as **Install.** Each step is one thing the reader does. Put each check or choice in its own bullet.
+
+## Wording
+
+- One idea per sentence. Split a sentence at a semicolon, a colon or a second "and".
+- **Users**, not "people", for whoever installs the extensions.
+- An extension **includes** a package. Not "wraps" or "bundles".
+- **Natural language**, not "language", for a language extension's kind.
+- No "sync" in docs for contributors. Say what happens, such as "the generator writes it".
+- `--yes` and other options without questions are for agents and experts. Guides for contributors use the questions.
+
+## Shared text
+
+Text that more than one doc needs goes in `docs/templates/`, such as the prerequisites. A doc marks where it goes with `<!--- @@inject: … --->` and `<!--- @@inject-end: … --->` comments. After a pull request merges, a workflow runs `npm run gen:readme`, which fills those sections in. A template can use values from a JSON file, such as `{@ engines.node @}` from the root `package.json`.
