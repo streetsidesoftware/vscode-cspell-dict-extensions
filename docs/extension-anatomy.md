@@ -20,7 +20,7 @@ To change an extension, edit its `extension.config.json`, or the shared files in
 - `samples/`, `LICENSE` and `images/`.
 - `cspell.config.yaml`. The sync creates it when it's missing, importing `./static/cspell-ext.json`, so the extension's dictionaries work when you open its folder. After that, it's yours: add `words`, `language` or other settings there.
 - `src/custom.ts`, optional: code only this extension needs.
-- The fields of `package.json` that the next section doesn't list, such as `dependencies`.
+- The other fields of `package.json`, such as `dependencies`.
 
 release-please writes `CHANGELOG.md` and the `version` in `package.json`.
 
@@ -28,7 +28,7 @@ release-please writes `CHANGELOG.md` and the `version` in `package.json`.
 
 Don't edit these; `npm run sync:extensions` overwrites them.
 
-- **Tool configs:** `tsconfig.json`, `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from [`template/`](../extension-runtime/template).
+- **Tool configs:** `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from [`template/`](../extension-runtime/template). Also `tsconfig.json`, but only when the extension has a `src/custom.ts`; otherwise the sync removes it.
 - **`static/cspell-ext.json`:** the `cspell` settings from `extension.config.json`, which the extension registers with Code Spell Checker.
 - **`static/commands.json`:** the commands, for the README's table. Removed when there are none.
 - **`static/dictionaries.json`:** each dictionary with the locales or file types that turn it on, read from the installed dictionaries, for the README's table. For a word list, a dictionary that nothing turns on is listed as "off until turned on". Removed when there are none, and never written for a bundle.
@@ -38,6 +38,8 @@ Don't edit these; `npm run sync:extensions` overwrites them.
   - `<!--- @@inject-table: ./static/commands.json --->`
   - `<!--- @@inject-table: ./static/dictionaries.json#markdown --->`
   - `<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->`, the Manual Settings of a language extension, filled from its `locale` and `friendlyName`. English variants use `manual-settings.english.md` instead, which advises replacing `en`.
+
+`npm run tool:fix-extensions`, which the generator runs, also sets the `package.json` fields every extension shares: `private`, `repository`, `publisher`, `author`, `bugs`, and the `vsce` base URLs.
 
 The sync also regenerates the schema from the `ExtensionConfig` type first, and checks every `extension.config.json` against it.
 
