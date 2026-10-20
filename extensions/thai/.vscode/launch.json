@@ -1,0 +1,16 @@
+// Written by `npm run sync:extensions`. Do not edit.
+// A launch configuration that builds the extension and then opens it inside a new window.
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": ["--extensionDevelopmentPath=${workspaceFolder}", "${workspaceFolder}/samples"],
+            "sourceMaps": true,
+            "outFiles": ["${workspaceFolder}/out/**/*.js"],
+            "preLaunchTask": "npm: build"
+        }
+    ]
+}

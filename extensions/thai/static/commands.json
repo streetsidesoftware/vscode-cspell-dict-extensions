@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Thai Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Thai Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Thai Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Thai Spell Checker Dictionary in Workspace"
+    }
+]
