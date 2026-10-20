@@ -269,35 +269,56 @@ async function dictionariesTable(extensionDir: string, config: ExtensionConfig):
  */
 export async function dictionaryStates(extensionDir: string, config: ExtensionConfig): Promise<DictionaryState[]> {
     const exts = [...(await readDictionaries(extensionDir, config)), config.cspell as DictionaryExt];
-    const overrides = exts.flatMap((ext) => ext.overrides ?? []);
+    const allRules = rules(exts);
     return exts
         .flatMap((ext) => ext.dictionaryDefinitions ?? [])
         .map(({ name }) => {
-            const settings = exts
-                .flatMap((ext) => ext.languageSettings ?? [])
-                .filter((s) => s.dictionaries?.includes(name));
-            // An override turns a dictionary on for its files, directly or in its own language settings.
-            const filePatterns = unique(
-                overrides
-                    .filter(
-                        (o) =>
-                            o.dictionaries?.includes(name) ||
-                            o.languageSettings?.some((s) => s.dictionaries?.includes(name)),
-                    )
-                    .flatMap((o) => [o.filename ?? []].flat())
-                    // A glob in a dictionary's config is relative to the dictionary's folder: only one that starts
-                    // with `**` reaches the user's files. A negated glob turns nothing on.
-                    .filter((pattern) => pattern.startsWith('**')),
+            const named = allRules.filter((rule) => rule.dictionaries.includes(name));
+            const fileTypes = unique(named.flatMap((rule) => rule.fileTypes));
+            const filePatterns = unique(named.flatMap((rule) => rule.filePatterns));
+            const locales = unique(named.flatMap((rule) => rule.locales).map(canonicalLocale));
+            const all = named.some(
+                (rule) => !rule.filePatterns.length && (!rule.fileTypes.length || rule.fileTypes.includes('*')),
             );
-            const fileTypes = unique(settings.flatMap((s) => splitList(s.languageId)));
-            const all =
-                exts.some((ext) => ext.dictionaries?.includes(name)) ||
-                fileTypes.includes('*') ||
-                settings.some((s) => !splitList(s.languageId).length);
-            const locales = unique(settings.flatMap((s) => splitList(s.locale)).map(canonicalLocale));
-            const off = !all && !settings.length && !filePatterns.length;
-            return { name, all, fileTypes, filePatterns, locales, off };
+            return { name, all, fileTypes, filePatterns, locales, off: !named.length };
         });
+}
+
+/** One setting that turns dictionaries on: for some file types, for the files that match some globs, or for every file. */
+interface Rule {
+    dictionaries: string[];
+    /** Empty, or `*`, for every file type. */
+    fileTypes: string[];
+    /** Empty for every file; otherwise only the files that match. */
+    filePatterns: string[];
+    locales: string[];
+}
+
+/** Every setting in the configs that turns dictionaries on, as a flat list of rules. */
+function rules(exts: readonly DictionaryExt[]): Rule[] {
+    const rules: Rule[] = [];
+    const fromSetting = (s: LanguageSetting, filePatterns: string[]): Rule => ({
+        dictionaries: s.dictionaries ?? [],
+        fileTypes: splitList(s.languageId),
+        filePatterns,
+        locales: splitList(s.locale),
+    });
+    for (const ext of exts) {
+        rules.push({ dictionaries: ext.dictionaries ?? [], fileTypes: [], filePatterns: [], locales: [] });
+        for (const setting of ext.languageSettings ?? []) rules.push(fromSetting(setting, []));
+        for (const override of ext.overrides ?? []) {
+            // A glob in a dictionary's config is relative to the dictionary's folder: only one that starts with `**`
+            // reaches the user's files. A negated glob turns nothing on.
+            const globs = [override.filename ?? []].flat().filter((glob) => glob.startsWith('**'));
+            // An override whose globs reach no user file turns nothing on.
+            if (!globs.length) continue;
+            rules.push({ dictionaries: override.dictionaries ?? [], fileTypes: [], filePatterns: globs, locales: [] });
+            // Inside an override, the globs decide which files a language setting covers.
+            for (const setting of override.languageSettings ?? [])
+                rules.push({ ...fromSetting(setting, globs), fileTypes: [] });
+        }
+    }
+    return rules;
 }
 
 /**
