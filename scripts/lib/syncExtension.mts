@@ -106,6 +106,8 @@ async function extensionFiles(
     if (dictionaries) files.set('static/dictionaries.json', dictionaries);
     const pkg = await readJson<PackageJson>(path.join(extensionDir, 'package.json'));
     const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
+    // `tsconfig.json` only type-checks `src/custom.ts`; without it, tsc and VS Code report "No inputs were found".
+    if (!hasCustom) files.delete('tsconfig.json');
     files.set('package.json', packageJsonSource(config, pkg, vscodeEngine, hasCustom));
     return files;
 }
@@ -142,7 +144,9 @@ async function removeUnusedFiles(
     files: Map<string, string>,
     check: boolean | undefined,
 ): Promise<FileChange[]> {
-    const unused = ['static/commands.json', 'static/dictionaries.json'].filter((file) => !files.has(file));
+    const unused = ['static/commands.json', 'static/dictionaries.json', 'tsconfig.json'].filter(
+        (file) => !files.has(file),
+    );
     const changes: FileChange[] = [];
     for (const file of unused) {
         const target = path.join(extensionDir, file);

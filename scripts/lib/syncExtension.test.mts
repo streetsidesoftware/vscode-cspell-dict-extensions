@@ -75,7 +75,6 @@ describe('syncExtension', () => {
             'package.json',
             'static/commands.json',
             'static/cspell-ext.json',
-            'tsconfig.json',
             'tsdown.config.ts',
         ]);
         assert.deepEqual(files(changes, 'remove'), []);
@@ -229,12 +228,18 @@ describe('syncExtension', () => {
         assert.deepEqual(Object.keys(result).slice(0, 5), ['name', 'version', 'type', 'contributes', 'scripts']);
     });
 
-    it('type-checks src/custom.ts when there is one, and keeps it', async () => {
+    it('type-checks src/custom.ts while there is one, and keeps it', async () => {
         await fs.mkdir(path.join(dir, 'src'));
         await fs.writeFile(path.join(dir, 'src/custom.ts'), 'export {};\n');
         await syncExtension(dir, options);
         assert.equal((await readJson('package.json')).scripts['check-types'], 'tsc -p .');
+        assert.match(await read('tsconfig.json'), /"include": \["src"\]/);
         assert.equal(await read('src/custom.ts'), 'export {};\n');
+
+        await fs.rm(path.join(dir, 'src'), { recursive: true });
+        const changes = await syncExtension(dir, options);
+        assert.deepEqual(files(changes, 'remove'), ['tsconfig.json']);
+        assert.equal((await readJson('package.json')).scripts['check-types'], undefined);
     });
 
     it('leaves commands that do not contribute out of package.json and the README table', async () => {
