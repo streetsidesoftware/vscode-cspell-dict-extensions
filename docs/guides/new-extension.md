@@ -27,7 +27,7 @@ People install an extension from the VS Code Marketplace.
    npm run list:packages -- --missing   # the packages no extension includes yet
    ```
 
-   `--json` prints JSON. Check the package's license (see [Licenses](../licenses.md)).
+   `--json` prints JSON.
 
 3. **Run the generator.** It asks a few questions, then creates the extension.
 
@@ -50,8 +50,6 @@ People install an extension from the VS Code Marketplace.
    The generator then creates `extensions/<name>/` with all of the extension's files, and installs the dictionaries or parsers.
 
    For a natural language, the generator also fetches a sample text: the Wikipedia article about Seattle in that language. If that article doesn't exist, the generator says so; write a short sample by hand in `samples/seattle.md`.
-
-   The generator doesn't ask for a license: the extension gets `GPL-3.0-or-later`. For another license, see [Licenses](../licenses.md).
 
    If you already know every answer, the [generator README](../../generator-cspell-dicts-extensions/README.md) shows how to give them as options.
 
