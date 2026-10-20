@@ -5,29 +5,31 @@ import path from 'node:path';
 import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/src/config.ts';
 import { languageOf } from './locales.mts';
 import { type Answers, defaultLicense, type Language } from './questions.mts';
+import type { Sample } from './sample.mts';
 
 export const templateDir: string = path.join(import.meta.dirname, '..', 'templates');
 
 /** Files copied as is from the generator's `templates` directory. `LICENSE` holds the text of the default license. */
 const copies = ['images/SpellCheck.png'];
 
-/** The sample the VS Code test opens. */
-const sample = 'samples/seattle.md';
-
 export interface WriteOptions {
     /** Defaults to the generator's `templates` directory. */
     templateDir?: string;
-    /** The sample's text, i.e. a Wikipedia article. Default: a placeholder to replace. */
-    sample?: string | undefined;
     log?: (message: string) => void;
 }
 
 /**
  * Write the files a person owns into `destDir`: `extension.config.json`, a starter `package.json`, `README.md`,
  * `LICENSE` and the samples. `npm run sync:extensions` writes the rest. Existing files are never overwritten.
+ * @param samples - the first is the `sample` in `extension.config.json`, which the VS Code test opens.
  * @returns the files written, relative to `destDir`.
  */
-export async function writeExtension(destDir: string, answers: Answers, options: WriteOptions = {}): Promise<string[]> {
+export async function writeExtension(
+    destDir: string,
+    answers: Answers,
+    samples: readonly [Sample, ...Sample[]],
+    options: WriteOptions = {},
+): Promise<string[]> {
     const srcDir = options.templateDir ?? templateDir;
     const log = options.log ?? (() => undefined);
     const written: string[] = [];
@@ -41,10 +43,10 @@ export async function writeExtension(destDir: string, answers: Answers, options:
     }
 
     const files: [string, string][] = [
-        ['extension.config.json', json(extensionConfig(answers))],
+        ['extension.config.json', json(extensionConfig(answers, samples[0].file))],
         ['package.json', json(packageJson(answers))],
         ['README.md', readme(answers)],
-        [sample, options.sample ?? sampleText(answers)],
+        ...samples.map((sample): [string, string] => [sample.file, sample.text]),
         ['samples/cspell.json', json(sampleConfig(answers))],
     ];
     for (const [file, content] of files) {
@@ -66,7 +68,7 @@ function json(value: unknown): string {
  * The extension's `extension.config.json`, with its fields in the order the existing ones use. Optional fields are
  * only written when they are given.
  */
-export function extensionConfig(answers: Answers): ExtensionConfig {
+export function extensionConfig(answers: Answers, sample: string): ExtensionConfig {
     const { kind, packages } = answers;
     const optional = (key: string, value: string) => (value ? { [key]: value } : {});
     const head = { $schema: '../../static/extension.config.schema.json', name: answers.name };
@@ -219,16 +221,4 @@ export function readme(answers: Answers): string {
  */
 export function sampleConfig(answers: Answers): Record<string, unknown> {
     return answers.kind === 'language' ? { language: `${answers.locale},en` } : {};
-}
-
-/** The sample the tests spell check. */
-export function sampleText(answers: Answers): string {
-    const language = answers.kind === 'language' ? languageOf(answers.locale) : 'en';
-    const lines = [
-        '# Seattle',
-        '',
-        `Replace this text with the Wikipedia article about Seattle: https://${language}.wikipedia.org/wiki/Seattle`,
-        '',
-    ];
-    return lines.join('\n');
 }

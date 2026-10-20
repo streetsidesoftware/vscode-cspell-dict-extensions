@@ -7,11 +7,12 @@ import { Command, Option } from 'commander';
 
 import { type CSpellPackage, fetchCSpellPackages } from '../../scripts/lib/cspellPackages.mts';
 import { findExistingExtensions } from '../../scripts/lib/existingExtensions.mts';
-import { articleMarkdown, fetchArticle } from '../../scripts/lib/wikipedia.mts';
+import { fetchArticle } from '../../scripts/lib/wikipedia.mts';
 import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
 import { askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
+import { askSampleFile, defaultSampleTitle, fileSamples, languageSample, starterMarker } from './sample.mts';
 import { writeExtension } from './writeExtension.mts';
 
 /** The repository root. */
@@ -40,6 +41,18 @@ export async function run(argv: string[] = process.argv): Promise<void> {
         .option('--display-name <name>', 'the Marketplace name (default: "<friendly name> - Code Spell Checker")')
         .option('--description <text>', 'the Marketplace description (required for a parser)')
         .option('--license <spdx>', `the extension's license (default: ${defaultLicense})`)
+        .option(
+            '--sample-title <title>',
+            `the Wikipedia article for a language's sample, in English or the language (default: ${defaultSampleTitle})`,
+        )
+        .addOption(
+            new Option(
+                '--sample-file <file>',
+                'a sample to copy into samples/, instead of the default; repeat it for several, and the VS Code test opens the first',
+            )
+                .argParser((value: string, previous: string[] | undefined) => [...(previous ?? []), value])
+                .conflicts('sampleTitle'),
+        )
         .option('-f, --force', 'replace the extension directory when it exists')
         .option('-y, --yes', 'never ask: use the defaults, and fail when a required value is missing')
         .showHelpAfterError(true)
@@ -50,22 +63,45 @@ export async function run(argv: string[] = process.argv): Promise<void> {
 
 async function generate(
     name: string | undefined,
-    { package: packages, ...options }: Omit<Options, 'name' | 'packages'> & { package?: string[] },
+    {
+        package: packages,
+        sampleTitle,
+        sampleFile: sampleFiles,
+        ...options
+    }: Omit<Options, 'name' | 'packages'> & { package?: string[]; sampleTitle?: string; sampleFile?: string[] },
 ): Promise<void> {
     if (!options.yes) {
         console.log(styleText('bold', '\nWelcome to the VS Code Spelling Dictionary Extension generator!\n'));
     }
 
+    const prompter = options.yes ? noPrompter : inquirerPrompter;
+    const log = (message: string) => console.log(message);
     const answers = await askQuestions(
         { ...options, name, packages },
         {
-            prompter: options.yes ? noPrompter : inquirerPrompter,
+            prompter,
             packages: await readPackageLists(),
             extensionsDir,
             existing: await findExistingExtensions(extensionsDir),
-            log: (message) => console.log(message),
+            log,
         },
     );
+
+    const sampleContext = {
+        prompter,
+        yes: !!options.yes,
+        // `npm run` starts in the repository root; INIT_CWD is where it was run from.
+        cwd: process.env['INIT_CWD'] ?? process.cwd(),
+        fetchArticle,
+        log,
+    };
+    const samples = sampleFiles
+        ? await fileSamples(sampleFiles, sampleContext.cwd)
+        : answers.kind === 'language'
+          ? [await languageSample(languageOf(answers.locale), sampleTitle ?? defaultSampleTitle, sampleContext)]
+          : await askSampleFile(answers.friendlyName, sampleContext);
+    const [firstSample, ...moreSamples] = samples;
+    if (!firstSample) throw new Error('No sample.');
 
     const destDir = path.join(extensionsDir, answers.name);
     if (options.force && existsSync(destDir)) {
@@ -73,8 +109,7 @@ async function generate(
         await rm(destDir, { recursive: true });
     }
     console.log(`Creating extensions/${answers.name}`);
-    const sample = answers.kind === 'language' ? await fetchSample(languageOf(answers.locale)) : undefined;
-    await writeExtension(destDir, answers, { sample, log: (message) => console.log(message) });
+    await writeExtension(destDir, answers, [firstSample, ...moreSamples], { log });
 
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     npm(['install', '-S', ...answers.packages], destDir);
@@ -85,6 +120,9 @@ async function generate(
     npm(['install'], destDir);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
+    if (firstSample.text.includes(starterMarker)) {
+        console.log(styleText('yellow', `Replace the text in extensions/${answers.name}/${firstSample.file}.`));
+    }
 }
 
 async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
@@ -94,23 +132,6 @@ async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
         console.log(styleText('yellow', `Could not fetch the package lists (${errorMessage(e)}).`));
         return undefined;
     }
-}
-
-/** The Wikipedia article about Seattle in the language, as the sample. */
-async function fetchSample(language: string): Promise<string | undefined> {
-    try {
-        const article = await fetchArticle(language, 'Seattle');
-        if (article) {
-            console.log(`Sample: ${article.url}`);
-            return articleMarkdown(article);
-        }
-        console.log(
-            styleText('yellow', `No ${language}.wikipedia.org article about Seattle; write the sample by hand.`),
-        );
-    } catch (e) {
-        console.log(styleText('yellow', `Could not fetch a sample from Wikipedia (${errorMessage(e)}).`));
-    }
-    return undefined;
 }
 
 function errorMessage(e: unknown): string {
