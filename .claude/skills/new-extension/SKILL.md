@@ -1,13 +1,13 @@
 ---
 name: new-extension
-description: 'Creates a new extension in this repo, from request to one pull request: finds the published @cspell/dict-* or @cspell/parser-* package, runs the generator, gets the sample and the checks passing, and opens the PR. Use when asked to add or create an extension for a language, word list, dictionary or parser, such as "add an extension for Thai".'
+description: 'Creates a new extension in this repo, from request to one pull request: finds the published @cspell/dict-* or @cspell/parser-* package, runs the generator, gets the sample and the checks passing, and, once the user agrees, opens the PR. Use when asked to add or create an extension for a language, word list, dictionary or parser, such as "add an extension for Thai".'
 ---
 
 # new-extension
 
 Takes a request such as "add an extension for Thai" to one pull request. The steps for contributors are in
-`docs/guides/new-extension.md`, and the generator's options are in `generator-cspell-dicts-extensions/README.md`. Read
-both first. This skill runs the generator without questions (`--yes`), and adds the points where you stop and ask the
+`docs/guides/new-extension.md`. The generator's options are in `generator-cspell-dicts-extensions/README.md`. Read
+both first. This skill runs the generator without questions (`--yes`). It adds the points where you stop and ask the
 user.
 
 ## Workflow
@@ -20,7 +20,7 @@ user.
   npm ci
   ```
 
-  The generator and `list:packages` need a network connection: they read the npm registry, the package lists of
+  The generator and `list:packages` need a network connection. They read the npm registry, the package lists of
   cspell-dicts and cspell-parsers, and Wikipedia.
 
 ### 2. Find the package
@@ -28,8 +28,7 @@ user.
 An extension includes a published package, unchanged. Find the one the request means.
 
 - **Do:** search for the English name, the natural language's own name, its language code, or the topic. Several
-  words must all match, so pass `--any` to match any of them. The guide's "How to find dictionaries and parsers"
-  describes the columns.
+  words must all match. Pass `--any` to match any of them.
 
   ```sh
   npm run list:packages -- <word>...
@@ -40,36 +39,46 @@ An extension includes a published package, unchanged. Find the one the request m
   - **Nothing matches.** The package must be published first, in
     [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts) or
     [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers). Say so, and stop.
-  - **The request is ambiguous.** "Gaelic" could mean Scottish Gaelic (`@cspell/dict-gd`) or Irish (no package);
-    "Portuguese" could mean Portugal or Brazil. List the matches and ask which.
+  - **The request is ambiguous.** "Gaelic" could mean Scottish Gaelic (`@cspell/dict-gd`) or Irish (no package). List
+    the matches and ask which.
+  - **The match is narrower than the request, or different.** "Lisp" finds only `@cspell/dict-elisp`, whose Name is
+    "Emacs Lisp". Show the package and ask whether it's the one.
   - **The Extension column says "ships with cspell".** cspell already includes it, so it needs no extension. Say so,
     and stop.
-  - **The Extension column names an extension.** Show it, and ask whether to change that extension instead or create
-    another one; both are allowed.
+  - **The Extension column names an extension.** Show it. Ask whether to change that extension instead or create
+    another one. Both are allowed.
+  - **The Kind column says bundle.** The generator can't make a bundle. Say so, and stop.
 - **Done when** the user's request names exactly one set of packages, or the user has chosen.
 
 ### 3. Branch
 
-- **Do:** work on a new branch `new-extension/<name>` from up-to-date `origin/main`, or on the fresh branch you're
+- **Do:** work on a new branch `new-extension/<name>` from up-to-date `origin/main`. Or work on the fresh branch you're
   already on for this task.
 
 ### 4. Gather the answers
 
-`--yes` never prompts, so every value without a default must be an option. Defaults come from the packages; the
+`--yes` never prompts, so every value without a default must be an option. Defaults come from the packages. The
 generator README lists them.
 
-- **Name:** a short lowercase English name, such as `thai` or `scottish-gaelic`. It's the folder `extensions/<name>/`,
-  the package `code-spell-checker-<name>` and the commands' ID prefix, so it can't change after release. Ask when the request doesn't make it obvious.
+- **Name:** a short lowercase English name, such as `thai` or `scottish-gaelic`. It's the folder `extensions/<name>/`.
+  It's also the package `code-spell-checker-<name>` and the commands' ID prefix. So it can't change after release. Ask
+  when the request doesn't make it obvious.
+- **Friendly name:** the name users see in the Marketplace, the README and the command titles. The default is the name
+  with each word capitalized: `scottish-gaelic` gives "Scottish Gaelic". When that isn't how the language or topic is
+  written, pass `--friendly-name`, such as `--friendly-name "Brazilian Portuguese"` or
+  `--friendly-name "Emacs Lisp"`. Ask when you aren't sure.
 - **Sample:**
   - **A natural language:** the generator fetches the Wikipedia article about Seattle in that language. If that
-    language's Wikipedia has none, the generator stops with an error. Ask the user for another article, and pass
+    language's Wikipedia has none, the generator stops with an error. Ask the user for another article. Pass
     `--sample-title <title>`, once for each article.
-  - **A word list or a parser:** ask the user for a sample file: text that uses the list's words, or code for the
-    parser, such as a file from the parser's `fixtures` in cspell-parsers. Pass it with `--sample-file <file>`, once
-    for each file. It can't be combined with `--sample-title`.
+  - **A word list or a parser:** ask the user for a sample file. It's text that uses the list's words, or code for the
+    parser, such as a file from the parser's `fixtures` in cspell-parsers. Its file extension must match one of the
+    dictionary's file types, such as `.clj` for Clojure. When a word list has several file types, ask for one file per
+    type. Pass each with `--sample-file <file>`, a relative path from the repository root, or an absolute path. It
+    can't be combined with `--sample-title`.
 - **Description:** a parser needs `--description`, one sentence for the Marketplace. Ask the user.
-- **License:** the default, `GPL-3.0-or-later`, unless the user asks for another (`--license <spdx>`). It covers the
-  extension's own code; each package keeps its own license.
+- **License:** leave the default, `GPL-3.0-or-later`, and never pass `--license`. If the user asks for another
+  license, say that the extension is created with the default, and that they change it themselves.
 
 ### 5. Run the generator
 
@@ -77,7 +86,7 @@ generator README lists them.
 
   ```sh
   npm run create:extension -- <name> --package <package> [--package <package>…] --yes \
-    [--sample-title <title>] [--sample-file <file>] [--description "<sentence>"]
+    [--friendly-name "<name>"] [--sample-title <title>] [--sample-file <file>] [--description "<sentence>"]
   ```
 
 - **If it fails:**
@@ -94,21 +103,28 @@ generator README lists them.
   npm run check:extension -- <name>
   ```
 
-- **If the sample check fails** on words the dictionary doesn't know:
-  - Names, places and other non-words go in `words` in `extensions/<name>/samples/cspell.json`.
-  - A real word the dictionary lacks belongs upstream in cspell-dicts. Shorten the sample around it, or add it to
-    `words`, and list it for the user.
+- **If the sample check fails** on words the dictionary doesn't know, add them to the sample itself. Leave
+  `samples/cspell.json` as the generator wrote it.
+  - Put names, pieces of words and other non-words on an `ignore` line, such as `Siatail`.
+  - Put real words the dictionary lacks on a `words` line. They belong upstream in cspell-dicts, so list them for the
+    user.
+  - Each is one line at the end of the sample: an HTML comment in Markdown, a line comment in code. For example:
+
+    ```markdown
+    <!--- cspell:ignore Siatail --->
+    ```
+
   - Keep the sample's source and license line.
-- **Done when** the check passes and every word in `words` is listed for the user.
+- **Stop and ask** when you can't tell whether an unknown word is a real word, a name or a piece of a word. This is
+  likely in a script without spaces between words, such as Thai. Show the user the list. Recommend `ignore` for each,
+  unless it's clearly a real word.
+- **Done when** the sample check passes, and every word on a `words` or `ignore` line is listed for the user.
 
-### 7. Edit the README
+### 7. Read the README
 
-- **Check** when each dictionary is on, in `extensions/<name>/static/dictionaries.json`: for some locales, for some
-  file types, for all, or "off until turned on" (such as `@cspell/dict-vim`), which users turn on with the
-  extension's commands.
-- **Do:** in `extensions/<name>/README.md`, change the text outside the `@@inject` markers: what the extension adds,
-  who it's for, and whether it's on once installed, matching that check. Keep the markers and the commands section;
-  the sync fills those sections in.
+- **Do:** read `extensions/<name>/README.md`. The generator writes it complete, including when each dictionary is on.
+  Add only what users should know, such as where the words come from. Keep the `@@inject` markers and the commands
+  section. The sync fills those sections in.
 
 ### 8. Run every check
 
@@ -118,24 +134,30 @@ generator README lists them.
   npm run check:extension -- <name> --vscode
   ```
 
+  For a new extension, these are all the checks. The root checks in `AGENTS.md` are for changes outside
+  `extensions/<name>/`.
+
 - **If the VS Code test can't run here** (no display, or the download fails), say so to the user and leave it to CI.
-  Run the rest without `--vscode` until it passes.
+  Then run `npm run check:extension -- <name>`, without `--vscode`, until it passes. A failing VS Code test retries
+  three times, so it's slow.
 - **Done when** every check passes, or only the VS Code test couldn't run and the user knows.
 
-### 9. Commit, then ask before the PR
+### 9. Commit, ask, then open the PR
 
 - **Do:** commit the new folder with the message `feat: add <friendly name> extension`, such as
-  `feat: add Scottish Gaelic extension`. Leave the root README lists, `release-please-config.json` and the workflow
-  lists alone: a workflow updates them after the merge.
+  `feat: add Scottish Gaelic extension`. Leave the root README lists, `static/dictionary-types.json`,
+  `release-please-config.json` and the workflow lists alone. A workflow updates them after the merge.
 - **Stop and ask** before pushing and opening the PR. Show the title and the description:
   - what the extension adds, and the packages it includes
   - when each dictionary is on, from `static/dictionaries.json`
   - the sample's source
-  - the words added to `samples/cspell.json`
+  - the words on the sample's `words` and `ignore` lines
   - whether the VS Code test ran
+- **After the user agrees:** push `new-extension/<name>`. Open the PR against `main`, with the title and description
+  you showed.
+- **Done when** the PR is open and the user has its link.
 
 ## Not this skill
 
 - **Words missing from a dictionary:** they belong upstream, in cspell-dicts. Say so.
-- **Changing an existing extension:** edit its `extension.config.json` and run `npm run sync:extensions`, as
-  `docs/extension-anatomy.md` describes.
+- **Changing an existing extension:** see "Files you edit" in `docs/extension-anatomy.md`.
