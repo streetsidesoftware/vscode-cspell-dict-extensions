@@ -23,7 +23,7 @@ The sample is what the tests spell check, and the VS Code test opens it. To brin
 
 Without `--sample-file`:
 
-- **A language:** the Wikipedia article about Seattle in that language, with its source and license, in `samples/seattle.md`. When that language's Wikipedia has no such article, the generator asks for another one; with `--yes` it stops, and `--sample-title <title>` names another article, in English or the language. The file is named after the title: `--sample-title "Lingua Latina"` writes `samples/lingua-latina.md`. Without Wikipedia, the generator stops before writing anything.
+- **A language:** Wikipedia articles in that language, with their source and license, one file each, named after the title: `Seattle` is `samples/seattle.md`, and `Lingua Latina` is `samples/lingua-latina.md`. The generator asks for an article, with Seattle as the default, then for more until the answer is empty. `--sample-title <title>`, once for each article, names them instead; with `--yes` and no `--sample-title`, it's Seattle. A missing article is asked again, or with `--yes` stops the generator. Without Wikipedia, the generator stops before writing anything.
 - **A word list or a parser:** there's no default. With `--yes`, `--sample-file` is required. Otherwise the generator asks for a sample file; without one, it writes `samples/sample.md`, a line to replace with a deliberate misspelling, so the spell check fails until you replace it.
 
 Afterwards, add the sample's unknown words to `samples/cspell.json`, edit the README, and run `npm run check:extension -- <name>`.
@@ -40,21 +40,21 @@ npm run create:extension -- medical-terms --package @cspell/dict-medicalterms --
 npm run create:extension -- typescript-parser --package @cspell/parser-typescript --description "Spell checks TypeScript." --sample-file sample.ts --yes
 ```
 
-| Option                                | Answers                                                                                                                                       |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `[name]`                              | The extension directory and command ID prefix, i.e. `swedish`. Required with `--yes`.                                                         |
-| `-p, --package <package>`             | A `@cspell/dict-*` or `@cspell/parser-*` package to include. Repeat it for several. Required with `--yes`.                                    |
-| `--kind <language\|wordList\|parser>` | The kind of extension. Default: from the packages.                                                                                            |
-| `--locale <locale>`                   | A language's locale. Default: the most specific locale the packages share.                                                                    |
-| `--native-name <name>`                | The language in the language itself. Default: the name `Intl` gives it; empty for none.                                                       |
-| `--friendly-name <name>`              | The name shown to people. Default: from the name, i.e. `Swedish`.                                                                             |
-| `--display-name <name>`               | The Marketplace name. Default: `<friendly name> - Code Spell Checker`.                                                                        |
-| `--description <text>`                | The Marketplace description. Required for a parser; the other kinds have a default.                                                           |
-| `--license <spdx>`                    | The extension's license. Default: `GPL-3.0-or-later`. For another license, add its text to `LICENSE`.                                         |
-| `--sample-title <title>`              | The Wikipedia article for a language's sample, in English or the language. Default: `Seattle`.                                                |
-| `--sample-file <file>`                | A sample to copy into `samples/`. Repeat it for several; the VS Code test opens the first. Required with `--yes` for a word list or a parser. |
-| `-f, --force`                         | Replace the extension's directory when it exists.                                                                                             |
-| `-y, --yes`                           | Never ask.                                                                                                                                    |
+| Option                                | Answers                                                                                                                                               |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `[name]`                              | The extension directory and command ID prefix, i.e. `swedish`. Required with `--yes`.                                                                 |
+| `-p, --package <package>`             | A `@cspell/dict-*` or `@cspell/parser-*` package to include. Repeat it for several. Required with `--yes`.                                            |
+| `--kind <language\|wordList\|parser>` | The kind of extension. Default: from the packages.                                                                                                    |
+| `--locale <locale>`                   | A language's locale. Default: the most specific locale the packages share.                                                                            |
+| `--native-name <name>`                | The language in the language itself. Default: the name `Intl` gives it; empty for none.                                                               |
+| `--friendly-name <name>`              | The name shown to people. Default: from the name, i.e. `Swedish`.                                                                                     |
+| `--display-name <name>`               | The Marketplace name. Default: `<friendly name> - Code Spell Checker`.                                                                                |
+| `--description <text>`                | The Marketplace description. Required for a parser; the other kinds have a default.                                                                   |
+| `--license <spdx>`                    | The extension's license. Default: `GPL-3.0-or-later`. For another license, add its text to `LICENSE`.                                                 |
+| `--sample-title <title>`              | A Wikipedia article for a language's sample, in English or the language. Repeat it for several; the VS Code test opens the first. Default: `Seattle`. |
+| `--sample-file <file>`                | A sample to copy into `samples/`. Repeat it for several; the VS Code test opens the first. Required with `--yes` for a word list or a parser.         |
+| `-f, --force`                         | Replace the extension's directory when it exists.                                                                                                     |
+| `-y, --yes`                           | Never ask.                                                                                                                                            |
 
 ## Development
 
