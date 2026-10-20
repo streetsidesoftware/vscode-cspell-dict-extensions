@@ -218,7 +218,13 @@ interface DictionaryExt {
     dictionaries?: string[];
     languageSettings?: LanguageSetting[];
     /** Settings for the files that match `filename`, such as `**\/*.{el,lisp}`. */
-    overrides?: { filename?: string | string[]; dictionaries?: string[]; languageSettings?: unknown }[];
+    overrides?: Override[];
+}
+
+interface Override {
+    filename?: string | string[];
+    dictionaries?: string[];
+    languageSettings?: unknown;
 }
 
 interface LanguageSetting {
@@ -299,32 +305,40 @@ interface Rule {
 
 /** Every setting in the configs that turns dictionaries on, as a flat list of rules. */
 function rules(exts: readonly DictionaryExt[]): Rule[] {
-    const rules: Rule[] = [];
-    for (const ext of exts) {
-        rules.push({ dictionaries: ext.dictionaries ?? [], fileTypes: [], filePatterns: [], locales: [] });
-        for (const s of ext.languageSettings ?? []) {
-            const fileTypes = splitList(s.languageId);
-            rules.push({
-                dictionaries: s.dictionaries ?? [],
-                fileTypes,
-                filePatterns: [],
-                locales: splitList(s.locale),
-            });
-        }
-        for (const override of ext.overrides ?? []) {
-            const globs = [override.filename ?? []].flat();
-            // A glob in a dictionary's config is relative to the dictionary's folder: only `**/…` reaches the user's
-            // files. No package uses another kind of glob, or language settings in an override.
-            const other = globs.find((glob) => !glob.startsWith('**/'));
-            assert(!other, `${ext.name ?? 'cspell'}: the override glob "${other}" isn't supported, only "**/…".`);
-            assert(
-                !override.languageSettings,
-                `${ext.name ?? 'cspell'}: languageSettings in overrides aren't supported.`,
-            );
-            rules.push({ dictionaries: override.dictionaries ?? [], fileTypes: [], filePatterns: globs, locales: [] });
-        }
-    }
-    return rules;
+    return exts.flatMap((ext) => [
+        dictionariesRule(ext),
+        ...(ext.languageSettings ?? []).map(languageSettingRule),
+        ...(ext.overrides ?? []).map((override) => overrideRule(override, ext.name ?? 'cspell')),
+    ]);
+}
+
+/** `dictionaries` turns its dictionaries on for every file. */
+function dictionariesRule(ext: DictionaryExt): Rule {
+    return { dictionaries: ext.dictionaries ?? [], fileTypes: [], filePatterns: [], locales: [] };
+}
+
+/** A language setting turns its dictionaries on for its file types and locales. */
+function languageSettingRule(setting: LanguageSetting): Rule {
+    return {
+        dictionaries: setting.dictionaries ?? [],
+        fileTypes: splitList(setting.languageId),
+        filePatterns: [],
+        locales: splitList(setting.locale),
+    };
+}
+
+/**
+ * An override turns its dictionaries on for the files that match its globs. A glob in a dictionary's config is
+ * relative to the dictionary's folder, so only `**\/…` reaches the user's files. No package uses another kind of glob,
+ * or language settings in an override.
+ * @param source - the config's name, for the error.
+ */
+function overrideRule(override: Override, source: string): Rule {
+    const globs = [override.filename ?? []].flat();
+    const other = globs.find((glob) => !glob.startsWith('**/'));
+    assert(!other, `${source}: the override glob "${other}" isn't supported, only "**/…".`);
+    assert(!override.languageSettings, `${source}: languageSettings in overrides aren't supported.`);
+    return { dictionaries: override.dictionaries ?? [], fileTypes: [], filePatterns: globs, locales: [] };
 }
 
 /**
