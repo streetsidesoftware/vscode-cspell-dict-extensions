@@ -27,7 +27,7 @@ An extension includes a published package and tells Code Spell Checker where to 
 In a clone of this repository, list the packages, with the extension that already includes each one:
 
 ```sh
-npm run list:packages -- thai        # the packages that match the words
+npm run list:packages -- thai        # the packages that match the word thai
 npm run list:packages -- --missing   # the packages no extension includes yet
 ```
 
