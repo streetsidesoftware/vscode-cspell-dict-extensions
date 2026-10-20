@@ -17,7 +17,8 @@ To change an extension, edit its `extension.config.json`, or the shared files in
 
 - `extension.config.json`: the extension's data. It's checked against [the schema](../static/extension.config.schema.json), which is generated from the `ExtensionConfig` type in [`src/config.ts`](../extension-runtime/src/config.ts).
 - `README.md`, except the sections between `@@inject` markers.
-- `samples/`, `LICENSE` and `images/`.
+- `samples/` and `images/`.
+- `LICENSE`: the license of the extension's own code, `GPL-3.0-or-later` unless the generator's `--license` set another. The extension includes its dictionaries or parsers unchanged, and each keeps its own license in its package.
 - `cspell.config.yaml`. The sync creates it when it's missing, importing `./static/cspell-ext.json`, so the extension's dictionaries work when you open its folder. After that, it's yours: add `words`, `language` or other settings there.
 - `src/custom.ts`, optional: code only this extension needs.
 - The other fields of `package.json`, such as `dependencies`.
