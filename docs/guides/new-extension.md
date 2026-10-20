@@ -67,11 +67,9 @@ Follow these steps in order:
 
    If you already know every answer, the [generator README](../../generator-cspell-dicts-extensions/README.md) shows how to give them as options.
 
-3. **Check the sample.** `samples/cspell.json` turns the language on, and the tests check that the dictionary recognizes the sample. Add the words it doesn't know, such as names, to `samples/cspell.json`, or shorten the sample. For another article, run `npm run fetch:sample -- <locale> [title] --out extensions/<name>/samples/seattle.md`.
+3. **Review `README.md`.** It becomes the extension's page on the VS Code Marketplace. The generator writes a complete README. Add anything users should know, such as where the words come from. Don't edit the sections between the `<!--- @@inject … --->` comments. They're filled in for you.
 
-4. **Review `README.md`.** It becomes the extension's page on the VS Code Marketplace. The generator writes a complete README. Add anything users should know, such as where the words come from. Don't edit the sections between the `<!--- @@inject … --->` comments. They're filled in for you.
-
-5. **Try it in VS Code.** Open the extension's folder:
+4. **Try it in VS Code.** Open the extension's folder:
 
    ```sh
    code extensions/<name>
@@ -79,9 +77,22 @@ Follow these steps in order:
 
    Or open the folder with **File > Open Folder**.
 
-   Choose **Run > Start Debugging** with the `Launch Extension` configuration. It opens a new VS Code window with the extension installed. Open the sample there, such as `seattle.md`: most words should have no squiggly line.
+   Choose **Run > Start Debugging** with the `Launch Extension` configuration. It opens a new VS Code window with the extension installed.
 
    ![Debug extension](../../images/debug-extension.png)
+
+5. **Check the samples.** In the new window, open each file in `samples/`. A squiggly line marks a word the dictionary doesn't know. To list them all at once, run this in a terminal, in the extension's folder:
+
+   ```sh
+   npm run test:cspell
+   ```
+
+   It prints each unknown word with its file and line. For each one:
+   - For a name or a word that isn't real, add it to `words` in `samples/cspell.json`.
+   - For a real word, add it to `words` too. Then ask for it in cspell-dicts. See [Adding words](../../CONTRIBUTING.md#adding-words-to-a-language-dictionary).
+   - Or delete the sentence from the sample.
+
+   For a natural language, keep the `language` setting in `samples/cspell.json`. It turns the language on for the samples.
 
 6. **Send your extension to the maintainers.**
    - Commit the new `extensions/<name>/` folder. Push it to your fork.
