@@ -2,7 +2,7 @@
 
 The code, tool configs and data format shared by every extension in [`extensions/`](../extensions) that has an `extension.config.json`. An extension holds only its data and its own text; `npm run sync:extensions` writes the rest.
 
-How the sync writes each extension's files is in [Synced extensions](../docs/synced-extensions.md), and how a runtime change is released is in [Releasing](../docs/releasing.md#releasing-a-runtime-change).
+Which files the sync writes is in [Anatomy of an extension](../docs/extension-anatomy.md), and how a runtime change is released is in [Releasing](../docs/releasing.md#releasing-a-runtime-change).
 
 ## Code
 

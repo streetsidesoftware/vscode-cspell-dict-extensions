@@ -37,7 +37,7 @@ Read the doc before changing that area. These are written for people too; [`CONT
 
 - [`docs/guides/new-extension.md`](docs/guides/new-extension.md): creating an extension.
 - [`docs/licenses.md`](docs/licenses.md): which license an extension can have.
-- [`docs/synced-extensions.md`](docs/synced-extensions.md): how the extensions are maintained centrally, and the files the sync writes.
+- [`docs/extension-anatomy.md`](docs/extension-anatomy.md): how the extensions are maintained centrally, and the files the sync writes.
 - [`docs/releasing.md`](docs/releasing.md): release-please, pre-release mode, runtime releases and publishing.
 - [`docs/style.md`](docs/style.md): where docs go, and their audiences.
 - [`generator-cspell-dicts-extensions/README.md`](generator-cspell-dicts-extensions/README.md): the generator's options.
@@ -45,7 +45,7 @@ Read the doc before changing that area. These are written for people too; [`CONT
 
 ## Rules
 
-- **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Edit that file or the shared files in `extension-runtime/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [What the sync maintains](docs/synced-extensions.md#what-the-sync-maintains) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand.
+- **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Edit that file or the shared files in `extension-runtime/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [Files the sync writes](docs/extension-anatomy.md#files-the-sync-writes) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand.
 - **New extensions:** create them with the generator, never by copying an extension. A new dictionary is added to cspell-dicts first.
 - **Words:** words a dictionary lacks belong upstream in cspell-dicts (see [Adding words](CONTRIBUTING.md#adding-words-to-a-language-dictionary)). A sample's names and other non-words go in its `samples/cspell.json`.
 - **Generated after merge:** never edit or regenerate the root README lists, `static/generated/`, `dict-extensions.code-workspace`, `release-please-config.json` or the extension lists in `.github/workflows/`. A workflow runs `gen:readme`, `gen:release-please` and `gen:workflow` after a PR merges.

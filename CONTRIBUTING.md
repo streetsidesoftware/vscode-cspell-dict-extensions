@@ -15,7 +15,7 @@ Contributions are very welcome. The steps work on Windows (PowerShell), macOS an
 
 - [Creating an extension](./docs/guides/new-extension.md): a new extension for a published dictionary or parser.
 - [Licenses](./docs/licenses.md): which license an extension can have.
-- [Synced extensions](./docs/synced-extensions.md): how the extensions are maintained centrally, and the files the sync writes.
+- [Anatomy of an extension](./docs/extension-anatomy.md): which files an extension holds, and which are generated from shared code.
 - [Releasing](./docs/releasing.md): release-please, pre-release mode and publishing. For maintainers.
 - [Writing docs](./docs/style.md): where docs go, and who each one is for.
 
