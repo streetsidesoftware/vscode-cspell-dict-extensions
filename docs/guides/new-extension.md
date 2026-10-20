@@ -9,7 +9,7 @@ level: comfortable with basic git and a terminal; doesn't read or write code
 > [!NOTE]
 > For contributors who can fork the repo and follow terminal steps. No coding needed.
 
-**What an extension does:** an extension adds a dictionary or a parser to Code Spell Checker. There are two kinds:
+**What an extension does:** an extension adds a dictionary or a parser to Code Spell Checker.
 
 - A **dictionary extension** adds words, such as Swedish or medical terms, so Code Spell Checker accepts them.
 - A **parser extension** tags the parts of a document, such as the comments, strings and identifiers of a TypeScript file, so people can choose which parts to spell check.
