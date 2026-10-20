@@ -102,7 +102,7 @@ describe('cspellPackages', () => {
         );
     });
 
-    it('filters by every word, in the package name, name or description', () => {
+    it('filters by every word, or with any by any word, in the package name, name or description', () => {
         const all = parseDictionaryPackages(dictionaries);
         assert.deepEqual(
             filterPackages(all, ['thai']).map((p) => p.packageName),
@@ -114,5 +114,13 @@ describe('cspellPackages', () => {
         );
         assert.equal(filterPackages(all, []).length, 3);
         assert.equal(filterPackages(all, ['german']).length, 0);
+        assert.deepEqual(
+            filterPackages(all, ['thai', 'fullstack']).map((p) => p.packageName),
+            [],
+        );
+        assert.deepEqual(
+            filterPackages(all, ['thai', 'fullstack'], { any: true }).map((p) => p.packageName),
+            ['@cspell/dict-th-th', '@cspell/dict-fullstack'],
+        );
     });
 });
