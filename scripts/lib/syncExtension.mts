@@ -330,11 +330,11 @@ function languageSettingRule(setting: LanguageSetting, filePatterns: string[] = 
  * dictionary's config is relative to the dictionary's folder, so only `**\/…` reaches the user's files.
  */
 function overrideRules(override: Override): Rule[] {
-    const { dictionaries = [], filename = [] } = override;
+    const { dictionaries = [], filename = [], languageSettings = [] } = override;
     const filePatterns = [filename ?? []].flat().filter((glob) => glob.startsWith('**/'));
     if (!filePatterns.length) return [];
     const overrideRule: Rule = { dictionaries, fileTypes: [], filePatterns, locales: [] };
-    const languageSettingsRules = (override.languageSettings ?? []).map((s) => languageSettingRule(s, filePatterns));
+    const languageSettingsRules = languageSettings.map((s) => languageSettingRule(s, filePatterns));
     return [overrideRule, ...languageSettingsRules];
 }
 
