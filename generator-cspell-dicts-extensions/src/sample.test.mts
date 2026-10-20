@@ -1,11 +1,14 @@
 // cspell:ignore Београд београд กรุงเทพมหานคร
 
 import assert from 'node:assert/strict';
+import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { describe, it } from 'node:test';
 
 import type { Article } from '../../scripts/lib/wikipedia.mts';
 import { noPrompter } from './prompt.mts';
-import { languageSample, sampleFile, type SampleContext, starterSample } from './sample.mts';
+import { fileSamples, languageSample, sampleFile, type SampleContext, starterSample } from './sample.mts';
 import { scriptedPrompter } from './test-helpers.mts';
 
 function article(title: string): Article {
@@ -66,6 +69,28 @@ describe('languageSample', () => {
             languageSample('gd', 'Seattle', context([], { fetchArticle, yes: false })),
             /Could not fetch the sample from Wikipedia: Could not reach gd\.wikipedia\.org: timeout/,
         );
+    });
+});
+
+describe('fileSamples', () => {
+    it('copies each file into samples/ under its own name, relative to the directory given', async () => {
+        const dir = await mkdtemp(path.join(tmpdir(), 'cspell-samples-'));
+        try {
+            await writeFile(path.join(dir, 'words.md'), '# Words\n');
+            await writeFile(path.join(dir, 'sample.go'), 'package main\n');
+            assert.deepEqual(await fileSamples(['words.md', path.join(dir, 'sample.go')], dir), [
+                { file: 'samples/words.md', text: '# Words\n' },
+                { file: 'samples/sample.go', text: 'package main\n' },
+            ]);
+            await assert.rejects(fileSamples(['missing.md'], dir), /--sample-file missing\.md: ENOENT/);
+            await assert.rejects(fileSamples(['cspell.json'], dir), /samples\/cspell\.json is the samples' config/);
+            await assert.rejects(
+                fileSamples(['words.md', `./words.md`], dir),
+                /--sample-file \.\/words\.md: another sample is also named words\.md/,
+            );
+        } finally {
+            await rm(dir, { recursive: true, force: true });
+        }
     });
 });
 

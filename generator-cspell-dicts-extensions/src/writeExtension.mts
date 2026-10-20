@@ -21,12 +21,13 @@ export interface WriteOptions {
 /**
  * Write the files a person owns into `destDir`: `extension.config.json`, a starter `package.json`, `README.md`,
  * `LICENSE` and the samples. `npm run sync:extensions` writes the rest. Existing files are never overwritten.
+ * @param samples - the first is the `sample` in `extension.config.json`, which the VS Code test opens.
  * @returns the files written, relative to `destDir`.
  */
 export async function writeExtension(
     destDir: string,
     answers: Answers,
-    sample: Sample,
+    samples: readonly [Sample, ...Sample[]],
     options: WriteOptions = {},
 ): Promise<string[]> {
     const srcDir = options.templateDir ?? templateDir;
@@ -42,10 +43,10 @@ export async function writeExtension(
     }
 
     const files: [string, string][] = [
-        ['extension.config.json', json(extensionConfig(answers, sample.file))],
+        ['extension.config.json', json(extensionConfig(answers, samples[0].file))],
         ['package.json', json(packageJson(answers))],
         ['README.md', readme(answers)],
-        [sample.file, sample.text],
+        ...samples.map((sample): [string, string] => [sample.file, sample.text]),
         ['samples/cspell.json', json(sampleConfig(answers))],
     ];
     for (const [file, content] of files) {

@@ -12,7 +12,7 @@ import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
 import { askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
-import { defaultSampleTitle, languageSample, starterSample } from './sample.mts';
+import { defaultSampleTitle, fileSamples, languageSample, type Sample, starterSample } from './sample.mts';
 import { writeExtension } from './writeExtension.mts';
 
 /** The repository root. */
@@ -45,6 +45,14 @@ export async function run(argv: string[] = process.argv): Promise<void> {
             '--sample-title <title>',
             `the Wikipedia article for a language's sample, in English or the language (default: ${defaultSampleTitle})`,
         )
+        .addOption(
+            new Option(
+                '--sample-file <file>',
+                'a sample to copy into samples/, instead of the default; repeat it for several, and the VS Code test opens the first',
+            )
+                .argParser((value: string, previous: string[] | undefined) => [...(previous ?? []), value])
+                .conflicts('sampleTitle'),
+        )
         .option('-f, --force', 'replace the extension directory when it exists')
         .option('-y, --yes', 'never ask: use the defaults, and fail when a required value is missing')
         .showHelpAfterError(true)
@@ -58,8 +66,9 @@ async function generate(
     {
         package: packages,
         sampleTitle,
+        sampleFile: sampleFiles,
         ...options
-    }: Omit<Options, 'name' | 'packages'> & { package?: string[]; sampleTitle?: string },
+    }: Omit<Options, 'name' | 'packages'> & { package?: string[]; sampleTitle?: string; sampleFile?: string[] },
 ): Promise<void> {
     if (!options.yes) {
         console.log(styleText('bold', '\nWelcome to the VS Code Spelling Dictionary Extension generator!\n'));
@@ -78,15 +87,20 @@ async function generate(
         },
     );
 
-    const sample =
-        answers.kind === 'language'
-            ? await languageSample(languageOf(answers.locale), sampleTitle ?? defaultSampleTitle, {
-                  prompter,
-                  yes: !!options.yes,
-                  fetchArticle,
-                  log,
-              })
-            : starterSample(answers.friendlyName);
+    // `npm run` starts in the repository root; INIT_CWD is where it was run from.
+    const given = sampleFiles && (await fileSamples(sampleFiles, process.env['INIT_CWD'] ?? process.cwd()));
+    const samples: [Sample, ...Sample[]] = given?.[0]
+        ? [given[0], ...given.slice(1)]
+        : [
+              answers.kind === 'language'
+                  ? await languageSample(languageOf(answers.locale), sampleTitle ?? defaultSampleTitle, {
+                        prompter,
+                        yes: !!options.yes,
+                        fetchArticle,
+                        log,
+                    })
+                  : starterSample(answers.friendlyName),
+          ];
 
     const destDir = path.join(extensionsDir, answers.name);
     if (options.force && existsSync(destDir)) {
@@ -94,7 +108,7 @@ async function generate(
         await rm(destDir, { recursive: true });
     }
     console.log(`Creating extensions/${answers.name}`);
-    await writeExtension(destDir, answers, sample, { log });
+    await writeExtension(destDir, answers, samples, { log });
 
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     npm(['install', '-S', ...answers.packages], destDir);
@@ -105,8 +119,8 @@ async function generate(
     npm(['install'], destDir);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
-    if (answers.kind !== 'language') {
-        console.log(styleText('yellow', `Replace the text in extensions/${answers.name}/${sample.file}.`));
+    if (!given && answers.kind !== 'language') {
+        console.log(styleText('yellow', `Replace the text in extensions/${answers.name}/${samples[0].file}.`));
     }
 }
 

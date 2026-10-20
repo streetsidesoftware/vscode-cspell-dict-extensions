@@ -204,7 +204,7 @@ describe('writeExtension', () => {
     afterEach(() => rm(destDir, { recursive: true, force: true }));
 
     it('writes only the files a person owns', async () => {
-        const written = await writeExtension(destDir, swedish, seattle);
+        const written = await writeExtension(destDir, swedish, [seattle]);
         assert.deepEqual(written.toSorted(), [
             'LICENSE',
             'README.md',
@@ -222,7 +222,7 @@ describe('writeExtension', () => {
 
     it('writes the GPL text only for the default license', async () => {
         const logged: string[] = [];
-        const written = await writeExtension(destDir, { ...swedish, license: 'MIT' }, seattle, {
+        const written = await writeExtension(destDir, { ...swedish, license: 'MIT' }, [seattle], {
             log: (m) => logged.push(m),
         });
         assert.ok(!written.includes('LICENSE'));
@@ -231,19 +231,20 @@ describe('writeExtension', () => {
         assert.equal(pkg.license, 'MIT');
     });
 
-    it('writes the sample it is given, and names it in extension.config.json', async () => {
-        const sample: Sample = { file: 'samples/lingua-latina.md', text: '# Lingua Latina\n' };
-        await writeExtension(destDir, swedish, sample);
-        assert.equal(await readFile(path.join(destDir, sample.file), 'utf8'), sample.text);
+    it('writes the samples it is given, and names the first in extension.config.json', async () => {
+        const latin: Sample = { file: 'samples/lingua-latina.md', text: '# Lingua Latina\n' };
+        await writeExtension(destDir, swedish, [latin, seattle]);
+        assert.equal(await readFile(path.join(destDir, latin.file), 'utf8'), latin.text);
+        assert.equal(await readFile(path.join(destDir, seattle.file), 'utf8'), seattle.text);
         const config = JSON.parse(await readFile(path.join(destDir, 'extension.config.json'), 'utf8')) as {
             sample: string;
         };
-        assert.equal(config.sample, sample.file);
+        assert.equal(config.sample, latin.file);
     });
 
     it('never overwrites a file', async () => {
         await writeFile(path.join(destDir, 'README.md'), 'mine\n');
-        await assert.rejects(writeExtension(destDir, swedish, seattle), /EEXIST/);
+        await assert.rejects(writeExtension(destDir, swedish, [seattle]), /EEXIST/);
         assert.equal(await readFile(path.join(destDir, 'README.md'), 'utf8'), 'mine\n');
     });
 });

@@ -1,7 +1,10 @@
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+
 import { type Article, articleMarkdown } from '../../scripts/lib/wikipedia.mts';
 import type { Prompter } from './prompt.mts';
 
-/** The sample the tests spell check and the VS Code test opens. */
+/** A sample the tests spell check. The VS Code test opens the first one. */
 export interface Sample {
     /** The path relative to the extension, i.e. `samples/seattle.md`. */
     file: string;
@@ -42,6 +45,27 @@ export async function languageSample(language: string, title: string, ctx: Sampl
         );
         title = answer.trim();
     }
+}
+
+/**
+ * The samples given with `--sample-file`, copied into `samples/` under their own names.
+ * @param cwd - where the paths are relative to.
+ */
+export async function fileSamples(files: readonly string[], cwd: string): Promise<Sample[]> {
+    const samples: Sample[] = [];
+    for (const file of files) {
+        const name = path.basename(file);
+        if (name === 'cspell.json')
+            throw new Error(`--sample-file ${file}: samples/cspell.json is the samples' config.`);
+        if (samples.some((s) => s.file === `samples/${name}`)) {
+            throw new Error(`--sample-file ${file}: another sample is also named ${name}.`);
+        }
+        const text = await readFile(path.resolve(cwd, file), 'utf8').catch((e: unknown) => {
+            throw new Error(`--sample-file ${file}: ${e instanceof Error ? e.message : String(e)}`);
+        });
+        samples.push({ file: `samples/${name}`, text });
+    }
+    return samples;
 }
 
 /** The sample of a word list or a parser, for the person to replace. */
