@@ -7,15 +7,8 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import { createExtensionConfigValidator, generateExtensionSchema } from './extensionSchema.mts';
-import {
-    describeFilePatterns,
-    type DictionaryState,
-    dictionaryStates,
-    type FileChange,
-    sampleTurnsOn,
-    syncExtension,
-    whenOn,
-} from './syncExtension.mts';
+import { describeFilePatterns, type DictionaryState, whenOn } from './dictionaryState.mts';
+import { dictionaryStates, type FileChange, sampleTurnsOn, syncExtension } from './syncExtension.mts';
 
 const config = {
     name: 'demo',

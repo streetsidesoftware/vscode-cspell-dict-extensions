@@ -5,7 +5,7 @@ import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/src/config.ts';
-import { type DictionaryState, whenOn } from '../../scripts/lib/syncExtension.mts';
+import { type DictionaryState, whenOn } from '../../scripts/lib/dictionaryState.mts';
 import { languageOf } from './locales.mts';
 import { type Answers, defaultLicense, type Language } from './questions.mts';
 import type { Sample } from './sample.mts';
