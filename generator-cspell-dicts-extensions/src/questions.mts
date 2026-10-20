@@ -74,7 +74,7 @@ export interface Options {
 
 export interface Context {
     prompter: Prompter;
-    /** The dictionaries and parsers that can be wrapped. Undefined when the lists could not be fetched. */
+    /** The dictionaries and parsers that can be included. Undefined when the lists could not be fetched. */
     packages: readonly CSpellPackage[] | undefined;
     /** Where the extensions are, i.e. `<repo>/extensions`. */
     extensionsDir: string;
@@ -172,7 +172,7 @@ async function askName(options: Options, ctx: Context): Promise<string> {
 }
 
 /**
- * The packages the extension wraps. Interactively, the packages that match the extension name are offered first, and
+ * The packages the extension includes. Interactively, the packages that match the extension name are offered first, and
  * the person can search with other words.
  */
 async function askPackages(name: string, options: Options, ctx: Context): Promise<string[]> {
@@ -274,7 +274,7 @@ function packageKind(name: string, ctx: Context): PackageKind {
 async function askKind(packages: PackageKind[], options: Options, ctx: Context): Promise<Kind> {
     const parsers = packages.filter((pkg) => pkg.parser).length;
     if (parsers && parsers < packages.length) {
-        throw new UsageError('An extension wraps either parsers or dictionaries, not both.');
+        throw new UsageError('An extension includes either parsers or dictionaries, not both.');
     }
     if (parsers) {
         if (options.kind && options.kind !== 'parser') {

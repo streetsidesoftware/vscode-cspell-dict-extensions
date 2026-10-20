@@ -20,11 +20,11 @@ People install an extension from the VS Code Marketplace.
 
 1. **Install.** Fork and clone the repository, then in its root: `npm ci`.
 
-2. **Find the package.** List them, with the extension that already wraps each one:
+2. **Find the package.** List them, with the extension that already includes each one:
 
    ```sh
    npm run list:packages -- thai        # the packages that match the words
-   npm run list:packages -- --missing   # the packages no extension wraps yet
+   npm run list:packages -- --missing   # the packages no extension includes yet
    ```
 
    `--json` prints JSON. Check the package's license (see [Licenses](../licenses.md)).

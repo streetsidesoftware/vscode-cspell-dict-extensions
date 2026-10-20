@@ -1,5 +1,5 @@
 /**
- * The packages an extension can wrap: the dictionaries in cspell-dicts and the parsers in cspell-parsers, read from
+ * the packages an extension can include: the dictionaries in cspell-dicts and the parsers in cspell-parsers, read from
  * the lists those repositories publish on GitHub.
  */
 

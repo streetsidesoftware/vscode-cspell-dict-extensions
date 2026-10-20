@@ -1,6 +1,6 @@
 # VS Code Spelling Dictionary Extension Generator
 
-Generate a VS Code extension for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). An extension wraps one or more published packages:
+Generate a VS Code extension for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). An extension includes one or more published packages:
 
 - **Dictionaries:** `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A natural language is enabled by its locale; a word list is on once installed.
 - **Parsers:** `@cspell/parser-*` packages from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
@@ -32,19 +32,19 @@ npm run create:extension -- french-reforme --package @cspell/dict-fr-reforme --f
 npm run create:extension -- typescript-parser --package @cspell/parser-typescript --description "Spell checks TypeScript." --yes
 ```
 
-| Option                                | Answers                                                                                                 |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `[name]`                              | The extension directory and command ID prefix, i.e. `swedish`. Required with `--yes`.                   |
-| `-p, --package <package>`             | A `@cspell/dict-*` or `@cspell/parser-*` package to wrap. Repeat it for several. Required with `--yes`. |
-| `--kind <language\|wordList\|parser>` | The kind of extension. Default: from the packages.                                                      |
-| `--locale <locale>`                   | A language's locale. Default: the most specific locale the packages share.                              |
-| `--native-name <name>`                | The language in the language itself. Default: the name `Intl` gives it; empty for none.                 |
-| `--friendly-name <name>`              | The name shown to people. Default: from the name, i.e. `Swedish`.                                       |
-| `--display-name <name>`               | The Marketplace name. Default: `<friendly name> - Code Spell Checker`.                                  |
-| `--description <text>`                | The Marketplace description. Required for a parser; the other kinds have a default.                     |
-| `--license <spdx>`                    | The extension's license. Default: `GPL-3.0-or-later`. For another license, add its text to `LICENSE`.   |
-| `-f, --force`                         | Replace the extension's directory when it exists.                                                       |
-| `-y, --yes`                           | Never ask.                                                                                              |
+| Option                                | Answers                                                                                                    |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `[name]`                              | The extension directory and command ID prefix, i.e. `swedish`. Required with `--yes`.                      |
+| `-p, --package <package>`             | A `@cspell/dict-*` or `@cspell/parser-*` package to include. Repeat it for several. Required with `--yes`. |
+| `--kind <language\|wordList\|parser>` | The kind of extension. Default: from the packages.                                                         |
+| `--locale <locale>`                   | A language's locale. Default: the most specific locale the packages share.                                 |
+| `--native-name <name>`                | The language in the language itself. Default: the name `Intl` gives it; empty for none.                    |
+| `--friendly-name <name>`              | The name shown to people. Default: from the name, i.e. `Swedish`.                                          |
+| `--display-name <name>`               | The Marketplace name. Default: `<friendly name> - Code Spell Checker`.                                     |
+| `--description <text>`                | The Marketplace description. Required for a parser; the other kinds have a default.                        |
+| `--license <spdx>`                    | The extension's license. Default: `GPL-3.0-or-later`. For another license, add its text to `LICENSE`.      |
+| `-f, --force`                         | Replace the extension's directory when it exists.                                                          |
+| `-y, --yes`                           | Never ask.                                                                                                 |
 
 ## Development
 

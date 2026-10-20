@@ -30,7 +30,7 @@ export async function run(argv: string[] = process.argv): Promise<void> {
         .argument('[name]', 'the extension name: its directory in extensions/ and its command ID prefix, i.e. swedish')
         .option(
             '-p, --package <package>',
-            'a @cspell/dict-* or @cspell/parser-* package to wrap, i.e. @cspell/dict-sv; repeat it for several',
+            'a @cspell/dict-* or @cspell/parser-* package to include, i.e. @cspell/dict-sv; repeat it for several',
             (value: string, previous: string[] | undefined) => [...(previous ?? []), value],
         )
         .addOption(new Option('--kind <kind>', 'the kind of extension (default: from the packages)').choices(kinds))
