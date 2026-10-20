@@ -104,21 +104,21 @@ Follow these steps in order:
    npm run test:cspell
    ```
 
-   It prints each unknown word with its file and line. For each one:
-   - For a real word the dictionary lacks, list it on a `words` line at the end of the sample. Then ask for it in cspell-dicts. See [Adding words](../../CONTRIBUTING.md#adding-words-to-a-language-dictionary).
-   - For a name or a word that isn't real, list it on an `ignore` line at the end of the sample.
-   - Or delete the sentence from the sample.
+   It prints each unknown word with its file and line. Fix each one in the sample itself:
+   - **A real word the dictionary lacks:** add it to a `cspell:words` comment at the end of the sample. The spell check then accepts it. Also ask for it in cspell-dicts. See [Adding words](../../CONTRIBUTING.md#adding-words-to-a-language-dictionary).
+   - **A name or a word that isn't real,** such as a place name: add it to a `cspell:ignore` comment at the end of the sample. The spell check then skips it.
+   - **Or delete the sentence** from the sample.
 
-   The lines are comments, so they don't show on the page. In Markdown:
+   For example, the last lines of a Markdown sample:
 
    ```markdown
    <!-- cspell:words Seattleites -->
    <!-- cspell:ignore Siatail Snohomish -->
    ```
 
-   In a code file, use the language's line comment, such as `// cspell:words` or, in Lisp, `; cspell:ignore`.
+   Markdown hides these comments on the page. In a code file, use the language's line comment instead, such as `// cspell:words` or, in Lisp, `; cspell:ignore`.
 
-   Don't change `samples/cspell.json`. The generator wrote it. For a natural language, it turns the language on for the samples.
+   The generator also writes `samples/cspell.json`. For a natural language, it turns the language on for the samples. Keep that setting.
 
 6. **Send your extension to the maintainers.**
    - Commit the new `extensions/<name>/` folder. Push it to your fork.
