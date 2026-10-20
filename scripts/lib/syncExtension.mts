@@ -1,3 +1,5 @@
+// cspell:ignore elisp
+
 /**
  * Sync one extension with `extension-runtime/` and its `extension.config.json`.
  *
@@ -212,7 +214,7 @@ interface DictionaryExt {
     dictionaries?: string[];
     languageSettings?: LanguageSetting[];
     /** Settings for the files that match `filename`, such as `**\/*.{el,lisp}`. */
-    overrides?: { filename?: string | string[]; dictionaries?: string[] }[];
+    overrides?: { filename?: string | string[]; dictionaries?: string[]; languageSettings?: LanguageSetting[] }[];
 }
 
 interface LanguageSetting {
@@ -263,8 +265,8 @@ async function dictionariesTable(extensionDir: string, config: ExtensionConfig):
 /** A dictionary in `cspell.import`, and what turns it on. */
 export interface DictionaryState {
     name: string;
-    /** On for every file. */
-    always: boolean;
+    /** On for every file: in `dictionaries`, or in a language setting for every file type. */
+    all: boolean;
     /** The file types (VS Code language IDs) that turn it on, such as `clojure`. `*` is every file type. */
     fileTypes: string[];
     /** The file name globs that turn it on, from the `overrides`, such as `**\/*.{el,lisp}`. */
@@ -281,32 +283,42 @@ export interface DictionaryState {
  */
 export async function dictionaryStates(extensionDir: string, config: ExtensionConfig): Promise<DictionaryState[]> {
     const exts = [...(await readDictionaries(extensionDir, config)), config.cspell as DictionaryExt];
+    const overrides = exts.flatMap((ext) => ext.overrides ?? []);
     return exts
         .flatMap((ext) => ext.dictionaryDefinitions ?? [])
         .map(({ name }) => {
             const settings = exts
                 .flatMap((ext) => ext.languageSettings ?? [])
                 .filter((s) => s.dictionaries?.includes(name));
+            // An override turns a dictionary on for its files, directly or in its own language settings.
             const filePatterns = unique(
-                exts
-                    .flatMap((ext) => ext.overrides ?? [])
-                    .filter((o) => o.dictionaries?.includes(name))
-                    .flatMap((o) => [o.filename ?? []].flat()),
+                overrides
+                    .filter(
+                        (o) =>
+                            o.dictionaries?.includes(name) ||
+                            o.languageSettings?.some((s) => s.dictionaries?.includes(name)),
+                    )
+                    .flatMap((o) => [o.filename ?? []].flat())
+                    .filter((pattern) => !pattern.startsWith('!')),
             );
-            const always = exts.some((ext) => ext.dictionaries?.includes(name));
             const fileTypes = unique(settings.flatMap((s) => splitList(s.languageId)));
+            const all =
+                exts.some((ext) => ext.dictionaries?.includes(name)) ||
+                fileTypes.includes('*') ||
+                settings.some((s) => !splitList(s.languageId).length);
             const locales = unique(settings.flatMap((s) => splitList(s.locale)).map(canonicalLocale));
-            const off = !always && !settings.length && !filePatterns.length;
-            return { name, always, fileTypes, filePatterns, locales, off };
+            const off = !all && !settings.length && !filePatterns.length;
+            return { name, all, fileTypes, filePatterns, locales, off };
         });
 }
 
 /** When a word list's dictionary is on, for the README: `all`, `off until turned on`, or its file types and files. */
 export function describeFileTypes(state: DictionaryState): string {
     if (state.off) return 'off until turned on';
-    if (state.always || state.fileTypes.includes('*')) return 'all';
-    const parts = [state.fileTypes.map(code).join(', '), describeFilePatterns(state.filePatterns)].filter(Boolean);
-    return parts.join(', and ') || 'all';
+    if (state.all) return 'all';
+    return [state.fileTypes.map(code).join(', '), describeFilePatterns(state.filePatterns)]
+        .filter(Boolean)
+        .join(', and ');
 }
 
 /**
@@ -315,18 +327,17 @@ export function describeFileTypes(state: DictionaryState): string {
  */
 export function whenOn(state: DictionaryState): string {
     if (state.off) return 'off until you turn it on';
-    if (state.always || state.fileTypes.includes('*')) return 'on for every file';
+    if (state.all) return 'on for every file';
     const types = state.fileTypes.map(code);
     const byType = types.length ? `${andList(types)} files` : '';
     const byName = describeFilePatterns(state.filePatterns);
-    if (!byType && !byName) return 'on for every file';
     return `on for ${[byType, byName].filter(Boolean).join(', and for ')}`;
 }
 
 /** File name globs as files: `**\/*.{el,lisp}` is "`.el` and `.lisp` files". Other globs are shown as they are. */
 export function describeFilePatterns(patterns: readonly string[]): string {
     const names = patterns.flatMap((pattern) => {
-        const ext = /^(?:\*\*\/)?\*\.(?:\{([^{}]+)\}|([^{}*/]+))$/.exec(pattern);
+        const ext = /^(?:\*\*\/)?\*\.(?:\{([\w.,-]+)\}|([\w.-]+))$/.exec(pattern);
         if (!ext) return [code(pattern)];
         return (ext[1] ?? ext[2] ?? '').split(',').map((e) => code(`.${e.trim()}`));
     });
@@ -343,15 +354,20 @@ function andList(items: readonly string[]): string {
  * @param file - the sample's path relative to the extension, such as `samples/sample.el`.
  */
 export function sampleTurnsOn(file: string, states: readonly DictionaryState[]): boolean {
-    const fileTypes = findMatchingFileTypes(file);
+    const posixFile = file.split(path.sep).join('/');
+    const fileTypes = findMatchingFileTypes(posixFile);
     return states.some(
         (state) =>
-            state.always ||
+            state.all ||
             state.off ||
-            state.fileTypes.includes('*') ||
             state.fileTypes.some((id) => fileTypes.includes(id)) ||
-            state.filePatterns.some((pattern) => path.matchesGlob(file, pattern)),
+            state.filePatterns.some((pattern) => path.posix.matchesGlob(posixFile, cspellGlob(pattern))),
     );
+}
+
+/** As cspell reads a glob, gitignore style: one without a `/`, such as `*.vim`, matches a file in any folder. */
+function cspellGlob(pattern: string): string {
+    return pattern.includes('/') ? pattern : `**/${pattern}`;
 }
 
 function splitList(list: string | string[] | undefined): string[] {

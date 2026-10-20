@@ -19,7 +19,7 @@ In the `vscode-cspell-dict-extensions` repository root directory:
 npm run create:extension
 ```
 
-The generator starts from the extension's name, e.g. `serbian`, and offers the packages that match it, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them), such as `@cspell/dict-sr-cyrl` and `@cspell/dict-sr-latn`; you can search with other words too. From the packages it suggests the kind and the locale. With several languages, as for Serbian, each also gets its own enable and disable commands. Each dictionary of a word list gets enable and disable commands. A dictionary can be off until someone turns it on, as in `@cspell/dict-vim`; then `samples/cspell.json` turns it on for the tests. The generator reads the installed packages for this. It writes a README sentence that says when each dictionary is on. It refuses a `--sample-file` that turns on none of the dictionaries, such as a `.txt` file for `@cspell/dict-elisp`, and removes the folder. It also adds the words of the package and dictionary names that cspell doesn't know, such as `elisp`, to the extension's `cspell.config.yaml`.
+The generator starts from the extension's name, e.g. `serbian`, and offers the packages that match it, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them), such as `@cspell/dict-sr-cyrl` and `@cspell/dict-sr-latn`; you can search with other words too. From the packages it suggests the kind and the locale. With several languages, as for Serbian, each also gets its own enable and disable commands. Each dictionary of a word list gets enable and disable commands. A dictionary can be off until a user turns it on, as in `@cspell/dict-vim`; then `samples/cspell.json` turns it on for the tests. The generator reads the installed packages to learn when each dictionary is on. It writes a README sentence that says when each dictionary is on. It refuses a `--sample-file` that turns on none of the dictionaries, such as a `.txt` file for `@cspell/dict-elisp`, and removes the folder. It also adds the words of the package and dictionary names that cspell doesn't know, such as `elisp`, to the extension's `cspell.config.yaml`.
 
 It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`, a starter `package.json`, `README.md`, `LICENSE` and a sample. Then it installs the packages and runs `npm run sync:extensions`, which writes the rest, as for every other extension.
 
@@ -90,3 +90,5 @@ npm run check-types  # type check
 ## License
 
 MIT © Street Side Software
+
+<!--- cspell:ignore elisp --->

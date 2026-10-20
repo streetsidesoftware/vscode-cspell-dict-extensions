@@ -1,3 +1,5 @@
+// cspell:ignore elisp
+
 import { existsSync } from 'node:fs';
 import { readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -8,7 +10,7 @@ import { Command, Option } from 'commander';
 import type { ExtensionConfig } from '../../extension-runtime/src/config.ts';
 import { type CSpellPackage, fetchCSpellPackages } from '../../scripts/lib/cspellPackages.mts';
 import { findExistingExtensions } from '../../scripts/lib/existingExtensions.mts';
-import { describeFileTypes, dictionaryStates, sampleTurnsOn, whenOn } from '../../scripts/lib/syncExtension.mts';
+import { describeFileTypes, dictionaryStates, sampleTurnsOn } from '../../scripts/lib/syncExtension.mts';
 import { fetchArticle } from '../../scripts/lib/wikipedia.mts';
 import { npm, npmOutput } from './exec.mts';
 import { languageOf } from './locales.mts';
@@ -22,7 +24,14 @@ import {
     type Sample,
     starterMarker,
 } from './sample.mts';
-import { dictionaryCommands, extensionConfig, json, readme, writeExtension } from './writeExtension.mts';
+import {
+    dictionaryCommands,
+    extensionConfig,
+    installedSentence,
+    json,
+    readme,
+    writeExtension,
+} from './writeExtension.mts';
 
 /** The repository root. */
 const repoRoot = path.resolve(import.meta.dirname, '../..');
@@ -126,7 +135,11 @@ async function generate(
 
     npm(['install', '-S', ...answers.packages], destDir);
     const config = extensionConfig(answers, firstSample.file);
-    if (answers.kind === 'wordList') await setUpWordList(destDir, answers, config, sampleFiles ? samples : []);
+    if (answers.kind === 'wordList') {
+        // The samples the user gave, on the command line or at the prompt; not the starter sample.
+        const given = samples.filter((sample) => !sample.text.includes(starterMarker));
+        await setUpWordList(destDir, answers, config, given);
+    }
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     // The shared package.json fields, then the files the sync owns or derives.
     npm(['run', 'tool:fix-extensions'], repoRoot);
@@ -156,7 +169,7 @@ async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
  * - each dictionary gets commands to turn it on and off;
  * - a dictionary that's off until turned on, such as `@cspell/dict-vim`'s, is turned on for the samples;
  * - the README says when each dictionary is on.
- * @param given - the samples given with `--sample-file`.
+ * @param given - the samples the user gave, with `--sample-file` or at the prompt.
  */
 async function setUpWordList(
     destDir: string,
@@ -184,10 +197,7 @@ async function setUpWordList(
         console.log(`Off until turned on: ${off.join(', ')}`);
         await writeFile(path.join(destDir, 'samples/cspell.json'), json({ dictionaries: off }));
     }
-    const installed = dictionaries.map(
-        (d) => `Once this extension is installed, the \`${d.name}\` dictionary is ${whenOn(d)}.`,
-    );
-    await writeFile(path.join(destDir, 'README.md'), readme(answers, installed.join(' ')));
+    await writeFile(path.join(destDir, 'README.md'), readme(answers, installedSentence(dictionaries)));
 }
 
 /**
@@ -198,7 +208,7 @@ async function addNameWords(destDir: string, answers: Answers, config: Extension
     const names = [...answers.packages, ...(await dictionaryStates(destDir, config)).map((d) => d.name)];
     const nameWords = new Set(names.flatMap((n) => n.toLowerCase().split(/[^\p{L}]+/u)).filter(Boolean));
     const relative = path.relative(repoRoot, destDir).split(path.sep).join('/');
-    const output = npmOutput(
+    const { stdout, stderr, status } = npmOutput(
         [
             'exec',
             '--',
@@ -212,14 +222,25 @@ async function addNameWords(destDir: string, answers: Answers, config: Extension
         ],
         repoRoot,
     );
-    const unknown = unique(output.split(/\r?\n/).map((w) => w.trim()))
+    if (status !== 0 && status !== 1) {
+        console.log(styleText('yellow', `Could not spell check the extension's files: ${stderr.trim()}`));
+        return;
+    }
+    const unknown = unique(stdout.split(/\r?\n/).map((w) => w.trim()))
         .filter((w) => nameWords.has(w.toLowerCase()))
         .toSorted();
     if (!unknown.length) return;
-    console.log(`Words from the package names, added to cspell.config.yaml: ${unknown.join(', ')}`);
     const file = path.join(destDir, 'cspell.config.yaml');
     const yaml = await readFile(file, 'utf8');
-    await writeFile(file, `${yaml}words:\n${unknown.map((w) => `  - ${w}\n`).join('')}`);
+    if (/^words:/m.test(yaml)) {
+        console.log(
+            styleText('yellow', `Add to words in extensions/${answers.name}/cspell.config.yaml: ${unknown.join(', ')}`),
+        );
+        return;
+    }
+    console.log(`Words from the package names, added to cspell.config.yaml: ${unknown.join(', ')}`);
+    const words = `words:\n${unknown.map((w) => `  - ${w}\n`).join('')}`;
+    await writeFile(file, `${yaml}${yaml.endsWith('\n') ? '' : '\n'}${words}`);
 }
 
 function unique(values: string[]): string[] {

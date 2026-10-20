@@ -25,5 +25,3 @@ yosay
 Yoyodyne
 svenska
 Dari
-elisp
-vimrc
