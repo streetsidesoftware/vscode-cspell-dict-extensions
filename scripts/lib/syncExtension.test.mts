@@ -169,14 +169,9 @@ describe('syncExtension', () => {
                 { name: 'off' },
                 { name: 'lisp' },
                 { name: 'everywhere' },
-                { name: 'web-only' },
             ],
             dictionaries: ['always'],
-            overrides: [
-                // Only a glob that starts with `**` reaches the user's files.
-                { filename: ['**/*.{el,lisp}', '!**/*.lisp.bak', '*.lsp', '/x.l'], dictionaries: ['lisp'] },
-                { filename: '**/*.html', languageSettings: [{ languageId: '*', dictionaries: ['web-only'] }] },
-            ],
+            overrides: [{ filename: ['**/*.{el,lisp}'], dictionaries: ['lisp'] }],
             languageSettings: [
                 { languageId: 'c,cpp', locale: '*', dictionaries: ['c-only'] },
                 { languageId: ['html', 'css'], locale: '*', dictionaries: ['web'] },
@@ -197,14 +192,13 @@ describe('syncExtension', () => {
             { Dictionary: '`off`', 'File types': 'off until turned on' },
             { Dictionary: '`lisp`', 'File types': '`elisp`, and `.el` and `.lisp` files' },
             { Dictionary: '`everywhere`', 'File types': 'all' },
-            { Dictionary: '`web-only`', 'File types': '`.html` files' },
         ]);
         const states = await dictionaryStates(dir, await readJson('extension.config.json'));
         assert.deepEqual(
             states.filter((d) => d.off).map((d) => d.name),
             ['off'],
         );
-        assert.equal(states.length, 8);
+        assert.equal(states.length, 7);
         const lisp = states.filter((d) => d.name === 'lisp');
         assert.equal(sampleTurnsOn('samples/sample.el', lisp), true);
         assert.equal(sampleTurnsOn('samples/sample.lisp', lisp), true);
@@ -225,8 +219,23 @@ describe('syncExtension', () => {
             'off until you turn it on',
             'on for `elisp` files, and for `.el` and `.lisp` files',
             'on for every file',
-            'on for `.html` files',
         ]);
+    });
+
+    it('fails on an override it does not support', async () => {
+        const { locale: _locale, ...rest } = config;
+        await writeJson('extension.config.json', { ...rest, kind: 'wordList', commands: [] });
+        for (const override of [
+            { filename: '*.adb', dictionaries: ['demo'] },
+            { filename: '**/*.html', languageSettings: [{ languageId: '*', dictionaries: ['demo'] }] },
+        ]) {
+            await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+                name: 'Demo',
+                dictionaryDefinitions: [{ name: 'demo' }],
+                overrides: [override],
+            });
+            await assert.rejects(syncExtension(dir, options), /^AssertionError.*Demo: .* supported/s);
+        }
     });
 
     it('has no static/dictionaries.json for a bundle', async () => {

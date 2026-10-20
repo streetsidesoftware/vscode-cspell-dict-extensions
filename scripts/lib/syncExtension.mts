@@ -13,6 +13,7 @@
  * that, the file belongs to the extension. It leaves every other file alone.
  */
 
+import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
@@ -210,12 +211,14 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
 
 /** The parts of a dictionary's `cspell-ext.json` the sync reads. */
 interface DictionaryExt {
+    /** The dictionary package's name, such as `Emacs Lisp`. */
+    name?: string;
     engines?: Record<string, string>;
     dictionaryDefinitions?: { name: string }[];
     dictionaries?: string[];
     languageSettings?: LanguageSetting[];
     /** Settings for the files that match `filename`, such as `**\/*.{el,lisp}`. */
-    overrides?: { filename?: string | string[]; dictionaries?: string[]; languageSettings?: LanguageSetting[] }[];
+    overrides?: { filename?: string | string[]; dictionaries?: string[]; languageSettings?: unknown }[];
 }
 
 interface LanguageSetting {
@@ -297,25 +300,28 @@ interface Rule {
 /** Every setting in the configs that turns dictionaries on, as a flat list of rules. */
 function rules(exts: readonly DictionaryExt[]): Rule[] {
     const rules: Rule[] = [];
-    const fromSetting = (s: LanguageSetting, filePatterns: string[]): Rule => ({
-        dictionaries: s.dictionaries ?? [],
-        fileTypes: splitList(s.languageId),
-        filePatterns,
-        locales: splitList(s.locale),
-    });
     for (const ext of exts) {
         rules.push({ dictionaries: ext.dictionaries ?? [], fileTypes: [], filePatterns: [], locales: [] });
-        for (const setting of ext.languageSettings ?? []) rules.push(fromSetting(setting, []));
+        for (const s of ext.languageSettings ?? []) {
+            const fileTypes = splitList(s.languageId);
+            rules.push({
+                dictionaries: s.dictionaries ?? [],
+                fileTypes,
+                filePatterns: [],
+                locales: splitList(s.locale),
+            });
+        }
         for (const override of ext.overrides ?? []) {
-            // A glob in a dictionary's config is relative to the dictionary's folder: only one that starts with `**`
-            // reaches the user's files. A negated glob turns nothing on.
-            const globs = [override.filename ?? []].flat().filter((glob) => glob.startsWith('**'));
-            // An override whose globs reach no user file turns nothing on.
-            if (!globs.length) continue;
+            const globs = [override.filename ?? []].flat();
+            // A glob in a dictionary's config is relative to the dictionary's folder: only `**/…` reaches the user's
+            // files. No package uses another kind of glob, or language settings in an override.
+            const other = globs.find((glob) => !glob.startsWith('**/'));
+            assert(!other, `${ext.name ?? 'cspell'}: the override glob "${other}" isn't supported, only "**/…".`);
+            assert(
+                !override.languageSettings,
+                `${ext.name ?? 'cspell'}: languageSettings in overrides aren't supported.`,
+            );
             rules.push({ dictionaries: override.dictionaries ?? [], fileTypes: [], filePatterns: globs, locales: [] });
-            // Inside an override, the globs decide which files a language setting covers.
-            for (const setting of override.languageSettings ?? [])
-                rules.push({ ...fromSetting(setting, globs), fileTypes: [] });
         }
     }
     return rules;
