@@ -82,7 +82,7 @@
     "onStartupFinished"
   ],
   "dependencies": {
-    "@cspell/dict-scientific-terms-us": "^3.1.1"
+    "@cspell/dict-scientific-terms-us": "^3.1.2"
   },
   "devDependencies": {
     "@internal/extension-runtime": "file:../../extension-runtime"
