@@ -43,13 +43,46 @@
     "watch": "tsdown --watch"
   },
   "contributes": {
-    "commands": []
+    "commands": [
+      {
+        "command": "cSpellExt_scientific-terms.enableScientificTermsUs",
+        "title": "Enable Scientific Terms Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_scientific-terms.disableScientificTermsUs",
+        "title": "Disable Scientific Terms Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_scientific-terms.enableScientificTermsUsWorkspace",
+        "title": "Enable Scientific Terms Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_scientific-terms.disableScientificTermsUsWorkspace",
+        "title": "Disable Scientific Terms Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_scientific-terms.enableMathematicsTermsUs",
+        "title": "Enable Mathematics Terms Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_scientific-terms.disableMathematicsTermsUs",
+        "title": "Disable Mathematics Terms Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_scientific-terms.enableMathematicsTermsUsWorkspace",
+        "title": "Enable Mathematics Terms Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_scientific-terms.disableMathematicsTermsUsWorkspace",
+        "title": "Disable Mathematics Terms Spell Checker Dictionary in Workspace"
+      }
+    ]
   },
   "activationEvents": [
     "onStartupFinished"
   ],
   "dependencies": {
-    "@cspell/dict-scientific-terms-us": "^3.1.1"
+    "@cspell/dict-scientific-terms-us": "^3.1.2"
   },
   "devDependencies": {
     "@internal/extension-runtime": "file:../../extension-runtime"

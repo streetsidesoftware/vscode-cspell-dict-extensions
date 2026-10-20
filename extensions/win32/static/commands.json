@@ -1,0 +1,14 @@
+[
+    {
+        "Command": "Enable Win32 Spell Checker Dictionary"
+    },
+    {
+        "Command": "Disable Win32 Spell Checker Dictionary"
+    },
+    {
+        "Command": "Enable Win32 Spell Checker Dictionary in Workspace"
+    },
+    {
+        "Command": "Disable Win32 Spell Checker Dictionary in Workspace"
+    }
+]

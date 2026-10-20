@@ -7,4 +7,5 @@ generator-cspell-dicts-extensions/templates
 lerna.json
 package-lock.json
 packages/*/dist/**
+static/dictionary-types.json
 tsconfig*.json

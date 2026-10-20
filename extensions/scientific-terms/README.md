@@ -10,6 +10,25 @@ Once this extension is installed, the Scientific Terms dictionary is automatical
 
 The name of the dictionary is `scientific-terms-us`.
 
+### Enable or Disable the Dictionary
+
+Run these commands with `F1` or _View -> Command Palette..._:
+
+<!--- @@inject-table: ./static/commands.json --->
+
+| Command                                                         |
+| --------------------------------------------------------------- |
+| Enable Scientific Terms Spell Checker Dictionary                |
+| Disable Scientific Terms Spell Checker Dictionary               |
+| Enable Scientific Terms Spell Checker Dictionary in Workspace   |
+| Disable Scientific Terms Spell Checker Dictionary in Workspace  |
+| Enable Mathematics Terms Spell Checker Dictionary               |
+| Disable Mathematics Terms Spell Checker Dictionary              |
+| Enable Mathematics Terms Spell Checker Dictionary in Workspace  |
+| Disable Mathematics Terms Spell Checker Dictionary in Workspace |
+
+<!--- @@inject-end: ./static/commands.json --->
+
 ## Dictionaries
 
 The dictionaries this extension adds, and the file types they check:

@@ -3,8 +3,9 @@
 /**
  * List the packages an extension can include: the dictionaries in cspell-dicts and the parsers in cspell-parsers.
  *
- * Usage: `npm run list:packages -- [words…] [--missing] [--json]`
- * - `words`: only the packages whose name, English name or description contains every word, i.e. `thai`.
+ * Usage: `npm run list:packages -- [words…] [--any] [--missing] [--json]`
+ * - `words`: only the packages whose name, English name or description contains every word, e.g. `thai`.
+ * - `--any`: a package may contain any of the words instead, e.g. `gaelic irish`.
  * - `--missing`: only the packages no extension includes yet, leaving out those that ship with cspell.
  * - `--json`: print JSON instead of a table.
  */
@@ -16,17 +17,17 @@ import { findExistingExtensions } from './lib/existingExtensions.mts';
 import { extensionsDir } from './lib/repo.mts';
 
 export interface ListedPackage extends CSpellPackage {
-    /** The extension that includes the package, i.e. `swedish`, or `ships with cspell`. Empty when there is none. */
+    /** The extension that includes the package, e.g. `swedish`, or `ships with cspell`. Empty when there is none. */
     extension: string;
 }
 
 async function run(): Promise<void> {
     const { values, positionals } = parseArgs({
         allowPositionals: true,
-        options: { missing: { type: 'boolean' }, json: { type: 'boolean' } },
+        options: { any: { type: 'boolean' }, missing: { type: 'boolean' }, json: { type: 'boolean' } },
     });
     const existing = await findExistingExtensions(extensionsDir);
-    const listed: ListedPackage[] = filterPackages(await fetchCSpellPackages(), positionals)
+    const listed: ListedPackage[] = filterPackages(await fetchCSpellPackages(), positionals, { any: values.any })
         .map((pkg) => ({
             ...pkg,
             extension: existing.get(pkg.packageName) ?? (pkg.withCSpell ? 'ships with cspell' : ''),

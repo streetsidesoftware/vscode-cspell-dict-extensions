@@ -77,7 +77,7 @@ interface ExtensionConfigBase {
      */
     name: string;
     /**
-     * The name shown to people, i.e. `Swedish`.
+     * The name shown in VS Code and the Marketplace, e.g. `Swedish`.
      * @minLength 1
      */
     friendlyName: string;
@@ -109,29 +109,29 @@ interface ExtensionConfigBase {
     notes?: string;
 }
 
-/** A natural language, enabled by its locale, i.e. Swedish. */
+/** A natural language, enabled by its locale, e.g. Swedish. */
 export interface LanguageExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'language';
     /**
-     * The locale people add to `cSpell.language` to use this language, as a BCP 47 tag (i.e. `sv-SE`) or a comma-separated list of them.
+     * The locale users add to `cSpell.language` to use this language, as a BCP 47 tag (e.g. `sv-SE`) or a comma-separated list of them.
      * @minLength 1
      */
     locale: string;
     /**
-     * The language's name in the language itself, i.e. `svenska`.
+     * The language's name in the language itself, e.g. `svenska`.
      * @minLength 1
      */
     nativeName?: string;
 }
 
-/** A list of words, enabled by dictionary name, i.e. medical terms. */
+/** A list of words, enabled by dictionary name, e.g. medical terms. */
 export interface WordListExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'wordList';
 }
 
-/** A collection of dictionaries, i.e. the latest copies of the dictionaries Code Spell Checker bundles. */
+/** A collection of dictionaries, e.g. the latest copies of the dictionaries Code Spell Checker bundles. */
 export interface BundleExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'bundle';

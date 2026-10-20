@@ -10,6 +10,21 @@ Once this extension is installed, the Medical Terms dictionary is automatically 
 
 The name of the dictionary is `medical terms`.
 
+### Enable or Disable the Dictionary
+
+Run these commands with `F1` or _View -> Command Palette..._:
+
+<!--- @@inject-table: ./static/commands.json --->
+
+| Command                                                     |
+| ----------------------------------------------------------- |
+| Enable Medical Terms Spell Checker Dictionary               |
+| Disable Medical Terms Spell Checker Dictionary              |
+| Enable Medical Terms Spell Checker Dictionary in Workspace  |
+| Disable Medical Terms Spell Checker Dictionary in Workspace |
+
+<!--- @@inject-end: ./static/commands.json --->
+
 ## Source
 
 The dictionary is based on [wordlist-medicalterms-en](https://github.com/Glutanimate/wordlist-medicalterms-en) by Aristotelis P., which merges OpenMedSpel (R. Robinson, e-MedTools) and MTH-Med-Spel-Chek (Rajasekharan N.).

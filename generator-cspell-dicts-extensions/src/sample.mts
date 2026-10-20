@@ -10,7 +10,7 @@ import { UsageError } from './questions.mts';
 
 /** A sample the tests spell check. The VS Code test opens the first one. */
 export interface Sample {
-    /** The path relative to the extension, i.e. `samples/seattle.md`. */
+    /** The path relative to the extension, e.g. `samples/seattle.md`. */
     file: string;
     text: string;
 }
@@ -29,27 +29,60 @@ export interface SampleContext {
 }
 
 /**
- * A language's sample: the Wikipedia article with this title in the language. When there's none, ask for another
- * title, or with `--yes`, fail.
- * @param language - the Wikipedia language, i.e. `th`.
+ * A language's samples: Wikipedia articles in the language, one file each; the VS Code test opens the first.
+ * - With titles from `--sample-title`, those. A missing article is an error with `--yes`, and asked again otherwise.
+ * - Without, `--yes` takes Seattle. Otherwise ask for an article, with Seattle as the default, then for more until the
+ *   answer is empty.
+ * @param language - the Wikipedia language, e.g. `th`.
  */
-export async function languageSample(language: string, title: string, ctx: SampleContext): Promise<Sample> {
-    for (;;) {
+export async function languageSamples(
+    language: string,
+    titles: readonly string[] | undefined,
+    ctx: SampleContext,
+): Promise<Sample[]> {
+    const samples: Sample[] = [];
+    const missing = (title: string) => `No ${language}.wikipedia.org article about "${title}".`;
+    const ask = (message: string, defaultValue?: string) =>
+        ctx.prompter
+            .input(message, defaultValue, (text) => (text.trim() ? true : 'Enter an article title.'))
+            .then((answer) => answer.trim());
+
+    /** Fetch the article and add it, unless it's missing. */
+    async function add(title: string): Promise<boolean> {
         const article = await ctx.fetchArticle(language, title).catch((e: unknown) => {
             throw new Error(`Could not fetch the sample from Wikipedia: ${e instanceof Error ? e.message : String(e)}`);
         });
-        if (article) {
+        if (!article) return false;
+        const file = sampleFile(title);
+        if (samples.some((s) => s.file === file)) {
+            ctx.log(`${file} is already a sample.`);
+        } else {
             ctx.log(`Sample: ${article.url}`);
-            return { file: sampleFile(title), text: articleMarkdown(article) };
+            samples.push({ file, text: articleMarkdown(article) });
         }
-        const missing = `No ${language}.wikipedia.org article about "${title}".`;
-        if (ctx.yes) throw new Error(`${missing} Name another article with --sample-title <title>.`);
-        const answer = await ctx.prompter.input(
-            `${missing} Another article, in English or the language:`,
-            undefined,
-            (text) => (text.trim() ? true : 'Enter an article title.'),
-        );
-        title = answer.trim();
+        return true;
+    }
+
+    if (titles?.length || ctx.yes) {
+        for (let title of titles?.length ? titles : [defaultSampleTitle]) {
+            while (!(await add(title))) {
+                if (ctx.yes) throw new Error(`${missing(title)} Name another article with --sample-title <title>.`);
+                title = await ask(`${missing(title)} Another article, in English or the language:`);
+            }
+        }
+        return samples;
+    }
+
+    const first = 'Wikipedia article for the sample, in English or the language:';
+    let title = await ask(first, defaultSampleTitle);
+    while (!(await add(title))) {
+        ctx.log(missing(title));
+        title = await ask(first, defaultSampleTitle);
+    }
+    for (;;) {
+        const more = (await ctx.prompter.input('Another article (empty to finish):')).trim();
+        if (!more) return samples;
+        if (!(await add(more))) ctx.log(missing(more));
     }
 }
 

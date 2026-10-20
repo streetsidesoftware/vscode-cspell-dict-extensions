@@ -111,13 +111,19 @@ function codeSpans(text: string): string[] {
 }
 
 /**
- * The packages that match every word, in the package name, name or description, ignoring case.
+ * The packages that match the words, in the package name, name or description, ignoring case.
+ * @param any - match any of the words. By default, a package must match every word.
  */
-export function filterPackages(packages: readonly CSpellPackage[], words: readonly string[]): CSpellPackage[] {
+export function filterPackages(
+    packages: readonly CSpellPackage[],
+    words: readonly string[],
+    { any = false }: { any?: boolean } = {},
+): CSpellPackage[] {
     const terms = words.flatMap((w) => w.toLowerCase().split(/\s+/)).filter(Boolean);
+    if (!terms.length) return [...packages];
     return packages.filter((pkg) => {
         const text = `${pkg.packageName} ${pkg.name} ${pkg.description}`.toLowerCase();
-        return terms.every((term) => text.includes(term));
+        return any ? terms.some((term) => text.includes(term)) : terms.every((term) => text.includes(term));
     });
 }
 
