@@ -7,6 +7,8 @@ on:
     paths:
       - "**/package.json"
       - "**/package-lock.json"
+      - ".prettierrc.json"
+      - ".prettierignore"
 
   workflow_dispatch:
   schedule:
@@ -53,6 +55,9 @@ jobs:
       - name: Build
         run: |
           npm run build
+      # Format with the updated Prettier and its rules, so formatting changes come in the same PR.
+      - name: Format
+        run: npm run prettier:fix
 
       - name: PR Body
         id: body

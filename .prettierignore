@@ -2,6 +2,7 @@
 **/dist/**
 CHANGELOG.md
 cspell.json
+extensions/*/samples/**
 generator-cspell-dicts-extensions/templates
 lerna.json
 package-lock.json
