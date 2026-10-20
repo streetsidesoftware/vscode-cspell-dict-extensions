@@ -198,7 +198,15 @@ function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): str
 }
 
 /** The starter README, with the `@@inject` sections the sync fills in. */
-export function readme(answers: Answers): string {
+/**
+ * The starter README.
+ * @param installed - for a word list, what happens once it's installed. The default doesn't name the dictionaries,
+ *   because they're known only once the packages are installed.
+ */
+export function readme(
+    answers: Answers,
+    installed = 'Once this extension is installed, each dictionary is on for the file types listed below, or off until you turn it on.',
+): string {
     const title = `# ${answers.displayName || `${answers.friendlyName} - Code Spell Checker`}\n`;
     const requirements = inject(
         '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
@@ -225,7 +233,7 @@ export function readme(answers: Answers): string {
                 title,
                 `Adds the ${answers.friendlyName} dictionary to ${codeSpellChecker}.\n`,
                 '## Installation\n',
-                'Once this extension is installed, each dictionary is on for the file types listed below, or off until you turn it on.\n',
+                `${installed}\n`,
                 '### Enable or Disable the Dictionary\n',
                 'Run these commands with `F1` or _View -> Command Palette..._:\n',
                 inject('./static/commands.json', 'inject-table'),

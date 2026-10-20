@@ -5,7 +5,14 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import { createExtensionConfigValidator, generateExtensionSchema } from './extensionSchema.mts';
-import { dictionaryStates, type FileChange, syncExtension } from './syncExtension.mts';
+import {
+    describeFilePatterns,
+    dictionaryStates,
+    type FileChange,
+    sampleTurnsOn,
+    syncExtension,
+    whenOn,
+} from './syncExtension.mts';
 
 const config = {
     name: 'demo',
@@ -164,12 +171,15 @@ describe('syncExtension', () => {
                 { name: 'any' },
                 { name: 'always' },
                 { name: 'off' },
+                { name: 'lisp' },
             ],
             dictionaries: ['always'],
+            overrides: [{ filename: ['**/*.{el,lisp}'], dictionaries: ['lisp'] }],
             languageSettings: [
                 { languageId: 'c,cpp', locale: '*', dictionaries: ['c-only'] },
                 { languageId: ['html', 'css'], locale: '*', dictionaries: ['web'] },
                 { languageId: '*', locale: '*', dictionaries: ['any'] },
+                { languageId: 'elisp', locale: '*', dictionaries: ['lisp'] },
             ],
         });
         const { locale: _locale, ...rest } = config;
@@ -182,13 +192,27 @@ describe('syncExtension', () => {
             { Dictionary: '`any`', 'File types': 'all' },
             { Dictionary: '`always`', 'File types': 'all' },
             { Dictionary: '`off`', 'File types': 'off until turned on' },
+            { Dictionary: '`lisp`', 'File types': '`elisp`, and `.el` and `.lisp` files' },
         ]);
         const states = await dictionaryStates(dir, await readJson('extension.config.json'));
         assert.deepEqual(
             states.filter((d) => d.off).map((d) => d.name),
             ['off'],
         );
-        assert.equal(states.length, 5);
+        assert.equal(states.length, 6);
+        const lisp = states.filter((d) => d.name === 'lisp');
+        assert.equal(sampleTurnsOn('samples/sample.el', lisp), true);
+        assert.equal(sampleTurnsOn('samples/sample.lisp', lisp), true);
+        assert.equal(sampleTurnsOn('samples/sample.txt', lisp), false);
+        assert.equal(sampleTurnsOn('samples/sample.txt', states), true);
+        assert.deepEqual(states.map(whenOn), [
+            'on for `c` and `cpp` files',
+            'on for `html` and `css` files',
+            'on for every file',
+            'on for every file',
+            'off until you turn it on',
+            'on for `elisp` files, and for `.el` and `.lisp` files',
+        ]);
     });
 
     it('has no static/dictionaries.json for a bundle', async () => {
@@ -311,3 +335,12 @@ function files(changes: FileChange[], action: FileChange['action']): string[] {
         .map((c) => c.file)
         .toSorted();
 }
+
+describe('describeFilePatterns', () => {
+    it('shows extension globs as files, and other globs as they are', () => {
+        assert.equal(describeFilePatterns(['**/*.{el,lisp,lsp,l}']), '`.el`, `.lisp`, `.lsp` and `.l` files');
+        assert.equal(describeFilePatterns(['*.vim']), '`.vim` files');
+        assert.equal(describeFilePatterns(['**/.vimrc']), '`**/.vimrc` files');
+        assert.equal(describeFilePatterns([]), '');
+    });
+});

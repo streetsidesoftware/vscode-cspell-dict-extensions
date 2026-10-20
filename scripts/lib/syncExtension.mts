@@ -15,6 +15,7 @@ import fs from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
+import { findMatchingFileTypes } from '@cspell/filetypes';
 import { injectMarkdown } from 'inject-markdown';
 import { parse as parseJsonc } from 'jsonc-parser';
 
@@ -210,6 +211,8 @@ interface DictionaryExt {
     dictionaryDefinitions?: { name: string }[];
     dictionaries?: string[];
     languageSettings?: LanguageSetting[];
+    /** Settings for the files that match `filename`, such as `**\/*.{el,lisp}`. */
+    overrides?: { filename?: string | string[]; dictionaries?: string[] }[];
 }
 
 interface LanguageSetting {
@@ -246,49 +249,109 @@ async function readDictionaries(extensionDir: string, config: ExtensionConfig): 
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
     const rows: Record<string, string>[] = [];
-    const exts = await readDictionaries(extensionDir, config);
-    for (const ext of exts) {
-        for (const { name } of ext.dictionaryDefinitions ?? []) {
-            const { settings, always } = turnedOnBy(name, [...exts, config.cspell as DictionaryExt]);
-            const off = !settings.length && !always;
-            if (config.kind === 'language') {
-                if (off) continue;
-                const locales = unique(settings.flatMap((s) => splitList(s.locale)).map(canonicalLocale));
-                rows.push({ Dictionary: code(name), Locales: locales.map(code).join(', ') });
-            } else {
-                const ids = unique(settings.flatMap((s) => splitList(s.languageId)));
-                const all = always || !ids.length || ids.includes('*');
-                const fileTypes = off ? 'off until turned on' : all ? 'all' : ids.map(code).join(', ');
-                rows.push({ Dictionary: code(name), 'File types': fileTypes });
-            }
+    for (const state of await dictionaryStates(extensionDir, config)) {
+        if (config.kind === 'language') {
+            if (state.off) continue;
+            rows.push({ Dictionary: code(state.name), Locales: state.locales.map(code).join(', ') });
+        } else {
+            rows.push({ Dictionary: code(state.name), 'File types': describeFileTypes(state) });
         }
     }
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
 }
 
+/** A dictionary in `cspell.import`, and what turns it on. */
+export interface DictionaryState {
+    name: string;
+    /** On for every file. */
+    always: boolean;
+    /** The file types (VS Code language IDs) that turn it on, such as `clojure`. `*` is every file type. */
+    fileTypes: string[];
+    /** The file name globs that turn it on, from the `overrides`, such as `**\/*.{el,lisp}`. */
+    filePatterns: string[];
+    /** The locales that turn it on, for a natural language. */
+    locales: string[];
+    /** Nothing turns it on: users turn it on in their settings, or with the extension's commands. */
+    off: boolean;
+}
+
 /**
- * The dictionaries in `cspell.import`, and whether each is off until turned on: neither the dictionaries' own settings
- * nor the extension's `cspell` turn it on. Users turn it on in their settings, or with the extension's commands.
+ * The dictionaries in `cspell.import`, and what turns each on: the dictionaries' own settings and the extension's
+ * `cspell`.
  */
-export async function dictionaryStates(
-    extensionDir: string,
-    config: ExtensionConfig,
-): Promise<{ name: string; off: boolean }[]> {
-    const exts = await readDictionaries(extensionDir, config);
+export async function dictionaryStates(extensionDir: string, config: ExtensionConfig): Promise<DictionaryState[]> {
+    const exts = [...(await readDictionaries(extensionDir, config)), config.cspell as DictionaryExt];
     return exts
         .flatMap((ext) => ext.dictionaryDefinitions ?? [])
         .map(({ name }) => {
-            const { settings, always } = turnedOnBy(name, [...exts, config.cspell as DictionaryExt]);
-            return { name, off: !settings.length && !always };
+            const settings = exts
+                .flatMap((ext) => ext.languageSettings ?? [])
+                .filter((s) => s.dictionaries?.includes(name));
+            const filePatterns = unique(
+                exts
+                    .flatMap((ext) => ext.overrides ?? [])
+                    .filter((o) => o.dictionaries?.includes(name))
+                    .flatMap((o) => [o.filename ?? []].flat()),
+            );
+            const always = exts.some((ext) => ext.dictionaries?.includes(name));
+            const fileTypes = unique(settings.flatMap((s) => splitList(s.languageId)));
+            const locales = unique(settings.flatMap((s) => splitList(s.locale)).map(canonicalLocale));
+            const off = !always && !settings.length && !filePatterns.length;
+            return { name, always, fileTypes, filePatterns, locales, off };
         });
 }
 
-/** What turns a dictionary on: the language settings that list it, and whether `dictionaries` does, for every file. */
-function turnedOnBy(name: string, exts: DictionaryExt[]): { settings: LanguageSetting[]; always: boolean } {
-    return {
-        settings: exts.flatMap((ext) => ext.languageSettings ?? []).filter((s) => s.dictionaries?.includes(name)),
-        always: exts.some((ext) => ext.dictionaries?.includes(name)),
-    };
+/** When a word list's dictionary is on, for the README: `all`, `off until turned on`, or its file types and files. */
+export function describeFileTypes(state: DictionaryState): string {
+    if (state.off) return 'off until turned on';
+    if (state.always || state.fileTypes.includes('*')) return 'all';
+    const parts = [state.fileTypes.map(code).join(', '), describeFilePatterns(state.filePatterns)].filter(Boolean);
+    return parts.join(', and ') || 'all';
+}
+
+/**
+ * When a word list's dictionary is on, for a sentence: "on for every file", "off until you turn it on", or "on for
+ * `elisp` and `lisp` files, and for `.el` and `.lisp` files".
+ */
+export function whenOn(state: DictionaryState): string {
+    if (state.off) return 'off until you turn it on';
+    if (state.always || state.fileTypes.includes('*')) return 'on for every file';
+    const types = state.fileTypes.map(code);
+    const byType = types.length ? `${andList(types)} files` : '';
+    const byName = describeFilePatterns(state.filePatterns);
+    if (!byType && !byName) return 'on for every file';
+    return `on for ${[byType, byName].filter(Boolean).join(', and for ')}`;
+}
+
+/** File name globs as files: `**\/*.{el,lisp}` is "`.el` and `.lisp` files". Other globs are shown as they are. */
+export function describeFilePatterns(patterns: readonly string[]): string {
+    const names = patterns.flatMap((pattern) => {
+        const ext = /^(?:\*\*\/)?\*\.(?:\{([^{}]+)\}|([^{}*/]+))$/.exec(pattern);
+        if (!ext) return [code(pattern)];
+        return (ext[1] ?? ext[2] ?? '').split(',').map((e) => code(`.${e.trim()}`));
+    });
+    return names.length ? `${andList(names)} files` : '';
+}
+
+function andList(items: readonly string[]): string {
+    return items.length > 1 ? `${items.slice(0, -1).join(', ')} and ${items.at(-1)}` : (items[0] ?? '');
+}
+
+/**
+ * Whether a sample file turns on at least one of the dictionaries, by its file type or its name. A dictionary that's
+ * on for every file, or off until turned on (the samples turn it on), takes any file.
+ * @param file - the sample's path relative to the extension, such as `samples/sample.el`.
+ */
+export function sampleTurnsOn(file: string, states: readonly DictionaryState[]): boolean {
+    const fileTypes = findMatchingFileTypes(file);
+    return states.some(
+        (state) =>
+            state.always ||
+            state.off ||
+            state.fileTypes.includes('*') ||
+            state.fileTypes.some((id) => fileTypes.includes(id)) ||
+            state.filePatterns.some((pattern) => path.matchesGlob(file, pattern)),
+    );
 }
 
 function splitList(list: string | string[] | undefined): string[] {
