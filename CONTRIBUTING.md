@@ -13,13 +13,13 @@ This repository holds the VS Code extensions that add cspell dictionaries and pa
 
 ## Adding words to a language dictionary
 
-The words come from cspell-dicts, not from this repository. To add or fix a word, change it in cspell-dicts. Its [contributing guide](https://github.com/streetsidesoftware/cspell-dicts/blob/main/CONTRIBUTING.md) shows how, in your browser or in a clone.
+The words come from cspell-dicts, not from this repository. To suggest, add or fix a word, use cspell-dicts. Its [contributing guide](https://github.com/streetsidesoftware/cspell-dicts/blob/main/CONTRIBUTING.md) shows how: an issue, a change in your browser, or a change in a clone.
 
-After cspell-dicts publishes the dictionary, a daily workflow here updates the extensions that include it. Their next release has your change.
+After cspell-dicts publishes the dictionary, a daily workflow here opens a pull request that updates the extensions that include it. Once a maintainer merges it, their next release has your change.
 
 ## Changing this repository
 
-Contributions are very welcome. The steps work on Windows (PowerShell), macOS and Linux.
+Changes to the extensions and the tooling are very welcome. The steps in the docs below work on Windows (PowerShell), macOS and Linux.
 
 <!--- @@inject: ./docs/templates/prerequisites.md#values-file=:./package.json --->
 
