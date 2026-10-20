@@ -9,7 +9,14 @@ level: comfortable with basic git and a terminal; doesn't read or write code
 > [!NOTE]
 > For contributors who can fork the repo and follow terminal steps. No coding needed.
 
-An extension wraps published packages: `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries) or `@cspell/parser-*` packages from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers). If the dictionary isn't published yet, add it to cspell-dicts first.
+**What an extension does:** an extension adds a dictionary or a parser to Code Spell Checker. There are two kinds:
+
+- A **dictionary extension** adds words, such as Swedish or medical terms, so Code Spell Checker accepts them.
+- A **parser extension** tags the parts of a document, such as the comments, strings and identifiers of a TypeScript file, so people can choose which parts to spell check.
+
+People install an extension from the VS Code Marketplace.
+
+**How an extension works:** an extension includes a published package, unchanged, and tells Code Spell Checker where to find it. Dictionaries come from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries), and parsers from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers). So the package must be published first. If it isn't, add it to cspell-dicts or cspell-parsers.
 
 1. **Install.** Fork and clone the repository, then in its root: `npm ci`.
 
