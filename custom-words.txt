@@ -3,7 +3,6 @@ appname
 Bokmål
 deduplicated
 Dependabot
-elisp
 Gnomovision
 googleapis
 lgpl

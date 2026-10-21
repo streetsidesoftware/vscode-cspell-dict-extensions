@@ -163,3 +163,5 @@ generator README lists them.
 
 - **Words missing from a dictionary:** they belong upstream, in cspell-dicts. Say so.
 - **Changing an existing extension:** see "Files you edit" in `docs/extension-anatomy.md`.
+
+<!--- cspell:ignore elisp --->
