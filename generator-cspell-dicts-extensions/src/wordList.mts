@@ -4,48 +4,23 @@
  * The parts of a word list that only its installed packages can tell: when each dictionary is on.
  */
 
-import { readFile, rm, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
 import type { ExtensionConfig } from '../../extension-runtime/src/config.ts';
-import { type DictionaryState, describeFileTypes } from '../../scripts/lib/dictionaryState.mts';
-import { dictionaryStates, sampleTurnsOn } from '../../scripts/lib/syncExtension.mts';
+import type { DictionaryState } from '../../scripts/lib/dictionaryState.mts';
+import { dictionaryStates } from '../../scripts/lib/syncExtension.mts';
 import { npmOutput } from './exec.mts';
-import { type Answers, UsageError } from './questions.mts';
-import type { Sample } from './sample.mts';
+import type { Answers } from './questions.mts';
 import { dictionaryCommands, installedSentence, json, readme } from './writeExtension.mts';
 
-/**
- * Set up a word list once its packages are installed. A sample the user gave must turn on one of the dictionaries;
- * otherwise the extension's folder is removed.
- * @param given - the samples the user gave, with `--sample-file` or at the prompt.
- */
-export async function setUpWordList(
-    destDir: string,
-    answers: Answers,
-    config: ExtensionConfig,
-    given: readonly Sample[],
-): Promise<void> {
+/** Set up a word list once its packages are installed. */
+export async function setUpWordList(destDir: string, answers: Answers, config: ExtensionConfig): Promise<void> {
     const dictionaries = await dictionaryStates(destDir, config);
-    const wrong = given.filter((sample) => !sampleTurnsOn(sample.file, dictionaries));
-    if (wrong.length) {
-        await rm(destDir, { recursive: true });
-        throw new UsageError(wrongSamplesMessage(wrong, dictionaries));
-    }
     await writeCommands(destDir, config, dictionaries);
     await turnOnForSamples(destDir, dictionaries);
     await writeFile(path.join(destDir, 'README.md'), readme(answers, installedSentence(dictionaries)));
-}
-
-/** Why the samples were refused, with the file types that turn the dictionaries on. */
-export function wrongSamplesMessage(wrong: readonly Sample[], dictionaries: readonly DictionaryState[]): string {
-    const files = wrong.map((sample) => path.basename(sample.file)).join(', ');
-    const when = dictionaries.map((d) => `${d.name}: ${describeFileTypes(d).replaceAll('`', '')}`).join('; ');
-    return (
-        `${files} turns on no dictionary of this extension (${when}). ` +
-        "Give a --sample-file of one of those file types. The extension's folder was removed."
-    );
 }
 
 /** Commands to turn each dictionary on and off. */

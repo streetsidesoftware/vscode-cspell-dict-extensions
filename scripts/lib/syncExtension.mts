@@ -17,7 +17,6 @@ import fs from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
-import { findMatchingFileTypes } from '@cspell/filetypes';
 import { injectMarkdown } from 'inject-markdown';
 import { parse as parseJsonc } from 'jsonc-parser';
 
@@ -305,22 +304,6 @@ function languageSettingRule(setting: LanguageSetting): Rule {
         fileTypes: splitList(setting.languageId),
         locales: splitList(setting.locale),
     };
-}
-
-/**
- * Whether a sample file turns on at least one of the dictionaries, by its file type. A dictionary that's
- * on for every file, or off until turned on (the samples turn it on), takes any file.
- * @param file - the sample's path relative to the extension, such as `samples/sample.el`.
- */
-export function sampleTurnsOn(file: string, states: readonly DictionaryState[]): boolean {
-    return states.some((state) => turnsOn(state, file));
-}
-
-/** Whether a file turns a dictionary on, by its file type. */
-function turnsOn(state: DictionaryState, file: string): boolean {
-    if (state.all || state.off) return true;
-    const fileTypes = findMatchingFileTypes(file);
-    return state.fileTypes.some((id) => fileTypes.includes(id));
 }
 
 function splitList(list: string | string[] | undefined): string[] {
