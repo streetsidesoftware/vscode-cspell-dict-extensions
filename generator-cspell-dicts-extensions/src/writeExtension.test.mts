@@ -295,7 +295,6 @@ describe('installedSentence', () => {
         name,
         all: false,
         fileTypes: [],
-        filePatterns: [],
         locales: [],
         off: false,
         ...fields,

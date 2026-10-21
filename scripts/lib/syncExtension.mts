@@ -214,14 +214,6 @@ interface DictionaryExt {
     dictionaryDefinitions?: { name: string }[];
     dictionaries?: string[];
     languageSettings?: LanguageSetting[];
-    /** Settings for the files that match `filename`, such as `**\/*.{el,lisp}`. */
-    overrides?: Override[];
-}
-
-interface Override {
-    filename?: string | string[];
-    dictionaries?: string[];
-    languageSettings?: LanguageSetting[];
 }
 
 interface LanguageSetting {
@@ -282,78 +274,53 @@ export async function dictionaryStates(extensionDir: string, config: ExtensionCo
             const named = allRules.filter((rule) => rule.dictionaries.includes(name));
             // `*` is every file type: `all` covers it.
             const fileTypes = unique(named.flatMap((rule) => rule.fileTypes)).filter((id) => id !== '*');
-            const filePatterns = unique(named.flatMap((rule) => rule.filePatterns));
             const locales = unique(named.flatMap((rule) => rule.locales).map(canonicalLocale));
-            const all = named.some(
-                (rule) => !rule.filePatterns.length && (!rule.fileTypes.length || rule.fileTypes.includes('*')),
-            );
-            return { name, all, fileTypes, filePatterns, locales, off: !named.length };
+            const all = named.some((rule) => !rule.fileTypes.length || rule.fileTypes.includes('*'));
+            return { name, all, fileTypes, locales, off: !named.length };
         });
 }
 
-/** One setting that turns dictionaries on: for some file types, for the files that match some globs, or for every file. */
+/** One setting that turns dictionaries on: for some file types, or for every file. */
 interface Rule {
     dictionaries: string[];
     /** Empty, or `*`, for every file type. */
     fileTypes: string[];
-    /** Empty for every file; otherwise only the files that match. */
-    filePatterns: string[];
     locales: string[];
 }
 
 /** Every setting in the configs that turns dictionaries on, as a flat list of rules. */
 function rules(exts: readonly DictionaryExt[]): Rule[] {
-    return exts.flatMap((ext) => [
-        dictionariesRule(ext),
-        ...(ext.languageSettings ?? []).map((s) => languageSettingRule(s)),
-        ...(ext.overrides ?? []).flatMap(overrideRules),
-    ]);
+    return exts.flatMap((ext) => [dictionariesRule(ext), ...(ext.languageSettings ?? []).map(languageSettingRule)]);
 }
 
 /** `dictionaries` turns its dictionaries on for every file. */
 function dictionariesRule(ext: DictionaryExt): Rule {
-    return { dictionaries: ext.dictionaries ?? [], fileTypes: [], filePatterns: [], locales: [] };
+    return { dictionaries: ext.dictionaries ?? [], fileTypes: [], locales: [] };
 }
 
 /** A language setting turns its dictionaries on for its file types and locales. */
-function languageSettingRule(setting: LanguageSetting, filePatterns: string[] = []): Rule {
+function languageSettingRule(setting: LanguageSetting): Rule {
     return {
         dictionaries: setting.dictionaries ?? [],
         fileTypes: splitList(setting.languageId),
-        filePatterns,
         locales: splitList(setting.locale),
     };
 }
 
 /**
- * An override turns its dictionaries and its language settings on for the files that match its globs. A glob in a
- * dictionary's config is relative to the dictionary's folder, so only `**\/…` reaches the user's files.
- */
-function overrideRules(override: Override): Rule[] {
-    const { dictionaries = [], filename = [], languageSettings = [] } = override;
-    const filePatterns = [filename].flat().filter((glob) => glob.startsWith('**/'));
-    if (!filePatterns.length) return [];
-    const overrideRule: Rule = { dictionaries, fileTypes: [], filePatterns, locales: [] };
-    const languageSettingsRules = languageSettings.map((s) => languageSettingRule(s, filePatterns));
-    return [overrideRule, ...languageSettingsRules];
-}
-
-/**
- * Whether a sample file turns on at least one of the dictionaries, by its file type or its name. A dictionary that's
+ * Whether a sample file turns on at least one of the dictionaries, by its file type. A dictionary that's
  * on for every file, or off until turned on (the samples turn it on), takes any file.
  * @param file - the sample's path relative to the extension, such as `samples/sample.el`.
  */
 export function sampleTurnsOn(file: string, states: readonly DictionaryState[]): boolean {
-    const posixFile = file.split(path.sep).join('/');
-    return states.some((state) => turnsOn(state, posixFile));
+    return states.some((state) => turnsOn(state, file));
 }
 
-/** Whether a file turns a dictionary on, by its file type or its name. */
+/** Whether a file turns a dictionary on, by its file type. */
 function turnsOn(state: DictionaryState, file: string): boolean {
     if (state.all || state.off) return true;
     const fileTypes = findMatchingFileTypes(file);
-    if (state.fileTypes.some((id) => fileTypes.includes(id))) return true;
-    return state.filePatterns.some((pattern) => path.posix.matchesGlob(file, pattern));
+    return state.fileTypes.some((id) => fileTypes.includes(id));
 }
 
 function splitList(list: string | string[] | undefined): string[] {
