@@ -62,19 +62,19 @@ Follow these steps in order:
    npm run create:extension
    ```
 
-   | Question                         | What to answer                                                                                                                                                                                                                  |
-   | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | Extension name                   | A short lowercase name in English, such as `swedish`. It becomes the folder `extensions/swedish/`.                                                                                                                              |
-   | Friendly name                    | The name shown in VS Code and the Marketplace, such as `Swedish`. Press Enter to accept the suggestion.                                                                                                                         |
-   | Packages that match              | The dictionaries or parsers to include. All matches start checked. Uncheck the ones you don't want. "(has an extension)" means another extension already includes the package.                                                  |
-   | Search for packages              | Asked when nothing matches the name, and after each list of matches. Type a word to search for, such as a language or a topic. To finish, press Enter with no word. You can finish only once you've picked a package.           |
-   | What kind of extension?          | **Natural Language** for a language such as Swedish, which users turn on in their settings. **Word List** for a set of terms, such as medical terms or Vim's keywords. The suggestion is usually right. Not asked for a parser. |
-   | Locale that enables the language | The language code users add to Code Spell Checker's `cSpell.language` setting, such as `sv-SE`. Natural languages only.                                                                                                         |
-   | Name of … in its command titles  | Only when the extension has several languages, such as Serbian in Cyrillic and Latin script. Each language gets its own commands to turn it on and off. The name goes in the titles of those commands. Accept the suggestion.   |
-   | Native name                      | The language's name in that language, such as `svenska`. Natural languages only.                                                                                                                                                |
-   | Marketplace description          | One sentence for the VS Code Marketplace. Parsers only.                                                                                                                                                                         |
-   | Sample file                      | Word lists and parsers only. A file with some of the dictionary's words, or code the parser tags. Press Enter for a starter `samples/sample.md`. The checks fail until you replace its text.                                    |
-   | Wikipedia article for the sample | Natural languages only. Press Enter for Seattle, or name another article, in English or the language. Then add more articles, or press Enter to finish. Each article becomes its own sample file, such as `samples/seattle.md`. |
+   | Question                         | What to answer                                                                                                                                                                                                                                                                                               |
+   | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | Extension name                   | A short lowercase name in English, such as `swedish`. It becomes the folder `extensions/swedish/`.                                                                                                                                                                                                           |
+   | Friendly name                    | The name shown in VS Code and the Marketplace, such as `Swedish`. Press Enter to accept the suggestion.                                                                                                                                                                                                      |
+   | Packages that match              | The dictionaries or parsers to include. All matches start checked. Uncheck the ones you don't want. "(has an extension)" means another extension already includes the package.                                                                                                                               |
+   | Search for packages              | Asked when nothing matches the name, and after each list of matches. Type a word to search for, such as a language or a topic. To finish, press Enter with no word. You can finish only once you've picked a package.                                                                                        |
+   | What kind of extension?          | **Natural Language** for a language such as Swedish, which users turn on in their settings. **Word List** for a set of terms, such as medical terms or Vim's keywords. The suggestion is usually right. Not asked for a parser.                                                                              |
+   | Locale that enables the language | The language code users add to Code Spell Checker's `cSpell.language` setting, such as `sv-SE`. Natural languages only.                                                                                                                                                                                      |
+   | Name of … in its command titles  | Only when the extension has several languages, such as Serbian in Cyrillic and Latin script. Each language gets its own commands to turn it on and off. The name goes in the titles of those commands. Accept the suggestion.                                                                                |
+   | Native name                      | The language's name in that language, such as `svenska`. Natural languages only.                                                                                                                                                                                                                             |
+   | Marketplace description          | One sentence for the VS Code Marketplace. Parsers only.                                                                                                                                                                                                                                                      |
+   | Sample file                      | Word lists and parsers only. A file with some of the dictionary's words, or code the parser tags. For a dictionary that's on only for some file types, use one of those types, such as a `.clj` file for Clojure. Press Enter for a starter `samples/sample.md`. The checks fail until you replace its text. |
+   | Wikipedia article for the sample | Natural languages only. Press Enter for Seattle, or name another article, in English or the language. Then add more articles, or press Enter to finish. Each article becomes its own sample file, such as `samples/seattle.md`.                                                                              |
 
    The generator needs a network connection. It lists the packages, fetches the Wikipedia articles and installs the packages.
 
@@ -104,12 +104,21 @@ Follow these steps in order:
    npm run test:cspell
    ```
 
-   It prints each unknown word with its file and line. For each one:
-   - For a name or a word that isn't real, add it to `words` in `samples/cspell.json`.
-   - For a real word, add it to `words` too. Then ask for it in cspell-dicts. See [Adding words](../../CONTRIBUTING.md#adding-words-to-a-language-dictionary).
-   - Or delete the sentence from the sample.
+   It prints each unknown word with its file and line. Fix each one in the sample itself:
+   - **A real word the dictionary lacks:** add it to a `cspell:words` comment at the end of the sample. The spell check then accepts it. Also ask for it in cspell-dicts. See [Adding words](../../CONTRIBUTING.md#adding-words-to-a-language-dictionary).
+   - **A name or a word that isn't real,** such as a place name: add it to a `cspell:ignore` comment at the end of the sample. The spell check then skips it.
+   - **Or delete the sentence** from the sample.
 
-   For a natural language, keep the `language` setting in `samples/cspell.json`. It turns the language on for the samples.
+   For example, the last lines of a Markdown sample:
+
+   ```markdown
+   <!-- cspell:words Seattleites -->
+   <!-- cspell:ignore Siatail Snohomish -->
+   ```
+
+   Markdown hides these comments on the page. In a code file, use the language's line comment instead, such as `// cspell:words` or, in Lisp, `; cspell:ignore`.
+
+   The generator also writes `samples/cspell.json`. For a natural language, it turns the language on for the samples. Keep that setting.
 
 6. **Send your extension to the maintainers.**
    - Commit the new `extensions/<name>/` folder. Push it to your fork.

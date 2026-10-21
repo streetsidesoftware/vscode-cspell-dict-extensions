@@ -19,7 +19,7 @@ In the `vscode-cspell-dict-extensions` repository root directory:
 npm run create:extension
 ```
 
-The generator starts from the extension's name, e.g. `serbian`, and offers the packages that match it, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them), such as `@cspell/dict-sr-cyrl` and `@cspell/dict-sr-latn`; you can search with other words too. From the packages it suggests the kind and the locale. With several languages, as for Serbian, each also gets its own enable and disable commands. Each dictionary of a word list gets enable and disable commands. A dictionary can be off until someone turns it on, as in `@cspell/dict-vim`; then `samples/cspell.json` turns it on for the tests.
+The generator starts from the extension's name, e.g. `serbian`, and offers the packages that match it, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them), such as `@cspell/dict-sr-cyrl` and `@cspell/dict-sr-latn`; you can search with other words too. From the packages it suggests the kind and the locale. With several languages, as for Serbian, each also gets its own enable and disable commands. Each dictionary of a word list gets enable and disable commands. A dictionary can be off until a user turns it on, as in `@cspell/dict-vim`; then `samples/cspell.json` turns it on for the tests. The generator reads the installed packages to learn when each dictionary is on. It writes a README sentence that says when each dictionary is on. It refuses a `--sample-file` that turns on none of the dictionaries, such as a `.txt` file for `@cspell/dict-elisp`, and removes the folder. It also adds the words of the package and dictionary names that cspell doesn't know, such as `elisp`, to the extension's `cspell.config.yaml`.
 
 It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`, a starter `package.json`, `README.md`, `LICENSE` and a sample. Then it installs the packages and runs `npm run sync:extensions`, which writes the rest, as for every other extension.
 
@@ -30,7 +30,7 @@ Without `--sample-file`:
 - **A language:** Wikipedia articles in that language, with their source and license, one file each, named after the title: `Seattle` is `samples/seattle.md`, and `Lingua Latina` is `samples/lingua-latina.md`. The generator asks for an article, with Seattle as the default, then for more until the answer is empty. `--sample-title <title>`, once for each article, names them instead; with `--yes` and no `--sample-title`, it's Seattle. A missing article is asked again, or with `--yes` stops the generator. Without Wikipedia, the generator stops before writing anything.
 - **A word list or a parser:** there's no default. With `--yes`, `--sample-file` is required. Otherwise the generator asks for a sample file; without one, it writes `samples/sample.md`, a line to replace with a deliberate misspelling, so the spell check fails until you replace it.
 
-Afterwards, add the sample's unknown words to `samples/cspell.json`, edit the README, and run `npm run check:extension -- <name>`.
+Afterwards, list the sample's unknown words at its end. Put real words on a `cspell:words` comment line. Put names and other non-words on a `cspell:ignore` line. For a natural language, keep the `language` setting in `samples/cspell.json`. Then review the README, and run `npm run check:extension -- <name>`.
 
 ### Without questions
 
@@ -79,6 +79,7 @@ The generator is written in TypeScript and runs directly with Node.js (type stri
 - `src/locales.mts` — writes locales as BCP 47, and suggests a language's native and English names.
 - `src/sample.mts` — chooses the samples: the files given, a language's Wikipedia article, or a starter file to replace.
 - `src/writeExtension.mts` — writes `extension.config.json` and the starter files.
+- `src/wordList.mts` — sets up a word list from its installed packages: the sample check, the commands, the README sentence and the words from the package names.
 - `../scripts/lib/cspellPackages.mts`, `wikipedia.mts` and `existingExtensions.mts` — the package lists, the Wikipedia sample and the packages that already have an extension, shared with `npm run list:packages` and `fetch:sample`.
 - `src/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.
 
@@ -90,3 +91,5 @@ npm run check-types  # type check
 ## License
 
 MIT © Street Side Software
+
+<!--- cspell:ignore elisp --->

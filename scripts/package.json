@@ -25,6 +25,7 @@
     "node": ">=24.11.0"
   },
   "dependencies": {
+    "@cspell/filetypes": "^10.4.0",
     "@types/mdast": "^4.0.4",
     "ajv": "^8.20.0",
     "jsonc-parser": "^3.3.1",

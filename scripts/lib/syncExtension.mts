@@ -1,3 +1,5 @@
+// cspell:ignore elisp
+
 /**
  * Sync one extension with `extension-runtime/` and its `extension.config.json`.
  *
@@ -15,6 +17,7 @@ import fs from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 
+import { findMatchingFileTypes } from '@cspell/filetypes';
 import { injectMarkdown } from 'inject-markdown';
 import { parse as parseJsonc } from 'jsonc-parser';
 
@@ -26,6 +29,7 @@ import {
     resolveCommands,
 } from '../../extension-runtime/src/config.ts';
 import type { PackageJson } from './extensionHelper.mts';
+import { type DictionaryState, describeFileTypes } from './dictionaryState.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { format, injectProblems } from './format.mts';
 import { exists, readJson, repoRoot, writeIfChanged } from './repo.mts';
@@ -210,6 +214,14 @@ interface DictionaryExt {
     dictionaryDefinitions?: { name: string }[];
     dictionaries?: string[];
     languageSettings?: LanguageSetting[];
+    /** Settings for the files that match `filename`, such as `**\/*.{el,lisp}`. */
+    overrides?: Override[];
+}
+
+interface Override {
+    filename?: string | string[];
+    dictionaries?: string[];
+    languageSettings?: LanguageSetting[];
 }
 
 interface LanguageSetting {
@@ -246,49 +258,102 @@ async function readDictionaries(extensionDir: string, config: ExtensionConfig): 
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
     const rows: Record<string, string>[] = [];
-    const exts = await readDictionaries(extensionDir, config);
-    for (const ext of exts) {
-        for (const { name } of ext.dictionaryDefinitions ?? []) {
-            const { settings, always } = turnedOnBy(name, [...exts, config.cspell as DictionaryExt]);
-            const off = !settings.length && !always;
-            if (config.kind === 'language') {
-                if (off) continue;
-                const locales = unique(settings.flatMap((s) => splitList(s.locale)).map(canonicalLocale));
-                rows.push({ Dictionary: code(name), Locales: locales.map(code).join(', ') });
-            } else {
-                const ids = unique(settings.flatMap((s) => splitList(s.languageId)));
-                const all = always || !ids.length || ids.includes('*');
-                const fileTypes = off ? 'off until turned on' : all ? 'all' : ids.map(code).join(', ');
-                rows.push({ Dictionary: code(name), 'File types': fileTypes });
-            }
+    for (const state of await dictionaryStates(extensionDir, config)) {
+        if (config.kind === 'language') {
+            if (state.off) continue;
+            rows.push({ Dictionary: code(state.name), Locales: state.locales.map(code).join(', ') });
+        } else {
+            rows.push({ Dictionary: code(state.name), 'File types': describeFileTypes(state) });
         }
     }
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
 }
 
 /**
- * The dictionaries in `cspell.import`, and whether each is off until turned on: neither the dictionaries' own settings
- * nor the extension's `cspell` turn it on. Users turn it on in their settings, or with the extension's commands.
+ * The dictionaries in `cspell.import`, and what turns each on: the dictionaries' own settings and the extension's
+ * `cspell`.
  */
-export async function dictionaryStates(
-    extensionDir: string,
-    config: ExtensionConfig,
-): Promise<{ name: string; off: boolean }[]> {
-    const exts = await readDictionaries(extensionDir, config);
+export async function dictionaryStates(extensionDir: string, config: ExtensionConfig): Promise<DictionaryState[]> {
+    const exts = [...(await readDictionaries(extensionDir, config)), config.cspell as DictionaryExt];
+    const allRules = rules(exts);
     return exts
         .flatMap((ext) => ext.dictionaryDefinitions ?? [])
         .map(({ name }) => {
-            const { settings, always } = turnedOnBy(name, [...exts, config.cspell as DictionaryExt]);
-            return { name, off: !settings.length && !always };
+            const named = allRules.filter((rule) => rule.dictionaries.includes(name));
+            // `*` is every file type: `all` covers it.
+            const fileTypes = unique(named.flatMap((rule) => rule.fileTypes)).filter((id) => id !== '*');
+            const filePatterns = unique(named.flatMap((rule) => rule.filePatterns));
+            const locales = unique(named.flatMap((rule) => rule.locales).map(canonicalLocale));
+            const all = named.some(
+                (rule) => !rule.filePatterns.length && (!rule.fileTypes.length || rule.fileTypes.includes('*')),
+            );
+            return { name, all, fileTypes, filePatterns, locales, off: !named.length };
         });
 }
 
-/** What turns a dictionary on: the language settings that list it, and whether `dictionaries` does, for every file. */
-function turnedOnBy(name: string, exts: DictionaryExt[]): { settings: LanguageSetting[]; always: boolean } {
+/** One setting that turns dictionaries on: for some file types, for the files that match some globs, or for every file. */
+interface Rule {
+    dictionaries: string[];
+    /** Empty, or `*`, for every file type. */
+    fileTypes: string[];
+    /** Empty for every file; otherwise only the files that match. */
+    filePatterns: string[];
+    locales: string[];
+}
+
+/** Every setting in the configs that turns dictionaries on, as a flat list of rules. */
+function rules(exts: readonly DictionaryExt[]): Rule[] {
+    return exts.flatMap((ext) => [
+        dictionariesRule(ext),
+        ...(ext.languageSettings ?? []).map((s) => languageSettingRule(s)),
+        ...(ext.overrides ?? []).flatMap(overrideRules),
+    ]);
+}
+
+/** `dictionaries` turns its dictionaries on for every file. */
+function dictionariesRule(ext: DictionaryExt): Rule {
+    return { dictionaries: ext.dictionaries ?? [], fileTypes: [], filePatterns: [], locales: [] };
+}
+
+/** A language setting turns its dictionaries on for its file types and locales. */
+function languageSettingRule(setting: LanguageSetting, filePatterns: string[] = []): Rule {
     return {
-        settings: exts.flatMap((ext) => ext.languageSettings ?? []).filter((s) => s.dictionaries?.includes(name)),
-        always: exts.some((ext) => ext.dictionaries?.includes(name)),
+        dictionaries: setting.dictionaries ?? [],
+        fileTypes: splitList(setting.languageId),
+        filePatterns,
+        locales: splitList(setting.locale),
     };
+}
+
+/**
+ * An override turns its dictionaries and its language settings on for the files that match its globs. A glob in a
+ * dictionary's config is relative to the dictionary's folder, so only `**\/…` reaches the user's files.
+ */
+function overrideRules(override: Override): Rule[] {
+    const { dictionaries = [], filename = [], languageSettings = [] } = override;
+    const filePatterns = [filename].flat().filter((glob) => glob.startsWith('**/'));
+    if (!filePatterns.length) return [];
+    const overrideRule: Rule = { dictionaries, fileTypes: [], filePatterns, locales: [] };
+    const languageSettingsRules = languageSettings.map((s) => languageSettingRule(s, filePatterns));
+    return [overrideRule, ...languageSettingsRules];
+}
+
+/**
+ * Whether a sample file turns on at least one of the dictionaries, by its file type or its name. A dictionary that's
+ * on for every file, or off until turned on (the samples turn it on), takes any file.
+ * @param file - the sample's path relative to the extension, such as `samples/sample.el`.
+ */
+export function sampleTurnsOn(file: string, states: readonly DictionaryState[]): boolean {
+    const posixFile = file.split(path.sep).join('/');
+    return states.some((state) => turnsOn(state, posixFile));
+}
+
+/** Whether a file turns a dictionary on, by its file type or its name. */
+function turnsOn(state: DictionaryState, file: string): boolean {
+    if (state.all || state.off) return true;
+    const fileTypes = findMatchingFileTypes(file);
+    if (state.fileTypes.some((id) => fileTypes.includes(id))) return true;
+    return state.filePatterns.some((pattern) => path.posix.matchesGlob(file, pattern));
 }
 
 function splitList(list: string | string[] | undefined): string[] {
