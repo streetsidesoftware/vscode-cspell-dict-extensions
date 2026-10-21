@@ -1,8 +1,11 @@
+// cspell:ignore elisp
+
 import { constants } from 'node:fs';
 import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/src/config.ts';
+import { andList, type DictionaryState, whenOn } from '../../scripts/lib/dictionaryState.mts';
 import { languageOf } from './locales.mts';
 import { type Answers, defaultLicense, type Language } from './questions.mts';
 import type { Sample } from './sample.mts';
@@ -197,8 +200,39 @@ function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): str
     return `<!--- @@${kind}: ${marker} --->\n<!--- @@inject-end: ${marker} --->\n`;
 }
 
-/** The starter README, with the `@@inject` sections the sync fills in. */
-export function readme(answers: Answers): string {
+/**
+ * What a word list's README says happens once it's installed, from its installed packages, such as "Once this
+ * extension is installed, the `elisp` dictionary is on for `elisp` and `lisp` files." Dictionaries that are on in the
+ * same way share a clause.
+ */
+export function installedSentence(dictionaries: readonly DictionaryState[]): string {
+    const byWhen = Map.groupBy(dictionaries, whenOn);
+    const clauses = [...byWhen].map(([when, group]) =>
+        clause(
+            group.map((d) => `\`${d.name}\``),
+            when,
+        ),
+    );
+    const joined = clauses.length > 1 ? `${clauses.slice(0, -1).join(', ')}, and ${clauses.at(-1)}` : clauses[0];
+    return `Once this extension is installed, ${joined}.`;
+}
+
+/** "the `a` dictionary is …", or "the `a` and `b` dictionaries are …". */
+function clause(names: string[], when: string): string {
+    return names.length > 1
+        ? `the ${andList(names)} dictionaries are ${when}`
+        : `the ${names[0]} dictionary is ${when}`;
+}
+
+/**
+ * The starter README, with the `@@inject` sections the sync fills in.
+ * @param installed - for a word list, what happens once it's installed. The default doesn't name the dictionaries,
+ *   because they're known only once the packages are installed.
+ */
+export function readme(
+    answers: Answers,
+    installed = 'Once this extension is installed, each dictionary is on for the file types listed below, or off until you turn it on.',
+): string {
     const title = `# ${answers.displayName || `${answers.friendlyName} - Code Spell Checker`}\n`;
     const requirements = inject(
         '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
@@ -225,7 +259,7 @@ export function readme(answers: Answers): string {
                 title,
                 `Adds the ${answers.friendlyName} dictionary to ${codeSpellChecker}.\n`,
                 '## Installation\n',
-                'Once this extension is installed, each dictionary is on for the file types listed below, or off until you turn it on.\n',
+                `${installed}\n`,
                 '### Enable or Disable the Dictionary\n',
                 'Run these commands with `F1` or _View -> Command Palette..._:\n',
                 inject('./static/commands.json', 'inject-table'),

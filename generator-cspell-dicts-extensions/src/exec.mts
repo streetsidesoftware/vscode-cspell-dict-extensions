@@ -34,3 +34,15 @@ export function npm(args: string[], cwd: string): void {
     if (result.error) throw result.error;
     if (result.status) throw new Error(`npm ${args.join(' ')} failed with exit code ${result.status}`);
 }
+
+/**
+ * Run npm quietly, and return what it printed and its exit code. A failing exit code isn't an error: some tools, such
+ * as cspell, exit 1 when they find something.
+ */
+export function npmOutput(args: string[], cwd: string): { stdout: string; stderr: string; status: number | null } {
+    const cli = findNpmCli();
+    const options = { cwd, encoding: 'utf8' as const };
+    const result = cli ? spawnSync(process.execPath, [cli, ...args], options) : spawnSync('npm', args, options);
+    if (result.error) throw result.error;
+    return { stdout: result.stdout, stderr: result.stderr, status: result.status };
+}

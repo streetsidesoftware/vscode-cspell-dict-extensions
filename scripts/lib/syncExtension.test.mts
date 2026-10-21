@@ -1,3 +1,5 @@
+// cspell:ignore elisp vimrc vimx
+
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
@@ -5,7 +7,8 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import { createExtensionConfigValidator, generateExtensionSchema } from './extensionSchema.mts';
-import { dictionaryStates, type FileChange, syncExtension } from './syncExtension.mts';
+import { describeFilePatterns, type DictionaryState, whenOn } from './dictionaryState.mts';
+import { dictionaryStates, type FileChange, sampleTurnsOn, syncExtension } from './syncExtension.mts';
 
 const config = {
     name: 'demo',
@@ -164,12 +167,17 @@ describe('syncExtension', () => {
                 { name: 'any' },
                 { name: 'always' },
                 { name: 'off' },
+                { name: 'lisp' },
+                { name: 'everywhere' },
             ],
             dictionaries: ['always'],
+            overrides: [{ filename: ['**/*.{el,lisp}'], dictionaries: ['lisp'] }],
             languageSettings: [
                 { languageId: 'c,cpp', locale: '*', dictionaries: ['c-only'] },
                 { languageId: ['html', 'css'], locale: '*', dictionaries: ['web'] },
                 { languageId: '*', locale: '*', dictionaries: ['any'] },
+                { languageId: 'elisp', locale: '*', dictionaries: ['lisp'] },
+                { locale: '*', dictionaries: ['everywhere'] },
             ],
         });
         const { locale: _locale, ...rest } = config;
@@ -182,13 +190,54 @@ describe('syncExtension', () => {
             { Dictionary: '`any`', 'File types': 'all' },
             { Dictionary: '`always`', 'File types': 'all' },
             { Dictionary: '`off`', 'File types': 'off until turned on' },
+            { Dictionary: '`lisp`', 'File types': '`elisp`, and `.el` and `.lisp` files' },
+            { Dictionary: '`everywhere`', 'File types': 'all' },
         ]);
         const states = await dictionaryStates(dir, await readJson('extension.config.json'));
         assert.deepEqual(
             states.filter((d) => d.off).map((d) => d.name),
             ['off'],
         );
-        assert.equal(states.length, 5);
+        assert.equal(states.length, 7);
+        const lisp = states.filter((d) => d.name === 'lisp');
+        assert.equal(sampleTurnsOn('samples/sample.el', lisp), true);
+        assert.equal(sampleTurnsOn('samples/sample.lisp', lisp), true);
+        assert.equal(sampleTurnsOn('samples/sample.txt', lisp), false);
+        assert.equal(
+            sampleTurnsOn(
+                'samples/sample.txt',
+                states.filter((d) => d.name === 'everywhere'),
+            ),
+            true,
+        );
+        assert.equal(sampleTurnsOn('samples/sample.txt', states), true);
+        assert.deepEqual(states.map(whenOn), [
+            'on for `c` and `cpp` files',
+            'on for `html` and `css` files',
+            'on for every file',
+            'on for every file',
+            'off until you turn it on',
+            'on for `elisp` files, and for `.el` and `.lisp` files',
+            'on for every file',
+        ]);
+    });
+
+    it("reads an override's globs and language settings, but only globs that reach the user's files", async () => {
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'ada' }, { name: 'web' }],
+            overrides: [
+                { filename: '*.adb', dictionaries: ['ada'] },
+                { filename: '**/*.html', languageSettings: [{ languageId: '*', dictionaries: ['web'] }] },
+            ],
+        });
+        const { locale: _locale, ...rest } = config;
+        await writeJson('extension.config.json', { ...rest, kind: 'wordList', commands: [] });
+        await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
+        await syncExtension(dir, options);
+        assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
+            { Dictionary: '`ada`', 'File types': 'off until turned on' },
+            { Dictionary: '`web`', 'File types': '`.html` files' },
+        ]);
     });
 
     it('has no static/dictionaries.json for a bundle', async () => {
@@ -311,3 +360,53 @@ function files(changes: FileChange[], action: FileChange['action']): string[] {
         .map((c) => c.file)
         .toSorted();
 }
+
+describe('describeFilePatterns', () => {
+    it('shows extension globs as files, and other globs as they are', () => {
+        assert.equal(describeFilePatterns(['**/*.{el,lisp,lsp,l}']), '`.el`, `.lisp`, `.lsp` and `.l` files');
+        assert.equal(describeFilePatterns(['*.vim']), '`.vim` files');
+        assert.equal(describeFilePatterns(['**/.vimrc']), '`**/.vimrc` files');
+        assert.equal(describeFilePatterns([]), '');
+    });
+});
+
+describe('sampleTurnsOn', () => {
+    const state = (fields: Partial<DictionaryState>): DictionaryState => ({
+        name: 'demo',
+        all: false,
+        fileTypes: [],
+        filePatterns: [],
+        locales: [],
+        off: false,
+        ...fields,
+    });
+
+    it('takes any file for a dictionary on for every file, or off until turned on', () => {
+        assert.equal(sampleTurnsOn('samples/a.txt', [state({ all: true })]), true);
+        assert.equal(sampleTurnsOn('samples/a.txt', [state({ off: true })]), true);
+    });
+
+    it('matches a file type or a glob', () => {
+        assert.equal(sampleTurnsOn('samples/a.clj', [state({ fileTypes: ['clojure'] })]), true);
+        assert.equal(sampleTurnsOn('samples/a.txt', [state({ fileTypes: ['clojure'] })]), false);
+        const vim = [state({ filePatterns: ['**/*.vim'] })];
+        assert.equal(sampleTurnsOn('samples/a.vim', vim), true);
+        assert.equal(sampleTurnsOn(path.join('samples', 'a.vim'), vim), true);
+        assert.equal(sampleTurnsOn('samples/a.vimx', vim), false);
+        assert.equal(sampleTurnsOn('samples/a.lisp', [state({ filePatterns: ['**/*.{el,lisp}'] })]), true);
+    });
+});
+
+describe('whenOn', () => {
+    it('names the files of a dictionary turned on only by its overrides', () => {
+        const lisp: DictionaryState = {
+            name: 'lisp',
+            all: false,
+            fileTypes: [],
+            filePatterns: ['**/*.{el,lisp}'],
+            locales: [],
+            off: false,
+        };
+        assert.equal(whenOn(lisp), 'on for `.el` and `.lisp` files');
+    });
+});
