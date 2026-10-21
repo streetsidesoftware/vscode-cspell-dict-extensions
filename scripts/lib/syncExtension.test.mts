@@ -7,8 +7,8 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import { createExtensionConfigValidator, generateExtensionSchema } from './extensionSchema.mts';
-import { type DictionaryState, whenOn } from './dictionaryState.mts';
-import { dictionaryStates, type FileChange, sampleTurnsOn, syncExtension } from './syncExtension.mts';
+import { whenOn } from './dictionaryState.mts';
+import { dictionaryStates, type FileChange, syncExtension } from './syncExtension.mts';
 
 const config = {
     name: 'demo',
@@ -198,17 +198,6 @@ describe('syncExtension', () => {
             ['off'],
         );
         assert.equal(states.length, 7);
-        const lisp = states.filter((d) => d.name === 'lisp');
-        assert.equal(sampleTurnsOn('samples/sample.el', lisp), true);
-        assert.equal(sampleTurnsOn('samples/sample.txt', lisp), false);
-        assert.equal(
-            sampleTurnsOn(
-                'samples/sample.txt',
-                states.filter((d) => d.name === 'everywhere'),
-            ),
-            true,
-        );
-        assert.equal(sampleTurnsOn('samples/sample.txt', states), true);
         assert.deepEqual(states.map(whenOn), [
             'on for `c` and `cpp` files',
             'on for `html` and `css` files',
@@ -340,25 +329,3 @@ function files(changes: FileChange[], action: FileChange['action']): string[] {
         .map((c) => c.file)
         .toSorted();
 }
-
-describe('sampleTurnsOn', () => {
-    const state = (fields: Partial<DictionaryState>): DictionaryState => ({
-        name: 'demo',
-        all: false,
-        fileTypes: [],
-        locales: [],
-        off: false,
-        ...fields,
-    });
-
-    it('takes any file for a dictionary on for every file, or off until turned on', () => {
-        assert.equal(sampleTurnsOn('samples/a.txt', [state({ all: true })]), true);
-        assert.equal(sampleTurnsOn('samples/a.txt', [state({ off: true })]), true);
-    });
-
-    it('matches a file type', () => {
-        assert.equal(sampleTurnsOn('samples/a.clj', [state({ fileTypes: ['clojure'] })]), true);
-        assert.equal(sampleTurnsOn('samples/a.txt', [state({ fileTypes: ['clojure'] })]), false);
-        assert.equal(sampleTurnsOn(path.join('samples', 'a.clj'), [state({ fileTypes: ['clojure'] })]), true);
-    });
-});

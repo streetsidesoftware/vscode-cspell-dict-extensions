@@ -116,8 +116,7 @@ async function generate(
     npm(['install', '-S', ...answers.packages], destDir);
     const config = extensionConfig(answers, firstSample.file);
     if (answers.kind === 'wordList') {
-        const given = samples.filter((sample) => !sample.text.includes(starterMarker));
-        await setUpWordList(destDir, answers, config, given);
+        await setUpWordList(destDir, answers, config);
     }
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     // The shared package.json fields, then the files the sync owns or derives.
