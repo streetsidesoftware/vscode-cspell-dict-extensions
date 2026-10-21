@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@4.1.1...code-spell-checker-medical-terms@4.2.0) (2026-10-21)
+
+
+### Features
+
+* commands to turn the medical terms, scientific terms and Win32 dictionaries on and off ([#1698](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1698)) ([8b50151](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/8b501518d347962964c1d4984c801f14da0503db))
+
 ## [4.1.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-medical-terms@4.1.0...code-spell-checker-medical-terms@4.1.1) (2026-10-19)
 
 

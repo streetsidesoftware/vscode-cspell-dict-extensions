@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-win32" extension will be documented in this file.
 
+## [2.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-win32@2.0.1...code-spell-checker-win32@2.1.0) (2026-10-21)
+
+
+### Features
+
+* commands to turn the medical terms, scientific terms and Win32 dictionaries on and off ([#1698](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1698)) ([8b50151](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/8b501518d347962964c1d4984c801f14da0503db))
+
 ## [2.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-win32@2.0.0...code-spell-checker-win32@2.0.1) (2026-10-19)
 
 
