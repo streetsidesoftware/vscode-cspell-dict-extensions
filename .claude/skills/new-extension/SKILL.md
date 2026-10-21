@@ -71,8 +71,8 @@ generator README lists them.
   - **A natural language:** the generator fetches the Wikipedia article about Seattle in that language. If that
     language's Wikipedia has none, the generator stops with an error. Ask the user for another article. Pass
     `--sample-title <title>`, once for each article.
-  - **A word list:** ask the user for a sample file. It's text or code that uses the list's words. Its file extension
-    must match one of the dictionary's file types, such as `.clj` for Clojure. One file is enough. Add more only when a
+  - **A word list:** ask the user for a sample file. It's text or code that uses the list's words. Use one of the
+    dictionary's file types, such as `.clj` for Clojure. One file is enough. Add more only when a
     file type needs its own sample, such as `.c` and `.cpp`. Pass each with `--sample-file <file>`, a relative path from
     the repository root, or an absolute path. It can't be combined with `--sample-title`.
 - **License:** leave the default, `GPL-3.0-or-later`, and never pass `--license`. If the user asks for another
@@ -90,8 +90,6 @@ generator README lists them.
 - **If it fails:**
   - On a missing or invalid value, nothing was written. Fix that option and run it again.
   - If `extensions/<name>/` exists, ask before passing `--force`, which replaces it.
-  - If it refuses a sample file because the file turns on no dictionary, it names the file types it expects and
-    removes the folder. Ask the user for a file of one of those types, and run it again.
   - If it fails after creating the folder (installing or the sync), show the user the error, and stop. Leave the
     folder for them to look at.
 
@@ -103,6 +101,9 @@ generator README lists them.
   npm run check:extension -- <name>
   ```
 
+- **If the sample check fails on most of the dictionary's words,** the sample's file type may not turn the dictionary
+  on. The README's Dictionaries table lists the file types. Ask the user for a file of one of those types, and replace
+  the sample.
 - **If the sample check fails** on words the dictionary doesn't know, add them to the sample itself. Leave
   `samples/cspell.json` as the generator wrote it.
   - Put names, pieces of words and other non-words on an `ignore` line, such as `Siatail`.
