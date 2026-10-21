@@ -1,6 +1,6 @@
 ---
 name: new-extension
-description: 'Creates a new extension in this repo, from request to one pull request: finds the published @cspell/dict-* or @cspell/parser-* package, runs the generator, gets the sample and the checks passing, and, once the user agrees, opens the PR. Use when asked to add or create an extension for a language, word list, dictionary or parser, such as "add an extension for Thai".'
+description: 'Creates a new dictionary extension in this repo, from request to one pull request: finds the published @cspell/dict-* package, runs the generator, gets the sample and the checks passing, and, once the user agrees, opens the PR. Use when asked to add or create an extension for a language, word list or dictionary, such as "add an extension for Thai".'
 ---
 
 # new-extension
@@ -36,9 +36,8 @@ An extension includes a published package, unchanged. Find the one the request m
   ```
 
 - **Stop and ask** when:
-  - **Nothing matches.** The package must be published first, in
-    [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts) or
-    [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers). Say so, and stop.
+  - **Nothing matches.** The dictionary must be published first, in
+    [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). Say so, and stop.
   - **The request is ambiguous.** "Gaelic" could mean Scottish Gaelic (`@cspell/dict-gd`) or Irish (no package). List
     the matches and ask which.
   - **The match is narrower than the request, or different.** "Lisp" finds only `@cspell/dict-elisp`, whose Name is
@@ -48,6 +47,7 @@ An extension includes a published package, unchanged. Find the one the request m
   - **The Extension column names an extension.** Show it. Ask whether to change that extension instead or create
     another one. Both are allowed.
   - **The Kind column says bundle.** The generator can't make a bundle. Say so, and stop.
+  - **The Kind column says parser.** This skill covers dictionary extensions only. Say so, and stop.
 - **Done when** the user's request names exactly one set of packages, or the user has chosen.
 
 ### 3. Branch
@@ -71,12 +71,10 @@ generator README lists them.
   - **A natural language:** the generator fetches the Wikipedia article about Seattle in that language. If that
     language's Wikipedia has none, the generator stops with an error. Ask the user for another article. Pass
     `--sample-title <title>`, once for each article.
-  - **A word list or a parser:** ask the user for a sample file. It's text that uses the list's words, or code for the
-    parser, such as a file from the parser's `fixtures` in cspell-parsers. Its file extension must match one of the
-    dictionary's file types, such as `.clj` for Clojure. When a word list has several file types, ask for one file per
-    type. Pass each with `--sample-file <file>`, a relative path from the repository root, or an absolute path. It
-    can't be combined with `--sample-title`.
-- **Description:** a parser needs `--description`, one sentence for the Marketplace. Ask the user.
+  - **A word list:** ask the user for a sample file. It's text or code that uses the list's words. Its file extension
+    must match one of the dictionary's file types, such as `.clj` for Clojure. When a word list has several file types,
+    ask for one file per type. Pass each with `--sample-file <file>`, a relative path from the repository root, or an
+    absolute path. It can't be combined with `--sample-title`.
 - **License:** leave the default, `GPL-3.0-or-later`, and never pass `--license`. If the user asks for another
   license, say that the extension is created with the default, and that they change it themselves.
 
@@ -86,7 +84,7 @@ generator README lists them.
 
   ```sh
   npm run create:extension -- <name> --package <package> [--package <package>…] --yes \
-    [--friendly-name "<name>"] [--sample-title <title>] [--sample-file <file>] [--description "<sentence>"]
+    [--friendly-name "<name>"] [--sample-title <title>] [--sample-file <file>]
   ```
 
 - **If it fails:**
