@@ -1,4 +1,20 @@
-# VS Code Spelling Dictionary Extension Generator
+# Extension tools
+
+The tools that create and maintain the extensions in [`extensions/`](../extensions). They run directly with Node.js (type stripping), without a build step. The root npm scripts run them:
+
+- `npm run create:extension`: [`create.mts`](./create.mts), which creates an extension. See [Create an extension](#create-an-extension).
+- `npm run sync:extensions`: [`sync.mts`](./sync.mts), which writes the files the sync maintains. See [Anatomy of an extension](../docs/extension-anatomy.md).
+- `npm run tool:fix-extensions`: [`fix-extensions.mts`](./fix-extensions.mts), which gives every extension's `package.json` the fields the extensions share.
+- `npm run list:packages`: [`list-packages.mts`](./list-packages.mts), which lists the published dictionaries and parsers.
+- `npm run fetch:sample`: [`fetch-sample.mts`](./fetch-sample.mts), which fetches a sample text from Wikipedia.
+
+## API
+
+The scripts outside this package import only [`api.mts`](./api.mts). The scripts that workflows run before `npm ci` import [`api-node-only.mts`](./api-node-only.mts) instead: it uses only `node:` modules. `api.mts` exports it too.
+
+From [`extension-runtime/`](../extension-runtime), these tools import only its `api.ts`.
+
+## Create an extension
 
 Generate a VS Code extension for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). An extension includes one or more published packages:
 
@@ -11,7 +27,7 @@ The package must be published first. To create a dictionary, see [Creating a dic
 
 <!--- @@inject-end: ../docs/templates/package-must-be-published.md --->
 
-## Usage
+### Usage
 
 In the `vscode-cspell-dict-extensions` repository root directory:
 
@@ -32,7 +48,7 @@ Without `--sample-file`:
 
 Afterwards, list the sample's unknown words at its end. Put real words on a `cspell:words` comment line. Put names and other non-words on a `cspell:ignore` line. For a natural language, keep the `language` setting in `samples/cspell.json`. Then review the README, and run `npm run check:extension -- <name>`.
 
-### Without questions
+#### Without questions
 
 Options answer the questions. Only the rest are asked. A few options, such as `--license`, set values the generator doesn't ask about.
 
@@ -70,18 +86,18 @@ npm run create:extension -- typescript-parser --package @cspell/parser-typescrip
 
 ## Development
 
-The generator is written in TypeScript and runs directly with Node.js (type stripping), without a build step. It uses [`@inquirer/prompts`](https://www.npmjs.com/package/@inquirer/prompts) for the questions and [`commander`](https://www.npmjs.com/package/commander) for the command line.
+`create` uses [`@inquirer/prompts`](https://www.npmjs.com/package/@inquirer/prompts) for the questions and [`commander`](https://www.npmjs.com/package/commander) for the command line.
 
-- `run.mts` — the entry point.
-- `src/app.mts` — the command line and the steps to generate an extension.
-- `src/questions.mts` — the questions, their defaults, and `--yes`.
-- `src/names.mts` — turns a typed name into a directory name, and suggests the friendly name.
-- `src/locales.mts` — writes locales as BCP 47, and suggests a language's native and English names.
-- `src/sample.mts` — chooses the samples: the files given, a language's Wikipedia article, or a starter file to replace.
-- `src/writeExtension.mts` — writes `extension.config.json` and the starter files.
-- `src/wordList.mts` — sets up a word list from its installed packages: the sample check, the commands, the README sentence and the words from the package names.
-- `../scripts/lib/cspellPackages.mts`, `wikipedia.mts` and `existingExtensions.mts` — the package lists, the Wikipedia sample and the packages that already have an extension, shared with `npm run list:packages` and `fetch:sample`.
-- `src/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.
+- `create.mts` — the entry point.
+- `src/create/app.mts` — the command line and the steps to generate an extension.
+- `src/create/questions.mts` — the questions, their defaults, and `--yes`.
+- `src/create/names.mts` — turns a typed name into a directory name, and suggests the friendly name.
+- `src/create/locales.mts` — writes locales as BCP 47, and suggests a language's native and English names.
+- `src/create/sample.mts` — chooses the samples: the files given, a language's Wikipedia article, or a starter file to replace.
+- `src/create/writeExtension.mts` — writes `extension.config.json` and the starter files.
+- `src/create/wordList.mts` — sets up a word list from its installed packages: the sample check, the commands, the README sentence and the words from the package names.
+- `src/cspellPackages.mts`, `wikipedia.mts` and `existingExtensions.mts` — the package lists, the Wikipedia sample and the packages that already have an extension, shared with `npm run list:packages` and `fetch:sample`.
+- `src/create/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.
 
 ```bash
 npm test             # unit tests (node:test)

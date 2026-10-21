@@ -1,0 +1,30 @@
+{
+  "name": "@internal/extension-tools",
+  "version": "1.0.0",
+  "description": "Tools that create and maintain the extensions.",
+  "private": true,
+  "type": "module",
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "onFail": "error"
+    }
+  },
+  "engines": {
+    "node": ">=24.11.0"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^8.7.3",
+    "ajv": "^8.20.0",
+    "commander": "^15.0.0",
+    "jsonc-parser": "^3.3.1",
+    "sort-package-json": "^4.1.0",
+    "ts-json-schema-generator": "^2.9.0"
+  },
+  "scripts": {
+    "check-types": "tsc -p .",
+    "test": "node --test \"src/**/*.test.mts\""
+  },
+  "author": "",
+  "license": "MIT"
+}

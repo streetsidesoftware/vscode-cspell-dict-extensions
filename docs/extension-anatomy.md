@@ -29,7 +29,7 @@ release-please writes `CHANGELOG.md` and the `version` in `package.json`.
 
 Don't edit these; `npm run sync:extensions` overwrites them.
 
-- **Tool configs:** `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from [`template/`](../extension-runtime/template). Also `tsconfig.json`, but only when the extension has a `src/custom.ts`; otherwise the sync removes it.
+- **Tool configs:** `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from [`templates/sync/`](../extension-tools/templates/sync). Also `tsconfig.json`, but only when the extension has a `src/custom.ts`; otherwise the sync removes it.
 - **`static/cspell-ext.json`:** the `cspell` settings from `extension.config.json`, which the extension registers with Code Spell Checker.
 - **`static/commands.json`:** the commands, for the README's table. Removed when there are none.
 - **`static/dictionaries.json`:** each dictionary with the locales or file types that turn it on, read from the installed dictionaries, for the README's table. A dictionary that nothing turns on is listed as "off until turned on". Removed when there are none, and never written for a bundle.

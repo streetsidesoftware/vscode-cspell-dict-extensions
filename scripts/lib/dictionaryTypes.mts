@@ -3,8 +3,9 @@
  * It is generated from each extension's `kind` in `extension.config.json`.
  */
 
-import type { ExtensionKind } from '../../extension-runtime/src/config.ts';
-import { exists, listExtensionRepoPaths, readJson, writeJson } from './repo.mts';
+import { type ExtensionKind, listExtensionRepoPaths, readExtensionKind } from '../../extension-tools/api.mts';
+
+import { writeJson } from './repo.mts';
 
 export const dictionaryTypesFile = 'static/dictionary-types.json';
 
@@ -42,9 +43,7 @@ export function dictionaryTypes(kinds: ReadonlyMap<string, ExtensionKind | undef
 export async function genDictionaryTypes(): Promise<void> {
     const kinds = new Map<string, ExtensionKind | undefined>();
     for (const repoPath of await listExtensionRepoPaths()) {
-        const configFile = `${repoPath}/extension.config.json`;
-        const config = (await exists(configFile)) ? await readJson<{ kind: ExtensionKind }>(configFile) : undefined;
-        kinds.set(repoPath, config?.kind);
+        kinds.set(repoPath, await readExtensionKind(repoPath));
     }
     await writeJson(dictionaryTypesFile, dictionaryTypes(kinds));
 }

@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { describe, it } from 'node:test';
 
-import type { Article } from '../../scripts/lib/wikipedia.mts';
+import type { Article } from '../wikipedia.mts';
 import { noPrompter } from './prompt.mts';
 import {
     askSampleFile,

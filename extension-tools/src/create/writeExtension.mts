@@ -4,19 +4,19 @@ import { constants } from 'node:fs';
 import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/src/config.ts';
-import { andList, type DictionaryState, whenOn } from '../../scripts/lib/dictionaryState.mts';
+import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
+import { andList, type DictionaryState, whenOn } from '../dictionaryState.mts';
 import { languageOf } from './locales.mts';
 import { type Answers, defaultLicense, type Language } from './questions.mts';
 import type { Sample } from './sample.mts';
 
-export const templateDir: string = path.join(import.meta.dirname, '..', 'templates');
+export const templateDir: string = path.join(import.meta.dirname, '../../templates/create');
 
-/** Files copied as is from the generator's `templates` directory. `LICENSE` holds the text of the default license. */
+/** Files copied as is from `templates/create/`. `LICENSE` holds the text of the default license. */
 const copies = ['images/SpellCheck.png'];
 
 export interface WriteOptions {
-    /** Defaults to the generator's `templates` directory. */
+    /** Defaults to `templates/create/`. */
     templateDir?: string;
     log?: (message: string) => void;
 }

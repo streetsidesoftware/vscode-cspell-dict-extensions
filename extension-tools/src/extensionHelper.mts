@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { type DictionaryTypesConfig, dictionaryTypesFile } from './dictionaryTypes.mts';
-import { readJson, repoRoot } from './repo.mts';
+import type { ExtensionKind } from '../../extension-runtime/api.ts';
+import { exists, readJson, repoRoot } from './repo.mts';
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');
 const repositoryRawUrl = new URL(
@@ -28,7 +28,8 @@ export interface ExtensionInfo {
     description: string;
     /** The extension's directory as a repo path, e.g. `extensions/swedish`. */
     repoPath: string;
-    dictionaryType: string;
+    /** The `kind` in the extension's `extension.config.json`; `undefined` without one. */
+    kind: ExtensionKind | undefined;
     /** `vsce.preRelease` in the extension's package.json */
     preRelease: boolean;
 }
@@ -43,21 +44,20 @@ export async function getExtensionInfo(repoPath: string): Promise<ExtensionInfo>
         displayNameShort: pkg.displayName.replace(/ -.*/, '').trim(),
         version: pkg.version,
         repoPath,
-        dictionaryType: await lookUpDictionaryType(repoPath),
+        kind: await readExtensionKind(repoPath),
         preRelease: pkg.vsce?.preRelease === true,
     };
     return info;
 }
 
-let dictionaryTypes: Promise<DictionaryTypesConfig> | undefined;
-
-async function lookUpDictionaryType(repoPath: string): Promise<string> {
-    const { types, default: defaultType } = await (dictionaryTypes ??= readJson(dictionaryTypesFile));
-    for (const [category, extensions] of Object.entries(types)) {
-        if (extensions.includes(repoPath)) return category;
-    }
-
-    return defaultType;
+/**
+ * The `kind` in an extension's `extension.config.json`.
+ * @returns `undefined` when the extension has no `extension.config.json`.
+ */
+export async function readExtensionKind(repoPath: string): Promise<ExtensionKind | undefined> {
+    const configFile = `${repoPath}/extension.config.json`;
+    if (!(await exists(configFile))) return undefined;
+    return (await readJson<{ kind: ExtensionKind }>(configFile)).kind;
 }
 
 /** The `vsce` options the scripts set or read; the others are kept as they are. */

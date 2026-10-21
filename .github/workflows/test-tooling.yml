@@ -5,6 +5,7 @@ on:
   pull_request:
     paths:
       - "extension-runtime/**"
+      - "extension-tools/**"
       - "scripts/**"
       - ".tool-versions"
       - "package.json"
@@ -16,6 +17,7 @@ on:
       - main
     paths:
       - "extension-runtime/**"
+      - "extension-tools/**"
       - "scripts/**"
       - ".tool-versions"
       - "package.json"
@@ -46,11 +48,13 @@ jobs:
         with:
           node-version-file: .tool-versions
           cache: npm
-      # The root `postinstall` would install all extensions. The tests only need the root and `scripts/` packages.
+      # The root `postinstall` would install all extensions. The tests only need the root, `scripts/` and
+      # `extension-tools/` packages: the scripts import extension-tools.
       - name: Install
         run: |
           npm ci --ignore-scripts
           npm ci --prefix scripts
+          npm ci --prefix extension-tools
       - name: Test extension-runtime
         run: npm test
         working-directory: extension-runtime

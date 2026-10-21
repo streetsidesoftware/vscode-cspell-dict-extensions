@@ -1,7 +1,7 @@
 /**
  * The entry point of every synced extension.
  *
- * The shared tsdown config (`.config/tsdown.extension.config.mts`) resolves `extension-config` to the extension's
+ * The shared tsdown config (`extension-runtime/tsdown.extension.config.mts`) resolves `extension-config` to the extension's
  * `extension.config.json`, and `extension-custom` to its `src/custom.ts`, or to `noCustom.ts` when it has none.
  */
 import type { ExtensionContext } from 'vscode';

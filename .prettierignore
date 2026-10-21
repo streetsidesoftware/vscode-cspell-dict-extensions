@@ -3,7 +3,7 @@
 CHANGELOG.md
 cspell.json
 extensions/*/samples/**
-generator-cspell-dicts-extensions/templates
+extension-tools/templates/create
 lerna.json
 package-lock.json
 packages/*/dist/**

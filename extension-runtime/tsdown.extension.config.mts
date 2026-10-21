@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { defineConfig, type UserConfig } from 'tsdown';
 
-const runtimeSrc = path.resolve(import.meta.dirname, '../extension-runtime/src');
+const runtimeSrc = path.resolve(import.meta.dirname, 'src');
 
 /**
  * The tsdown config of a synced extension. Each extension's `tsdown.config.ts`, written by

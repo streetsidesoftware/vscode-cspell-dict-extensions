@@ -70,6 +70,6 @@ Text that more than one doc needs goes in `docs/templates/`, such as the prerequ
 <!--- @@inject-end: ../templates/prerequisites.md#values-file=:../../package.json --->
 ```
 
-A template can use values from a JSON file, such as `{@ engines.node @}`. Name the file after `#values-file=:`, relative to the doc. After a pull request merges, a workflow runs `npm run gen:readme`, which fills the sections in. It fills in `CONTRIBUTING.md`, the docs in `docs/` and the generator README.
+A template can use values from a JSON file, such as `{@ engines.node @}`. Name the file after `#values-file=:`, relative to the doc. After a pull request merges, a workflow runs `npm run gen:readme`, which fills the sections in. It fills in `CONTRIBUTING.md`, the docs in `docs/` and the extension-tools README.
 
 Edit the template, not the text between the comments. The workflow overwrites that text.

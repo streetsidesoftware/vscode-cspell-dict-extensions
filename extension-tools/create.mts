@@ -2,8 +2,8 @@
 
 import { styleText } from 'node:util';
 
-import { run } from './src/app.mts';
-import { isExitPromptError } from './src/prompt.mts';
+import { run } from './src/create/app.mts';
+import { isExitPromptError } from './src/create/prompt.mts';
 
 try {
     await run();

@@ -16,7 +16,7 @@ npm run check:extension -- <name>     # an extension's build, sample, sync, Pret
 npm run sync:extensions               # write the files the sync maintains, for every synced extension
 npm run sync:extensions -- --check    # fail if a synced extension is out of date
 npm run lint                          # cspell over the repo
-npm run check-types                   # type-check test-runner, extension-runtime and the generator
+npm run check-types                   # type-check test-runner, extension-runtime and extension-tools
 npm run lint:code                     # oxlint, type-aware; warnings fail
 npm run prettier:lint                 # Prettier check; prettier:fix writes
 ```
@@ -29,7 +29,7 @@ npm run test:cspell    # spell check samples/ with the extension's dictionaries
 npm run test:vscode    # VS Code integration test; downloads VS Code into .vscode-test/ the first time
 ```
 
-Tooling packages (`scripts/`, `extension-runtime/`, `generator-cspell-dicts-extensions/`) run `npm test` in their own directory.
+Tooling packages (`scripts/`, `extension-runtime/`, `extension-tools/`) run `npm test` in their own directory.
 
 Before finishing, run `npm run lint`, `npm run check-types`, `npm run lint:code` and `npm run sync:extensions -- --check` at the root, as CI does, and `npm run prettier:lint`. For each extension you changed, run `npm run check:extension -- <name>`.
 
@@ -41,16 +41,16 @@ Read the doc before changing that area. These are written for people too; [`CONT
 - [`docs/extension-anatomy.md`](docs/extension-anatomy.md): how the extensions are maintained centrally, and the files the sync writes.
 - [`docs/releasing.md`](docs/releasing.md): release-please, pre-release mode, runtime releases and publishing.
 - [`docs/style.md`](docs/style.md): where docs go, their audiences, wording and shared text.
-- [`generator-cspell-dicts-extensions/README.md`](generator-cspell-dicts-extensions/README.md): the generator's options.
+- [`extension-tools/README.md`](extension-tools/README.md): the tools, their API, and the generator's options.
 - [`extension-runtime/README.md`](extension-runtime/README.md): the runtime's code.
 
 ## Rules
 
-- **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Edit that file or the shared files in `extension-runtime/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [Files the sync writes](docs/extension-anatomy.md#files-the-sync-writes) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand.
+- **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Edit that file or the shared files in `extension-runtime/`, `extension-tools/templates/sync/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [Files the sync writes](docs/extension-anatomy.md#files-the-sync-writes) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand.
 - **New extensions:** create them with the generator, never by copying an extension, by following the `new-extension` skill: [`.claude/skills/new-extension/SKILL.md`](.claude/skills/new-extension/SKILL.md). A new dictionary is added to cspell-dicts first.
 - **Words:** words a dictionary lacks belong upstream in cspell-dicts (see [Adding words](CONTRIBUTING.md#adding-words-to-a-language-dictionary)). For a sample's unknown words, add a line at the end of the sample: `words` for real words, `ignore` for names and other non-words. Leave `samples/cspell.json` as the generator wrote it.
 - **Generated after merge:** never edit or regenerate the root README lists, `static/generated/`, `static/dictionary-types.json`, `dict-extensions.code-workspace`, `release-please-config.json` or the extension lists in `.github/workflows/`. A workflow runs `gen:readme`, `gen:release-please` and `gen:workflow` after a PR merges.
-- **Shared text:** `gen:readme` also injects the templates in `docs/templates/` into `CONTRIBUTING.md`, `docs/` and the generator README after merge. Edit the template, never the injected text between its `@@inject` markers.
+- **Shared text:** `gen:readme` also injects the templates in `docs/templates/` into `CONTRIBUTING.md`, `docs/` and the extension-tools README after merge. Edit the template, never the injected text between its `@@inject` markers.
 - **Releases:** never edit `.release-please-manifest.json`; release-please adds new packages to it.
 - **Licenses:** an extension includes its packages unchanged, and each keeps its own license. The extension's license covers its own code (see [Files you edit](docs/extension-anatomy.md#files-you-edit)). Create a new extension with the default, `GPL-3.0-or-later`. If the user wants another license, they change it themselves.
 - **Docs:** before editing a doc in `docs/` or `CONTRIBUTING.md`, read the audience header under its title and write for that reader. A new doc gets a header. See [Writing docs](docs/style.md).

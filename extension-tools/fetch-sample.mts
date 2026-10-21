@@ -13,7 +13,7 @@
 import fs from 'node:fs/promises';
 import { parseArgs } from 'node:util';
 
-import { articleMarkdown, fetchArticle } from './lib/wikipedia.mts';
+import { articleMarkdown, fetchArticle } from './src/wikipedia.mts';
 
 async function run(): Promise<void> {
     const { values, positionals } = parseArgs({ allowPositionals: true, options: { out: { type: 'string' } } });
