@@ -11,48 +11,27 @@ export interface DictionaryState {
     all: boolean;
     /** The file types (VS Code language IDs) that turn it on, such as `clojure`. `*` is every file type. */
     fileTypes: string[];
-    /** The file name globs that turn it on, from the `overrides`, such as `**\/*.{el,lisp}`. */
-    filePatterns: string[];
     /** The locales that turn it on, for a natural language. */
     locales: string[];
     /** Nothing turns it on: users turn it on in their settings, or with the extension's commands. */
     off: boolean;
 }
 
-/** When a word list's dictionary is on, for the README: `all`, `off until turned on`, or its file types and files. */
+/** When a word list's dictionary is on, for the README: `all`, `off until turned on`, or its file types. */
 export function describeFileTypes(state: DictionaryState): string {
     if (state.off) return 'off until turned on';
     if (state.all) return 'all';
-    return [state.fileTypes.map(code).join(', '), describeFilePatterns(state.filePatterns)]
-        .filter(Boolean)
-        .join(', and ');
+    return state.fileTypes.map(code).join(', ');
 }
 
 /**
  * When a word list's dictionary is on, for a sentence: "on for every file", "off until you turn it on", or "on for
- * `elisp` and `lisp` files, and for `.el` and `.lisp` files".
+ * `elisp` and `lisp` files".
  */
 export function whenOn(state: DictionaryState): string {
     if (state.off) return 'off until you turn it on';
     if (state.all) return 'on for every file';
-    const byFileType = state.fileTypes.length ? `${andList(state.fileTypes.map(code))} files` : '';
-    const byFileName = describeFilePatterns(state.filePatterns);
-    return `on for ${[byFileType, byFileName].filter(Boolean).join(', and for ')}`;
-}
-
-/** File name globs as files: `**\/*.{el,lisp}` is "`.el` and `.lisp` files". Other globs are shown as they are. */
-export function describeFilePatterns(patterns: readonly string[]): string {
-    const names = patterns.flatMap(
-        (pattern) => extensionsOf(pattern)?.map((ext) => code(`.${ext}`)) ?? [code(pattern)],
-    );
-    return names.length ? `${andList(names)} files` : '';
-}
-
-/** The file extensions a glob matches, such as `['el', 'lisp']` for `**\/*.{el,lisp}`. Undefined for other globs. */
-function extensionsOf(pattern: string): string[] | undefined {
-    const match = /^(?:\*\*\/)?\*\.(?:\{(?<list>[\w.,-]+)\}|(?<one>[\w.-]+))$/.exec(pattern);
-    if (!match?.groups) return undefined;
-    return (match.groups['list'] ?? match.groups['one'] ?? '').split(',');
+    return `on for ${andList(state.fileTypes.map(code))} files`;
 }
 
 /** `a`, `a and b`, or `a, b and c`. */
