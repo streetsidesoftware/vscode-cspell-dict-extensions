@@ -261,7 +261,7 @@ function checkPackage(name: string, ctx: Context): void {
 
 function packageKind(name: string, ctx: Context): PackageKind {
     const pkg = ctx.packages?.find((p) => p.packageName === name);
-    if (pkg?.kind === 'bundle') throw new UsageError(`${name} is a bundle; the generator does not make bundles.`);
+    if (pkg?.kind === 'bundle') throw new UsageError(`${name} is a bundle, and the generator has no bundle kind.`);
     if (name.startsWith('@cspell/parser-')) return { name, parser: true };
     if (!pkg) return { name, parser: false };
     return { name, parser: false, info: { naturalLanguage: pkg.kind === 'language', locales: pkg.locales } };
