@@ -72,9 +72,9 @@ generator README lists them.
     language's Wikipedia has none, the generator stops with an error. Ask the user for another article. Pass
     `--sample-title <title>`, once for each article.
   - **A word list:** ask the user for a sample file. It's text or code that uses the list's words. Its file extension
-    must match one of the dictionary's file types, such as `.clj` for Clojure. When a word list has several file types,
-    ask for one file per type. Pass each with `--sample-file <file>`, a relative path from the repository root, or an
-    absolute path. It can't be combined with `--sample-title`.
+    must match one of the dictionary's file types, such as `.clj` for Clojure. One file is enough. Add more only when a
+    file type needs its own sample, such as `.c` and `.cpp`. Pass each with `--sample-file <file>`, a relative path from
+    the repository root, or an absolute path. It can't be combined with `--sample-title`.
 - **License:** leave the default, `GPL-3.0-or-later`, and never pass `--license`. If the user asks for another
   license, say that the extension is created with the default, and that they change it themselves.
 
