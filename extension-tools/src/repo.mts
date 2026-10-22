@@ -42,7 +42,13 @@ export async function readVscodeEngine(): Promise<string> {
  * @param file - a repo path, or an absolute path.
  */
 export async function readJson<T = unknown>(file: string): Promise<T> {
-    return JSON.parse(await fs.readFile(path.resolve(repoRoot, file), 'utf8'));
+    const target = path.resolve(repoRoot, file);
+    try {
+        return JSON.parse(await fs.readFile(target, 'utf8'));
+    } catch (e) {
+        if (!(e instanceof SyntaxError)) throw e;
+        throw new Error(`${path.relative(repoRoot, target)}: ${e.message}`, { cause: e });
+    }
 }
 
 export async function exists(file: string): Promise<boolean> {

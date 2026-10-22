@@ -14,7 +14,7 @@ import { extensionRepoPath } from './repo.mts';
 /** The parts of a `cspell-ext.json` the tools read. */
 export interface DictionaryExt {
     engines?: Record<string, string>;
-    /** Not read: only a bundle has one, and a bundle has no table and no commands. */
+    /** Not followed. The table stops on a package that imports others; see `importedRows` in the sync. */
     import?: string[];
     dictionaryDefinitions?: DictionaryDefinition[];
     dictionaries?: string[];
@@ -24,8 +24,6 @@ export interface DictionaryExt {
 
 export interface DictionaryDefinition {
     name: string;
-    // cspell takes a comma-separated list or an array.
-    locale?: string | string[];
 }
 
 export interface LanguageSetting {
@@ -42,7 +40,7 @@ export interface Override {
     /** Sets the file type of the matching files. It doesn't select them. */
     languageId?: string | string[];
     /** Sets the locale of the matching files. It doesn't select them. */
-    language?: string | string[];
+    language?: string;
     dictionaries?: string[];
 }
 

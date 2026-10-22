@@ -33,7 +33,7 @@ Don't edit these; `npm run sync:extensions` overwrites them.
 - **`static/cspell-ext.json`:** the `cspell` settings from `extension.config.json`, which the extension registers with Code Spell Checker.
 - **`static/commands.json`:** the commands, for the README's table. Removed when there are none.
 - **`static/dictionaries.json`:** for the README's table, one row for each dictionary a setting names, with the setting's `locale`, `languageId` and `glob` as written. The settings are the top-level `dictionaries`, the language settings and the overrides, read from the installed dictionaries and the extension's `cspell`. Removed when there are none, and never written for a bundle.
-- **`package.json` fields:** `name`, `displayName`, `description`, `type`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)), `main`, `files`, `contributes.commands` and `scripts`.
+- **`package.json` fields:** `name`, `displayName`, `description`, `type`, `main`, `files`, `contributes.commands` and `scripts`.
 - **`package.json` `files`:** what vsce packages, besides `package.json` and `README.md`. It lists `LICENSE`, `CHANGELOG.md`, `extension.js`, the `icon`, `static/cspell-ext.json` and `node_modules/**`. It also lists `COPYING` when the extension has one. vsce only takes the production dependencies from `node_modules`. The sync removes `.vscodeignore`, because vsce refuses an extension that has both.
 - **README sections** between `@@inject` markers, filled by [inject-markdown](https://github.com/streetsidesoftware/inject-markdown) from the shared templates in [`static/`](../static) and the extension's own `static/` files:
   - `<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->`
@@ -41,18 +41,9 @@ Don't edit these; `npm run sync:extensions` overwrites them.
   - `<!--- @@inject-table: ./static/dictionaries.json#markdown --->`
   - `<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->`, the Manual Settings of a language extension, filled from its `locale` and `friendlyName`. English variants use `manual-settings.english.md` instead, which advises replacing `en`.
 
-The sync also sets the `package.json` fields every extension shares: `private`, `repository`, `publisher`, `author`, `bugs`, `engines.vscode` and the `vsce` base URLs. It keeps every other value, and sorts the fields.
+The sync also sets the `package.json` fields every extension shares: `private`, `repository`, `publisher`, `author`, `contributors`, `bugs`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)) and the `vsce` base URLs. It removes `preview`. It keeps every other value, and sorts the fields.
 
 The sync checks every `extension.config.json` against the runtime's schema first.
-
-## Checks
-
-`npm run check:extensions` changes nothing. It fails when the sync would change a file, and when a config says something the installed packages no longer back up:
-
-- A command turns a dictionary on or off that no package defines.
-- A command, or `locale`, names a locale no package declares. Locales compare as in cspell: `sv_SE` is `sv-SE`.
-
-`npm run check:extension -- <folder>` runs it for one extension, along with the build, the tests, Prettier and the spell check.
 
 The sync stops with an error on a dictionary setting that the README's table would show wrongly:
 
@@ -60,6 +51,15 @@ The sync stops with an error on a dictionary setting that the README's table wou
 - A language setting with `local`.
 - An override that names dictionaries and sets `language` or `languageId`. These set the locale and file type of the files it matches. They don't select the files.
 - A package that imports other packages.
+
+## Checks
+
+`npm run check:extensions` changes nothing. It fails when the sync would change a file, and when a config says something its packages no longer back up. "Its packages" means the installed packages and the config's own `cspell`:
+
+- A command turns a dictionary on or off that none of them defines. cspell's built-in dictionaries don't count: an extension turns on the dictionaries it brings.
+- A command, or `locale`, names a locale that no language setting declares. Locales compare as in cspell: `sv_SE` is `sv-SE`.
+
+`npm run check:extension -- <folder>` runs it for one extension, along with the build, the sample spell check, Prettier and the repo's spell check. `--vscode` adds the VS Code test.
 
 ## The built file
 

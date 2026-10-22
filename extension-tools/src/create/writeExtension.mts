@@ -211,8 +211,8 @@ export function dictionaryCommands(
 }
 
 /**
- * The fields of `package.json` a person owns. `npm install` adds the dependency, and the sync and
- * `fix-extensions` fill in the rest.
+ * The fields of `package.json` a person owns. `npm install` adds the dependency, and the sync fills
+ * in the rest.
  */
 export function packageJson(answers: Answers): Record<string, unknown> {
     return {

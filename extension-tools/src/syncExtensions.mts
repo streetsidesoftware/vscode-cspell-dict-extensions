@@ -30,7 +30,7 @@ export interface SyncResult {
  * @param folders - folders in `extensions/`. Default: all of them.
  * @param check - change nothing: report the files that would change, and the drift.
  */
-export async function syncExtensions(folders: string[], check: boolean): Promise<SyncResult> {
+export async function syncExtensions(folders: string[], { check }: { check: boolean }): Promise<SyncResult> {
     const all = (await listExtensionRepoPaths()).map((repoPath) => path.basename(repoPath));
     for (const folder of folders) {
         if (!all.includes(folder)) throw new Error(`extensions/${folder}/package.json not found.`);
@@ -40,7 +40,7 @@ export async function syncExtensions(folders: string[], check: boolean): Promise
     const vscodeEngine = await readVscodeEngine();
     const validate = await readExtensionConfigValidator();
     const result: SyncResult = { changes: [], drift: [], count: 0 };
-    for (const folder of folders.length ? folders : all) {
+    for (const folder of folders.length ? new Set(folders) : all) {
         const extensionDir = path.join(extensionsDir, folder);
         const hasConfig = await exists(path.join(extensionDir, configFileName));
         const changes = hasConfig

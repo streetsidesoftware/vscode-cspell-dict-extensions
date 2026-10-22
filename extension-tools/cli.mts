@@ -26,7 +26,7 @@ program
     )
     .argument('[folder...]', 'folders in extensions/ (default: all of them)')
     .action(async (folders: string[]) => {
-        const { changes, count } = await syncExtensions(folders, false);
+        const { changes, count } = await syncExtensions(folders, { check: false });
         for (const { folder, file, action } of changes) {
             const verb = { create: 'Created', update: 'Updated', remove: 'Removed' }[action];
             console.log(`${verb}: extensions/${folder}/${file}`);
@@ -42,7 +42,7 @@ program
     )
     .argument('[folder...]', 'folders in extensions/ (default: all of them)')
     .action(async (folders: string[]) => {
-        const { changes, drift, count } = await syncExtensions(folders, true);
+        const { changes, drift, count } = await syncExtensions(folders, { check: true });
         for (const { folder, file } of changes) console.log(`Out of date: extensions/${folder}/${file}`);
         for (const { file, message } of drift) console.log(`${file}: ${message}`);
         console.log(`Checked ${plural(count, 'extension')}.`);
@@ -74,7 +74,7 @@ program
     .argument('[title]', 'the article, in that language or in English', 'Seattle')
     .option('--out <file>', 'write to a file instead of printing')
     .action(async (locale: string, title: string, options: { out?: string }) => {
-        const language = locale.split(/[-_]/)[0]?.toLowerCase() ?? locale;
+        const language = locale.split(/[-_]/)[0]!.toLowerCase();
         const article = await fetchArticle(language, title);
         if (!article) throw new Error(`No ${language}.wikipedia.org article for "${title}".`);
         const markdown = articleMarkdown(article);

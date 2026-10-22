@@ -12,7 +12,7 @@ import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { parseArgs, styleText } from 'node:util';
 
-import { repoRoot } from './lib/repo.mts';
+import { exists, repoRoot } from './lib/repo.mts';
 
 interface Check {
     name: string;
@@ -47,6 +47,11 @@ function npm(args: string[], cwd: string): boolean {
 async function run(): Promise<void> {
     const { values, positionals } = parseArgs({ allowPositionals: true, options: { vscode: { type: 'boolean' } } });
     if (!positionals.length) throw new Error('Usage: npm run check:extension -- <name…> [--vscode]');
+
+    for (const name of positionals) {
+        if (!(await exists(`extensions/${name}/package.json`)))
+            throw new Error(`extensions/${name}/package.json not found.`);
+    }
 
     const failed: string[] = [];
     for (const name of positionals) {

@@ -44,6 +44,7 @@
     "node": ">=24.11.0"
   },
   "devDependencies": {
+    "@cspell/cspell-types": "^10.4.0",
     "@lerna-lite/cli": "^5.6.4",
     "@lerna-lite/exec": "^5.6.4",
     "@lerna-lite/run": "^5.6.4",
