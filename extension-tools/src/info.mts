@@ -5,7 +5,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import type { ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/api.ts';
 import { starterMarker } from './create/sample.mts';
 import { type DictionaryExt, readImports } from './dictionaries.mts';
 import type { Extension } from './extensionConfig.mts';
@@ -25,10 +25,8 @@ export interface Facts {
     nativeName?: string;
     /** The packages in `cspell.import`, then the config's own `cspell` as `extension.config.json`. */
     sources: Source[];
-    commands: Command[];
+    commands: CommandConfig[];
     samples: { file: string; test: boolean }[];
-    /** The dictionaries no setting names: off until a user turns them on. */
-    off: string[];
     /** What's left to do on a new extension. */
     todo: string[];
 }
@@ -43,17 +41,6 @@ export interface Source {
     locales: string[];
 }
 
-export interface Command {
-    id: string;
-    title: string;
-    toggle: string;
-    value: string;
-    action: string;
-    scope?: string;
-    /** `false` when the command isn't listed in the Command Palette. */
-    contributes: boolean;
-}
-
 export async function readFacts({ folder, dir }: Extension, config: ExtensionConfig): Promise<Facts> {
     const imports = await readImports(dir, config);
     const own = config.cspell as DictionaryExt;
@@ -61,7 +48,6 @@ export async function readFacts({ folder, dir }: Extension, config: ExtensionCon
         ...(await Promise.all(imports.map(({ name, ext }) => packageSource(dir, packageName(name), ext)))),
         source('extension.config.json', own),
     ];
-    const exts = [...imports.map(({ ext }) => ext), own];
     const samples = await listSamples(dir);
     return {
         folder,
@@ -73,17 +59,8 @@ export async function readFacts({ folder, dir }: Extension, config: ExtensionCon
         ...(config.kind === 'language' ? { locale: config.locale } : {}),
         ...(config.kind === 'language' && config.nativeName ? { nativeName: config.nativeName } : {}),
         sources,
-        commands: config.commands.map((command) => ({
-            id: command.id,
-            title: command.title,
-            toggle: command.toggle,
-            value: command.value,
-            action: command.action,
-            ...('scope' in command ? { scope: command.scope } : {}),
-            contributes: command.contributes ?? true,
-        })),
+        commands: config.commands,
         samples: samples.map((file) => ({ file, test: file === config.sample })),
-        off: offDictionaries(exts),
         todo: await todo(dir, config, sources, samples),
     };
 }
@@ -109,17 +86,6 @@ function source(name: string, ext: DictionaryExt): Source {
         dictionaries: (ext.dictionaryDefinitions ?? []).map((definition) => definition.name),
         locales: [...new Set((ext.languageSettings ?? []).flatMap((setting) => [setting.locale ?? []].flat()))],
     };
-}
-
-function offDictionaries(exts: DictionaryExt[]): string[] {
-    const named = new Set(
-        exts.flatMap((ext) => [
-            ...(ext.dictionaries ?? []),
-            ...(ext.languageSettings ?? []).flatMap((setting) => setting.dictionaries ?? []),
-            ...(ext.overrides ?? []).flatMap((override) => override.dictionaries ?? []),
-        ]),
-    );
-    return exts.flatMap((ext) => (ext.dictionaryDefinitions ?? []).map((d) => d.name)).filter((d) => !named.has(d));
 }
 
 /** A sample still holds the starter text; a word list's dictionary has no commands. */
@@ -157,12 +123,11 @@ export function factsText(facts: Facts): string {
     lines.push('', 'Commands:');
     if (!facts.commands.length) lines.push('  none');
     for (const c of facts.commands) {
-        const where = [c.toggle, c.value, c.scope].filter(Boolean).join(' ');
-        lines.push(`  ${c.id}  ${c.title}  (${where}${c.contributes ? '' : ', not listed'})`);
+        const where = [c.toggle, c.value, 'scope' in c ? c.scope : ''].filter(Boolean).join(' ');
+        lines.push(`  ${c.id}  ${c.title}  (${where}${c.contributes === false ? ', not listed' : ''})`);
     }
     lines.push('', 'Samples:');
     for (const s of facts.samples) lines.push(`  ${s.file}${s.test ? '  (the VS Code test opens this one)' : ''}`);
-    if (facts.off.length) lines.push('', `Off until a user turns them on: ${facts.off.join(', ')}`);
     if (facts.todo.length) lines.push('', 'To do:', ...facts.todo.map((item) => `  - ${item}`));
     return lines.join('\n');
 }

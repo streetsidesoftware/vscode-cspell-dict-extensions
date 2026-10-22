@@ -12,6 +12,7 @@ import { type Command, Option } from 'commander';
 
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
 import { type Choice, inquirerPrompter, type Prompter } from './create/prompt.mts';
+import { findDrift } from './drift.mts';
 import { addCommandSet, type Fields, removeCommands, setFields } from './editConfig.mts';
 import { type Extension, pickExtension, readConfig, writeConfig } from './extensionConfig.mts';
 import { factsText, readFacts } from './info.mts';
@@ -85,6 +86,7 @@ export function addEditCommands(program: Command): void {
         .action(async (files: string[], options: { extension?: string; title?: string[] }) => {
             const extension = await pickExtension(options.extension);
             const config = await readConfig(extension.dir);
+            if (files.length && options.title) throw new Error('Give files or --title, not both.');
             if (!files.length && !options.title) {
                 const answer = (await prompter().input('A file to copy, or a Wikipedia article title:')).trim();
                 if (existsSync(path.resolve(cwd(), answer))) files = [answer];
@@ -123,6 +125,7 @@ export function addEditCommands(program: Command): void {
             const extension = await pickExtension(options.extension);
             const config = await readConfig(extension.dir);
             const others = (await listSamples(extension.dir)).filter((file) => file !== config.sample);
+            if (!sample && !others.length) throw new Error(`No sample can be removed: only the test sample is left.`);
             const file =
                 sample ??
                 (await prompter().select(
@@ -149,37 +152,27 @@ export function addEditCommands(program: Command): void {
         .command('set')
         .description("Change an extension's fields.")
         .addOption(extensionOption())
-        .option('--friendly-name <name>', 'the name, e.g. Swedish; also renames the standard command titles')
+        .option(
+            '--friendly-name <name>',
+            'the name, e.g. Swedish; also renames the standard command titles, but not --display-name or --description',
+        )
         .option('--display-name <name>', 'the Marketplace name')
         .option('--description <text>', 'the Marketplace description')
-        .option('--notes <text>', 'notes for maintainers')
-        .option('--native-name <name>', "a language's name in the language itself")
+        .option('--notes <text>', 'notes for maintainers; empty removes them')
+        .option('--native-name <name>', "a language's name in the language itself; empty removes it")
         .option('--locale <locale>', "a language's primary locale")
         .option('--test-sample <sample>', 'the sample the VS Code test opens, e.g. samples/seattle.md')
-        .option(
-            '--engine <name=range>',
-            'an engine in cspell.engines, e.g. cspell=>=9; an empty range removes it; repeat it for several',
-            (value: string, previous: Record<string, string> | undefined) => ({ ...previous, ...engine(value) }),
-        )
-        .action(
-            async (
-                options: Omit<Fields, 'sample' | 'engines'> & {
-                    extension?: string;
-                    testSample?: string;
-                    engine?: Record<string, string>;
-                },
-            ) => {
-                const { extension: folder, testSample, engine: engines, ...rest } = options;
-                await change(folder, async (extension, config) => {
-                    let fields: Fields = { ...rest, sample: testSample, engines };
-                    if (Object.values(fields).every((value) => value === undefined)) fields = await askField(config);
-                    if (fields.sample && !(await listSamples(extension.dir)).includes(fields.sample)) {
-                        throw new Error(`${fields.sample} isn't a sample. Add it first with \`add sample\`.`);
-                    }
-                    return setFields(config, fields);
-                });
-            },
-        );
+        .action(async (options: Omit<Fields, 'sample'> & { extension?: string; testSample?: string }) => {
+            const { extension: folder, testSample, ...rest } = options;
+            await change(folder, async (extension, config) => {
+                let fields: Fields = { ...rest, sample: testSample };
+                if (Object.values(fields).every((value) => value === undefined)) fields = await askField(config);
+                if (fields.sample && !(await listSamples(extension.dir)).includes(fields.sample)) {
+                    throw new Error(`${fields.sample} isn't a sample. Add it first with \`add sample\`.`);
+                }
+                return setFields(config, fields);
+            });
+        });
 }
 
 /** Read the config, change it, write it, and sync the extension. */
@@ -189,6 +182,9 @@ async function change(
 ): Promise<void> {
     const extension = await pickExtension(folder);
     const config = await edit(extension, await readConfig(extension.dir));
+    // The same facts `check` reports: refuse a change that `check` would fail on.
+    const drift = await findDrift(extension.dir, config);
+    if (drift.length) throw new Error(`Not changed:\n${drift.map((message) => `  ${message}`).join('\n')}`);
     await writeConfig(extension.dir, config);
     console.log(`Updated extensions/${extension.folder}/extension.config.json`);
     await sync(extension);
@@ -219,7 +215,7 @@ async function askTarget(
     return prompter().select('Commands for:', choices);
 }
 
-const fieldNames: Record<Exclude<keyof Fields, 'engines'>, string> = {
+const fieldNames: Record<keyof Fields, string> = {
     friendlyName: 'friendly name',
     displayName: 'display name',
     description: 'description',
@@ -230,9 +226,13 @@ const fieldNames: Record<Exclude<keyof Fields, 'engines'>, string> = {
 };
 
 async function askField(config: ExtensionConfig): Promise<Fields> {
+    const languageOnly = ['nativeName', 'locale'];
+    const fields = Object.entries(fieldNames).filter(
+        ([field]) => config.kind === 'language' || !languageOnly.includes(field),
+    );
     const field = await prompter().select(
         'Field to change:',
-        Object.entries(fieldNames).map(([value, name]) => ({ name, value: value as keyof typeof fieldNames })),
+        fields.map(([value, name]) => ({ name, value: value as keyof typeof fieldNames })),
     );
     const current = (config as unknown as Record<string, string | undefined>)[field];
     return { [field]: await prompter().input(`New ${fieldNames[field]}:`, current) };
@@ -241,10 +241,4 @@ async function askField(config: ExtensionConfig): Promise<Fields> {
 function languageLocale(config: ExtensionConfig): string {
     if (config.kind !== 'language') throw new Error('Only a language gets Wikipedia samples. Give a file instead.');
     return config.locale;
-}
-
-function engine(value: string): Record<string, string> {
-    const [name, range = ''] = value.split(/=(.*)/s);
-    if (!name) throw new Error(`--engine ${value}: expected <name>=<range>, e.g. cspell=>=9.`);
-    return { [name]: range };
 }

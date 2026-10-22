@@ -29,14 +29,15 @@ export async function listSamples(extensionDir: string): Promise<string[]> {
  * @returns the samples added.
  */
 export async function addSampleFiles(extensionDir: string, files: readonly string[], cwd: string): Promise<string[]> {
-    const added: string[] = [];
+    // Read them all first, so a missing file adds none.
+    const samples: [string, string][] = [];
     for (const file of files) {
         const sample = `samples/${path.basename(file)}`;
         if (sample === samplesConfig) throw new Error(`${file}: ${samplesConfig} is the samples' config.`);
-        await copyNew(extensionDir, sample, await fs.readFile(path.resolve(cwd, file), 'utf8'));
-        added.push(sample);
+        samples.push([sample, await fs.readFile(path.resolve(cwd, file), 'utf8')]);
     }
-    return added;
+    for (const [sample, text] of samples) await copyNew(extensionDir, sample, text);
+    return samples.map(([sample]) => sample);
 }
 
 /**

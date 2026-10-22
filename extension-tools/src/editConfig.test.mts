@@ -56,9 +56,23 @@ describe('addCommandSet', () => {
     it('refuses an ID the extension has', () => {
         const config = addCommandSet(serbian, 'locale', 'sr');
         assert.throws(
-            () => addCommandSet(config, 'locale', 'sr', { suffix: '' }),
+            () => addCommandSet(config, 'locale', 'sr-Cyrl', { suffix: '' }),
             /already has cSpellExt_serbian.enable,/,
         );
+    });
+
+    it('names a set after its value once the extension has any commands', () => {
+        const config = addCommandSet(addCommandSet(serbian, 'locale', 'sr'), 'dictionary', 'sr-latn');
+        assert.equal(config.commands[4]?.id, 'cSpellExt_serbian.enableSrLatn');
+    });
+
+    it('refuses a second set for the same value, and a list of locales', () => {
+        const config = addCommandSet(serbian, 'locale', 'sr');
+        assert.throws(
+            () => addCommandSet(config, 'locale', 'sr'),
+            /cSpellExt_serbian.enable already turns locale "sr"/,
+        );
+        assert.throws(() => addCommandSet(serbian, 'locale', 'sr,sr-Latn'), /give one locale/);
     });
 });
 
@@ -91,12 +105,14 @@ describe('setFields', () => {
         );
     });
 
-    it('sets and removes engines, and leaves the other fields', () => {
-        const withEngine = setFields(serbian, { engines: { cspell: '>=9' }, sample: 'samples/other.md' });
-        assert.deepEqual(withEngine.cspell, { ...serbian.cspell, engines: { cspell: '>=9' } });
-        assert.equal(withEngine.sample, 'samples/other.md');
-        assert.equal(withEngine.description, serbian.description);
-        assert.deepEqual(setFields(withEngine, { engines: { cspell: '' } }).cspell, serbian.cspell);
+    it('sets a field and leaves the others, and removes an optional field set to empty', () => {
+        const withNotes = setFields(serbian, { notes: 'Why.', sample: 'samples/other.md' });
+        assert.equal(withNotes.notes, 'Why.');
+        assert.equal(withNotes.sample, 'samples/other.md');
+        assert.equal(withNotes.description, serbian.description);
+        assert.deepEqual(setFields(withNotes, { notes: '', sample: serbian.sample }), serbian);
+        const renamed = setFields(serbian, { friendlyName: 'S$&X' });
+        assert.equal(renamed.friendlyName, 'S$&X');
     });
 
     it('sets the locale only for a language', () => {

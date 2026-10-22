@@ -9,15 +9,15 @@ The tools that create and maintain the extensions in [`extensions/`](../extensio
   - `packages [word…]` (`npm run list:packages`): lists the published dictionaries and parsers.
   - `fetch-sample <locale> [title]` (`npm run fetch:sample`): fetches a sample text from Wikipedia.
   - The commands below work on one extension, and run with `npm run extension-tools -- <command>`. They pick the extension with `-e <folder>`, or the folder they run in. Without their options, they ask in the terminal.
-  - `info [--json]`: shows the extension: its packages with their dictionaries and locales, its commands, its samples, the dictionaries that start off, and what's left to do on a new extension.
+  - `info [--json]`: shows the extension: its packages with their dictionaries and locales, its commands, its samples, and what's left to do on a new extension.
   - `add command --dictionary <name>` or `--locale <locale>`: adds Enable and Disable, globally and in the workspace. The first set gets the plain IDs and titles. A later one is named after its value, or takes `--label` and `--suffix`.
   - `remove command --id <id…>`: removes commands.
   - `add sample <file…>`, or `--title <article>` for a language: copies files into `samples/`, or writes Wikipedia articles there.
   - `remove sample <sample>`: removes a sample, but not the one the VS Code test opens.
-  - `set`: changes `--friendly-name` (and the standard command titles), `--display-name`, `--description`, `--notes`, `--native-name`, `--locale`, `--test-sample` or `--engine <name=range>`.
+  - `set`: changes `--friendly-name` (and the standard command titles), `--display-name`, `--description`, `--notes`, `--native-name`, `--locale` or `--test-sample`. An empty `--notes` or `--native-name` removes it.
   - `remove extension <folder>`: deletes an extension that was never released.
 
-  Each change is checked against the schema, written to `extension.config.json`, and followed by the sync.
+  Each change is checked against the schema and against the installed packages, as `check` does, then written to `extension.config.json` and followed by the sync.
 
 - The `set-prerelease` workflow: [`set-prerelease-mode.mts`](./set-prerelease-mode.mts), which turns an extension's pre-release mode on or off. It uses only `node:` modules, because the workflow runs it before `npm ci`.
 

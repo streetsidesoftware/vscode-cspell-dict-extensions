@@ -48,6 +48,13 @@ export function commandSet(target: Target, value: string): CommandConfig[] {
     return scopes.flatMap((scope) => actions.map((action) => standardCommand(target, value, action, scope)));
 }
 
+/** The ID suffix of a locale: its subtags after the language, or the language when there are none. `sr-Cyrl` gives `Cyrl`. */
+export function localeSuffix(locale: string): string {
+    const [language = locale, ...subtags] = locale.split(/[-_]/);
+    const suffix = subtags.join('') || language;
+    return suffix.slice(0, 1).toUpperCase() + suffix.slice(1);
+}
+
 /** An ID suffix from a name: each word capitalized, e.g. `vim-script` gives `VimScript`. */
 export function idSuffix(name: string): string {
     return name

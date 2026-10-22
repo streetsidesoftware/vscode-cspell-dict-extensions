@@ -8,7 +8,7 @@ import path from 'node:path';
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
 import { type ExtensionConfigValidator, readExtensionConfigValidator } from './extensionSchema.mts';
 import { format } from './format.mts';
-import { exists, extensionRepoPath, extensionsDir, readJson } from './repo.mts';
+import { exists, extensionRepoPath, extensionsDir, listExtensionRepoPaths, readJson } from './repo.mts';
 
 export const configFileName = 'extension.config.json';
 
@@ -31,9 +31,10 @@ export async function pickExtension(
 ): Promise<Extension> {
     const name = folder ?? folderOf(cwd);
     if (!name) throw new Error('Name the extension with -e <folder>, or run the command in its folder.');
-    const dir = path.join(extensionsDir, name);
-    if (!(await exists(path.join(dir, 'package.json')))) throw new Error(`extensions/${name}/package.json not found.`);
-    return { folder: name, dir };
+    // Only a folder in `extensions/` itself: `swedish/`, `./swedish` or `..` would reach other paths.
+    const folders = (await listExtensionRepoPaths()).map((repoPath) => path.posix.basename(repoPath));
+    if (!folders.includes(name)) throw new Error(`"${name}" isn't an extension: no extensions/<folder>/package.json.`);
+    return { folder: name, dir: path.join(extensionsDir, name) };
 }
 
 /** The folder in `extensions/` that `cwd` is in. */

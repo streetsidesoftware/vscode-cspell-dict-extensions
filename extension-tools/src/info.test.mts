@@ -63,12 +63,11 @@ describe('readFacts', () => {
             dictionaries: ['demo', 'extra', 'quiet'],
             locales: ['*'],
         });
-        assert.equal(facts.commands[0]?.contributes, false);
+        assert.deepEqual(facts.commands, config.commands);
         assert.deepEqual(facts.samples, [
             { file: 'samples/demo.md', test: true },
             { file: 'samples/starter.md', test: false },
         ]);
-        assert.deepEqual(facts.off, ['quiet']);
         assert.deepEqual(facts.todo, [
             'Replace the starter text in samples/starter.md.',
             'Add commands for the extra dictionary: add command --dictionary extra',
@@ -86,6 +85,8 @@ describe('pickExtension', () => {
         assert.equal((await pickExtension('swedish')).folder, 'swedish');
         assert.equal((await pickExtension(undefined, path.join(extensionsDir, 'swedish/samples'))).folder, 'swedish');
         await assert.rejects(pickExtension(undefined, os.tmpdir()), /Name the extension with -e <folder>/);
-        await assert.rejects(pickExtension('nope'), /extensions\/nope\/package.json not found/);
+        for (const name of ['nope', 'swedish/', './swedish', '..', '../extension-tools']) {
+            await assert.rejects(pickExtension(name), /isn't an extension/);
+        }
     });
 });

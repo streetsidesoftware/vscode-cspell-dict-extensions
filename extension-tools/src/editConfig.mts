@@ -4,7 +4,7 @@
  */
 
 import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/api.ts';
-import { commandSet, idSuffix } from './commandSets.mts';
+import { commandSet, idSuffix, localeSuffix } from './commandSets.mts';
 
 export interface CommandSetOptions {
     /** Names what the commands turn on in the titles. */
@@ -26,7 +26,13 @@ export function addCommandSet(
     value: string,
     options: CommandSetOptions = {},
 ): ExtensionConfig {
-    const first = !config.commands.some((command) => command.toggle === toggle);
+    if (toggle === 'locale' && /[\s,|;]/.test(value)) {
+        throw new Error(`--locale ${value}: give one locale. A command for a list of locales is edited in the config.`);
+    }
+    const existing = config.commands.find((command) => command.toggle === toggle && command.value === value);
+    if (existing) throw new Error(`${existing.id} already turns ${toggle} "${value}" on or off.`);
+    // IDs are unique per extension: only the extension's first commands get the plain IDs.
+    const first = config.commands.length === 0;
     const label = options.label ?? (first ? config.friendlyName : defaultLabel(toggle, value));
     const suffix = options.suffix ?? (first ? '' : defaultSuffix(toggle, value));
     const added = commandSet({ name: config.name, label, suffix, toggle }, value);
@@ -41,9 +47,7 @@ function defaultLabel(toggle: 'locale' | 'dictionary', value: string): string {
 }
 
 function defaultSuffix(toggle: 'locale' | 'dictionary', value: string): string {
-    if (toggle === 'dictionary') return idSuffix(value);
-    const [language = value, ...subtags] = value.split(/[-_]/);
-    return idSuffix(subtags.join('-') || language);
+    return toggle === 'dictionary' ? idSuffix(value) : localeSuffix(value);
 }
 
 /** Remove commands by ID. */
@@ -62,50 +66,40 @@ export interface Fields {
     nativeName?: string | undefined;
     locale?: string | undefined;
     sample?: string | undefined;
-    /** `cspell.engines`: a range per engine, or `''` to remove one. */
-    engines?: Record<string, string> | undefined;
 }
+
+/** The fields an extension may leave out: `''` removes them. */
+const optionalFields = ['notes', 'nativeName'] as const;
 
 /**
  * Set scalar fields. A new `friendlyName` also renames the command titles that follow the standard pattern
- * (`… <friendlyName> Spell Checker Dictionary …`). `nativeName` and `locale` are only for a language.
+ * (`… <friendlyName> Spell Checker Dictionary …`), but not `displayName` or `description`. `nativeName` and `locale`
+ * are only for a language. An empty `notes` or `nativeName` removes it.
  */
 export function setFields(config: ExtensionConfig, fields: Fields): ExtensionConfig {
-    const { friendlyName, nativeName, locale, engines, ...plain } = fields;
+    const { friendlyName, nativeName, locale, ...plain } = fields;
     if ((nativeName !== undefined || locale !== undefined) && config.kind !== 'language') {
         throw new Error(`--native-name and --locale are only for a language; this extension is a ${config.kind}.`);
     }
-    let result: ExtensionConfig = { ...config, ...defined(plain) };
+    let result: Record<string, unknown> = { ...config, ...defined(plain) };
     if (friendlyName !== undefined) {
-        result = {
-            ...result,
-            friendlyName,
-            commands: renameTitles(result.commands, config.friendlyName, friendlyName),
-        };
+        const commands = renameTitles(config.commands, config.friendlyName, friendlyName);
+        result = { ...result, friendlyName, commands };
     }
-    if (result.kind === 'language') result = { ...result, ...defined({ nativeName, locale }) };
-    if (engines) result = { ...result, cspell: withEngines(result.cspell, engines) };
-    return result;
+    if (config.kind === 'language') result = { ...result, ...defined({ nativeName, locale }) };
+    for (const field of optionalFields) {
+        if (result[field] === '') delete result[field];
+    }
+    return result as unknown as ExtensionConfig;
 }
 
 function renameTitles(commands: CommandConfig[], from: string, to: string): CommandConfig[] {
     const standard = ` ${from} Spell Checker Dictionary`;
     return commands.map((command) =>
         command.title.includes(standard)
-            ? { ...command, title: command.title.replace(standard, ` ${to} Spell Checker Dictionary`) }
+            ? { ...command, title: command.title.replace(standard, () => ` ${to} Spell Checker Dictionary`) }
             : command,
     );
-}
-
-function withEngines(cspell: Record<string, unknown>, changes: Record<string, string>): Record<string, unknown> {
-    const engines = { ...(cspell['engines'] as Record<string, string> | undefined) };
-    for (const [engine, range] of Object.entries(changes)) {
-        if (range) engines[engine] = range;
-        else delete engines[engine];
-    }
-    if (Object.keys(engines).length) return { ...cspell, engines };
-    const { engines: _removed, ...rest } = cspell;
-    return rest;
 }
 
 function defined<T extends object>(fields: T): Partial<T> {

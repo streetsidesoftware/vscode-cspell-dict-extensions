@@ -5,9 +5,8 @@ import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
+import { actions, commandSet, idSuffix, localeSuffix, scopes, standardCommand, type Target } from '../commandSets.mts';
 import { andList, type DictionaryState, whenOn } from '../dictionaryState.mts';
-import { languageOf } from './locales.mts';
-import { actions, commandSet, idSuffix, scopes, standardCommand, type Target } from '../commandSets.mts';
 import { type Answers, defaultLicense, type Language } from './questions.mts';
 import type { Sample } from './sample.mts';
 
@@ -145,9 +144,10 @@ export function localeCommands(
  * Dictionary`. The ID ends with the locale's subtags after the language, or the language when there are none.
  */
 export function languageCommands(name: string, language: Language): CommandConfig[] {
-    const subtags = language.locale.split('-').slice(1).join('') || languageOf(language.locale);
-    const suffix = subtags.slice(0, 1).toUpperCase() + subtags.slice(1);
-    return commandSet({ name, label: language.name, suffix, toggle: 'locale' }, language.locale);
+    return commandSet(
+        { name, label: language.name, suffix: localeSuffix(language.locale), toggle: 'locale' },
+        language.locale,
+    );
 }
 
 /**
