@@ -51,7 +51,7 @@ const starterFiles: Record<string, string> = {
 export interface SyncOptions {
     /** Only report the files that would change. */
     check?: boolean;
-    /** The `engines.vscode` of the root package.json. */
+    /** The `engines.vscode` of the runtime's package.json. */
     vscodeEngine: string;
     /** Checks `extension.config.json` against the generated schema. */
     validate: ExtensionConfigValidator;

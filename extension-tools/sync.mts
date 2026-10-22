@@ -4,10 +4,10 @@
  * Sync the extensions that have an `extension.config.json` with `extension-runtime/`, after generating
  * `static/extension.config.schema.json` from the `ExtensionConfig` type.
  *
- * Usage: sync-extensions.mts [--check] [extension...]
+ * Usage: `sync.mts [--check] [folder...]`
  *
  * - `--check`: change nothing; list the files that are out of date and exit with 1 if there are any.
- * - `extension`: the directory names in `extensions/` to sync. Default: all of them.
+ * - `folder`: the folders in `extensions/` to sync. Default: all of them.
  */
 
 import fs from 'node:fs/promises';
@@ -60,7 +60,7 @@ async function run(): Promise<void> {
     console.log(`Synced ${synced} extension${synced === 1 ? '' : 's'}.`);
     if (values.check && outOfDate) {
         console.error(
-            styleText('red', 'Run `npm run sync:extensions` and commit the changes.', { stream: process.stderr }),
+            styleText('red', 'Run `extension-tools/sync.mts` and commit the changes.', { stream: process.stderr }),
         );
         process.exitCode = 1;
     }

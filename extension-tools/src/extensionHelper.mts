@@ -54,7 +54,7 @@ export async function getExtensionInfo(repoPath: string): Promise<ExtensionInfo>
  * The `kind` in an extension's `extension.config.json`.
  * @returns `undefined` when the extension has no `extension.config.json`.
  */
-export async function readExtensionKind(repoPath: string): Promise<ExtensionKind | undefined> {
+async function readExtensionKind(repoPath: string): Promise<ExtensionKind | undefined> {
     const configFile = `${repoPath}/extension.config.json`;
     if (!(await exists(configFile))) return undefined;
     return (await readJson<{ kind: ExtensionKind }>(configFile)).kind;

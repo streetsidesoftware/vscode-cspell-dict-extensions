@@ -7,6 +7,7 @@ import path from 'node:path';
 
 export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
 export const extensionsDir: string = path.join(repoRoot, 'extensions');
+const runtimePackageJson = 'extension-runtime/package.json';
 
 /**
  * The repo paths of the extensions: the directories in `extensions/` that have a `package.json`, sorted.
@@ -23,12 +24,12 @@ export async function listExtensionRepoPaths(): Promise<string[]> {
 }
 
 /**
- * The `engines.vscode` of the root `package.json`, which every extension gets.
+ * The `engines.vscode` of the runtime: the VS Code version its code needs, which every extension gets.
  */
 export async function readVscodeEngine(): Promise<string> {
-    const pkg = await readJson<{ engines?: { vscode?: string } }>('package.json');
+    const pkg = await readJson<{ engines?: { vscode?: string } }>(runtimePackageJson);
     const vscodeEngine = pkg.engines?.vscode;
-    if (!vscodeEngine) throw new Error('package.json: "engines.vscode" is missing.');
+    if (!vscodeEngine) throw new Error(`${runtimePackageJson}: "engines.vscode" is missing.`);
     return vscodeEngine;
 }
 

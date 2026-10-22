@@ -33,7 +33,7 @@ Don't edit these; `npm run sync:extensions` overwrites them.
 - **`static/cspell-ext.json`:** the `cspell` settings from `extension.config.json`, which the extension registers with Code Spell Checker.
 - **`static/commands.json`:** the commands, for the README's table. Removed when there are none.
 - **`static/dictionaries.json`:** each dictionary with the locales or file types that turn it on, read from the installed dictionaries, for the README's table. A dictionary that nothing turns on is listed as "off until turned on". Removed when there are none, and never written for a bundle.
-- **`package.json` fields:** `name`, `displayName`, `description`, `type`, `engines.vscode`, `main`, `contributes.commands`, `scripts`, and the `devDependencies` entry `"@internal/extension-runtime": "file:../../extension-runtime"`.
+- **`package.json` fields:** `name`, `displayName`, `description`, `type`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)), `main`, `contributes.commands`, `scripts`, and the `devDependencies` entry `"@internal/extension-runtime": "file:../../extension-runtime"`.
 - **README sections** between `@@inject` markers, filled by [inject-markdown](https://github.com/streetsidesoftware/inject-markdown) from the shared templates in [`static/`](../static) and the extension's own `static/` files:
   - `<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->`
   - `<!--- @@inject-table: ./static/commands.json --->`

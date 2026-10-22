@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Generate the extension lists in `static/generated/`, which READMEs inject, and the categories they use as headings
- * in `static/dictionary-types.json`.
+ * Generate the extension lists in `static/generated/`, which READMEs inject. Each list groups the extensions under a
+ * heading per category, from the extension's `kind`.
  */
 
 import fs from 'node:fs/promises';
@@ -11,13 +11,28 @@ import path from 'node:path';
 import type { ListItem, PhrasingContent, RootContent } from 'mdast';
 import { toMarkdown } from 'mdast-util-to-markdown';
 
-import { type ExtensionInfo, getExtensionInfo, listExtensionRepoPaths } from '../extension-tools/api.mts';
+import {
+    type ExtensionInfo,
+    type ExtensionKind,
+    getExtensionInfo,
+    listExtensionRepoPaths,
+} from '../extension-tools/api.mts';
 
-import { categoryOfKind, defaultCategory, genDictionaryTypes } from './lib/dictionaryTypes.mts';
 import { heading, link, list, listItem, paragraph, root, strong, text } from './lib/mdastBuilder.mts';
 import { repoRoot } from './lib/repo.mts';
 
 const generatedDir = path.join(repoRoot, 'static/generated');
+
+/** The category of each kind of extension. */
+const categoryOfKind: Record<ExtensionKind, string> = {
+    language: 'Languages',
+    wordList: 'Technical Terms',
+    bundle: 'Support',
+    parser: 'Parsers',
+};
+
+/** The category of an extension without an `extension.config.json`. */
+const defaultCategory = 'Other';
 
 /** The headings of the categories in `marketplace_language_extensions.md`; the other categories are left out. */
 const languageListHeadings: Record<string, string | undefined> = {
@@ -85,7 +100,6 @@ function groupExtensionsByType(extensionInfos: ExtensionInfo[]): Map<string, Ext
 }
 
 export async function genExtensionList(): Promise<void> {
-    await genDictionaryTypes();
     const extensionInfos = await Promise.all((await listExtensionRepoPaths()).map(getExtensionInfo));
     const byCategory = groupExtensionsByType(extensionInfos);
 

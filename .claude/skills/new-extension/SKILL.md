@@ -146,8 +146,8 @@ generator README lists them.
 ### 9. Commit, ask, then open the PR
 
 - **Do:** commit the new folder with the message `feat: add <friendly name> extension`, such as
-  `feat: add Scottish Gaelic extension`. Leave the root README lists, `static/dictionary-types.json`,
-  `release-please-config.json` and the workflow lists alone. A workflow updates them after the merge.
+  `feat: add Scottish Gaelic extension`. Leave the root README lists, `release-please-config.json` and
+  the workflow lists alone. A workflow updates them after the merge.
 - **Stop and ask** before pushing and opening the PR. Show the title and the description:
   - what the extension adds, and the packages it includes
   - when each dictionary is on, from `static/dictionaries.json`

@@ -26,7 +26,7 @@ export function npm(args: string[], cwd: string): void {
     console.log(styleText('gray', `> npm ${args.join(' ')}`));
     const cli = findNpmCli();
     if (!cli && process.platform === 'win32') {
-        throw new Error('Could not find npm. Run the generator with: npm run create:extension');
+        throw new Error('Could not find npm. Run `create.mts` through npm, which tells it where npm is.');
     }
     const result = cli
         ? spawnSync(process.execPath, [cli, ...args], { cwd, stdio: 'inherit' })

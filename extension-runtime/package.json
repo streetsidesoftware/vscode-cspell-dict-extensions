@@ -1,9 +1,12 @@
 {
   "name": "@internal/extension-runtime",
   "version": "1.0.0",
-  "description": "The code shared by the extensions, and the files the sync writes into them.",
+  "description": "The code shared by the extensions.",
   "private": true,
   "type": "module",
+  "engines": {
+    "vscode": "^1.125.0"
+  },
   "scripts": {
     "check-types": "tsc -p .",
     "test": "node --test"
