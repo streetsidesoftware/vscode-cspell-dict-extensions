@@ -12,8 +12,6 @@ import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { parseArgs, styleText } from 'node:util';
 
-import { extensionsDir } from '../extension-tools/api.mts';
-
 import { exists, repoRoot } from './lib/repo.mts';
 
 interface Check {
@@ -23,8 +21,8 @@ interface Check {
 }
 
 function checks(name: string, vscode: boolean): Check[] {
-    const dir = path.join(extensionsDir, name);
     const relative = `extensions/${name}`;
+    const dir = path.join(repoRoot, relative);
     return [
         { name: 'build', args: ['run', 'build'], cwd: dir },
         { name: 'sample spell check', args: ['run', 'test:cspell'], cwd: dir },
@@ -52,7 +50,7 @@ async function run(): Promise<void> {
 
     const failed: string[] = [];
     for (const name of positionals) {
-        if (!(await exists(path.join(extensionsDir, name, 'extension.config.json')))) {
+        if (!(await exists(`extensions/${name}/extension.config.json`))) {
             throw new Error(`extensions/${name}/extension.config.json not found.`);
         }
         for (const check of checks(name, !!values.vscode)) {

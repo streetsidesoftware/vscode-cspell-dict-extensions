@@ -3,7 +3,7 @@
 /**
  * List the packages an extension can include: the dictionaries in cspell-dicts and the parsers in cspell-parsers.
  *
- * Usage: `npm run list:packages -- [words…] [--any] [--missing] [--json]`
+ * Usage: `list-packages.mts [words…] [--any] [--missing] [--json]`
  * - `words`: only the packages whose name, English name or description contains every word, e.g. `thai`.
  * - `--any`: a package may contain any of the words instead, e.g. `gaelic irish`.
  * - `--missing`: only the packages no extension includes yet, leaving out those that ship with cspell.

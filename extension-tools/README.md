@@ -1,12 +1,13 @@
 # Extension tools
 
-The tools that create and maintain the extensions in [`extensions/`](../extensions). They run directly with Node.js (type stripping), without a build step. The root npm scripts run them:
+The tools that create and maintain the extensions in [`extensions/`](../extensions). They run directly with Node.js (type stripping), without a build step. The root npm scripts and a workflow run them:
 
 - `npm run create:extension`: [`create.mts`](./create.mts), which creates an extension. See [Create an extension](#create-an-extension).
 - `npm run sync:extensions`: [`sync.mts`](./sync.mts), which writes the files the sync maintains. See [Anatomy of an extension](../docs/extension-anatomy.md).
 - `npm run tool:fix-extensions`: [`fix-extensions.mts`](./fix-extensions.mts), which gives every extension's `package.json` the fields the extensions share.
 - `npm run list:packages`: [`list-packages.mts`](./list-packages.mts), which lists the published dictionaries and parsers.
 - `npm run fetch:sample`: [`fetch-sample.mts`](./fetch-sample.mts), which fetches a sample text from Wikipedia.
+- The `set-prerelease` workflow: [`set-prerelease-mode.mts`](./set-prerelease-mode.mts), which turns an extension's pre-release mode on or off. It uses only `node:` modules, because the workflow runs it before `npm ci`.
 
 ## API
 

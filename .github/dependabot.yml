@@ -30,7 +30,7 @@ updates:
       - dependency-name: "@types/node"
         update-types:
           - version-update:semver-major
-      # Pinned to engines.vscode: vsce refuses to package when the types are newer than the engine.
+      # Pinned to engines.vscode in extension-runtime/package.json: vsce refuses to package when the types are newer than the engine.
       - dependency-name: "@types/vscode"
 
   - package-ecosystem: "github-actions"

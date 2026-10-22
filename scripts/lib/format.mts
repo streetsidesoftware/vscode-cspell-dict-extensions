@@ -53,7 +53,7 @@ export async function injectFiles(...patterns: string[]): Promise<void> {
 /**
  * The errors and warnings of an injection, as `file:line: message`. See `injectFiles` for why warnings count.
  */
-export function injectProblems(result: InjectMarkdownResult): string[] {
+function injectProblems(result: InjectMarkdownResult): string[] {
     const { file } = result.document;
     return [...result.errors, ...result.warnings].map((p) => `${file}:${p.line ?? 0}: ${p.message}`);
 }

@@ -41,8 +41,7 @@
     }
   },
   "engines": {
-    "node": ">=24.11.0",
-    "vscode": "^1.125.0"
+    "node": ">=24.11.0"
   },
   "devDependencies": {
     "@lerna-lite/cli": "^5.6.3",

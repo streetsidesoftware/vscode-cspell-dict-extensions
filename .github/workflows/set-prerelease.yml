@@ -97,7 +97,7 @@ jobs:
           node-version-file: .tool-versions
 
       - name: Set Mode
-        run: node ./scripts/set-prerelease-mode.mts "$EXTENSION" "$PRERELEASE"
+        run: node ./extension-tools/set-prerelease-mode.mts "$EXTENSION" "$PRERELEASE"
 
       - name: PR
         uses: peter-evans/create-pull-request@v8
