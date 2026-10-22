@@ -23,6 +23,11 @@ export async function listExtensionRepoPaths(): Promise<string[]> {
     return repoPaths.sort();
 }
 
+/** An extension's directory as a repo path, e.g. `extensions/swedish`. */
+export function extensionRepoPath(extensionDir: string): string {
+    return `extensions/${path.basename(extensionDir)}`;
+}
+
 /**
  * The `engines.vscode` of the runtime: the VS Code version its code needs, which every extension gets.
  */

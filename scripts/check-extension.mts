@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Run the checks an extension must pass: the build, the sample spell check, the sync check, Prettier and the repo's
- * spell check.
+ * Run the checks an extension must pass: the build, the sample spell check, extension-tools' check, Prettier and the
+ * repo's spell check.
  *
  * Usage: `npm run check:extension -- <name…> [--vscode]`
  * - `--vscode`: also run the VS Code test, which downloads VS Code the first time.
@@ -12,7 +12,7 @@ import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { parseArgs, styleText } from 'node:util';
 
-import { exists, repoRoot } from './lib/repo.mts';
+import { repoRoot } from './lib/repo.mts';
 
 interface Check {
     name: string;
@@ -27,7 +27,7 @@ function checks(name: string, vscode: boolean): Check[] {
         { name: 'build', args: ['run', 'build'], cwd: dir },
         { name: 'sample spell check', args: ['run', 'test:cspell'], cwd: dir },
         ...(vscode ? [{ name: 'VS Code test', args: ['run', 'test:vscode'], cwd: dir }] : []),
-        { name: 'sync check', args: ['run', 'sync:extensions', '--', '--check', name], cwd: repoRoot },
+        { name: 'extension-tools check', args: ['run', 'check:extensions', '--', name], cwd: repoRoot },
         { name: 'Prettier', args: ['exec', '--', 'prettier', '--check', relative], cwd: repoRoot },
         {
             name: 'spell check',
@@ -50,9 +50,6 @@ async function run(): Promise<void> {
 
     const failed: string[] = [];
     for (const name of positionals) {
-        if (!(await exists(`extensions/${name}/extension.config.json`))) {
-            throw new Error(`extensions/${name}/extension.config.json not found.`);
-        }
         for (const check of checks(name, !!values.vscode)) {
             console.log(styleText('bold', `\n${name}: ${check.name}`));
             if (!npm(check.args, check.cwd)) failed.push(`${name}: ${check.name}`);

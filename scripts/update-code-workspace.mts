@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * Update the folders in `dict-extensions.code-workspace`, the generated extension lists, the READMEs and the docs, and fix
- * the extensions' `package.json` files.
+ * Update the folders in `dict-extensions.code-workspace`, the generated extension lists, the READMEs and the docs.
  */
 
-import { fixExtensions, listExtensionRepoPaths } from '../extension-tools/api.mts';
+import { listExtensionRepoPaths } from '../extension-tools/api.mts';
 
 import { genExtensionList } from './gen-extension-list.mts';
 import { formatFiles, injectFiles } from './lib/format.mts';
@@ -27,7 +26,6 @@ async function main(): Promise<void> {
 
     // Update README.md
     await genExtensionList();
-    await fixExtensions();
 
     await formatFiles('static/generated/*.md');
     const docs = ['CONTRIBUTING.md', 'docs/**/*.md', 'extension-tools/README.md'];

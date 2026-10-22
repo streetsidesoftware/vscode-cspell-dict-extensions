@@ -116,8 +116,7 @@ async function generate(
         await setUpWordList(destDir, answers, config);
     }
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
-    // The shared package.json fields, then the files the sync owns or derives.
-    npm(['run', 'tool:fix-extensions'], repoRoot);
+    // The files the sync owns or derives, and the package.json fields every extension shares.
     npm(['run', 'sync:extensions', '--', answers.name], repoRoot);
     // Record the runtime dependency the sync added in package-lock.json.
     npm(['install'], destDir);

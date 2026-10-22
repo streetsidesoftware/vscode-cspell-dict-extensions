@@ -12,9 +12,9 @@ A fresh clone has no `node_modules`. npm only: pnpm and yarn are blocked. Node.j
 npm ci                                # installs the root, then every package (the postinstall runs npm i in each)
 npm run list:packages -- <word>...    # the published dictionaries and parsers, and the extension that includes each
 npm run create:extension -- <name> --package <@cspell/package> --yes   # create an extension
-npm run check:extension -- <name>     # an extension's build, sample, sync, Prettier and spell checks; --vscode adds the VS Code test
-npm run sync:extensions               # write the files the sync maintains, for every synced extension
-npm run sync:extensions -- --check    # fail if a synced extension is out of date
+npm run check:extension -- <name>     # an extension's build, sample, extension-tools check, Prettier and spell checks; --vscode adds the VS Code test
+npm run sync:extensions               # write the files the sync maintains, for every extension
+npm run check:extensions              # fail if an extension is out of date, or its config has drifted from its packages
 npm run lint                          # cspell over the repo
 npm run check-types                   # type-check test-runner, extension-runtime and extension-tools
 npm run lint:code                     # oxlint, type-aware; warnings fail
@@ -31,7 +31,7 @@ npm run test:vscode    # VS Code integration test; downloads VS Code into .vscod
 
 Tooling packages (`scripts/`, `extension-runtime/`, `extension-tools/`) run `npm test` in their own directory.
 
-Before finishing, run `npm run lint`, `npm run check-types`, `npm run lint:code` and `npm run sync:extensions -- --check` at the root, as CI does, and `npm run prettier:lint`. For each extension you changed, run `npm run check:extension -- <name>`.
+Before finishing, run `npm run lint`, `npm run check-types`, `npm run lint:code` and `npm run check:extensions` at the root, as CI does, and `npm run prettier:lint`. For each extension you changed, run `npm run check:extension -- <name>`.
 
 ## Where things are
 

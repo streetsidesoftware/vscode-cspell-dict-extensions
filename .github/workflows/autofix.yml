@@ -1,8 +1,9 @@
 name: autofix.ci
 
-# Rebuild the files a pull request must carry, and push them to the pull request with autofix.ci:
-# each extension's `extension.js`, and the runtime's config schema. A change that alters an extension's
-# `extension.js` then releases that extension. The `no-autofix` label turns it off.
+# Fix what can be fixed on a pull request, and push it to the pull request with autofix.ci: the files the
+# sync writes, each extension's `extension.js`, the runtime's config schema, Prettier's formatting and
+# oxlint's fixes. A change that alters an extension's `extension.js` then releases that extension. The
+# `no-autofix` label turns it off.
 
 on:
   pull_request:
@@ -36,8 +37,19 @@ jobs:
 
       - run: npm ci
 
+      - name: Sync
+        run: npm run sync:extensions
+
       - name: Build
         run: npm run build
+
+      - name: Prettier
+        run: npm run prettier:fix
+
+      # Not `lint:code`: a warning oxlint can't fix would stop the job, and the lint job reports it anyway.
+      - name: oxlint
+        run: npx oxlint --type-aware --fix
+        continue-on-error: true
 
       - name: Run autofix.ci
         if: env.USE_AUTOFIX == 'true'

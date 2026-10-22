@@ -6,9 +6,11 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
+import { sortPackageJson } from 'sort-package-json';
+
 import { readExtensionConfigValidator } from './extensionSchema.mts';
 import { whenOn } from './dictionaryState.mts';
-import { dictionaryStates, type FileChange, syncExtension } from './syncExtension.mts';
+import { dictionaryStates, type FileChange, syncExtension, syncPackageJson } from './syncExtension.mts';
 
 const config = {
     name: 'demo',
@@ -195,7 +197,9 @@ describe('syncExtension', () => {
             ],
             overrides: [
                 { filename: ['**/*.el', '**/.emacs'], dictionaries: ['lisp'] },
-                { filename: '**/*.md', languageId: 'markdown', language: 'en', dictionaries: ['off'] },
+                { filename: '**/*.md', dictionaries: ['off'] },
+                // Sets the file type of the matching files, and names no dictionary: no row.
+                { filename: '**/*.mdx', languageId: 'markdown' },
             ],
         });
         const { locale: _locale, ...rest } = config;
@@ -210,7 +214,7 @@ describe('syncExtension', () => {
             { Dictionary: '`lisp`', locale: '`*`', languageId: '`elisp`', glob: '' },
             { Dictionary: '`everywhere`', locale: '`*`', languageId: '', glob: '' },
             { Dictionary: '`lisp`', locale: '', languageId: '', glob: '`**/*.el`, `**/.emacs`' },
-            { Dictionary: '`off`', locale: '`en`', languageId: '`markdown`', glob: '`**/*.md`' },
+            { Dictionary: '`off`', locale: '', languageId: '', glob: '`**/*.md`' },
         ]);
         const states = await dictionaryStates(dir, await readJson('extension.config.json'));
         assert.deepEqual(
@@ -227,6 +231,28 @@ describe('syncExtension', () => {
             'on for `elisp` files',
             'on for every file',
         ]);
+    });
+
+    it('fails on a setting the table would show wrongly', async () => {
+        const { locale: _locale, ...rest } = config;
+        await writeJson('extension.config.json', { ...rest, kind: 'wordList', commands: [] });
+        const unsupported: [object, RegExp][] = [
+            [{ dictionaries: ['!demo'] }, /turning a dictionary off \(!demo\) isn't supported/],
+            [{ languageSettings: [{ local: 'xx', dictionaries: ['demo'] }] }, /"local" isn't supported/],
+            [
+                { overrides: [{ filename: '**/*.md', languageId: 'markdown', dictionaries: ['demo'] }] },
+                /an override that names dictionaries and sets "language" or "languageId" isn't supported/,
+            ],
+            [
+                { overrides: [{ filename: '**/*.md', language: 'en', dictionaries: ['demo'] }] },
+                /an override that names dictionaries and sets "language" or "languageId" isn't supported/,
+            ],
+            [{ import: ['@cspell/dict-other/cspell-ext.json'] }, /a package that imports others isn't supported/],
+        ];
+        for (const [ext, message] of unsupported) {
+            await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', ext);
+            await assert.rejects(syncExtension(dir, options), message);
+        }
     });
 
     it('has no static/dictionaries.json for a bundle', async () => {
@@ -250,7 +276,7 @@ describe('syncExtension', () => {
         assert.deepEqual(files(changes, 'remove'), ['static/commands.json']);
     });
 
-    it('derives package.json fields and keeps the others in order', async () => {
+    it('derives package.json fields, adds the shared ones, keeps the other values, and sorts the fields', async () => {
         await syncExtension(dir, options);
         const result = await readJson('package.json');
         assert.equal(result.name, 'code-spell-checker-demo');
@@ -276,7 +302,21 @@ describe('syncExtension', () => {
         assert.equal(result.scripts.extra, undefined);
         assert.deepEqual(result.dependencies, pkg.dependencies);
         assert.equal(result.devDependencies, undefined);
-        assert.deepEqual(Object.keys(result).slice(0, 5), ['name', 'version', 'type', 'contributes', 'scripts']);
+        assert.equal(result.publisher, 'streetsidesoftware');
+        assert.equal(result.repository.directory, 'extensions/demo');
+        assert.deepEqual(Object.keys(result), Object.keys(sortPackageJson(result)));
+    });
+
+    it('gives an extension without extension.config.json only the shared fields', async () => {
+        await fs.rm(path.join(dir, 'extension.config.json'));
+        const changes = await syncPackageJson(dir, options);
+        assert.deepEqual(files(changes, 'update'), ['package.json']);
+        const result = await readJson('package.json');
+        assert.equal(result.name, 'old-name');
+        assert.deepEqual(result.scripts, pkg.scripts);
+        assert.deepEqual(result.engines, { vscode: '^1.125.0' });
+        assert.equal(result.publisher, 'streetsidesoftware');
+        assert.deepEqual(await syncPackageJson(dir, options), []);
     });
 
     it('lists the packaged files, with COPYING and the icon when there are any', async () => {
