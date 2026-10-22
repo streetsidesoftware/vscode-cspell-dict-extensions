@@ -10,6 +10,7 @@ import { Command, Option } from 'commander';
 import { type CSpellPackage, fetchCSpellPackages } from '../cspellPackages.mts';
 import { findExistingExtensions } from '../existingExtensions.mts';
 import { extensionsDir, repoRoot } from '../repo.mts';
+import { syncExtensions } from '../syncExtensions.mts';
 import { fetchArticle } from '../wikipedia.mts';
 import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
@@ -117,9 +118,8 @@ async function generate(
     }
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     // The files the sync owns or derives, and the package.json fields every extension shares.
-    npm(['run', 'sync:extensions', '--', answers.name], repoRoot);
-    // Record the runtime dependency the sync added in package-lock.json.
-    npm(['install'], destDir);
+    const { changes } = await syncExtensions([answers.name], false);
+    for (const { file } of changes) log(`sync ${file}`);
     await addNameWords(destDir, config, repoRoot);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
