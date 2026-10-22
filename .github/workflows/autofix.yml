@@ -1,0 +1,44 @@
+name: autofix.ci
+
+# Rebuild the files a pull request must carry, and push them to the pull request with autofix.ci:
+# each extension's `extension.js`, and the runtime's config schema. A change that alters an extension's
+# `extension.js` then releases that extension. The `no-autofix` label turns it off.
+
+on:
+  pull_request:
+    types: [labeled, unlabeled, opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Skip the install-time audit: a hung audit request can stall an install for 5 minutes.
+env:
+  NPM_CONFIG_AUDIT: false
+  USE_AUTOFIX: ${{ !contains(github.event.pull_request.labels.*.name, 'no-autofix') }}
+
+jobs:
+  autofix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run autofix.ci
+        if: env.USE_AUTOFIX == 'true'
+        uses: autofix-ci/action@c5b2d67aa2274e7b5a18224e8171550871fc7e4a

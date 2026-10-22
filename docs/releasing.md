@@ -23,7 +23,7 @@ While an extension's `package.json` has `"vsce": { "preRelease": true }`, every 
 
 ## Releasing a runtime change
 
-Every synced extension bundles the runtime, so a change to it reaches users only when the extensions are released. `hunspell-syntax` and `timestamp-hover` don't use it. The runtime is a release-please package, and each extension lists it in `devDependencies`. A `fix:` or `feat:` commit that changes `extension-runtime/` releases the runtime. release-please's `node-workspace` plugin then releases every extension that depends on it. A `chore:` commit releases nothing.
+Every synced extension bundles the runtime into its `extension.js`, which is committed. `hunspell-syntax` and `timestamp-hover` don't use it. On every pull request, the `autofix.ci` workflow rebuilds each `extension.js` and pushes any change to the pull request. So a runtime change that alters what an extension ships changes that extension's files in the same commit. A `fix:` or `feat:` commit then releases each of those extensions with that commit's bump and changelog line. A change that leaves every `extension.js` the same releases no extension. A `chore:` commit releases nothing. The changed `extension.js` files show the reviewer which extensions a pull request releases.
 
 ## Manual publishing
 

@@ -2,6 +2,7 @@
     "$schema": "./node_modules/oxlint/configuration_schema.json",
     "ignorePatterns": [
         "**/out/**",
+        "extensions/*/extension.js",
         "**/samples/**",
         "**/.vscode-test/**",
         "**/static/**",

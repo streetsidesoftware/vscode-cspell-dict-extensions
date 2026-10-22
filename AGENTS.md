@@ -24,7 +24,7 @@ npm run prettier:lint                 # Prettier check; prettier:fix writes
 One extension, in `extensions/<name>/`:
 
 ```sh
-npm run build          # tsdown, into out/
+npm run build          # tsdown, into extension.js (committed; a workflow rebuilds it on every PR)
 npm run test:cspell    # spell check samples/ with the extension's dictionaries
 npm run test:vscode    # VS Code integration test; downloads VS Code into .vscode-test/ the first time
 ```

@@ -2,6 +2,7 @@
 **/dist/**
 CHANGELOG.md
 cspell.json
+extensions/*/extension.js
 extensions/*/samples/**
 extension-tools/templates/create
 lerna.json
