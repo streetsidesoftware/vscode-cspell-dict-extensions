@@ -14,7 +14,7 @@
     "node": ">=24.11.0"
   },
   "dependencies": {
-    "@inquirer/prompts": "^8.7.3",
+    "@inquirer/prompts": "^8.7.4",
     "ajv": "^8.20.0",
     "commander": "^15.0.0",
     "jsonc-parser": "^3.3.1",
