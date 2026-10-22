@@ -11,10 +11,11 @@ import path from 'node:path';
 import type { ListItem, PhrasingContent, RootContent } from 'mdast';
 import { toMarkdown } from 'mdast-util-to-markdown';
 
-import { genDictionaryTypes } from './lib/dictionaryTypes.mts';
-import { type ExtensionInfo, getExtensionInfo } from './lib/extensionHelper.mts';
+import { type ExtensionInfo, getExtensionInfo, listExtensionRepoPaths } from '../extension-tools/api.mts';
+
+import { categoryOfKind, defaultCategory, genDictionaryTypes } from './lib/dictionaryTypes.mts';
 import { heading, link, list, listItem, paragraph, root, strong, text } from './lib/mdastBuilder.mts';
-import { listExtensionRepoPaths, repoRoot } from './lib/repo.mts';
+import { repoRoot } from './lib/repo.mts';
 
 const generatedDir = path.join(repoRoot, 'static/generated');
 
@@ -74,9 +75,10 @@ function groupExtensionsByType(extensionInfos: ExtensionInfo[]): Map<string, Ext
     const extensionsByCategory = new Map<string, ExtensionInfo[]>();
 
     for (const extensionInfo of extensionInfos) {
-        const cat = extensionsByCategory.get(extensionInfo.dictionaryType) || [];
+        const category = extensionInfo.kind ? categoryOfKind[extensionInfo.kind] : defaultCategory;
+        const cat = extensionsByCategory.get(category) || [];
         cat.push(extensionInfo);
-        extensionsByCategory.set(extensionInfo.dictionaryType, cat);
+        extensionsByCategory.set(category, cat);
     }
 
     return extensionsByCategory;

@@ -4,7 +4,7 @@
  * Sync one extension with `extension-runtime/` and its `extension.config.json`.
  *
  * The sync writes:
- * - the tool configs, copied from `extension-runtime/template/`;
+ * - the tool configs, copied from `extension-tools/templates/sync/`;
  * - `static/cspell-ext.json`, `static/commands.json` and `static/dictionaries.json`, generated from the config and
  *   the installed dictionaries;
  * - some fields of `package.json`, and the `@@inject` sections of `README.md`.
@@ -26,18 +26,18 @@ import {
     displayName,
     type ExtensionConfig,
     resolveCommands,
-} from '../../extension-runtime/src/config.ts';
+} from '../../extension-runtime/api.ts';
 import type { PackageJson } from './extensionHelper.mts';
 import { type DictionaryState, describeFileTypes } from './dictionaryState.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { format, injectProblems } from './format.mts';
-import { exists, readJson, repoRoot, writeIfChanged } from './repo.mts';
+import { exists, readJson, writeIfChanged } from './repo.mts';
 
 export const configFileName = 'extension.config.json';
-const templateDir = path.join(repoRoot, 'extension-runtime/template');
+const templateDir = path.join(import.meta.dirname, '../templates/sync');
 const runtimePackage = '@internal/extension-runtime';
 
-/** Template files whose names can't be used in `extension-runtime/template/`. */
+/** Template files whose names can't be used in `templates/sync/`. */
 const renamedTemplateFiles: Record<string, string> = {
     gitignore: '.gitignore',
 };

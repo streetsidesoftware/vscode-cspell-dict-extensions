@@ -82,7 +82,7 @@ Follow these steps in order:
 
    The generator then creates `extensions/<name>/` with all of the extension's files. It installs the dictionaries or parsers, which can take a minute or two. It ends with **Created extensions/<name>** in green.
 
-   If you already know every answer, the [generator README](../../generator-cspell-dicts-extensions/README.md) shows how to give them as options.
+   If you already know every answer, the [generator README](../../extension-tools/README.md#create-an-extension) shows how to give them as options.
 
 3. **Review `README.md`.** It becomes the extension's page on the VS Code Marketplace. The generator writes a complete README. Add anything users should know, such as where the words come from. Don't edit the sections between the `<!--- @@inject … --->` comments. They're filled in for you.
 

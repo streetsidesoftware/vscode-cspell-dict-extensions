@@ -12,9 +12,9 @@
 
 import { parseArgs } from 'node:util';
 
-import { type CSpellPackage, fetchCSpellPackages, filterPackages } from './lib/cspellPackages.mts';
-import { findExistingExtensions } from './lib/existingExtensions.mts';
-import { extensionsDir } from './lib/repo.mts';
+import { type CSpellPackage, fetchCSpellPackages, filterPackages } from './src/cspellPackages.mts';
+import { findExistingExtensions } from './src/existingExtensions.mts';
+import { extensionsDir } from './src/repo.mts';
 
 export interface ListedPackage extends CSpellPackage {
     /** The extension that includes the package, e.g. `swedish`, or `ships with cspell`. Empty when there is none. */

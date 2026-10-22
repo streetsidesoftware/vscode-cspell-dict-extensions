@@ -6,7 +6,7 @@ description: 'Creates a new dictionary extension in this repo, from request to o
 # new-extension
 
 Takes a request such as "add an extension for Thai" to one pull request. The steps for contributors are in
-`docs/guides/new-extension.md`. The generator's options are in `generator-cspell-dicts-extensions/README.md`. Read
+`docs/guides/new-extension.md`. The generator's options are in `extension-tools/README.md`. Read
 both first. This skill runs the generator without questions (`--yes`). It adds the points where you stop and ask the
 user.
 

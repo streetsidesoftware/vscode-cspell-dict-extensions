@@ -4,7 +4,7 @@
     "test-runner",
     "extension-runtime",
     "extensions/*",
-    "generator-cspell-dicts-extensions"
+    "extension-tools"
   ],
   "version": "independent",
   "command": {

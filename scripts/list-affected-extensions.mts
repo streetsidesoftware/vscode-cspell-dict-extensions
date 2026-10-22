@@ -17,8 +17,9 @@
 import { text } from 'node:stream/consumers';
 import { parseArgs } from 'node:util';
 
+import { listExtensionRepoPaths } from '../extension-tools/api-node-only.mts';
+
 import { extensionsToTest } from './lib/extensionsToTest.mts';
-import { listExtensionRepoPaths } from './lib/repo.mts';
 
 const { values } = parseArgs({ options: { all: { type: 'boolean', default: false } } });
 

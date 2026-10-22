@@ -7,5 +7,5 @@
         "erasableSyntaxOnly": true,
         "verbatimModuleSyntax": true
     },
-    "include": ["src"]
+    "include": ["api.ts", "src"]
 }

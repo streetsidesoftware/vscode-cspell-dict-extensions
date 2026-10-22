@@ -12,7 +12,9 @@ import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { parseArgs, styleText } from 'node:util';
 
-import { exists, extensionsDir, repoRoot } from './lib/repo.mts';
+import { extensionsDir } from '../extension-tools/api.mts';
+
+import { exists, repoRoot } from './lib/repo.mts';
 
 interface Check {
     name: string;

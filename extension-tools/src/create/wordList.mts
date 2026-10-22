@@ -8,9 +8,9 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
-import type { ExtensionConfig } from '../../extension-runtime/src/config.ts';
-import type { DictionaryState } from '../../scripts/lib/dictionaryState.mts';
-import { dictionaryStates } from '../../scripts/lib/syncExtension.mts';
+import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
+import type { DictionaryState } from '../dictionaryState.mts';
+import { dictionaryStates } from '../syncExtension.mts';
 import { npmOutput } from './exec.mts';
 import type { Answers } from './questions.mts';
 import { dictionaryCommands, installedSentence, json, readme } from './writeExtension.mts';

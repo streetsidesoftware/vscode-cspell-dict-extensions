@@ -8,8 +8,10 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import yaml from 'yaml';
 
+import { listExtensionRepoPaths } from '../extension-tools/api.mts';
+
 import { format } from './lib/format.mts';
-import { listExtensionRepoPaths, repoRoot } from './lib/repo.mts';
+import { repoRoot } from './lib/repo.mts';
 
 const workflowsDir = path.join(repoRoot, '.github/workflows');
 

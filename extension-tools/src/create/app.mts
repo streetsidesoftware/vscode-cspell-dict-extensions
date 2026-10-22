@@ -7,9 +7,10 @@ import { styleText } from 'node:util';
 
 import { Command, Option } from 'commander';
 
-import { type CSpellPackage, fetchCSpellPackages } from '../../scripts/lib/cspellPackages.mts';
-import { findExistingExtensions } from '../../scripts/lib/existingExtensions.mts';
-import { fetchArticle } from '../../scripts/lib/wikipedia.mts';
+import { type CSpellPackage, fetchCSpellPackages } from '../cspellPackages.mts';
+import { findExistingExtensions } from '../existingExtensions.mts';
+import { extensionsDir, repoRoot } from '../repo.mts';
+import { fetchArticle } from '../wikipedia.mts';
 import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
 import { inquirerPrompter, noPrompter, type Prompter } from './prompt.mts';
@@ -24,10 +25,6 @@ import {
 } from './sample.mts';
 import { addNameWords, setUpWordList } from './wordList.mts';
 import { extensionConfig, writeExtension } from './writeExtension.mts';
-
-/** The repository root. */
-const repoRoot = path.resolve(import.meta.dirname, '../..');
-const extensionsDir = path.join(repoRoot, 'extensions');
 
 /**
  * Run the generator.

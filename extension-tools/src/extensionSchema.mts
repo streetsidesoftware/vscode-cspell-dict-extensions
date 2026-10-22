@@ -7,7 +7,7 @@ import path from 'node:path';
 import { Ajv, type ValidateFunction } from 'ajv';
 import * as tsj from 'ts-json-schema-generator';
 
-import { duplicateCommandIds, type ExtensionConfig } from '../../extension-runtime/src/config.ts';
+import { duplicateCommandIds, type ExtensionConfig } from '../../extension-runtime/api.ts';
 
 const runtimeDir = path.resolve(import.meta.dirname, '../../extension-runtime');
 
