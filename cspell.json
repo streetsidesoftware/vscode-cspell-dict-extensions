@@ -10,6 +10,7 @@
     ],
     "useGitignore": true,
     "ignorePaths": [
+        "extensions/*/extension.js",
         ".git",
         ".gitattributes",
         ".gitignore",

@@ -8,8 +8,7 @@
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceFolder}", "${workspaceFolder}/samples"],
-            "sourceMaps": true,
-            "outFiles": ["${workspaceFolder}/out/**/*.js"],
+            "outFiles": ["${workspaceFolder}/extension.js"],
             "preLaunchTask": "npm: build"
         }
     ]

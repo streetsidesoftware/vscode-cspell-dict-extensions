@@ -30,7 +30,6 @@ import { exists, readJson, writeIfChanged } from './repo.mts';
 export const configFileName = 'extension.config.json';
 const cspellExtPath: CSpellExtPath = 'static/cspell-ext.json';
 const templateDir = path.join(import.meta.dirname, '../templates/sync');
-const runtimePackage = '@internal/extension-runtime';
 
 /** Template files whose names can't be used in `templates/sync/`. */
 const renamedTemplateFiles: Record<string, string> = {
@@ -390,11 +389,8 @@ function packageJsonSource(
         description: config.description,
         type: 'module',
         engines: { ...pkg.engines, vscode: vscodeEngine },
-        main: './out/extension.js',
+        main: './extension.js',
         contributes: { ...contributes, commands },
-        // Each extension bundles the runtime. The dependency lets release-please's node-workspace plugin release every
-        // extension when the runtime is released.
-        devDependencies: { ...pkg.devDependencies, [runtimePackage]: 'file:../../extension-runtime' },
         scripts: {
             build: 'tsdown',
             // Only `src/custom.ts` is the extension's own code; the shared code is checked in `extension-runtime/`.

@@ -28,7 +28,7 @@
   "contributors": [],
   "publisher": "streetsidesoftware",
   "type": "module",
-  "main": "./out/extension.js",
+  "main": "./extension.js",
   "scripts": {
     "build": "tsdown",
     "clean": "node ../../scripts/clean.mts",
@@ -66,9 +66,6 @@
   ],
   "dependencies": {
     "@cspell/dict-nl-nl": "^2.4.2"
-  },
-  "devDependencies": {
-    "@internal/extension-runtime": "file:../../extension-runtime"
   },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
