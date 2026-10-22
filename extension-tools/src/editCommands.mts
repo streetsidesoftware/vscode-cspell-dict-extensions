@@ -8,13 +8,17 @@
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 
-import { type Command, Option } from 'commander';
+import { Option } from 'commander';
+import type { Command } from 'commander';
 
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
-import { type Choice, inquirerPrompter, type Prompter } from './create/prompt.mts';
+import { inquirerPrompter } from './create/prompt.mts';
+import type { Choice, Prompter } from './create/prompt.mts';
 import { findDrift } from './drift.mts';
-import { addCommandSet, type Fields, removeCommands, setFields } from './editConfig.mts';
-import { type Extension, pickExtension, readConfig, writeConfig } from './extensionConfig.mts';
+import { addCommandSet, removeCommands, setFields } from './editConfig.mts';
+import type { Fields } from './editConfig.mts';
+import { pickExtension, readConfig, writeConfig } from './extensionConfig.mts';
+import type { Extension } from './extensionConfig.mts';
 import { factsText, readFacts } from './info.mts';
 import { removeExtension } from './removeExtension.mts';
 import { addSampleArticles, addSampleFiles, listSamples, removeSample } from './samples.mts';

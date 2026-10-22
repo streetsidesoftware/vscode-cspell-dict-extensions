@@ -24,16 +24,11 @@ import { injectMarkdown } from 'inject-markdown';
 import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
-import {
-    type DictionaryExt,
-    type LanguageSetting,
-    type Override,
-    readDictionaries,
-    readImports,
-    splitList,
-} from './dictionaries.mts';
+import { readDictionaries, readImports, splitList } from './dictionaries.mts';
+import type { DictionaryExt, LanguageSetting, Override } from './dictionaries.mts';
 import type { DictionaryState } from './dictionaryState.mts';
-import { type PackageJson, withSharedFields } from './extensionHelper.mts';
+import { withSharedFields } from './extensionHelper.mts';
+import type { PackageJson } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { readConfig } from './extensionConfig.mts';
 import { format, injectProblems } from './format.mts';

@@ -7,7 +7,8 @@ import path from 'node:path';
 
 import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/api.ts';
 import { starterMarker } from './create/sample.mts';
-import { type DictionaryExt, readImports } from './dictionaries.mts';
+import { readImports } from './dictionaries.mts';
+import type { DictionaryExt } from './dictionaries.mts';
 import type { Extension } from './extensionConfig.mts';
 import type { PackageJson } from './extensionHelper.mts';
 import { readJson } from './repo.mts';

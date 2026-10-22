@@ -5,9 +5,12 @@ import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
-import { actions, commandSet, idSuffix, localeSuffix, scopes, standardCommand, type Target } from '../commandSets.mts';
-import { andList, type DictionaryState, whenOn } from '../dictionaryState.mts';
-import { type Answers, defaultLicense, type Language } from './questions.mts';
+import { actions, commandSet, idSuffix, localeSuffix, scopes, standardCommand } from '../commandSets.mts';
+import type { Target } from '../commandSets.mts';
+import { andList, whenOn } from '../dictionaryState.mts';
+import type { DictionaryState } from '../dictionaryState.mts';
+import { defaultLicense } from './questions.mts';
+import type { Answers, Language } from './questions.mts';
 import type { Sample } from './sample.mts';
 
 export const templateDir: string = path.join(import.meta.dirname, '../../templates/create');

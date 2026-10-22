@@ -6,7 +6,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
-import { type ExtensionConfigValidator, readExtensionConfigValidator } from './extensionSchema.mts';
+import { readExtensionConfigValidator } from './extensionSchema.mts';
+import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { format } from './format.mts';
 import { exists, extensionRepoPath, extensionsDir, listExtensionRepoPaths, readJson } from './repo.mts';
 
