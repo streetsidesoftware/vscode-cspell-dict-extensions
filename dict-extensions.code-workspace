@@ -4,6 +4,9 @@
             "path": "."
         },
         {
+            "path": "extension-tools"
+        },
+        {
             "path": "extensions/ancient-greek"
         },
         {
@@ -170,9 +173,6 @@
         },
         {
             "path": "extensions/win32"
-        },
-        {
-            "path": "generator-cspell-dicts-extensions"
         },
         {
             "path": "test-runner"
