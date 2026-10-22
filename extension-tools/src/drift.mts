@@ -3,7 +3,8 @@
  */
 
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
-import { type DictionaryExt, readDictionaries } from './dictionaries.mts';
+import { readDictionaries } from './dictionaries.mts';
+import type { DictionaryExt } from './dictionaries.mts';
 
 /**
  * The commands for a dictionary nothing defines, and the locales no language setting declares: in a command and in

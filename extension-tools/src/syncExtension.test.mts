@@ -10,7 +10,8 @@ import { sortPackageJson } from 'sort-package-json';
 
 import { readExtensionConfigValidator } from './extensionSchema.mts';
 import { whenOn } from './dictionaryState.mts';
-import { dictionaryStates, type FileChange, syncExtension, syncPackageJson } from './syncExtension.mts';
+import { dictionaryStates, syncExtension, syncPackageJson } from './syncExtension.mts';
+import type { FileChange } from './syncExtension.mts';
 
 const config = {
     name: 'demo',

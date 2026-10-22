@@ -3,7 +3,8 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { articleMarkdown, fetchArticle, type GetJson } from './wikipedia.mts';
+import { articleMarkdown, fetchArticle } from './wikipedia.mts';
+import type { GetJson } from './wikipedia.mts';
 
 const api = (language: string) =>
     `https://${language}.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&`;

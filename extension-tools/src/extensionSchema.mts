@@ -2,7 +2,8 @@
  * The validation of `extension.config.json`, against the schema the runtime builds from its `ExtensionConfig` type.
  */
 
-import { Ajv, type ValidateFunction } from 'ajv';
+import { Ajv } from 'ajv';
+import type { ValidateFunction } from 'ajv';
 
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
 import { readJson } from './repo.mts';

@@ -1,7 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { injectMarkdown, type InjectMarkdownResult } from 'inject-markdown';
+import { injectMarkdown } from 'inject-markdown';
+import type { InjectMarkdownResult } from 'inject-markdown';
 import * as prettier from 'prettier';
 
 import { repoRoot } from './repo.mts';

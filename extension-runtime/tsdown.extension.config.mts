@@ -1,7 +1,8 @@
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 
-import { defineConfig, type UserConfig } from 'tsdown';
+import { defineConfig } from 'tsdown';
+import type { UserConfig } from 'tsdown';
 
 const runtimeSrc = path.resolve(import.meta.dirname, 'src');
 

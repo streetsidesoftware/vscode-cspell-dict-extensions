@@ -2,7 +2,8 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
-import { type CSpellPackage, filterPackages as matchPackages } from '../cspellPackages.mts';
+import { filterPackages as matchPackages } from '../cspellPackages.mts';
+import type { CSpellPackage } from '../cspellPackages.mts';
 import {
     canonicalLocale,
     englishLanguageName,

@@ -2,7 +2,8 @@ import assert from 'node:assert';
 import { basename, resolve } from 'node:path';
 
 import { suite, test } from 'mocha';
-import { commands, type Diagnostic, languages, Position, Uri, window } from 'vscode';
+import { commands, languages, Position, Uri, window } from 'vscode';
+import type { Diagnostic } from 'vscode';
 
 import {
     activateExtension,

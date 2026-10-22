@@ -4,5 +4,6 @@
  */
 
 export type { ExtensionKind } from '../extension-runtime/api.ts';
-export { type ExtensionInfo, getExtensionInfo } from './src/extensionHelper.mts';
+export type { ExtensionInfo } from './src/extensionHelper.mts';
+export { getExtensionInfo } from './src/extensionHelper.mts';
 export { listExtensionRepoPaths } from './src/repo.mts';

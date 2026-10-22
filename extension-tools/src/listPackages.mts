@@ -1,4 +1,5 @@
-import { type CSpellPackage, fetchCSpellPackages, filterPackages } from './cspellPackages.mts';
+import { fetchCSpellPackages, filterPackages } from './cspellPackages.mts';
+import type { CSpellPackage } from './cspellPackages.mts';
 import { findExistingExtensions } from './existingExtensions.mts';
 import { extensionsDir } from './repo.mts';
 

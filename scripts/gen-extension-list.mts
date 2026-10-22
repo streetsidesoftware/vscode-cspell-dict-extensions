@@ -11,12 +11,8 @@ import path from 'node:path';
 import type { ListItem, PhrasingContent, RootContent } from 'mdast';
 import { toMarkdown } from 'mdast-util-to-markdown';
 
-import {
-    type ExtensionInfo,
-    type ExtensionKind,
-    getExtensionInfo,
-    listExtensionRepoPaths,
-} from '../extension-tools/api.mts';
+import { getExtensionInfo, listExtensionRepoPaths } from '../extension-tools/api.mts';
+import type { ExtensionInfo, ExtensionKind } from '../extension-tools/api.mts';
 
 import { heading, link, list, listItem, paragraph, root, strong, text } from './lib/mdastBuilder.mts';
 import { repoRoot } from './lib/repo.mts';

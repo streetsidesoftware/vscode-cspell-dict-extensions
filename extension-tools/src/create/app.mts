@@ -7,23 +7,20 @@ import { styleText } from 'node:util';
 
 import { Command, Option } from 'commander';
 
-import { type CSpellPackage, fetchCSpellPackages } from '../cspellPackages.mts';
+import { fetchCSpellPackages } from '../cspellPackages.mts';
+import type { CSpellPackage } from '../cspellPackages.mts';
 import { findExistingExtensions } from '../existingExtensions.mts';
 import { extensionsDir, repoRoot } from '../repo.mts';
 import { syncExtensions } from '../syncExtensions.mts';
 import { fetchArticle } from '../wikipedia.mts';
 import { npm } from './exec.mts';
 import { languageOf } from './locales.mts';
-import { inquirerPrompter, noPrompter, type Prompter } from './prompt.mts';
-import { type Answers, askQuestions, defaultLicense, kinds, type Options } from './questions.mts';
-import {
-    askSampleFile,
-    defaultSampleTitle,
-    fileSamples,
-    languageSamples,
-    type Sample,
-    starterMarker,
-} from './sample.mts';
+import { inquirerPrompter, noPrompter } from './prompt.mts';
+import type { Prompter } from './prompt.mts';
+import { askQuestions, defaultLicense, kinds } from './questions.mts';
+import type { Answers, Options } from './questions.mts';
+import { askSampleFile, defaultSampleTitle, fileSamples, languageSamples, starterMarker } from './sample.mts';
+import type { Sample } from './sample.mts';
 import { addNameWords, setUpWordList } from './wordList.mts';
 import { extensionConfig, writeExtension } from './writeExtension.mts';
 

@@ -8,15 +8,8 @@ import { describe, it } from 'node:test';
 
 import type { Article } from '../wikipedia.mts';
 import { noPrompter } from './prompt.mts';
-import {
-    askSampleFile,
-    fileSamples,
-    languageSamples,
-    sampleFile,
-    type SampleContext,
-    starterMarker,
-    starterSample,
-} from './sample.mts';
+import { askSampleFile, fileSamples, languageSamples, sampleFile, starterMarker, starterSample } from './sample.mts';
+import type { SampleContext } from './sample.mts';
 import { scriptedPrompter } from './test-helpers.mts';
 
 function article(title: string): Article {

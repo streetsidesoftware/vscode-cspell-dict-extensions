@@ -4,7 +4,8 @@ import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { type Article, articleMarkdown } from '../wikipedia.mts';
+import { articleMarkdown } from '../wikipedia.mts';
+import type { Article } from '../wikipedia.mts';
 import type { Prompter } from './prompt.mts';
 import { UsageError } from './questions.mts';
 
