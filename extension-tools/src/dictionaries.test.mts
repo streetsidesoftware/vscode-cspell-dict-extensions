@@ -1,6 +1,3 @@
-import assert from 'node:assert/strict';
-import { describe, it } from 'node:test';
-
 import type {
     CSpellSettings,
     DictionaryDefinitionBase,
@@ -19,7 +16,8 @@ type Misfit<T, U> = {
     [K in keyof T & keyof U]: NonNullable<T[K]> extends NonNullable<U[K]> ? never : K;
 }[keyof T & keyof U];
 
-// Checked by `tsc`: each shadow type names only fields cspell has, with types cspell accepts.
+// Checked by `tsc` (`npm run check-types`), not at run time: each shadow type names only fields cspell has, with types
+// cspell accepts.
 export type Checks = [
     None<Extra<DictionaryExt, CSpellSettings>>,
     None<Misfit<Omit<DictionaryExt, 'dictionaryDefinitions' | 'languageSettings' | 'overrides'>, CSpellSettings>>,
@@ -30,10 +28,3 @@ export type Checks = [
     None<Extra<Override, OverrideSettings>>,
     None<Misfit<Override, OverrideSettings>>,
 ];
-
-describe('the shadow types of cspell-ext.json', () => {
-    it('match @cspell/cspell-types', () => {
-        // The checks are the `Checks` type above; `tsc` fails when one doesn't hold.
-        assert.ok(true);
-    });
-});

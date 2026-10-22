@@ -47,7 +47,8 @@ program
         for (const { file, message } of drift) console.log(`${file}: ${message}`);
         console.log(`Checked ${plural(count, 'extension')}.`);
         if (changes.length) error('Run `extension-tools/cli.mts sync` and commit the changes.');
-        if (drift.length) error('Change the commands or the locale to match the packages.');
+        if (drift.length)
+            error('Change the commands or the locale, or the packages, so that each is defined or declared.');
     });
 
 program
