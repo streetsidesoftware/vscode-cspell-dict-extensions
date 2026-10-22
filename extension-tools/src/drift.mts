@@ -3,7 +3,7 @@
  */
 
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
-import { readDictionaries } from './dictionaries.mts';
+import { readSources } from './dictionaries.mts';
 import type { DictionaryExt } from './dictionaries.mts';
 
 /**
@@ -13,7 +13,7 @@ import type { DictionaryExt } from './dictionaries.mts';
  * @returns one message for each.
  */
 export async function findDrift(extensionDir: string, config: ExtensionConfig): Promise<string[]> {
-    const exts = [...(await readDictionaries(extensionDir, config)), config.cspell as DictionaryExt];
+    const exts = (await readSources(extensionDir, config)).map((source) => source.ext);
     const dictionaries = new Set(exts.flatMap((ext) => (ext.dictionaryDefinitions ?? []).map((d) => d.name)));
     const locales = new Set(exts.flatMap(declaredLocales).map(localeKey));
     const undeclared = (value: string) => localeList(value).filter((locale) => !locales.has(localeKey(locale)));

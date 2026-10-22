@@ -1,77 +1,72 @@
 /**
- * The `cspell-ext.json` of the packages an extension imports: the dictionaries and the settings that turn them on.
+ * The cspell config an extension ships, read by cspell-lib: the config's own `cspell` and every file it imports, with
+ * their imports. The dictionaries and the settings that turn them on.
  */
 
-import fs from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-import { parse as parseJsonc } from 'jsonc-parser';
+import { extractImportErrors, getSources, resolveConfigFileImports } from 'cspell-lib';
+import type { CSpellSettings, LanguageSetting as CSpellLanguageSetting, OverrideSettings } from 'cspell-lib';
 
-import type { ExtensionConfig } from '../../extension-runtime/api.ts';
-import { extensionRepoPath } from './repo.mts';
+import type { CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
+import { extensionRepoPath, repoRoot } from './repo.mts';
 
-/** The parts of a `cspell-ext.json` the tools read. */
-export interface DictionaryExt {
-    engines?: Record<string, string>;
-    /** Not followed. The table stops on a package that imports others; see `importedRows` in the sync. */
-    import?: string[];
-    dictionaryDefinitions?: DictionaryDefinition[];
-    dictionaries?: string[];
-    languageSettings?: LanguageSetting[];
-    overrides?: Override[];
-}
+/** The parts of a cspell config file the tools read. */
+export type DictionaryExt = Pick<
+    CSpellSettings,
+    'engines' | 'dictionaryDefinitions' | 'dictionaries' | 'languageSettings' | 'overrides'
+>;
+export type LanguageSetting = CSpellLanguageSetting;
+export type Override = OverrideSettings;
 
-export interface DictionaryDefinition {
-    name: string;
-}
-
-export interface LanguageSetting {
-    // cspell takes a comma-separated list or an array.
-    languageId?: string | string[];
-    locale?: string | string[];
-    /** The deprecated spelling of `locale`. */
-    local?: string | string[];
-    dictionaries?: string[];
-}
-
-export interface Override {
-    filename: string | string[];
-    /** Sets the file type of the matching files. It doesn't select them. */
-    languageId?: string | string[];
-    /** Sets the locale of the matching files. It doesn't select them. */
-    language?: string;
-    dictionaries?: string[];
-}
-
-/** A `cspell-ext.json` and where it comes from. */
+/** One config file cspell reads for the extension. */
 export interface Source {
-    /** The import, e.g. `@cspell/dict-sv/cspell-ext.json`, or `extension.config.json` for the extension's `cspell`. */
+    /** The file as a repo path, or `extension.config.json` for the config's own `cspell`. */
     name: string;
+    /** The package the file is in, e.g. `@cspell/dict-sv`, and its folder; `undefined` for the config's own `cspell`. */
+    package: { name: string; dir: string } | undefined;
+    /** The file's own settings, without its imports. */
     ext: DictionaryExt;
 }
 
-/** The `cspell-ext.json` of each package in `cspell.import`, read from the extension's `node_modules`. */
-export async function readDictionaries(extensionDir: string, config: ExtensionConfig): Promise<DictionaryExt[]> {
-    return (await readImports(extensionDir, config)).map((source) => source.ext);
+const cspellExtPath: CSpellExtPath = 'static/cspell-ext.json';
+
+/**
+ * Every config file cspell reads for the extension, in cspell's order: the imported files, each after the files it
+ * imports, then the config's own `cspell` last. It reads the config in memory: nothing needs to be written first.
+ */
+export async function readSources(extensionDir: string, config: ExtensionConfig): Promise<Source[]> {
+    // Where the extension's config ends up; cspell-lib resolves the imports from there.
+    const url = pathToFileURL(path.join(extensionDir, cspellExtPath));
+    const settings = await resolveConfigFileImports({ url, settings: config.cspell as CSpellSettings });
+    const errors = extractImportErrors(settings);
+    if (errors.length) {
+        const lines = errors.map((e) => `  ${e.filename}: ${e.error.message}`);
+        throw new Error(
+            `${extensionRepoPath(extensionDir)}: can't read an import. Run \`npm install\` first.\n${lines.join('\n')}`,
+        );
+    }
+    return getSources(settings).map((source) => {
+        // The config in memory is the one source without a file.
+        const file = source.source?.filename;
+        if (!file) return { name: 'extension.config.json', package: undefined, ext: source };
+        return { name: path.relative(repoRoot, file), package: packageOf(file), ext: source };
+    });
 }
 
-/** The `cspell-ext.json` of each package in `cspell.import`, with the import it comes from. */
+/** The imported files only, without the config's own `cspell`. */
 export async function readImports(extensionDir: string, config: ExtensionConfig): Promise<Source[]> {
-    const imports = (config.cspell as { import?: string[] }).import ?? [];
-    const require = createRequire(path.join(extensionDir, 'package.json'));
-    const sources: Source[] = [];
-    for (const spec of imports.filter((spec) => !spec.startsWith('.'))) {
-        let file: string;
-        try {
-            file = require.resolve(spec);
-        } catch {
-            throw new Error(`${extensionRepoPath(extensionDir)}: can't find "${spec}". Run \`npm install\` first.`);
-        }
-        // A dictionary's cspell-ext.json may have comments.
-        sources.push({ name: spec, ext: parseJsonc(await fs.readFile(file, 'utf8')) as DictionaryExt });
-    }
-    return sources;
+    return (await readSources(extensionDir, config)).filter((source) => source.name !== 'extension.config.json');
+}
+
+/** The package a file in `node_modules` is in: `…/node_modules/@cspell/dict-sv/cspell-ext.json` is `@cspell/dict-sv`. */
+function packageOf(file: string): { name: string; dir: string } | undefined {
+    const parts = file.split(path.sep);
+    const at = parts.lastIndexOf('node_modules');
+    if (at < 0) return undefined;
+    const end = at + (parts[at + 1]?.startsWith('@') ? 3 : 2);
+    return { name: parts.slice(at + 1, end).join('/'), dir: parts.slice(0, end).join(path.sep) };
 }
 
 /** The items of a setting cspell reads as a list: an array, or a comma-separated string. */

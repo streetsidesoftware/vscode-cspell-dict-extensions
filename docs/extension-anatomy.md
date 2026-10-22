@@ -45,12 +45,12 @@ The sync also sets the `package.json` fields every extension shares: `private`, 
 
 The sync checks every `extension.config.json` against the runtime's schema first.
 
+The tools read the extension's cspell configuration with [cspell-lib](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-lib), the way Code Spell Checker does: the config's `cspell` in memory, every file it imports, and the files those import.
+
 The sync stops with an error on a dictionary setting that the README's table would show wrongly:
 
 - A `!name`, which turns a dictionary off.
-- A language setting with `local`.
 - An override that names dictionaries and sets `language` or `languageId`. These set the locale and file type of the files it matches. They don't select the files.
-- A package that imports other packages.
 
 ## Checks
 

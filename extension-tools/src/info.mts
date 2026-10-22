@@ -7,8 +7,8 @@ import path from 'node:path';
 
 import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/api.ts';
 import { starterMarker } from './create/sample.mts';
-import { readImports } from './dictionaries.mts';
-import type { DictionaryExt } from './dictionaries.mts';
+import { readSources } from './dictionaries.mts';
+import type { Source as ConfigSource } from './dictionaries.mts';
 import type { Extension } from './extensionConfig.mts';
 import type { PackageJson } from './extensionHelper.mts';
 import { readJson } from './repo.mts';
@@ -43,12 +43,7 @@ export interface Source {
 }
 
 export async function readFacts({ folder, dir }: Extension, config: ExtensionConfig): Promise<Facts> {
-    const imports = await readImports(dir, config);
-    const own = config.cspell as DictionaryExt;
-    const sources = [
-        ...(await Promise.all(imports.map(({ name, ext }) => packageSource(dir, packageName(name), ext)))),
-        source('extension.config.json', own),
-    ];
+    const sources = await Promise.all((await readSources(dir, config)).map(toSource));
     const samples = await listSamples(dir);
     return {
         folder,
@@ -66,24 +61,12 @@ export async function readFacts({ folder, dir }: Extension, config: ExtensionCon
     };
 }
 
-/** `@cspell/dict-sv/cspell-ext.json` is in `@cspell/dict-sv`. */
-function packageName(spec: string): string {
-    const parts = spec.split('/');
-    return parts.slice(0, spec.startsWith('@') ? 2 : 1).join('/');
-}
-
-async function packageSource(extensionDir: string, name: string, ext: DictionaryExt): Promise<Source> {
-    const pkgFile = path.join(extensionDir, 'node_modules', name, 'package.json');
-    const version = await readJson<PackageJson>(pkgFile).then(
-        (pkg) => pkg.version,
-        () => undefined,
-    );
-    return { ...source(name, ext), ...(version ? { version } : {}) };
-}
-
-function source(name: string, ext: DictionaryExt): Source {
+/** A file cspell reads, named by its package, with the package's installed version. */
+async function toSource({ name, package: pkg, ext }: ConfigSource): Promise<Source> {
+    const version = pkg && (await readJson<PackageJson>(path.join(pkg.dir, 'package.json'))).version;
     return {
-        name,
+        name: pkg?.name ?? name,
+        ...(version ? { version } : {}),
         dictionaries: (ext.dictionaryDefinitions ?? []).map((definition) => definition.name),
         locales: [...new Set((ext.languageSettings ?? []).flatMap((setting) => [setting.locale ?? []].flat()))],
     };
