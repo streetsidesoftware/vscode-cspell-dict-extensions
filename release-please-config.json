@@ -67,11 +67,6 @@
             "hidden": true
         }
     ],
-    "plugins": [
-        {
-            "type": "node-workspace"
-        }
-    ],
     "packages": {
         ".": {
             "component": "vscode-cspell-dict-extensions",
