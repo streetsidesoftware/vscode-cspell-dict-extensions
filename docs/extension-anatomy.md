@@ -29,11 +29,12 @@ release-please writes `CHANGELOG.md` and the `version` in `package.json`.
 
 Don't edit these; `npm run sync:extensions` overwrites them.
 
-- **Tool configs:** `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from [`templates/sync/`](../extension-tools/templates/sync). Also `tsconfig.json`, but only when the extension has a `src/custom.ts`; otherwise the sync removes it.
+- **Tool configs:** `tsdown.config.ts`, `.vscode/*` and `.gitignore`, copied from [`templates/sync/`](../extension-tools/templates/sync). Also `tsconfig.json`, but only when the extension has a `src/custom.ts`; otherwise the sync removes it.
 - **`static/cspell-ext.json`:** the `cspell` settings from `extension.config.json`, which the extension registers with Code Spell Checker.
 - **`static/commands.json`:** the commands, for the README's table. Removed when there are none.
 - **`static/dictionaries.json`:** for the README's table, one row for each dictionary a setting names, with the setting's `locale`, `languageId` and `glob` as written. The settings are the top-level `dictionaries`, the language settings and the overrides, read from the installed dictionaries and the extension's `cspell`. Removed when there are none, and never written for a bundle.
-- **`package.json` fields:** `name`, `displayName`, `description`, `type`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)), `main`, `contributes.commands` and `scripts`.
+- **`package.json` fields:** `name`, `displayName`, `description`, `type`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)), `main`, `files`, `contributes.commands` and `scripts`.
+- **`package.json` `files`:** what vsce packages, besides `package.json` and `README.md`. It lists `LICENSE`, `extension.js`, the `icon`, `static/cspell-ext.json` and `node_modules/**`. It also lists `CHANGELOG.md` and `COPYING` when the extension has them. vsce only takes the production dependencies from `node_modules`. The sync removes `.vscodeignore`, because vsce refuses an extension that has both.
 - **README sections** between `@@inject` markers, filled by [inject-markdown](https://github.com/streetsidesoftware/inject-markdown) from the shared templates in [`static/`](../static) and the extension's own `static/` files:
   - `<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->`
   - `<!--- @@inject-table: ./static/commands.json --->`

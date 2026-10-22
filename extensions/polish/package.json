@@ -90,5 +90,13 @@
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/polish/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/polish/"
-  }
+  },
+  "files": [
+    "LICENSE",
+    "CHANGELOG.md",
+    "extension.js",
+    "images/SpellCheck.png",
+    "static/cspell-ext.json",
+    "node_modules/**"
+  ]
 }
