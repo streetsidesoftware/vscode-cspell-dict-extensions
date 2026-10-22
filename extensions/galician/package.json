@@ -30,6 +30,14 @@
   "publisher": "streetsidesoftware",
   "type": "module",
   "main": "./extension.js",
+  "files": [
+    "LICENSE",
+    "CHANGELOG.md",
+    "extension.js",
+    "images/SpellCheck.png",
+    "static/cspell-ext.json",
+    "node_modules/**"
+  ],
   "scripts": {
     "build": "tsdown",
     "clean": "node ../../scripts/clean.mts",
@@ -90,13 +98,5 @@
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/galician/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/galician/"
-  },
-  "files": [
-    "LICENSE",
-    "CHANGELOG.md",
-    "extension.js",
-    "images/SpellCheck.png",
-    "static/cspell-ext.json",
-    "node_modules/**"
-  ]
+  }
 }

@@ -30,6 +30,15 @@
   "publisher": "streetsidesoftware",
   "type": "module",
   "main": "./extension.js",
+  "files": [
+    "LICENSE",
+    "CHANGELOG.md",
+    "COPYING",
+    "extension.js",
+    "images/SpellCheck.png",
+    "static/cspell-ext.json",
+    "node_modules/**"
+  ],
   "scripts": {
     "build": "tsdown",
     "clean": "node ../../scripts/clean.mts",
@@ -90,14 +99,5 @@
   "vsce": {
     "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/portuguese/",
     "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/portuguese/"
-  },
-  "files": [
-    "LICENSE",
-    "CHANGELOG.md",
-    "COPYING",
-    "extension.js",
-    "images/SpellCheck.png",
-    "static/cspell-ext.json",
-    "node_modules/**"
-  ]
+  }
 }
