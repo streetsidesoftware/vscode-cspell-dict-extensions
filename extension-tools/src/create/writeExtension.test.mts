@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
+import { readExtensionConfigValidator } from '../extensionSchema.mts';
 import type { Answers } from './questions.mts';
 import type { Sample } from './sample.mts';
 import {
@@ -68,6 +69,16 @@ const parser: Answers = {
 };
 
 describe('extensionConfig', () => {
+    it('writes configs the schema accepts', async () => {
+        const validate = await readExtensionConfigValidator();
+        for (const answers of [swedish, serbian, medicalTerms, parser]) {
+            validate(extensionConfig(answers, seattle.file), `extensions/${answers.name}/extension.config.json`);
+        }
+        const wordList = extensionConfig(medicalTerms, seattle.file);
+        const commands = dictionaryCommands(wordList, ['medical terms']);
+        validate({ ...wordList, commands }, 'extensions/medical-terms/extension.config.json');
+    });
+
     it('describes a language, with commands for its locale', () => {
         assert.deepEqual(extensionConfig(swedish, seattle.file), {
             $schema: '../../extension-runtime/extension.config.schema.json',

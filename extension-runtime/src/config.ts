@@ -101,7 +101,7 @@ interface ExtensionConfigBase {
      * `engines` here only to override them or the defaults in `static/engines.json`.
      */
     cspell: Record<string, unknown>;
-    /** The commands the extension contributes. */
+    /** The commands the extension registers. */
     commands: CommandConfig[];
     /**
      * Notes for maintainers: why something in this file is the way it is.

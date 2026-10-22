@@ -306,9 +306,8 @@ export async function dictionaryStates(extensionDir: string, config: ExtensionCo
             const named = allRules.filter((rule) => rule.dictionaries.includes(name));
             // `*` is every file type: `all` covers it.
             const fileTypes = unique(named.flatMap((rule) => rule.fileTypes)).filter((id) => id !== '*');
-            const locales = unique(named.flatMap((rule) => rule.locales).map(canonicalLocale));
             const all = named.some((rule) => !rule.fileTypes.length || rule.fileTypes.includes('*'));
-            return { name, all, fileTypes, locales, off: !named.length };
+            return { name, all, fileTypes, off: !named.length };
         });
 }
 
@@ -317,7 +316,6 @@ interface Rule {
     dictionaries: string[];
     /** Empty, or `*`, for every file type. */
     fileTypes: string[];
-    locales: string[];
 }
 
 /** Every setting in the configs that turns dictionaries on, as a flat list of rules. */
@@ -327,15 +325,14 @@ function rules(exts: readonly DictionaryExt[]): Rule[] {
 
 /** `dictionaries` turns its dictionaries on for every file. */
 function dictionariesRule(ext: DictionaryExt): Rule {
-    return { dictionaries: ext.dictionaries ?? [], fileTypes: [], locales: [] };
+    return { dictionaries: ext.dictionaries ?? [], fileTypes: [] };
 }
 
-/** A language setting turns its dictionaries on for its file types and locales. */
+/** A language setting turns its dictionaries on for its file types. */
 function languageSettingRule(setting: LanguageSetting): Rule {
     return {
         dictionaries: setting.dictionaries ?? [],
         fileTypes: splitList(setting.languageId),
-        locales: splitList(setting.locale),
     };
 }
 
@@ -345,15 +342,6 @@ function splitList(list: string | string[] | undefined): string[] {
         .flatMap((item) => item.split(','))
         .map((item) => item.trim())
         .filter(Boolean);
-}
-
-/** A locale as canonical BCP 47 (i.e. `sv_SE` → `sv-SE`), or as written when it isn't a valid tag (i.e. `fr-90`). */
-function canonicalLocale(locale: string): string {
-    try {
-        return Intl.getCanonicalLocales(locale.replaceAll('_', '-'))[0] ?? locale;
-    } catch {
-        return locale;
-    }
 }
 
 function unique(values: string[]): string[] {

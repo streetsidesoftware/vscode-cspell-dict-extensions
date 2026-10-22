@@ -123,17 +123,23 @@ const actions = ['enable', 'disable'] as const;
 type Scope = (typeof scopes)[number];
 type Action = (typeof actions)[number];
 
+/** What a set of commands turns on and off. */
+interface Target {
+    /** The extension's `name`, which starts the ID. */
+    name: string;
+    /** Names what the commands turn on in the title, e.g. `Serbian (Cyrillic)`. */
+    label: string;
+    /** Added to the ID after the action, e.g. `Cyrl`. */
+    suffix: string;
+    toggle: 'locale' | 'dictionary';
+}
+
 /**
  * A command with the standard ID and title, e.g. `cSpellExt_swedish.enableWorkspace` titled `Enable Swedish Spell
  * Checker Dictionary in Workspace`.
- * @param suffix - added to the ID after the action, e.g. `Cyrl`.
- * @param label - names what the command turns on in the title, e.g. `Serbian (Cyrillic)`.
  */
 function standardCommand(
-    name: string,
-    label: string,
-    suffix: string,
-    toggle: 'locale' | 'dictionary',
+    { name, label, suffix, toggle }: Target,
     value: string,
     action: Action,
     scope: Scope,
@@ -159,8 +165,9 @@ export function localeCommands(
 ): CommandConfig[] {
     const { name, friendlyName } = answers;
     const value = { enable: answers.locale, disable: answers.locales.join(',') };
+    const target: Target = { name, label: friendlyName, suffix: '', toggle: 'locale' };
     const main = scopes.flatMap((scope) =>
-        actions.map((action) => standardCommand(name, friendlyName, '', 'locale', value[action], action, scope)),
+        actions.map((action) => standardCommand(target, value[action], action, scope)),
     );
     return [...main, ...answers.languages.flatMap((language) => languageCommands(name, language))];
 }
@@ -172,9 +179,8 @@ export function localeCommands(
 export function languageCommands(name: string, language: Language): CommandConfig[] {
     const subtags = language.locale.split('-').slice(1).join('') || languageOf(language.locale);
     const suffix = subtags.slice(0, 1).toUpperCase() + subtags.slice(1);
-    return scopes.flatMap((scope) =>
-        actions.map((action) => standardCommand(name, language.name, suffix, 'locale', language.locale, action, scope)),
-    );
+    const target: Target = { name, label: language.name, suffix, toggle: 'locale' };
+    return scopes.flatMap((scope) => actions.map((action) => standardCommand(target, language.locale, action, scope)));
 }
 
 /**
@@ -196,11 +202,8 @@ export function dictionaryCommands(
                   .split(/[^\p{L}\p{N}]+/u)
                   .map((part) => part.slice(0, 1).toUpperCase() + part.slice(1))
                   .join('');
-        return scopes.flatMap((scope) =>
-            actions.map((action) =>
-                standardCommand(config.name, label, suffix, 'dictionary', dictionary, action, scope),
-            ),
-        );
+        const target: Target = { name: config.name, label, suffix, toggle: 'dictionary' };
+        return scopes.flatMap((scope) => actions.map((action) => standardCommand(target, dictionary, action, scope)));
     });
 }
 

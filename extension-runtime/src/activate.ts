@@ -67,8 +67,10 @@ function runCommand(command: CommandConfig, extension: Extension): Promise<void>
             return getApi(extension).then((api) =>
                 enable ? api?.enableLanguageId(command.value) : api?.disableLanguageId(command.value),
             );
-        case 'dictionary':
-            return toggleDictionary(command.value, enable, command.scope === 'global');
+        case 'dictionary': {
+            const isGlobal = command.scope === 'global';
+            return toggleDictionary(command.value, enable, isGlobal);
+        }
     }
 }
 

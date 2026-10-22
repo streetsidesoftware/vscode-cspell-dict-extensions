@@ -12,8 +12,5 @@
     "check-types": "tsc -p ."
   },
   "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "ts-json-schema-generator": "^2.9.0"
-  }
+  "license": "MIT"
 }

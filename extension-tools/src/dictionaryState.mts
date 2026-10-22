@@ -11,8 +11,6 @@ export interface DictionaryState {
     all: boolean;
     /** The file types (VS Code language IDs) that turn it on, such as `clojure`. `*` is every file type. */
     fileTypes: string[];
-    /** The locales that turn it on, for a natural language. */
-    locales: string[];
     /** Nothing turns it on: users turn it on in their settings, or with the extension's commands. */
     off: boolean;
 }

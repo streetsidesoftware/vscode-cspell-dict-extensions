@@ -42,7 +42,7 @@ Don't edit these; `npm run sync:extensions` overwrites them.
 
 `npm run tool:fix-extensions`, which the generator runs, also sets the `package.json` fields every extension shares: `private`, `repository`, `publisher`, `author`, `bugs`, and the `vsce` base URLs.
 
-The sync also regenerates the schema from the `ExtensionConfig` type first, and checks every `extension.config.json` against it.
+The sync checks every `extension.config.json` against the runtime's schema first.
 
 ## Engines
 
