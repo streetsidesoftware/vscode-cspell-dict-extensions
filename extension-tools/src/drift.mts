@@ -2,9 +2,10 @@
  * Drift: what an extension's config says that its installed packages, and its own `cspell`, no longer back up.
  */
 
+import type { CSpellSettings } from 'cspell-lib';
+
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
 import { readSources } from './dictionaries.mts';
-import type { DictionaryExt } from './dictionaries.mts';
 
 /**
  * The commands for a dictionary nothing defines, and the locales no language setting declares: in a command and in
@@ -38,7 +39,7 @@ export async function findDrift(extensionDir: string, config: ExtensionConfig): 
 }
 
 /** The locales of a `cspell-ext.json`'s language settings: the only setting that turns a dictionary on by locale. */
-function declaredLocales(ext: DictionaryExt): string[] {
+function declaredLocales(ext: CSpellSettings): string[] {
     return (ext.languageSettings ?? []).flatMap((setting) => [setting.locale ?? []].flat().flatMap(localeList));
 }
 

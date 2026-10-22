@@ -62,12 +62,6 @@ async function readExtensionKind(repoPath: string): Promise<ExtensionKind | unde
     return (await readJson<{ kind: ExtensionKind }>(configFile)).kind;
 }
 
-/**
- * The `vsce` options in `package.json` the tools set or read. A type only: Node erases `import type`, so the scripts
- * that run before `npm ci` don't need `@vscode/vsce` installed.
- */
-type VsceOptions = Pick<IPackageOptions, 'baseContentUrl' | 'baseImagesUrl' | 'preRelease'>;
-
 export interface PackageJson {
     name: string;
     displayName: string;
@@ -80,7 +74,8 @@ export interface PackageJson {
     publisher?: string;
     author?: string;
     contributors?: string[];
-    vsce?: VsceOptions;
+    /** A type only: Node erases `import type`, so the scripts that run before `npm ci` don't need vsce installed. */
+    vsce?: IPackageOptions;
     private: boolean;
     preview?: boolean | undefined;
     bugs?: { url: string };
