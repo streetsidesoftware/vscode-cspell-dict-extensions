@@ -9,6 +9,7 @@ import { styleText } from 'node:util';
 
 import { Command } from 'commander';
 
+import { addEditCommands } from './src/editCommands.mts';
 import { listPackages, packagesTable } from './src/listPackages.mts';
 import { syncExtensions } from './src/syncExtensions.mts';
 import { articleMarkdown, fetchArticle } from './src/wikipedia.mts';
@@ -86,6 +87,8 @@ program
             process.stdout.write(markdown);
         }
     });
+
+addEditCommands(program);
 
 function plural(count: number, noun: string): string {
     return `${count} ${noun}${count === 1 ? '' : 's'}`;

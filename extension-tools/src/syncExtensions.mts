@@ -7,7 +7,8 @@ import path from 'node:path';
 import { findDrift } from './drift.mts';
 import { readExtensionConfigValidator } from './extensionSchema.mts';
 import { exists, extensionsDir, listExtensionRepoPaths, readJson, readVscodeEngine } from './repo.mts';
-import { configFileName, type FileChange, syncExtension, syncPackageJson } from './syncExtension.mts';
+import { configFileName, readConfig } from './extensionConfig.mts';
+import { type FileChange, syncExtension, syncPackageJson } from './syncExtension.mts';
 
 export interface Finding {
     /** A repo path, e.g. `extensions/swedish/README.md`. */
@@ -49,7 +50,7 @@ export async function syncExtensions(folders: string[], { check }: { check: bool
         result.changes.push(...changes.map((change) => ({ ...change, folder })));
         if (check && hasConfig) {
             const file = `extensions/${folder}/${configFileName}`;
-            const config = validate(await readJson(path.join(extensionDir, configFileName)), file);
+            const config = await readConfig(extensionDir, validate);
             result.drift.push(...(await findDrift(extensionDir, config)).map((message) => ({ file, message })));
         }
         ++result.count;

@@ -25,6 +25,7 @@
     "test:download-vscode": "download-vscode ",
     "sync:extensions": "node ./extension-tools/cli.mts sync",
     "check:extensions": "node ./extension-tools/cli.mts check",
+    "extension-tools": "node ./extension-tools/cli.mts",
     "tool:gen-extension-list": "node ./scripts/gen-extension-list.mts",
     "lint": "npm run cspell",
     "update-dictionaries": "lerna exec \"npx npm-check-updates -t latest -u -f \\\"@cspell*\\\" \" && npm i && npm run sync:extensions",
