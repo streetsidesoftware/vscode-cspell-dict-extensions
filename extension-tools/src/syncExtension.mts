@@ -42,6 +42,9 @@ const starterFiles: Record<string, string> = {
     'cspell.config.yaml': 'import:\n  - ./static/cspell-ext.json\n',
 };
 
+/** Files vsce packages when the extension has them. vsce fails on a `files` pattern that matches nothing. */
+const optionalPackagedFiles = ['COPYING'];
+
 export interface SyncOptions {
     /** Only report the files that would change. */
     check?: boolean;
@@ -104,8 +107,17 @@ async function extensionFiles(
     const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
     // `tsconfig.json` only type-checks `src/custom.ts`; without it, tsc and VS Code report "No inputs were found".
     if (!hasCustom) files.delete('tsconfig.json');
-    files.set('package.json', packageJsonSource(config, pkg, vscodeEngine, hasCustom));
+    const optional = await existingFiles(extensionDir, optionalPackagedFiles);
+    files.set('package.json', packageJsonSource(config, pkg, vscodeEngine, hasCustom, optional));
     return files;
+}
+
+async function existingFiles(extensionDir: string, files: string[]): Promise<string[]> {
+    const found: string[] = [];
+    for (const file of files) {
+        if (await exists(path.join(extensionDir, file))) found.push(file);
+    }
+    return found;
 }
 
 async function writeFiles(
@@ -140,7 +152,8 @@ async function removeUnusedFiles(
     files: Map<string, string>,
     check: boolean | undefined,
 ): Promise<FileChange[]> {
-    const unused = ['static/commands.json', 'static/dictionaries.json', 'tsconfig.json'].filter(
+    // `.vscodeignore` was replaced by `files` in `package.json`; vsce refuses an extension that has both.
+    const unused = ['.vscodeignore', 'static/commands.json', 'static/dictionaries.json', 'tsconfig.json'].filter(
         (file) => !files.has(file),
     );
     const changes: FileChange[] = [];
@@ -380,6 +393,7 @@ function packageJsonSource(
     pkg: PackageJson,
     vscodeEngine: string,
     hasCustom: boolean,
+    optionalFiles: string[],
 ): string {
     const commands = contributedCommands(config).map(({ id, title }) => ({ command: id, title }));
     const contributes = (pkg as { contributes?: object }).contributes;
@@ -390,6 +404,17 @@ function packageJsonSource(
         type: 'module',
         engines: { ...pkg.engines, vscode: vscodeEngine },
         main: './extension.js',
+        // What vsce packages, besides `package.json` and `README.md`. vsce only takes the production dependencies from
+        // `node_modules`, wherever npm installed them.
+        files: [
+            'LICENSE',
+            'CHANGELOG.md',
+            ...optionalFiles,
+            'extension.js',
+            ...(pkg.icon ? [pkg.icon] : []),
+            cspellExtPath,
+            'node_modules/**',
+        ],
         contributes: { ...contributes, commands },
         scripts: {
             build: 'tsdown',

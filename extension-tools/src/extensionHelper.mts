@@ -75,6 +75,7 @@ export interface PackageJson {
     description: string;
     main: string;
     browser?: string;
+    icon?: string;
     repository?: Repository;
     publisher?: string;
     author?: string;

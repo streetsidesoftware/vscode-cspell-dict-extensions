@@ -23,7 +23,8 @@ export interface WriteOptions {
 
 /**
  * Write the files a person owns into `destDir`: `extension.config.json`, a starter `package.json`, `README.md`,
- * `LICENSE` and the samples. `npm run sync:extensions` writes the rest. Existing files are never overwritten.
+ * `LICENSE` and the samples, and an empty `CHANGELOG.md` for release-please to fill. `npm run sync:extensions` writes
+ * the rest. Existing files are never overwritten.
  * @param samples - the first is the `sample` in `extension.config.json`, which the VS Code test opens.
  * @returns the files written, relative to `destDir`.
  */
@@ -51,6 +52,8 @@ export async function writeExtension(
         ['README.md', readme(answers)],
         ...samples.map((sample): [string, string] => [sample.file, sample.text]),
         ['samples/cspell.json', json(sampleConfig(answers))],
+        // Empty: release-please keeps any text that comes before the first version heading.
+        ['CHANGELOG.md', ''],
     ];
     for (const [file, content] of files) {
         await create(file, (dest) => writeFile(dest, content, { flag: 'wx' }));

@@ -318,9 +318,10 @@ describe('writeExtension', () => {
 
     afterEach(() => rm(destDir, { recursive: true, force: true }));
 
-    it('writes only the files a person owns', async () => {
+    it('writes only the files a person owns, and an empty CHANGELOG.md', async () => {
         const written = await writeExtension(destDir, swedish, [seattle]);
         assert.deepEqual(written.toSorted(), [
+            'CHANGELOG.md',
             'LICENSE',
             'README.md',
             'extension.config.json',
@@ -333,6 +334,7 @@ describe('writeExtension', () => {
         assert.deepEqual(config, extensionConfig(swedish, seattle.file));
         const pkg = JSON.parse(await readFile(path.join(destDir, 'package.json'), 'utf8')) as { name: string };
         assert.equal(pkg.name, 'code-spell-checker-swedish');
+        assert.equal(await readFile(path.join(destDir, 'CHANGELOG.md'), 'utf8'), '');
     });
 
     it('writes the GPL text only for the default license', async () => {

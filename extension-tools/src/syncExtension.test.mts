@@ -89,7 +89,6 @@ describe('syncExtension', () => {
             '.gitignore',
             '.vscode/launch.json',
             '.vscode/tasks.json',
-            '.vscodeignore',
             'README.md',
             'package.json',
             'static/commands.json',
@@ -278,6 +277,37 @@ describe('syncExtension', () => {
         assert.deepEqual(result.dependencies, pkg.dependencies);
         assert.equal(result.devDependencies, undefined);
         assert.deepEqual(Object.keys(result).slice(0, 5), ['name', 'version', 'type', 'contributes', 'scripts']);
+    });
+
+    it('lists the packaged files, with COPYING and the icon when there are any', async () => {
+        await syncExtension(dir, options);
+        assert.deepEqual((await readJson('package.json')).files, [
+            'LICENSE',
+            'CHANGELOG.md',
+            'extension.js',
+            'static/cspell-ext.json',
+            'node_modules/**',
+        ]);
+
+        await fs.writeFile(path.join(dir, 'COPYING'), 'GPL\n');
+        await writeJson('package.json', { ...(await readJson('package.json')), icon: 'images/icon.png' });
+        await syncExtension(dir, options);
+        assert.deepEqual((await readJson('package.json')).files, [
+            'LICENSE',
+            'CHANGELOG.md',
+            'COPYING',
+            'extension.js',
+            'images/icon.png',
+            'static/cspell-ext.json',
+            'node_modules/**',
+        ]);
+    });
+
+    it('removes .vscodeignore, which vsce refuses next to files', async () => {
+        await fs.writeFile(path.join(dir, '.vscodeignore'), 'src/**\n');
+        const changes = await syncExtension(dir, options);
+        assert.deepEqual(files(changes, 'remove'), ['.vscodeignore']);
+        await assert.rejects(read('.vscodeignore'), { code: 'ENOENT' });
     });
 
     it('type-checks src/custom.ts while there is one, and keeps it', async () => {
