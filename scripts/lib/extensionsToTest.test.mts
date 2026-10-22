@@ -33,7 +33,7 @@ describe('extensionsToTest', () => {
     it('tests everything when a shared file changed', () => {
         for (const file of [
             'extension-runtime/src/entry.ts',
-            'scripts/lib/repo.mts',
+            'extension-tools/templates/sync/tsdown.config.ts',
             'package-lock.json',
             '.github/workflows/test.yml',
             'extensions/removed/package.json',

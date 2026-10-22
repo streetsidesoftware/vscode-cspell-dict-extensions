@@ -7,5 +7,5 @@
         "erasableSyntaxOnly": true,
         "verbatimModuleSyntax": true
     },
-    "include": ["api.ts", "src"]
+    "include": ["api.ts", "src", "tsdown.extension.config.mts"]
 }
