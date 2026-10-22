@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Estonian Spell Checker Dictionary"
+        "Command": "Enable Estonian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "et-EE",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Estonian Spell Checker Dictionary"
+        "Command": "Disable Estonian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "et,et-EE",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Estonian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Estonian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "et-EE",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Estonian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Estonian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "et,et-EE",
+        "Scope": "workspace"
     }
 ]

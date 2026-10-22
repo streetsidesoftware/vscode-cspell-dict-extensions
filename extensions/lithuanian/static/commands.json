@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Lithuanian Spell Checker Dictionary"
+        "Command": "Enable Lithuanian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "lt-LT",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Lithuanian Spell Checker Dictionary"
+        "Command": "Disable Lithuanian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "lt,lt-LT",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Lithuanian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Lithuanian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "lt-LT",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Lithuanian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Lithuanian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "lt,lt-LT",
+        "Scope": "workspace"
     }
 ]

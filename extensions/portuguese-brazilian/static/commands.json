@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Brazilian Portuguese Spell Checker Dictionary"
+        "Command": "Enable Brazilian Portuguese Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "pt-BR",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Brazilian Portuguese Spell Checker Dictionary"
+        "Command": "Disable Brazilian Portuguese Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "pt-BR",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Brazilian Portuguese Spell Checker Dictionary in Workspace"
+        "Command": "Enable Brazilian Portuguese Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "pt-BR",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Brazilian Portuguese Spell Checker Dictionary in Workspace"
+        "Command": "Disable Brazilian Portuguese Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "pt-BR",
+        "Scope": "workspace"
     }
 ]

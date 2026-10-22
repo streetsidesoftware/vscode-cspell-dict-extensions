@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                |
-| ------------------------------------------------------ |
-| Enable Armenian Spell Checker Dictionary               |
-| Disable Armenian Spell Checker Dictionary              |
-| Enable Armenian Spell Checker Dictionary in Workspace  |
-| Disable Armenian Spell Checker Dictionary in Workspace |
+| Command                                                | What   | Value    | Scope     |
+| ------------------------------------------------------ | ------ | -------- | --------- |
+| Enable Armenian Spell Checker Dictionary               | locale | hy-AM    | global    |
+| Disable Armenian Spell Checker Dictionary              | locale | hy,hy-AM | global    |
+| Enable Armenian Spell Checker Dictionary in Workspace  | locale | hy-AM    | workspace |
+| Disable Armenian Spell Checker Dictionary in Workspace | locale | hy,hy-AM | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

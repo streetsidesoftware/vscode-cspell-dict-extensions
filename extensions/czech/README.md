@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                             |
-| --------------------------------------------------- |
-| Enable Czech Spell Checker Dictionary               |
-| Disable Czech Spell Checker Dictionary              |
-| Enable Czech Spell Checker Dictionary in Workspace  |
-| Disable Czech Spell Checker Dictionary in Workspace |
+| Command                                             | What   | Value | Scope     |
+| --------------------------------------------------- | ------ | ----- | --------- |
+| Enable Czech Spell Checker Dictionary               | locale | cs    | global    |
+| Disable Czech Spell Checker Dictionary              | locale | cs    | global    |
+| Enable Czech Spell Checker Dictionary in Workspace  | locale | cs    | workspace |
+| Disable Czech Spell Checker Dictionary in Workspace | locale | cs    | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

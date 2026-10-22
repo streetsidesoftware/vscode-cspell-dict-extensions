@@ -31,7 +31,7 @@ Don't edit these; `npm run sync:extensions` overwrites them.
 
 - **Tool configs:** `tsdown.config.ts`, `.vscode/*` and `.gitignore`, copied from [`templates/sync/`](../extension-tools/templates/sync). Also `tsconfig.json`, but only when the extension has a `src/custom.ts`; otherwise the sync removes it.
 - **`static/cspell-ext.json`:** the `cspell` settings from `extension.config.json`, which the extension registers with Code Spell Checker.
-- **`static/commands.json`:** the commands, for the README's table. Removed when there are none.
+- **`static/commands.json`:** the commands, for the README's table: each command's title, what it changes (`locale`, `dictionary` or `fileType`), its value, and its scope. Removed when there are none.
 - **`static/dictionaries.json`:** for the README's table, one row for each dictionary a setting names, with the setting's `locale`, `languageId` and `glob` as written. The settings are the top-level `dictionaries`, the language settings and the overrides, read from the installed dictionaries and the extension's `cspell`. Removed when there are none, and never written for a bundle.
 - **`package.json` fields:** `name`, `displayName`, `description`, `type`, `main`, `files`, `contributes.commands` and `scripts`.
 - **`package.json` `files`:** what vsce packages, besides `package.json` and `README.md`. It lists `LICENSE`, `CHANGELOG.md`, `extension.js`, the `icon`, `static/cspell-ext.json` and `node_modules/**`. It also lists `COPYING` when the extension has one. vsce only takes the production dependencies from `node_modules`. The sync removes `.vscodeignore`, because vsce refuses an extension that has both.

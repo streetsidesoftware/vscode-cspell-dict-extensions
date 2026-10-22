@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                 |
-| ------------------------------------------------------- |
-| Enable Slovenian Spell Checker Dictionary               |
-| Disable Slovenian Spell Checker Dictionary              |
-| Enable Slovenian Spell Checker Dictionary in Workspace  |
-| Disable Slovenian Spell Checker Dictionary in Workspace |
+| Command                                                 | What   | Value    | Scope     |
+| ------------------------------------------------------- | ------ | -------- | --------- |
+| Enable Slovenian Spell Checker Dictionary               | locale | sl-SI    | global    |
+| Disable Slovenian Spell Checker Dictionary              | locale | sl,sl-SI | global    |
+| Enable Slovenian Spell Checker Dictionary in Workspace  | locale | sl-SI    | workspace |
+| Disable Slovenian Spell Checker Dictionary in Workspace | locale | sl,sl-SI | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

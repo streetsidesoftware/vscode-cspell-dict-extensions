@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Czech Spell Checker Dictionary"
+        "Command": "Enable Czech Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "cs",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Czech Spell Checker Dictionary"
+        "Command": "Disable Czech Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "cs",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Czech Spell Checker Dictionary in Workspace"
+        "Command": "Enable Czech Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "cs",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Czech Spell Checker Dictionary in Workspace"
+        "Command": "Disable Czech Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "cs",
+        "Scope": "workspace"
     }
 ]

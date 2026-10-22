@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable French Spell Checker Dictionary"
+        "Command": "Enable French Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "fr-FR",
+        "Scope": "global"
     },
     {
-        "Command": "Disable French Spell Checker Dictionary"
+        "Command": "Disable French Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "fr-FR",
+        "Scope": "global"
     },
     {
-        "Command": "Enable French Spell Checker Dictionary in Workspace"
+        "Command": "Enable French Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "fr-FR",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable French Spell Checker Dictionary in Workspace"
+        "Command": "Disable French Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "fr-FR",
+        "Scope": "workspace"
     }
 ]

@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Dutch Spell Checker Dictionary"
+        "Command": "Enable Dutch Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "nl-NL",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Dutch Spell Checker Dictionary"
+        "Command": "Disable Dutch Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "nl-NL",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Dutch Spell Checker Dictionary in Workspace"
+        "Command": "Enable Dutch Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "nl-NL",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Dutch Spell Checker Dictionary in Workspace"
+        "Command": "Disable Dutch Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "nl-NL",
+        "Scope": "workspace"
     }
 ]

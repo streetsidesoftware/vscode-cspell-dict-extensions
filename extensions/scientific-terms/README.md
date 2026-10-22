@@ -16,16 +16,16 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                         |
-| --------------------------------------------------------------- |
-| Enable Scientific Terms Spell Checker Dictionary                |
-| Disable Scientific Terms Spell Checker Dictionary               |
-| Enable Scientific Terms Spell Checker Dictionary in Workspace   |
-| Disable Scientific Terms Spell Checker Dictionary in Workspace  |
-| Enable Mathematics Terms Spell Checker Dictionary               |
-| Disable Mathematics Terms Spell Checker Dictionary              |
-| Enable Mathematics Terms Spell Checker Dictionary in Workspace  |
-| Disable Mathematics Terms Spell Checker Dictionary in Workspace |
+| Command                                                         | What       | Value                | Scope     |
+| --------------------------------------------------------------- | ---------- | -------------------- | --------- |
+| Enable Scientific Terms Spell Checker Dictionary                | dictionary | scientific-terms-us  | global    |
+| Disable Scientific Terms Spell Checker Dictionary               | dictionary | scientific-terms-us  | global    |
+| Enable Scientific Terms Spell Checker Dictionary in Workspace   | dictionary | scientific-terms-us  | workspace |
+| Disable Scientific Terms Spell Checker Dictionary in Workspace  | dictionary | scientific-terms-us  | workspace |
+| Enable Mathematics Terms Spell Checker Dictionary               | dictionary | mathematics-terms-us | global    |
+| Disable Mathematics Terms Spell Checker Dictionary              | dictionary | mathematics-terms-us | global    |
+| Enable Mathematics Terms Spell Checker Dictionary in Workspace  | dictionary | mathematics-terms-us | workspace |
+| Disable Mathematics Terms Spell Checker Dictionary in Workspace | dictionary | mathematics-terms-us | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

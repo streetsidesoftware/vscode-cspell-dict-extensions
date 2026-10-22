@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                               |
-| ----------------------------------------------------- |
-| Enable Turkish Spell Checker Dictionary               |
-| Disable Turkish Spell Checker Dictionary              |
-| Enable Turkish Spell Checker Dictionary in Workspace  |
-| Disable Turkish Spell Checker Dictionary in Workspace |
+| Command                                               | What   | Value    | Scope     |
+| ----------------------------------------------------- | ------ | -------- | --------- |
+| Enable Turkish Spell Checker Dictionary               | locale | tr-TR    | global    |
+| Disable Turkish Spell Checker Dictionary              | locale | tr,tr-TR | global    |
+| Enable Turkish Spell Checker Dictionary in Workspace  | locale | tr-TR    | workspace |
+| Disable Turkish Spell Checker Dictionary in Workspace | locale | tr,tr-TR | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

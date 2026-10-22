@@ -372,19 +372,20 @@ function contributedCommands(config: ExtensionConfig): CommandConfig[] {
 }
 
 /**
- * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`.
+ * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`: the
+ * title, what it changes, the value, and where the setting is written. A file type command has no scope.
  * @returns `undefined` when the extension has no commands.
  */
 function commandsTable(config: ExtensionConfig): string | undefined {
     const commands = contributedCommands(config);
     if (!commands.length) return undefined;
-    return (
-        JSON.stringify(
-            commands.map(({ title }) => ({ Command: title })),
-            null,
-            4,
-        ) + '\n'
-    );
+    const rows = commands.map((command) => ({
+        Command: command.title,
+        What: command.toggle,
+        Value: command.value,
+        Scope: 'scope' in command ? command.scope : '',
+    }));
+    return JSON.stringify(rows, null, 4) + '\n';
 }
 
 /** An extension's `package.json` with the shared fields, sorted. */

@@ -27,12 +27,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                              |
-| ---------------------------------------------------- |
-| Enable Hebrew Spell Checker Dictionary               |
-| Disable Hebrew Spell Checker Dictionary              |
-| Enable Hebrew Spell Checker Dictionary in Workspace  |
-| Disable Hebrew Spell Checker Dictionary in Workspace |
+| Command                                              | What   | Value | Scope     |
+| ---------------------------------------------------- | ------ | ----- | --------- |
+| Enable Hebrew Spell Checker Dictionary               | locale | he    | global    |
+| Disable Hebrew Spell Checker Dictionary              | locale | he    | global    |
+| Enable Hebrew Spell Checker Dictionary in Workspace  | locale | he    | workspace |
+| Disable Hebrew Spell Checker Dictionary in Workspace | locale | he    | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

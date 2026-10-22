@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Russian Spell Checker Dictionary"
+        "Command": "Enable Russian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "ru-RU",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Russian Spell Checker Dictionary"
+        "Command": "Disable Russian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "ru,ru-RU",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Russian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Russian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "ru-RU",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Russian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Russian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "ru,ru-RU",
+        "Scope": "workspace"
     }
 ]

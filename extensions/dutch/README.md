@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                             |
-| --------------------------------------------------- |
-| Enable Dutch Spell Checker Dictionary               |
-| Disable Dutch Spell Checker Dictionary              |
-| Enable Dutch Spell Checker Dictionary in Workspace  |
-| Disable Dutch Spell Checker Dictionary in Workspace |
+| Command                                             | What   | Value | Scope     |
+| --------------------------------------------------- | ------ | ----- | --------- |
+| Enable Dutch Spell Checker Dictionary               | locale | nl-NL | global    |
+| Disable Dutch Spell Checker Dictionary              | locale | nl-NL | global    |
+| Enable Dutch Spell Checker Dictionary in Workspace  | locale | nl-NL | workspace |
+| Disable Dutch Spell Checker Dictionary in Workspace | locale | nl-NL | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

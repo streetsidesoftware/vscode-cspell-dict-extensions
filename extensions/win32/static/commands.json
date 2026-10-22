@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Win32 Spell Checker Dictionary"
+        "Command": "Enable Win32 Spell Checker Dictionary",
+        "What": "dictionary",
+        "Value": "win32",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Win32 Spell Checker Dictionary"
+        "Command": "Disable Win32 Spell Checker Dictionary",
+        "What": "dictionary",
+        "Value": "win32",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Win32 Spell Checker Dictionary in Workspace"
+        "Command": "Enable Win32 Spell Checker Dictionary in Workspace",
+        "What": "dictionary",
+        "Value": "win32",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Win32 Spell Checker Dictionary in Workspace"
+        "Command": "Disable Win32 Spell Checker Dictionary in Workspace",
+        "What": "dictionary",
+        "Value": "win32",
+        "Scope": "workspace"
     }
 ]

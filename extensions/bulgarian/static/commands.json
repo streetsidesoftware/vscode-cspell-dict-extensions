@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Bulgarian Spell Checker Dictionary"
+        "Command": "Enable Bulgarian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "bg_BG",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Bulgarian Spell Checker Dictionary"
+        "Command": "Disable Bulgarian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "bg-BG,bg",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Bulgarian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Bulgarian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "bg_BG",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Bulgarian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Bulgarian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "bg-BG,bg",
+        "Scope": "workspace"
     }
 ]

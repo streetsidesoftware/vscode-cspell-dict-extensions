@@ -1,26 +1,50 @@
 [
     {
-        "Command": "Enable Serbian Spell Checker Dictionary"
+        "Command": "Enable Serbian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "sr",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Serbian Spell Checker Dictionary"
+        "Command": "Disable Serbian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "sr,sr-Cyrl,sr-Latn",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Serbian Cyrillic Spell Checker Dictionary"
+        "Command": "Enable Serbian Cyrillic Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "sr-Cyrl",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Serbian Cyrillic Spell Checker Dictionary"
+        "Command": "Disable Serbian Cyrillic Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "sr-Cyrl",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Serbian Latin Spell Checker Dictionary"
+        "Command": "Enable Serbian Latin Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "sr-Latn",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Serbian Latin Spell Checker Dictionary"
+        "Command": "Disable Serbian Latin Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "sr-Latn",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Serbian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Serbian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "sr",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Serbian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Serbian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "sr,sr-Cyrl,sr-Latn",
+        "Scope": "workspace"
     }
 ]

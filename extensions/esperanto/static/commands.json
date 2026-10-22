@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Esperanto Spell Checker Dictionary"
+        "Command": "Enable Esperanto Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "eo",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Esperanto Spell Checker Dictionary"
+        "Command": "Disable Esperanto Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "eo",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Esperanto Spell Checker Dictionary in Workspace"
+        "Command": "Enable Esperanto Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "eo",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Esperanto Spell Checker Dictionary in Workspace"
+        "Command": "Disable Esperanto Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "eo",
+        "Scope": "workspace"
     }
 ]

@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Ancient Greek Spell Checker Dictionary"
+        "Command": "Enable Ancient Greek Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "grc-GR",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Ancient Greek Spell Checker Dictionary"
+        "Command": "Disable Ancient Greek Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "grc,grc-GR,gr,el-GRC",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Ancient Greek Spell Checker Dictionary in Workspace"
+        "Command": "Enable Ancient Greek Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "grc-GR",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Ancient Greek Spell Checker Dictionary in Workspace"
+        "Command": "Disable Ancient Greek Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "grc,grc-GR,gr,el-GRC",
+        "Scope": "workspace"
     }
 ]

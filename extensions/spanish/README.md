@@ -12,12 +12,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                               |
-| ----------------------------------------------------- |
-| Enable Spanish Spell Checker Dictionary               |
-| Disable Spanish Spell Checker Dictionary              |
-| Enable Spanish Spell Checker Dictionary in Workspace  |
-| Disable Spanish Spell Checker Dictionary in Workspace |
+| Command                                               | What   | Value | Scope     |
+| ----------------------------------------------------- | ------ | ----- | --------- |
+| Enable Spanish Spell Checker Dictionary               | locale | es-ES | global    |
+| Disable Spanish Spell Checker Dictionary              | locale | es-ES | global    |
+| Enable Spanish Spell Checker Dictionary in Workspace  | locale | es-ES | workspace |
+| Disable Spanish Spell Checker Dictionary in Workspace | locale | es-ES | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

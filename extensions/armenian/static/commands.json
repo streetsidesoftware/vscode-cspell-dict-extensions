@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Armenian Spell Checker Dictionary"
+        "Command": "Enable Armenian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "hy-AM",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Armenian Spell Checker Dictionary"
+        "Command": "Disable Armenian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "hy,hy-AM",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Armenian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Armenian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "hy-AM",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Armenian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Armenian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "hy,hy-AM",
+        "Scope": "workspace"
     }
 ]

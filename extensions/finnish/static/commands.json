@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Finnish Spell Checker Dictionary"
+        "Command": "Enable Finnish Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "fi-FI",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Finnish Spell Checker Dictionary"
+        "Command": "Disable Finnish Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "fi,fi-FI",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Finnish Spell Checker Dictionary in Workspace"
+        "Command": "Enable Finnish Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "fi-FI",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Finnish Spell Checker Dictionary in Workspace"
+        "Command": "Disable Finnish Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "fi,fi-FI",
+        "Scope": "workspace"
     }
 ]

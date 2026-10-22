@@ -26,16 +26,16 @@ You can also use the following commands (`F1` or _View -> Command Palette..._) t
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                               |
-| ----------------------------------------------------- |
-| Enable Serbian Spell Checker Dictionary               |
-| Disable Serbian Spell Checker Dictionary              |
-| Enable Serbian Cyrillic Spell Checker Dictionary      |
-| Disable Serbian Cyrillic Spell Checker Dictionary     |
-| Enable Serbian Latin Spell Checker Dictionary         |
-| Disable Serbian Latin Spell Checker Dictionary        |
-| Enable Serbian Spell Checker Dictionary in Workspace  |
-| Disable Serbian Spell Checker Dictionary in Workspace |
+| Command                                               | What   | Value              | Scope     |
+| ----------------------------------------------------- | ------ | ------------------ | --------- |
+| Enable Serbian Spell Checker Dictionary               | locale | sr                 | global    |
+| Disable Serbian Spell Checker Dictionary              | locale | sr,sr-Cyrl,sr-Latn | global    |
+| Enable Serbian Cyrillic Spell Checker Dictionary      | locale | sr-Cyrl            | global    |
+| Disable Serbian Cyrillic Spell Checker Dictionary     | locale | sr-Cyrl            | global    |
+| Enable Serbian Latin Spell Checker Dictionary         | locale | sr-Latn            | global    |
+| Disable Serbian Latin Spell Checker Dictionary        | locale | sr-Latn            | global    |
+| Enable Serbian Spell Checker Dictionary in Workspace  | locale | sr                 | workspace |
+| Disable Serbian Spell Checker Dictionary in Workspace | locale | sr,sr-Cyrl,sr-Latn | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

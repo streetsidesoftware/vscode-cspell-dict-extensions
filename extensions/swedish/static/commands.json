@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Swedish Spell Checker Dictionary"
+        "Command": "Enable Swedish Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "sv_SE",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Swedish Spell Checker Dictionary"
+        "Command": "Disable Swedish Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "sv-SE,sv",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Swedish Spell Checker Dictionary in Workspace"
+        "Command": "Enable Swedish Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "sv_SE",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Swedish Spell Checker Dictionary in Workspace"
+        "Command": "Disable Swedish Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "sv-SE,sv",
+        "Scope": "workspace"
     }
 ]

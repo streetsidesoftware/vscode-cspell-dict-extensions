@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                 |
-| ------------------------------------------------------- |
-| Enable Bulgarian Spell Checker Dictionary               |
-| Disable Bulgarian Spell Checker Dictionary              |
-| Enable Bulgarian Spell Checker Dictionary in Workspace  |
-| Disable Bulgarian Spell Checker Dictionary in Workspace |
+| Command                                                 | What   | Value    | Scope     |
+| ------------------------------------------------------- | ------ | -------- | --------- |
+| Enable Bulgarian Spell Checker Dictionary               | locale | bg_BG    | global    |
+| Disable Bulgarian Spell Checker Dictionary              | locale | bg-BG,bg | global    |
+| Enable Bulgarian Spell Checker Dictionary in Workspace  | locale | bg_BG    | workspace |
+| Disable Bulgarian Spell Checker Dictionary in Workspace | locale | bg-BG,bg | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                          |
-| ---------------------------------------------------------------- |
-| Enable Australian English Spell Checker Dictionary               |
-| Disable Australian English Spell Checker Dictionary              |
-| Enable Australian English Spell Checker Dictionary in Workspace  |
-| Disable Australian English Spell Checker Dictionary in Workspace |
+| Command                                                          | What   | Value | Scope     |
+| ---------------------------------------------------------------- | ------ | ----- | --------- |
+| Enable Australian English Spell Checker Dictionary               | locale | en-au | global    |
+| Disable Australian English Spell Checker Dictionary              | locale | en-au | global    |
+| Enable Australian English Spell Checker Dictionary in Workspace  | locale | en-au | workspace |
+| Disable Australian English Spell Checker Dictionary in Workspace | locale | en-au | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Medical Terms Spell Checker Dictionary"
+        "Command": "Enable Medical Terms Spell Checker Dictionary",
+        "What": "dictionary",
+        "Value": "medical terms",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Medical Terms Spell Checker Dictionary"
+        "Command": "Disable Medical Terms Spell Checker Dictionary",
+        "What": "dictionary",
+        "Value": "medical terms",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Medical Terms Spell Checker Dictionary in Workspace"
+        "Command": "Enable Medical Terms Spell Checker Dictionary in Workspace",
+        "What": "dictionary",
+        "Value": "medical terms",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Medical Terms Spell Checker Dictionary in Workspace"
+        "Command": "Disable Medical Terms Spell Checker Dictionary in Workspace",
+        "What": "dictionary",
+        "Value": "medical terms",
+        "Scope": "workspace"
     }
 ]

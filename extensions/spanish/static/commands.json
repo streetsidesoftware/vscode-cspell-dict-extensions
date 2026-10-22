@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Spanish Spell Checker Dictionary"
+        "Command": "Enable Spanish Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "es-ES",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Spanish Spell Checker Dictionary"
+        "Command": "Disable Spanish Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "es-ES",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Spanish Spell Checker Dictionary in Workspace"
+        "Command": "Enable Spanish Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "es-ES",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Spanish Spell Checker Dictionary in Workspace"
+        "Command": "Disable Spanish Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "es-ES",
+        "Scope": "workspace"
     }
 ]

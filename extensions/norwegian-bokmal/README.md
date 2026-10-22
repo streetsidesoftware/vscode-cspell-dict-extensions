@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                        |
-| -------------------------------------------------------------- |
-| Enable Norwegian Bokmål Spell Checker Dictionary               |
-| Disable Norwegian Bokmål Spell Checker Dictionary              |
-| Enable Norwegian Bokmål Spell Checker Dictionary in Workspace  |
-| Disable Norwegian Bokmål Spell Checker Dictionary in Workspace |
+| Command                                                        | What   | Value    | Scope     |
+| -------------------------------------------------------------- | ------ | -------- | --------- |
+| Enable Norwegian Bokmål Spell Checker Dictionary               | locale | nb-NO    | global    |
+| Disable Norwegian Bokmål Spell Checker Dictionary              | locale | nb,nb-NO | global    |
+| Enable Norwegian Bokmål Spell Checker Dictionary in Workspace  | locale | nb-NO    | workspace |
+| Disable Norwegian Bokmål Spell Checker Dictionary in Workspace | locale | nb,nb-NO | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

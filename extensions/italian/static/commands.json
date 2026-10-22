@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Italian Spell Checker Dictionary"
+        "Command": "Enable Italian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "it-IT",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Italian Spell Checker Dictionary"
+        "Command": "Disable Italian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "it,it-IT",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Italian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Italian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "it-IT",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Italian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Italian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "it,it-IT",
+        "Scope": "workspace"
     }
 ]

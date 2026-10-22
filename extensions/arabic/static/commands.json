@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Arabic Spell Checker Dictionary"
+        "Command": "Enable Arabic Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "ar",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Arabic Spell Checker Dictionary"
+        "Command": "Disable Arabic Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "ar",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Arabic Spell Checker Dictionary in Workspace"
+        "Command": "Enable Arabic Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "ar",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Arabic Spell Checker Dictionary in Workspace"
+        "Command": "Disable Arabic Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "ar",
+        "Scope": "workspace"
     }
 ]

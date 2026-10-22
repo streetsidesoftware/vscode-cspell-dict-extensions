@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                              |
-| ---------------------------------------------------- |
-| Enable German Spell Checker Dictionary               |
-| Disable German Spell Checker Dictionary              |
-| Enable German Spell Checker Dictionary in Workspace  |
-| Disable German Spell Checker Dictionary in Workspace |
+| Command                                              | What   | Value | Scope     |
+| ---------------------------------------------------- | ------ | ----- | --------- |
+| Enable German Spell Checker Dictionary               | locale | de-DE | global    |
+| Disable German Spell Checker Dictionary              | locale | de-DE | global    |
+| Enable German Spell Checker Dictionary in Workspace  | locale | de-DE | workspace |
+| Disable German Spell Checker Dictionary in Workspace | locale | de-DE | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

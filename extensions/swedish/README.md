@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                               |
-| ----------------------------------------------------- |
-| Enable Swedish Spell Checker Dictionary               |
-| Disable Swedish Spell Checker Dictionary              |
-| Enable Swedish Spell Checker Dictionary in Workspace  |
-| Disable Swedish Spell Checker Dictionary in Workspace |
+| Command                                               | What   | Value    | Scope     |
+| ----------------------------------------------------- | ------ | -------- | --------- |
+| Enable Swedish Spell Checker Dictionary               | locale | sv_SE    | global    |
+| Disable Swedish Spell Checker Dictionary              | locale | sv-SE,sv | global    |
+| Enable Swedish Spell Checker Dictionary in Workspace  | locale | sv_SE    | workspace |
+| Disable Swedish Spell Checker Dictionary in Workspace | locale | sv-SE,sv | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

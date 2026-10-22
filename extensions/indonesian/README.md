@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                  |
-| -------------------------------------------------------- |
-| Enable Indonesian Spell Checker Dictionary               |
-| Disable Indonesian Spell Checker Dictionary              |
-| Enable Indonesian Spell Checker Dictionary in Workspace  |
-| Disable Indonesian Spell Checker Dictionary in Workspace |
+| Command                                                  | What   | Value    | Scope     |
+| -------------------------------------------------------- | ------ | -------- | --------- |
+| Enable Indonesian Spell Checker Dictionary               | locale | id-id    | global    |
+| Disable Indonesian Spell Checker Dictionary              | locale | id-ID,id | global    |
+| Enable Indonesian Spell Checker Dictionary in Workspace  | locale | id-id    | workspace |
+| Disable Indonesian Spell Checker Dictionary in Workspace | locale | id-ID,id | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 
