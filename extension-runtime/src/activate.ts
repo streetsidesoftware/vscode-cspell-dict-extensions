@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 
-import { type CommandConfig, cspellExtPath, type ExtensionConfig } from './config.ts';
+import { cspellExtPath } from './config.ts';
+import type { CommandConfig, ExtensionConfig } from './config.ts';
 
 /** The part of the Code Spell Checker extension API used by the extensions. */
 export interface CodeSpellCheckerApi {

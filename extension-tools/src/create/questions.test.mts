@@ -6,8 +6,10 @@ import { after, before, describe, it } from 'node:test';
 import { stripVTControlCharacters } from 'node:util';
 
 import type { CSpellPackage } from '../cspellPackages.mts';
-import { noPrompter, type Prompter } from './prompt.mts';
-import { type Answers, askQuestions, type Context, filterPackages, type Options, UsageError } from './questions.mts';
+import { noPrompter } from './prompt.mts';
+import type { Prompter } from './prompt.mts';
+import { askQuestions, filterPackages, UsageError } from './questions.mts';
+import type { Answers, Context, Options } from './questions.mts';
 import { scriptedPrompter } from './test-helpers.mts';
 
 const language = (packageName: string, name: string, locales: string[]): CSpellPackage => ({

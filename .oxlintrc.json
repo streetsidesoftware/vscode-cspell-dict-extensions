@@ -8,7 +8,9 @@
         "**/static/**",
         "extension-tools/templates/**"
     ],
+    "plugins": ["unicorn", "typescript", "oxc", "import"],
     "rules": {
+        "import/consistent-type-specifier-style": ["warn", "prefer-top-level"],
         "typescript/no-floating-promises": [
             "warn",
             {
