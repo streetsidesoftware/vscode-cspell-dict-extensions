@@ -27,7 +27,7 @@
     "build": "tsdown",
     "clean": "node ../../scripts/clean.mts",
     "clean-build": "npm run clean && npm run build",
-    "pack-extension": "vsce package --allow-unused-files-pattern",
+    "pack-extension": "vsce package",
     "publish-extension": "vsce publish",
     "test": "npm run test:cspell && npm run test:vscode",
     "test:cspell": "cspell -c static/cspell-ext.json samples",

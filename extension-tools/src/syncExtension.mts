@@ -408,7 +408,6 @@ function packageJsonSource(
         // `node_modules`, wherever npm installed them.
         files: [
             'LICENSE',
-            // A new extension has none until release-please writes it in the first release.
             'CHANGELOG.md',
             ...optionalFiles,
             'extension.js',
@@ -423,8 +422,7 @@ function packageJsonSource(
             ...(hasCustom ? { 'check-types': 'tsc -p .' } : {}),
             clean: 'node ../../scripts/clean.mts',
             'clean-build': 'npm run clean && npm run build',
-            // Tests package a new extension before it has a `CHANGELOG.md`. Publishing stays strict.
-            'pack-extension': 'vsce package --allow-unused-files-pattern',
+            'pack-extension': 'vsce package',
             'publish-extension': 'vsce publish',
             test: 'npm run test:cspell && npm run test:vscode',
             'test:cspell': `cspell -c ${cspellExtPath} samples`,

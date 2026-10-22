@@ -271,7 +271,6 @@ describe('syncExtension', () => {
         });
         assert.equal(result.scripts.build, 'tsdown');
         assert.equal(result.scripts['check-types'], undefined);
-        assert.equal(result.scripts['pack-extension'], 'vsce package --allow-unused-files-pattern');
         assert.equal(result.scripts['test:cspell'], 'cspell -c static/cspell-ext.json samples');
         assert.equal(result.scripts['test:vscode'], 'node ../../test-runner/bin.mjs . --sample samples/demo.md');
         assert.equal(result.scripts.extra, undefined);
