@@ -15,6 +15,8 @@ npm run create:extension -- <name> --package <@cspell/package> --yes   # create 
 npm run check:extension -- <name>     # an extension's build, sample, extension-tools check, Prettier and spell checks; --vscode adds the VS Code test
 npm run sync:extensions               # write the files the sync maintains, for every extension
 npm run check:extensions              # fail if an extension is out of date, or its config has drifted from its packages
+npm run extension-tools -- info -e <folder>   # one extension's packages, commands and samples; --json for JSON
+npm run extension-tools -- --help     # add/remove command, add/remove sample, set, remove extension
 npm run lint                          # cspell over the repo
 npm run check-types                   # type-check test-runner, extension-runtime and extension-tools
 npm run lint:code                     # oxlint, type-aware; warnings fail
@@ -46,7 +48,7 @@ Read the doc before changing that area. These are written for people too; [`CONT
 
 ## Rules
 
-- **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Edit that file or the shared files in `extension-runtime/`, `extension-tools/templates/sync/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [Files the sync writes](docs/extension-anatomy.md#files-the-sync-writes) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand, except the shared `package.json` fields, which the sync writes.
+- **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Change that file with `npm run extension-tools -- add|remove|set …`, which checks it and runs the sync, rather than by hand. Or edit the shared files in `extension-runtime/`, `extension-tools/templates/sync/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [Files the sync writes](docs/extension-anatomy.md#files-the-sync-writes) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand, except the shared `package.json` fields, which the sync writes.
 - **New extensions:** create them with the generator, never by copying an extension, by following the `new-extension` skill: [`.claude/skills/new-extension/SKILL.md`](.claude/skills/new-extension/SKILL.md). A new dictionary is added to cspell-dicts first.
 - **Words:** words a dictionary lacks belong upstream in cspell-dicts (see [Adding words](CONTRIBUTING.md#adding-words-to-a-language-dictionary)). For a sample's unknown words, add a line at the end of the sample: `words` for real words, `ignore` for names and other non-words. Leave `samples/cspell.json` as the generator wrote it.
 - **Generated after merge:** never edit or regenerate the root README lists, `static/generated/`, `dict-extensions.code-workspace`, `release-please-config.json` or the extension lists in `.github/workflows/`. A workflow runs `gen:readme`, `gen:release-please` and `gen:workflow` after a PR merges.

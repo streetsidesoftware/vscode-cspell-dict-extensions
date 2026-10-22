@@ -24,21 +24,16 @@ import { injectMarkdown } from 'inject-markdown';
 import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
-import {
-    type DictionaryExt,
-    type LanguageSetting,
-    type Override,
-    readDictionaries,
-    readImports,
-    splitList,
-} from './dictionaries.mts';
+import { readDictionaries, readImports, splitList } from './dictionaries.mts';
+import type { DictionaryExt, LanguageSetting, Override } from './dictionaries.mts';
 import type { DictionaryState } from './dictionaryState.mts';
-import { type PackageJson, withSharedFields } from './extensionHelper.mts';
+import { withSharedFields } from './extensionHelper.mts';
+import type { PackageJson } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
+import { readConfig } from './extensionConfig.mts';
 import { format, injectProblems } from './format.mts';
 import { exists, extensionRepoPath, readJson, writeIfChanged } from './repo.mts';
 
-export const configFileName = 'extension.config.json';
 const cspellExtPath: CSpellExtPath = 'static/cspell-ext.json';
 const templateDir = path.join(import.meta.dirname, '../templates/sync');
 
@@ -102,11 +97,6 @@ export async function syncPackageJson(
     const pkg = await readJson<PackageJson>(path.join(extensionDir, 'package.json'));
     const files = new Map([['package.json', packageJsonText(extensionDir, pkg, options.vscodeEngine)]]);
     return writeFiles(extensionDir, files, options.check);
-}
-
-async function readConfig(extensionDir: string, validate: ExtensionConfigValidator): Promise<ExtensionConfig> {
-    const configFile = `${extensionRepoPath(extensionDir)}/${configFileName}`;
-    return validate(await readJson(path.join(extensionDir, configFileName)), configFile);
 }
 
 /**

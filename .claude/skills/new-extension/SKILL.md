@@ -93,6 +93,10 @@ generator README lists them.
   - If it fails after creating the folder (installing or the sync), show the user the error, and stop. Leave the
     folder for them to look at.
 
+- **After it,** change the extension with `npm run extension-tools -- <command> -e <name>`, not by editing
+  `extension.config.json`: `info` shows it, `add command`, `remove command`, `add sample`, `remove sample` and `set`
+  change it. `--help` lists the options.
+
 ### 6. Fix the sample
 
 - **Do:**

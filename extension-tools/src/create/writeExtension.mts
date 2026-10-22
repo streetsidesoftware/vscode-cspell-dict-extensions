@@ -5,9 +5,12 @@ import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
-import { andList, type DictionaryState, whenOn } from '../dictionaryState.mts';
-import { languageOf } from './locales.mts';
-import { type Answers, defaultLicense, type Language } from './questions.mts';
+import { actions, commandSet, idSuffix, localeSuffix, scopes, standardCommand } from '../commandSets.mts';
+import type { Target } from '../commandSets.mts';
+import { andList, whenOn } from '../dictionaryState.mts';
+import type { DictionaryState } from '../dictionaryState.mts';
+import { defaultLicense } from './questions.mts';
+import type { Answers, Language } from './questions.mts';
 import type { Sample } from './sample.mts';
 
 export const templateDir: string = path.join(import.meta.dirname, '../../templates/create');
@@ -120,45 +123,6 @@ function standardDescription(answers: Answers): string {
     return `Adds ${nativeName ? `${friendlyName} (${nativeName})` : friendlyName} spell checking to Code Spell Checker.`;
 }
 
-const scopes = ['global', 'workspace'] as const;
-const actions = ['enable', 'disable'] as const;
-
-type Scope = (typeof scopes)[number];
-type Action = (typeof actions)[number];
-
-/** What a set of commands turns on and off. */
-interface Target {
-    /** The extension's `name`, which starts the ID. */
-    name: string;
-    /** Names what the commands turn on in the title, e.g. `Serbian (Cyrillic)`. */
-    label: string;
-    /** Added to the ID after the action, e.g. `Cyrl`. */
-    suffix: string;
-    toggle: 'locale' | 'dictionary';
-}
-
-/**
- * A command with the standard ID and title, e.g. `cSpellExt_swedish.enableWorkspace` titled `Enable Swedish Spell
- * Checker Dictionary in Workspace`.
- */
-function standardCommand(
-    { name, label, suffix, toggle }: Target,
-    value: string,
-    action: Action,
-    scope: Scope,
-): CommandConfig {
-    const inWorkspace = scope === 'workspace';
-    const verb = action === 'enable' ? 'Enable' : 'Disable';
-    return {
-        id: `cSpellExt_${name}.${action}${suffix}${inWorkspace ? 'Workspace' : ''}`,
-        title: `${verb} ${label} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
-        action,
-        toggle,
-        value,
-        scope,
-    };
-}
-
 /**
  * Enable the locale, and disable every locale the packages declare, globally and in the workspace: `sv-SE` is enabled
  * with `sv-SE` and disabled with `sv,sv-SE`. With several languages, each also gets its own commands.
@@ -167,7 +131,10 @@ export function localeCommands(
     answers: Pick<Answers, 'name' | 'friendlyName' | 'locale' | 'locales' | 'languages'>,
 ): CommandConfig[] {
     const { name, friendlyName } = answers;
-    const value = { enable: answers.locale, disable: answers.locales.join(',') };
+    const value: Record<CommandConfig['action'], string> = {
+        enable: answers.locale,
+        disable: answers.locales.join(','),
+    };
     const target: Target = { name, label: friendlyName, suffix: '', toggle: 'locale' };
     const main = scopes.flatMap((scope) =>
         actions.map((action) => standardCommand(target, value[action], action, scope)),
@@ -180,10 +147,10 @@ export function localeCommands(
  * Dictionary`. The ID ends with the locale's subtags after the language, or the language when there are none.
  */
 export function languageCommands(name: string, language: Language): CommandConfig[] {
-    const subtags = language.locale.split('-').slice(1).join('') || languageOf(language.locale);
-    const suffix = subtags.slice(0, 1).toUpperCase() + subtags.slice(1);
-    const target: Target = { name, label: language.name, suffix, toggle: 'locale' };
-    return scopes.flatMap((scope) => actions.map((action) => standardCommand(target, language.locale, action, scope)));
+    return commandSet(
+        { name, label: language.name, suffix: localeSuffix(language.locale), toggle: 'locale' },
+        language.locale,
+    );
 }
 
 /**
@@ -199,14 +166,8 @@ export function dictionaryCommands(
     return dictionaries.flatMap((dictionary) => {
         const single = dictionaries.length === 1;
         const label = single ? config.friendlyName : dictionary;
-        const suffix = single
-            ? ''
-            : dictionary
-                  .split(/[^\p{L}\p{N}]+/u)
-                  .map((part) => part.slice(0, 1).toUpperCase() + part.slice(1))
-                  .join('');
-        const target: Target = { name: config.name, label, suffix, toggle: 'dictionary' };
-        return scopes.flatMap((scope) => actions.map((action) => standardCommand(target, dictionary, action, scope)));
+        const suffix = single ? '' : idSuffix(dictionary);
+        return commandSet({ name: config.name, label, suffix, toggle: 'dictionary' }, dictionary);
     });
 }
 
