@@ -258,9 +258,15 @@ function clause(names: string[], when: string): string {
 }
 
 /** Explains the columns of the README's dictionaries table. */
-const dictionariesSentence =
-    'The dictionaries this extension adds, and where each one is on. `locale` is checked against `cSpell.language`. ' +
-    "`languageId` is checked against the file type. `glob` is checked against the file's path. An empty cell matches everything.";
+const dictionariesText = [
+    "Each row is a setting that turns a dictionary on. The dictionary is on when all of the row's conditions match:",
+    '',
+    '- **locale:** `cSpell.language` includes one of these locales.',
+    '- **languageId:** the file is one of these types.',
+    "- **glob:** the file's path matches one of these patterns.",
+    '',
+    'An empty cell is no condition.',
+].join('\n');
 
 /**
  * The starter README, with the `@@inject` sections the sync fills in.
@@ -275,7 +281,7 @@ export function readme(
     const requirements = inject(
         '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
     );
-    const dictionaries = `## Dictionaries\n\n${dictionariesSentence}\n\n${inject('./static/dictionaries.json#markdown', 'inject-table')}`;
+    const dictionaries = `## Dictionaries\n\n${dictionariesText}\n\n${inject('./static/dictionaries.json#markdown', 'inject-table')}`;
     const footer = inject('../../static/footer.md');
     switch (answers.kind) {
         case 'language':
