@@ -12,9 +12,9 @@ A fresh clone has no `node_modules`. npm only: pnpm and yarn are blocked. Node.j
 npm ci                                # installs the root, then every package (the postinstall runs npm i in each)
 npm run list:packages -- <word>...    # the published dictionaries and parsers, and the extension that includes each
 npm run create:extension -- <name> --package <@cspell/package> --yes   # create an extension
-npm run check:extension -- <name>     # an extension's build, sample, sync, Prettier and spell checks; --vscode adds the VS Code test
-npm run sync:extensions               # write the files the sync maintains, for every synced extension
-npm run sync:extensions -- --check    # fail if a synced extension is out of date
+npm run check:extension -- <name>     # an extension's build, sample, extension-tools check, Prettier and spell checks; --vscode adds the VS Code test
+npm run sync:extensions               # write the files the sync maintains, for every extension
+npm run check:extensions              # fail if an extension is out of date, or its config has drifted from its packages
 npm run lint                          # cspell over the repo
 npm run check-types                   # type-check test-runner, extension-runtime and extension-tools
 npm run lint:code                     # oxlint, type-aware; warnings fail
@@ -31,7 +31,7 @@ npm run test:vscode    # VS Code integration test; downloads VS Code into .vscod
 
 Tooling packages (`scripts/`, `extension-runtime/`, `extension-tools/`) run `npm test` in their own directory.
 
-Before finishing, run `npm run lint`, `npm run check-types`, `npm run lint:code` and `npm run sync:extensions -- --check` at the root, as CI does, and `npm run prettier:lint`. For each extension you changed, run `npm run check:extension -- <name>`.
+Before finishing, run `npm run lint`, `npm run check-types`, `npm run lint:code` and `npm run check:extensions` at the root, as CI does, and `npm run prettier:lint`. For each extension you changed, run `npm run check:extension -- <name>`.
 
 ## Where things are
 
@@ -46,7 +46,7 @@ Read the doc before changing that area. These are written for people too; [`CONT
 
 ## Rules
 
-- **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Edit that file or the shared files in `extension-runtime/`, `extension-tools/templates/sync/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [Files the sync writes](docs/extension-anatomy.md#files-the-sync-writes) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand.
+- **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Edit that file or the shared files in `extension-runtime/`, `extension-tools/templates/sync/` and `static/`, then run `npm run sync:extensions` and commit the result. Never edit the files the sync writes; [Files the sync writes](docs/extension-anatomy.md#files-the-sync-writes) lists them. `hunspell-syntax` and `timestamp-hover` are maintained by hand, except the shared `package.json` fields, which the sync writes.
 - **New extensions:** create them with the generator, never by copying an extension, by following the `new-extension` skill: [`.claude/skills/new-extension/SKILL.md`](.claude/skills/new-extension/SKILL.md). A new dictionary is added to cspell-dicts first.
 - **Words:** words a dictionary lacks belong upstream in cspell-dicts (see [Adding words](CONTRIBUTING.md#adding-words-to-a-language-dictionary)). For a sample's unknown words, add a line at the end of the sample: `words` for real words, `ignore` for names and other non-words. Leave `samples/cspell.json` as the generator wrote it.
 - **Generated after merge:** never edit or regenerate the root README lists, `static/generated/`, `dict-extensions.code-workspace`, `release-please-config.json` or the extension lists in `.github/workflows/`. A workflow runs `gen:readme`, `gen:release-please` and `gen:workflow` after a PR merges.

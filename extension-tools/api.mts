@@ -3,4 +3,3 @@
  */
 
 export * from './api-node-only.mts';
-export { fixExtensions } from './src/fixExtensions.mts';

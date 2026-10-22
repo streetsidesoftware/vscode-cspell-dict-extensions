@@ -98,16 +98,13 @@ export async function writeExtensionPackageJson(repoPath: string, pkg: PackageJs
 
 /**
  * The extension's `package.json` with the fields every extension shares.
+ * @param vscodeEngine - the `engines.vscode` of the runtime.
  */
-export function fixExtensionPackageJson(
-    repoPath: string,
-    pkg: PackageJson,
-    overrides: Partial<PackageJson>,
-): PackageJson {
+export function withSharedFields(repoPath: string, pkg: PackageJson, vscodeEngine: string): PackageJson {
     const baseUrl = new URL(`${repoPath}/`, repositoryRawUrl).href;
     return {
         ...pkg,
-        ...overrides,
+        engines: { ...pkg.engines, vscode: vscodeEngine },
         private: true,
         preview: undefined,
         repository: { ...(pkg.repository ?? defaultRepository), directory: repoPath },

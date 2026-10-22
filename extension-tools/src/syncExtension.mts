@@ -7,25 +7,36 @@
  * - the tool configs, copied from `extension-tools/templates/sync/`;
  * - `static/cspell-ext.json`, `static/commands.json` and `static/dictionaries.json`, generated from the config and
  *   the installed dictionaries;
- * - some fields of `package.json`, and the `@@inject` sections of `README.md`.
+ * - `package.json`: the fields every extension shares, and the fields derived from the config, sorted. It keeps every
+ *   other value;
+ * - the `@@inject` sections of `README.md`.
+ *
+ * An extension without an `extension.config.json` only gets the shared `package.json` fields; see `syncPackageJson`.
  *
  * It removes a generated file the extension no longer has. It creates `cspell.config.yaml` when it's missing; after
  * that, the file belongs to the extension. It leaves every other file alone.
  */
 
 import fs from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import path from 'node:path';
 
 import { injectMarkdown } from 'inject-markdown';
-import { parse as parseJsonc } from 'jsonc-parser';
+import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
+import {
+    type DictionaryExt,
+    type LanguageSetting,
+    type Override,
+    readDictionaries,
+    readImports,
+    splitList,
+} from './dictionaries.mts';
 import type { DictionaryState } from './dictionaryState.mts';
-import type { PackageJson } from './extensionHelper.mts';
+import { type PackageJson, withSharedFields } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { format, injectProblems } from './format.mts';
-import { exists, readJson, writeIfChanged } from './repo.mts';
+import { exists, extensionRepoPath, readJson, writeIfChanged } from './repo.mts';
 
 export const configFileName = 'extension.config.json';
 const cspellExtPath: CSpellExtPath = 'static/cspell-ext.json';
@@ -79,14 +90,23 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
     return changes;
 }
 
-async function readConfig(extensionDir: string, validate: ExtensionConfigValidator): Promise<ExtensionConfig> {
-    const configFile = `${repoPath(extensionDir)}/${configFileName}`;
-    return validate(await readJson(path.join(extensionDir, configFileName)), configFile);
+/**
+ * Sync an extension that has no `extension.config.json`, such as one maintained by hand: only the `package.json` fields
+ * every extension shares.
+ * @returns the files that changed (or would change with `check`).
+ */
+export async function syncPackageJson(
+    extensionDir: string,
+    options: Pick<SyncOptions, 'check' | 'vscodeEngine'>,
+): Promise<FileChange[]> {
+    const pkg = await readJson<PackageJson>(path.join(extensionDir, 'package.json'));
+    const files = new Map([['package.json', packageJsonText(extensionDir, pkg, options.vscodeEngine)]]);
+    return writeFiles(extensionDir, files, options.check);
 }
 
-/** The extension's directory as a repo path, e.g. `extensions/swedish`. */
-function repoPath(extensionDir: string): string {
-    return `extensions/${path.basename(extensionDir)}`;
+async function readConfig(extensionDir: string, validate: ExtensionConfigValidator): Promise<ExtensionConfig> {
+    const configFile = `${extensionRepoPath(extensionDir)}/${configFileName}`;
+    return validate(await readJson(path.join(extensionDir, configFileName)), configFile);
 }
 
 /**
@@ -108,7 +128,14 @@ async function extensionFiles(
     // `tsconfig.json` only type-checks `src/custom.ts`; without it, tsc and VS Code report "No inputs were found".
     if (!hasCustom) files.delete('tsconfig.json');
     const optional = await existingFiles(extensionDir, optionalPackagedFiles);
-    files.set('package.json', packageJsonSource(config, pkg, vscodeEngine, hasCustom, optional));
+    files.set(
+        'package.json',
+        packageJsonText(
+            extensionDir,
+            { ...pkg, ...derivedPackageJson(config, pkg, hasCustom, optional) },
+            vscodeEngine,
+        ),
+    );
     return files;
 }
 
@@ -204,7 +231,7 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
         for (const [engine, range] of Object.entries(ext.engines ?? {})) {
             if (engines[engine] !== undefined && engines[engine] !== range) {
                 throw new Error(
-                    `${repoPath(extensionDir)}: the dictionaries need different ${engine} versions ` +
+                    `${extensionRepoPath(extensionDir)}: the dictionaries need different ${engine} versions ` +
                         `("${engines[engine]}" and "${range}"). Set it in cspell.engines.`,
                 );
             }
@@ -212,48 +239,6 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
         }
     }
     return engines;
-}
-
-/** The parts of a dictionary's `cspell-ext.json` the sync reads. */
-interface DictionaryExt {
-    engines?: Record<string, string>;
-    dictionaryDefinitions?: { name: string }[];
-    dictionaries?: string[];
-    languageSettings?: LanguageSetting[];
-    overrides?: Override[];
-}
-
-interface LanguageSetting {
-    // cspell takes a comma-separated list or an array.
-    languageId?: string | string[];
-    locale?: string | string[];
-    dictionaries?: string[];
-}
-
-interface Override {
-    filename: string | string[];
-    languageId?: string | string[];
-    /** The locale. */
-    language?: string | string[];
-    dictionaries?: string[];
-}
-
-/** The `cspell-ext.json` of each dictionary in `cspell.import`, read from the extension's `node_modules`. */
-async function readDictionaries(extensionDir: string, config: ExtensionConfig): Promise<DictionaryExt[]> {
-    const imports = (config.cspell as { import?: string[] }).import ?? [];
-    const require = createRequire(path.join(extensionDir, 'package.json'));
-    const exts: DictionaryExt[] = [];
-    for (const spec of imports.filter((spec) => !spec.startsWith('.'))) {
-        let file: string;
-        try {
-            file = require.resolve(spec);
-        } catch {
-            throw new Error(`${repoPath(extensionDir)}: can't find "${spec}". Run \`npm install\` first.`);
-        }
-        // A dictionary's cspell-ext.json may have comments.
-        exts.push(parseJsonc(await fs.readFile(file, 'utf8')) as DictionaryExt);
-    }
-    return exts;
 }
 
 /**
@@ -265,38 +250,83 @@ async function readDictionaries(extensionDir: string, config: ExtensionConfig): 
  */
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
-    const exts = [...(await readDictionaries(extensionDir, config)), config.cspell as DictionaryExt];
-    const rows = exts.flatMap(settingRows);
+    const where = extensionRepoPath(extensionDir);
+    const rows = [
+        ...(await readImports(extensionDir, config)).flatMap(({ name, ext }) => importedRows(`${where}: ${name}`, ext)),
+        ...settingRows(`${where}/extension.config.json`, config.cspell as DictionaryExt),
+    ];
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
 }
 
-/** The rows of the settings in one `cspell-ext.json`. */
-function settingRows(ext: DictionaryExt): Record<string, string>[] {
+/**
+ * The rows of an imported package's `cspell-ext.json`.
+ * @param where - names the file in an error.
+ */
+function importedRows(where: string, ext: DictionaryExt): Row[] {
+    // The table would leave out the settings of the nested import.
+    if (ext.import?.length) throw new Error(`${where}: a package that imports others isn't supported.`);
+    return settingRows(where, ext);
+}
+
+/**
+ * The rows of the settings in one `cspell-ext.json`.
+ * @param where - names the file in an error.
+ */
+function settingRows(where: string, ext: DictionaryExt): Row[] {
     return [
-        ...(ext.dictionaries ?? []).map((name) => row(name, {})),
-        ...(ext.languageSettings ?? []).flatMap((setting) =>
-            (setting.dictionaries ?? []).map((name) => row(name, setting)),
-        ),
-        ...(ext.overrides ?? []).flatMap((override) =>
-            (override.dictionaries ?? []).map((name) =>
-                row(name, { locale: override.language, languageId: override.languageId, glob: override.filename }),
-            ),
-        ),
+        ...dictionariesRows(where, ext.dictionaries),
+        ...(ext.languageSettings ?? []).flatMap((setting) => languageSettingRows(where, setting)),
+        ...(ext.overrides ?? []).flatMap((override) => overrideRows(where, override)),
     ];
 }
 
-interface Where {
+/** The top-level `dictionaries` are on for every file. */
+function dictionariesRows(where: string, dictionaries: string[] | undefined): Row[] {
+    return names(where, dictionaries).map((name) => row(name, {}));
+}
+
+/** A language setting turns its dictionaries on for its locales and file types. */
+function languageSettingRows(where: string, setting: LanguageSetting): Row[] {
+    // The table would show no locale, which reads as "any locale".
+    if (setting.local !== undefined) throw new Error(`${where}: a language setting with "local" isn't supported.`);
+    return names(where, setting.dictionaries).map((name) => row(name, setting));
+}
+
+/**
+ * An override turns its dictionaries on for the files its `filename` matches. Its `language` and `languageId` set the
+ * locale and file type of those files; they don't select them, so they have no column.
+ */
+function overrideRows(where: string, override: Override): Row[] {
+    const dictionaries = names(where, override.dictionaries);
+    if (dictionaries.length && (override.language !== undefined || override.languageId !== undefined)) {
+        throw new Error(
+            `${where}: an override that names dictionaries and sets "language" or "languageId" isn't supported.`,
+        );
+    }
+    return dictionaries.map((name) => row(name, { glob: override.filename }));
+}
+
+/** The dictionaries a setting names. A `!name` turns a dictionary off, which the table can't show. */
+function names(where: string, dictionaries: string[] | undefined): string[] {
+    const negated = (dictionaries ?? []).filter((name) => name.startsWith('!'));
+    if (negated.length) throw new Error(`${where}: turning a dictionary off (${negated.join(', ')}) isn't supported.`);
+    return dictionaries ?? [];
+}
+
+type Row = Record<'Dictionary' | 'locale' | 'languageId' | 'glob', string>;
+
+interface Cells {
     locale?: string | string[] | undefined;
     languageId?: string | string[] | undefined;
     glob?: string | string[] | undefined;
 }
 
-function row(name: string, where: Where): Record<string, string> {
+function row(name: string, cells: Cells): Row {
     return {
         Dictionary: code(name),
-        locale: asWritten(where.locale),
-        languageId: asWritten(where.languageId),
-        glob: asWritten(where.glob),
+        locale: asWritten(cells.locale),
+        languageId: asWritten(cells.languageId),
+        glob: asWritten(cells.glob),
     };
 }
 
@@ -348,14 +378,6 @@ function languageSettingRule(setting: LanguageSetting): Rule {
     };
 }
 
-function splitList(list: string | string[] | undefined): string[] {
-    return [list ?? '']
-        .flat()
-        .flatMap((item) => item.split(','))
-        .map((item) => item.trim())
-        .filter(Boolean);
-}
-
 function unique(values: string[]): string[] {
     return [...new Set(values)];
 }
@@ -385,24 +407,28 @@ function commandsTable(config: ExtensionConfig): string | undefined {
     );
 }
 
-/**
- * Update the derived fields of an extension's `package.json` and keep the others, in their order.
- */
-function packageJsonSource(
+/** An extension's `package.json` with the shared fields, sorted. */
+function packageJsonText(extensionDir: string, pkg: PackageJson, vscodeEngine: string): string {
+    return (
+        JSON.stringify(sortPackageJson(withSharedFields(extensionRepoPath(extensionDir), pkg, vscodeEngine)), null, 2) +
+        '\n'
+    );
+}
+
+/** The `package.json` fields derived from the config. */
+function derivedPackageJson(
     config: ExtensionConfig,
     pkg: PackageJson,
-    vscodeEngine: string,
     hasCustom: boolean,
     optionalFiles: string[],
-): string {
+): Record<string, unknown> {
     const commands = contributedCommands(config).map(({ id, title }) => ({ command: id, title }));
     const contributes = (pkg as { contributes?: object }).contributes;
-    const derived: Record<string, unknown> = {
+    return {
         name: `code-spell-checker-${config.name}`,
         displayName: config.displayName,
         description: config.description,
         type: 'module',
-        engines: { ...pkg.engines, vscode: vscodeEngine },
         main: './extension.js',
         // What vsce packages, besides `package.json` and `README.md`. vsce only takes the production dependencies from
         // `node_modules`, wherever npm installed them.
@@ -431,7 +457,6 @@ function packageJsonSource(
             watch: 'tsdown --watch',
         },
     };
-    return JSON.stringify({ ...pkg, ...derived }, null, 2) + '\n';
 }
 
 /**
