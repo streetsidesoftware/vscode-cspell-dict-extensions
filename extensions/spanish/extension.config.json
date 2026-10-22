@@ -4,7 +4,7 @@
     "kind": "language",
     "friendlyName": "Spanish",
     "displayName": "Spanish - Code Spell Checker",
-    "description": "Adds Spanish (español) spell checking to Code Spell Checker.",
+    "description": "Spanish dictionary extension for VS Code.",
     "nativeName": "español",
     "locale": "es-ES",
     "sample": "samples/seattle.md",

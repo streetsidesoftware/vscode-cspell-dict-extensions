@@ -1,6 +1,6 @@
 # Code Spell Checker Spanish / Español Extension
 
-Imports the Spanish spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Spanish dictionary extension for VS Code.
 
 ## Installation
 
