@@ -15,7 +15,7 @@ To change an extension, edit its `extension.config.json`, or the shared files in
 
 ## Files you edit
 
-- `extension.config.json`: the extension's data. It's checked against [the schema](../static/extension.config.schema.json), which is generated from the `ExtensionConfig` type in [`src/config.ts`](../extension-runtime/src/config.ts).
+- `extension.config.json`: the extension's data. It's checked against [the schema](../extension-runtime/extension.config.schema.json), which the runtime's build generates from the `ExtensionConfig` type in [`src/config.ts`](../extension-runtime/src/config.ts).
 - `README.md`, except the sections between `@@inject` markers.
 - `samples/` and `images/`.
 - `LICENSE`: the license of the extension's own code, `GPL-3.0-or-later` unless the generator's `--license` set another. The extension includes its dictionaries or parsers unchanged, and each keeps its own license in its package.
@@ -32,7 +32,7 @@ Don't edit these; `npm run sync:extensions` overwrites them.
 - **Tool configs:** `tsdown.config.ts`, `.vscode/*`, `.vscodeignore` and `.gitignore`, copied from [`templates/sync/`](../extension-tools/templates/sync). Also `tsconfig.json`, but only when the extension has a `src/custom.ts`; otherwise the sync removes it.
 - **`static/cspell-ext.json`:** the `cspell` settings from `extension.config.json`, which the extension registers with Code Spell Checker.
 - **`static/commands.json`:** the commands, for the README's table. Removed when there are none.
-- **`static/dictionaries.json`:** each dictionary with the locales or file types that turn it on, read from the installed dictionaries, for the README's table. A dictionary that nothing turns on is listed as "off until turned on". Removed when there are none, and never written for a bundle.
+- **`static/dictionaries.json`:** for the README's table, one row for each dictionary a setting names, with the setting's `locale`, `languageId` and `glob` as written. The settings are the top-level `dictionaries`, the language settings and the overrides, read from the installed dictionaries and the extension's `cspell`. Removed when there are none, and never written for a bundle.
 - **`package.json` fields:** `name`, `displayName`, `description`, `type`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)), `main`, `contributes.commands`, `scripts`, and the `devDependencies` entry `"@internal/extension-runtime": "file:../../extension-runtime"`.
 - **README sections** between `@@inject` markers, filled by [inject-markdown](https://github.com/streetsidesoftware/inject-markdown) from the shared templates in [`static/`](../static) and the extension's own `static/` files:
   - `<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->`
@@ -42,7 +42,7 @@ Don't edit these; `npm run sync:extensions` overwrites them.
 
 `npm run tool:fix-extensions`, which the generator runs, also sets the `package.json` fields every extension shares: `private`, `repository`, `publisher`, `author`, `bugs`, and the `vsce` base URLs.
 
-The sync also regenerates the schema from the `ExtensionConfig` type first, and checks every `extension.config.json` against it.
+The sync checks every `extension.config.json` against the runtime's schema first.
 
 ## Engines
 

@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "latin",
     "kind": "language",
     "friendlyName": "Latin",
+    "displayName": "Latin - Code Spell Checker",
+    "description": "Adds Latin (Latina) spell checking to Code Spell Checker.",
     "nativeName": "Latina",
     "locale": "la-VA",
     "sample": "samples/lingua-latina.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_latin.enable",
+            "title": "Enable Latin Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "la-VA"
+            "value": "la-VA",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_latin.disable",
+            "title": "Disable Latin Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "la,la-VA"
+            "value": "la,la-VA",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_latin.enableWorkspace",
+            "title": "Enable Latin Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "la-VA",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_latin.disableWorkspace",
+            "title": "Disable Latin Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "la,la-VA",

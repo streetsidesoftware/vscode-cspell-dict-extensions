@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "armenian",
     "kind": "language",
     "friendlyName": "Armenian",
+    "displayName": "Armenian - Code Spell Checker",
+    "description": "Adds Armenian (հայերեն) spell checking to Code Spell Checker.",
     "nativeName": "հայերեն",
     "locale": "hy-AM",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_armenian.enable",
+            "title": "Enable Armenian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "hy-AM"
+            "value": "hy-AM",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_armenian.disable",
+            "title": "Disable Armenian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "hy,hy-AM"
+            "value": "hy,hy-AM",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_armenian.enableWorkspace",
+            "title": "Enable Armenian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "hy-AM",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_armenian.disableWorkspace",
+            "title": "Disable Armenian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "hy,hy-AM",

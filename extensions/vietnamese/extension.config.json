@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "vietnamese",
     "kind": "language",
     "friendlyName": "Vietnamese",
+    "displayName": "Vietnamese - Code Spell Checker",
+    "description": "Adds Vietnamese (Tiếng Việt) spell checking to Code Spell Checker.",
     "nativeName": "Tiếng Việt",
     "locale": "vi",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_vietnamese.enable",
+            "title": "Enable Vietnamese Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "vi"
+            "value": "vi",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_vietnamese.disable",
+            "title": "Disable Vietnamese Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "vi"
+            "value": "vi",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_vietnamese.enableWorkspace",
+            "title": "Enable Vietnamese Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "vi",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_vietnamese.disableWorkspace",
+            "title": "Disable Vietnamese Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "vi",

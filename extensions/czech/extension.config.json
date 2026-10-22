@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "czech",
     "kind": "language",
     "friendlyName": "Czech",
+    "displayName": "Czech - Code Spell Checker",
+    "description": "Adds Czech (čeština) spell checking to Code Spell Checker.",
     "nativeName": "čeština",
     "locale": "cs",
     "sample": "samples/seattle.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_czech.enable",
+            "title": "Enable Czech Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "cs"
+            "value": "cs",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_czech.disable",
+            "title": "Disable Czech Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "cs"
+            "value": "cs",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_czech.enableWorkspace",
+            "title": "Enable Czech Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "cs",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_czech.disableWorkspace",
+            "title": "Disable Czech Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "cs",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "cs",
             "id": "cSpellExt_czech.enableCzech",
+            "title": "Enable Czech Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "cs",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_czech.disableCzech",
+            "title": "Disable Czech Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "cs",
-            "id": "cSpellExt_czech.disableCzech",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_czech.enableCzechWorkspace",
+            "title": "Enable Czech Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "cs",
             "scope": "workspace",
-            "id": "cSpellExt_czech.enableCzechWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_czech.disableCzechWorkspace",
+            "title": "Disable Czech Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "cs",
             "scope": "workspace",
-            "id": "cSpellExt_czech.disableCzechWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

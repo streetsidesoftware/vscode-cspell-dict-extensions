@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "azerbaijani",
     "kind": "language",
     "friendlyName": "Azerbaijani",
+    "displayName": "Azerbaijani - Code Spell Checker",
+    "description": "Adds Azerbaijani (azərbaycan) spell checking to Code Spell Checker.",
     "nativeName": "azərbaycan",
     "locale": "az-AZ",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_azerbaijani.enable",
+            "title": "Enable Azerbaijani Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "az-az"
+            "value": "az-az",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_azerbaijani.disable",
+            "title": "Disable Azerbaijani Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "az-AZ,az"
+            "value": "az-AZ,az",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_azerbaijani.enableWorkspace",
+            "title": "Enable Azerbaijani Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "az-az",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_azerbaijani.disableWorkspace",
+            "title": "Disable Azerbaijani Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "az-AZ,az",

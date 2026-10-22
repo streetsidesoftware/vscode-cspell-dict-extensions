@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "esperanto",
     "kind": "language",
     "friendlyName": "Esperanto",
+    "displayName": "Esperanto - Code Spell Checker",
+    "description": "Adds Esperanto spell checking to Code Spell Checker.",
     "locale": "eo",
     "sample": "samples/seattle.md",
     "cspell": {
@@ -10,61 +12,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_esperanto.enable",
+            "title": "Enable Esperanto Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "eo"
+            "value": "eo",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_esperanto.disable",
+            "title": "Disable Esperanto Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "eo"
+            "value": "eo",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_esperanto.enableWorkspace",
+            "title": "Enable Esperanto Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "eo",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_esperanto.disableWorkspace",
+            "title": "Disable Esperanto Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "eo",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "eo",
             "id": "cSpellExt_esperanto.enableEsperanto",
+            "title": "Enable Esperanto Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "eo",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_esperanto.disableEsperanto",
+            "title": "Disable Esperanto Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "eo",
-            "id": "cSpellExt_esperanto.disableEsperanto",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_esperanto.enableEsperantoWorkspace",
+            "title": "Enable Esperanto Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "eo",
             "scope": "workspace",
-            "id": "cSpellExt_esperanto.enableEsperantoWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_esperanto.disableEsperantoWorkspace",
+            "title": "Disable Esperanto Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "eo",
             "scope": "workspace",
-            "id": "cSpellExt_esperanto.disableEsperantoWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

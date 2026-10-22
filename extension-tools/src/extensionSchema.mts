@@ -1,44 +1,28 @@
 /**
- * The JSON schema of `extension.config.json`, generated from the `ExtensionConfig` type, and its validation.
+ * The validation of `extension.config.json`, against the schema the runtime builds from its `ExtensionConfig` type.
  */
-
-import path from 'node:path';
 
 import { Ajv, type ValidateFunction } from 'ajv';
-import * as tsj from 'ts-json-schema-generator';
 
-import { duplicateCommandIds, type ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { ExtensionConfig } from '../../extension-runtime/api.ts';
+import { readJson } from './repo.mts';
 
-const runtimeDir = path.resolve(import.meta.dirname, '../../extension-runtime');
-
-/** Where the generated schema is written, relative to the repository root. */
-export const schemaPath = 'static/extension.config.schema.json';
-
-/**
- * Generate the schema from `ExtensionConfig` in `extension-runtime/src/config.ts`.
- */
-export function generateExtensionSchema(): tsj.Schema {
-    const config: tsj.Config = {
-        path: path.join(runtimeDir, 'src/config.ts'),
-        tsconfig: path.join(runtimeDir, 'tsconfig.json'),
-        type: 'ExtensionConfig',
-        topRef: false,
-        // Exported types become shared definitions, so the schema doesn't repeat them.
-        expose: 'export',
-        skipTypeCheck: true,
-        sortProps: false,
-        additionalProperties: false,
-    };
-    return { title: 'Extension config', ...tsj.createGenerator(config).createSchema(config.type) };
-}
+/** The runtime's schema of `extension.config.json`, relative to the repository root. */
+export const schemaPath = 'extension-runtime/extension.config.schema.json';
 
 export type ExtensionConfigValidator = (data: unknown, file: string) => ExtensionConfig;
 
 /**
- * Make a validator for `extension.config.json` files.
- * @param schema - the generated schema.
+ * Make a validator for `extension.config.json` files from the runtime's schema.
  */
-export function createExtensionConfigValidator(schema: tsj.Schema): ExtensionConfigValidator {
+export async function readExtensionConfigValidator(): Promise<ExtensionConfigValidator> {
+    return createExtensionConfigValidator(await readJson(schemaPath));
+}
+
+/**
+ * Make a validator for `extension.config.json` files.
+ */
+export function createExtensionConfigValidator(schema: object): ExtensionConfigValidator {
     const validate: ValidateFunction = new Ajv({ allErrors: true }).compile(schema);
     return (data, file) => {
         if (!validate(data)) {
@@ -48,8 +32,21 @@ export function createExtensionConfigValidator(schema: tsj.Schema): ExtensionCon
         const config = data as ExtensionConfig;
         const duplicates = duplicateCommandIds(config);
         if (duplicates.length) {
-            throw new Error(`${file}: duplicate command IDs ${duplicates.join(', ')}. Give the commands explicit IDs.`);
+            throw new Error(`${file}: duplicate command IDs ${duplicates.join(', ')}. Give each command its own ID.`);
         }
         return config;
     };
+}
+
+/**
+ * The command IDs used more than once. A schema can't express this.
+ */
+export function duplicateCommandIds(config: ExtensionConfig): string[] {
+    const seen = new Set<string>();
+    const duplicates = new Set<string>();
+    for (const { id } of config.commands) {
+        if (seen.has(id)) duplicates.add(id);
+        seen.add(id);
+    }
+    return [...duplicates];
 }

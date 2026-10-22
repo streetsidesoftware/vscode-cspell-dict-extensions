@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "romanian",
     "kind": "language",
     "friendlyName": "Romanian",
+    "displayName": "Romanian - Code Spell Checker",
+    "description": "Adds Romanian (română) spell checking to Code Spell Checker.",
     "nativeName": "română",
     "locale": "ro-RO",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_romanian.enable",
+            "title": "Enable Romanian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "ro-ro"
+            "value": "ro-ro",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_romanian.disable",
+            "title": "Disable Romanian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "ro-RO,ro"
+            "value": "ro-RO,ro",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_romanian.enableWorkspace",
+            "title": "Enable Romanian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "ro-ro",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_romanian.disableWorkspace",
+            "title": "Disable Romanian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "ro-RO,ro",

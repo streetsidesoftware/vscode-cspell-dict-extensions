@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "turkish",
     "kind": "language",
     "friendlyName": "Turkish",
+    "displayName": "Turkish - Code Spell Checker",
+    "description": "Adds Turkish (Türkçe) spell checking to Code Spell Checker.",
     "nativeName": "Türkçe",
     "locale": "tr-TR",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_turkish.enable",
+            "title": "Enable Turkish Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "tr-TR"
+            "value": "tr-TR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_turkish.disable",
+            "title": "Disable Turkish Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "tr,tr-TR"
+            "value": "tr,tr-TR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_turkish.enableWorkspace",
+            "title": "Enable Turkish Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "tr-TR",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_turkish.disableWorkspace",
+            "title": "Disable Turkish Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "tr,tr-TR",

@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "hebrew",
     "kind": "language",
     "friendlyName": "Hebrew",
+    "displayName": "Hebrew - Code Spell Checker",
+    "description": "Adds Hebrew (עברית) spell checking to Code Spell Checker.",
     "nativeName": "עברית",
     "locale": "he",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_hebrew.enable",
+            "title": "Enable Hebrew Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "he"
+            "value": "he",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_hebrew.disable",
+            "title": "Disable Hebrew Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "he"
+            "value": "he",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_hebrew.enableWorkspace",
+            "title": "Enable Hebrew Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "he",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_hebrew.disableWorkspace",
+            "title": "Disable Hebrew Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "he",

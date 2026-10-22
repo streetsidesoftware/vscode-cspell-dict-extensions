@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "austrian-german",
     "kind": "language",
     "friendlyName": "Austrian German",
+    "displayName": "Austrian German - Code Spell Checker",
+    "description": "Adds Austrian German (Österreichisches Deutsch) spell checking to Code Spell Checker.",
     "nativeName": "Österreichisches Deutsch",
     "locale": "de-AT",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_austrian-german.enable",
+            "title": "Enable Austrian German Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "de-at"
+            "value": "de-at",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_austrian-german.disable",
+            "title": "Disable Austrian German Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "de-at"
+            "value": "de-at",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_austrian-german.enableWorkspace",
+            "title": "Enable Austrian German Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "de-at",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_austrian-german.disableWorkspace",
+            "title": "Disable Austrian German Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "de-at",

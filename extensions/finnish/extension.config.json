@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "finnish",
     "kind": "language",
     "friendlyName": "Finnish",
+    "displayName": "Finnish - Code Spell Checker",
+    "description": "Adds Finnish (suomi) spell checking to Code Spell Checker.",
     "nativeName": "suomi",
     "locale": "fi-FI",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_finnish.enable",
+            "title": "Enable Finnish Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "fi-FI"
+            "value": "fi-FI",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_finnish.disable",
+            "title": "Disable Finnish Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "fi,fi-FI"
+            "value": "fi,fi-FI",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_finnish.enableWorkspace",
+            "title": "Enable Finnish Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "fi-FI",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_finnish.disableWorkspace",
+            "title": "Disable Finnish Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "fi,fi-FI",

@@ -11,17 +11,8 @@ export interface DictionaryState {
     all: boolean;
     /** The file types (VS Code language IDs) that turn it on, such as `clojure`. `*` is every file type. */
     fileTypes: string[];
-    /** The locales that turn it on, for a natural language. */
-    locales: string[];
     /** Nothing turns it on: users turn it on in their settings, or with the extension's commands. */
     off: boolean;
-}
-
-/** When a word list's dictionary is on, for the README: `all`, `off until turned on`, or its file types. */
-export function describeFileTypes(state: DictionaryState): string {
-    if (state.off) return 'off until turned on';
-    if (state.all) return 'all';
-    return state.fileTypes.map(code).join(', ');
 }
 
 /**

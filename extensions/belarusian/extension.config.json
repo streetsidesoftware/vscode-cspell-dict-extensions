@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "belarusian",
     "kind": "language",
     "friendlyName": "Belarusian",
+    "displayName": "Belarusian - Code Spell Checker",
+    "description": "Adds Belarusian (беларуская) spell checking to Code Spell Checker.",
     "nativeName": "беларуская",
     "locale": "be-BY",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_belarusian.enable",
+            "title": "Enable Belarusian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "be-BY"
+            "value": "be-BY",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_belarusian.disable",
+            "title": "Disable Belarusian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "be,be-BY"
+            "value": "be,be-BY",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_belarusian.enableWorkspace",
+            "title": "Enable Belarusian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "be-BY",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_belarusian.disableWorkspace",
+            "title": "Disable Belarusian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "be,be-BY",

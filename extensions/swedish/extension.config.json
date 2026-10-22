@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "swedish",
     "kind": "language",
     "friendlyName": "Swedish",
+    "displayName": "Swedish - Code Spell Checker",
+    "description": "Adds Swedish (svenska) spell checking to Code Spell Checker.",
     "nativeName": "svenska",
     "locale": "sv-SE",
     "sample": "samples/Seattle.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_swedish.enable",
+            "title": "Enable Swedish Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "sv_SE"
+            "value": "sv_SE",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_swedish.disable",
+            "title": "Disable Swedish Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "sv-SE,sv"
+            "value": "sv-SE,sv",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_swedish.enableWorkspace",
+            "title": "Enable Swedish Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "sv_SE",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_swedish.disableWorkspace",
+            "title": "Disable Swedish Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "sv-SE,sv",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "sv_SE",
             "id": "cSpellExt_swedish.enableSwedish",
+            "title": "Enable Swedish Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sv_SE",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_swedish.disableSwedish",
+            "title": "Disable Swedish Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "sv-SE,sv",
-            "id": "cSpellExt_swedish.disableSwedish",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_swedish.enableSwedishWorkspace",
+            "title": "Enable Swedish Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "sv_SE",
             "scope": "workspace",
-            "id": "cSpellExt_swedish.enableSwedishWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_swedish.disableSwedishWorkspace",
+            "title": "Disable Swedish Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "sv-SE,sv",
             "scope": "workspace",
-            "id": "cSpellExt_swedish.disableSwedishWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

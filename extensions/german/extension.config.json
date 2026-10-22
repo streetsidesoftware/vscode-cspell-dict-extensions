@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "german",
     "kind": "language",
     "friendlyName": "German",
+    "displayName": "German - Code Spell Checker",
+    "description": "Adds German (Deutsch) spell checking to Code Spell Checker.",
     "nativeName": "Deutsch",
     "locale": "de-DE",
     "sample": "samples/seattle.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_german.enable",
+            "title": "Enable German Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "de-DE"
+            "value": "de-DE",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_german.disable",
+            "title": "Disable German Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "de-DE"
+            "value": "de-DE",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_german.enableWorkspace",
+            "title": "Enable German Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "de-DE",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_german.disableWorkspace",
+            "title": "Disable German Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "de-DE",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "de-DE",
             "id": "cSpellExt_german.enableGerman",
+            "title": "Enable German Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "de-DE",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_german.disableGerman",
+            "title": "Disable German Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "de-DE",
-            "id": "cSpellExt_german.disableGerman",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_german.enableGermanWorkspace",
+            "title": "Enable German Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "de-DE",
             "scope": "workspace",
-            "id": "cSpellExt_german.enableGermanWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_german.disableGermanWorkspace",
+            "title": "Disable German Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "de-DE",
             "scope": "workspace",
-            "id": "cSpellExt_german.disableGermanWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

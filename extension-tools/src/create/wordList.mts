@@ -30,7 +30,7 @@ async function writeCommands(
     dictionaries: readonly DictionaryState[],
 ): Promise<void> {
     const commands = dictionaryCommands(
-        config.name,
+        config,
         dictionaries.map((d) => d.name),
     );
     await writeFile(path.join(destDir, 'extension.config.json'), json({ ...config, commands }));

@@ -1,6 +1,8 @@
 [
     {
         "Dictionary": "`tr-tr`",
-        "Locales": "`tr`, `tr-TR`"
+        "locale": "`tr,tr-TR`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

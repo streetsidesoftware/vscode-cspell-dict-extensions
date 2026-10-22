@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Sync the extensions that have an `extension.config.json` with `extension-runtime/`, after generating
- * `static/extension.config.schema.json` from the `ExtensionConfig` type.
+ * Sync the extensions that have an `extension.config.json` with `extension-runtime/`. Each `extension.config.json` is
+ * checked against the runtime's schema first.
  *
  * Usage: `sync.mts [--check] [folder...]`
  *
@@ -14,9 +14,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { parseArgs, styleText } from 'node:util';
 
-import { createExtensionConfigValidator, generateExtensionSchema, schemaPath } from './src/extensionSchema.mts';
-import { format } from './src/format.mts';
-import { exists, extensionsDir, readVscodeEngine, repoRoot, writeIfChanged } from './src/repo.mts';
+import { readExtensionConfigValidator } from './src/extensionSchema.mts';
+import { exists, extensionsDir, readVscodeEngine } from './src/repo.mts';
 import { configFileName, syncExtension } from './src/syncExtension.mts';
 
 async function run(): Promise<void> {
@@ -28,16 +27,8 @@ async function run(): Promise<void> {
     const names = positionals.length ? positionals : (await fs.readdir(extensionsDir)).sort();
     const vscodeEngine = await readVscodeEngine();
 
-    // The schema comes from the `ExtensionConfig` type; every extension.config.json is checked against it.
-    const schema = generateExtensionSchema();
-    const schemaFile = path.join(repoRoot, schemaPath);
-    const schemaContent = await format(schemaFile, JSON.stringify(schema, null, 4) + '\n');
+    const validate = await readExtensionConfigValidator();
     let outOfDate = 0;
-    if (await writeIfChanged(schemaFile, schemaContent, values.check)) {
-        console.log(`${values.check ? 'Out of date' : 'Updated'}: ${schemaPath}`);
-        ++outOfDate;
-    }
-    const validate = createExtensionConfigValidator(schema);
 
     let synced = 0;
     for (const name of names) {

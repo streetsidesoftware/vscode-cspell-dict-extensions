@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "french",
     "kind": "language",
     "friendlyName": "French",
+    "displayName": "French - Code Spell Checker",
+    "description": "Adds French (français) spell checking to Code Spell Checker.",
     "nativeName": "français",
     "locale": "fr-FR",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_french.enable",
+            "title": "Enable French Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "fr-FR"
+            "value": "fr-FR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_french.disable",
+            "title": "Disable French Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-FR"
+            "value": "fr-FR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_french.enableWorkspace",
+            "title": "Enable French Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "fr-FR",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_french.disableWorkspace",
+            "title": "Disable French Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "fr-FR",

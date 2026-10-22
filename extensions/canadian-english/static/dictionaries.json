@@ -1,6 +1,20 @@
 [
     {
         "Dictionary": "`en-ca`",
-        "Locales": "`en-CA`"
+        "locale": "`en-CA`",
+        "languageId": "`*`",
+        "glob": ""
+    },
+    {
+        "Dictionary": "`en-common-misspellings`",
+        "locale": "`en-CA`",
+        "languageId": "`*`",
+        "glob": ""
+    },
+    {
+        "Dictionary": "`en-gb-common-misspellings`",
+        "locale": "`en-CA`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

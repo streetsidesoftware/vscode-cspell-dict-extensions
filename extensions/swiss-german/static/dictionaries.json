@@ -1,6 +1,8 @@
 [
     {
         "Dictionary": "`de-ch`",
-        "Locales": "`de`, `de-CH`"
+        "locale": "`de,de_CH`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

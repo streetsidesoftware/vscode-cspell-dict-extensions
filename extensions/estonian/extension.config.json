@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "estonian",
     "kind": "language",
     "friendlyName": "Estonian",
+    "displayName": "Estonian - Code Spell Checker",
+    "description": "Adds Estonian (eesti) spell checking to Code Spell Checker.",
     "nativeName": "eesti",
     "locale": "et-EE",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_estonian.enable",
+            "title": "Enable Estonian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "et-EE"
+            "value": "et-EE",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_estonian.disable",
+            "title": "Disable Estonian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "et,et-EE"
+            "value": "et,et-EE",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_estonian.enableWorkspace",
+            "title": "Enable Estonian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "et-EE",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_estonian.disableWorkspace",
+            "title": "Disable Estonian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "et,et-EE",

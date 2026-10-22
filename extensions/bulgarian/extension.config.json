@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "bulgarian",
     "kind": "language",
     "friendlyName": "Bulgarian",
+    "displayName": "Bulgarian - Code Spell Checker",
+    "description": "Adds Bulgarian (български) spell checking to Code Spell Checker.",
     "nativeName": "български",
     "locale": "bg-BG",
     "sample": "samples/seattle-bg.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_bulgarian.enable",
+            "title": "Enable Bulgarian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "bg_BG"
+            "value": "bg_BG",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_bulgarian.disable",
+            "title": "Disable Bulgarian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "bg-BG,bg"
+            "value": "bg-BG,bg",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_bulgarian.enableWorkspace",
+            "title": "Enable Bulgarian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "bg_BG",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_bulgarian.disableWorkspace",
+            "title": "Disable Bulgarian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "bg-BG,bg",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "bg_BG",
             "id": "cSpellExt_bulgarian.enableBulgarian",
+            "title": "Enable Bulgarian Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "bg_BG",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_bulgarian.disableBulgarian",
+            "title": "Disable Bulgarian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "bg-BG,bg",
-            "id": "cSpellExt_bulgarian.disableBulgarian",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_bulgarian.enableBulgarianWorkspace",
+            "title": "Enable Bulgarian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "bg_BG",
             "scope": "workspace",
-            "id": "cSpellExt_bulgarian.enableBulgarianWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_bulgarian.disableBulgarianWorkspace",
+            "title": "Disable Bulgarian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "bg-BG,bg",
             "scope": "workspace",
-            "id": "cSpellExt_bulgarian.disableBulgarianWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

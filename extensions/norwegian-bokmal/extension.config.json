@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "norwegian-bokmal",
     "kind": "language",
     "friendlyName": "Norwegian Bokmål",
+    "displayName": "Norwegian Bokmål - Code Spell Checker",
+    "description": "Adds Norwegian Bokmål (norsk bokmål) spell checking to Code Spell Checker.",
     "nativeName": "norsk bokmål",
     "locale": "nb-NO",
     "sample": "samples/norge.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_norwegian-bokmal.enable",
+            "title": "Enable Norwegian Bokmål Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "nb-NO"
+            "value": "nb-NO",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_norwegian-bokmal.disable",
+            "title": "Disable Norwegian Bokmål Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "nb,nb-NO"
+            "value": "nb,nb-NO",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_norwegian-bokmal.enableWorkspace",
+            "title": "Enable Norwegian Bokmål Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "nb-NO",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_norwegian-bokmal.disableWorkspace",
+            "title": "Disable Norwegian Bokmål Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "nb,nb-NO",

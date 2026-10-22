@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "french-reforme",
     "kind": "language",
     "friendlyName": "French Réforme 90",
+    "displayName": "French Réforme 90 - Code Spell Checker",
+    "description": "Adds French Réforme 90 (français) spell checking to Code Spell Checker.",
     "nativeName": "français",
     "locale": "fr-90",
     "sample": "samples/seattle.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_french-reforme.enable",
+            "title": "Enable French Réforme 90 Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "fr-90"
+            "value": "fr-90",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_french-reforme.disable",
+            "title": "Disable French Réforme 90 Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "fr-90"
+            "value": "fr-90",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_french-reforme.enableWorkspace",
+            "title": "Enable French Réforme 90 Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "fr-90",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_french-reforme.disableWorkspace",
+            "title": "Disable French Réforme 90 Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "fr-90",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "fr-90",
             "id": "cSpellExt_french-reforme.enableFrench",
+            "title": "Enable French Réforme 90 Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "fr-90",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_french-reforme.disableFrench",
+            "title": "Disable French Réforme 90 Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "fr-90",
-            "id": "cSpellExt_french-reforme.disableFrench",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_french-reforme.enableFrenchWorkspace",
+            "title": "Enable French Réforme 90 Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "fr-90",
             "scope": "workspace",
-            "id": "cSpellExt_french-reforme.enableFrenchWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_french-reforme.disableFrenchWorkspace",
+            "title": "Disable French Réforme 90 Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "fr-90",
             "scope": "workspace",
-            "id": "cSpellExt_french-reforme.disableFrenchWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

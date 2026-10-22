@@ -1,6 +1,8 @@
 [
     {
         "Dictionary": "`win32`",
-        "File types": "`c`, `cpp`"
+        "locale": "`*`",
+        "languageId": "`c,cpp`",
+        "glob": ""
     }
 ]

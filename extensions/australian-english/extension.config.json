@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "australian-english",
     "kind": "language",
     "friendlyName": "Australian English",
+    "displayName": "Australian English - Code Spell Checker",
+    "description": "Adds Australian English spell checking to Code Spell Checker.",
     "locale": "en-AU",
     "sample": "samples/seattle.md",
     "cspell": {
@@ -10,22 +12,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_australian-english.enable",
+            "title": "Enable Australian English Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "en-au"
+            "value": "en-au",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_australian-english.disable",
+            "title": "Disable Australian English Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "en-au"
+            "value": "en-au",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_australian-english.enableWorkspace",
+            "title": "Enable Australian English Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "en-au",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_australian-english.disableWorkspace",
+            "title": "Disable Australian English Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "en-au",

@@ -6,7 +6,8 @@ Which files the sync writes is in [Anatomy of an extension](../docs/extension-an
 
 ## Code
 
-- [`src/config.ts`](./src/config.ts): the `ExtensionConfig` type, the source of [the schema](../static/extension.config.schema.json).
+- [`src/config.ts`](./src/config.ts): the `ExtensionConfig` type, the source of [the schema](./extension.config.schema.json).
+- [`build-schema.mts`](./build-schema.mts): writes the schema from the type. `npm run build` runs it, and so does a workflow after every merge. Run it after changing `src/config.ts`.
 - [`package.json`](./package.json): its `engines.vscode` is the VS Code version the code needs.
 - [`api.ts`](./api.ts): what the tools in [`extension-tools/`](../extension-tools) use from the runtime. They import only this file.
 

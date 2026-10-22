@@ -1,6 +1,8 @@
 [
     {
         "Dictionary": "`uk-ua`",
-        "Locales": "`uk`"
+        "locale": "`uk`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "spanish",
     "kind": "language",
     "friendlyName": "Spanish",
+    "displayName": "Spanish - Code Spell Checker",
+    "description": "Adds Spanish (español) spell checking to Code Spell Checker.",
     "nativeName": "español",
     "locale": "es-ES",
     "sample": "samples/seattle.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_spanish.enable",
+            "title": "Enable Spanish Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "es-ES"
+            "value": "es-ES",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_spanish.disable",
+            "title": "Disable Spanish Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "es-ES"
+            "value": "es-ES",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_spanish.enableWorkspace",
+            "title": "Enable Spanish Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "es-ES",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_spanish.disableWorkspace",
+            "title": "Disable Spanish Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "es-ES",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "es-ES",
             "id": "cSpell.enableSpanish",
+            "title": "Enable Spanish Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "es-ES",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."
         },
         {
+            "id": "cSpell.disableSpanish",
+            "title": "Disable Spanish Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "es-ES",
-            "id": "cSpell.disableSpanish",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."
         },
         {
+            "id": "cSpell.enableSpanishWorkspace",
+            "title": "Enable Spanish Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "es-ES",
             "scope": "workspace",
-            "id": "cSpell.enableSpanishWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."
         },
         {
+            "id": "cSpell.disableSpanishWorkspace",
+            "title": "Disable Spanish Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "es-ES",
             "scope": "workspace",
-            "id": "cSpell.disableSpanishWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."

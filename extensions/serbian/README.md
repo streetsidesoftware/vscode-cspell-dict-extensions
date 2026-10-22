@@ -60,14 +60,20 @@ Example using both English and Serbian dictionaries:
 
 ## Dictionaries
 
-The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+Each row is a setting that turns a dictionary on. The dictionary is on when all of the row's conditions match:
+
+- **locale:** `cSpell.language` includes one of these locales.
+- **languageId:** the file is one of these types.
+- **glob:** the file's path matches one of these patterns.
+
+An empty cell is no condition.
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | Locales         |
-| ---------- | --------------- |
-| `sr-cyrl`  | `sr`, `sr-Cyrl` |
-| `sr-latn`  | `sr`, `sr-Latn` |
+| Dictionary | locale       | languageId | glob |
+| ---------- | ------------ | ---------- | ---- |
+| `sr-cyrl`  | `sr,sr-Cyrl` | `*`        |      |
+| `sr-latn`  | `sr,sr-Latn` | `*`        |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

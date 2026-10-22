@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "polish",
     "kind": "language",
     "friendlyName": "Polish",
+    "displayName": "Polish - Code Spell Checker",
+    "description": "Adds Polish (polski) spell checking to Code Spell Checker.",
     "nativeName": "polski",
     "locale": "pl-PL",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_polish.enable",
+            "title": "Enable Polish Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "pl-PL"
+            "value": "pl-PL",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_polish.disable",
+            "title": "Disable Polish Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "pl,pl-PL"
+            "value": "pl,pl-PL",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_polish.enableWorkspace",
+            "title": "Enable Polish Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "pl-PL",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_polish.disableWorkspace",
+            "title": "Disable Polish Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "pl,pl-PL",

@@ -1,16 +1,16 @@
 /**
  * The data in an extension's `extension.config.json`.
  *
- * These types are the source of truth: `npm run sync:extensions` generates `static/extension.config.schema.json`
- * from `ExtensionConfig` and validates every `extension.config.json` against it. The runtime trusts the bundled
- * config, because the sync has checked it.
+ * These types are the source of truth: the runtime's build generates `extension.config.schema.json` from
+ * `ExtensionConfig`, and every `extension.config.json` is checked against it before it's bundled. The runtime trusts
+ * the bundled config.
  *
- * This file is shared by the extension runtime (bundled into each extension) and by the sync script,
- * so it must not import `vscode`.
+ * The tools that work on extensions use these types too, so this file must not import `vscode`.
  */
 
-/** Where the sync writes an extension's cspell configuration, relative to the extension. */
-export const cspellExtPath = 'static/cspell-ext.json';
+/** Where an extension's cspell configuration is, relative to the extension. */
+export type CSpellExtPath = 'static/cspell-ext.json';
+export const cspellExtPath: CSpellExtPath = 'static/cspell-ext.json';
 
 /** Turn the toggle on or off. */
 export type Action = 'enable' | 'disable';
@@ -27,16 +27,15 @@ interface CommandBase {
      */
     value: string;
     /**
-     * The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.
+     * The command ID, e.g. `cSpellExt_swedish.enable`. Unique within the extension.
      * @minLength 1
      */
-    id?: string;
+    id: string;
     /**
-     * The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended
-     * for the workspace scope.
+     * The command title, e.g. `Enable Swedish Spell Checker Dictionary`.
      * @minLength 1
      */
-    title?: string;
+    title: string;
     /**
      * Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README.
      * A command that isn't is still registered, so keybindings and tasks that use its ID keep working.
@@ -45,7 +44,7 @@ interface CommandBase {
     contributes?: boolean;
     /** The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers. */
     legacy?: boolean;
-    /** Notes for maintainers: why this command is the way it is. Not used by the sync. */
+    /** Notes for maintainers: why this command is the way it is. */
     notes?: string;
 }
 
@@ -53,8 +52,8 @@ interface CommandBase {
 export interface ScopedCommandConfig extends CommandBase {
     /** What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`). */
     toggle: 'locale' | 'dictionary';
-    /** Where the setting is written. Default: `global`. */
-    scope?: Scope;
+    /** Where the setting is written. */
+    scope: Scope;
 }
 
 /** A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope. */
@@ -72,7 +71,8 @@ interface ExtensionConfigBase {
     /** The JSON schema of this file. */
     $schema?: string;
     /**
-     * The extension's directory in `extensions/`. Also the default command ID prefix: `cSpellExt_<name>`.
+     * The extension's published identity: its `package.json` name is `code-spell-checker-<name>`. It doesn't change
+     * after the extension is published.
      * @pattern ^[a-z0-9]+(-[a-z0-9]+)*$
      */
     name: string;
@@ -82,15 +82,15 @@ interface ExtensionConfigBase {
      */
     friendlyName: string;
     /**
-     * The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.
+     * The Marketplace name, e.g. `Swedish - Code Spell Checker`.
      * @minLength 1
      */
-    displayName?: string;
+    displayName: string;
     /**
      * The Marketplace description.
      * @minLength 1
      */
-    description?: string;
+    description: string;
     /**
      * The document opened by the VS Code test, relative to the extension.
      * @minLength 1
@@ -101,10 +101,10 @@ interface ExtensionConfigBase {
      * `engines` here only to override them or the defaults in `static/engines.json`.
      */
     cspell: Record<string, unknown>;
-    /** The commands the extension contributes. */
+    /** The commands the extension registers. */
     commands: CommandConfig[];
     /**
-     * Notes for maintainers: why something in this file is the way it is. Not used by the sync.
+     * Notes for maintainers: why something in this file is the way it is.
      */
     notes?: string;
 }
@@ -114,7 +114,7 @@ export interface LanguageExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'language';
     /**
-     * The locale users add to `cSpell.language` to use this language, as a BCP 47 tag (e.g. `sv-SE`) or a comma-separated list of them.
+     * The language's primary locale, as a BCP 47 tag, e.g. `sv-SE`.
      * @minLength 1
      */
     locale: string;
@@ -135,95 +135,16 @@ export interface WordListExtensionConfig extends ExtensionConfigBase {
 export interface BundleExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'bundle';
-    /**
-     * The Marketplace description. Required: there is no default wording for this kind.
-     * @minLength 1
-     */
-    description: string;
 }
 
 /** A cspell parser for a programming language. */
 export interface ParserExtensionConfig extends ExtensionConfigBase {
     /** What the extension is. */
     kind: 'parser';
-    /**
-     * The Marketplace description. Required: there is no default wording for this kind.
-     * @minLength 1
-     */
-    description: string;
 }
 
-/** The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it. */
+/** The data of an extension in `extensions/`. */
 export type ExtensionConfig =
     LanguageExtensionConfig | WordListExtensionConfig | BundleExtensionConfig | ParserExtensionConfig;
 
 export type ExtensionKind = ExtensionConfig['kind'];
-
-export interface ResolvedCommand {
-    id: string;
-    title: string;
-    /** Listed in `package.json`, the Command Palette and the README; registered either way. */
-    contributes: boolean;
-    action: Action;
-    toggle: Toggle;
-    value: string;
-    scope: Scope;
-}
-
-export function displayName(config: ExtensionConfig): string {
-    return config.displayName ?? `${config.friendlyName} - Code Spell Checker`;
-}
-
-/**
- * The Marketplace description. Default for a language: `Adds <friendlyName> (<nativeName>) spell checking to Code Spell Checker.`,
- * without the parentheses when there is no `nativeName`. Default for a word list:
- * `Adds the <friendlyName> dictionary to Code Spell Checker.` Bundles and parsers set their own.
- */
-export function description(config: ExtensionConfig): string {
-    if (config.description) return config.description;
-    switch (config.kind) {
-        case 'language': {
-            const name = config.nativeName ? `${config.friendlyName} (${config.nativeName})` : config.friendlyName;
-            return `Adds ${name} spell checking to Code Spell Checker.`;
-        }
-        case 'wordList':
-            return `Adds the ${config.friendlyName} dictionary to Code Spell Checker.`;
-        default:
-            return config.description;
-    }
-}
-
-/**
- * Fill in the default ID, title and scope of each command.
- */
-export function resolveCommands(config: ExtensionConfig): ResolvedCommand[] {
-    return config.commands.map((command) => {
-        const scope = (command.toggle !== 'fileType' && command.scope) || 'global';
-        const inWorkspace = scope === 'workspace';
-        const action = command.action === 'enable' ? 'Enable' : 'Disable';
-        return {
-            id: command.id ?? `cSpellExt_${config.name}.${command.action}${inWorkspace ? 'Workspace' : ''}`,
-            title:
-                command.title ??
-                `${action} ${config.friendlyName} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
-            contributes: command.contributes ?? true,
-            action: command.action,
-            toggle: command.toggle,
-            value: command.value,
-            scope,
-        };
-    });
-}
-
-/**
- * The command IDs used more than once. A schema can't express this, so the sync checks it.
- */
-export function duplicateCommandIds(config: ExtensionConfig): string[] {
-    const seen = new Set<string>();
-    const duplicates = new Set<string>();
-    for (const { id } of resolveCommands(config)) {
-        if (seen.has(id)) duplicates.add(id);
-        seen.add(id);
-    }
-    return [...duplicates];
-}

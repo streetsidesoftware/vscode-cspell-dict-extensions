@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "scientific-terms",
     "kind": "wordList",
     "friendlyName": "Scientific Terms",
+    "displayName": "Scientific Terms - Code Spell Checker",
+    "description": "Adds the Scientific Terms dictionary to Code Spell Checker.",
     "sample": "samples/README.md",
     "cspell": {
         "dictionaries": ["scientific-terms-us"],
@@ -10,64 +12,68 @@
     },
     "commands": [
         {
-            "action": "enable",
-            "toggle": "dictionary",
-            "value": "scientific-terms-us",
             "id": "cSpellExt_scientific-terms.enableScientificTermsUs",
-            "title": "Enable Scientific Terms Spell Checker Dictionary"
-        },
-        {
-            "action": "disable",
+            "title": "Enable Scientific Terms Spell Checker Dictionary",
+            "action": "enable",
             "toggle": "dictionary",
             "value": "scientific-terms-us",
+            "scope": "global"
+        },
+        {
             "id": "cSpellExt_scientific-terms.disableScientificTermsUs",
-            "title": "Disable Scientific Terms Spell Checker Dictionary"
-        },
-        {
-            "action": "enable",
+            "title": "Disable Scientific Terms Spell Checker Dictionary",
+            "action": "disable",
             "toggle": "dictionary",
             "value": "scientific-terms-us",
-            "scope": "workspace",
+            "scope": "global"
+        },
+        {
             "id": "cSpellExt_scientific-terms.enableScientificTermsUsWorkspace",
-            "title": "Enable Scientific Terms Spell Checker Dictionary in Workspace"
+            "title": "Enable Scientific Terms Spell Checker Dictionary in Workspace",
+            "action": "enable",
+            "toggle": "dictionary",
+            "value": "scientific-terms-us",
+            "scope": "workspace"
         },
         {
+            "id": "cSpellExt_scientific-terms.disableScientificTermsUsWorkspace",
+            "title": "Disable Scientific Terms Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "dictionary",
             "value": "scientific-terms-us",
-            "scope": "workspace",
-            "id": "cSpellExt_scientific-terms.disableScientificTermsUsWorkspace",
-            "title": "Disable Scientific Terms Spell Checker Dictionary in Workspace"
+            "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "dictionary",
-            "value": "mathematics-terms-us",
             "id": "cSpellExt_scientific-terms.enableMathematicsTermsUs",
-            "title": "Enable Mathematics Terms Spell Checker Dictionary"
-        },
-        {
-            "action": "disable",
-            "toggle": "dictionary",
-            "value": "mathematics-terms-us",
-            "id": "cSpellExt_scientific-terms.disableMathematicsTermsUs",
-            "title": "Disable Mathematics Terms Spell Checker Dictionary"
-        },
-        {
+            "title": "Enable Mathematics Terms Spell Checker Dictionary",
             "action": "enable",
             "toggle": "dictionary",
             "value": "mathematics-terms-us",
-            "scope": "workspace",
-            "id": "cSpellExt_scientific-terms.enableMathematicsTermsUsWorkspace",
-            "title": "Enable Mathematics Terms Spell Checker Dictionary in Workspace"
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_scientific-terms.disableMathematicsTermsUs",
+            "title": "Disable Mathematics Terms Spell Checker Dictionary",
             "action": "disable",
             "toggle": "dictionary",
             "value": "mathematics-terms-us",
-            "scope": "workspace",
+            "scope": "global"
+        },
+        {
+            "id": "cSpellExt_scientific-terms.enableMathematicsTermsUsWorkspace",
+            "title": "Enable Mathematics Terms Spell Checker Dictionary in Workspace",
+            "action": "enable",
+            "toggle": "dictionary",
+            "value": "mathematics-terms-us",
+            "scope": "workspace"
+        },
+        {
             "id": "cSpellExt_scientific-terms.disableMathematicsTermsUsWorkspace",
-            "title": "Disable Mathematics Terms Spell Checker Dictionary in Workspace"
+            "title": "Disable Mathematics Terms Spell Checker Dictionary in Workspace",
+            "action": "disable",
+            "toggle": "dictionary",
+            "value": "mathematics-terms-us",
+            "scope": "workspace"
         }
     ]
 }

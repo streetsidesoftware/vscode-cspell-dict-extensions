@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-import { cspellExtPath, type ExtensionConfig, type ResolvedCommand, resolveCommands } from './config.ts';
+import { type CommandConfig, cspellExtPath, type ExtensionConfig } from './config.ts';
 
 /** The part of the Code Spell Checker extension API used by the extensions. */
 export interface CodeSpellCheckerApi {
@@ -29,7 +29,7 @@ const codeSpellCheckerId = 'streetsidesoftware.code-spell-checker';
  *
  * Not an `async` function: the commands must be registered before `activate` returns, and the rest is a
  * promise chain.
- * @param config - the content of `extension.config.json`, already checked by the sync.
+ * @param config - the content of `extension.config.json`, already checked against the schema.
  * @param custom - the extension's `src/custom.ts`, if it has one.
  */
 export function activateExtension(
@@ -40,7 +40,7 @@ export function activateExtension(
     const extension = vscode.extensions.getExtension<CodeSpellCheckerApi>(codeSpellCheckerId);
     const api = getApi(extension);
 
-    for (const command of resolveCommands(config)) {
+    for (const command of config.commands) {
         context.subscriptions.push(vscode.commands.registerCommand(command.id, () => runCommand(command, extension)));
     }
 
@@ -54,20 +54,23 @@ function getApi(extension: Extension): Promise<CodeSpellCheckerApi | undefined> 
     return Promise.resolve(extension?.activate());
 }
 
-function runCommand(command: ResolvedCommand, extension: Extension): Promise<void> {
+function runCommand(command: CommandConfig, extension: Extension): Promise<void> {
     const enable = command.action === 'enable';
-    const isGlobal = command.scope === 'global';
     switch (command.toggle) {
-        case 'locale':
+        case 'locale': {
+            const isGlobal = command.scope === 'global';
             return getApi(extension).then((api) =>
                 enable ? api?.enableLocale(isGlobal, command.value) : api?.disableLocale(isGlobal, command.value),
             );
+        }
         case 'fileType':
             return getApi(extension).then((api) =>
                 enable ? api?.enableLanguageId(command.value) : api?.disableLanguageId(command.value),
             );
-        case 'dictionary':
+        case 'dictionary': {
+            const isGlobal = command.scope === 'global';
             return toggleDictionary(command.value, enable, isGlobal);
+        }
     }
 }
 

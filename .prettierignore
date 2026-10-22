@@ -8,3 +8,4 @@ lerna.json
 package-lock.json
 packages/*/dist/**
 tsconfig*.json
+**/*.schema.json

@@ -31,14 +31,21 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 ## Dictionaries
 
-The dictionaries this extension adds, and the file types they check:
+Each row is a setting that turns a dictionary on. The dictionary is on when all of the row's conditions match:
+
+- **locale:** `cSpell.language` includes one of these locales.
+- **languageId:** the file is one of these types.
+- **glob:** the file's path matches one of these patterns.
+
+An empty cell is no condition.
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary             | File types |
-| ---------------------- | ---------- |
-| `scientific-terms-us`  | all        |
-| `mathematics-terms-us` | all        |
+| Dictionary             | locale | languageId | glob |
+| ---------------------- | ------ | ---------- | ---- |
+| `scientific-terms-us`  |        |            |      |
+| `mathematics-terms-us` |        |            |      |
+| `scientific-terms-us`  |        |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 
