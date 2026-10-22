@@ -120,6 +120,8 @@ async function generate(
     // The files the sync owns or derives, and the package.json fields every extension shares.
     const { changes } = await syncExtensions([answers.name], false);
     for (const { file } of changes) log(`sync ${file}`);
+    // Record the package.json fields the sync set, such as `engines`, in package-lock.json.
+    npm(['install', '--package-lock-only'], destDir);
     await addNameWords(destDir, config, repoRoot);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
