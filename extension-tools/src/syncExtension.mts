@@ -24,7 +24,7 @@ import { injectMarkdown } from 'inject-markdown';
 import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
-import { readDictionaries, readImports, splitList } from './dictionaries.mts';
+import { readImports, readSources, splitList } from './dictionaries.mts';
 import type { DictionaryExt, LanguageSetting, Override } from './dictionaries.mts';
 import type { DictionaryState } from './dictionaryState.mts';
 import { withSharedFields } from './extensionHelper.mts';
@@ -214,11 +214,12 @@ async function cspellExt(extensionDir: string, config: ExtensionConfig): Promise
     return Object.keys(merged).length ? { ...cspell, engines: merged } : cspell;
 }
 
-/** The `engines` declared by the dictionaries in `cspell.import`. */
+/** The `engines` declared by the files the config imports, and the files they import. */
 async function dictionaryEngines(extensionDir: string, config: ExtensionConfig): Promise<Record<string, string>> {
     const engines: Record<string, string> = {};
-    for (const ext of await readDictionaries(extensionDir, config)) {
+    for (const { ext } of await readImports(extensionDir, config)) {
         for (const [engine, range] of Object.entries(ext.engines ?? {})) {
+            if (range === undefined) continue;
             if (engines[engine] !== undefined && engines[engine] !== range) {
                 throw new Error(
                     `${extensionRepoPath(extensionDir)}: the dictionaries need different ${engine} versions ` +
@@ -234,28 +235,17 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
 /**
  * The settings that name the extension's dictionaries, as table rows, injected into the README with
  * `<!--- @@inject-table: ./static/dictionaries.json --->`. One row for each dictionary a setting names: the top-level
- * `dictionaries`, each language setting and each override, in the imported dictionaries and in the extension's
- * `cspell`. The values are as the setting writes them; an empty cell is a field the setting doesn't set.
+ * `dictionaries`, each language setting and each override, in every file cspell reads for the extension (the imported
+ * files, with their own imports) and in the extension's `cspell`. The values are as the setting writes them; an empty
+ * cell is a field the setting doesn't set.
  * @returns `undefined` for a bundle, or when no setting names a dictionary.
  */
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
     const where = extensionRepoPath(extensionDir);
-    const rows = [
-        ...(await readImports(extensionDir, config)).flatMap(({ name, ext }) => importedRows(`${where}: ${name}`, ext)),
-        ...settingRows(`${where}/extension.config.json`, config.cspell as DictionaryExt),
-    ];
+    const sources = await readSources(extensionDir, config);
+    const rows = sources.flatMap(({ name, ext }) => settingRows(`${where}: ${name}`, ext));
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
-}
-
-/**
- * The rows of an imported package's `cspell-ext.json`.
- * @param where - names the file in an error.
- */
-function importedRows(where: string, ext: DictionaryExt): Row[] {
-    // The table would leave out the settings of the nested import.
-    if (ext.import?.length) throw new Error(`${where}: a package that imports others isn't supported.`);
-    return settingRows(where, ext);
 }
 
 /**
@@ -277,8 +267,6 @@ function dictionariesRows(where: string, dictionaries: string[] | undefined): Ro
 
 /** A language setting turns its dictionaries on for its locales and file types. */
 function languageSettingRows(where: string, setting: LanguageSetting): Row[] {
-    // The table would show no locale, which reads as "any locale".
-    if (setting.local !== undefined) throw new Error(`${where}: a language setting with "local" isn't supported.`);
     return names(where, setting.dictionaries).map((name) => row(name, setting));
 }
 
@@ -293,7 +281,9 @@ function overrideRows(where: string, override: Override): Row[] {
             `${where}: an override that names dictionaries and sets "language" or "languageId" isn't supported.`,
         );
     }
-    return dictionaries.map((name) => row(name, { glob: override.filename }));
+    // cspell-lib reads each pattern into an object with the folder it's relative to; the column shows the pattern.
+    const globs = [override.filename].flat().map((glob) => (typeof glob === 'string' ? glob : glob.glob));
+    return dictionaries.map((name) => row(name, { glob: globs }));
 }
 
 /** The dictionaries a setting names. A `!name` turns a dictionary off, which the table can't show. */
@@ -330,7 +320,7 @@ function asWritten(value: string | string[] | undefined): string {
  * `cspell`.
  */
 export async function dictionaryStates(extensionDir: string, config: ExtensionConfig): Promise<DictionaryState[]> {
-    const exts = [...(await readDictionaries(extensionDir, config)), config.cspell as DictionaryExt];
+    const exts = (await readSources(extensionDir, config)).map((source) => source.ext);
     const allRules = rules(exts);
     return exts
         .flatMap((ext) => ext.dictionaryDefinitions ?? [])

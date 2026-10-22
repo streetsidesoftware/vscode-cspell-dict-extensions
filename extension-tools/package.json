@@ -17,7 +17,7 @@
     "@inquirer/prompts": "^8.7.4",
     "ajv": "^8.20.0",
     "commander": "^15.0.0",
-    "jsonc-parser": "^3.3.1",
+    "cspell-lib": "^10.4.0",
     "sort-package-json": "^4.1.0"
   },
   "scripts": {

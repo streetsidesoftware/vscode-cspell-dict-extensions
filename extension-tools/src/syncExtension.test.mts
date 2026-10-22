@@ -6,6 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
+import { clearCachedFiles } from 'cspell-lib';
 import { sortPackageJson } from 'sort-package-json';
 
 import { readExtensionConfigValidator } from './extensionSchema.mts';
@@ -131,7 +132,10 @@ describe('syncExtension', () => {
 
     it('needs the dictionaries installed', async () => {
         await fs.rm(path.join(dir, 'node_modules'), { recursive: true });
-        await assert.rejects(syncExtension(dir, options), /can't find "@cspell\/dict-demo\/cspell-ext\.json"/);
+        await assert.rejects(
+            syncExtension(dir, options),
+            /can't read an import\. Run `npm install` first\.\n.*@cspell\/dict-demo\/cspell-ext\.json/,
+        );
     });
 
     it('fills the README from the shared templates and static/ data', async () => {
@@ -239,7 +243,6 @@ describe('syncExtension', () => {
         await writeJson('extension.config.json', { ...rest, kind: 'wordList', commands: [] });
         const unsupported: [object, RegExp][] = [
             [{ dictionaries: ['!demo'] }, /turning a dictionary off \(!demo\) isn't supported/],
-            [{ languageSettings: [{ local: 'xx', dictionaries: ['demo'] }] }, /"local" isn't supported/],
             [
                 { overrides: [{ filename: '**/*.md', languageId: 'markdown', dictionaries: ['demo'] }] },
                 /an override that names dictionaries and sets "language" or "languageId" isn't supported/,
@@ -248,12 +251,38 @@ describe('syncExtension', () => {
                 { overrides: [{ filename: '**/*.md', language: 'en', dictionaries: ['demo'] }] },
                 /an override that names dictionaries and sets "language" or "languageId" isn't supported/,
             ],
-            [{ import: ['@cspell/dict-other/cspell-ext.json'] }, /a package that imports others isn't supported/],
         ];
         for (const [ext, message] of unsupported) {
             await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', ext);
+            // cspell-lib caches the files it read; this one changed.
+            await clearCachedFiles();
             await assert.rejects(syncExtension(dir, options), message);
         }
+    });
+
+    it('reads the packages a package imports', async () => {
+        await writeJson('node_modules/@cspell/dict-other/package.json', {
+            name: '@cspell/dict-other',
+            version: '1.0.0',
+        });
+        await writeJson('node_modules/@cspell/dict-other/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'other', path: './other.txt' }],
+            dictionaries: ['other'],
+        });
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            import: ['@cspell/dict-other/cspell-ext.json'],
+            dictionaryDefinitions: [{ name: 'demo', path: './demo.txt' }],
+            dictionaries: ['demo'],
+        });
+        await clearCachedFiles();
+        const { locale: _locale, ...rest } = config;
+        await writeJson('extension.config.json', { ...rest, kind: 'wordList', commands: [] });
+        await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
+        await syncExtension(dir, options);
+        assert.deepEqual(
+            JSON.parse(await read('static/dictionaries.json')).map((row: { Dictionary: string }) => row.Dictionary),
+            ['`other`', '`demo`'],
+        );
     });
 
     it('has no static/dictionaries.json for a bundle', async () => {
