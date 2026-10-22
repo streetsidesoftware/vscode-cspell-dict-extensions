@@ -37,20 +37,21 @@ jobs:
 
       - run: npm ci
 
+      # Fix the sources first, then format them, then build from them.
       - name: Sync
         run: npm run sync:extensions
-
-      - name: Build
-        run: npm run build
-
-      # Not `.github/`: autofix.ci rejects the whole fix when it changes a file there. The lint job reports it.
-      - name: Prettier
-        run: npx prettier --write . '!.github/**'
 
       # Not `lint:code`: a warning oxlint can't fix would stop the job, and the lint job reports it anyway.
       - name: oxlint
         run: npx oxlint --type-aware --fix
         continue-on-error: true
+
+      # Not `.github/`: autofix.ci rejects the whole fix when it changes a file there. The lint job reports it.
+      - name: Prettier
+        run: npx prettier --write . '!.github/**'
+
+      - name: Build
+        run: npm run build
 
       - name: Run autofix.ci
         if: env.USE_AUTOFIX == 'true'
