@@ -42,11 +42,8 @@ const starterFiles: Record<string, string> = {
     'cspell.config.yaml': 'import:\n  - ./static/cspell-ext.json\n',
 };
 
-/**
- * Files vsce packages when the extension has them. A new extension has no `CHANGELOG.md` until release-please writes
- * it, and vsce fails on a `files` pattern that matches nothing.
- */
-const optionalPackagedFiles = ['CHANGELOG.md', 'COPYING'];
+/** Files vsce packages when the extension has them. vsce fails on a `files` pattern that matches nothing. */
+const optionalPackagedFiles = ['COPYING'];
 
 export interface SyncOptions {
     /** Only report the files that would change. */
@@ -411,6 +408,8 @@ function packageJsonSource(
         // `node_modules`, wherever npm installed them.
         files: [
             'LICENSE',
+            // A new extension has none until release-please writes it in the first release.
+            'CHANGELOG.md',
             ...optionalFiles,
             'extension.js',
             ...(pkg.icon ? [pkg.icon] : []),
@@ -424,7 +423,8 @@ function packageJsonSource(
             ...(hasCustom ? { 'check-types': 'tsc -p .' } : {}),
             clean: 'node ../../scripts/clean.mts',
             'clean-build': 'npm run clean && npm run build',
-            'pack-extension': 'vsce package',
+            // Tests package a new extension before it has a `CHANGELOG.md`. Publishing stays strict.
+            'pack-extension': 'vsce package --allow-unused-files-pattern',
             'publish-extension': 'vsce publish',
             test: 'npm run test:cspell && npm run test:vscode',
             'test:cspell': `cspell -c ${cspellExtPath} samples`,

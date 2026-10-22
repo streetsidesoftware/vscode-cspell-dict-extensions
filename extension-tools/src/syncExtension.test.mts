@@ -271,6 +271,7 @@ describe('syncExtension', () => {
         });
         assert.equal(result.scripts.build, 'tsdown');
         assert.equal(result.scripts['check-types'], undefined);
+        assert.equal(result.scripts['pack-extension'], 'vsce package --allow-unused-files-pattern');
         assert.equal(result.scripts['test:cspell'], 'cspell -c static/cspell-ext.json samples');
         assert.equal(result.scripts['test:vscode'], 'node ../../test-runner/bin.mjs . --sample samples/demo.md');
         assert.equal(result.scripts.extra, undefined);
@@ -279,16 +280,16 @@ describe('syncExtension', () => {
         assert.deepEqual(Object.keys(result).slice(0, 5), ['name', 'version', 'type', 'contributes', 'scripts']);
     });
 
-    it('lists the packaged files, with CHANGELOG.md, COPYING and the icon when there are any', async () => {
+    it('lists the packaged files, with COPYING and the icon when there are any', async () => {
         await syncExtension(dir, options);
         assert.deepEqual((await readJson('package.json')).files, [
             'LICENSE',
+            'CHANGELOG.md',
             'extension.js',
             'static/cspell-ext.json',
             'node_modules/**',
         ]);
 
-        await fs.writeFile(path.join(dir, 'CHANGELOG.md'), '# Changelog\n');
         await fs.writeFile(path.join(dir, 'COPYING'), 'GPL\n');
         await writeJson('package.json', { ...(await readJson('package.json')), icon: 'images/icon.png' });
         await syncExtension(dir, options);
