@@ -59,7 +59,7 @@
                     "items": {
                         "$ref": "#/definitions/CommandConfig"
                     },
-                    "description": "The commands the extension contributes."
+                    "description": "The commands the extension registers."
                 },
                 "notes": {
                     "type": "string",
@@ -271,7 +271,7 @@
                     "items": {
                         "$ref": "#/definitions/CommandConfig"
                     },
-                    "description": "The commands the extension contributes."
+                    "description": "The commands the extension registers."
                 },
                 "notes": {
                     "type": "string",
@@ -338,7 +338,7 @@
                     "items": {
                         "$ref": "#/definitions/CommandConfig"
                     },
-                    "description": "The commands the extension contributes."
+                    "description": "The commands the extension registers."
                 },
                 "notes": {
                     "type": "string",
@@ -405,7 +405,7 @@
                     "items": {
                         "$ref": "#/definitions/CommandConfig"
                     },
-                    "description": "The commands the extension contributes."
+                    "description": "The commands the extension registers."
                 },
                 "notes": {
                     "type": "string",
