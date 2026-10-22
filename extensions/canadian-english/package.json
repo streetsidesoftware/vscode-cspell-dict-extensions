@@ -68,7 +68,7 @@
     "onStartupFinished"
   ],
   "dependencies": {
-    "@cspell/dict-en-ca": "^1.0.69"
+    "@cspell/dict-en-ca": "^1.0.67"
   },
   "devDependencies": {
     "@internal/extension-runtime": "file:../../extension-runtime"
