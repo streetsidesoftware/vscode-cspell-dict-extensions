@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "danish",
     "kind": "language",
     "friendlyName": "Danish",
+    "displayName": "Danish - Code Spell Checker",
+    "description": "Adds Danish (dansk) spell checking to Code Spell Checker.",
     "nativeName": "dansk",
     "locale": "da-DK",
     "sample": "samples/seattle.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_danish.enable",
+            "title": "Enable Danish Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "da-DK"
+            "value": "da-DK",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_danish.disable",
+            "title": "Disable Danish Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "da,da-DK"
+            "value": "da,da-DK",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_danish.enableWorkspace",
+            "title": "Enable Danish Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "da-DK",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_danish.disableWorkspace",
+            "title": "Disable Danish Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "da,da-DK",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "da-DK",
             "id": "cSpellExt_danish.enableDanish",
+            "title": "Enable Danish Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "da-DK",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_danish.disableDanish",
+            "title": "Disable Danish Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "da,da-DK",
-            "id": "cSpellExt_danish.disableDanish",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_danish.enableDanishWorkspace",
+            "title": "Enable Danish Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "da-DK",
             "scope": "workspace",
-            "id": "cSpellExt_danish.enableDanishWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_danish.disableDanishWorkspace",
+            "title": "Disable Danish Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "da,da-DK",
             "scope": "workspace",
-            "id": "cSpellExt_danish.disableDanishWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

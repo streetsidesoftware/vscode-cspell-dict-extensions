@@ -42,13 +42,13 @@ Example using both English and Lithuanian dictionaries:
 
 ## Dictionaries
 
-The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+The dictionaries this extension adds, and where each one is on. `locale` is checked against `cSpell.language`. `languageId` is checked against the file type. `glob` is checked against the file's path. An empty cell matches everything.
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | Locales       |
-| ---------- | ------------- |
-| `lt-lt`    | `lt`, `lt-LT` |
+| Dictionary | locale     | languageId | glob |
+| ---------- | ---------- | ---------- | ---- |
+| `lt-lt`    | `lt,lt-LT` | `*`        |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

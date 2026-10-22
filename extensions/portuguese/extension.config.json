@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "portuguese",
     "kind": "language",
     "friendlyName": "Portuguese",
+    "displayName": "Portuguese - Code Spell Checker",
+    "description": "Adds Portuguese (português) spell checking to Code Spell Checker.",
     "nativeName": "português",
     "locale": "pt-PT",
     "sample": "samples/seattle.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_portuguese.enable",
+            "title": "Enable Portuguese Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "pt-PT"
+            "value": "pt-PT",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_portuguese.disable",
+            "title": "Disable Portuguese Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "pt-PT"
+            "value": "pt-PT",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_portuguese.enableWorkspace",
+            "title": "Enable Portuguese Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "pt-PT",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_portuguese.disableWorkspace",
+            "title": "Disable Portuguese Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "pt-PT",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "pt-PT",
             "id": "cSpellExt_portuguese.enablePortuguese",
+            "title": "Enable Portuguese Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pt-PT",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_portuguese.disablePortuguese",
+            "title": "Disable Portuguese Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "pt-PT",
-            "id": "cSpellExt_portuguese.disablePortuguese",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_portuguese.enablePortugueseWorkspace",
+            "title": "Enable Portuguese Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "pt-PT",
             "scope": "workspace",
-            "id": "cSpellExt_portuguese.enablePortugueseWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_portuguese.disablePortugueseWorkspace",
+            "title": "Disable Portuguese Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "pt-PT",
             "scope": "workspace",
-            "id": "cSpellExt_portuguese.disablePortugueseWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

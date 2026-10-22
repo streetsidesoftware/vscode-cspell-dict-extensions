@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "basque",
     "kind": "language",
     "friendlyName": "Basque",
+    "displayName": "Basque - Code Spell Checker",
+    "description": "Adds Basque (euskara) spell checking to Code Spell Checker.",
     "nativeName": "euskara",
     "locale": "eu",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_basque.enable",
+            "title": "Enable Basque Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "eu"
+            "value": "eu",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_basque.disable",
+            "title": "Disable Basque Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "eu"
+            "value": "eu",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_basque.enableWorkspace",
+            "title": "Enable Basque Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "eu",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_basque.disableWorkspace",
+            "title": "Disable Basque Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "eu",

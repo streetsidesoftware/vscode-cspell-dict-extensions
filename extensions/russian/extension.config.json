@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "russian",
     "kind": "language",
     "friendlyName": "Russian",
+    "displayName": "Russian - Code Spell Checker",
+    "description": "Adds Russian (русский) spell checking to Code Spell Checker.",
     "nativeName": "русский",
     "locale": "ru-RU",
     "sample": "samples/portland.md",
@@ -13,61 +15,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_russian.enable",
+            "title": "Enable Russian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "ru-RU"
+            "value": "ru-RU",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_russian.disable",
+            "title": "Disable Russian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "ru,ru-RU"
+            "value": "ru,ru-RU",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_russian.enableWorkspace",
+            "title": "Enable Russian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "ru-RU",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_russian.disableWorkspace",
+            "title": "Disable Russian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "ru,ru-RU",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "ru-RU",
             "id": "cSpellExt_russian.enableRussian",
+            "title": "Enable Russian Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ru-RU",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_russian.disableRussian",
+            "title": "Disable Russian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "ru,ru-RU",
-            "id": "cSpellExt_russian.disableRussian",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_russian.enableRussianWorkspace",
+            "title": "Enable Russian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "ru-RU",
             "scope": "workspace",
-            "id": "cSpellExt_russian.enableRussianWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_russian.disableRussianWorkspace",
+            "title": "Disable Russian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "ru,ru-RU",
             "scope": "workspace",
-            "id": "cSpellExt_russian.disableRussianWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

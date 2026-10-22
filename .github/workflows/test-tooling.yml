@@ -55,9 +55,6 @@ jobs:
           npm ci --ignore-scripts
           npm ci --prefix scripts
           npm ci --prefix extension-tools
-      - name: Test extension-runtime
-        run: npm test
-        working-directory: extension-runtime
       - name: Test scripts
         run: npm test
         working-directory: scripts

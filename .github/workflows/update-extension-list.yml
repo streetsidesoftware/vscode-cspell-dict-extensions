@@ -39,6 +39,10 @@ jobs:
       - name: Install
         run: npm ci
 
+      - name: Build the Config Schema
+        run: npm run build
+        working-directory: extension-runtime
+
       - name: Update Workspace
         run: |
           npm run gen:readme

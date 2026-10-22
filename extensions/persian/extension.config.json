@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "persian",
     "kind": "language",
     "friendlyName": "Persian",
+    "displayName": "Persian - Code Spell Checker",
+    "description": "Adds Persian (فارسی) spell checking to Code Spell Checker.",
     "nativeName": "فارسی",
     "locale": "fa-IR",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_persian.enable",
+            "title": "Enable Persian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "fa-IR"
+            "value": "fa-IR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_persian.disable",
+            "title": "Disable Persian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "fa-IR"
+            "value": "fa-IR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_persian.enableWorkspace",
+            "title": "Enable Persian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "fa-IR",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_persian.disableWorkspace",
+            "title": "Disable Persian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "fa-IR",

@@ -1,14 +1,5 @@
 /**
- * What the tools outside the runtime use from it. They import only this file.
+ * What the tools outside the runtime use from it: types only. They import only this file.
  */
 
-export {
-    type CommandConfig,
-    cspellExtPath,
-    description,
-    displayName,
-    duplicateCommandIds,
-    type ExtensionConfig,
-    type ExtensionKind,
-    resolveCommands,
-} from './src/config.ts';
+export type { CommandConfig, CSpellExtPath, ExtensionConfig, ExtensionKind } from './src/config.ts';

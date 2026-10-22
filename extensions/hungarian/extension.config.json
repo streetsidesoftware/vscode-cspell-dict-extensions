@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "hungarian",
     "kind": "language",
     "friendlyName": "Hungarian",
+    "displayName": "Hungarian - Code Spell Checker",
+    "description": "Adds Hungarian (magyar) spell checking to Code Spell Checker.",
     "nativeName": "magyar",
     "locale": "hu-HU",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_hungarian.enable",
+            "title": "Enable Hungarian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "hu-HU"
+            "value": "hu-HU",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_hungarian.disable",
+            "title": "Disable Hungarian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "hu,hu-HU"
+            "value": "hu,hu-HU",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_hungarian.enableWorkspace",
+            "title": "Enable Hungarian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "hu-HU",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_hungarian.disableWorkspace",
+            "title": "Disable Hungarian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "hu,hu-HU",

@@ -42,13 +42,13 @@ Example using both English and Austrian German dictionaries:
 
 ## Dictionaries
 
-The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+The dictionaries this extension adds, and where each one is on. `locale` is checked against `cSpell.language`. `languageId` is checked against the file type. `glob` is checked against the file's path. An empty cell matches everything.
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | Locales |
-| ---------- | ------- |
-| `de-at`    | `de-AT` |
+| Dictionary | locale  | languageId | glob |
+| ---------- | ------- | ---------- | ---- |
+| `de-at`    | `de_AT` | `*`        |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

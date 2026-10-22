@@ -1,30 +1,42 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "win32",
     "kind": "wordList",
     "friendlyName": "Win32",
+    "displayName": "Win32 - Code Spell Checker",
+    "description": "Adds the Win32 dictionary to Code Spell Checker.",
     "sample": "samples/window_sample.cpp",
     "cspell": {
         "import": ["@cspell/dict-win32/cspell-ext.json"]
     },
     "commands": [
         {
+            "id": "cSpellExt_win32.enable",
+            "title": "Enable Win32 Spell Checker Dictionary",
             "action": "enable",
             "toggle": "dictionary",
-            "value": "win32"
+            "value": "win32",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_win32.disable",
+            "title": "Disable Win32 Spell Checker Dictionary",
             "action": "disable",
             "toggle": "dictionary",
-            "value": "win32"
+            "value": "win32",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_win32.enableWorkspace",
+            "title": "Enable Win32 Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "dictionary",
             "value": "win32",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_win32.disableWorkspace",
+            "title": "Disable Win32 Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "dictionary",
             "value": "win32",

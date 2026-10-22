@@ -1,26 +1,36 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { createExtensionConfigValidator, generateExtensionSchema } from './extensionSchema.mts';
+import { readExtensionConfigValidator } from './extensionSchema.mts';
 
 const swedish = {
-    $schema: '../../static/extension.config.schema.json',
+    $schema: '../../extension-runtime/extension.config.schema.json',
     name: 'swedish',
     kind: 'language',
     locale: 'sv_SE',
     nativeName: 'svenska',
     friendlyName: 'Swedish',
+    displayName: 'Swedish - Code Spell Checker',
+    description: 'Adds Swedish (svenska) spell checking to Code Spell Checker.',
     sample: 'samples/Seattle.md',
     cspell: { import: ['@cspell/dict-sv/cspell-ext.json'], engines: { cspell: '>=10.4.0' } },
     commands: [
-        { action: 'enable', toggle: 'locale', value: 'sv_SE' },
-        { action: 'disable', toggle: 'locale', value: 'sv_SE', scope: 'workspace' },
-        { action: 'enable', toggle: 'fileType', value: 'python', id: 'x.enablePython' },
+        { id: 'x.enable', title: 'Enable', action: 'enable', toggle: 'locale', value: 'sv_SE', scope: 'global' },
+        {
+            id: 'x.disableWorkspace',
+            title: 'Disable in Workspace',
+            action: 'disable',
+            toggle: 'locale',
+            value: 'sv_SE',
+            scope: 'workspace',
+        },
+        { id: 'x.enablePython', title: 'Enable Python', action: 'enable', toggle: 'fileType', value: 'python' },
     ],
 };
 
+const validate = await readExtensionConfigValidator();
+
 describe('extension.config.json validation', () => {
-    const validate = createExtensionConfigValidator(generateExtensionSchema());
     const file = 'extensions/swedish/extension.config.json';
 
     it('accepts a valid config', () => {
@@ -29,19 +39,30 @@ describe('extension.config.json validation', () => {
 
     it('rejects unknown keys', () => {
         assert.throws(() => validate({ ...swedish, extra: 1 }, file), /must NOT have additional properties/);
-        const commands = [{ action: 'enable', toggle: 'locale', value: 'sv', target: 'global' }];
+        const commands = [{ ...swedish.commands[0], target: 'global' }];
         assert.throws(() => validate({ ...swedish, commands }, file), /\/commands\/0/);
     });
 
     it('rejects missing and wrong values', () => {
         assert.throws(() => validate({ ...swedish, friendlyName: '' }, file), /\/friendlyName/);
         assert.throws(() => validate({ ...swedish, name: 'Swedish' }, file), /\/name must match pattern/);
-        const commands = [{ action: 'toggle', toggle: 'locale', value: 'sv' }];
+        const commands = [{ ...swedish.commands[0], action: 'toggle' }];
         assert.throws(() => validate({ ...swedish, commands }, file), /\/commands\/0/);
     });
 
+    it('requires the ID, title and scope of a command, and the display name and description', () => {
+        for (const key of ['id', 'title', 'scope'] as const) {
+            const { [key]: _, ...command } = swedish.commands[0]!;
+            assert.throws(() => validate({ ...swedish, commands: [command] }, file), /\/commands\/0/);
+        }
+        const { displayName: _d, ...withoutDisplayName } = swedish;
+        assert.throws(() => validate(withoutDisplayName, file), /doesn't match/);
+        const { description: _e, ...withoutDescription } = swedish;
+        assert.throws(() => validate(withoutDescription, file), /doesn't match/);
+    });
+
     it('rejects a scope on a fileType toggle', () => {
-        const commands = [{ action: 'enable', toggle: 'fileType', value: 'python', scope: 'global' }];
+        const commands = [{ ...swedish.commands[2], scope: 'global' }];
         assert.throws(() => validate({ ...swedish, commands }, file), /\/commands\/0/);
     });
 
@@ -60,13 +81,7 @@ describe('extension.config.json validation', () => {
     });
 
     it('rejects duplicate command IDs', () => {
-        const commands = [
-            { action: 'enable', toggle: 'locale', value: 'sr' },
-            { action: 'enable', toggle: 'locale', value: 'sr-Cyrl' },
-        ];
-        assert.throws(
-            () => validate({ ...swedish, commands }, file),
-            /duplicate command IDs cSpellExt_swedish\.enable/,
-        );
+        const commands = [swedish.commands[0], { ...swedish.commands[0], value: 'sv' }];
+        assert.throws(() => validate({ ...swedish, commands }, file), /duplicate command IDs x\.enable/);
     });
 });

@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "slovak",
     "kind": "language",
     "friendlyName": "Slovak",
+    "displayName": "Slovak - Code Spell Checker",
+    "description": "Adds Slovak (slovenčina) spell checking to Code Spell Checker.",
     "nativeName": "slovenčina",
     "locale": "sk",
     "sample": "samples/seattle.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_slovak.enable",
+            "title": "Enable Slovak Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "sk"
+            "value": "sk",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_slovak.disable",
+            "title": "Disable Slovak Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "sk"
+            "value": "sk",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_slovak.enableWorkspace",
+            "title": "Enable Slovak Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "sk",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_slovak.disableWorkspace",
+            "title": "Disable Slovak Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "sk",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "sk",
             "id": "cSpellExt_slovak.enableSlovak",
+            "title": "Enable Slovak Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sk",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_slovak.disableSlovak",
+            "title": "Disable Slovak Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "sk",
-            "id": "cSpellExt_slovak.disableSlovak",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_slovak.enableSlovakWorkspace",
+            "title": "Enable Slovak Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "sk",
             "scope": "workspace",
-            "id": "cSpellExt_slovak.enableSlovakWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_slovak.disableSlovakWorkspace",
+            "title": "Disable Slovak Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "sk",
             "scope": "workspace",
-            "id": "cSpellExt_slovak.disableSlovakWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

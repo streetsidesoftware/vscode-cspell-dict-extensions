@@ -23,13 +23,13 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 ## Dictionaries
 
-The dictionaries this extension adds, and the file types they check:
+The dictionaries this extension adds, and where each one is on. `locale` is checked against `cSpell.language`. `languageId` is checked against the file type. `glob` is checked against the file's path. An empty cell matches everything.
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | File types |
-| ---------- | ---------- |
-| `win32`    | `c`, `cpp` |
+| Dictionary | locale | languageId | glob |
+| ---------- | ------ | ---------- | ---- |
+| `win32`    | `*`    | `c,cpp`    |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

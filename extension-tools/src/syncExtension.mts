@@ -20,20 +20,15 @@ import path from 'node:path';
 import { injectMarkdown } from 'inject-markdown';
 import { parse as parseJsonc } from 'jsonc-parser';
 
-import {
-    cspellExtPath,
-    description,
-    displayName,
-    type ExtensionConfig,
-    resolveCommands,
-} from '../../extension-runtime/api.ts';
+import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { DictionaryState } from './dictionaryState.mts';
 import type { PackageJson } from './extensionHelper.mts';
-import { type DictionaryState, describeFileTypes } from './dictionaryState.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { format, injectProblems } from './format.mts';
 import { exists, readJson, writeIfChanged } from './repo.mts';
 
 export const configFileName = 'extension.config.json';
+const cspellExtPath: CSpellExtPath = 'static/cspell-ext.json';
 const templateDir = path.join(import.meta.dirname, '../templates/sync');
 const runtimePackage = '@internal/extension-runtime';
 
@@ -83,13 +78,13 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
 }
 
 async function readConfig(extensionDir: string, validate: ExtensionConfigValidator): Promise<ExtensionConfig> {
-    const name = path.basename(extensionDir);
-    const configFile = `extensions/${name}/${configFileName}`;
-    const config = validate(await readJson(path.join(extensionDir, configFileName)), configFile);
-    if (config.name !== name) {
-        throw new Error(`${configFile}: "name" must be "${name}", not "${config.name}".`);
-    }
-    return config;
+    const configFile = `${repoPath(extensionDir)}/${configFileName}`;
+    return validate(await readJson(path.join(extensionDir, configFileName)), configFile);
+}
+
+/** The extension's directory as a repo path, e.g. `extensions/swedish`. */
+function repoPath(extensionDir: string): string {
+    return `extensions/${path.basename(extensionDir)}`;
 }
 
 /**
@@ -197,7 +192,7 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
         for (const [engine, range] of Object.entries(ext.engines ?? {})) {
             if (engines[engine] !== undefined && engines[engine] !== range) {
                 throw new Error(
-                    `extensions/${config.name}: the dictionaries need different ${engine} versions ` +
+                    `${repoPath(extensionDir)}: the dictionaries need different ${engine} versions ` +
                         `("${engines[engine]}" and "${range}"). Set it in cspell.engines.`,
                 );
             }
@@ -213,12 +208,21 @@ interface DictionaryExt {
     dictionaryDefinitions?: { name: string }[];
     dictionaries?: string[];
     languageSettings?: LanguageSetting[];
+    overrides?: Override[];
 }
 
 interface LanguageSetting {
     // cspell takes a comma-separated list or an array.
     languageId?: string | string[];
     locale?: string | string[];
+    dictionaries?: string[];
+}
+
+interface Override {
+    filename: string | string[];
+    languageId?: string | string[];
+    /** The locale. */
+    language?: string | string[];
     dictionaries?: string[];
 }
 
@@ -232,7 +236,7 @@ async function readDictionaries(extensionDir: string, config: ExtensionConfig): 
         try {
             file = require.resolve(spec);
         } catch {
-            throw new Error(`extensions/${config.name}: can't find "${spec}". Run \`npm install\` first.`);
+            throw new Error(`${repoPath(extensionDir)}: can't find "${spec}". Run \`npm install\` first.`);
         }
         // A dictionary's cspell-ext.json may have comments.
         exts.push(parseJsonc(await fs.readFile(file, 'utf8')) as DictionaryExt);
@@ -241,23 +245,52 @@ async function readDictionaries(extensionDir: string, config: ExtensionConfig): 
 }
 
 /**
- * The dictionaries the extension adds, as table rows, injected into the README with
- * `<!--- @@inject-table: ./static/dictionaries.json --->`. A language lists the locales that turn each dictionary on;
- * the other kinds list the file types, or that a dictionary is off until turned on, i.e. by the extension's commands.
- * @returns `undefined` for a bundle, or when the dictionaries define nothing.
+ * The settings that name the extension's dictionaries, as table rows, injected into the README with
+ * `<!--- @@inject-table: ./static/dictionaries.json --->`. One row for each dictionary a setting names: the top-level
+ * `dictionaries`, each language setting and each override, in the imported dictionaries and in the extension's
+ * `cspell`. The values are as the setting writes them; an empty cell is a field the setting doesn't set.
+ * @returns `undefined` for a bundle, or when no setting names a dictionary.
  */
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
-    const rows: Record<string, string>[] = [];
-    for (const state of await dictionaryStates(extensionDir, config)) {
-        if (config.kind === 'language') {
-            if (state.off) continue;
-            rows.push({ Dictionary: code(state.name), Locales: state.locales.map(code).join(', ') });
-        } else {
-            rows.push({ Dictionary: code(state.name), 'File types': describeFileTypes(state) });
-        }
-    }
+    const exts = [...(await readDictionaries(extensionDir, config)), config.cspell as DictionaryExt];
+    const rows = exts.flatMap(settingRows);
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
+}
+
+/** The rows of the settings in one `cspell-ext.json`. */
+function settingRows(ext: DictionaryExt): Record<string, string>[] {
+    return [
+        ...(ext.dictionaries ?? []).map((name) => row(name, {})),
+        ...(ext.languageSettings ?? []).flatMap((setting) =>
+            (setting.dictionaries ?? []).map((name) => row(name, setting)),
+        ),
+        ...(ext.overrides ?? []).flatMap((override) =>
+            (override.dictionaries ?? []).map((name) =>
+                row(name, { locale: override.language, languageId: override.languageId, glob: override.filename }),
+            ),
+        ),
+    ];
+}
+
+interface Where {
+    locale?: string | string[] | undefined;
+    languageId?: string | string[] | undefined;
+    glob?: string | string[] | undefined;
+}
+
+function row(name: string, where: Where): Record<string, string> {
+    return {
+        Dictionary: code(name),
+        locale: asWritten(where.locale),
+        languageId: asWritten(where.languageId),
+        glob: asWritten(where.glob),
+    };
+}
+
+/** A setting's value as written: a string, or each item of a list, as code. */
+function asWritten(value: string | string[] | undefined): string {
+    return [value ?? []].flat().map(code).join(', ');
 }
 
 /**
@@ -331,12 +364,17 @@ function code(text: string): string {
     return `\`${text}\``;
 }
 
+/** The commands listed in `package.json`, the Command Palette and the README. */
+function contributedCommands(config: ExtensionConfig): CommandConfig[] {
+    return config.commands.filter((command) => command.contributes ?? true);
+}
+
 /**
  * The commands as table rows, injected into the README with `<!--- @@inject-table: ./static/commands.json --->`.
  * @returns `undefined` when the extension has no commands.
  */
 function commandsTable(config: ExtensionConfig): string | undefined {
-    const commands = resolveCommands(config).filter((command) => command.contributes);
+    const commands = contributedCommands(config);
     if (!commands.length) return undefined;
     return (
         JSON.stringify(
@@ -356,14 +394,12 @@ function packageJsonSource(
     vscodeEngine: string,
     hasCustom: boolean,
 ): string {
-    const commands = resolveCommands(config)
-        .filter((command) => command.contributes)
-        .map(({ id, title }) => ({ command: id, title }));
+    const commands = contributedCommands(config).map(({ id, title }) => ({ command: id, title }));
     const contributes = (pkg as { contributes?: object }).contributes;
     const derived: Record<string, unknown> = {
         name: `code-spell-checker-${config.name}`,
-        displayName: displayName(config),
-        description: description(config),
+        displayName: config.displayName,
+        description: config.description,
         type: 'module',
         engines: { ...pkg.engines, vscode: vscodeEngine },
         main: './out/extension.js',

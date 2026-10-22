@@ -70,10 +70,12 @@ const parser: Answers = {
 describe('extensionConfig', () => {
     it('describes a language, with commands for its locale', () => {
         assert.deepEqual(extensionConfig(swedish, seattle.file), {
-            $schema: '../../static/extension.config.schema.json',
+            $schema: '../../extension-runtime/extension.config.schema.json',
             name: 'swedish',
             kind: 'language',
             friendlyName: 'Swedish',
+            displayName: 'Swedish - Code Spell Checker',
+            description: 'Adds Swedish (svenska) spell checking to Code Spell Checker.',
             nativeName: 'svenska',
             locale: 'sv-SE',
             sample: 'samples/seattle.md',
@@ -96,20 +98,24 @@ describe('extensionConfig', () => {
             'kind',
             'friendlyName',
             'displayName',
+            'description',
             'nativeName',
             'locale',
-            'description',
             'sample',
             'cspell',
             'commands',
         ]);
     });
 
-    it('leaves out the optional fields that are empty, and writes the ones that are given', () => {
+    it('writes the standard names when none are given, and leaves out an empty nativeName', () => {
         const config = extensionConfig({ ...swedish, nativeName: '' }, seattle.file);
         assert.equal('nativeName' in config, false);
-        assert.equal('displayName' in config, false);
-        assert.equal('description' in config, false);
+        assert.equal(config.displayName, 'Swedish - Code Spell Checker');
+        assert.equal(config.description, 'Adds Swedish spell checking to Code Spell Checker.');
+        assert.equal(
+            extensionConfig(medicalTerms, 'samples/sample.md').description,
+            'Adds the Medical Terms dictionary to Code Spell Checker.',
+        );
         const named = extensionConfig(
             { ...swedish, displayName: 'Svenska', description: 'Swedish words.' },
             seattle.file,
@@ -131,10 +137,38 @@ describe('extensionConfig', () => {
 describe('localeCommands', () => {
     it('enables the locale, and disables every locale the packages declare', () => {
         assert.deepEqual(localeCommands(swedish), [
-            { action: 'enable', toggle: 'locale', value: 'sv-SE' },
-            { action: 'disable', toggle: 'locale', value: 'sv,sv-SE' },
-            { action: 'enable', toggle: 'locale', value: 'sv-SE', scope: 'workspace' },
-            { action: 'disable', toggle: 'locale', value: 'sv,sv-SE', scope: 'workspace' },
+            {
+                id: 'cSpellExt_swedish.enable',
+                title: 'Enable Swedish Spell Checker Dictionary',
+                action: 'enable',
+                toggle: 'locale',
+                value: 'sv-SE',
+                scope: 'global',
+            },
+            {
+                id: 'cSpellExt_swedish.disable',
+                title: 'Disable Swedish Spell Checker Dictionary',
+                action: 'disable',
+                toggle: 'locale',
+                value: 'sv,sv-SE',
+                scope: 'global',
+            },
+            {
+                id: 'cSpellExt_swedish.enableWorkspace',
+                title: 'Enable Swedish Spell Checker Dictionary in Workspace',
+                action: 'enable',
+                toggle: 'locale',
+                value: 'sv-SE',
+                scope: 'workspace',
+            },
+            {
+                id: 'cSpellExt_swedish.disableWorkspace',
+                title: 'Disable Swedish Spell Checker Dictionary in Workspace',
+                action: 'disable',
+                toggle: 'locale',
+                value: 'sv,sv-SE',
+                scope: 'workspace',
+            },
         ]);
     });
 
@@ -146,37 +180,38 @@ describe('localeCommands', () => {
         );
         assert.deepEqual(commands.slice(4, 8), [
             {
-                action: 'enable',
-                toggle: 'locale',
-                value: 'sr-Cyrl',
                 id: 'cSpellExt_serbian.enableCyrl',
                 title: 'Enable Serbian (Cyrillic) Spell Checker Dictionary',
+                action: 'enable',
+                toggle: 'locale',
+                value: 'sr-Cyrl',
+                scope: 'global',
             },
             {
+                id: 'cSpellExt_serbian.disableCyrl',
+                title: 'Disable Serbian (Cyrillic) Spell Checker Dictionary',
                 action: 'disable',
                 toggle: 'locale',
                 value: 'sr-Cyrl',
-                id: 'cSpellExt_serbian.disableCyrl',
-                title: 'Disable Serbian (Cyrillic) Spell Checker Dictionary',
+                scope: 'global',
             },
             {
+                id: 'cSpellExt_serbian.enableCyrlWorkspace',
+                title: 'Enable Serbian (Cyrillic) Spell Checker Dictionary in Workspace',
                 action: 'enable',
                 toggle: 'locale',
                 value: 'sr-Cyrl',
                 scope: 'workspace',
-                id: 'cSpellExt_serbian.enableCyrlWorkspace',
-                title: 'Enable Serbian (Cyrillic) Spell Checker Dictionary in Workspace',
             },
             {
+                id: 'cSpellExt_serbian.disableCyrlWorkspace',
+                title: 'Disable Serbian (Cyrillic) Spell Checker Dictionary in Workspace',
                 action: 'disable',
                 toggle: 'locale',
                 value: 'sr-Cyrl',
                 scope: 'workspace',
-                id: 'cSpellExt_serbian.disableCyrlWorkspace',
-                title: 'Disable Serbian (Cyrillic) Spell Checker Dictionary in Workspace',
             },
         ]);
-        assert.equal(commands.length, 12);
     });
 });
 
@@ -198,17 +233,45 @@ describe('readme', () => {
 });
 
 describe('dictionaryCommands', () => {
-    it('turns one dictionary on and off, globally and in the workspace, with the default IDs', () => {
-        assert.deepEqual(dictionaryCommands('vim', ['vim']), [
-            { action: 'enable', toggle: 'dictionary', value: 'vim' },
-            { action: 'disable', toggle: 'dictionary', value: 'vim' },
-            { action: 'enable', toggle: 'dictionary', value: 'vim', scope: 'workspace' },
-            { action: 'disable', toggle: 'dictionary', value: 'vim', scope: 'workspace' },
+    it('turns one dictionary on and off, globally and in the workspace, with the plain IDs', () => {
+        assert.deepEqual(dictionaryCommands({ name: 'vim', friendlyName: 'Vim' }, ['vim']), [
+            {
+                id: 'cSpellExt_vim.enable',
+                title: 'Enable Vim Spell Checker Dictionary',
+                action: 'enable',
+                toggle: 'dictionary',
+                value: 'vim',
+                scope: 'global',
+            },
+            {
+                id: 'cSpellExt_vim.disable',
+                title: 'Disable Vim Spell Checker Dictionary',
+                action: 'disable',
+                toggle: 'dictionary',
+                value: 'vim',
+                scope: 'global',
+            },
+            {
+                id: 'cSpellExt_vim.enableWorkspace',
+                title: 'Enable Vim Spell Checker Dictionary in Workspace',
+                action: 'enable',
+                toggle: 'dictionary',
+                value: 'vim',
+                scope: 'workspace',
+            },
+            {
+                id: 'cSpellExt_vim.disableWorkspace',
+                title: 'Disable Vim Spell Checker Dictionary in Workspace',
+                action: 'disable',
+                toggle: 'dictionary',
+                value: 'vim',
+                scope: 'workspace',
+            },
         ]);
     });
 
     it('names the commands after each dictionary when there are several', () => {
-        const commands = dictionaryCommands('demo', ['vim', 'vim-script']);
+        const commands = dictionaryCommands({ name: 'demo', friendlyName: 'Demo' }, ['vim', 'vim-script']);
         assert.deepEqual(
             commands.map((c) => [c.id, c.title]),
             [

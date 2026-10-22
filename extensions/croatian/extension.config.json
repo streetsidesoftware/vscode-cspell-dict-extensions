@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "croatian",
     "kind": "language",
     "friendlyName": "Croatian",
+    "displayName": "Croatian - Code Spell Checker",
+    "description": "Adds Croatian (hrvatski) spell checking to Code Spell Checker.",
     "nativeName": "hrvatski",
     "locale": "hr-HR",
     "sample": "samples/amsterdam.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_croatian.enable",
+            "title": "Enable Croatian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "hr-HR"
+            "value": "hr-HR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_croatian.disable",
+            "title": "Disable Croatian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "hr,hr-HR"
+            "value": "hr,hr-HR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_croatian.enableWorkspace",
+            "title": "Enable Croatian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "hr-HR",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_croatian.disableWorkspace",
+            "title": "Disable Croatian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "hr,hr-HR",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "hr-HR",
             "id": "cSpellExt_croatian.enableCroatian",
+            "title": "Enable Croatian Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "hr-HR",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_croatian.disableCroatian",
+            "title": "Disable Croatian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "hr,hr-HR",
-            "id": "cSpellExt_croatian.disableCroatian",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_croatian.enableCroatianWorkspace",
+            "title": "Enable Croatian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "hr-HR",
             "scope": "workspace",
-            "id": "cSpellExt_croatian.enableCroatianWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_croatian.disableCroatianWorkspace",
+            "title": "Disable Croatian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "hr,hr-HR",
             "scope": "workspace",
-            "id": "cSpellExt_croatian.disableCroatianWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

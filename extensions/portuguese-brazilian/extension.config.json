@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "portuguese-brazilian",
     "kind": "language",
     "friendlyName": "Brazilian Portuguese",
+    "displayName": "Brazilian Portuguese - Code Spell Checker",
+    "description": "Adds Brazilian Portuguese (português brasileiro) spell checking to Code Spell Checker.",
     "nativeName": "português brasileiro",
     "locale": "pt-BR",
     "sample": "samples/Seattle.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_portuguese-brazilian.enable",
+            "title": "Enable Brazilian Portuguese Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "pt-BR"
+            "value": "pt-BR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_portuguese-brazilian.disable",
+            "title": "Disable Brazilian Portuguese Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "pt-BR"
+            "value": "pt-BR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_portuguese-brazilian.enableWorkspace",
+            "title": "Enable Brazilian Portuguese Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "pt-BR",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_portuguese-brazilian.disableWorkspace",
+            "title": "Disable Brazilian Portuguese Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "pt-BR",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "pt-BR",
             "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilian",
+            "title": "Enable Brazilian Portuguese Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "pt-BR",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilian",
+            "title": "Disable Brazilian Portuguese Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "pt-BR",
-            "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilian",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilianWorkspace",
+            "title": "Enable Brazilian Portuguese Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "pt-BR",
             "scope": "workspace",
-            "id": "cSpellExt_portuguese-brazilian.enablePortuguese_brazilianWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilianWorkspace",
+            "title": "Disable Brazilian Portuguese Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "pt-BR",
             "scope": "workspace",
-            "id": "cSpellExt_portuguese-brazilian.disablePortuguese_brazilianWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

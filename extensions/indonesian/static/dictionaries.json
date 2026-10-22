@@ -1,6 +1,8 @@
 [
     {
         "Dictionary": "`id-id`",
-        "Locales": "`id`, `id-ID`"
+        "locale": "`id,id-ID`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

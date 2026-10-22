@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "ukrainian",
     "kind": "language",
     "friendlyName": "Ukrainian",
+    "displayName": "Ukrainian - Code Spell Checker",
+    "description": "Adds Ukrainian (українська) spell checking to Code Spell Checker.",
     "nativeName": "українська",
     "locale": "uk",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_ukrainian.enable",
+            "title": "Enable Ukrainian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "uk"
+            "value": "uk",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_ukrainian.disable",
+            "title": "Disable Ukrainian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "uk"
+            "value": "uk",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_ukrainian.enableWorkspace",
+            "title": "Enable Ukrainian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "uk",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_ukrainian.disableWorkspace",
+            "title": "Disable Ukrainian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "uk",

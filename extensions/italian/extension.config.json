@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "italian",
     "kind": "language",
     "friendlyName": "Italian",
+    "displayName": "Italian - Code Spell Checker",
+    "description": "Adds Italian (italiano) spell checking to Code Spell Checker.",
     "nativeName": "italiano",
     "locale": "it-IT",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_italian.enable",
+            "title": "Enable Italian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "it-IT"
+            "value": "it-IT",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_italian.disable",
+            "title": "Disable Italian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "it,it-IT"
+            "value": "it,it-IT",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_italian.enableWorkspace",
+            "title": "Enable Italian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "it-IT",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_italian.disableWorkspace",
+            "title": "Disable Italian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "it,it-IT",

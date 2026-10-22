@@ -68,14 +68,17 @@ export function json(value: unknown): string {
 }
 
 /**
- * The extension's `extension.config.json`, with its fields in the order the existing ones use. Optional fields are
- * only written when they are given.
+ * The extension's `extension.config.json`, with its fields in the order the existing ones use. `nativeName` is only
+ * written when it is given.
  */
 export function extensionConfig(answers: Answers, sample: string): ExtensionConfig {
     const { kind, packages } = answers;
-    const optional = (key: string, value: string) => (value ? { [key]: value } : {});
-    const head = { $schema: '../../static/extension.config.schema.json', name: answers.name };
-    const names = { friendlyName: answers.friendlyName, ...optional('displayName', answers.displayName) };
+    const head = { $schema: '../../extension-runtime/extension.config.schema.json', name: answers.name };
+    const names = {
+        friendlyName: answers.friendlyName,
+        displayName: displayName(answers),
+        description: answers.description || standardDescription(answers),
+    };
     const tail = {
         sample,
         cspell: {
@@ -88,36 +91,78 @@ export function extensionConfig(answers: Answers, sample: string): ExtensionConf
                 ...head,
                 kind,
                 ...names,
-                ...optional('nativeName', answers.nativeName),
+                ...(answers.nativeName ? { nativeName: answers.nativeName } : {}),
                 locale: answers.locale,
-                ...optional('description', answers.description),
                 ...tail,
                 commands: localeCommands(answers),
             };
         case 'wordList':
-            return { ...head, kind, ...names, ...optional('description', answers.description), ...tail, commands: [] };
         case 'parser':
-            return { ...head, kind, ...names, description: answers.description, ...tail, commands: [] };
+            return { ...head, kind, ...names, ...tail, commands: [] };
     }
+}
+
+/** The Marketplace name: the one given, or `<friendlyName> - Code Spell Checker`. */
+export function displayName(answers: Pick<Answers, 'displayName' | 'friendlyName'>): string {
+    return answers.displayName || `${answers.friendlyName} - Code Spell Checker`;
+}
+
+/**
+ * The standard Marketplace description: `Adds Swedish (svenska) spell checking to Code Spell Checker.` for a language,
+ * `Adds the Medical Terms dictionary to Code Spell Checker.` for a word list. A parser's is always given.
+ */
+function standardDescription(answers: Answers): string {
+    const { friendlyName, nativeName } = answers;
+    if (answers.kind !== 'language') return `Adds the ${friendlyName} dictionary to Code Spell Checker.`;
+    return `Adds ${nativeName ? `${friendlyName} (${nativeName})` : friendlyName} spell checking to Code Spell Checker.`;
+}
+
+const scopes = ['global', 'workspace'] as const;
+const actions = ['enable', 'disable'] as const;
+
+type Scope = (typeof scopes)[number];
+type Action = (typeof actions)[number];
+
+/**
+ * A command with the standard ID and title, e.g. `cSpellExt_swedish.enableWorkspace` titled `Enable Swedish Spell
+ * Checker Dictionary in Workspace`.
+ * @param suffix - added to the ID after the action, e.g. `Cyrl`.
+ * @param label - names what the command turns on in the title, e.g. `Serbian (Cyrillic)`.
+ */
+function standardCommand(
+    name: string,
+    label: string,
+    suffix: string,
+    toggle: 'locale' | 'dictionary',
+    value: string,
+    action: Action,
+    scope: Scope,
+): CommandConfig {
+    const inWorkspace = scope === 'workspace';
+    const verb = action === 'enable' ? 'Enable' : 'Disable';
+    return {
+        id: `cSpellExt_${name}.${action}${suffix}${inWorkspace ? 'Workspace' : ''}`,
+        title: `${verb} ${label} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
+        action,
+        toggle,
+        value,
+        scope,
+    };
 }
 
 /**
  * Enable the locale, and disable every locale the packages declare, globally and in the workspace: `sv-SE` is enabled
  * with `sv-SE` and disabled with `sv,sv-SE`. With several languages, each also gets its own commands.
  */
-export function localeCommands(answers: Pick<Answers, 'name' | 'locale' | 'locales' | 'languages'>): CommandConfig[] {
-    const disable = answers.locales.join(',');
-    const main = scopes.flatMap((scope): CommandConfig[] => [
-        { action: 'enable', toggle: 'locale', value: answers.locale, ...workspace(scope) },
-        { action: 'disable', toggle: 'locale', value: disable, ...workspace(scope) },
-    ]);
-    return [...main, ...answers.languages.flatMap((language) => languageCommands(answers.name, language))];
-}
-
-const scopes = ['global', 'workspace'] as const;
-
-function workspace(scope: (typeof scopes)[number]): { scope?: 'workspace' } {
-    return scope === 'workspace' ? { scope } : {};
+export function localeCommands(
+    answers: Pick<Answers, 'name' | 'friendlyName' | 'locale' | 'locales' | 'languages'>,
+): CommandConfig[] {
+    const { name, friendlyName } = answers;
+    const value = { enable: answers.locale, disable: answers.locales.join(',') };
+    const main = scopes.flatMap((scope) =>
+        actions.map((action) => standardCommand(name, friendlyName, '', 'locale', value[action], action, scope)),
+    );
+    return [...main, ...answers.languages.flatMap((language) => languageCommands(name, language))];
 }
 
 /**
@@ -128,47 +173,35 @@ export function languageCommands(name: string, language: Language): CommandConfi
     const subtags = language.locale.split('-').slice(1).join('') || languageOf(language.locale);
     const suffix = subtags.slice(0, 1).toUpperCase() + subtags.slice(1);
     return scopes.flatMap((scope) =>
-        (['enable', 'disable'] as const).map((action): CommandConfig => {
-            const inWorkspace = scope === 'workspace' ? 'Workspace' : '';
-            const verb = action === 'enable' ? 'Enable' : 'Disable';
-            return {
-                action,
-                toggle: 'locale',
-                value: language.locale,
-                ...workspace(scope),
-                id: `cSpellExt_${name}.${action}${suffix}${inWorkspace}`,
-                title: `${verb} ${language.name} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
-            };
-        }),
+        actions.map((action) => standardCommand(name, language.name, suffix, 'locale', language.locale, action, scope)),
     );
 }
 
 /**
- * Turn a word list's dictionaries on and off, globally and in the workspace. One dictionary gets the
- * default IDs and titles; with several, each gets its own, e.g. `cSpellExt_vim.enableVimScript` and `Enable vim-script
- * Spell Checker Dictionary`.
+ * Turn a word list's dictionaries on and off, globally and in the workspace. One dictionary gets the plain IDs and
+ * titles; with several, each gets its own, e.g. `cSpellExt_vim.enableVimScript` and `Enable vim-script Spell Checker
+ * Dictionary`.
  * @param dictionaries - the dictionary names, e.g. `['vim']`.
  */
-export function dictionaryCommands(name: string, dictionaries: readonly string[]): CommandConfig[] {
-    return dictionaries.flatMap((dictionary) =>
-        scopes.flatMap((scope) =>
-            (['enable', 'disable'] as const).map((action): CommandConfig => {
-                const command: CommandConfig = { action, toggle: 'dictionary', value: dictionary, ...workspace(scope) };
-                if (dictionaries.length === 1) return command;
-                const inWorkspace = scope === 'workspace' ? 'Workspace' : '';
-                const verb = action === 'enable' ? 'Enable' : 'Disable';
-                const suffix = dictionary
-                    .split(/[^\p{L}\p{N}]+/u)
-                    .map((part) => part.slice(0, 1).toUpperCase() + part.slice(1))
-                    .join('');
-                return {
-                    ...command,
-                    id: `cSpellExt_${name}.${action}${suffix}${inWorkspace}`,
-                    title: `${verb} ${dictionary} Spell Checker Dictionary${inWorkspace ? ' in Workspace' : ''}`,
-                };
-            }),
-        ),
-    );
+export function dictionaryCommands(
+    config: Pick<ExtensionConfig, 'name' | 'friendlyName'>,
+    dictionaries: readonly string[],
+): CommandConfig[] {
+    return dictionaries.flatMap((dictionary) => {
+        const single = dictionaries.length === 1;
+        const label = single ? config.friendlyName : dictionary;
+        const suffix = single
+            ? ''
+            : dictionary
+                  .split(/[^\p{L}\p{N}]+/u)
+                  .map((part) => part.slice(0, 1).toUpperCase() + part.slice(1))
+                  .join('');
+        return scopes.flatMap((scope) =>
+            actions.map((action) =>
+                standardCommand(config.name, label, suffix, 'dictionary', dictionary, action, scope),
+            ),
+        );
+    });
 }
 
 /**
@@ -224,6 +257,11 @@ function clause(names: string[], when: string): string {
         : `the ${names[0]} dictionary is ${when}`;
 }
 
+/** Explains the columns of the README's dictionaries table. */
+const dictionariesSentence =
+    'The dictionaries this extension adds, and where each one is on. `locale` is checked against `cSpell.language`. ' +
+    "`languageId` is checked against the file type. `glob` is checked against the file's path. An empty cell matches everything.";
+
 /**
  * The starter README, with the `@@inject` sections the sync fills in.
  * @param installed - for a word list, what happens once it's installed. The default doesn't name the dictionaries,
@@ -233,11 +271,11 @@ export function readme(
     answers: Answers,
     installed = 'Once this extension is installed, each dictionary is on for the file types listed below, or off until you turn it on.',
 ): string {
-    const title = `# ${answers.displayName || `${answers.friendlyName} - Code Spell Checker`}\n`;
+    const title = `# ${displayName(answers)}\n`;
     const requirements = inject(
         '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
     );
-    const dictionaries = `## Dictionaries\n\n${inject('./static/dictionaries.json#markdown', 'inject-table')}`;
+    const dictionaries = `## Dictionaries\n\n${dictionariesSentence}\n\n${inject('./static/dictionaries.json#markdown', 'inject-table')}`;
     const footer = inject('../../static/footer.md');
     switch (answers.kind) {
         case 'language':

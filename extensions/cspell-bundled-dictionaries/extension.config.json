@@ -1,8 +1,9 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "cspell-bundled-dictionaries",
     "kind": "bundle",
     "friendlyName": "CSpell Bundled Dictionaries",
+    "displayName": "CSpell Bundled Dictionaries - Code Spell Checker",
     "description": "Adds the dictionaries bundled with CSpell to Code Spell Checker.",
     "sample": "samples/seattle.md",
     "cspell": {

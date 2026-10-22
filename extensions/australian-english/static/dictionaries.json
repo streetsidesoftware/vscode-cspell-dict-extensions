@@ -1,6 +1,20 @@
 [
     {
         "Dictionary": "`en-au`",
-        "Locales": "`en-AU`"
+        "locale": "`en-AU`",
+        "languageId": "`*`",
+        "glob": ""
+    },
+    {
+        "Dictionary": "`en-common-misspellings`",
+        "locale": "`en-AU`",
+        "languageId": "`*`",
+        "glob": ""
+    },
+    {
+        "Dictionary": "`en-gb-common-misspellings`",
+        "locale": "`en-AU`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

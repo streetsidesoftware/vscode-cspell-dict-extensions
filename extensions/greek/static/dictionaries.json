@@ -1,6 +1,8 @@
 [
     {
         "Dictionary": "`el`",
-        "Locales": "`el`"
+        "locale": "`el`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

@@ -1,6 +1,8 @@
 [
     {
         "Dictionary": "`he`",
-        "Locales": "`he`"
+        "locale": "`he`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

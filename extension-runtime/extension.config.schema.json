@@ -15,7 +15,7 @@
             "$ref": "#/definitions/ParserExtensionConfig"
         }
     ],
-    "description": "The data of an extension in `extensions/`. `npm run sync:extensions` derives the extension's files from it.",
+    "description": "The data of an extension in `extensions/`.",
     "definitions": {
         "LanguageExtensionConfig": {
             "type": "object",
@@ -26,7 +26,7 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "The extension's directory in `extensions/`. Also the default command ID prefix: `cSpellExt_<name>`.",
+                    "description": "The extension's published identity: its `package.json` name is `code-spell-checker-<name>`. It doesn't change after the extension is published.",
                     "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
                 },
                 "friendlyName": {
@@ -36,7 +36,7 @@
                 },
                 "displayName": {
                     "type": "string",
-                    "description": "The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.",
+                    "description": "The Marketplace name, e.g. `Swedish - Code Spell Checker`.",
                     "minLength": 1
                 },
                 "description": {
@@ -63,7 +63,7 @@
                 },
                 "notes": {
                     "type": "string",
-                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync."
+                    "description": "Notes for maintainers: why something in this file is the way it is."
                 },
                 "kind": {
                     "type": "string",
@@ -72,7 +72,7 @@
                 },
                 "locale": {
                     "type": "string",
-                    "description": "The locale users add to `cSpell.language` to use this language, as a BCP 47 tag (e.g. `sv-SE`) or a comma-separated list of them.",
+                    "description": "The language's primary locale, as a BCP 47 tag, e.g. `sv-SE`.",
                     "minLength": 1
                 },
                 "nativeName": {
@@ -81,7 +81,17 @@
                     "minLength": 1
                 }
             },
-            "required": ["commands", "cspell", "friendlyName", "kind", "locale", "name", "sample"],
+            "required": [
+                "commands",
+                "cspell",
+                "description",
+                "displayName",
+                "friendlyName",
+                "kind",
+                "locale",
+                "name",
+                "sample"
+            ],
             "additionalProperties": false,
             "description": "A natural language, enabled by its locale, e.g. Swedish."
         },
@@ -109,12 +119,12 @@
                 },
                 "id": {
                     "type": "string",
-                    "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
+                    "description": "The command ID, e.g. `cSpellExt_swedish.enable`. Unique within the extension.",
                     "minLength": 1
                 },
                 "title": {
                     "type": "string",
-                    "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
+                    "description": "The command title, e.g. `Enable Swedish Spell Checker Dictionary`.",
                     "minLength": 1
                 },
                 "contributes": {
@@ -127,30 +137,46 @@
                 },
                 "notes": {
                     "type": "string",
-                    "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
+                    "description": "Notes for maintainers: why this command is the way it is."
                 },
                 "toggle": {
                     "type": "string",
-                    "enum": ["locale", "dictionary"],
+                    "enum": [
+                        "locale",
+                        "dictionary"
+                    ],
                     "description": "What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
                 },
                 "scope": {
                     "$ref": "#/definitions/Scope",
-                    "description": "Where the setting is written. Default: `global`."
+                    "description": "Where the setting is written."
                 }
             },
-            "required": ["action", "toggle", "value"],
+            "required": [
+                "action",
+                "id",
+                "scope",
+                "title",
+                "toggle",
+                "value"
+            ],
             "additionalProperties": false,
             "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
         },
         "Action": {
             "type": "string",
-            "enum": ["enable", "disable"],
+            "enum": [
+                "enable",
+                "disable"
+            ],
             "description": "Turn the toggle on or off."
         },
         "Scope": {
             "type": "string",
-            "enum": ["global", "workspace"],
+            "enum": [
+                "global",
+                "workspace"
+            ],
             "description": "Where the setting is written."
         },
         "FileTypeCommandConfig": {
@@ -167,12 +193,12 @@
                 },
                 "id": {
                     "type": "string",
-                    "description": "The command ID. Default: `cSpellExt_<name>.<action>`, with `Workspace` appended for the workspace scope.",
+                    "description": "The command ID, e.g. `cSpellExt_swedish.enable`. Unique within the extension.",
                     "minLength": 1
                 },
                 "title": {
                     "type": "string",
-                    "description": "The command title. Default: `<Action> <friendlyName> Spell Checker Dictionary`, with ` in Workspace` appended for the workspace scope.",
+                    "description": "The command title, e.g. `Enable Swedish Spell Checker Dictionary`.",
                     "minLength": 1
                 },
                 "contributes": {
@@ -185,7 +211,7 @@
                 },
                 "notes": {
                     "type": "string",
-                    "description": "Notes for maintainers: why this command is the way it is. Not used by the sync."
+                    "description": "Notes for maintainers: why this command is the way it is."
                 },
                 "toggle": {
                     "type": "string",
@@ -193,7 +219,13 @@
                     "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
                 }
             },
-            "required": ["action", "toggle", "value"],
+            "required": [
+                "action",
+                "id",
+                "title",
+                "toggle",
+                "value"
+            ],
             "additionalProperties": false,
             "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
         },
@@ -206,7 +238,7 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "The extension's directory in `extensions/`. Also the default command ID prefix: `cSpellExt_<name>`.",
+                    "description": "The extension's published identity: its `package.json` name is `code-spell-checker-<name>`. It doesn't change after the extension is published.",
                     "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
                 },
                 "friendlyName": {
@@ -216,7 +248,7 @@
                 },
                 "displayName": {
                     "type": "string",
-                    "description": "The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.",
+                    "description": "The Marketplace name, e.g. `Swedish - Code Spell Checker`.",
                     "minLength": 1
                 },
                 "description": {
@@ -243,7 +275,7 @@
                 },
                 "notes": {
                     "type": "string",
-                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync."
+                    "description": "Notes for maintainers: why something in this file is the way it is."
                 },
                 "kind": {
                     "type": "string",
@@ -251,7 +283,16 @@
                     "description": "What the extension is."
                 }
             },
-            "required": ["commands", "cspell", "friendlyName", "kind", "name", "sample"],
+            "required": [
+                "commands",
+                "cspell",
+                "description",
+                "displayName",
+                "friendlyName",
+                "kind",
+                "name",
+                "sample"
+            ],
             "additionalProperties": false,
             "description": "A list of words, enabled by dictionary name, e.g. medical terms."
         },
@@ -264,7 +305,7 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "The extension's directory in `extensions/`. Also the default command ID prefix: `cSpellExt_<name>`.",
+                    "description": "The extension's published identity: its `package.json` name is `code-spell-checker-<name>`. It doesn't change after the extension is published.",
                     "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
                 },
                 "friendlyName": {
@@ -274,12 +315,12 @@
                 },
                 "displayName": {
                     "type": "string",
-                    "description": "The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.",
+                    "description": "The Marketplace name, e.g. `Swedish - Code Spell Checker`.",
                     "minLength": 1
                 },
                 "description": {
                     "type": "string",
-                    "description": "The Marketplace description. Required: there is no default wording for this kind.",
+                    "description": "The Marketplace description.",
                     "minLength": 1
                 },
                 "sample": {
@@ -301,7 +342,7 @@
                 },
                 "notes": {
                     "type": "string",
-                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync."
+                    "description": "Notes for maintainers: why something in this file is the way it is."
                 },
                 "kind": {
                     "type": "string",
@@ -309,7 +350,16 @@
                     "description": "What the extension is."
                 }
             },
-            "required": ["commands", "cspell", "description", "friendlyName", "kind", "name", "sample"],
+            "required": [
+                "commands",
+                "cspell",
+                "description",
+                "displayName",
+                "friendlyName",
+                "kind",
+                "name",
+                "sample"
+            ],
             "additionalProperties": false,
             "description": "A collection of dictionaries, e.g. the latest copies of the dictionaries Code Spell Checker bundles."
         },
@@ -322,7 +372,7 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "The extension's directory in `extensions/`. Also the default command ID prefix: `cSpellExt_<name>`.",
+                    "description": "The extension's published identity: its `package.json` name is `code-spell-checker-<name>`. It doesn't change after the extension is published.",
                     "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
                 },
                 "friendlyName": {
@@ -332,12 +382,12 @@
                 },
                 "displayName": {
                     "type": "string",
-                    "description": "The Marketplace name. Default: `<friendlyName> - Code Spell Checker`.",
+                    "description": "The Marketplace name, e.g. `Swedish - Code Spell Checker`.",
                     "minLength": 1
                 },
                 "description": {
                     "type": "string",
-                    "description": "The Marketplace description. Required: there is no default wording for this kind.",
+                    "description": "The Marketplace description.",
                     "minLength": 1
                 },
                 "sample": {
@@ -359,7 +409,7 @@
                 },
                 "notes": {
                     "type": "string",
-                    "description": "Notes for maintainers: why something in this file is the way it is. Not used by the sync."
+                    "description": "Notes for maintainers: why something in this file is the way it is."
                 },
                 "kind": {
                     "type": "string",
@@ -367,7 +417,16 @@
                     "description": "What the extension is."
                 }
             },
-            "required": ["commands", "cspell", "description", "friendlyName", "kind", "name", "sample"],
+            "required": [
+                "commands",
+                "cspell",
+                "description",
+                "displayName",
+                "friendlyName",
+                "kind",
+                "name",
+                "sample"
+            ],
             "additionalProperties": false,
             "description": "A cspell parser for a programming language."
         }

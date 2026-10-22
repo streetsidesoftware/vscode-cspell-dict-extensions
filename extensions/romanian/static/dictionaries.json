@@ -1,6 +1,8 @@
 [
     {
         "Dictionary": "`ro-ro`",
-        "Locales": "`ro`, `ro-RO`"
+        "locale": "`ro,ro-RO`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

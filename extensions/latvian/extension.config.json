@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "latvian",
     "kind": "language",
     "friendlyName": "Latvian",
+    "displayName": "Latvian - Code Spell Checker",
+    "description": "Adds Latvian (latviešu) spell checking to Code Spell Checker.",
     "nativeName": "latviešu",
     "locale": "lv",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_latvian.enable",
+            "title": "Enable Latvian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "lv"
+            "value": "lv",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_latvian.disable",
+            "title": "Disable Latvian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "lv"
+            "value": "lv",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_latvian.enableWorkspace",
+            "title": "Enable Latvian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "lv",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_latvian.disableWorkspace",
+            "title": "Disable Latvian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "lv",

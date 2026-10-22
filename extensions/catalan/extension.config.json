@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "catalan",
     "kind": "language",
     "friendlyName": "Catalan",
+    "displayName": "Catalan - Code Spell Checker",
+    "description": "Adds Catalan (català) spell checking to Code Spell Checker.",
     "nativeName": "català",
     "locale": "ca",
     "sample": "samples/seattle.md",
@@ -11,61 +13,77 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_catalan.enable",
+            "title": "Enable Catalan Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "ca"
+            "value": "ca",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_catalan.disable",
+            "title": "Disable Catalan Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "ca"
+            "value": "ca",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_catalan.enableWorkspace",
+            "title": "Enable Catalan Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "ca",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_catalan.disableWorkspace",
+            "title": "Disable Catalan Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "ca",
             "scope": "workspace"
         },
         {
-            "action": "enable",
-            "toggle": "locale",
-            "value": "ca",
             "id": "cSpellExt_catalan.enableCatalan",
+            "title": "Enable Catalan Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "ca",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_catalan.disableCatalan",
+            "title": "Disable Catalan Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "ca",
-            "id": "cSpellExt_catalan.disableCatalan",
+            "scope": "global",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_catalan.enableCatalanWorkspace",
+            "title": "Enable Catalan Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "ca",
             "scope": "workspace",
-            "id": "cSpellExt_catalan.enableCatalanWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
         },
         {
+            "id": "cSpellExt_catalan.disableCatalanWorkspace",
+            "title": "Disable Catalan Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "ca",
             "scope": "workspace",
-            "id": "cSpellExt_catalan.disableCatalanWorkspace",
             "contributes": false,
             "legacy": true,
             "notes": "Original command ID, kept registered so existing keybindings and tasks keep working."

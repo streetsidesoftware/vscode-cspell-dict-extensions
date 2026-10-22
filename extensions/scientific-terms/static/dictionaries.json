@@ -1,10 +1,20 @@
 [
     {
         "Dictionary": "`scientific-terms-us`",
-        "File types": "all"
+        "locale": "",
+        "languageId": "",
+        "glob": ""
     },
     {
         "Dictionary": "`mathematics-terms-us`",
-        "File types": "all"
+        "locale": "",
+        "languageId": "",
+        "glob": ""
+    },
+    {
+        "Dictionary": "`scientific-terms-us`",
+        "locale": "",
+        "languageId": "",
+        "glob": ""
     }
 ]

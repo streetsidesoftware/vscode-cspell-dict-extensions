@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "macedonian",
     "kind": "language",
     "friendlyName": "Macedonian",
+    "displayName": "Macedonian - Code Spell Checker",
+    "description": "Adds Macedonian (македонски) spell checking to Code Spell Checker.",
     "nativeName": "македонски",
     "locale": "mk-Cyrl",
     "sample": "samples/Skopje.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_macedonian.enable",
+            "title": "Enable Macedonian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "mk-Cyrl"
+            "value": "mk-Cyrl",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_macedonian.disable",
+            "title": "Disable Macedonian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "mk,mk-Cyrl"
+            "value": "mk,mk-Cyrl",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_macedonian.enableWorkspace",
+            "title": "Enable Macedonian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "mk-Cyrl",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_macedonian.disableWorkspace",
+            "title": "Disable Macedonian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "mk,mk-Cyrl",

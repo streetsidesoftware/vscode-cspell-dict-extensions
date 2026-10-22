@@ -6,7 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
-import { createExtensionConfigValidator, generateExtensionSchema } from './extensionSchema.mts';
+import { readExtensionConfigValidator } from './extensionSchema.mts';
 import { whenOn } from './dictionaryState.mts';
 import { dictionaryStates, type FileChange, syncExtension } from './syncExtension.mts';
 
@@ -15,11 +15,27 @@ const config = {
     kind: 'language',
     locale: 'xx',
     friendlyName: 'Demo',
+    displayName: 'Demo - Code Spell Checker',
+    description: 'Adds Demo spell checking to Code Spell Checker.',
     sample: 'samples/demo.md',
     cspell: { import: ['@cspell/dict-demo/cspell-ext.json'] },
     commands: [
-        { action: 'enable', toggle: 'locale', value: 'xx' },
-        { action: 'disable', toggle: 'dictionary', value: 'demo', scope: 'workspace' },
+        {
+            id: 'cSpellExt_demo.enable',
+            title: 'Enable Demo Spell Checker Dictionary',
+            action: 'enable',
+            toggle: 'locale',
+            value: 'xx',
+            scope: 'global',
+        },
+        {
+            id: 'cSpellExt_demo.disableWorkspace',
+            title: 'Disable Demo Spell Checker Dictionary in Workspace',
+            action: 'disable',
+            toggle: 'dictionary',
+            value: 'demo',
+            scope: 'workspace',
+        },
     ],
 };
 
@@ -43,7 +59,7 @@ Commands:
 <!--- @@inject-end: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 `;
 
-const options = { vscodeEngine: '^1.125.0', validate: createExtensionConfigValidator(generateExtensionSchema()) };
+const options = { vscodeEngine: '^1.125.0', validate: await readExtensionConfigValidator() };
 
 describe('syncExtension', () => {
     let dir = '';
@@ -148,18 +164,18 @@ describe('syncExtension', () => {
         assert.equal(await read('cspell.config.yaml'), 'words: [demo]\n');
     });
 
-    it('lists the locales that turn each dictionary on for a language', async () => {
+    it('lists each setting that names a dictionary, as written', async () => {
         await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
             dictionaryDefinitions: [{ name: 'demo' }, { name: 'unused' }],
             languageSettings: [{ languageId: '*', locale: 'xx, xx_YY,xx-90', dictionaries: ['demo'] }],
         });
         await syncExtension(dir, options);
         assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
-            { Dictionary: '`demo`', Locales: '`xx`, `xx-YY`, `xx-90`' },
+            { Dictionary: '`demo`', locale: '`xx, xx_YY,xx-90`', languageId: '`*`', glob: '' },
         ]);
     });
 
-    it('lists the file types that turn each dictionary on for the other kinds', async () => {
+    it('lists the top-level dictionaries, the language settings and the overrides, in that order', async () => {
         await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
             dictionaryDefinitions: [
                 { name: 'c-only' },
@@ -178,19 +194,24 @@ describe('syncExtension', () => {
                 { languageId: 'elisp', locale: '*', dictionaries: ['lisp'] },
                 { locale: '*', dictionaries: ['everywhere'] },
             ],
+            overrides: [
+                { filename: ['**/*.el', '**/.emacs'], dictionaries: ['lisp'] },
+                { filename: '**/*.md', languageId: 'markdown', language: 'en', dictionaries: ['off'] },
+            ],
         });
         const { locale: _locale, ...rest } = config;
         await writeJson('extension.config.json', { ...rest, kind: 'wordList', commands: [] });
         await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
         await syncExtension(dir, options);
         assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
-            { Dictionary: '`c-only`', 'File types': '`c`, `cpp`' },
-            { Dictionary: '`web`', 'File types': '`html`, `css`' },
-            { Dictionary: '`any`', 'File types': 'all' },
-            { Dictionary: '`always`', 'File types': 'all' },
-            { Dictionary: '`off`', 'File types': 'off until turned on' },
-            { Dictionary: '`lisp`', 'File types': '`elisp`' },
-            { Dictionary: '`everywhere`', 'File types': 'all' },
+            { Dictionary: '`always`', locale: '', languageId: '', glob: '' },
+            { Dictionary: '`c-only`', locale: '`*`', languageId: '`c,cpp`', glob: '' },
+            { Dictionary: '`web`', locale: '`*`', languageId: '`html`, `css`', glob: '' },
+            { Dictionary: '`any`', locale: '`*`', languageId: '`*`', glob: '' },
+            { Dictionary: '`lisp`', locale: '`*`', languageId: '`elisp`', glob: '' },
+            { Dictionary: '`everywhere`', locale: '`*`', languageId: '', glob: '' },
+            { Dictionary: '`lisp`', locale: '', languageId: '', glob: '`**/*.el`, `**/.emacs`' },
+            { Dictionary: '`off`', locale: '`en`', languageId: '`markdown`', glob: '`**/*.md`' },
         ]);
         const states = await dictionaryStates(dir, await readJson('extension.config.json'));
         assert.deepEqual(
@@ -275,10 +296,12 @@ describe('syncExtension', () => {
 
     it('leaves commands that do not contribute out of package.json and the README table', async () => {
         const legacy = {
+            id: 'cSpellExt_demo.enableDemo',
+            title: 'Enable Demo Spell Checker Dictionary',
             action: 'enable',
             toggle: 'locale',
             value: 'xx',
-            id: 'cSpellExt_demo.enableDemo',
+            scope: 'global',
             contributes: false,
             legacy: true,
             notes: 'Old ID.',
@@ -304,9 +327,10 @@ describe('syncExtension', () => {
         assert.equal(await read('README.md'), readme);
     });
 
-    it('rejects a name that is not the directory', async () => {
+    it('names the package after the config, not the folder', async () => {
         await writeJson('extension.config.json', { ...config, name: 'other' });
-        await assert.rejects(syncExtension(dir, options), /"name" must be "demo"/);
+        await syncExtension(dir, options);
+        assert.equal((await readJson('package.json')).name, 'code-spell-checker-other');
     });
 
     async function writeJson(file: string, data: unknown): Promise<void> {

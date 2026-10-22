@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "swiss-german",
     "kind": "language",
     "friendlyName": "Swiss German",
+    "displayName": "Swiss German - Code Spell Checker",
+    "description": "Adds Swiss German (Schweizer Hochdeutsch) spell checking to Code Spell Checker.",
     "nativeName": "Schweizer Hochdeutsch",
     "locale": "de-CH",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_swiss-german.enable",
+            "title": "Enable Swiss German Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "de-ch"
+            "value": "de-ch",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_swiss-german.disable",
+            "title": "Disable Swiss German Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "de-CH"
+            "value": "de-CH",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_swiss-german.enableWorkspace",
+            "title": "Enable Swiss German Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "de-ch",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_swiss-german.disableWorkspace",
+            "title": "Disable Swiss German Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "de-CH",

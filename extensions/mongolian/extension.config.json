@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "mongolian",
     "kind": "language",
     "friendlyName": "Mongolian",
+    "displayName": "Mongolian - Code Spell Checker",
+    "description": "Adds Mongolian (монгол) spell checking to Code Spell Checker.",
     "nativeName": "монгол",
     "locale": "mn-MN",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_mongolian.enable",
+            "title": "Enable Mongolian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "mn-mn"
+            "value": "mn-mn",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_mongolian.disable",
+            "title": "Disable Mongolian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "mn-MN,mn"
+            "value": "mn-MN,mn",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_mongolian.enableWorkspace",
+            "title": "Enable Mongolian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "mn-mn",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_mongolian.disableWorkspace",
+            "title": "Disable Mongolian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "mn-MN,mn",

@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "lithuanian",
     "kind": "language",
     "friendlyName": "Lithuanian",
+    "displayName": "Lithuanian - Code Spell Checker",
+    "description": "Adds Lithuanian (lietuvių) spell checking to Code Spell Checker.",
     "nativeName": "lietuvių",
     "locale": "lt-LT",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_lithuanian.enable",
+            "title": "Enable Lithuanian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "lt-LT"
+            "value": "lt-LT",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_lithuanian.disable",
+            "title": "Disable Lithuanian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "lt,lt-LT"
+            "value": "lt,lt-LT",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_lithuanian.enableWorkspace",
+            "title": "Enable Lithuanian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "lt-LT",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_lithuanian.disableWorkspace",
+            "title": "Disable Lithuanian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "lt,lt-LT",

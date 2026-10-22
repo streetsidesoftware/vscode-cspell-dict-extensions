@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "serbian",
     "kind": "language",
     "friendlyName": "Serbian",
+    "displayName": "Serbian - Code Spell Checker",
+    "description": "Adds Serbian (српски) spell checking to Code Spell Checker.",
     "nativeName": "српски",
     "locale": "sr",
     "sample": "samples/Београд.md",
@@ -10,38 +12,70 @@
         "import": ["@cspell/dict-sr-cyrl/cspell-ext.json", "@cspell/dict-sr-latn/cspell-ext.json"]
     },
     "commands": [
-        { "action": "enable", "toggle": "locale", "value": "sr" },
-        { "action": "disable", "toggle": "locale", "value": "sr,sr-Cyrl,sr-Latn" },
         {
+            "id": "cSpellExt_serbian.enable",
+            "title": "Enable Serbian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "sr-Cyrl",
+            "value": "sr",
+            "scope": "global"
+        },
+        {
+            "id": "cSpellExt_serbian.disable",
+            "title": "Disable Serbian Spell Checker Dictionary",
+            "action": "disable",
+            "toggle": "locale",
+            "value": "sr,sr-Cyrl,sr-Latn",
+            "scope": "global"
+        },
+        {
             "id": "cSpellExt_serbian.enableCyrl",
-            "title": "Enable Serbian Cyrillic Spell Checker Dictionary"
+            "title": "Enable Serbian Cyrillic Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sr-Cyrl",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_serbian.disableCyrl",
+            "title": "Disable Serbian Cyrillic Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "sr-Cyrl",
-            "id": "cSpellExt_serbian.disableCyrl",
-            "title": "Disable Serbian Cyrillic Spell Checker Dictionary"
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_serbian.enableLatn",
+            "title": "Enable Serbian Latin Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
             "value": "sr-Latn",
-            "id": "cSpellExt_serbian.enableLatn",
-            "title": "Enable Serbian Latin Spell Checker Dictionary"
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_serbian.disableLatn",
+            "title": "Disable Serbian Latin Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
             "value": "sr-Latn",
-            "id": "cSpellExt_serbian.disableLatn",
-            "title": "Disable Serbian Latin Spell Checker Dictionary"
+            "scope": "global"
         },
-        { "action": "enable", "toggle": "locale", "value": "sr", "scope": "workspace" },
-        { "action": "disable", "toggle": "locale", "value": "sr,sr-Cyrl,sr-Latn", "scope": "workspace" }
+        {
+            "id": "cSpellExt_serbian.enableWorkspace",
+            "title": "Enable Serbian Spell Checker Dictionary in Workspace",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "sr",
+            "scope": "workspace"
+        },
+        {
+            "id": "cSpellExt_serbian.disableWorkspace",
+            "title": "Disable Serbian Spell Checker Dictionary in Workspace",
+            "action": "disable",
+            "toggle": "locale",
+            "value": "sr,sr-Cyrl,sr-Latn",
+            "scope": "workspace"
+        }
     ],
     "notes": "Disable Cyrillic and Disable Latin remove only `sr-Cyrl` or `sr-Latn`, not `sr`: `sr` turns on both scripts, and the plain Disable commands remove all three."
 }

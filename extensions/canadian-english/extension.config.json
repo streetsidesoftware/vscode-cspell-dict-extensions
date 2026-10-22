@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "canadian-english",
     "kind": "language",
     "friendlyName": "Canadian English",
+    "displayName": "Canadian English - Code Spell Checker",
+    "description": "Adds Canadian English spell checking to Code Spell Checker.",
     "locale": "en-CA",
     "sample": "samples/seattle.md",
     "cspell": {
@@ -10,22 +12,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_canadian-english.enable",
+            "title": "Enable Canadian English Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "en-ca"
+            "value": "en-ca",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_canadian-english.disable",
+            "title": "Disable Canadian English Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "en-ca"
+            "value": "en-ca",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_canadian-english.enableWorkspace",
+            "title": "Enable Canadian English Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "en-ca",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_canadian-english.disableWorkspace",
+            "title": "Disable Canadian English Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "en-ca",

@@ -47,13 +47,15 @@ To accept both the American and the Australian English spellings:
 
 ## Dictionaries
 
-The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+The dictionaries this extension adds, and where each one is on. `locale` is checked against `cSpell.language`. `languageId` is checked against the file type. `glob` is checked against the file's path. An empty cell matches everything.
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | Locales |
-| ---------- | ------- |
-| `en-au`    | `en-AU` |
+| Dictionary                  | locale  | languageId | glob |
+| --------------------------- | ------- | ---------- | ---- |
+| `en-au`                     | `en-AU` | `*`        |      |
+| `en-common-misspellings`    | `en-AU` | `*`        |      |
+| `en-gb-common-misspellings` | `en-AU` | `*`        |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

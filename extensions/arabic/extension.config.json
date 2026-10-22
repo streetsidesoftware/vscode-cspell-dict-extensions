@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "arabic",
     "kind": "language",
     "friendlyName": "Arabic",
+    "displayName": "Arabic - Code Spell Checker",
+    "description": "Adds Arabic (العربية) spell checking to Code Spell Checker.",
     "nativeName": "العربية",
     "locale": "ar",
     "sample": "samples/README-ar.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_arabic.enable",
+            "title": "Enable Arabic Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "ar"
+            "value": "ar",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_arabic.disable",
+            "title": "Disable Arabic Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "ar"
+            "value": "ar",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_arabic.enableWorkspace",
+            "title": "Enable Arabic Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "ar",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_arabic.disableWorkspace",
+            "title": "Disable Arabic Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "ar",

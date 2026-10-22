@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "british-english-ise",
     "kind": "language",
     "friendlyName": "British English -ise",
+    "displayName": "British English -ise - Code Spell Checker",
+    "description": "Adds British English -ise spell checking to Code Spell Checker.",
     "locale": "en-GB",
     "sample": "samples/sample.md",
     "cspell": {
@@ -10,22 +12,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_british-english-ise.enable",
+            "title": "Enable British English -ise Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "en-gb"
+            "value": "en-gb",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_british-english-ise.disable",
+            "title": "Disable British English -ise Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "en-gb"
+            "value": "en-gb",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_british-english-ise.enableWorkspace",
+            "title": "Enable British English -ise Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "en-gb",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_british-english-ise.disableWorkspace",
+            "title": "Disable British English -ise Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "en-gb",

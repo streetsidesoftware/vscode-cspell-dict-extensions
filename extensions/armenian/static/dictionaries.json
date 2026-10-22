@@ -1,6 +1,8 @@
 [
     {
         "Dictionary": "`hy_am`",
-        "Locales": "`hy`, `hy-AM`"
+        "locale": "`hy,hy-AM`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

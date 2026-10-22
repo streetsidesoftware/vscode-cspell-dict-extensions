@@ -42,13 +42,13 @@ Example using both English and Ukrainian dictionaries:
 
 ## Dictionaries
 
-The dictionaries this extension adds, and the locales in `cSpell.language` that turn each one on:
+The dictionaries this extension adds, and where each one is on. `locale` is checked against `cSpell.language`. `languageId` is checked against the file type. `glob` is checked against the file's path. An empty cell matches everything.
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | Locales |
-| ---------- | ------- |
-| `uk-ua`    | `uk`    |
+| Dictionary | locale | languageId | glob |
+| ---------- | ------ | ---------- | ---- |
+| `uk-ua`    | `uk`   | `*`        |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

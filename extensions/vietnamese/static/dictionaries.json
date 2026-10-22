@@ -1,6 +1,8 @@
 [
     {
         "Dictionary": "`vi-vn`",
-        "Locales": "`vi`"
+        "locale": "`vi`",
+        "languageId": "`*`",
+        "glob": ""
     }
 ]

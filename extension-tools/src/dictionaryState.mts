@@ -17,13 +17,6 @@ export interface DictionaryState {
     off: boolean;
 }
 
-/** When a word list's dictionary is on, for the README: `all`, `off until turned on`, or its file types. */
-export function describeFileTypes(state: DictionaryState): string {
-    if (state.off) return 'off until turned on';
-    if (state.all) return 'all';
-    return state.fileTypes.map(code).join(', ');
-}
-
 /**
  * When a word list's dictionary is on, for a sentence: "on for every file", "off until you turn it on", or "on for
  * `elisp` and `lisp` files".

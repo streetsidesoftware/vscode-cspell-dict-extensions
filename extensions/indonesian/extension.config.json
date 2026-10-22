@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "indonesian",
     "kind": "language",
     "friendlyName": "Indonesian",
+    "displayName": "Indonesian - Code Spell Checker",
+    "description": "Adds Indonesian (Indonesia) spell checking to Code Spell Checker.",
     "nativeName": "Indonesia",
     "locale": "id-ID",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_indonesian.enable",
+            "title": "Enable Indonesian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "id-id"
+            "value": "id-id",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_indonesian.disable",
+            "title": "Disable Indonesian Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "id-ID,id"
+            "value": "id-ID,id",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_indonesian.enableWorkspace",
+            "title": "Enable Indonesian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "id-id",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_indonesian.disableWorkspace",
+            "title": "Disable Indonesian Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "id-ID,id",

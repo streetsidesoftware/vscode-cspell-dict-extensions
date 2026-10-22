@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "dutch",
     "kind": "language",
     "friendlyName": "Dutch",
+    "displayName": "Dutch - Code Spell Checker",
+    "description": "Adds Dutch (Nederlands) spell checking to Code Spell Checker.",
     "nativeName": "Nederlands",
     "locale": "nl-NL",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_dutch.enable",
+            "title": "Enable Dutch Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "nl-NL"
+            "value": "nl-NL",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_dutch.disable",
+            "title": "Disable Dutch Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "nl-NL"
+            "value": "nl-NL",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_dutch.enableWorkspace",
+            "title": "Enable Dutch Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "nl-NL",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_dutch.disableWorkspace",
+            "title": "Disable Dutch Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "nl-NL",

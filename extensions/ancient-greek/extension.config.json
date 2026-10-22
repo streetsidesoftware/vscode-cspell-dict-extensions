@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "ancient-greek",
     "kind": "language",
     "friendlyName": "Ancient Greek",
+    "displayName": "Ancient Greek - Code Spell Checker",
+    "description": "Adds Ancient Greek (Ἀρχαία Ἑλληνική) spell checking to Code Spell Checker.",
     "nativeName": "Ἀρχαία Ἑλληνική",
     "locale": "grc-GR",
     "sample": "samples/Hymn-4-to-Hermes.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_ancient-greek.enable",
+            "title": "Enable Ancient Greek Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "grc-GR"
+            "value": "grc-GR",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_ancient-greek.disable",
+            "title": "Disable Ancient Greek Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "grc,grc-GR,gr,el-GRC"
+            "value": "grc,grc-GR,gr,el-GRC",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_ancient-greek.enableWorkspace",
+            "title": "Enable Ancient Greek Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "grc-GR",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_ancient-greek.disableWorkspace",
+            "title": "Disable Ancient Greek Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "grc,grc-GR,gr,el-GRC",

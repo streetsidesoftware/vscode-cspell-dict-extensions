@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "greek",
     "kind": "language",
     "friendlyName": "Greek",
+    "displayName": "Greek - Code Spell Checker",
+    "description": "Adds Greek (Ελληνικά) spell checking to Code Spell Checker.",
     "nativeName": "Ελληνικά",
     "locale": "el",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_greek.enable",
+            "title": "Enable Greek Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "el"
+            "value": "el",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_greek.disable",
+            "title": "Disable Greek Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "el"
+            "value": "el",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_greek.enableWorkspace",
+            "title": "Enable Greek Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "el",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_greek.disableWorkspace",
+            "title": "Disable Greek Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "el",

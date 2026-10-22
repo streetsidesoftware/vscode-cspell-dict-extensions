@@ -1,8 +1,10 @@
 {
-    "$schema": "../../static/extension.config.schema.json",
+    "$schema": "../../extension-runtime/extension.config.schema.json",
     "name": "galician",
     "kind": "language",
     "friendlyName": "Galician",
+    "displayName": "Galician - Code Spell Checker",
+    "description": "Adds Galician (galego) spell checking to Code Spell Checker.",
     "nativeName": "galego",
     "locale": "gl-ES",
     "sample": "samples/seattle.md",
@@ -11,22 +13,32 @@
     },
     "commands": [
         {
+            "id": "cSpellExt_galician.enable",
+            "title": "Enable Galician Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "gl-ES"
+            "value": "gl-ES",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_galician.disable",
+            "title": "Disable Galician Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "gl,gl-ES"
+            "value": "gl,gl-ES",
+            "scope": "global"
         },
         {
+            "id": "cSpellExt_galician.enableWorkspace",
+            "title": "Enable Galician Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
             "value": "gl-ES",
             "scope": "workspace"
         },
         {
+            "id": "cSpellExt_galician.disableWorkspace",
+            "title": "Disable Galician Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
             "value": "gl,gl-ES",
