@@ -36,6 +36,7 @@ jobs:
           cache: npm
 
       - run: npm ci
+      - run: npm run setup
 
       # Fix the sources first, then format them, then build from them.
       - name: Sync

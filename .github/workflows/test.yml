@@ -101,7 +101,9 @@ jobs:
           path: .vscode-test
 
       - name: Install
-        run: npm ci
+        run: |
+          npm ci
+          npm run setup
 
       - name: Download
         id: download
@@ -151,6 +153,7 @@ jobs:
           fail-on-cache-miss: true
 
       - run: npm ci
+      - run: npm run setup
       - run: |
           cd ${{ matrix.extension_dir }}
           npm run pack-extension

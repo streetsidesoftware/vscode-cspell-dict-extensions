@@ -18,6 +18,7 @@ user.
 
   ```sh
   npm ci
+  npm run setup
   ```
 
   The generator and `list:packages` need a network connection. They read the npm registry, the package lists of

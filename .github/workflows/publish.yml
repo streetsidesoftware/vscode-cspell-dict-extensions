@@ -53,7 +53,9 @@ jobs:
         with:
           node-version-file: .tool-versions
       - name: Install
-        run: npm ci
+        run: |
+          npm ci
+          npm run setup
       - name: Prepare Try to Release
         env:
           EXTENSION_DIR: ${{ matrix.extension_dir }}

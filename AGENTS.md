@@ -9,7 +9,8 @@ This repo is **vscode-cspell-dict-extensions**: an npm + lerna-lite monorepo of 
 A fresh clone has no `node_modules`. npm only: pnpm and yarn are blocked. Node.js version: `.tool-versions`.
 
 ```sh
-npm ci                                # installs the root, then every package (the postinstall runs npm i in each)
+npm ci                                # installs the root
+npm run setup                         # installs every package: npm ci in each
 npm run list:packages -- <word>...    # the published dictionaries and parsers, and the extension that includes each
 npm run create:extension -- <name> --package <@cspell/package> --yes   # create an extension
 npm run check:extension -- <name>     # an extension's build, sample, extension-tools check, Prettier and spell checks; --vscode adds the VS Code test

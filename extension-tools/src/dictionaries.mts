@@ -36,7 +36,7 @@ export async function readSources(extensionDir: string, config: ExtensionConfig)
     if (errors.length) {
         const lines = errors.map((e) => `  ${e.filename}: ${e.error.message}`);
         throw new Error(
-            `${extensionRepoPath(extensionDir)}: can't read an import. Run \`npm install\` first.\n${lines.join('\n')}`,
+            `${extensionRepoPath(extensionDir)}: can't read an import. Run \`npm run setup\` first.\n${lines.join('\n')}`,
         );
     }
     return getSources(settings).map((source) => {
