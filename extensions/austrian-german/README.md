@@ -2,7 +2,8 @@
 
 Austrian German dictionary extension for VS Code.
 
-Imports the Austrian German spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Austrian German spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -31,8 +32,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `de-AT` to the `cSpell.language` setting, will enable the Austrian German dictionary.
-Example using both English and Austrian German dictionaries:
+Adding `de-AT` to the `cSpell.language` setting, will enable the Austrian German dictionary. Example using both English
+and Austrian German dictionaries:
 
 ```javascript
 "cSpell.language": "en,de-AT",
@@ -66,7 +67,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

@@ -2,7 +2,8 @@
 
 ### Монгол хэлний үг үсгийн алдаа шалгагч
 
-[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)-ийн Монгол хэлний үг үсгийн алдаа шалгах толь бичгийг импорт хийнэ.
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)-ийн
+Монгол хэлний үг үсгийн алдаа шалгах толь бичгийг импорт хийнэ.
 
 VS Code-д зориулсан Монгол хэлний толь бичгийн өргөтгөл.
 
@@ -10,7 +11,8 @@ VS Code-д зориулсан Монгол хэлний толь бичгийн 
 
 Mongolian dictionary extension for VS Code.
 
-Imports the Mongolian spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Mongolian spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Суулгах | Installation
 
@@ -26,7 +28,8 @@ After this extension is installed, it is necessary to tell the spell checker to 
 
 - `F1` `Show Spell Checker Configuration Info` | Үг үсгийн алдаа шалгагчийн тохиргооны мэдээллийг харуулах
 - Language таб-ыг сонгоно. | `Language` (Хэл) таб-ыг сонгоно.
-- Хэлийг бүхэлд нь эсвэл зөвхөн тухайн Workspace-д идэвхжүүлнэ. | Хэлийг бүх - систем дээр эсвэл зөвхөн тухайн ажлын орчинд идэвхжүүлнэ.
+- Хэлийг бүхэлд нь эсвэл зөвхөн тухайн Workspace-д идэвхжүүлнэ. | Хэлийг бүх - систем дээр эсвэл зөвхөн тухайн ажлын
+  орчинд идэвхжүүлнэ.
 
 ---
 
@@ -55,8 +58,8 @@ Or run these commands:
 
 Preferences (Тохиргоо) -> Settings (Тохируулга)
 
-`cSpell.language` тохиргоонд mn-mn нэмж оруулсан-аар Монгол хэлний толь бичгийг идэвхжүүлнэ.
-Англи болон Монгол хэлний толь бичгийг хамтад нь ашиглах жишээ:
+`cSpell.language` тохиргоонд mn-mn нэмж оруулсан-аар Монгол хэлний толь бичгийг идэвхжүүлнэ. Англи болон Монгол хэлний
+толь бичгийг хамтад нь ашиглах жишээ:
 
 ```javascript
 "cSpell.language": "en,mn-mn",
@@ -68,8 +71,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `mn-mn` to the `cSpell.language` setting, will enable the Mongolian dictionary.
-Example using both English and Mongolian dictionaries:
+Adding `mn-mn` to the `cSpell.language` setting, will enable the Mongolian dictionary. Example using both English and
+Mongolian dictionaries:
 
 ```javascript
 "cSpell.language": "en,mn-mn",
@@ -99,11 +102,15 @@ An empty cell is no condition.
 
 ## Шаардлага | Requirements
 
-Энэ өргөтгөл нь [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) өргөтгөлийг автоматаар суулгах болно.
+Энэ өргөтгөл нь
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+өргөтгөлийг автоматаар суулгах болно.
 
 ---
 
-This extension will automatically include [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 <!--- @@inject: ../../static/engines-table.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 

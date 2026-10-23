@@ -3,7 +3,8 @@
 British English `-ise` dictionary extension for VS Code. This dictionary is a full British English dictionary preferring
 words ending in `-ise` over words ending in `-ize`.
 
-Imports the British English `-ise` spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the British English `-ise` spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -32,7 +33,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Replacing `en` with `en-GB` in the `cSpell.language` setting will check British English -ise spelling instead of American English:
+Replacing `en` with `en-GB` in the `cSpell.language` setting will check British English -ise spelling instead of
+American English:
 
 ```javascript
 "cSpell.language": "en-GB",
@@ -72,7 +74,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

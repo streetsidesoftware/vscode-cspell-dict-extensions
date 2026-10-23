@@ -2,7 +2,8 @@
 
 Slovenian dictionary extension for VS Code.
 
-Imports the Slovenian spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Slovenian spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -31,8 +32,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `sl-SI` to the `cSpell.language` setting, will enable the Slovenian dictionary.
-Example using both English and Slovenian dictionaries:
+Adding `sl-SI` to the `cSpell.language` setting, will enable the Slovenian dictionary. Example using both English and
+Slovenian dictionaries:
 
 ```javascript
 "cSpell.language": "en,sl-SI",
@@ -66,7 +67,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

@@ -7,6 +7,7 @@ level: comfortable with basic git and a terminal; doesn't read or write code
 -->
 
 > [!NOTE]
+>
 > For contributors who can fork the repo and follow terminal steps. No coding needed.
 
 ## What an extension does
@@ -14,13 +15,16 @@ level: comfortable with basic git and a terminal; doesn't read or write code
 An extension adds a dictionary or a parser to Code Spell Checker.
 
 - A **dictionary extension** adds words, such as Swedish or medical terms, so Code Spell Checker accepts them.
-- A **parser extension** tags the parts of a document, such as comments, strings and identifiers, so users can choose which parts to spell check.
+- A **parser extension** tags the parts of a document, such as comments, strings and identifiers, so users can choose
+  which parts to spell check.
 
 VS Code users install an extension from the Marketplace.
 
 ## How an extension works
 
-An extension includes a published package and tells Code Spell Checker where to find it. Dictionaries come from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries), and parsers from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
+An extension includes a published package and tells Code Spell Checker where to find it. Dictionaries come from
+[cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts#all-dictionaries), and parsers from
+[cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
 
 ## How to find dictionaries and parsers
 
@@ -38,7 +42,11 @@ With several words, a package must match every word, unless you add `--any`. `--
 
 <!--- @@inject: ../templates/package-must-be-published.md --->
 
-The package must be published first. To create a dictionary, see [Creating a dictionary](https://github.com/streetsidesoftware/cspell-dicts/blob/main/docs/guides/new-dictionary.md) in cspell-dicts. To create a parser, see [Adding a parser package](https://github.com/streetsidesoftware/cspell-parsers/blob/main/docs/guides/new-parser-package.md) in cspell-parsers.
+The package must be published first. To create a dictionary, see
+[Creating a dictionary](https://github.com/streetsidesoftware/cspell-dicts/blob/main/docs/guides/new-dictionary.md) in
+cspell-dicts. To create a parser, see
+[Adding a parser package](https://github.com/streetsidesoftware/cspell-parsers/blob/main/docs/guides/new-parser-package.md)
+in cspell-parsers.
 
 <!--- @@inject-end: ../templates/package-must-be-published.md --->
 
@@ -76,15 +84,21 @@ Follow these steps in order:
    | Sample file                      | Word lists and parsers only. A file with some of the dictionary's words, or code the parser tags. For a dictionary that's on only for some file types, use one of those types, such as a `.clj` file for Clojure. Press Enter for a starter `samples/sample.md`. The checks fail until you replace its text. |
    | Wikipedia article for the sample | Natural languages only. Press Enter for Seattle, or name another article, in English or the language. Then add more articles, or press Enter to finish. Each article becomes its own sample file, such as `samples/seattle.md`.                                                                              |
 
-   The generator needs a network connection. It lists the packages, fetches the Wikipedia articles and installs the packages.
+   The generator needs a network connection. It lists the packages, fetches the Wikipedia articles and installs the
+   packages.
 
-   For a natural language, the generator fetches the articles you named from that language's Wikipedia, with their source and license.
+   For a natural language, the generator fetches the articles you named from that language's Wikipedia, with their
+   source and license.
 
-   The generator then creates `extensions/<name>/` with all of the extension's files. It installs the dictionaries or parsers, which can take a minute or two. It ends with **Created extensions/<name>** in green.
+   The generator then creates `extensions/<name>/` with all of the extension's files. It installs the dictionaries or
+   parsers, which can take a minute or two. It ends with **Created extensions/<name>** in green.
 
-   If you already know every answer, the [generator README](../../extension-tools/README.md#create-an-extension) shows how to give them as options.
+   If you already know every answer, the [generator README](../../extension-tools/README.md#create-an-extension) shows
+   how to give them as options.
 
-3. **Review `README.md`.** It becomes the extension's page on the VS Code Marketplace. The generator writes a complete README. Add anything users should know, such as where the words come from. Don't edit the sections between the `<!--- @@inject … --->` comments. They're filled in for you.
+3. **Review `README.md`.** It becomes the extension's page on the VS Code Marketplace. The generator writes a complete
+   README. Add anything users should know, such as where the words come from. Don't edit the sections between the
+   `<!--- @@inject … --->` comments. They're filled in for you.
 
 4. **Try it in VS Code.** Open the extension's folder:
 
@@ -94,19 +108,24 @@ Follow these steps in order:
 
    Or open the folder with **File > Open Folder**.
 
-   Choose **Run > Start Debugging** with the `Launch Extension` configuration. It opens a new VS Code window with the extension installed.
+   Choose **Run > Start Debugging** with the `Launch Extension` configuration. It opens a new VS Code window with the
+   extension installed.
 
    ![Debug extension](../../images/debug-extension.png)
 
-5. **Check the samples.** In the new window, open each file in `samples/`. A squiggly line marks a word the dictionary doesn't know. To list them all at once, run this in a terminal, in the extension's folder:
+5. **Check the samples.** In the new window, open each file in `samples/`. A squiggly line marks a word the dictionary
+   doesn't know. To list them all at once, run this in a terminal, in the extension's folder:
 
    ```sh
    npm run test:cspell
    ```
 
    It prints each unknown word with its file and line. Fix each one in the sample itself:
-   - **A real word the dictionary lacks:** add it to a `cspell:words` comment at the end of the sample. The spell check then accepts it. Also ask for it in cspell-dicts. See [Adding words](../../CONTRIBUTING.md#adding-words-to-a-language-dictionary).
-   - **A name or a word that isn't real,** such as a place name: add it to a `cspell:ignore` comment at the end of the sample. The spell check then skips it.
+   - **A real word the dictionary lacks:** add it to a `cspell:words` comment at the end of the sample. The spell check
+     then accepts it. Also ask for it in cspell-dicts. See
+     [Adding words](../../CONTRIBUTING.md#adding-words-to-a-language-dictionary).
+   - **A name or a word that isn't real,** such as a place name: add it to a `cspell:ignore` comment at the end of the
+     sample. The spell check then skips it.
    - **Or delete the sentence** from the sample.
 
    For example, the last lines of a Markdown sample:
@@ -116,13 +135,16 @@ Follow these steps in order:
    <!-- cspell:ignore Siatail Snohomish -->
    ```
 
-   Markdown hides these comments on the page. In a code file, use the language's line comment instead, such as `// cspell:words` or, in Lisp, `; cspell:ignore`.
+   Markdown hides these comments on the page. In a code file, use the language's line comment instead, such as
+   `// cspell:words` or, in Lisp, `; cspell:ignore`.
 
-   The generator also writes `samples/cspell.json`. For a natural language, it turns the language on for the samples. Keep that setting.
+   The generator also writes `samples/cspell.json`. For a natural language, it turns the language on for the samples.
+   Keep that setting.
 
 6. **Send your extension to the maintainers.**
    - Commit the new `extensions/<name>/` folder. Push it to your fork.
-   - On GitHub, open a pull request from your fork. See [Creating a pull request from a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
+   - On GitHub, open a pull request from your fork. See
+     [Creating a pull request from a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
    - Title it `feat: add <Language> extension`, such as `feat: add Thai extension`.
 
    The pull request runs the checks. To run them first:
@@ -131,4 +153,5 @@ Follow these steps in order:
    npm run check:extension -- <name>
    ```
 
-   After the pull request is merged, the maintainers add the extension to the lists and release it. You don't need to do anything else.
+   After the pull request is merged, the maintainers add the extension to the lists and release it. You don't need to do
+   anything else.

@@ -2,7 +2,8 @@
 
 Serbian dictionary extension for VS Code.
 
-Imports the Serbian (both Cyrillic and Latin) spellchecking dictionaries for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Serbian (both Cyrillic and Latin) spellchecking dictionaries for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -22,7 +23,8 @@ After this extension is installed, it is necessary to tell the spell checker to 
 
 ### Enable/disable dictionaries via commands
 
-You can also use the following commands (`F1` or _View -> Command Palette..._) to enable or disable Serbian dictionaries:
+You can also use the following commands (`F1` or _View -> Command Palette..._) to enable or disable Serbian
+dictionaries:
 
 <!--- @@inject-table: ./static/commands.json --->
 
@@ -49,8 +51,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `sr` to the `cSpell.language` setting, will enable the Serbian dictionary.
-Example using both English and Serbian dictionaries:
+Adding `sr` to the `cSpell.language` setting, will enable the Serbian dictionary. Example using both English and Serbian
+dictionaries:
 
 ```javascript
 "cSpell.language": "en,sr",
@@ -85,7 +87,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

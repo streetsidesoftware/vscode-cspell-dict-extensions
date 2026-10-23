@@ -2,7 +2,8 @@
 
 Ancient Greek dictionary extension for VS Code.
 
-Imports the Ancient Greek spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Ancient Greek spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -31,8 +32,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `grc-GR` to the `cSpell.language` setting, will enable the Ancient Greek dictionary.
-Example using both English and Ancient Greek dictionaries:
+Adding `grc-GR` to the `cSpell.language` setting, will enable the Ancient Greek dictionary. Example using both English
+and Ancient Greek dictionaries:
 
 ```javascript
 "cSpell.language": "en,grc-GR",
@@ -66,7 +67,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

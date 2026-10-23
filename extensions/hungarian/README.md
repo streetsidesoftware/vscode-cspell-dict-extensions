@@ -2,9 +2,11 @@
 
 Hungarian dictionary extension for VS Code.
 
-Imports the Hungarian spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Hungarian spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
-**NOTE:** Due to the complexity of the Hungarian language, the dictionary is limited and might be missing some common words. Work is underway to correct the limitation.
+**NOTE:** Due to the complexity of the Hungarian language, the dictionary is limited and might be missing some common
+words. Work is underway to correct the limitation.
 
 ## Installation
 
@@ -33,8 +35,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `hu-HU` to the `cSpell.language` setting, will enable the Hungarian dictionary.
-Example using both English and Hungarian dictionaries:
+Adding `hu-HU` to the `cSpell.language` setting, will enable the Hungarian dictionary. Example using both English and
+Hungarian dictionaries:
 
 ```javascript
 "cSpell.language": "en,hu-HU",
@@ -68,7 +70,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |
