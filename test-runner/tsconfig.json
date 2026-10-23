@@ -5,7 +5,7 @@
         "lib": ["es2024", "ESNext.Array", "ESNext.Iterator"],
         "module": "nodenext",
         "moduleResolution": "nodenext",
-        "types": ["node", "mocha"],
+        "types": ["node"],
         "strict": true,
         "skipLibCheck": true,
         "noEmit": true,

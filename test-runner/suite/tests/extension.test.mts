@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { basename, resolve } from 'node:path';
 
-import { suite, test } from 'mocha';
+import { describe, it } from 'node:test';
 import { commands, languages, Position, Uri, window } from 'vscode';
 import type { Diagnostic } from 'vscode';
 
@@ -22,27 +22,20 @@ const uriSampleDoc = Uri.file(resolve(sampleDoc));
 
 const timeoutInSeconds = 120;
 
-suite('Extension Test Suite 1', function () {
-    this.timeout(timeoutInSeconds * 1000);
-
+describe('Extension Test Suite 1', { timeout: timeoutInSeconds * 1000 }, () => {
     window.showInformationMessage('Start all tests.');
 
-    this.beforeAll(async () => {
-        // await helper.activateExtension('streetsidesoftware.code-spell-checker');
-        // await helper.activateExtension();
-    });
-
-    test('loading the spell checker extension', async () => {
+    it('loading the spell checker extension', async () => {
         const ext = await activateExtension('streetsidesoftware.code-spell-checker');
         assert.ok(ext, 'Spell Checker Extension has loaded.');
     });
 
-    test('loading the dictionary extension', async () => {
+    it('loading the dictionary extension', async () => {
         const ext = await activateExtension();
         assert.ok(ext, 'Dictionary Extension has loaded.');
     });
 
-    test('registering all contributed commands', async () => {
+    it('registering all contributed commands', async () => {
         await activateExtension();
         const pkg = await readPackageJson();
         const contributed = pkg.contributes?.commands?.map((c) => c.command) ?? [];
@@ -52,7 +45,7 @@ suite('Extension Test Suite 1', function () {
         assert.deepStrictEqual(missing, [], 'Every command in `contributes.commands` must be registered.');
     });
 
-    test('registering the commands with explicit IDs, including legacy ones', async () => {
+    it('registering the commands with explicit IDs, including legacy ones', async () => {
         await activateExtension();
         const ids = await readExplicitCommandIds();
         const registered = new Set(await commands.getCommands(true));
@@ -61,7 +54,7 @@ suite('Extension Test Suite 1', function () {
         assert.deepEqual(missing, [], 'Every command in `extension.config.json` must be registered.');
     });
 
-    test('reading the sample file.', async () => {
+    it('reading the sample file.', async () => {
         logYellow('Verifies reading the sample file: %s.', sampleDoc);
         const result = await loadDocument(uriSampleDoc);
         assert.ok(result?.doc, 'Must be able to load the document.');
@@ -69,7 +62,7 @@ suite('Extension Test Suite 1', function () {
         assert.ok(urlDoc.endsWith(basename(sampleDoc)), 'matches sample doc');
     });
 
-    test('Opening the sample document and making sure there are no errors.', async () => {
+    it('Opening the sample document and making sure there are no errors.', async () => {
         logYellow('Opening the sample document and making sure there are no errors.');
         const docContext = await loadDocument(uriSampleDoc);
         assert.ok(docContext, 'Must be able to load the document.');
