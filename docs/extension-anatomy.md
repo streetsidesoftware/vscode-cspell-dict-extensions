@@ -38,8 +38,8 @@ Don't edit these; `npm run sync:extensions` overwrites them.
 - **README sections** between `@@inject` markers, filled by [inject-markdown](https://github.com/streetsidesoftware/inject-markdown) from the shared templates in [`static/`](../static) and the extension's own `static/` files:
   - `<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->`
   - `<!--- @@inject-table: ./static/commands.json --->`
-  - `<!--- @@inject: ../../static/dictionaries-columns.md --->`, which explains the columns of the dictionaries table.
   - `<!--- @@inject-table: ./static/dictionaries.json#markdown --->`
+  - `<!--- @@inject: ../../static/dictionaries-columns.md --->`, after the table, which explains its columns.
   - `<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->`, the Manual Settings of a language extension, filled from its `locale` and `friendlyName`. English variants use `manual-settings.english.md` instead, which advises replacing `en`.
 
 The sync also sets the `package.json` fields every extension shares: `private`, `repository`, `publisher`, `author`, `contributors`, `bugs`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)) and the `vsce` base URLs. It keeps every other value, and sorts the fields.

@@ -47,6 +47,16 @@ To accept both the American and the Australian English spellings:
 
 ## Dictionaries
 
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary                  | locale  | languageId | glob |
+| --------------------------- | ------- | ---------- | ---- |
+| `en-au`                     | `en-AU` | `*`        |      |
+| `en-common-misspellings`    | `en-AU` | `*`        |      |
+| `en-gb-common-misspellings` | `en-AU` | `*`        |      |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 <!--- @@inject: ../../static/dictionaries-columns.md --->
 
 Each row is a setting that turns a dictionary on. The dictionary is on when all of the row's conditions match:
@@ -58,16 +68,6 @@ Each row is a setting that turns a dictionary on. The dictionary is on when all 
 An empty cell, or `*`, is no condition.
 
 <!--- @@inject-end: ../../static/dictionaries-columns.md --->
-
-<!--- @@inject-table: ./static/dictionaries.json#markdown --->
-
-| Dictionary                  | locale  | languageId | glob |
-| --------------------------- | ------- | ---------- | ---- |
-| `en-au`                     | `en-AU` | `*`        |      |
-| `en-common-misspellings`    | `en-AU` | `*`        |      |
-| `en-gb-common-misspellings` | `en-AU` | `*`        |      |
-
-<!--- @@inject-end: ./static/dictionaries.json#markdown --->
 
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 

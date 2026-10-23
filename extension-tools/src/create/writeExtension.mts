@@ -202,7 +202,7 @@ export function readme(answers: Answers): string {
     const requirements = inject(
         '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
     );
-    const dictionaries = `## Dictionaries\n\n${inject('../../static/dictionaries-columns.md')}\n${inject('./static/dictionaries.json#markdown', 'inject-table')}`;
+    const dictionaries = `## Dictionaries\n\n${inject('./static/dictionaries.json#markdown', 'inject-table')}\n${inject('../../static/dictionaries-columns.md')}`;
     const footer = inject('../../static/footer.md');
     switch (answers.kind) {
         case 'language':

@@ -77,6 +77,14 @@ Example using both English and Mongolian dictionaries:
 
 ## Толь бичиг | Dictionaries
 
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary | locale        | languageId | glob |
+| ---------- | ------------- | ---------- | ---- |
+| `mn-mn`    | `mn`, `mn-MN` | `*`        |      |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
 <!--- @@inject: ../../static/dictionaries-columns.md --->
 
 Each row is a setting that turns a dictionary on. The dictionary is on when all of the row's conditions match:
@@ -88,14 +96,6 @@ Each row is a setting that turns a dictionary on. The dictionary is on when all 
 An empty cell, or `*`, is no condition.
 
 <!--- @@inject-end: ../../static/dictionaries-columns.md --->
-
-<!--- @@inject-table: ./static/dictionaries.json#markdown --->
-
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `mn-mn`    | `mn`, `mn-MN` | `*`        |      |
-
-<!--- @@inject-end: ./static/dictionaries.json#markdown --->
 
 ## Шаардлага | Requirements
 
