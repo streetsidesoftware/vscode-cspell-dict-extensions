@@ -38,7 +38,7 @@ var extension_config_default = {
 			"title": "Disable Persian Spell Checker Dictionary",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "fa-IR",
+			"value": "fa-IR,fa",
 			"scope": "global"
 		},
 		{
@@ -54,11 +54,10 @@ var extension_config_default = {
 			"title": "Disable Persian Spell Checker Dictionary in Workspace",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "fa-IR",
+			"value": "fa-IR,fa",
 			"scope": "workspace"
 		}
-	],
-	notes: "Disable removes only `fa-IR`, not `fa`: `fa` is shared with Dari (fa-AF), so a user who added `fa` keeps this dictionary on."
+	]
 };
 //#endregion
 //#region ../../extension-runtime/src/noCustom.ts

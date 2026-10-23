@@ -38,7 +38,7 @@ var extension_config_default = {
 			"title": "Disable Spanish Spell Checker Dictionary",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "es-ES",
+			"value": "es-ES,es",
 			"scope": "global"
 		},
 		{
@@ -54,7 +54,7 @@ var extension_config_default = {
 			"title": "Disable Spanish Spell Checker Dictionary in Workspace",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "es-ES",
+			"value": "es-ES,es",
 			"scope": "workspace"
 		},
 		{
@@ -73,7 +73,7 @@ var extension_config_default = {
 			"title": "Disable Spanish Spell Checker Dictionary",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "es-ES",
+			"value": "es-ES,es",
 			"scope": "global",
 			"contributes": false,
 			"legacy": true,
@@ -95,14 +95,13 @@ var extension_config_default = {
 			"title": "Disable Spanish Spell Checker Dictionary in Workspace",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "es-ES",
+			"value": "es-ES,es",
 			"scope": "workspace",
 			"contributes": false,
 			"legacy": true,
 			"notes": "Original command ID, kept registered so existing keybindings and tasks keep working. It is in Code Spell Checker's `cSpell.` command namespace."
 		}
-	],
-	notes: "Disable removes only `es-ES`, not `es`: `es` is shared with other Spanish variants, so a user who added `es` keeps this dictionary on."
+	]
 };
 //#endregion
 //#region ../../extension-runtime/src/noCustom.ts

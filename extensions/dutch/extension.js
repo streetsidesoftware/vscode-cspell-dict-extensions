@@ -38,7 +38,7 @@ var extension_config_default = {
 			"title": "Disable Dutch Spell Checker Dictionary",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "nl-NL",
+			"value": "nl-NL,nl",
 			"scope": "global"
 		},
 		{
@@ -54,11 +54,10 @@ var extension_config_default = {
 			"title": "Disable Dutch Spell Checker Dictionary in Workspace",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "nl-NL",
+			"value": "nl-NL,nl",
 			"scope": "workspace"
 		}
-	],
-	notes: "Disable removes only `nl-NL`, not `nl`: `nl` is shared with Flemish (nl-BE), so a user who added `nl` keeps this dictionary on."
+	]
 };
 //#endregion
 //#region ../../extension-runtime/src/noCustom.ts
