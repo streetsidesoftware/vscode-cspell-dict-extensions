@@ -34,14 +34,14 @@ Don't edit these; `npm run sync:extensions` overwrites them.
 - **`static/commands.json`:** the commands, for the README's table: each command's title, what it changes (`locale`, `dictionary` or `fileType`), its value, and its scope. Removed when there are none.
 - **`static/dictionaries.json`:** for the README's table, one row for each dictionary a setting names, with the setting's `locale`, `languageId` and `glob` as written. The settings are the top-level `dictionaries`, the language settings and the overrides, read from the installed dictionaries and the extension's `cspell`. Removed when there are none, and never written for a bundle.
 - **`package.json` fields:** `name`, `displayName`, `description`, `type`, `main`, `files`, `contributes.commands` and `scripts`.
-- **`package.json` `files`:** what vsce packages, besides `package.json` and `README.md`. It lists `LICENSE`, `CHANGELOG.md`, `extension.js`, the `icon`, `static/cspell-ext.json` and `node_modules/**`. It also lists `COPYING` when the extension has one. vsce only takes the production dependencies from `node_modules`. The sync removes `.vscodeignore`, because vsce refuses an extension that has both.
+- **`package.json` `files`:** what vsce packages, besides `package.json` and `README.md`. It lists `LICENSE`, `CHANGELOG.md`, `extension.js`, the `icon`, `static/cspell-ext.json` and `node_modules/**`. It also lists `COPYING` when the extension has one. vsce only takes the production dependencies from `node_modules`. vsce refuses an extension that also has a `.vscodeignore`, so CI's packaging step fails on one.
 - **README sections** between `@@inject` markers, filled by [inject-markdown](https://github.com/streetsidesoftware/inject-markdown) from the shared templates in [`static/`](../static) and the extension's own `static/` files:
   - `<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->`
   - `<!--- @@inject-table: ./static/commands.json --->`
   - `<!--- @@inject-table: ./static/dictionaries.json#markdown --->`
   - `<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->`, the Manual Settings of a language extension, filled from its `locale` and `friendlyName`. English variants use `manual-settings.english.md` instead, which advises replacing `en`.
 
-The sync also sets the `package.json` fields every extension shares: `private`, `repository`, `publisher`, `author`, `contributors`, `bugs`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)) and the `vsce` base URLs. It removes `preview`. It keeps every other value, and sorts the fields.
+The sync also sets the `package.json` fields every extension shares: `private`, `repository`, `publisher`, `author`, `contributors`, `bugs`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)) and the `vsce` base URLs. It keeps every other value, and sorts the fields.
 
 The sync checks every `extension.config.json` against the runtime's schema first.
 

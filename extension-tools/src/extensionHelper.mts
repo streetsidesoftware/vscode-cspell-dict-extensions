@@ -77,7 +77,6 @@ export interface PackageJson {
     /** A type only: Node erases `import type`, so the scripts that run before `npm ci` don't need vsce installed. */
     vsce?: IPackageOptions;
     private: boolean;
-    preview?: boolean | undefined;
     bugs?: { url: string };
     engines?: { [engine: string]: string };
     devDependencies?: { [name: string]: string };
@@ -101,7 +100,6 @@ export function withSharedFields(repoPath: string, pkg: PackageJson, vscodeEngin
         ...pkg,
         engines: { ...pkg.engines, vscode: vscodeEngine },
         private: true,
-        preview: undefined,
         repository: { ...(pkg.repository ?? defaultRepository), directory: repoPath },
         publisher: 'streetsidesoftware',
         author: 'Street Side Software <support@streetsidesoftware.nl>',

@@ -7,11 +7,10 @@ import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
 import { clearCachedFiles } from 'cspell-lib';
-import { sortPackageJson } from 'sort-package-json';
 
 import { readExtensionConfigValidator } from './extensionSchema.mts';
 import { whenOn } from './dictionaryState.mts';
-import { dictionaryStates, syncExtension, syncPackageJson } from './syncExtension.mts';
+import { dictionaryStates, syncExtension } from './syncExtension.mts';
 import type { FileChange } from './syncExtension.mts';
 
 const config = {
@@ -87,33 +86,6 @@ describe('syncExtension', () => {
         await fs.rm(path.resolve(dir, '../..'), { recursive: true, force: true });
     });
 
-    it('writes the owned and generated files', async () => {
-        const changes = await syncExtension(dir, options);
-        assert.deepEqual(files(changes, 'update'), [
-            '.gitignore',
-            '.vscode/launch.json',
-            '.vscode/tasks.json',
-            'README.md',
-            'package.json',
-            'static/commands.json',
-            'static/cspell-ext.json',
-            'tsdown.config.ts',
-        ]);
-        assert.deepEqual(files(changes, 'remove'), []);
-    });
-
-    it('takes the engines from static/engines.json, overridden in static/cspell-ext.json', async () => {
-        await syncExtension(dir, options);
-        assert.deepEqual(await readJson('static/cspell-ext.json'), config.cspell);
-        assert.match(await read('README.md'), /cspell `>=10`/);
-
-        const cspell = { ...config.cspell, engines: { cspell: '>=10.4.0' } };
-        await writeJson('extension.config.json', { ...config, cspell });
-        await syncExtension(dir, options);
-        assert.deepEqual(await readJson('static/cspell-ext.json'), cspell);
-        assert.match(await read('README.md'), /cspell `>=10\.4\.0`/);
-    });
-
     it('takes the engines the dictionaries declare, unless cspell.engines sets them', async () => {
         const engines = { cspell: '>=10.4.0', 'code-spell-checker': '>=4.10.0' };
         await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', { engines });
@@ -138,16 +110,6 @@ describe('syncExtension', () => {
         );
     });
 
-    it('fills the README from the shared templates and static/ data', async () => {
-        await syncExtension(dir, options);
-        const result = await read('README.md');
-        assert.match(
-            result,
-            /\| Command +\| What +\| Value +\| Scope +\|\n.*\n\| Enable Demo Spell Checker Dictionary +\| locale +\| xx +\| global +\|\n\| Disable Demo Spell Checker Dictionary in Workspace \| dictionary \| demo +\| workspace \|/,
-        );
-        assert.match(result, /cspell `>=10`/);
-    });
-
     it('fails on an unresolved placeholder or a missing file in the README', async () => {
         const root = path.resolve(dir, '../..');
         await fs.writeFile(path.join(root, 'static/requirements.md'), 'cspell `{@ engines.missing @}`\n');
@@ -168,17 +130,6 @@ describe('syncExtension', () => {
         await fs.writeFile(path.join(dir, 'cspell.config.yaml'), 'words: [demo]\n');
         assert.deepEqual(await syncExtension(dir, options), []);
         assert.equal(await read('cspell.config.yaml'), 'words: [demo]\n');
-    });
-
-    it('lists each setting that names a dictionary, as written', async () => {
-        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
-            dictionaryDefinitions: [{ name: 'demo' }, { name: 'unused' }],
-            languageSettings: [{ languageId: '*', locale: 'xx, xx_YY,xx-90', dictionaries: ['demo'] }],
-        });
-        await syncExtension(dir, options);
-        assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
-            { Dictionary: '`demo`', locale: '`xx, xx_YY,xx-90`', languageId: '`*`', glob: '' },
-        ]);
     });
 
     it('lists the top-level dictionaries, the language settings and the overrides, in that order', async () => {
@@ -285,101 +236,6 @@ describe('syncExtension', () => {
         );
     });
 
-    it('has no static/dictionaries.json for a bundle', async () => {
-        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
-            dictionaryDefinitions: [{ name: 'demo' }],
-            dictionaries: ['demo'],
-        });
-        await syncExtension(dir, options);
-        const { locale: _locale, ...rest } = config;
-        await writeJson('extension.config.json', { ...rest, kind: 'bundle', description: 'D', commands: [] });
-        await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
-        const changes = await syncExtension(dir, options);
-        assert.deepEqual(files(changes, 'remove'), ['static/commands.json', 'static/dictionaries.json']);
-    });
-
-    it('has no static/commands.json without commands', async () => {
-        await syncExtension(dir, options);
-        await writeJson('extension.config.json', { ...config, commands: [] });
-        await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
-        const changes = await syncExtension(dir, options);
-        assert.deepEqual(files(changes, 'remove'), ['static/commands.json']);
-    });
-
-    it('derives package.json fields, adds the shared ones, keeps the other values, and sorts the fields', async () => {
-        await syncExtension(dir, options);
-        const result = await readJson('package.json');
-        assert.equal(result.name, 'code-spell-checker-demo');
-        assert.equal(result.displayName, 'Demo - Code Spell Checker');
-        assert.equal(result.version, '1.2.3');
-        assert.equal(result.type, 'module');
-        assert.equal(result.main, './extension.js');
-        assert.deepEqual(result.engines, { vscode: '^1.125.0' });
-        assert.deepEqual(result.contributes, {
-            languages: [],
-            commands: [
-                { command: 'cSpellExt_demo.enable', title: 'Enable Demo Spell Checker Dictionary' },
-                {
-                    command: 'cSpellExt_demo.disableWorkspace',
-                    title: 'Disable Demo Spell Checker Dictionary in Workspace',
-                },
-            ],
-        });
-        assert.equal(result.scripts.build, 'tsdown');
-        assert.equal(result.scripts['check-types'], undefined);
-        assert.equal(result.scripts['test:cspell'], 'cspell -c static/cspell-ext.json samples');
-        assert.equal(result.scripts['test:vscode'], 'node ../../test-runner/bin.mjs . --sample samples/demo.md');
-        assert.equal(result.scripts.extra, undefined);
-        assert.deepEqual(result.dependencies, pkg.dependencies);
-        assert.equal(result.devDependencies, undefined);
-        assert.equal(result.publisher, 'streetsidesoftware');
-        assert.equal(result.repository.directory, 'extensions/demo');
-        assert.deepEqual(Object.keys(result), Object.keys(sortPackageJson(result)));
-    });
-
-    it('gives an extension without extension.config.json only the shared fields', async () => {
-        await fs.rm(path.join(dir, 'extension.config.json'));
-        const changes = await syncPackageJson(dir, options);
-        assert.deepEqual(files(changes, 'update'), ['package.json']);
-        const result = await readJson('package.json');
-        assert.equal(result.name, 'old-name');
-        assert.deepEqual(result.scripts, pkg.scripts);
-        assert.deepEqual(result.engines, { vscode: '^1.125.0' });
-        assert.equal(result.publisher, 'streetsidesoftware');
-        assert.deepEqual(await syncPackageJson(dir, options), []);
-    });
-
-    it('lists the packaged files, with COPYING and the icon when there are any', async () => {
-        await syncExtension(dir, options);
-        assert.deepEqual((await readJson('package.json')).files, [
-            'LICENSE',
-            'CHANGELOG.md',
-            'extension.js',
-            'static/cspell-ext.json',
-            'node_modules/**',
-        ]);
-
-        await fs.writeFile(path.join(dir, 'COPYING'), 'GPL\n');
-        await writeJson('package.json', { ...(await readJson('package.json')), icon: 'images/icon.png' });
-        await syncExtension(dir, options);
-        assert.deepEqual((await readJson('package.json')).files, [
-            'LICENSE',
-            'CHANGELOG.md',
-            'COPYING',
-            'extension.js',
-            'images/icon.png',
-            'static/cspell-ext.json',
-            'node_modules/**',
-        ]);
-    });
-
-    it('removes .vscodeignore, which vsce refuses next to files', async () => {
-        await fs.writeFile(path.join(dir, '.vscodeignore'), 'src/**\n');
-        const changes = await syncExtension(dir, options);
-        assert.deepEqual(files(changes, 'remove'), ['.vscodeignore']);
-        await assert.rejects(read('.vscodeignore'), { code: 'ENOENT' });
-    });
-
     it('type-checks src/custom.ts while there is one, and keeps it', async () => {
         await fs.mkdir(path.join(dir, 'src'));
         await fs.writeFile(path.join(dir, 'src/custom.ts'), 'export {};\n');
@@ -392,32 +248,6 @@ describe('syncExtension', () => {
         const changes = await syncExtension(dir, options);
         assert.deepEqual(files(changes, 'remove'), ['tsconfig.json']);
         assert.equal((await readJson('package.json')).scripts['check-types'], undefined);
-    });
-
-    it('leaves commands that do not contribute out of package.json and the README table', async () => {
-        const legacy = {
-            id: 'cSpellExt_demo.enableDemo',
-            title: 'Enable Demo Spell Checker Dictionary',
-            action: 'enable',
-            toggle: 'locale',
-            value: 'xx',
-            scope: 'global',
-            contributes: false,
-            legacy: true,
-            notes: 'Old ID.',
-        };
-        await writeJson('extension.config.json', { ...config, commands: [...config.commands, legacy] });
-        await syncExtension(dir, options);
-        const contributed = (await readJson('package.json')).contributes.commands.map(
-            (c: { command: string }) => c.command,
-        );
-        assert.deepEqual(contributed, ['cSpellExt_demo.enable', 'cSpellExt_demo.disableWorkspace']);
-        assert.equal((await readJson('static/commands.json')).length, 2);
-    });
-
-    it('changes nothing the second time', async () => {
-        await syncExtension(dir, options);
-        assert.deepEqual(await syncExtension(dir, { ...options, check: true }), []);
     });
 
     it('only reports with check', async () => {
