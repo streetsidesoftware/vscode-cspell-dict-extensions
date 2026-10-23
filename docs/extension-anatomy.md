@@ -41,7 +41,7 @@ Don't edit these; `npm run sync:extensions` overwrites them.
   - `<!--- @@inject-table: ./static/dictionaries.json#markdown --->`
   - `<!--- @@inject: ../../static/manual-settings.language.md#values-file=:./extension.config.json --->`, the Manual Settings of a language extension, filled from its `locale` and `friendlyName`. English variants use `manual-settings.english.md` instead, which advises replacing `en`.
 
-The sync also sets the `package.json` fields every extension shares: `private`, `repository`, `publisher`, `author`, `contributors`, `bugs`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)) and the `vsce` base URLs. It removes `preview`. It keeps every other value, and sorts the fields.
+The sync also sets the `package.json` fields every extension shares: `private`, `repository`, `publisher`, `author`, `contributors`, `bugs`, `engines.vscode` (copied from [`extension-runtime/package.json`](../extension-runtime/package.json)) and the `vsce` base URLs. It keeps every other value, and sorts the fields.
 
 The sync checks every `extension.config.json` against the runtime's schema first.
 
