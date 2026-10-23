@@ -4,7 +4,7 @@
  * Run the checks an extension must pass: the build, the sample spell check, extension-tools' check, Prettier and the
  * repo's spell check.
  *
- * Usage: `npm run check:extension -- <name…> [--vscode]`
+ * Usage: `check-extension.mts <name…> [--vscode]`, run through npm, which sets `npm_execpath`.
  * - `--vscode`: also run the VS Code test, which downloads VS Code the first time.
  */
 

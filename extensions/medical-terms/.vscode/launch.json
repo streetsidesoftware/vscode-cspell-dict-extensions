@@ -1,4 +1,4 @@
-// Written by `npm run sync:extensions`. Do not edit.
+// Written by the sync in extension-tools. Do not edit.
 // A launch configuration that builds the extension and then opens it inside a new window.
 {
     "version": "0.2.0",

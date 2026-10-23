@@ -1,8 +1,7 @@
 // cspell:ignore exintro explaintext langlinks lllang pageprops ppprop
 
 /**
- * Fetch a sample text from Wikipedia: the lead section of an article in a language. Ported from cspell-dicts'
- * create-dictionary (`packages/create-dictionary/src/lib/samples.mts`).
+ * Fetch a sample text from Wikipedia: the lead section of an article in a language.
  */
 
 export const wikipediaLicense = '[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)';

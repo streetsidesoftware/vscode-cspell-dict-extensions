@@ -111,27 +111,21 @@ const codeSpellCheckerId = "streetsidesoftware.code-spell-checker";
 */
 function activateExtension(context, config, custom) {
 	const extension = vscode.extensions.getExtension(codeSpellCheckerId);
-	const api = getApi(extension);
-	for (const command of config.commands) context.subscriptions.push(vscode.commands.registerCommand(command.id, () => runCommand(command, extension)));
+	const api = Promise.resolve(extension?.activate());
+	for (const command of config.commands) context.subscriptions.push(vscode.commands.registerCommand(command.id, commandHandler(command, api)));
 	const registered = api.then((cspell) => cspell?.registerConfig(context.asAbsolutePath(cspellExtPath)));
 	return Promise.all([registered, custom?.activate?.(context, api)]).then(() => void 0);
 }
-function getApi(extension) {
-	return Promise.resolve(extension?.activate());
-}
-function runCommand(command, extension) {
+/**
+* The handler of one command, with its action, toggle, value and scope resolved once.
+* @param api - Code Spell Checker's API, once it's active.
+*/
+function commandHandler(command, api) {
+	const { value } = command;
+	const isGlobal = command.scope === "global";
 	const enable = command.action === "enable";
-	switch (command.toggle) {
-		case "locale": {
-			const isGlobal = command.scope === "global";
-			return getApi(extension).then((api) => enable ? api?.enableLocale(isGlobal, command.value) : api?.disableLocale(isGlobal, command.value));
-		}
-		case "fileType": return getApi(extension).then((api) => enable ? api?.enableLanguageId(command.value) : api?.disableLanguageId(command.value));
-		case "dictionary": {
-			const isGlobal = command.scope === "global";
-			return toggleDictionary(command.value, enable, isGlobal);
-		}
-	}
+	if (command.toggle === "dictionary") return () => toggleDictionary(value, enable, isGlobal);
+	return enable ? () => api.then((cspell) => cspell?.enableLocale(isGlobal, value)) : () => api.then((cspell) => cspell?.disableLocale(isGlobal, value));
 }
 /**
 * Add `name` or `!name` to `cSpell.dictionaries`. Code Spell Checker has no API for this yet
@@ -140,8 +134,10 @@ function runCommand(command, extension) {
 function toggleDictionary(name, enable, isGlobal) {
 	const settings = vscode.workspace.getConfiguration("cSpell");
 	const inspected = settings.inspect("dictionaries");
-	const dictionaries = ((isGlobal ? inspected?.globalValue : inspected?.workspaceValue) ?? []).filter((d) => d !== name && d !== `!${name}`);
-	dictionaries.push(enable ? name : `!${name}`);
+	const current = (isGlobal ? inspected?.globalValue : inspected?.workspaceValue) ?? [];
+	const negated = `!${name}`;
+	const dictionaries = current.filter((d) => d !== name && d !== negated);
+	dictionaries.push(enable ? name : negated);
 	const target = isGlobal ? vscode.ConfigurationTarget.Global : vscode.ConfigurationTarget.Workspace;
 	return Promise.resolve(settings.update("dictionaries", dictionaries, target));
 }

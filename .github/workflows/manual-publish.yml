@@ -16,7 +16,7 @@ on:
       extension:
         description: The Extension to publish
         type: choice
-        # Options are generated from `npm run gen:workflow`
+        # The options are generated after a merge. Don't edit them.
         options:
           - none
           - all

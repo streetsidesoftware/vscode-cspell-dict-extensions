@@ -6,7 +6,7 @@
  * Usage: `set-prerelease-mode.mts <folder> <true|false>`
  *
  * While `vsce.preRelease` is `true` in an extension's `package.json`, `vsce` publishes every release of it
- * as a pre-release. Modeled on `scripts/set-prerelease-mode.js` in streetsidesoftware/vscode-spell-checker.
+ * as a pre-release.
  *
  * Only `node:` modules: a workflow runs it before `npm ci`.
  */

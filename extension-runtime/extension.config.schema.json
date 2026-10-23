@@ -96,26 +96,28 @@
             "description": "A natural language, enabled by its locale, e.g. Swedish."
         },
         "CommandConfig": {
-            "anyOf": [
-                {
-                    "$ref": "#/definitions/ScopedCommandConfig"
-                },
-                {
-                    "$ref": "#/definitions/FileTypeCommandConfig"
-                }
-            ]
-        },
-        "ScopedCommandConfig": {
             "type": "object",
             "properties": {
                 "action": {
                     "$ref": "#/definitions/Action",
                     "description": "Turn the toggle on or off."
                 },
+                "toggle": {
+                    "type": "string",
+                    "enum": [
+                        "locale",
+                        "dictionary"
+                    ],
+                    "description": "What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
+                },
                 "value": {
                     "type": "string",
-                    "description": "The locale, dictionary name, or file type (language ID).",
+                    "description": "The locale or the dictionary name.",
                     "minLength": 1
+                },
+                "scope": {
+                    "$ref": "#/definitions/Scope",
+                    "description": "Where the setting is written."
                 },
                 "id": {
                     "type": "string",
@@ -138,30 +140,18 @@
                 "notes": {
                     "type": "string",
                     "description": "Notes for maintainers: why this command is the way it is."
-                },
-                "toggle": {
-                    "type": "string",
-                    "enum": [
-                        "locale",
-                        "dictionary"
-                    ],
-                    "description": "What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
-                },
-                "scope": {
-                    "$ref": "#/definitions/Scope",
-                    "description": "Where the setting is written."
                 }
             },
             "required": [
                 "action",
-                "id",
-                "scope",
-                "title",
                 "toggle",
-                "value"
+                "value",
+                "scope",
+                "id",
+                "title"
             ],
             "additionalProperties": false,
-            "description": "A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
+            "description": "A command that turns a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`) on or off."
         },
         "Action": {
             "type": "string",
@@ -178,56 +168,6 @@
                 "workspace"
             ],
             "description": "Where the setting is written."
-        },
-        "FileTypeCommandConfig": {
-            "type": "object",
-            "properties": {
-                "action": {
-                    "$ref": "#/definitions/Action",
-                    "description": "Turn the toggle on or off."
-                },
-                "value": {
-                    "type": "string",
-                    "description": "The locale, dictionary name, or file type (language ID).",
-                    "minLength": 1
-                },
-                "id": {
-                    "type": "string",
-                    "description": "The command ID, e.g. `cSpellExt_swedish.enable`. Unique within the extension.",
-                    "minLength": 1
-                },
-                "title": {
-                    "type": "string",
-                    "description": "The command title, e.g. `Enable Swedish Spell Checker Dictionary`.",
-                    "minLength": 1
-                },
-                "contributes": {
-                    "type": "boolean",
-                    "description": "Whether the command is listed in `package.json` (`contributes.commands`), the Command Palette and the README. A command that isn't is still registered, so keybindings and tasks that use its ID keep working. Default: `true`."
-                },
-                "legacy": {
-                    "type": "boolean",
-                    "description": "The command is a holdover from an old way of doing things, i.e. an old command ID. For maintainers."
-                },
-                "notes": {
-                    "type": "string",
-                    "description": "Notes for maintainers: why this command is the way it is."
-                },
-                "toggle": {
-                    "type": "string",
-                    "const": "fileType",
-                    "description": "What the command changes: a file type (`cSpell.enabledFileTypes`)."
-                }
-            },
-            "required": [
-                "action",
-                "id",
-                "title",
-                "toggle",
-                "value"
-            ],
-            "additionalProperties": false,
-            "description": "A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope."
         },
         "WordListExtensionConfig": {
             "type": "object",

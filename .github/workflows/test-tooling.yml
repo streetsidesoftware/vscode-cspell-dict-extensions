@@ -48,7 +48,7 @@ jobs:
         with:
           node-version-file: .tool-versions
           cache: npm
-      # The root `postinstall` would install all extensions. The tests only need the root, `scripts/` and
+      # A full install would install all extensions. The tests only need the root, `scripts/` and
       # `extension-tools/` packages: the scripts import extension-tools.
       - name: Install
         run: |
