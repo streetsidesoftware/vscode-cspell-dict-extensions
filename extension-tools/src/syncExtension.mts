@@ -169,8 +169,7 @@ async function removeUnusedFiles(
     files: Map<string, string>,
     check: boolean | undefined,
 ): Promise<FileChange[]> {
-    // `.vscodeignore` was replaced by `files` in `package.json`; vsce refuses an extension that has both.
-    const unused = ['.vscodeignore', 'static/commands.json', 'static/dictionaries.json', 'tsconfig.json'].filter(
+    const unused = ['static/commands.json', 'static/dictionaries.json', 'tsconfig.json'].filter(
         (file) => !files.has(file),
     );
     const changes: FileChange[] = [];

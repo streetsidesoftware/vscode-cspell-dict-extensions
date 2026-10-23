@@ -236,13 +236,6 @@ describe('syncExtension', () => {
         );
     });
 
-    it('removes .vscodeignore, which vsce refuses next to files', async () => {
-        await fs.writeFile(path.join(dir, '.vscodeignore'), 'src/**\n');
-        const changes = await syncExtension(dir, options);
-        assert.deepEqual(files(changes, 'remove'), ['.vscodeignore']);
-        await assert.rejects(read('.vscodeignore'), { code: 'ENOENT' });
-    });
-
     it('type-checks src/custom.ts while there is one, and keeps it', async () => {
         await fs.mkdir(path.join(dir, 'src'));
         await fs.writeFile(path.join(dir, 'src/custom.ts'), 'export {};\n');
