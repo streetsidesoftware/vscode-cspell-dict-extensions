@@ -146,12 +146,14 @@ async function chooseSamples(
     return askSampleFile(answers.friendlyName, context);
 }
 
-async function readPackageLists(): Promise<CSpellPackage[] | undefined> {
+async function readPackageLists(): Promise<CSpellPackage[]> {
     try {
         return await fetchCSpellPackages();
     } catch (e) {
-        console.log(styleText('yellow', `Could not fetch the package lists (${errorMessage(e)}).`));
-        return undefined;
+        throw new Error(
+            `Could not fetch the package lists (${errorMessage(e)}). The generator needs a network connection.`,
+            { cause: e },
+        );
     }
 }
 

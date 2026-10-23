@@ -75,8 +75,8 @@ export interface Options {
 
 export interface Context {
     prompter: Prompter;
-    /** The dictionaries and parsers that can be included. Undefined when the lists could not be fetched. */
-    packages: readonly CSpellPackage[] | undefined;
+    /** The dictionaries and parsers that can be included. */
+    packages: readonly CSpellPackage[];
     /** Where the extensions are, e.g. `<repo>/extensions`. */
     extensionsDir: string;
     /** Packages that already have an extension, mapped to the extension directory name. */
@@ -97,7 +97,7 @@ const notPublished =
 interface PackageKind {
     name: string;
     parser: boolean;
-    /** A dictionary's kind and locales, when the lists could be fetched. */
+    /** A dictionary's kind and locales. */
     info?: { naturalLanguage: boolean; locales: string[] } | undefined;
 }
 
@@ -184,18 +184,6 @@ async function askPackages(name: string, options: Options, ctx: Context): Promis
     if (options.yes) return missing('--package', 'a @cspell/dict-* or @cspell/parser-* package');
 
     const list = ctx.packages;
-    if (!list?.length) {
-        const typed = await ctx.prompter.input('Package names, separated by commas:', undefined, (answer) => {
-            const names = splitList(answer);
-            if (!names.length) return 'Please enter at least one package.';
-            const wrong = names.find((pkg) => !isCSpellPackage(pkg));
-            return wrong ? `${wrong} is not a @cspell/dict-* or @cspell/parser-* package.` : true;
-        });
-        const packages = unique(splitList(typed));
-        for (const pkg of packages) checkPackage(pkg, ctx);
-        return packages;
-    }
-
     const picked: string[] = [];
     let term = name.replaceAll('-', ' ');
     for (;;) {
@@ -256,23 +244,21 @@ function noMatch(packages: readonly CSpellPackage[], term: string): string {
     return `No package matches "${term}" that needs an extension. These ship with cspell: ${names}.`;
 }
 
-/** Check the package is in the lists. Without them, continue: `npm install` checks it later. */
-function checkPackage(name: string, ctx: Context): void {
+/** The package in the lists. Fails when it isn't there, or ships with cspell. */
+function checkPackage(name: string, ctx: Context): CSpellPackage {
     if (!isCSpellPackage(name)) {
         throw new UsageError(`${name} is not a @cspell/dict-* or @cspell/parser-* package. ${notPublished}`);
     }
-    const pkg = ctx.packages?.find((p) => p.packageName === name);
-    if (ctx.packages && !pkg) {
-        throw new UsageError(`${name} is not in cspell-dicts or cspell-parsers. ${notPublished}`);
-    }
-    if (pkg?.withCSpell) throw new UsageError(`${name} ships with cspell, so it needs no extension.`);
+    const pkg = ctx.packages.find((p) => p.packageName === name);
+    if (!pkg) throw new UsageError(`${name} is not in cspell-dicts or cspell-parsers. ${notPublished}`);
+    if (pkg.withCSpell) throw new UsageError(`${name} ships with cspell, so it needs no extension.`);
+    return pkg;
 }
 
 function packageKind(name: string, ctx: Context): PackageKind {
-    const pkg = ctx.packages?.find((p) => p.packageName === name);
-    if (pkg?.kind === 'bundle') throw new UsageError(`${name} is a bundle, and the generator has no bundle kind.`);
+    const pkg = checkPackage(name, ctx);
+    if (pkg.kind === 'bundle') throw new UsageError(`${name} is a bundle, and the generator has no bundle kind.`);
     if (name.startsWith('@cspell/parser-')) return { name, parser: true };
-    if (!pkg) return { name, parser: false };
     return { name, parser: false, info: { naturalLanguage: pkg.kind === 'language', locales: pkg.locales } };
 }
 
@@ -294,9 +280,8 @@ async function askKind(packages: PackageKind[], options: Options, ctx: Context):
     if (options.kind === 'parser') throw new UsageError('--kind parser does not match the dictionary packages.');
     if (options.kind) return options.kind;
 
-    const known = packages.every((pkg) => pkg.info);
     const derived: Kind = packages.some((pkg) => pkg.info?.naturalLanguage) ? 'language' : 'wordList';
-    if (options.yes) return known ? derived : missing('--kind', 'the package lists could not be fetched');
+    if (options.yes) return derived;
     const locales = unique(languageLocales(packages).flat());
     const localeList = locales.length ? ` (${locales.join(', ')})` : '';
     return ctx.prompter.select(
@@ -394,13 +379,6 @@ async function askDescription(options: Options, ctx: Context): Promise<string> {
         text.trim() ? true : 'Please enter a description.',
     );
     return answer.trim();
-}
-
-function splitList(text: string): string[] {
-    return text
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean);
 }
 
 function unique<T>(values: T[]): T[] {
