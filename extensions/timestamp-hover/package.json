@@ -23,6 +23,12 @@
   "type": "commonjs",
   "main": "./out/extension.js",
   "browser": "./out/extension.js",
+  "files": [
+    "LICENSE",
+    "CHANGELOG.md",
+    "images/icon.png",
+    "out/**/*.js"
+  ],
   "scripts": {
     "build": "tsc -p ./",
     "clean": "node ../../scripts/clean.mts",

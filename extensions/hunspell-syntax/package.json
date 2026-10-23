@@ -20,6 +20,15 @@
   "author": "Street Side Software <support@streetsidesoftware.nl>",
   "contributors": [],
   "publisher": "streetsidesoftware",
+  "files": [
+    "LICENSE",
+    "CHANGELOG.md",
+    "images/hunspell.png",
+    "images/screen-shot.png",
+    "language-configuration.json",
+    "syntaxes/aff.tmLanguage.json",
+    "syntaxes/dic.tmLanguage.json"
+  ],
   "scripts": {
     "build": "echo build",
     "clean": "echo clean",
