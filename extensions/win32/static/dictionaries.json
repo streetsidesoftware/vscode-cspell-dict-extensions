@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`win32`",
-        "locale": "`*`",
+        "locale": "",
         "languageId": "`c`, `cpp`",
         "glob": ""
     }

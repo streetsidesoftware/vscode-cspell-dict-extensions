@@ -48,7 +48,7 @@ Example using both English and Belarusian dictionaries:
 
 | Dictionary | locale        | languageId | glob |
 | ---------- | ------------- | ---------- | ---- |
-| `be-by`    | `be`, `be-BY` | `*`        |      |
+| `be-by`    | `be`, `be-BY` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 
@@ -60,7 +60,7 @@ Each row is a setting that turns a dictionary on. The dictionary is on when all 
 - **languageId:** the file is one of these types.
 - **glob:** the file's path matches one of these patterns.
 
-An empty cell, or `*`, is no condition.
+An empty cell is no condition.
 
 <!--- @@inject-end: ../../static/dictionaries-columns.md --->
 

@@ -2,7 +2,7 @@
     {
         "Dictionary": "`id-id`",
         "locale": "`id`, `id-ID`",
-        "languageId": "`*`",
+        "languageId": "",
         "glob": ""
     }
 ]

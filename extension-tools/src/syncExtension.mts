@@ -235,7 +235,7 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
  * `<!--- @@inject-table: ./static/dictionaries.json --->`. One row for each dictionary a setting names: the top-level
  * `dictionaries`, each language setting and each override, in every file cspell reads for the extension (the imported
  * files, with their own imports) and in the extension's `cspell`. Each locale, file type and glob is shown as code; an
- * empty cell is a field the setting doesn't set. Identical rows are shown once.
+ * empty cell is a field the setting doesn't set, or sets to `*`. Identical rows are shown once.
  * @returns `undefined` for a bundle, or when no setting names a dictionary.
  */
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
@@ -310,11 +310,16 @@ interface Cells {
 function row(name: string, cells: Cells): Row {
     return {
         Dictionary: code(name),
-        locale: codes(splitList(cells.locale)),
-        languageId: codes(splitList(cells.languageId)),
+        locale: codes(condition(cells.locale)),
+        languageId: codes(condition(cells.languageId)),
         // Not split: a glob can have commas, as in `*.{adb,ads}`.
         glob: codes([cells.glob ?? []].flat()),
     };
+}
+
+/** A locale or file type condition. cspell-lib treats `*` like no value: every locale or file type. */
+function condition(value: string | string[] | undefined): string[] {
+    return value === '*' ? [] : splitList(value);
 }
 
 /** Each item as code, such as `` `c`, `cpp` ``. */
