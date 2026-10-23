@@ -23,7 +23,7 @@ export interface Prompter {
     confirm(message: string, defaultValue: boolean): Promise<boolean>;
     /** Pick one of the choices. */
     select<T>(message: string, choices: Choice<T>[], defaultValue?: T): Promise<T>;
-    /** Pick any number of the choices. */
+    /** Pick at least one of the choices. */
     checkbox<T>(message: string, choices: Choice<T>[]): Promise<T[]>;
 }
 
@@ -31,7 +31,7 @@ export const inquirerPrompter: Prompter = {
     input: (message, defaultValue, validate) => input({ message, default: defaultValue, validate }),
     confirm: (message, defaultValue) => confirm({ message, default: defaultValue }),
     select: (message, choices, defaultValue) => select({ message, choices, default: defaultValue }),
-    checkbox: (message, choices) => checkbox({ message, choices, pageSize: 12 }),
+    checkbox: (message, choices) => checkbox({ message, choices, pageSize: 12, required: true }),
 };
 
 /**

@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
-import { filterPackages as matchPackages, noExtensionReason } from '../cspellPackages.mts';
+import { noExtensionReason } from '../cspellPackages.mts';
 import type { CSpellPackage } from '../cspellPackages.mts';
 import {
     canonicalLocale,
@@ -107,12 +107,12 @@ interface PackageKind {
 export async function askQuestions(options: Options, ctx: Context): Promise<Answers> {
     const yes = !!options.yes;
 
-    const name = await askName(options, ctx);
+    const packages = await askPackages(options, ctx);
+    const name = await askName(options, ctx, normalizeName(checkPackage(packages[0] ?? '', ctx).name));
     const friendlyName =
         options.friendlyName ??
         (yes ? toFriendlyName(name) : await ctx.prompter.input('Friendly name:', toFriendlyName(name)));
 
-    const packages = await askPackages(name, options, ctx);
     const kinds = packages.map((pkg) => packageKind(pkg, ctx));
     const kind = await askKind(kinds, options, ctx);
     if (kind !== 'language') {
@@ -148,7 +148,8 @@ function missing(option: string, why: string): never {
     throw new UsageError(`Missing ${option}: ${why}.`);
 }
 
-async function askName(options: Options, ctx: Context): Promise<string> {
+/** @param suggested - the default, from the first package's name, such as `swedish` for "Swedish". */
+async function askName(options: Options, ctx: Context, suggested: string): Promise<string> {
     const check = (name: string): true | string => {
         if (!name) return 'Please enter a name.';
         return !options.force && existsSync(path.join(ctx.extensionsDir, name))
@@ -166,84 +167,59 @@ async function askName(options: Options, ctx: Context): Promise<string> {
 
     const answer = await ctx.prompter.input(
         'Extension name, e.g. "swedish" (the directory in extensions/ and the command ID prefix):',
-        undefined,
+        suggested,
         (text) => check(normalizeName(text)),
     );
     return normalizeName(answer);
 }
 
 /**
- * The packages the extension includes. Interactively, the packages that match the extension name are offered first, and
- * the person can search with other words.
+ * The packages the extension includes. Interactively: dictionaries or parsers, then a checklist of the packages of
+ * that kind that have no extension yet. Packages that get no extension, such as those that ship with cspell, aren't
+ * offered.
  */
-async function askPackages(name: string, options: Options, ctx: Context): Promise<string[]> {
+async function askPackages(options: Options, ctx: Context): Promise<string[]> {
     if (options.packages?.length) {
         for (const pkg of options.packages) checkPackage(pkg, ctx);
         return unique(options.packages);
     }
     if (options.yes) return missing('--package', 'a @cspell/dict-* or @cspell/parser-* package');
 
-    const list = ctx.packages;
-    const picked: string[] = [];
-    let term = name.replaceAll('-', ' ');
-    for (;;) {
-        const matches = filterPackages(list, term, ctx.existing).filter((pkg) => !picked.includes(pkg.packageName));
-        if (!matches.length) {
-            ctx.log(noMatch(list, term));
-        } else {
-            const chosen = await ctx.prompter.checkbox(
-                `Packages that match "${term}":`,
-                matches.map((pkg) => ({
-                    name:
-                        `${pkg.packageName}: ${pkg.name}` +
-                        (ctx.existing.has(pkg.packageName) ? styleText('gray', ' (has an extension)') : ''),
-                    value: pkg.packageName,
-                    description: pkg.description,
-                    checked: true,
-                })),
-            );
-            picked.push(...chosen);
-        }
-        const message = picked.length
-            ? 'Search for more packages (a language or topic; empty to finish):'
-            : 'Search for packages (a language or topic):';
-        term = (
-            await ctx.prompter.input(message, undefined, (text) =>
-                text.trim() || picked.length ? true : 'Please enter a word to search for.',
-            )
-        ).trim();
-        if (!term) return picked;
+    const parsers = await ctx.prompter.select(
+        'Dictionaries or parsers?',
+        [
+            { name: 'Dictionaries', value: false, description: 'Words for a language or a topic.' },
+            { name: 'Parsers', value: true, description: 'Parsers for programming languages.' },
+        ],
+        false,
+    );
+    const offered = ctx.packages
+        .filter((pkg) => (parsers ? pkg.kind === 'parser' : pkg.kind === 'language' || pkg.kind === 'wordList'))
+        .filter((pkg) => !noExtensionReason(pkg) && !ctx.existing.has(pkg.packageName))
+        // Languages first, then word lists.
+        .toSorted((a, b) => Number(a.kind !== 'language') - Number(b.kind !== 'language'));
+    if (!offered.length) {
+        throw new UsageError('Every package of that kind has an extension. To make another one, pass --package.');
     }
+    return ctx.prompter.checkbox(
+        `Packages without an extension (${offered.length}):`,
+        offered.map((pkg) => ({
+            name: `${pkg.packageName}: ${pkg.name}` + (parsers ? '' : styleText('gray', ` (${kindLabels[pkg.kind]})`)),
+            value: pkg.packageName,
+            description: pkg.description,
+        })),
+    );
 }
+
+const kindLabels: Record<CSpellPackage['kind'], string> = {
+    language: 'language',
+    wordList: 'word list',
+    bundle: 'bundle',
+    parser: 'parser',
+};
 
 function isCSpellPackage(name: string): boolean {
     return packagePrefixes.some((prefix) => name.startsWith(prefix));
-}
-
-/**
- * The packages that match the search term, by package name, name or description, leaving out those that get no
- * extension, such as those that ship with cspell. Packages that already have an extension come last.
- */
-export function filterPackages(
-    packages: readonly CSpellPackage[],
-    term: string,
-    existing: ReadonlyMap<string, string>,
-): CSpellPackage[] {
-    const matches = matchPackages(packages, [term]).filter((pkg) => !noExtensionReason(pkg));
-    return [
-        ...matches.filter((pkg) => !existing.has(pkg.packageName)),
-        ...matches.filter((pkg) => existing.has(pkg.packageName)),
-    ];
-}
-
-/** Why nothing matches: the search leaves out the packages that get no extension. */
-function noMatch(packages: readonly CSpellPackage[], term: string): string {
-    const left = matchPackages(packages, [term]).flatMap((pkg) => {
-        const reason = noExtensionReason(pkg);
-        return reason ? [`- ${pkg.packageName} ${reason}.`] : [];
-    });
-    if (!left.length) return `No package matches "${term}".`;
-    return [`No package matches "${term}" that can have an extension:`, ...left].join('\n');
 }
 
 /** The package in the lists. Fails when it isn't there, or gets no extension. */
