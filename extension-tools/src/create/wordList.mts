@@ -1,7 +1,7 @@
 // cspell:ignore elisp
 
 /**
- * The parts of a word list that only its installed packages can tell: when each dictionary is on.
+ * The parts of a word list that only its installed packages can tell: its dictionaries, and which are off.
  */
 
 import { readFile, writeFile } from 'node:fs/promises';
@@ -9,36 +9,25 @@ import path from 'node:path';
 import { styleText } from 'node:util';
 
 import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
-import type { DictionaryState } from '../dictionaryState.mts';
-import { dictionaryStates } from '../syncExtension.mts';
+import { dictionaryNames, offDictionaries } from '../syncExtension.mts';
 import { npmOutput } from './exec.mts';
-import type { Answers } from './questions.mts';
-import { dictionaryCommands, installedSentence, json, readme } from './writeExtension.mts';
+import { dictionaryCommands, json } from './writeExtension.mts';
 
 /** Set up a word list once its packages are installed. */
-export async function setUpWordList(destDir: string, answers: Answers, config: ExtensionConfig): Promise<void> {
-    const dictionaries = await dictionaryStates(destDir, config);
-    await writeCommands(destDir, config, dictionaries);
-    await turnOnForSamples(destDir, dictionaries);
-    await writeFile(path.join(destDir, 'README.md'), readme(answers, installedSentence(dictionaries)));
+export async function setUpWordList(destDir: string, config: ExtensionConfig): Promise<void> {
+    await writeCommands(destDir, config);
+    await turnOnForSamples(destDir, config);
 }
 
 /** Commands to turn each dictionary on and off. */
-async function writeCommands(
-    destDir: string,
-    config: ExtensionConfig,
-    dictionaries: readonly DictionaryState[],
-): Promise<void> {
-    const commands = dictionaryCommands(
-        config,
-        dictionaries.map((d) => d.name),
-    );
+async function writeCommands(destDir: string, config: ExtensionConfig): Promise<void> {
+    const commands = dictionaryCommands(config, await dictionaryNames(destDir, config));
     await writeFile(path.join(destDir, 'extension.config.json'), json({ ...config, commands }));
 }
 
-/** Turn on the dictionaries that are off until turned on, such as `@cspell/dict-vim`'s, so the tests check the samples. */
-async function turnOnForSamples(destDir: string, dictionaries: readonly DictionaryState[]): Promise<void> {
-    const off = dictionaries.filter((d) => d.off).map((d) => d.name);
+/** Turn on the dictionaries that no setting turns on, so the tests check the samples with them. */
+async function turnOnForSamples(destDir: string, config: ExtensionConfig): Promise<void> {
+    const off = await offDictionaries(destDir, config);
     if (!off.length) return;
     console.log(`Off until turned on: ${off.join(', ')}`);
     await writeFile(path.join(destDir, 'samples/cspell.json'), json({ dictionaries: off }));
@@ -51,7 +40,7 @@ async function turnOnForSamples(destDir: string, dictionaries: readonly Dictiona
  */
 export async function addNameWords(destDir: string, config: ExtensionConfig, repoRoot: string): Promise<void> {
     const packages = (config.cspell as { import?: string[] }).import ?? [];
-    const names = [...packages, ...(await dictionaryStates(destDir, config)).map((d) => d.name)];
+    const names = [...packages, ...(await dictionaryNames(destDir, config))];
     const unknown = unknownWords(destDir, repoRoot);
     if (!unknown) return;
     const words = nameWords(names, unknown);
