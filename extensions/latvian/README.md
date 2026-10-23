@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                               |
-| ----------------------------------------------------- |
-| Enable Latvian Spell Checker Dictionary               |
-| Disable Latvian Spell Checker Dictionary              |
-| Enable Latvian Spell Checker Dictionary in Workspace  |
-| Disable Latvian Spell Checker Dictionary in Workspace |
+| Command                                               | What   | Value | Scope     |
+| ----------------------------------------------------- | ------ | ----- | --------- |
+| Enable Latvian Spell Checker Dictionary               | locale | lv    | global    |
+| Disable Latvian Spell Checker Dictionary              | locale | lv    | global    |
+| Enable Latvian Spell Checker Dictionary in Workspace  | locale | lv    | workspace |
+| Disable Latvian Spell Checker Dictionary in Workspace | locale | lv    | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

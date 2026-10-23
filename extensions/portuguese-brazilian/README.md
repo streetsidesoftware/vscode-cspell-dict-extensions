@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                            |
-| ------------------------------------------------------------------ |
-| Enable Brazilian Portuguese Spell Checker Dictionary               |
-| Disable Brazilian Portuguese Spell Checker Dictionary              |
-| Enable Brazilian Portuguese Spell Checker Dictionary in Workspace  |
-| Disable Brazilian Portuguese Spell Checker Dictionary in Workspace |
+| Command                                                            | What   | Value | Scope     |
+| ------------------------------------------------------------------ | ------ | ----- | --------- |
+| Enable Brazilian Portuguese Spell Checker Dictionary               | locale | pt-BR | global    |
+| Disable Brazilian Portuguese Spell Checker Dictionary              | locale | pt-BR | global    |
+| Enable Brazilian Portuguese Spell Checker Dictionary in Workspace  | locale | pt-BR | workspace |
+| Disable Brazilian Portuguese Spell Checker Dictionary in Workspace | locale | pt-BR | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

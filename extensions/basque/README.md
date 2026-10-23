@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                              |
-| ---------------------------------------------------- |
-| Enable Basque Spell Checker Dictionary               |
-| Disable Basque Spell Checker Dictionary              |
-| Enable Basque Spell Checker Dictionary in Workspace  |
-| Disable Basque Spell Checker Dictionary in Workspace |
+| Command                                              | What   | Value | Scope     |
+| ---------------------------------------------------- | ------ | ----- | --------- |
+| Enable Basque Spell Checker Dictionary               | locale | eu    | global    |
+| Disable Basque Spell Checker Dictionary              | locale | eu    | global    |
+| Enable Basque Spell Checker Dictionary in Workspace  | locale | eu    | workspace |
+| Disable Basque Spell Checker Dictionary in Workspace | locale | eu    | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Slovenian Spell Checker Dictionary"
+        "Command": "Enable Slovenian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "sl-SI",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Slovenian Spell Checker Dictionary"
+        "Command": "Disable Slovenian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "sl,sl-SI",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Slovenian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Slovenian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "sl-SI",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Slovenian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Slovenian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "sl,sl-SI",
+        "Scope": "workspace"
     }
 ]

@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                  |
-| -------------------------------------------------------- |
-| Enable Macedonian Spell Checker Dictionary               |
-| Disable Macedonian Spell Checker Dictionary              |
-| Enable Macedonian Spell Checker Dictionary in Workspace  |
-| Disable Macedonian Spell Checker Dictionary in Workspace |
+| Command                                                  | What   | Value      | Scope     |
+| -------------------------------------------------------- | ------ | ---------- | --------- |
+| Enable Macedonian Spell Checker Dictionary               | locale | mk-Cyrl    | global    |
+| Disable Macedonian Spell Checker Dictionary              | locale | mk,mk-Cyrl | global    |
+| Enable Macedonian Spell Checker Dictionary in Workspace  | locale | mk-Cyrl    | workspace |
+| Disable Macedonian Spell Checker Dictionary in Workspace | locale | mk,mk-Cyrl | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

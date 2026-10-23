@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                       |
-| ------------------------------------------------------------- |
-| Enable Austrian German Spell Checker Dictionary               |
-| Disable Austrian German Spell Checker Dictionary              |
-| Enable Austrian German Spell Checker Dictionary in Workspace  |
-| Disable Austrian German Spell Checker Dictionary in Workspace |
+| Command                                                       | What   | Value | Scope     |
+| ------------------------------------------------------------- | ------ | ----- | --------- |
+| Enable Austrian German Spell Checker Dictionary               | locale | de-at | global    |
+| Disable Austrian German Spell Checker Dictionary              | locale | de-at | global    |
+| Enable Austrian German Spell Checker Dictionary in Workspace  | locale | de-at | workspace |
+| Disable Austrian German Spell Checker Dictionary in Workspace | locale | de-at | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

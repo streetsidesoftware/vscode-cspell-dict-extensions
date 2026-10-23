@@ -16,12 +16,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                 |
-| ------------------------------------------------------- |
-| Enable Hungarian Spell Checker Dictionary               |
-| Disable Hungarian Spell Checker Dictionary              |
-| Enable Hungarian Spell Checker Dictionary in Workspace  |
-| Disable Hungarian Spell Checker Dictionary in Workspace |
+| Command                                                 | What   | Value    | Scope     |
+| ------------------------------------------------------- | ------ | -------- | --------- |
+| Enable Hungarian Spell Checker Dictionary               | locale | hu-HU    | global    |
+| Disable Hungarian Spell Checker Dictionary              | locale | hu,hu-HU | global    |
+| Enable Hungarian Spell Checker Dictionary in Workspace  | locale | hu-HU    | workspace |
+| Disable Hungarian Spell Checker Dictionary in Workspace | locale | hu,hu-HU | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

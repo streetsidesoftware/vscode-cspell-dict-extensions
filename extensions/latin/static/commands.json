@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Latin Spell Checker Dictionary"
+        "Command": "Enable Latin Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "la-VA",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Latin Spell Checker Dictionary"
+        "Command": "Disable Latin Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "la,la-VA",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Latin Spell Checker Dictionary in Workspace"
+        "Command": "Enable Latin Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "la-VA",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Latin Spell Checker Dictionary in Workspace"
+        "Command": "Disable Latin Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "la,la-VA",
+        "Scope": "workspace"
     }
 ]

@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Catalan Spell Checker Dictionary"
+        "Command": "Enable Catalan Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "ca",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Catalan Spell Checker Dictionary"
+        "Command": "Disable Catalan Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "ca",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Catalan Spell Checker Dictionary in Workspace"
+        "Command": "Enable Catalan Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "ca",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Catalan Spell Checker Dictionary in Workspace"
+        "Command": "Disable Catalan Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "ca",
+        "Scope": "workspace"
     }
 ]

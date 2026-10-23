@@ -1,26 +1,50 @@
 [
     {
-        "Command": "Enable Scientific Terms Spell Checker Dictionary"
+        "Command": "Enable Scientific Terms Spell Checker Dictionary",
+        "What": "dictionary",
+        "Value": "scientific-terms-us",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Scientific Terms Spell Checker Dictionary"
+        "Command": "Disable Scientific Terms Spell Checker Dictionary",
+        "What": "dictionary",
+        "Value": "scientific-terms-us",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Scientific Terms Spell Checker Dictionary in Workspace"
+        "Command": "Enable Scientific Terms Spell Checker Dictionary in Workspace",
+        "What": "dictionary",
+        "Value": "scientific-terms-us",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Scientific Terms Spell Checker Dictionary in Workspace"
+        "Command": "Disable Scientific Terms Spell Checker Dictionary in Workspace",
+        "What": "dictionary",
+        "Value": "scientific-terms-us",
+        "Scope": "workspace"
     },
     {
-        "Command": "Enable Mathematics Terms Spell Checker Dictionary"
+        "Command": "Enable Mathematics Terms Spell Checker Dictionary",
+        "What": "dictionary",
+        "Value": "mathematics-terms-us",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Mathematics Terms Spell Checker Dictionary"
+        "Command": "Disable Mathematics Terms Spell Checker Dictionary",
+        "What": "dictionary",
+        "Value": "mathematics-terms-us",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Mathematics Terms Spell Checker Dictionary in Workspace"
+        "Command": "Enable Mathematics Terms Spell Checker Dictionary in Workspace",
+        "What": "dictionary",
+        "Value": "mathematics-terms-us",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Mathematics Terms Spell Checker Dictionary in Workspace"
+        "Command": "Disable Mathematics Terms Spell Checker Dictionary in Workspace",
+        "What": "dictionary",
+        "Value": "mathematics-terms-us",
+        "Scope": "workspace"
     }
 ]

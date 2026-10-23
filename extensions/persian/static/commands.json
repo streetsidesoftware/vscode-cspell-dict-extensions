@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Persian Spell Checker Dictionary"
+        "Command": "Enable Persian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "fa-IR",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Persian Spell Checker Dictionary"
+        "Command": "Disable Persian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "fa-IR",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Persian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Persian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "fa-IR",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Persian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Persian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "fa-IR",
+        "Scope": "workspace"
     }
 ]

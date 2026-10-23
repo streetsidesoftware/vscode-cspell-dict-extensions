@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Latvian Spell Checker Dictionary"
+        "Command": "Enable Latvian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "lv",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Latvian Spell Checker Dictionary"
+        "Command": "Disable Latvian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "lv",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Latvian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Latvian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "lv",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Latvian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Latvian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "lv",
+        "Scope": "workspace"
     }
 ]

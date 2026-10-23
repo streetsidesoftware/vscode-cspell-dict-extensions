@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                 |
-| ------------------------------------------------------- |
-| Enable Ukrainian Spell Checker Dictionary               |
-| Disable Ukrainian Spell Checker Dictionary              |
-| Enable Ukrainian Spell Checker Dictionary in Workspace  |
-| Disable Ukrainian Spell Checker Dictionary in Workspace |
+| Command                                                 | What   | Value | Scope     |
+| ------------------------------------------------------- | ------ | ----- | --------- |
+| Enable Ukrainian Spell Checker Dictionary               | locale | uk    | global    |
+| Disable Ukrainian Spell Checker Dictionary              | locale | uk    | global    |
+| Enable Ukrainian Spell Checker Dictionary in Workspace  | locale | uk    | workspace |
+| Disable Ukrainian Spell Checker Dictionary in Workspace | locale | uk    | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                               |
-| ----------------------------------------------------- |
-| Enable Italian Spell Checker Dictionary               |
-| Disable Italian Spell Checker Dictionary              |
-| Enable Italian Spell Checker Dictionary in Workspace  |
-| Disable Italian Spell Checker Dictionary in Workspace |
+| Command                                               | What   | Value    | Scope     |
+| ----------------------------------------------------- | ------ | -------- | --------- |
+| Enable Italian Spell Checker Dictionary               | locale | it-IT    | global    |
+| Disable Italian Spell Checker Dictionary              | locale | it,it-IT | global    |
+| Enable Italian Spell Checker Dictionary in Workspace  | locale | it-IT    | workspace |
+| Disable Italian Spell Checker Dictionary in Workspace | locale | it,it-IT | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

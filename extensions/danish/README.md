@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                              |
-| ---------------------------------------------------- |
-| Enable Danish Spell Checker Dictionary               |
-| Disable Danish Spell Checker Dictionary              |
-| Enable Danish Spell Checker Dictionary in Workspace  |
-| Disable Danish Spell Checker Dictionary in Workspace |
+| Command                                              | What   | Value    | Scope     |
+| ---------------------------------------------------- | ------ | -------- | --------- |
+| Enable Danish Spell Checker Dictionary               | locale | da-DK    | global    |
+| Disable Danish Spell Checker Dictionary              | locale | da,da-DK | global    |
+| Enable Danish Spell Checker Dictionary in Workspace  | locale | da-DK    | workspace |
+| Disable Danish Spell Checker Dictionary in Workspace | locale | da,da-DK | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

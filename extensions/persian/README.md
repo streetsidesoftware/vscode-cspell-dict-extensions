@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                               |
-| ----------------------------------------------------- |
-| Enable Persian Spell Checker Dictionary               |
-| Disable Persian Spell Checker Dictionary              |
-| Enable Persian Spell Checker Dictionary in Workspace  |
-| Disable Persian Spell Checker Dictionary in Workspace |
+| Command                                               | What   | Value | Scope     |
+| ----------------------------------------------------- | ------ | ----- | --------- |
+| Enable Persian Spell Checker Dictionary               | locale | fa-IR | global    |
+| Disable Persian Spell Checker Dictionary              | locale | fa-IR | global    |
+| Enable Persian Spell Checker Dictionary in Workspace  | locale | fa-IR | workspace |
+| Disable Persian Spell Checker Dictionary in Workspace | locale | fa-IR | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

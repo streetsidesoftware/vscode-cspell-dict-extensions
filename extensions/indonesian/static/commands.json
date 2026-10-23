@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Indonesian Spell Checker Dictionary"
+        "Command": "Enable Indonesian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "id-id",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Indonesian Spell Checker Dictionary"
+        "Command": "Disable Indonesian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "id-ID,id",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Indonesian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Indonesian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "id-id",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Indonesian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Indonesian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "id-ID,id",
+        "Scope": "workspace"
     }
 ]

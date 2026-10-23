@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                |
-| ------------------------------------------------------ |
-| Enable Galician Spell Checker Dictionary               |
-| Disable Galician Spell Checker Dictionary              |
-| Enable Galician Spell Checker Dictionary in Workspace  |
-| Disable Galician Spell Checker Dictionary in Workspace |
+| Command                                                | What   | Value    | Scope     |
+| ------------------------------------------------------ | ------ | -------- | --------- |
+| Enable Galician Spell Checker Dictionary               | locale | gl-ES    | global    |
+| Disable Galician Spell Checker Dictionary              | locale | gl,gl-ES | global    |
+| Enable Galician Spell Checker Dictionary in Workspace  | locale | gl-ES    | workspace |
+| Disable Galician Spell Checker Dictionary in Workspace | locale | gl,gl-ES | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

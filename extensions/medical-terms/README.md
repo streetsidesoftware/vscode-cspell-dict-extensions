@@ -16,12 +16,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                     |
-| ----------------------------------------------------------- |
-| Enable Medical Terms Spell Checker Dictionary               |
-| Disable Medical Terms Spell Checker Dictionary              |
-| Enable Medical Terms Spell Checker Dictionary in Workspace  |
-| Disable Medical Terms Spell Checker Dictionary in Workspace |
+| Command                                                     | What       | Value         | Scope     |
+| ----------------------------------------------------------- | ---------- | ------------- | --------- |
+| Enable Medical Terms Spell Checker Dictionary               | dictionary | medical terms | global    |
+| Disable Medical Terms Spell Checker Dictionary              | dictionary | medical terms | global    |
+| Enable Medical Terms Spell Checker Dictionary in Workspace  | dictionary | medical terms | workspace |
+| Disable Medical Terms Spell Checker Dictionary in Workspace | dictionary | medical terms | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

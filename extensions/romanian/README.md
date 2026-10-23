@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                |
-| ------------------------------------------------------ |
-| Enable Romanian Spell Checker Dictionary               |
-| Disable Romanian Spell Checker Dictionary              |
-| Enable Romanian Spell Checker Dictionary in Workspace  |
-| Disable Romanian Spell Checker Dictionary in Workspace |
+| Command                                                | What   | Value    | Scope     |
+| ------------------------------------------------------ | ------ | -------- | --------- |
+| Enable Romanian Spell Checker Dictionary               | locale | ro-ro    | global    |
+| Disable Romanian Spell Checker Dictionary              | locale | ro-RO,ro | global    |
+| Enable Romanian Spell Checker Dictionary in Workspace  | locale | ro-ro    | workspace |
+| Disable Romanian Spell Checker Dictionary in Workspace | locale | ro-RO,ro | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                  |
-| -------------------------------------------------------- |
-| Enable Vietnamese Spell Checker Dictionary               |
-| Disable Vietnamese Spell Checker Dictionary              |
-| Enable Vietnamese Spell Checker Dictionary in Workspace  |
-| Disable Vietnamese Spell Checker Dictionary in Workspace |
+| Command                                                  | What   | Value | Scope     |
+| -------------------------------------------------------- | ------ | ----- | --------- |
+| Enable Vietnamese Spell Checker Dictionary               | locale | vi    | global    |
+| Disable Vietnamese Spell Checker Dictionary              | locale | vi    | global    |
+| Enable Vietnamese Spell Checker Dictionary in Workspace  | locale | vi    | workspace |
+| Disable Vietnamese Spell Checker Dictionary in Workspace | locale | vi    | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

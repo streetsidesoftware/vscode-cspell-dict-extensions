@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                             |
-| --------------------------------------------------- |
-| Enable Greek Spell Checker Dictionary               |
-| Disable Greek Spell Checker Dictionary              |
-| Enable Greek Spell Checker Dictionary in Workspace  |
-| Disable Greek Spell Checker Dictionary in Workspace |
+| Command                                             | What   | Value | Scope     |
+| --------------------------------------------------- | ------ | ----- | --------- |
+| Enable Greek Spell Checker Dictionary               | locale | el    | global    |
+| Disable Greek Spell Checker Dictionary              | locale | el    | global    |
+| Enable Greek Spell Checker Dictionary in Workspace  | locale | el    | workspace |
+| Disable Greek Spell Checker Dictionary in Workspace | locale | el    | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

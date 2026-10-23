@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                   |
-| --------------------------------------------------------- |
-| Enable Azerbaijani Spell Checker Dictionary               |
-| Disable Azerbaijani Spell Checker Dictionary              |
-| Enable Azerbaijani Spell Checker Dictionary in Workspace  |
-| Disable Azerbaijani Spell Checker Dictionary in Workspace |
+| Command                                                   | What   | Value    | Scope     |
+| --------------------------------------------------------- | ------ | -------- | --------- |
+| Enable Azerbaijani Spell Checker Dictionary               | locale | az-az    | global    |
+| Disable Azerbaijani Spell Checker Dictionary              | locale | az-AZ,az | global    |
+| Enable Azerbaijani Spell Checker Dictionary in Workspace  | locale | az-az    | workspace |
+| Disable Azerbaijani Spell Checker Dictionary in Workspace | locale | az-AZ,az | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

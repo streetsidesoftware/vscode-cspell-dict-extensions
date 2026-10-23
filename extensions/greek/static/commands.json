@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Greek Spell Checker Dictionary"
+        "Command": "Enable Greek Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "el",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Greek Spell Checker Dictionary"
+        "Command": "Disable Greek Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "el",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Greek Spell Checker Dictionary in Workspace"
+        "Command": "Enable Greek Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "el",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Greek Spell Checker Dictionary in Workspace"
+        "Command": "Disable Greek Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "el",
+        "Scope": "workspace"
     }
 ]

@@ -12,12 +12,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                             |
-| --------------------------------------------------- |
-| Enable Win32 Spell Checker Dictionary               |
-| Disable Win32 Spell Checker Dictionary              |
-| Enable Win32 Spell Checker Dictionary in Workspace  |
-| Disable Win32 Spell Checker Dictionary in Workspace |
+| Command                                             | What       | Value | Scope     |
+| --------------------------------------------------- | ---------- | ----- | --------- |
+| Enable Win32 Spell Checker Dictionary               | dictionary | win32 | global    |
+| Disable Win32 Spell Checker Dictionary              | dictionary | win32 | global    |
+| Enable Win32 Spell Checker Dictionary in Workspace  | dictionary | win32 | workspace |
+| Disable Win32 Spell Checker Dictionary in Workspace | dictionary | win32 | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

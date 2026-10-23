@@ -15,12 +15,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                       |
-| ------------------------------------------------------------- |
-| Enable British English Spell Checker Dictionary               |
-| Disable British English Spell Checker Dictionary              |
-| Enable British English Spell Checker Dictionary in Workspace  |
-| Disable British English Spell Checker Dictionary in Workspace |
+| Command                                                       | What   | Value | Scope     |
+| ------------------------------------------------------------- | ------ | ----- | --------- |
+| Enable British English Spell Checker Dictionary               | locale | en-GB | global    |
+| Disable British English Spell Checker Dictionary              | locale | en-GB | global    |
+| Enable British English Spell Checker Dictionary in Workspace  | locale | en-GB | workspace |
+| Disable British English Spell Checker Dictionary in Workspace | locale | en-GB | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

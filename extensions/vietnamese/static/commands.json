@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Vietnamese Spell Checker Dictionary"
+        "Command": "Enable Vietnamese Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "vi",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Vietnamese Spell Checker Dictionary"
+        "Command": "Disable Vietnamese Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "vi",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Vietnamese Spell Checker Dictionary in Workspace"
+        "Command": "Enable Vietnamese Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "vi",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Vietnamese Spell Checker Dictionary in Workspace"
+        "Command": "Disable Vietnamese Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "vi",
+        "Scope": "workspace"
     }
 ]

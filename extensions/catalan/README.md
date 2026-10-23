@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                               |
-| ----------------------------------------------------- |
-| Enable Catalan Spell Checker Dictionary               |
-| Disable Catalan Spell Checker Dictionary              |
-| Enable Catalan Spell Checker Dictionary in Workspace  |
-| Disable Catalan Spell Checker Dictionary in Workspace |
+| Command                                               | What   | Value | Scope     |
+| ----------------------------------------------------- | ------ | ----- | --------- |
+| Enable Catalan Spell Checker Dictionary               | locale | ca    | global    |
+| Disable Catalan Spell Checker Dictionary              | locale | ca    | global    |
+| Enable Catalan Spell Checker Dictionary in Workspace  | locale | ca    | workspace |
+| Disable Catalan Spell Checker Dictionary in Workspace | locale | ca    | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

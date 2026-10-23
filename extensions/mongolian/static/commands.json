@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Mongolian Spell Checker Dictionary"
+        "Command": "Enable Mongolian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "mn-mn",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Mongolian Spell Checker Dictionary"
+        "Command": "Disable Mongolian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "mn-MN,mn",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Mongolian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Mongolian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "mn-mn",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Mongolian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Mongolian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "mn-MN,mn",
+        "Scope": "workspace"
     }
 ]

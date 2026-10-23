@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                 |
-| ------------------------------------------------------- |
-| Enable Esperanto Spell Checker Dictionary               |
-| Disable Esperanto Spell Checker Dictionary              |
-| Enable Esperanto Spell Checker Dictionary in Workspace  |
-| Disable Esperanto Spell Checker Dictionary in Workspace |
+| Command                                                 | What   | Value | Scope     |
+| ------------------------------------------------------- | ------ | ----- | --------- |
+| Enable Esperanto Spell Checker Dictionary               | locale | eo    | global    |
+| Disable Esperanto Spell Checker Dictionary              | locale | eo    | global    |
+| Enable Esperanto Spell Checker Dictionary in Workspace  | locale | eo    | workspace |
+| Disable Esperanto Spell Checker Dictionary in Workspace | locale | eo    | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

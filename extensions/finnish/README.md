@@ -14,12 +14,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                               |
-| ----------------------------------------------------- |
-| Enable Finnish Spell Checker Dictionary               |
-| Disable Finnish Spell Checker Dictionary              |
-| Enable Finnish Spell Checker Dictionary in Workspace  |
-| Disable Finnish Spell Checker Dictionary in Workspace |
+| Command                                               | What   | Value    | Scope     |
+| ----------------------------------------------------- | ------ | -------- | --------- |
+| Enable Finnish Spell Checker Dictionary               | locale | fi-FI    | global    |
+| Disable Finnish Spell Checker Dictionary              | locale | fi,fi-FI | global    |
+| Enable Finnish Spell Checker Dictionary in Workspace  | locale | fi-FI    | workspace |
+| Disable Finnish Spell Checker Dictionary in Workspace | locale | fi,fi-FI | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

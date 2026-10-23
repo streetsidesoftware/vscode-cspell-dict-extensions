@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Belarusian Spell Checker Dictionary"
+        "Command": "Enable Belarusian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "be-BY",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Belarusian Spell Checker Dictionary"
+        "Command": "Disable Belarusian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "be,be-BY",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Belarusian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Belarusian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "be-BY",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Belarusian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Belarusian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "be,be-BY",
+        "Scope": "workspace"
     }
 ]

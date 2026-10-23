@@ -16,12 +16,12 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/commands.json --->
 
-| Command                                                  |
-| -------------------------------------------------------- |
-| Enable Belarusian Spell Checker Dictionary               |
-| Disable Belarusian Spell Checker Dictionary              |
-| Enable Belarusian Spell Checker Dictionary in Workspace  |
-| Disable Belarusian Spell Checker Dictionary in Workspace |
+| Command                                                  | What   | Value    | Scope     |
+| -------------------------------------------------------- | ------ | -------- | --------- |
+| Enable Belarusian Spell Checker Dictionary               | locale | be-BY    | global    |
+| Disable Belarusian Spell Checker Dictionary              | locale | be,be-BY | global    |
+| Enable Belarusian Spell Checker Dictionary in Workspace  | locale | be-BY    | workspace |
+| Disable Belarusian Spell Checker Dictionary in Workspace | locale | be,be-BY | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

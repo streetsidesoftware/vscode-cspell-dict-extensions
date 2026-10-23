@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Hebrew Spell Checker Dictionary"
+        "Command": "Enable Hebrew Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "he",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Hebrew Spell Checker Dictionary"
+        "Command": "Disable Hebrew Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "he",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Hebrew Spell Checker Dictionary in Workspace"
+        "Command": "Enable Hebrew Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "he",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Hebrew Spell Checker Dictionary in Workspace"
+        "Command": "Disable Hebrew Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "he",
+        "Scope": "workspace"
     }
 ]

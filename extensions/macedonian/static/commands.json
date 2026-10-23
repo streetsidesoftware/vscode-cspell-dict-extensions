@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Macedonian Spell Checker Dictionary"
+        "Command": "Enable Macedonian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "mk-Cyrl",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Macedonian Spell Checker Dictionary"
+        "Command": "Disable Macedonian Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "mk,mk-Cyrl",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Macedonian Spell Checker Dictionary in Workspace"
+        "Command": "Enable Macedonian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "mk-Cyrl",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Macedonian Spell Checker Dictionary in Workspace"
+        "Command": "Disable Macedonian Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "mk,mk-Cyrl",
+        "Scope": "workspace"
     }
 ]

@@ -143,7 +143,7 @@ describe('syncExtension', () => {
         const result = await read('README.md');
         assert.match(
             result,
-            /\| Enable Demo Spell Checker Dictionary +\|\n\| Disable Demo Spell Checker Dictionary in Workspace \|/,
+            /\| Command +\| What +\| Value +\| Scope +\|\n.*\n\| Enable Demo Spell Checker Dictionary +\| locale +\| xx +\| global +\|\n\| Disable Demo Spell Checker Dictionary in Workspace \| dictionary \| demo +\| workspace \|/,
         );
         assert.match(result, /cspell `>=10`/);
     });

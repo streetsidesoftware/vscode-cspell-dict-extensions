@@ -1,14 +1,26 @@
 [
     {
-        "Command": "Enable Azerbaijani Spell Checker Dictionary"
+        "Command": "Enable Azerbaijani Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "az-az",
+        "Scope": "global"
     },
     {
-        "Command": "Disable Azerbaijani Spell Checker Dictionary"
+        "Command": "Disable Azerbaijani Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "az-AZ,az",
+        "Scope": "global"
     },
     {
-        "Command": "Enable Azerbaijani Spell Checker Dictionary in Workspace"
+        "Command": "Enable Azerbaijani Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "az-az",
+        "Scope": "workspace"
     },
     {
-        "Command": "Disable Azerbaijani Spell Checker Dictionary in Workspace"
+        "Command": "Disable Azerbaijani Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "az-AZ,az",
+        "Scope": "workspace"
     }
 ]
