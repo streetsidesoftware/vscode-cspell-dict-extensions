@@ -8,7 +8,7 @@ import { stripVTControlCharacters } from 'node:util';
 import type { CSpellPackage } from '../cspellPackages.mts';
 import { noPrompter } from './prompt.mts';
 import type { Prompter } from './prompt.mts';
-import { askQuestions, filterPackages, UsageError } from './questions.mts';
+import { askQuestions, UsageError } from './questions.mts';
 import type { Answers, Context, Options } from './questions.mts';
 import { scriptedPrompter } from './test-helpers.mts';
 
@@ -107,27 +107,38 @@ describe('askQuestions', () => {
         prompter.asked.map((q) => q.message.split(' ')[0]);
 
     describe('interactive', () => {
-        it('starts from the name, and offers the packages that match it', async () => {
-            const prompter = scriptedPrompter(['bengali']);
+        it('starts with the kind and the packages without an extension, then suggests the names', async () => {
+            const prompter = scriptedPrompter(['', ['@cspell/dict-bn']]);
             assert.deepEqual(await askQuestions({}, context(prompter)), bengali);
             assert.deepEqual(firstWords(prompter), [
+                'Dictionaries',
+                'Packages',
                 'Extension',
                 'Friendly',
-                'Packages',
-                'Search',
                 'What',
                 'Locale',
                 'Native',
             ]);
-            const extensionName = prompter.asked[0];
-            assert.equal(extensionName?.defaultValue, undefined);
+            // Languages, then word lists. Not offered: Swedish has an extension, English ships with cspell, and the
+            // bundle and the parser are other kinds.
+            assert.deepEqual(
+                prompter.asked[1]?.choices?.map((c) => stripVTControlCharacters(c)),
+                [
+                    '@cspell/dict-bn: Bengali (language)',
+                    '@cspell/dict-fr-reforme: Français Réforme 1990 (language)',
+                    '@cspell/dict-sr-cyrl: Serbian (Cyrillic) (language)',
+                    '@cspell/dict-sr-latn: Serbian (Latin) (language)',
+                    '@cspell/dict-medicalterms: Medical Terms (word list)',
+                ],
+            );
+            assert.equal(prompter.asked[2]?.defaultValue, 'bengali');
         });
 
         it('includes several packages, and names each language for its commands', async () => {
-            const prompter = scriptedPrompter(['serbian']);
+            const prompter = scriptedPrompter(['', ['@cspell/dict-sr-cyrl', '@cspell/dict-sr-latn'], 'serbian']);
             const answers = await askQuestions({}, context(prompter));
             assert.deepEqual(answers.packages, ['@cspell/dict-sr-cyrl', '@cspell/dict-sr-latn']);
-            assert.deepEqual([answers.kind, answers.locale], ['language', 'sr']);
+            assert.deepEqual([answers.name, answers.kind, answers.locale], ['serbian', 'language', 'sr']);
             assert.deepEqual(answers.locales, ['sr', 'sr-Cyrl', 'sr-Latn']);
             assert.deepEqual(answers.languages, [
                 { locale: 'sr-Cyrl', name: 'Serbian (Cyrillic)' },
@@ -137,42 +148,18 @@ describe('askQuestions', () => {
             assert.deepEqual(localeQuestion?.choices, ['sr', 'sr-Cyrl', 'sr-Latn']);
         });
 
-        it('says why the only matches get no extension', async () => {
-            const prompter = scriptedPrompter(['american', 'American', 'réforme']);
-            const ctx = context(prompter);
-            const answers = await askQuestions({}, ctx);
-            assert.deepEqual(ctx.logged, [
-                'No package matches "american" that can have an extension:\n- @cspell/dict-en_us ships with cspell.',
-            ]);
-            assert.deepEqual(answers.packages, ['@cspell/dict-fr-reforme']);
-        });
-
-        it('searches again when the name matches no package', async () => {
-            const prompter = scriptedPrompter(['french-reforme', 'French Réforme', 'réforme']);
-            const ctx = context(prompter);
-            const answers = await askQuestions({}, ctx);
-            assert.deepEqual(ctx.logged, ['No package matches "french reforme".']);
-            assert.deepEqual(answers.packages, ['@cspell/dict-fr-reforme']);
-            assert.deepEqual([answers.locale, answers.nativeName], ['fr-90', 'français']);
+        it('takes the locale and native name from the package', async () => {
+            const prompter = scriptedPrompter(['', ['@cspell/dict-fr-reforme']]);
+            const answers = await askQuestions({}, context(prompter));
+            assert.deepEqual(
+                [answers.name, answers.locale, answers.nativeName],
+                ['francais-reforme-1990', 'fr-90', 'français'],
+            );
             assert.deepEqual(answers.locales, ['fr', 'fr-FR', 'fr-90']);
         });
 
-        it('searches again with the words typed after a pick, and an empty answer finishes', async () => {
-            const prompter = scriptedPrompter(['medical-terms', '', '', 'swedish']);
-            const answers = await askQuestions({}, context(prompter));
-            assert.deepEqual(answers.packages, ['@cspell/dict-medicalterms', '@cspell/dict-sv']);
-            const searches = prompter.asked.filter((q) => q.message.startsWith('Search'));
-            assert.deepEqual(
-                searches.map((q) => q.message),
-                [
-                    'Search for more packages (a language or topic; empty to finish):',
-                    'Search for more packages (a language or topic; empty to finish):',
-                ],
-            );
-        });
-
         it('makes a word list of a dictionary without a locale', async () => {
-            const prompter = scriptedPrompter(['medical-terms']);
+            const prompter = scriptedPrompter(['', ['@cspell/dict-medicalterms']]);
             const answers = await askQuestions({}, context(prompter));
             const kindQuestion = prompter.asked.find((q) => q.message.startsWith('What'));
             assert.equal(kindQuestion?.defaultValue, 'wordList');
@@ -183,7 +170,14 @@ describe('askQuestions', () => {
         });
 
         it('asks a parser for its description, which has no default', async () => {
-            const prompter = scriptedPrompter(['typescript-parser', '', '', '', '', 'Spell checks TypeScript.']);
+            const prompter = scriptedPrompter([
+                true,
+                ['@cspell/parser-typescript'],
+                '',
+                '',
+                '',
+                'Spell checks TypeScript.',
+            ]);
             const answers = await askQuestions({}, context(prompter));
             assert.deepEqual(
                 [answers.kind, answers.packages, answers.description],
@@ -195,24 +189,12 @@ describe('askQuestions', () => {
             );
         });
 
-        it('lists packages that have an extension last, and marked', async () => {
-            const prompter = scriptedPrompter(['dictionary', '', ['@cspell/dict-bn']]);
-            await askQuestions({}, context(prompter));
-            const choices = prompter.asked[2]?.choices?.map((c) => stripVTControlCharacters(c));
-            assert.equal(choices?.at(-1), '@cspell/dict-sv: Swedish (has an extension)');
-            assert.equal(choices?.filter((c) => c.includes('has an extension')).length, 1);
-        });
-
         it('rejects a name that is taken', async () => {
-            const prompter = scriptedPrompter(['', 'swedish', 'svenska']);
+            const prompter = scriptedPrompter(['', 'svenska']);
             await askQuestions({ packages: ['@cspell/dict-sv'] }, context(prompter));
             assert.deepEqual(
                 prompter.asked.filter((q) => q.message.startsWith('Extension name')).map((q) => q.error),
-                [
-                    'Please enter a name.',
-                    'extensions/swedish already exists. Choose another name, or pass --force to replace it.',
-                    undefined,
-                ],
+                ['extensions/swedish already exists. Choose another name, or pass --force to replace it.', undefined],
             );
         });
 
@@ -263,9 +245,9 @@ describe('askQuestions', () => {
         });
 
         it('fails when a required value is missing', async () => {
-            await assert.rejects(yes({}), /Missing --name/);
-            await assert.rejects(yes({ name: 'bengali' }), UsageError);
+            await assert.rejects(yes({}), UsageError);
             await assert.rejects(yes({ name: 'bengali' }), /Missing --package/);
+            await assert.rejects(yes({ packages: ['@cspell/dict-bn'] }), /Missing --name/);
             await assert.rejects(yes({ name: 'ts', packages: ['@cspell/parser-typescript'] }), /Missing --description/);
             await assert.rejects(
                 yes({ name: 'ts', packages: ['@cspell/parser-typescript'], description: '   ' }),
@@ -319,27 +301,5 @@ describe('askQuestions', () => {
                 /--native-name only applies to a language/,
             );
         });
-    });
-});
-
-describe('filterPackages', () => {
-    const list = [
-        language('@cspell/dict-sv', 'Swedish', ['sv']),
-        language('@cspell/dict-en-gb', 'British English', ['en-GB']),
-        language('@cspell/dict-en-us', 'American English', ['en-US']),
-    ];
-
-    it('matches every word in the name or description, existing extensions last', () => {
-        const existing = new Map([['@cspell/dict-en-gb', 'british-english']]);
-        assert.deepEqual(
-            filterPackages(list, 'english', existing).map((p) => p.packageName),
-            ['@cspell/dict-en-us', '@cspell/dict-en-gb'],
-        );
-        assert.deepEqual(
-            filterPackages(list, 'BRITISH en-gb', existing).map((p) => p.packageName),
-            ['@cspell/dict-en-gb'],
-        );
-        assert.equal(filterPackages(list, '', existing).length, 3);
-        assert.equal(filterPackages(list, 'german', existing).length, 0);
     });
 });
