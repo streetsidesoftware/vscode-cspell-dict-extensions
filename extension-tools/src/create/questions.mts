@@ -189,7 +189,7 @@ async function askPackages(name: string, options: Options, ctx: Context): Promis
     for (;;) {
         const matches = filterPackages(list, term, ctx.existing).filter((pkg) => !picked.includes(pkg.packageName));
         if (!matches.length) {
-            ctx.log(`No package matches "${term}".`);
+            ctx.log(noMatch(list, term));
         } else {
             const chosen = await ctx.prompter.checkbox(
                 `Packages that match "${term}":`,
@@ -234,6 +234,14 @@ export function filterPackages(
         ...matches.filter((pkg) => !existing.has(pkg.packageName)),
         ...matches.filter((pkg) => existing.has(pkg.packageName)),
     ];
+}
+
+/** Why nothing matches: a package that ships with cspell needs no extension, so the search leaves it out. */
+function noMatch(packages: readonly CSpellPackage[], term: string): string {
+    const shipped = matchPackages(packages, [term]).filter((pkg) => pkg.withCSpell);
+    if (!shipped.length) return `No package matches "${term}".`;
+    const names = shipped.map((pkg) => pkg.packageName).join(', ');
+    return `No package matches "${term}" that needs an extension. These ship with cspell: ${names}.`;
 }
 
 /** The package in the lists. Fails when it isn't there, or ships with cspell. */

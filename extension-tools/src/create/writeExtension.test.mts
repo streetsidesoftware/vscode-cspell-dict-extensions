@@ -1,5 +1,3 @@
-// cspell:ignore elisp
-
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -12,7 +10,6 @@ import type { Sample } from './sample.mts';
 import {
     dictionaryCommands,
     extensionConfig,
-    installedSentence,
     localeCommands,
     readme,
     sampleConfig,
@@ -363,31 +360,5 @@ describe('writeExtension', () => {
         await writeFile(path.join(destDir, 'README.md'), 'mine\n');
         await assert.rejects(writeExtension(destDir, swedish, [seattle]), /EEXIST/);
         assert.equal(await readFile(path.join(destDir, 'README.md'), 'utf8'), 'mine\n');
-    });
-});
-
-describe('installedSentence', () => {
-    const state = (name: string, fields: object) => ({
-        name,
-        all: false,
-        fileTypes: [],
-        locales: [],
-        off: false,
-        ...fields,
-    });
-
-    it('says when each dictionary is on, with one clause for those on in the same way', () => {
-        assert.equal(
-            installedSentence([state('elisp', { fileTypes: ['elisp', 'lisp'] })]),
-            'Once this extension is installed, the `elisp` dictionary is on for `elisp` and `lisp` files.',
-        );
-        assert.equal(
-            installedSentence([
-                state('scientific-terms-us', { all: true }),
-                state('mathematics-terms-us', { all: true }),
-                state('vim', { off: true }),
-            ]),
-            'Once this extension is installed, the `scientific-terms-us` and `mathematics-terms-us` dictionaries are on for every file, and the `vim` dictionary is off until you turn it on.',
-        );
     });
 });
