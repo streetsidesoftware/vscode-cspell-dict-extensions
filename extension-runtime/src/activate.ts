@@ -8,8 +8,6 @@ export interface CodeSpellCheckerApi {
     registerConfig(path: string): void;
     enableLocale(isGlobal: boolean, locale: string): Promise<void>;
     disableLocale(isGlobal: boolean, locale: string): Promise<void>;
-    enableLanguageId(languageId: string, uri?: string): Promise<void>;
-    disableLanguageId(languageId: string, uri?: string): Promise<void>;
 }
 
 /** The optional `src/custom.ts` of an extension. */
@@ -20,8 +18,6 @@ export interface CustomModule {
      */
     activate?(context: vscode.ExtensionContext, api: Promise<CodeSpellCheckerApi | undefined>): void | Promise<void>;
 }
-
-type Extension = vscode.Extension<CodeSpellCheckerApi> | undefined;
 
 const codeSpellCheckerId = 'streetsidesoftware.code-spell-checker';
 
@@ -39,10 +35,10 @@ export function activateExtension(
     custom?: CustomModule,
 ): Promise<void> {
     const extension = vscode.extensions.getExtension<CodeSpellCheckerApi>(codeSpellCheckerId);
-    const api = getApi(extension);
+    const api = Promise.resolve(extension?.activate());
 
     for (const command of config.commands) {
-        context.subscriptions.push(vscode.commands.registerCommand(command.id, () => runCommand(command, extension)));
+        context.subscriptions.push(vscode.commands.registerCommand(command.id, commandHandler(command, api)));
     }
 
     // Register the dictionary configuration with Code Spell Checker.
@@ -51,28 +47,18 @@ export function activateExtension(
     return Promise.all([registered, custom?.activate?.(context, api)]).then(() => undefined);
 }
 
-function getApi(extension: Extension): Promise<CodeSpellCheckerApi | undefined> {
-    return Promise.resolve(extension?.activate());
-}
-
-function runCommand(command: CommandConfig, extension: Extension): Promise<void> {
+/**
+ * The handler of one command, with its action, toggle, value and scope resolved once.
+ * @param api - Code Spell Checker's API, once it's active.
+ */
+function commandHandler(command: CommandConfig, api: Promise<CodeSpellCheckerApi | undefined>): () => Promise<void> {
+    const { value } = command;
+    const isGlobal = command.scope === 'global';
     const enable = command.action === 'enable';
-    switch (command.toggle) {
-        case 'locale': {
-            const isGlobal = command.scope === 'global';
-            return getApi(extension).then((api) =>
-                enable ? api?.enableLocale(isGlobal, command.value) : api?.disableLocale(isGlobal, command.value),
-            );
-        }
-        case 'fileType':
-            return getApi(extension).then((api) =>
-                enable ? api?.enableLanguageId(command.value) : api?.disableLanguageId(command.value),
-            );
-        case 'dictionary': {
-            const isGlobal = command.scope === 'global';
-            return toggleDictionary(command.value, enable, isGlobal);
-        }
-    }
+    if (command.toggle === 'dictionary') return () => toggleDictionary(value, enable, isGlobal);
+    return enable
+        ? () => api.then((cspell) => cspell?.enableLocale(isGlobal, value))
+        : () => api.then((cspell) => cspell?.disableLocale(isGlobal, value));
 }
 
 /**
@@ -83,8 +69,9 @@ function toggleDictionary(name: string, enable: boolean, isGlobal: boolean): Pro
     const settings = vscode.workspace.getConfiguration('cSpell');
     const inspected = settings.inspect<string[]>('dictionaries');
     const current = (isGlobal ? inspected?.globalValue : inspected?.workspaceValue) ?? [];
-    const dictionaries = current.filter((d) => d !== name && d !== `!${name}`);
-    dictionaries.push(enable ? name : `!${name}`);
+    const negated = `!${name}`;
+    const dictionaries = current.filter((d) => d !== name && d !== negated);
+    dictionaries.push(enable ? name : negated);
     const target = isGlobal ? vscode.ConfigurationTarget.Global : vscode.ConfigurationTarget.Workspace;
     return Promise.resolve(settings.update('dictionaries', dictionaries, target));
 }

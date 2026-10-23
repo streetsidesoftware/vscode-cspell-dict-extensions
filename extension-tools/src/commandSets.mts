@@ -5,7 +5,7 @@
 import type { CommandConfig } from '../../extension-runtime/api.ts';
 
 type Action = CommandConfig['action'];
-type Scope = Extract<CommandConfig, { scope: unknown }>['scope'];
+type Scope = CommandConfig['scope'];
 
 export const scopes: readonly Scope[] = ['global', 'workspace'];
 export const actions: readonly Action[] = ['enable', 'disable'];

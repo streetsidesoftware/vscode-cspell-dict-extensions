@@ -41,7 +41,7 @@ jobs:
       - name: Sync
         run: npm run sync:extensions
 
-      # Not `lint:code`: a warning oxlint can't fix would stop the job, and the lint job reports it anyway.
+      # Without `--deny-warnings`: a warning oxlint can't fix would stop the job, and the lint job reports it anyway.
       - name: oxlint
         run: npx oxlint --type-aware --fix
         continue-on-error: true

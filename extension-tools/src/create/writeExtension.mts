@@ -26,8 +26,8 @@ export interface WriteOptions {
 
 /**
  * Write the files a person owns into `destDir`: `extension.config.json`, a starter `package.json`, `README.md`,
- * `LICENSE` and the samples, and an empty `CHANGELOG.md` for release-please to fill. `npm run sync:extensions` writes
- * the rest. Existing files are never overwritten.
+ * `LICENSE` and the samples, and an empty `CHANGELOG.md` for release-please to fill. The sync writes the rest.
+ * Existing files are never overwritten.
  * @param samples - the first is the `sample` in `extension.config.json`, which the VS Code test opens.
  * @returns the files written, relative to `destDir`.
  */

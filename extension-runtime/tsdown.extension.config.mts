@@ -7,8 +7,8 @@ import type { UserConfig } from 'tsdown';
 const runtimeSrc = path.resolve(import.meta.dirname, 'src');
 
 /**
- * The tsdown config of a synced extension. Each extension's `tsdown.config.ts`, written by
- * `npm run sync:extensions`, calls this with its own directory.
+ * The tsdown config of a synced extension. Each extension's `tsdown.config.ts`, written by the sync, calls this
+ * with its own directory.
  *
  * Bundles the shared entry `extension-runtime/src/entry.ts` into the extension's `extension.js`, with its
  * `extension.config.json` and optional `src/custom.ts` resolved through aliases. `vscode` is provided by the

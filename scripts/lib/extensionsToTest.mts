@@ -1,5 +1,5 @@
 /*
- * Only `node:` modules here: `list-affected-extensions.mts` runs in workflows before `npm ci`.
+ * Only `node:` modules here: workflows run the scripts that use it before `npm ci`.
  */
 
 export interface ExtensionsToTest {

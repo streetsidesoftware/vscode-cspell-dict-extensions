@@ -12,7 +12,7 @@ on:
         description: The extension
         type: choice
         required: true
-        # Options are generated from `npm run gen:workflow`
+        # The options are generated after a merge. Don't edit them.
         options:
           - ancient-greek
           - arabic

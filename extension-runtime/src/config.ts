@@ -18,14 +18,19 @@ export type Action = 'enable' | 'disable';
 /** Where the setting is written. */
 export type Scope = 'global' | 'workspace';
 
-interface CommandBase {
+/** A command that turns a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`) on or off. */
+export interface CommandConfig {
     /** Turn the toggle on or off. */
     action: Action;
+    /** What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`). */
+    toggle: 'locale' | 'dictionary';
     /**
-     * The locale, dictionary name, or file type (language ID).
+     * The locale or the dictionary name.
      * @minLength 1
      */
     value: string;
+    /** Where the setting is written. */
+    scope: Scope;
     /**
      * The command ID, e.g. `cSpellExt_swedish.enable`. Unique within the extension.
      * @minLength 1
@@ -47,24 +52,6 @@ interface CommandBase {
     /** Notes for maintainers: why this command is the way it is. */
     notes?: string;
 }
-
-/** A command that changes a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`). */
-export interface ScopedCommandConfig extends CommandBase {
-    /** What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`). */
-    toggle: 'locale' | 'dictionary';
-    /** Where the setting is written. */
-    scope: Scope;
-}
-
-/** A command that turns spell checking on or off for a file type (`cSpell.enabledFileTypes`). It has no scope. */
-export interface FileTypeCommandConfig extends CommandBase {
-    /** What the command changes: a file type (`cSpell.enabledFileTypes`). */
-    toggle: 'fileType';
-}
-
-export type CommandConfig = ScopedCommandConfig | FileTypeCommandConfig;
-
-export type Toggle = CommandConfig['toggle'];
 
 /** The fields every kind of extension has. */
 interface ExtensionConfigBase {

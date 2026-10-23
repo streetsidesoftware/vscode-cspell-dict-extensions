@@ -107,7 +107,7 @@ export function factsText(facts: Facts): string {
     lines.push('', 'Commands:');
     if (!facts.commands.length) lines.push('  none');
     for (const c of facts.commands) {
-        const where = [c.toggle, c.value, 'scope' in c ? c.scope : ''].filter(Boolean).join(' ');
+        const where = `${c.toggle} ${c.value} ${c.scope}`;
         lines.push(`  ${c.id}  ${c.title}  (${where}${c.contributes === false ? ', not listed' : ''})`);
     }
     lines.push('', 'Samples:');

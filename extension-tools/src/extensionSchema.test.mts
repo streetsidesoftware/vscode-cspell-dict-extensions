@@ -24,7 +24,6 @@ const swedish = {
             value: 'sv_SE',
             scope: 'workspace',
         },
-        { id: 'x.enablePython', title: 'Enable Python', action: 'enable', toggle: 'fileType', value: 'python' },
     ],
 };
 
@@ -61,8 +60,8 @@ describe('extension.config.json validation', () => {
         assert.throws(() => validate(withoutDescription, file), /doesn't match/);
     });
 
-    it('rejects a scope on a fileType toggle', () => {
-        const commands = [{ ...swedish.commands[2], scope: 'global' }];
+    it('rejects a toggle other than locale or dictionary', () => {
+        const commands = [{ ...swedish.commands[0], toggle: 'fileType' }];
         assert.throws(() => validate({ ...swedish, commands }, file), /\/commands\/0/);
     });
 
