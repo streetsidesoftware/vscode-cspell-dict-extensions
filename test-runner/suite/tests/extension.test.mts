@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { basename, resolve } from 'node:path';
 
-import { describe, it } from 'node:test';
+import { suite, test } from 'node:test';
 import { commands, languages, Position, Uri, window } from 'vscode';
 import type { Diagnostic } from 'vscode';
 
@@ -22,20 +22,20 @@ const uriSampleDoc = Uri.file(resolve(sampleDoc));
 
 const timeoutInSeconds = 120;
 
-describe('Extension Test Suite 1', { timeout: timeoutInSeconds * 1000 }, () => {
+suite('Extension Test Suite 1', { timeout: timeoutInSeconds * 1000 }, () => {
     window.showInformationMessage('Start all tests.');
 
-    it('loading the spell checker extension', async () => {
+    test('loading the spell checker extension', async () => {
         const ext = await activateExtension('streetsidesoftware.code-spell-checker');
         assert.ok(ext, 'Spell Checker Extension has loaded.');
     });
 
-    it('loading the dictionary extension', async () => {
+    test('loading the dictionary extension', async () => {
         const ext = await activateExtension();
         assert.ok(ext, 'Dictionary Extension has loaded.');
     });
 
-    it('registering all contributed commands', async () => {
+    test('registering all contributed commands', async () => {
         await activateExtension();
         const pkg = await readPackageJson();
         const contributed = pkg.contributes?.commands?.map((c) => c.command) ?? [];
@@ -45,7 +45,7 @@ describe('Extension Test Suite 1', { timeout: timeoutInSeconds * 1000 }, () => {
         assert.deepStrictEqual(missing, [], 'Every command in `contributes.commands` must be registered.');
     });
 
-    it('registering the commands with explicit IDs, including legacy ones', async () => {
+    test('registering the commands with explicit IDs, including legacy ones', async () => {
         await activateExtension();
         const ids = await readExplicitCommandIds();
         const registered = new Set(await commands.getCommands(true));
@@ -54,7 +54,7 @@ describe('Extension Test Suite 1', { timeout: timeoutInSeconds * 1000 }, () => {
         assert.deepEqual(missing, [], 'Every command in `extension.config.json` must be registered.');
     });
 
-    it('reading the sample file.', async () => {
+    test('reading the sample file.', async () => {
         logYellow('Verifies reading the sample file: %s.', sampleDoc);
         const result = await loadDocument(uriSampleDoc);
         assert.ok(result?.doc, 'Must be able to load the document.');
@@ -62,7 +62,7 @@ describe('Extension Test Suite 1', { timeout: timeoutInSeconds * 1000 }, () => {
         assert.ok(urlDoc.endsWith(basename(sampleDoc)), 'matches sample doc');
     });
 
-    it('Opening the sample document and making sure there are no errors.', async () => {
+    test('Opening the sample document and making sure there are no errors.', async () => {
         logYellow('Opening the sample document and making sure there are no errors.');
         const docContext = await loadDocument(uriSampleDoc);
         assert.ok(docContext, 'Must be able to load the document.');
@@ -106,7 +106,7 @@ describe('Extension Test Suite 1', { timeout: timeoutInSeconds * 1000 }, () => {
         logYellow('Done: Verifies that some spelling errors were found');
     });
 
-    it('Wait a bit', async () => {
+    test('Wait a bit', async () => {
         // This is useful for debugging and you want to see the VS Code UI.
         // Set `secondsToWait` to 30 or more.
         const secondsToWait = 1;
