@@ -48,8 +48,8 @@ jobs:
         with:
           node-version-file: .tool-versions
           cache: npm
-      # A full install would install all extensions. The tests only need the root, `scripts/` and
-      # `extension-tools/` packages: the scripts import extension-tools.
+      # The tests need only the root, `scripts/` and `extension-tools/` packages: the scripts import extension-tools.
+      # `--ignore-scripts`: no dependency needs its install script here.
       - name: Install
         run: |
           npm ci --ignore-scripts
