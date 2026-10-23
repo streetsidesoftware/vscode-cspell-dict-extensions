@@ -25,8 +25,7 @@ import { injectMarkdown } from 'inject-markdown';
 import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
-import { readImports, readSources, splitList } from './dictionaries.mts';
-import type { DictionaryState } from './dictionaryState.mts';
+import { readImports, readSources } from './dictionaries.mts';
 import { withSharedFields } from './extensionHelper.mts';
 import type { PackageJson } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
@@ -241,10 +240,15 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
  */
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
+    const rows = await tableRows(extensionDir, config);
+    return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
+}
+
+/** The rows of every file cspell reads for the extension. */
+async function tableRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
     const where = extensionRepoPath(extensionDir);
     const sources = await readSources(extensionDir, config);
-    const rows = sources.flatMap(({ name, ext }) => settingRows(`${where}: ${name}`, ext));
-    return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
+    return sources.flatMap(({ name, ext }) => settingRows(`${where}: ${name}`, ext));
 }
 
 /**
@@ -314,51 +318,16 @@ function asWritten(value: string | string[] | undefined): string {
     return [value ?? []].flat().map(code).join(', ');
 }
 
-/**
- * The dictionaries in `cspell.import`, and what turns each on: the dictionaries' own settings and the extension's
- * `cspell`.
- */
-export async function dictionaryStates(extensionDir: string, config: ExtensionConfig): Promise<DictionaryState[]> {
-    const exts = (await readSources(extensionDir, config)).map((source) => source.ext);
-    const allRules = rules(exts);
-    return exts
-        .flatMap((ext) => ext.dictionaryDefinitions ?? [])
-        .map(({ name }) => {
-            const named = allRules.filter((rule) => rule.dictionaries.includes(name));
-            // `*` is every file type: `all` covers it.
-            const fileTypes = unique(named.flatMap((rule) => rule.fileTypes)).filter((id) => id !== '*');
-            const all = named.some((rule) => !rule.fileTypes.length || rule.fileTypes.includes('*'));
-            return { name, all, fileTypes, off: !named.length };
-        });
+/** The names of the dictionaries the extension's configs define. */
+export async function dictionaryNames(extensionDir: string, config: ExtensionConfig): Promise<string[]> {
+    const sources = await readSources(extensionDir, config);
+    return sources.flatMap(({ ext }) => ext.dictionaryDefinitions ?? []).map(({ name }) => name);
 }
 
-/** One setting that turns dictionaries on: for some file types, or for every file. */
-interface Rule {
-    dictionaries: string[];
-    /** Empty, or `*`, for every file type. */
-    fileTypes: string[];
-}
-
-/** Every setting in the configs that turns dictionaries on, as a flat list of rules. */
-function rules(exts: readonly CSpellSettings[]): Rule[] {
-    return exts.flatMap((ext) => [dictionariesRule(ext), ...(ext.languageSettings ?? []).map(languageSettingRule)]);
-}
-
-/** `dictionaries` turns its dictionaries on for every file. */
-function dictionariesRule(ext: CSpellSettings): Rule {
-    return { dictionaries: ext.dictionaries ?? [], fileTypes: [] };
-}
-
-/** A language setting turns its dictionaries on for its file types. */
-function languageSettingRule(setting: LanguageSetting): Rule {
-    return {
-        dictionaries: setting.dictionaries ?? [],
-        fileTypes: splitList(setting.languageId),
-    };
-}
-
-function unique(values: string[]): string[] {
-    return [...new Set(values)];
+/** The dictionaries no setting turns on, so they have no row in the dictionaries table. */
+export async function offDictionaries(extensionDir: string, config: ExtensionConfig): Promise<string[]> {
+    const on = new Set((await tableRows(extensionDir, config)).map((row) => row.Dictionary));
+    return (await dictionaryNames(extensionDir, config)).filter((name) => !on.has(code(name)));
 }
 
 function code(text: string): string {

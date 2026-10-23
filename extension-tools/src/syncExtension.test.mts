@@ -9,8 +9,7 @@ import { afterEach, beforeEach, describe, it } from 'node:test';
 import { clearCachedFiles } from 'cspell-lib';
 
 import { readExtensionConfigValidator } from './extensionSchema.mts';
-import { whenOn } from './dictionaryState.mts';
-import { dictionaryStates, syncExtension } from './syncExtension.mts';
+import { offDictionaries, syncExtension } from './syncExtension.mts';
 import type { FileChange } from './syncExtension.mts';
 
 const config = {
@@ -142,6 +141,7 @@ describe('syncExtension', () => {
                 { name: 'off' },
                 { name: 'lisp' },
                 { name: 'everywhere' },
+                { name: 'unused' },
             ],
             dictionaries: ['always'],
             languageSettings: [
@@ -172,21 +172,8 @@ describe('syncExtension', () => {
             { Dictionary: '`lisp`', locale: '', languageId: '', glob: '`**/*.el`, `**/.emacs`' },
             { Dictionary: '`off`', locale: '', languageId: '', glob: '`**/*.md`' },
         ]);
-        const states = await dictionaryStates(dir, await readJson('extension.config.json'));
-        assert.deepEqual(
-            states.filter((d) => d.off).map((d) => d.name),
-            ['off'],
-        );
-        assert.equal(states.length, 7);
-        assert.deepEqual(states.map(whenOn), [
-            'on for `c` and `cpp` files',
-            'on for `html` and `css` files',
-            'on for every file',
-            'on for every file',
-            'off until you turn it on',
-            'on for `elisp` files',
-            'on for every file',
-        ]);
+        // Off: no row. An override's glob turns `off` on.
+        assert.deepEqual(await offDictionaries(dir, await readJson('extension.config.json')), ['unused']);
     });
 
     it('fails on a setting the table would show wrongly', async () => {
