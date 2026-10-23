@@ -44,6 +44,9 @@
   "engines": {
     "node": ">=24.11.0"
   },
+  "allowScripts": {
+    "@vscode/vsce-sign": false
+  },
   "devDependencies": {
     "@lerna-lite/cli": "^5.6.4",
     "@lerna-lite/exec": "^5.6.4",
