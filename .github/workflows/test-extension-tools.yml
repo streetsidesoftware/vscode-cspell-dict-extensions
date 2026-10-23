@@ -55,7 +55,7 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             extension-tools/package-lock.json
-      # The tests need only the root and `extension-tools/` packages.
+      # Install only what the tests need.
       - name: Install
         run: |
           npm ci

@@ -198,7 +198,7 @@ jobs:
           key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ env.VSCODE_VERSION }}
           path: .vscode-test
 
-      # Install only what the test extension needs: the root, `test-runner/` and the extension.
+      # Install only what the test extension needs.
       - name: Install
         shell: bash
         run: |

@@ -48,7 +48,8 @@ jobs:
         with:
           node-version-file: .tool-versions
           cache: npm
-      # The tests need only the root, `scripts/` and `extension-tools/` packages: the scripts import extension-tools.
+      # Install only what the tests need.
+      # The scripts import extension-tools, so it is installed too.
       - name: Install
         run: |
           npm ci
