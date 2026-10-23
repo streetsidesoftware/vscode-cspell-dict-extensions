@@ -1,8 +1,8 @@
 [
     {
         "Dictionary": "`de-de`",
-        "locale": "`de,de_DE`",
-        "languageId": "`*`",
+        "locale": "`de`, `de_DE`",
+        "languageId": "",
         "glob": ""
     }
 ]

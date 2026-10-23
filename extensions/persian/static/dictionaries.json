@@ -1,8 +1,8 @@
 [
     {
         "Dictionary": "`fa-ir`",
-        "locale": "`fa, fa-IR`",
-        "languageId": "`*`",
+        "locale": "`fa`, `fa-IR`",
+        "languageId": "",
         "glob": ""
     }
 ]

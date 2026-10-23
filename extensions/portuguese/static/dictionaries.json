@@ -1,8 +1,8 @@
 [
     {
         "Dictionary": "`pt-pt`",
-        "locale": "`pt,pt_PT`",
-        "languageId": "`*`",
+        "locale": "`pt`, `pt_PT`",
+        "languageId": "",
         "glob": ""
     }
 ]

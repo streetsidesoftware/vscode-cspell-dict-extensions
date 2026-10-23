@@ -230,6 +230,7 @@ describe('readme', () => {
             './static/commands.json',
             '../../static/manual-settings.language.md#values-file=:./extension.config.json',
             './static/dictionaries.json#markdown',
+            '../../static/dictionaries-columns.md',
             '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
             '../../static/footer.md',
         ]);

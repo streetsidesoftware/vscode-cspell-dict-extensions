@@ -1,8 +1,8 @@
 [
     {
         "Dictionary": "`da-dk`",
-        "locale": "`da,da-DK`",
-        "languageId": "`*`",
+        "locale": "`da`, `da-DK`",
+        "languageId": "",
         "glob": ""
     }
 ]

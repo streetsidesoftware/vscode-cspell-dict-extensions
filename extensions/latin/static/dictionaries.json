@@ -1,8 +1,8 @@
 [
     {
         "Dictionary": "`la`",
-        "locale": "`la,la-VA`",
-        "languageId": "`*`",
+        "locale": "`la`, `la-VA`",
+        "languageId": "",
         "glob": ""
     }
 ]

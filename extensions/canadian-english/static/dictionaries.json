@@ -2,19 +2,19 @@
     {
         "Dictionary": "`en-ca`",
         "locale": "`en-CA`",
-        "languageId": "`*`",
+        "languageId": "",
         "glob": ""
     },
     {
         "Dictionary": "`en-common-misspellings`",
         "locale": "`en-CA`",
-        "languageId": "`*`",
+        "languageId": "",
         "glob": ""
     },
     {
         "Dictionary": "`en-gb-common-misspellings`",
         "locale": "`en-CA`",
-        "languageId": "`*`",
+        "languageId": "",
         "glob": ""
     }
 ]

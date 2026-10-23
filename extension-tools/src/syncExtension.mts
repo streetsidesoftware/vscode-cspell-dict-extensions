@@ -25,7 +25,7 @@ import { injectMarkdown } from 'inject-markdown';
 import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
-import { readImports, readSources } from './dictionaries.mts';
+import { readImports, readSources, splitList } from './dictionaries.mts';
 import { withSharedFields } from './extensionHelper.mts';
 import type { PackageJson } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
@@ -234,13 +234,16 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
  * The settings that name the extension's dictionaries, as table rows, injected into the README with
  * `<!--- @@inject-table: ./static/dictionaries.json --->`. One row for each dictionary a setting names: the top-level
  * `dictionaries`, each language setting and each override, in every file cspell reads for the extension (the imported
- * files, with their own imports) and in the extension's `cspell`. The values are as the setting writes them; an empty
- * cell is a field the setting doesn't set.
+ * files, with their own imports) and in the extension's `cspell`. Each locale, file type and glob is shown as code; an
+ * empty cell is a field the setting doesn't set, or sets to `*`. Identical rows are shown once.
  * @returns `undefined` for a bundle, or when no setting names a dictionary.
  */
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
-    const rows = await tableRows(extensionDir, config);
+    // Two settings can turn a dictionary on in the same way, such as a package's `dictionaries` and the extension's.
+    const rows = [
+        ...new Map((await tableRows(extensionDir, config)).map((row) => [JSON.stringify(row), row])).values(),
+    ];
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
 }
 
@@ -307,15 +310,21 @@ interface Cells {
 function row(name: string, cells: Cells): Row {
     return {
         Dictionary: code(name),
-        locale: asWritten(cells.locale),
-        languageId: asWritten(cells.languageId),
-        glob: asWritten(cells.glob),
+        locale: codes(condition(cells.locale)),
+        languageId: codes(condition(cells.languageId)),
+        // Not split: a glob can have commas, as in `*.{adb,ads}`.
+        glob: codes([cells.glob ?? []].flat()),
     };
 }
 
-/** A setting's value as written: a string, or each item of a list, as code. */
-function asWritten(value: string | string[] | undefined): string {
-    return [value ?? []].flat().map(code).join(', ');
+/** A locale or file type condition. cspell-lib treats `*` like no value: every locale or file type. */
+function condition(value: string | string[] | undefined): string[] {
+    return value === '*' ? [] : splitList(value);
+}
+
+/** Each item as code, such as `` `c`, `cpp` ``. */
+function codes(items: string[]): string {
+    return items.map(code).join(', ');
 }
 
 /** The names of the dictionaries the extension's configs define. */

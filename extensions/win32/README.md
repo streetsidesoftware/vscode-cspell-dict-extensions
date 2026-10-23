@@ -23,6 +23,16 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 ## Dictionaries
 
+<!--- @@inject-table: ./static/dictionaries.json#markdown --->
+
+| Dictionary | locale | languageId | glob |
+| ---------- | ------ | ---------- | ---- |
+| `win32`    |        | `c`, `cpp` |      |
+
+<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+
+<!--- @@inject: ../../static/dictionaries-columns.md --->
+
 Each row is a setting that turns a dictionary on. The dictionary is on when all of the row's conditions match:
 
 - **locale:** `cSpell.language` includes one of these locales.
@@ -31,13 +41,7 @@ Each row is a setting that turns a dictionary on. The dictionary is on when all 
 
 An empty cell is no condition.
 
-<!--- @@inject-table: ./static/dictionaries.json#markdown --->
-
-| Dictionary | locale | languageId | glob |
-| ---------- | ------ | ---------- | ---- |
-| `win32`    | `*`    | `c,cpp`    |      |
-
-<!--- @@inject-end: ./static/dictionaries.json#markdown --->
+<!--- @@inject-end: ../../static/dictionaries-columns.md --->
 
 <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 

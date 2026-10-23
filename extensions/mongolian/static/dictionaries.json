@@ -1,8 +1,8 @@
 [
     {
         "Dictionary": "`mn-mn`",
-        "locale": "`mn,mn-MN`",
-        "languageId": "`*`",
+        "locale": "`mn`, `mn-MN`",
+        "languageId": "",
         "glob": ""
     }
 ]

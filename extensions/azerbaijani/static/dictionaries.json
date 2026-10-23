@@ -1,8 +1,8 @@
 [
     {
         "Dictionary": "`az-az`",
-        "locale": "`az,az-AZ`",
-        "languageId": "`*`",
+        "locale": "`az`, `az-AZ`",
+        "languageId": "",
         "glob": ""
     }
 ]

@@ -1,8 +1,8 @@
 [
     {
         "Dictionary": "`bg-bg`",
-        "locale": "`bg,bg-BG`",
-        "languageId": "`*`",
+        "locale": "`bg`, `bg-BG`",
+        "languageId": "",
         "glob": ""
     }
 ]

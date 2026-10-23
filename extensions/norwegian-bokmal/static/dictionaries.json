@@ -1,8 +1,8 @@
 [
     {
         "Dictionary": "`nb-no`",
-        "locale": "`nb, nb-no`",
-        "languageId": "`*`",
+        "locale": "`nb`, `nb-no`",
+        "languageId": "",
         "glob": ""
     }
 ]

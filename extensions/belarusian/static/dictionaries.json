@@ -1,8 +1,8 @@
 [
     {
         "Dictionary": "`be-by`",
-        "locale": "`be, be-BY`",
-        "languageId": "`*`",
+        "locale": "`be`, `be-BY`",
+        "languageId": "",
         "glob": ""
     }
 ]
