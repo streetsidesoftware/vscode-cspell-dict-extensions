@@ -7,18 +7,10 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { extractImportErrors, getSources, resolveConfigFileImports } from 'cspell-lib';
-import type { CSpellSettings, LanguageSetting as CSpellLanguageSetting, OverrideSettings } from 'cspell-lib';
+import type { CSpellSettings } from 'cspell-lib';
 
 import type { CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
 import { extensionRepoPath, repoRoot } from './repo.mts';
-
-/** The parts of a cspell config file the tools read. */
-export type DictionaryExt = Pick<
-    CSpellSettings,
-    'engines' | 'dictionaryDefinitions' | 'dictionaries' | 'languageSettings' | 'overrides'
->;
-export type LanguageSetting = CSpellLanguageSetting;
-export type Override = OverrideSettings;
 
 /** One config file cspell reads for the extension. */
 export interface Source {
@@ -27,7 +19,7 @@ export interface Source {
     /** The package the file is in, e.g. `@cspell/dict-sv`, and its folder; `undefined` for the config's own `cspell`. */
     package: { name: string; dir: string } | undefined;
     /** The file's own settings, without its imports. */
-    ext: DictionaryExt;
+    ext: CSpellSettings;
 }
 
 const cspellExtPath: CSpellExtPath = 'static/cspell-ext.json';

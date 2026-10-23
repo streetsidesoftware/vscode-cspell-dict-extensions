@@ -20,12 +20,12 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
+import type { CSpellSettings, LanguageSetting, OverrideSettings } from 'cspell-lib';
 import { injectMarkdown } from 'inject-markdown';
 import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
 import { readImports, readSources, splitList } from './dictionaries.mts';
-import type { DictionaryExt, LanguageSetting, Override } from './dictionaries.mts';
 import type { DictionaryState } from './dictionaryState.mts';
 import { withSharedFields } from './extensionHelper.mts';
 import type { PackageJson } from './extensionHelper.mts';
@@ -252,7 +252,7 @@ async function dictionariesTable(extensionDir: string, config: ExtensionConfig):
  * The rows of the settings in one `cspell-ext.json`.
  * @param where - names the file in an error.
  */
-function settingRows(where: string, ext: DictionaryExt): Row[] {
+function settingRows(where: string, ext: CSpellSettings): Row[] {
     return [
         ...dictionariesRows(where, ext.dictionaries),
         ...(ext.languageSettings ?? []).flatMap((setting) => languageSettingRows(where, setting)),
@@ -274,7 +274,7 @@ function languageSettingRows(where: string, setting: LanguageSetting): Row[] {
  * An override turns its dictionaries on for the files its `filename` matches. Its `language` and `languageId` set the
  * locale and file type of those files; they don't select them, so they have no column.
  */
-function overrideRows(where: string, override: Override): Row[] {
+function overrideRows(where: string, override: OverrideSettings): Row[] {
     const dictionaries = names(where, override.dictionaries);
     if (dictionaries.length && (override.language !== undefined || override.languageId !== undefined)) {
         throw new Error(
@@ -341,12 +341,12 @@ interface Rule {
 }
 
 /** Every setting in the configs that turns dictionaries on, as a flat list of rules. */
-function rules(exts: readonly DictionaryExt[]): Rule[] {
+function rules(exts: readonly CSpellSettings[]): Rule[] {
     return exts.flatMap((ext) => [dictionariesRule(ext), ...(ext.languageSettings ?? []).map(languageSettingRule)]);
 }
 
 /** `dictionaries` turns its dictionaries on for every file. */
-function dictionariesRule(ext: DictionaryExt): Rule {
+function dictionariesRule(ext: CSpellSettings): Rule {
     return { dictionaries: ext.dictionaries ?? [], fileTypes: [] };
 }
 
