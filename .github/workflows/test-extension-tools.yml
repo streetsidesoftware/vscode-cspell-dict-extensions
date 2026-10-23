@@ -55,10 +55,10 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             extension-tools/package-lock.json
-      # A full install would install all extensions. The tests only need the root and `extension-tools/` packages.
+      # Install only what the tests need.
       - name: Install
         run: |
-          npm ci --ignore-scripts
+          npm ci
           npm ci --prefix extension-tools
       - run: npm test
         working-directory: extension-tools

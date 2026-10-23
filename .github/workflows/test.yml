@@ -101,7 +101,9 @@ jobs:
           path: .vscode-test
 
       - name: Install
-        run: npm ci
+        run: |
+          npm ci
+          npm run setup
 
       - name: Download
         id: download
@@ -151,6 +153,7 @@ jobs:
           fail-on-cache-miss: true
 
       - run: npm ci
+      - run: npm run setup
       - run: |
           cd ${{ matrix.extension_dir }}
           npm run pack-extension
@@ -195,11 +198,11 @@ jobs:
           key: vscode-download-cache-${{ runner.os }}-${{ runner.arch }}-${{ env.VSCODE_VERSION }}
           path: .vscode-test
 
-      # Install only what the test extension needs. A full install would install all extensions.
+      # Install only what the test extension needs.
       - name: Install
         shell: bash
         run: |
-          npm ci --ignore-scripts
+          npm ci
           npm ci --prefix test-runner
           npm ci --prefix "$TEST_EXTENSION_DIR"
 

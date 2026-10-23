@@ -54,7 +54,7 @@ You need:
 
 Follow these steps in order:
 
-1. **Install.** Fork and clone the repository. Then, in its root, run `npm ci`.
+1. **Install.** Fork and clone the repository. Then, in its root, run `npm ci`, then `npm run setup`.
 
 2. **Run the generator.** It asks a few questions, then creates the extension.
 

@@ -4,7 +4,7 @@
   "version": "8.2.0",
   "scripts": {
     "test": "lerna run test",
-    "postinstall": "lerna exec \"npm i\"",
+    "setup": "lerna exec \"npm ci\"",
     "pub-version": "lerna version --conventional-commits",
     "publish-all": "lerna exec --no-bail \"vsce publish\"",
     "publish-all-ovsx": "lerna exec --no-bail \"ovsx publish --pat \\$OVSX_TOKEN\"",
@@ -28,7 +28,7 @@
     "extension-tools": "node ./extension-tools/cli.mts",
     "tool:gen-extension-list": "node ./scripts/gen-extension-list.mts",
     "lint": "npm run cspell",
-    "update-dictionaries": "lerna exec \"npx npm-check-updates -t latest -u -f \\\"@cspell*\\\" \" && npm i && npm run sync:extensions",
+    "update-dictionaries": "lerna exec \"npx npm-check-updates -t latest -u -f \\\"@cspell*\\\" && npm i\" && npm run sync:extensions",
     "update-packages": "npm ci && npx npm-check-updates -t semver -u && npm i && lerna exec \"npx npm-check-updates -t semver -u && rm -rf node_modules package-lock.json && npm i\" && npm i && npm run sync:extensions",
     "list:packages": "node ./extension-tools/cli.mts packages",
     "fetch:sample": "node ./extension-tools/cli.mts fetch-sample",

@@ -30,6 +30,7 @@ jobs:
           node-version-file: .tool-versions
           cache: npm
       - run: npm install
+      - run: npm run setup
       - run: npm run lint
       - run: npm run check-types
       - run: npm run lint:code

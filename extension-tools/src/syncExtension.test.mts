@@ -105,7 +105,7 @@ describe('syncExtension', () => {
         await fs.rm(path.join(dir, 'node_modules'), { recursive: true });
         await assert.rejects(
             syncExtension(dir, options),
-            /can't read an import\. Run `npm install` first\.\n.*@cspell\/dict-demo\/cspell-ext\.json/,
+            /can't read an import\. Run `npm run setup` first\.\n.*@cspell\/dict-demo\/cspell-ext\.json/,
         );
     });
 
