@@ -77,14 +77,11 @@ describe('askQuestions', () => {
 
     after(() => rm(extensionsDir, { recursive: true, force: true }));
 
-    function context(
-        prompter: Prompter,
-        lists: readonly CSpellPackage[] | 'offline' = packages,
-    ): Context & { logged: string[] } {
+    function context(prompter: Prompter): Context & { logged: string[] } {
         const logged: string[] = [];
         return {
             prompter,
-            packages: lists === 'offline' ? undefined : lists,
+            packages,
             extensionsDir,
             existing: new Map([['@cspell/dict-sv', 'swedish']]),
             log: (message) => logged.push(stripVTControlCharacters(message)),
@@ -197,8 +194,8 @@ describe('askQuestions', () => {
         });
 
         it('rejects a name that is taken', async () => {
-            const prompter = scriptedPrompter(['', 'swedish', 'svenska', '', '@cspell/dict-sv', 'language', 'sv']);
-            await askQuestions({}, context(prompter, 'offline'));
+            const prompter = scriptedPrompter(['', 'swedish', 'svenska']);
+            await askQuestions({ packages: ['@cspell/dict-sv'] }, context(prompter));
             assert.deepEqual(
                 prompter.asked.filter((q) => q.message.startsWith('Extension name')).map((q) => q.error),
                 [
@@ -207,13 +204,6 @@ describe('askQuestions', () => {
                     undefined,
                 ],
             );
-        });
-
-        it('asks for the package names and the kind when offline', async () => {
-            const prompter = scriptedPrompter(['svenska', '', '@cspell/dict-sv', 'language', 'sv']);
-            const ctx = context(prompter, 'offline');
-            const answers = await askQuestions({}, ctx);
-            assert.deepEqual([answers.packages, answers.kind, answers.locale], [['@cspell/dict-sv'], 'language', 'sv']);
         });
 
         it('only asks what the options do not answer', async () => {
@@ -283,17 +273,6 @@ describe('askQuestions', () => {
                 /extensions\/swedish already exists.*--force/,
             );
             assert.equal((await yes({ name: 'swedish', packages: ['@cspell/dict-sv'], force: true })).name, 'swedish');
-        });
-
-        it('fails without the package lists unless the kind and locale are given', async () => {
-            const offline = (options: Options) =>
-                askQuestions({ ...options, yes: true }, context(noPrompter, 'offline'));
-            const sv = { name: 'svenska', packages: ['@cspell/dict-sv'] };
-            await assert.rejects(offline(sv), /Missing --kind/);
-            await assert.rejects(offline({ ...sv, kind: 'language' }), /Missing --locale/);
-            const answers = await offline({ ...sv, kind: 'language', locale: 'sv' });
-            assert.deepEqual([answers.kind, answers.locale, answers.nativeName], ['language', 'sv', 'svenska']);
-            assert.equal((await offline({ ...sv, kind: 'wordList' })).kind, 'wordList');
         });
     });
 
