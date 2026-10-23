@@ -119,6 +119,8 @@ async function generate(
     for (const { file } of changes) log(`sync ${file}`);
     // Record the package.json fields the sync set, such as `engines`, in package-lock.json.
     npm(['install', '--package-lock-only'], destDir);
+    // extension.js is committed.
+    npm(['run', 'build'], destDir);
     await addNameWords(destDir, config, repoRoot);
 
     console.log(styleText('green', `\nCreated extensions/${answers.name}`));
