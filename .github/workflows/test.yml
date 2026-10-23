@@ -199,11 +199,10 @@ jobs:
           path: .vscode-test
 
       # Install only what the test extension needs: the root, `test-runner/` and the extension.
-      # `--ignore-scripts`: no dependency needs its install script here.
       - name: Install
         shell: bash
         run: |
-          npm ci --ignore-scripts
+          npm ci
           npm ci --prefix test-runner
           npm ci --prefix "$TEST_EXTENSION_DIR"
 

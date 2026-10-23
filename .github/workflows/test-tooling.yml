@@ -49,10 +49,9 @@ jobs:
           node-version-file: .tool-versions
           cache: npm
       # The tests need only the root, `scripts/` and `extension-tools/` packages: the scripts import extension-tools.
-      # `--ignore-scripts`: no dependency needs its install script here.
       - name: Install
         run: |
-          npm ci --ignore-scripts
+          npm ci
           npm ci --prefix scripts
           npm ci --prefix extension-tools
       - name: Test scripts
