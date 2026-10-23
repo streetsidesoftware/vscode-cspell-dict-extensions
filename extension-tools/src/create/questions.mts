@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
-import { filterPackages as matchPackages } from '../cspellPackages.mts';
+import { filterPackages as matchPackages, noExtensionReason } from '../cspellPackages.mts';
 import type { CSpellPackage } from '../cspellPackages.mts';
 import {
     canonicalLocale,
@@ -221,37 +221,40 @@ function isCSpellPackage(name: string): boolean {
 }
 
 /**
- * The packages that match the search term, by package name, name or description, leaving out those that ship with
- * cspell. Packages that already have an extension come last.
+ * The packages that match the search term, by package name, name or description, leaving out those that get no
+ * extension, such as those that ship with cspell. Packages that already have an extension come last.
  */
 export function filterPackages(
     packages: readonly CSpellPackage[],
     term: string,
     existing: ReadonlyMap<string, string>,
 ): CSpellPackage[] {
-    const matches = matchPackages(packages, [term]).filter((pkg) => !pkg.withCSpell);
+    const matches = matchPackages(packages, [term]).filter((pkg) => !noExtensionReason(pkg));
     return [
         ...matches.filter((pkg) => !existing.has(pkg.packageName)),
         ...matches.filter((pkg) => existing.has(pkg.packageName)),
     ];
 }
 
-/** Why nothing matches: a package that ships with cspell needs no extension, so the search leaves it out. */
+/** Why nothing matches: the search leaves out the packages that get no extension. */
 function noMatch(packages: readonly CSpellPackage[], term: string): string {
-    const shipped = matchPackages(packages, [term]).filter((pkg) => pkg.withCSpell);
-    if (!shipped.length) return `No package matches "${term}".`;
-    const names = shipped.map((pkg) => pkg.packageName).join(', ');
-    return `No package matches "${term}" that needs an extension. These ship with cspell: ${names}.`;
+    const left = matchPackages(packages, [term]).flatMap((pkg) => {
+        const reason = noExtensionReason(pkg);
+        return reason ? [`- ${pkg.packageName} ${reason}.`] : [];
+    });
+    if (!left.length) return `No package matches "${term}".`;
+    return [`No package matches "${term}" that can have an extension:`, ...left].join('\n');
 }
 
-/** The package in the lists. Fails when it isn't there, or ships with cspell. */
+/** The package in the lists. Fails when it isn't there, or gets no extension. */
 function checkPackage(name: string, ctx: Context): CSpellPackage {
     if (!isCSpellPackage(name)) {
         throw new UsageError(`${name} is not a @cspell/dict-* or @cspell/parser-* package. ${notPublished}`);
     }
     const pkg = ctx.packages.find((p) => p.packageName === name);
     if (!pkg) throw new UsageError(`${name} is not in cspell-dicts or cspell-parsers. ${notPublished}`);
-    if (pkg.withCSpell) throw new UsageError(`${name} ships with cspell, so it needs no extension.`);
+    const reason = noExtensionReason(pkg);
+    if (reason) throw new UsageError(`${name} ${reason}, so it gets no extension.`);
     return pkg;
 }
 

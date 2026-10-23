@@ -44,6 +44,8 @@ An extension includes a published package, unchanged. Find the one the request m
     "Emacs Lisp". Show the package and ask whether it's the one.
   - **The Extension column says "ships with cspell".** cspell already includes it, so it needs no extension. Say so,
     and stop.
+  - **The Extension column says "isn't published" or "is deprecated".** The package gets no extension. Give the
+    reason, and stop.
   - **The Extension column names an extension.** Show it. Ask whether to change that extension instead or create
     another one. Both are allowed.
   - **The Kind column says bundle.** The generator can't make a bundle. Say so, and stop.

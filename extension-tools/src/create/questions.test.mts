@@ -137,12 +137,12 @@ describe('askQuestions', () => {
             assert.deepEqual(localeQuestion?.choices, ['sr', 'sr-Cyrl', 'sr-Latn']);
         });
 
-        it('says when the only matches ship with cspell', async () => {
+        it('says why the only matches get no extension', async () => {
             const prompter = scriptedPrompter(['american', 'American', 'réforme']);
             const ctx = context(prompter);
             const answers = await askQuestions({}, ctx);
             assert.deepEqual(ctx.logged, [
-                'No package matches "american" that needs an extension. These ship with cspell: @cspell/dict-en_us.',
+                'No package matches "american" that can have an extension:\n- @cspell/dict-en_us ships with cspell.',
             ]);
             assert.deepEqual(answers.packages, ['@cspell/dict-fr-reforme']);
         });
