@@ -8,7 +8,7 @@
     {
         "Command": "Disable Spanish Spell Checker Dictionary",
         "What": "locale",
-        "Value": "es-ES",
+        "Value": "es-ES,es",
         "Scope": "global"
     },
     {
@@ -20,7 +20,7 @@
     {
         "Command": "Disable Spanish Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "es-ES",
+        "Value": "es-ES,es",
         "Scope": "workspace"
     }
 ]
