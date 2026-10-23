@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`hr-hr`",
-        "locale": "`hr,hr-HR`",
+        "locale": "`hr`, `hr-HR`",
         "languageId": "`*`",
         "glob": ""
     }

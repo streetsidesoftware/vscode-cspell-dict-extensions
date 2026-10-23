@@ -1,13 +1,13 @@
 [
     {
         "Dictionary": "`sr-cyrl`",
-        "locale": "`sr,sr-Cyrl`",
+        "locale": "`sr`, `sr-Cyrl`",
         "languageId": "`*`",
         "glob": ""
     },
     {
         "Dictionary": "`sr-latn`",
-        "locale": "`sr,sr-Latn`",
+        "locale": "`sr`, `sr-Latn`",
         "languageId": "`*`",
         "glob": ""
     }

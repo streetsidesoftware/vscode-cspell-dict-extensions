@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`grc`",
-        "locale": "`grc,grc_GR,gr,el-GRC`",
+        "locale": "`grc`, `grc_GR`, `gr`, `el-GRC`",
         "languageId": "`*`",
         "glob": ""
     }

@@ -196,24 +196,13 @@ function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): str
     return `<!--- @@${kind}: ${marker} --->\n<!--- @@inject-end: ${marker} --->\n`;
 }
 
-/** Explains the columns of the README's dictionaries table. */
-const dictionariesText = [
-    "Each row is a setting that turns a dictionary on. The dictionary is on when all of the row's conditions match:",
-    '',
-    '- **locale:** `cSpell.language` includes one of these locales.',
-    '- **languageId:** the file is one of these types.',
-    "- **glob:** the file's path matches one of these patterns.",
-    '',
-    'An empty cell is no condition.',
-].join('\n');
-
 /** The starter README, with the `@@inject` sections the sync fills in. */
 export function readme(answers: Answers): string {
     const title = `# ${displayName(answers)}\n`;
     const requirements = inject(
         '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
     );
-    const dictionaries = `## Dictionaries\n\n${dictionariesText}\n\n${inject('./static/dictionaries.json#markdown', 'inject-table')}`;
+    const dictionaries = `## Dictionaries\n\n${inject('../../static/dictionaries-columns.md')}\n${inject('./static/dictionaries.json#markdown', 'inject-table')}`;
     const footer = inject('../../static/footer.md');
     switch (answers.kind) {
         case 'language':

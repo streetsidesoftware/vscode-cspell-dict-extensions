@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`pt-br`",
-        "locale": "`pt,pt_BR`",
+        "locale": "`pt`, `pt_BR`",
         "languageId": "`*`",
         "glob": ""
     }

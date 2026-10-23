@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`nl-nl`",
-        "locale": "`nl,nl-NL`",
+        "locale": "`nl`, `nl-NL`",
         "languageId": "`*`",
         "glob": ""
     }

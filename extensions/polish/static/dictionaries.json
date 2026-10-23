@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`pl-pl`",
-        "locale": "`pl,pl_PL`",
+        "locale": "`pl`, `pl_PL`",
         "languageId": "`*`",
         "glob": ""
     }

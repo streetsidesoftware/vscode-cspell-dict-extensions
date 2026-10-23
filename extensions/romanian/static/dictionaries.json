@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`ro-ro`",
-        "locale": "`ro,ro-RO`",
+        "locale": "`ro`, `ro-RO`",
         "languageId": "`*`",
         "glob": ""
     }

@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`hu-hu`",
-        "locale": "`hu,hu-hu`",
+        "locale": "`hu`, `hu-hu`",
         "languageId": "`*`",
         "glob": ""
     }

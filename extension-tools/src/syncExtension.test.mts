@@ -164,7 +164,7 @@ describe('syncExtension', () => {
         await syncExtension(dir, options);
         assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
             { Dictionary: '`always`', locale: '', languageId: '', glob: '' },
-            { Dictionary: '`c-only`', locale: '`*`', languageId: '`c,cpp`', glob: '' },
+            { Dictionary: '`c-only`', locale: '`*`', languageId: '`c`, `cpp`', glob: '' },
             { Dictionary: '`web`', locale: '`*`', languageId: '`html`, `css`', glob: '' },
             { Dictionary: '`any`', locale: '`*`', languageId: '`*`', glob: '' },
             { Dictionary: '`lisp`', locale: '`*`', languageId: '`elisp`', glob: '' },

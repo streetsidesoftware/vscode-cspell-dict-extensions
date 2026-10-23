@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`sl-si`",
-        "locale": "`sl,sl-SI`",
+        "locale": "`sl`, `sl-SI`",
         "languageId": "`*`",
         "glob": ""
     }

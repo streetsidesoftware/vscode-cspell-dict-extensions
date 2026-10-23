@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`gl-es`",
-        "locale": "`gl,gl_ES`",
+        "locale": "`gl`, `gl_ES`",
         "languageId": "`*`",
         "glob": ""
     }

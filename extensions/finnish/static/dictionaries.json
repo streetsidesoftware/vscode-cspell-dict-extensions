@@ -1,7 +1,7 @@
 [
     {
         "Dictionary": "`fi-fi`",
-        "locale": "`fi,fi-fi`",
+        "locale": "`fi`, `fi-fi`",
         "languageId": "`*`",
         "glob": ""
     }
