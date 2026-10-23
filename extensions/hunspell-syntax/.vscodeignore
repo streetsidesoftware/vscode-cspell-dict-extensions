@@ -1,8 +1,0 @@
-.*
-.*/**
-
-*.vsix
-
-cspell.json
-vsc-extension-quickstart.md
-samples/**
