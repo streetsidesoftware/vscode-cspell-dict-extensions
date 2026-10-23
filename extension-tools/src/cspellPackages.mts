@@ -24,6 +24,20 @@ export interface CSpellPackage {
     fileTypes: string[];
     /** It ships with cspell, so it needs no extension. */
     withCSpell: boolean;
+    /** It isn't published to npm. */
+    private?: boolean | undefined;
+    /** Why it is deprecated. */
+    deprecated?: string | undefined;
+}
+
+/**
+ * Why the package gets no extension of its own, such as "ships with cspell". Undefined when it can have one.
+ */
+export function noExtensionReason(pkg: CSpellPackage): string | undefined {
+    if (pkg.withCSpell) return 'ships with cspell';
+    if (pkg.private) return "isn't published";
+    if (pkg.deprecated) return `is deprecated (${pkg.deprecated})`;
+    return undefined;
 }
 
 /** Fetch a URL as text. Rejects on a network error or an HTTP error status. */
@@ -42,6 +56,10 @@ interface DictionaryPackageEntry {
     description?: string;
     /** True when the package ships with cspell. */
     cspell?: boolean;
+    /** True when the package isn't published to npm. */
+    private?: boolean;
+    /** Why the package is deprecated. */
+    deprecated?: string;
     categories?: string[];
     isBundle?: boolean;
     dictionaries?: { locales?: string[]; fileTypes?: string[] }[];
@@ -71,6 +89,8 @@ export function parseDictionaryPackages(json: string): CSpellPackage[] {
             locales: kind === 'language' ? unique(dictionaries.flatMap((d) => d.locales ?? [])) : [],
             fileTypes: unique(dictionaries.flatMap((d) => d.fileTypes ?? [])),
             withCSpell: entry.cspell === true,
+            private: entry.private,
+            deprecated: entry.deprecated,
         };
     });
 }

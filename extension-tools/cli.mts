@@ -57,7 +57,10 @@ program
     .description('List the dictionaries in cspell-dicts and the parsers in cspell-parsers, and the extension of each.')
     .argument('[word...]', 'only the packages whose name, English name or description contains every word')
     .option('--any', 'a package may contain any of the words instead')
-    .option('--missing', 'only the packages no extension includes yet, leaving out those that ship with cspell')
+    .option(
+        '--missing',
+        'only the packages no extension includes yet, leaving out those that ship with cspell, are private or are deprecated',
+    )
     .option('--json', 'print JSON instead of a table')
     .action(async (words: string[], options: { any?: boolean; missing?: boolean; json?: boolean }) => {
         const listed = await listPackages(words, options);

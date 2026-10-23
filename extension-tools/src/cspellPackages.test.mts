@@ -5,6 +5,7 @@ import {
     dictionaryPackagesUrl,
     fetchCSpellPackages,
     filterPackages,
+    noExtensionReason,
     parseDictionaryPackages,
     parseParserPackages,
     parserPackagesUrl,
@@ -52,6 +53,8 @@ describe('cspellPackages', () => {
                 locales: ['th', 'th-th'],
                 fileTypes: [],
                 withCSpell: false,
+                private: undefined,
+                deprecated: undefined,
             },
             {
                 packageName: '@cspell/dict-fullstack',
@@ -61,6 +64,8 @@ describe('cspellPackages', () => {
                 locales: [],
                 fileTypes: ['css', 'html'],
                 withCSpell: true,
+                private: undefined,
+                deprecated: undefined,
             },
             {
                 packageName: '@cspell/dict-cspell-bundle',
@@ -70,8 +75,24 @@ describe('cspellPackages', () => {
                 locales: [],
                 fileTypes: [],
                 withCSpell: false,
+                private: undefined,
+                deprecated: undefined,
             },
         ]);
+    });
+
+    it('reads whether a dictionary is private or deprecated', () => {
+        const entries = JSON.stringify([
+            { name: 'English - Shared', packageName: '@cspell/dict-en-shared', private: true },
+            { name: 'Legacy', packageName: '@cspell/dict-en-gb-legacy', deprecated: 'Use @cspell/dict-en-gb.' },
+        ]);
+        assert.deepEqual(
+            parseDictionaryPackages(entries).map((p) => [p.private, p.deprecated, noExtensionReason(p)]),
+            [
+                [true, undefined, "isn't published"],
+                [undefined, 'Use @cspell/dict-en-gb.', 'is deprecated (Use @cspell/dict-en-gb.)'],
+            ],
+        );
     });
 
     it("reads the parsers from cspell-parsers' Markdown-flavored CSV", () => {

@@ -1,17 +1,20 @@
-import { fetchCSpellPackages, filterPackages } from './cspellPackages.mts';
+import { fetchCSpellPackages, filterPackages, noExtensionReason } from './cspellPackages.mts';
 import type { CSpellPackage } from './cspellPackages.mts';
 import { findExistingExtensions } from './existingExtensions.mts';
 import { extensionsDir } from './repo.mts';
 
 export interface ListedPackage extends CSpellPackage {
-    /** The extension that includes the package, e.g. `swedish`, or `ships with cspell`. Empty when there is none. */
+    /**
+     * The extension that includes the package, e.g. `swedish`, or why it gets none, e.g. `ships with cspell`. Empty
+     * when there is none.
+     */
     extension: string;
 }
 
 export interface ListOptions {
     /** A package may contain any of the words, instead of every word. */
     any?: boolean | undefined;
-    /** Only the packages no extension includes yet, leaving out those that ship with cspell. */
+    /** Only the packages no extension includes yet, leaving out those that get no extension. */
     missing?: boolean | undefined;
 }
 
@@ -24,7 +27,7 @@ export async function listPackages(words: string[], options: ListOptions): Promi
     return filterPackages(await fetchCSpellPackages(), words, { any: options.any })
         .map((pkg) => ({
             ...pkg,
-            extension: existing.get(pkg.packageName) ?? (pkg.withCSpell ? 'ships with cspell' : ''),
+            extension: existing.get(pkg.packageName) ?? noExtensionReason(pkg) ?? '',
         }))
         .filter((pkg) => !options.missing || !pkg.extension);
 }
