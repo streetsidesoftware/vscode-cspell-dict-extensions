@@ -74,7 +74,7 @@
     "onStartupFinished"
   ],
   "dependencies": {
-    "@cspell/dict-ro-ro": "^2.0.8"
+    "@cspell/dict-ro-ro": "^2.0.9"
   },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
