@@ -1,5 +1,18 @@
 # Changelog
 
+## [8.2.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@8.2.0...vscode-cspell-dict-extensions@8.2.1) (2026-10-24)
+
+
+### Updates and Bug Fixes
+
+* Disable turns off Dutch, Persian and Spanish when the language was added without its region ([#1772](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1772)) ([cff1d05](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/cff1d051a33ae932e54c0f2c5743c14c1b16c83a))
+* explicit commands and names in every config, one dictionaries table ([#1742](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1742)) ([2119a43](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2119a43b03de920ac952bd062a63a9d1c16b9bb1))
+* package each extension's code as a single file ([#1749](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1749)) ([40872dd](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/40872dd7ff8ba2bad04f63ff9936ef4058eda2c7))
+* show what each command changes in the README ([#1756](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1756)) ([28e9c29](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/28e9c296d790d7b96869782cea72b9710683fb37))
+* the README's dictionaries table lists each locale and file type, and explains itself after the table ([#1771](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1771)) ([4dff204](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/4dff204455c64cd4a25bde8ff6a2167bd30b257d))
+* Workflow Bot -- Update Dictionaries ([#1734](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1734)) ([845d4d5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/845d4d53566e382d051cecba1938b88cbf7d4987))
+* Workflow Bot -- Update Dictionaries ([#1773](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1773)) ([35386aa](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/35386aae2db9fcb2fc8208703e3dc7c52b5b2c93))
+
 ## [8.2.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@8.1.1...vscode-cspell-dict-extensions@8.2.0) (2026-10-21)
 
 
