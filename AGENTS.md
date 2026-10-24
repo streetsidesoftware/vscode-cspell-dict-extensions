@@ -84,6 +84,8 @@ them.
   that reader. A new doc gets a header. See [Writing docs](docs/style.md).
 - **Docs for people** never point to `AGENTS.md` or `CLAUDE.md`. If a guide needs something that's only here, move it
   into a doc under `docs/` and link to it from both.
+- **Line breaks in Markdown:** don't wrap prose by hand. Write each paragraph or list item on one line, then run
+  `npm run prettier:fix`. Prettier wraps it at 120 characters and never splits inline code.
 - **Scripts:** write them in TypeScript (`.mts`, run directly by Node), not shell, `jq` or `.mjs`.
 
 ### Commits and pull requests
