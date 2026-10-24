@@ -1,6 +1,6 @@
 // Built from extension-runtime/ by tsdown. Do not edit.
 import * as vscode from "vscode";
-//#region \0rolldown/runtime.js
+// \0rolldown/runtime.js
 var __defProp = Object.defineProperty;
 var __exportAll = (all, no_symbols) => {
 	let target = {};
@@ -11,8 +11,7 @@ var __exportAll = (all, no_symbols) => {
 	if (!no_symbols) __defProp(target, Symbol.toStringTag, { value: "Module" });
 	return target;
 };
-//#endregion
-//#region extension.config.json
+// extension.config.json
 var extension_config_default = {
 	$schema: "../../extension-runtime/extension.config.schema.json",
 	name: "indonesian",
@@ -59,14 +58,11 @@ var extension_config_default = {
 		}
 	]
 };
-//#endregion
-//#region ../../extension-runtime/src/noCustom.ts
+// ../../extension-runtime/src/noCustom.ts
 var noCustom_exports = /* @__PURE__ */ __exportAll({ activate: () => void 0 });
-//#endregion
-//#region ../../extension-runtime/src/config.ts
+// ../../extension-runtime/src/config.ts
 const cspellExtPath = "static/cspell-ext.json";
-//#endregion
-//#region ../../extension-runtime/src/activate.ts
+// ../../extension-runtime/src/activate.ts
 const codeSpellCheckerId = "streetsidesoftware.code-spell-checker";
 /**
 * Activate an extension from its `extension.config.json`: register its commands and its `static/cspell-ext.json`.
@@ -108,11 +104,9 @@ function toggleDictionary(name, enable, isGlobal) {
 	const target = isGlobal ? vscode.ConfigurationTarget.Global : vscode.ConfigurationTarget.Workspace;
 	return Promise.resolve(settings.update("dictionaries", dictionaries, target));
 }
-//#endregion
-//#region ../../extension-runtime/src/entry.ts
+// ../../extension-runtime/src/entry.ts
 function activate(context) {
 	return activateExtension(context, extension_config_default, noCustom_exports);
 }
 function deactivate() {}
-//#endregion
 export { activate, deactivate };
