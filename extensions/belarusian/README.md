@@ -2,9 +2,11 @@
 
 Belarusian dictionary extension for VS Code.
 
-Imports the Belarusian spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Belarusian spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
-The bundled dictionary is generated from the Belarusian Hunspell dictionary files `be-BY.aff` and `be-BY.dic` from the [National Corpus of the Belarusian Language spell checker](https://bnkorpus.info/spell.html).
+The bundled dictionary is generated from the Belarusian Hunspell dictionary files `be-BY.aff` and `be-BY.dic` from the
+[National Corpus of the Belarusian Language spell checker](https://bnkorpus.info/spell.html).
 
 ## Installation
 
@@ -33,8 +35,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `be-BY` to the `cSpell.language` setting, will enable the Belarusian dictionary.
-Example using both English and Belarusian dictionaries:
+Adding `be-BY` to the `cSpell.language` setting, will enable the Belarusian dictionary. Example using both English and
+Belarusian dictionaries:
 
 ```javascript
 "cSpell.language": "en,be-BY",
@@ -68,7 +70,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |
@@ -81,9 +85,11 @@ This extension will automatically include the [Code Spell Checker](https://marke
 
 Беларускі слоўнік для VS Code.
 
-Пашырэнне дадае беларускі слоўнік праверкі правапісу для [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Пашырэнне дадае беларускі слоўнік праверкі правапісу для
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
-Убудаваны слоўнік згенераваны з беларускіх файлаў Hunspell `be-BY.aff` і `be-BY.dic`, атрыманых з [сайта Нацыянальнага корпуса беларускай мовы](https://bnkorpus.info/spell.html).
+Убудаваны слоўнік згенераваны з беларускіх файлаў Hunspell `be-BY.aff` і `be-BY.dic`, атрыманых з
+[сайта Нацыянальнага корпуса беларускай мовы](https://bnkorpus.info/spell.html).
 
 ## Усталяванне
 
@@ -103,12 +109,13 @@ This extension will automatically include the [Code Spell Checker](https://marke
 
 ### Ручныя налады
 
-Робіцца праз параметр `language` у наладах арыгінальнага пашырэння [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Робіцца праз параметр `language` у наладах арыгінальнага пашырэння
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 _Preferences_ -> _Settings_
 
-Дадайце `be` у параметр `cSpell.language`, каб уключыць беларускі слоўнік.
-Прыклад выкарыстання англійскага і беларускага слоўнікаў разам:
+Дадайце `be` у параметр `cSpell.language`, каб уключыць беларускі слоўнік. Прыклад выкарыстання англійскага і
+беларускага слоўнікаў разам:
 
 ```javascript
 "cSpell.language": "en,be",
@@ -116,7 +123,8 @@ _Preferences_ -> _Settings_
 
 ## Патрабаванні
 
-Аўтаматычна падключае пашырэнне [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Аўтаматычна падключае пашырэнне
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 <!--- @@inject: ../../static/footer.md --->
 

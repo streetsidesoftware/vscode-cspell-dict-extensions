@@ -1,13 +1,16 @@
 # British English - Code Spell Checker
 
-British English dictionary extension for VS Code. This dictionary includes both the `-ise` and `-ize` spelling variants according
-to the Oxford English Dictionary.
+British English dictionary extension for VS Code. This dictionary includes both the `-ise` and `-ize` spelling variants
+according to the Oxford English Dictionary.
 
-Note: this is a replacement dictionary for the one that is bundled with [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). Due to licensing restrictions, the bundled dictionary is many years old.
+Note: this is a replacement dictionary for the one that is bundled with
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). Due to
+licensing restrictions, the bundled dictionary is many years old.
 
 ## Installation
 
-Once this extension is installed, the updated British English dictionary will automatically be used, if the `en-gb` locale is used.
+Once this extension is installed, the updated British English dictionary will automatically be used, if the `en-gb`
+locale is used.
 
 ### Enable or Disable the Dictionary
 
@@ -32,7 +35,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Replacing `en` with `en-GB` in the `cSpell.language` setting will check British English spelling instead of American English:
+Replacing `en` with `en-GB` in the `cSpell.language` setting will check British English spelling instead of American
+English:
 
 ```javascript
 "cSpell.language": "en-GB",
@@ -72,7 +76,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

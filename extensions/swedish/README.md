@@ -2,7 +2,8 @@
 
 Swedish dictionary extension for VS Code.
 
-Imports the Swedish spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Swedish spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -31,8 +32,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `sv-SE` to the `cSpell.language` setting, will enable the Swedish dictionary.
-Example using both English and Swedish dictionaries:
+Adding `sv-SE` to the `cSpell.language` setting, will enable the Swedish dictionary. Example using both English and
+Swedish dictionaries:
 
 ```javascript
 "cSpell.language": "en,sv-SE",
@@ -66,7 +67,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

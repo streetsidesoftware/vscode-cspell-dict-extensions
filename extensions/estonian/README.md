@@ -2,7 +2,8 @@
 
 Estonian dictionary extension for VS Code.
 
-Imports the Estonian spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Estonian spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -31,8 +32,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `et-EE` to the `cSpell.language` setting, will enable the Estonian dictionary.
-Example using both English and Estonian dictionaries:
+Adding `et-EE` to the `cSpell.language` setting, will enable the Estonian dictionary. Example using both English and
+Estonian dictionaries:
 
 ```javascript
 "cSpell.language": "en,et-EE",
@@ -66,7 +67,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

@@ -39,7 +39,7 @@
         {
             "name": "language-description",
             "description": "A language extension's description, which repeats its nativeName: in package.json and the extension list in README.md.",
-            "pattern": "/Adds [^\"\\n]* spell checking to Code Spell Checker\\./g"
+            "pattern": "/Adds\\s[^\"]*?\\sspell\\s+checking\\s+to\\s+Code\\s+Spell\\s+Checker\\./g"
         }
     ],
     "ignoreRegExpList": ["native-name", "language-description"]

@@ -2,7 +2,8 @@
 
 French Réforme 90 dictionary extension for VS Code.
 
-Imports the French Réforme 90 spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the French Réforme 90 spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -31,8 +32,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `fr-90` to the `cSpell.language` setting, will enable the French Réforme 90 dictionary.
-Example using both English and French Réforme 90 dictionaries:
+Adding `fr-90` to the `cSpell.language` setting, will enable the French Réforme 90 dictionary. Example using both
+English and French Réforme 90 dictionaries:
 
 ```javascript
 "cSpell.language": "en,fr-90",
@@ -66,7 +67,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

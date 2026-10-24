@@ -1,14 +1,16 @@
 ---
 name: new-extension
-description: 'Creates a new dictionary extension in this repo, from request to one pull request: finds the published @cspell/dict-* package, runs the generator, gets the sample and the checks passing, and, once the user agrees, opens the PR. Use when asked to add or create an extension for a language, word list or dictionary, such as "add an extension for Thai".'
+description:
+  'Creates a new dictionary extension in this repo, from request to one pull request: finds the published @cspell/dict-*
+  package, runs the generator, gets the sample and the checks passing, and, once the user agrees, opens the PR. Use when
+  asked to add or create an extension for a language, word list or dictionary, such as "add an extension for Thai".'
 ---
 
 # new-extension
 
 Takes a request such as "add an extension for Thai" to one pull request. The steps for contributors are in
-`docs/guides/new-extension.md`. The generator's options are in `extension-tools/README.md`. Read
-both first. This skill runs the generator without questions (`--yes`). It adds the points where you stop and ask the
-user.
+`docs/guides/new-extension.md`. The generator's options are in `extension-tools/README.md`. Read both first. This skill
+runs the generator without questions (`--yes`). It adds the points where you stop and ask the user.
 
 ## Workflow
 
@@ -28,8 +30,8 @@ user.
 
 An extension includes a published package, unchanged. Find the one the request means.
 
-- **Do:** search for the English name, the natural language's own name, its language code, or the topic. Several
-  words must all match. Pass `--any` to match any of them.
+- **Do:** search for the English name, the natural language's own name, its language code, or the topic. Several words
+  must all match. Pass `--any` to match any of them.
 
   ```sh
   npm run list:packages -- <word>...
@@ -43,12 +45,12 @@ An extension includes a published package, unchanged. Find the one the request m
     the matches and ask which.
   - **The match is narrower than the request, or different.** "Lisp" finds only `@cspell/dict-elisp`, whose Name is
     "Emacs Lisp". Show the package and ask whether it's the one.
-  - **The Extension column says "ships with cspell".** cspell already includes it, so it needs no extension. Say so,
+  - **The Extension column says "ships with cspell".** cspell already includes it, so it needs no extension. Say so, and
+    stop.
+  - **The Extension column says "isn't published" or "is deprecated".** The package gets no extension. Give the reason,
     and stop.
-  - **The Extension column says "isn't published" or "is deprecated".** The package gets no extension. Give the
-    reason, and stop.
-  - **The Extension column names an extension.** Show it. Ask whether to change that extension instead or create
-    another one. Both are allowed.
+  - **The Extension column names an extension.** Show it. Ask whether to change that extension instead or create another
+    one. Both are allowed.
   - **The Kind column says bundle.** The generator can't make a bundle. Say so, and stop.
   - **The Kind column says parser.** This skill covers dictionary extensions only. Say so, and stop.
 - **Done when** the user's request names exactly one set of packages, or the user has chosen.
@@ -68,18 +70,18 @@ generator README lists them.
   when the request doesn't make it obvious.
 - **Friendly name:** the name users see in the Marketplace, the README and the command titles. The default is the name
   with each word capitalized: `scottish-gaelic` gives "Scottish Gaelic". When that isn't how the language or topic is
-  written, pass `--friendly-name`, such as `--friendly-name "Brazilian Portuguese"` or
-  `--friendly-name "Emacs Lisp"`. Ask when you aren't sure.
+  written, pass `--friendly-name`, such as `--friendly-name "Brazilian Portuguese"` or `--friendly-name "Emacs Lisp"`.
+  Ask when you aren't sure.
 - **Sample:**
   - **A natural language:** the generator fetches the Wikipedia article about Seattle in that language. If that
     language's Wikipedia has none, the generator stops with an error. Ask the user for another article. Pass
     `--sample-title <title>`, once for each article.
   - **A word list:** ask the user for a sample file. It's text or code that uses the list's words. Use one of the
-    dictionary's file types, such as `.clj` for Clojure. One file is enough. Add more only when a
-    file type needs its own sample, such as `.c` and `.cpp`. Pass each with `--sample-file <file>`, a relative path from
-    the repository root, or an absolute path. It can't be combined with `--sample-title`.
-- **License:** leave the default, `GPL-3.0-or-later`, and never pass `--license`. If the user asks for another
-  license, say that the extension is created with the default, and that they change it themselves.
+    dictionary's file types, such as `.clj` for Clojure. One file is enough. Add more only when a file type needs its
+    own sample, such as `.c` and `.cpp`. Pass each with `--sample-file <file>`, a relative path from the repository
+    root, or an absolute path. It can't be combined with `--sample-title`.
+- **License:** leave the default, `GPL-3.0-or-later`, and never pass `--license`. If the user asks for another license,
+  say that the extension is created with the default, and that they change it themselves.
 
 ### 5. Run the generator
 
@@ -93,8 +95,8 @@ generator README lists them.
 - **If it fails:**
   - On a missing or invalid value, nothing was written. Fix that option and run it again.
   - If `extensions/<name>/` exists, ask before passing `--force`, which replaces it.
-  - If it fails after creating the folder (installing or the sync), show the user the error, and stop. Leave the
-    folder for them to look at.
+  - If it fails after creating the folder (installing or the sync), show the user the error, and stop. Leave the folder
+    for them to look at.
 
 - **After it,** change the extension with `npm run extension-tools -- <command> -e <name>`, not by editing
   `extension.config.json`: `info` shows it, `add command`, `remove command`, `add sample`, `remove sample` and `set`
@@ -153,16 +155,16 @@ generator README lists them.
 ### 9. Commit, ask, then open the PR
 
 - **Do:** commit the new folder with the message `feat: add <friendly name> extension`, such as
-  `feat: add Scottish Gaelic extension`. Leave the root README lists, `release-please-config.json` and
-  the workflow lists alone. A workflow updates them after the merge.
+  `feat: add Scottish Gaelic extension`. Leave the root README lists, `release-please-config.json` and the workflow
+  lists alone. A workflow updates them after the merge.
 - **Stop and ask** before pushing and opening the PR. Show the title and the description:
   - what the extension adds, and the packages it includes
   - when each dictionary is on, from `static/dictionaries.json`
   - the sample's source
   - the words on the sample's `words` and `ignore` lines
   - whether the VS Code test ran
-- **After the user agrees:** push `new-extension/<name>`. Open the PR against `main`, with the title and description
-  you showed.
+- **After the user agrees:** push `new-extension/<name>`. Open the PR against `main`, with the title and description you
+  showed.
 - **Done when** the PR is open and the user has its link.
 
 ## Not this skill

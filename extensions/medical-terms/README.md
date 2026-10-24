@@ -2,7 +2,8 @@
 
 Medical Terms dictionary extension for VS Code.
 
-Imports the Medical Terms spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Medical Terms spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -27,7 +28,8 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 ## Source
 
-The dictionary is based on [wordlist-medicalterms-en](https://github.com/Glutanimate/wordlist-medicalterms-en) by Aristotelis P., which merges OpenMedSpel (R. Robinson, e-MedTools) and MTH-Med-Spel-Chek (Rajasekharan N.).
+The dictionary is based on [wordlist-medicalterms-en](https://github.com/Glutanimate/wordlist-medicalterms-en) by
+Aristotelis P., which merges OpenMedSpel (R. Robinson, e-MedTools) and MTH-Med-Spel-Chek (Rajasekharan N.).
 
 ## Dictionaries
 
@@ -55,7 +57,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

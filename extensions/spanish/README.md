@@ -1,6 +1,7 @@
 # Code Spell Checker Spanish / Español Extension
 
-Imports the Spanish spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Spanish spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -29,8 +30,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Adding `es-ES` to the `cSpell.language` setting, will enable the Spanish dictionary.
-Example using both English and Spanish dictionaries:
+Adding `es-ES` to the `cSpell.language` setting, will enable the Spanish dictionary. Example using both English and
+Spanish dictionaries:
 
 ```javascript
 "cSpell.language": "en,es-ES",
@@ -64,7 +65,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |

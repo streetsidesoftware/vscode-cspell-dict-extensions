@@ -1,42 +1,64 @@
 # Extension tools
 
-The tools that create and maintain the extensions in [`extensions/`](../extensions). They run directly with Node.js (type stripping), without a build step. The root npm scripts and a workflow run them:
+The tools that create and maintain the extensions in [`extensions/`](../extensions). They run directly with Node.js
+(type stripping), without a build step. The root npm scripts and a workflow run them:
 
-- `npm run create:extension`: [`create.mts`](./create.mts), which creates an extension. See [Create an extension](#create-an-extension).
-- [`cli.mts`](./cli.mts), with a command for each job. `cli.mts --help` lists them, and `cli.mts <command> --help` shows a command's options:
-  - `sync [folder…]` (`npm run sync:extensions`): writes the files the sync maintains. See [Anatomy of an extension](../docs/extension-anatomy.md).
-  - `check [folder…]` (`npm run check:extensions`): changes nothing, and fails when an extension is out of date or its config has drifted from its packages. See [Checks](../docs/extension-anatomy.md#checks).
+- `npm run create:extension`: [`create.mts`](./create.mts), which creates an extension. See
+  [Create an extension](#create-an-extension).
+- [`cli.mts`](./cli.mts), with a command for each job. `cli.mts --help` lists them, and `cli.mts <command> --help` shows
+  a command's options:
+  - `sync [folder…]` (`npm run sync:extensions`): writes the files the sync maintains. See
+    [Anatomy of an extension](../docs/extension-anatomy.md).
+  - `check [folder…]` (`npm run check:extensions`): changes nothing, and fails when an extension is out of date or its
+    config has drifted from its packages. See [Checks](../docs/extension-anatomy.md#checks).
   - `packages [word…]` (`npm run list:packages`): lists the published dictionaries and parsers.
   - `fetch-sample <locale> [title]` (`npm run fetch:sample`): fetches a sample text from Wikipedia.
-  - The commands below work on one extension, and run with `npm run extension-tools -- <command>`. They pick the extension with `-e <folder>`, or the folder they run in. Without their options, they ask in the terminal.
-  - `info [--json]`: shows the extension: its packages with their dictionaries and locales, its commands, its samples, and what's left to do on a new extension.
-  - `add command --dictionary <name>` or `--locale <locale>`: adds Enable and Disable, globally and in the workspace. The first set gets the plain IDs and titles. A later one is named after its value, or takes `--label` and `--suffix`.
+  - The commands below work on one extension, and run with `npm run extension-tools -- <command>`. They pick the
+    extension with `-e <folder>`, or the folder they run in. Without their options, they ask in the terminal.
+  - `info [--json]`: shows the extension: its packages with their dictionaries and locales, its commands, its samples,
+    and what's left to do on a new extension.
+  - `add command --dictionary <name>` or `--locale <locale>`: adds Enable and Disable, globally and in the workspace.
+    The first set gets the plain IDs and titles. A later one is named after its value, or takes `--label` and
+    `--suffix`.
   - `remove command --id <id…>`: removes commands.
-  - `add sample <file…>`, or `--title <article>` for a language: copies files into `samples/`, or writes Wikipedia articles there.
+  - `add sample <file…>`, or `--title <article>` for a language: copies files into `samples/`, or writes Wikipedia
+    articles there.
   - `remove sample <sample>`: removes a sample, but not the one the VS Code test opens.
-  - `set`: changes `--friendly-name` (and the standard command titles), `--display-name`, `--description`, `--notes`, `--native-name`, `--locale` or `--test-sample`. An empty `--notes` or `--native-name` removes it.
+  - `set`: changes `--friendly-name` (and the standard command titles), `--display-name`, `--description`, `--notes`,
+    `--native-name`, `--locale` or `--test-sample`. An empty `--notes` or `--native-name` removes it.
   - `remove extension <folder>`: deletes an extension that was never released.
 
-  Each change is checked against the schema and against the installed packages, as `check` does, then written to `extension.config.json` and followed by the sync.
+  Each change is checked against the schema and against the installed packages, as `check` does, then written to
+  `extension.config.json` and followed by the sync.
 
-- The `set-prerelease` workflow: [`set-prerelease-mode.mts`](./set-prerelease-mode.mts), which turns an extension's pre-release mode on or off. It uses only `node:` modules, because the workflow runs it before `npm ci`.
+- The `set-prerelease` workflow: [`set-prerelease-mode.mts`](./set-prerelease-mode.mts), which turns an extension's
+  pre-release mode on or off. It uses only `node:` modules, because the workflow runs it before `npm ci`.
 
 ## API
 
-The scripts outside this package import only [`api.mts`](./api.mts). The scripts that workflows run before `npm ci` import [`api-node-only.mts`](./api-node-only.mts) instead: it uses only `node:` modules. `api.mts` exports it too.
+The scripts outside this package import only [`api.mts`](./api.mts). The scripts that workflows run before `npm ci`
+import [`api-node-only.mts`](./api-node-only.mts) instead: it uses only `node:` modules. `api.mts` exports it too.
 
 From [`extension-runtime/`](../extension-runtime), these tools import only its `api.ts`.
 
 ## Create an extension
 
-Generate a VS Code extension for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). An extension includes one or more published packages:
+Generate a VS Code extension for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker). An
+extension includes one or more published packages:
 
-- **Dictionaries:** `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A natural language is enabled by its locale. A word list's dictionaries are on for their file types, or off until turned on. The extension's commands turn them on and off.
+- **Dictionaries:** `@cspell/dict-*` packages from [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts). A
+  natural language is enabled by its locale. A word list's dictionaries are on for their file types, or off until turned
+  on. The extension's commands turn them on and off.
 - **Parsers:** `@cspell/parser-*` packages from [cspell-parsers](https://github.com/streetsidesoftware/cspell-parsers).
 
 <!--- @@inject: ../docs/templates/package-must-be-published.md --->
 
-The package must be published first. To create a dictionary, see [Creating a dictionary](https://github.com/streetsidesoftware/cspell-dicts/blob/main/docs/guides/new-dictionary.md) in cspell-dicts. To create a parser, see [Adding a parser package](https://github.com/streetsidesoftware/cspell-parsers/blob/main/docs/guides/new-parser-package.md) in cspell-parsers.
+The package must be published first. To create a dictionary, see
+[Creating a dictionary](https://github.com/streetsidesoftware/cspell-dicts/blob/main/docs/guides/new-dictionary.md) in
+cspell-dicts. To create a parser, see
+[Adding a parser package](https://github.com/streetsidesoftware/cspell-parsers/blob/main/docs/guides/new-parser-package.md)
+in cspell-parsers.
 
 <!--- @@inject-end: ../docs/templates/package-must-be-published.md --->
 
@@ -48,22 +70,42 @@ In the `vscode-cspell-dict-extensions` repository root directory:
 npm run create:extension
 ```
 
-The generator starts with the packages. It asks for dictionaries or parsers, then lists the packages of that kind that have no extension yet, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them). From the packages it suggests the extension name, such as `bengali` for `@cspell/dict-bn`, the kind and the locale. A package that already has an extension can still get another one with `--package`. With several languages, as for Serbian, each also gets its own enable and disable commands. Each dictionary of a word list gets enable and disable commands. A dictionary can be off until a user turns it on, when no setting turns it on. Then `samples/cspell.json` turns it on for the tests. The generator also adds the words of the package and dictionary names that cspell doesn't know, such as `elisp`, to the extension's `cspell.config.yaml`.
+The generator starts with the packages. It asks for dictionaries or parsers, then lists the packages of that kind that
+have no extension yet, from the lists cspell-dicts and cspell-parsers publish (`npm run list:packages` shows them). From
+the packages it suggests the extension name, such as `bengali` for `@cspell/dict-bn`, the kind and the locale. A package
+that already has an extension can still get another one with `--package`. With several languages, as for Serbian, each
+also gets its own enable and disable commands. Each dictionary of a word list gets enable and disable commands. A
+dictionary can be off until a user turns it on, when no setting turns it on. Then `samples/cspell.json` turns it on for
+the tests. The generator also adds the words of the package and dictionary names that cspell doesn't know, such as
+`elisp`, to the extension's `cspell.config.yaml`.
 
-It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`, a starter `package.json`, `README.md`, `LICENSE`, a sample and an empty `CHANGELOG.md` for release-please to fill. Then it installs the packages and runs `npm run sync:extensions`, which writes the rest, as for every other extension.
+It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`,
+a starter `package.json`, `README.md`, `LICENSE`, a sample and an empty `CHANGELOG.md` for release-please to fill. Then
+it installs the packages and runs `npm run sync:extensions`, which writes the rest, as for every other extension.
 
-The sample is what the tests spell check, and the VS Code test opens it. To bring your own, pass `--sample-file <file>`, once for each file: it is copied into `samples/` under its own name, and the VS Code test opens the first one. Use it for a word list's words, or for a parser's code, such as a file from the parser's `fixtures` in cspell-parsers.
+The sample is what the tests spell check, and the VS Code test opens it. To bring your own, pass `--sample-file <file>`,
+once for each file: it is copied into `samples/` under its own name, and the VS Code test opens the first one. Use it
+for a word list's words, or for a parser's code, such as a file from the parser's `fixtures` in cspell-parsers.
 
 Without `--sample-file`:
 
-- **A language:** Wikipedia articles in that language, with their source and license, one file each, named after the title: `Seattle` is `samples/seattle.md`, and `Lingua Latina` is `samples/lingua-latina.md`. The generator asks for an article, with Seattle as the default, then for more until the answer is empty. `--sample-title <title>`, once for each article, names them instead; with `--yes` and no `--sample-title`, it's Seattle. A missing article is asked again, or with `--yes` stops the generator. Without Wikipedia, the generator stops before writing anything.
-- **A word list or a parser:** there's no default. With `--yes`, `--sample-file` is required. Otherwise the generator asks for a sample file; without one, it writes `samples/sample.md`, a line to replace with a deliberate misspelling, so the spell check fails until you replace it.
+- **A language:** Wikipedia articles in that language, with their source and license, one file each, named after the
+  title: `Seattle` is `samples/seattle.md`, and `Lingua Latina` is `samples/lingua-latina.md`. The generator asks for an
+  article, with Seattle as the default, then for more until the answer is empty. `--sample-title <title>`, once for each
+  article, names them instead; with `--yes` and no `--sample-title`, it's Seattle. A missing article is asked again, or
+  with `--yes` stops the generator. Without Wikipedia, the generator stops before writing anything.
+- **A word list or a parser:** there's no default. With `--yes`, `--sample-file` is required. Otherwise the generator
+  asks for a sample file; without one, it writes `samples/sample.md`, a line to replace with a deliberate misspelling,
+  so the spell check fails until you replace it.
 
-Afterwards, list the sample's unknown words at its end. Put real words on a `cspell:words` comment line. Put names and other non-words on a `cspell:ignore` line. For a natural language, keep the `language` setting in `samples/cspell.json`. Then review the README, and run `npm run check:extension -- <name>`.
+Afterwards, list the sample's unknown words at its end. Put real words on a `cspell:words` comment line. Put names and
+other non-words on a `cspell:ignore` line. For a natural language, keep the `language` setting in `samples/cspell.json`.
+Then review the README, and run `npm run check:extension -- <name>`.
 
 #### Without questions
 
-Options answer the questions. Only the rest are asked. A few options, such as `--license`, set values the generator doesn't ask about.
+Options answer the questions. Only the rest are asked. A few options, such as `--license`, set values the generator
+doesn't ask about.
 
 With `--yes`, nothing is asked:
 
@@ -99,17 +141,21 @@ npm run create:extension -- typescript-parser --package @cspell/parser-typescrip
 
 ## Development
 
-`create` uses [`@inquirer/prompts`](https://www.npmjs.com/package/@inquirer/prompts) for the questions and [`commander`](https://www.npmjs.com/package/commander) for the command line.
+`create` uses [`@inquirer/prompts`](https://www.npmjs.com/package/@inquirer/prompts) for the questions and
+[`commander`](https://www.npmjs.com/package/commander) for the command line.
 
 - `create.mts` — the entry point.
 - `src/create/app.mts` — the command line and the steps to generate an extension.
 - `src/create/questions.mts` — the questions, their defaults, and `--yes`.
 - `src/create/names.mts` — turns a typed name into a directory name, and suggests the friendly name.
 - `src/create/locales.mts` — writes locales as BCP 47, and suggests a language's native and English names.
-- `src/create/sample.mts` — chooses the samples: the files given, a language's Wikipedia article, or a starter file to replace.
+- `src/create/sample.mts` — chooses the samples: the files given, a language's Wikipedia article, or a starter file to
+  replace.
 - `src/create/writeExtension.mts` — writes `extension.config.json` and the starter files.
-- `src/create/wordList.mts` — sets up a word list from its installed packages: the sample check, the commands, the README sentence and the words from the package names.
-- `src/cspellPackages.mts`, `wikipedia.mts` and `existingExtensions.mts` — the package lists, the Wikipedia sample and the packages that already have an extension, shared with `npm run list:packages` and `fetch:sample`.
+- `src/create/wordList.mts` — sets up a word list from its installed packages: the sample check, the commands, the
+  README sentence and the words from the package names.
+- `src/cspellPackages.mts`, `wikipedia.mts` and `existingExtensions.mts` — the package lists, the Wikipedia sample and
+  the packages that already have an extension, shared with `npm run list:packages` and `fetch:sample`.
 - `src/create/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.
 
 ```bash

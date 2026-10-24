@@ -2,7 +2,8 @@
 
 Canadian English dictionary extension for VS Code.
 
-Imports the Canadian English spell checking dictionary for [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
+Imports the Canadian English spell checking dictionary for
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker).
 
 ## Installation
 
@@ -31,7 +32,8 @@ This is done with the `language` setting.
 
 _Preferences_ -> _Settings_
 
-Replacing `en` with `en-CA` in the `cSpell.language` setting will check Canadian English spelling instead of American English:
+Replacing `en` with `en-CA` in the `cSpell.language` setting will check Canadian English spelling instead of American
+English:
 
 ```javascript
 "cSpell.language": "en-CA",
@@ -73,7 +75,9 @@ An empty cell is no condition.
 
 ## Requirements
 
-This extension will automatically include the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension.
+This extension will automatically include the
+[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+extension.
 
 | Tool                                                                                                            | Version   |
 | --------------------------------------------------------------------------------------------------------------- | --------- |
