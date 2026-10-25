@@ -8,13 +8,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import type { ListItem, PhrasingContent, RootContent } from 'mdast';
-import { toMarkdown } from 'mdast-util-to-markdown';
-
 import { getExtensionInfo, listExtensionRepoPaths } from '../extension-tools/api.mts';
 import type { ExtensionInfo, ExtensionKind } from '../extension-tools/api.mts';
 
-import { heading, link, list, listItem, paragraph, root, strong, text } from './lib/mdastBuilder.mts';
+import { document, heading, link, list, listItem, strong } from 'inject-markdown/markdown';
+import type { InlineContent, MDBlock, MDListItem } from 'inject-markdown/markdown';
 import { repoRoot } from './lib/repo.mts';
 
 const generatedDir = path.join(repoRoot, 'static/generated');
@@ -36,26 +34,24 @@ const languageListHeadings: Record<string, string | undefined> = {
     'Technical Terms': 'Technical Dictionaries',
 };
 
-function preReleaseMarker(extensionInfo: ExtensionInfo): PhrasingContent[] {
-    return extensionInfo.preRelease ? [text(' '), strong(text('pre-release'))] : [];
+function preReleaseMarker(extensionInfo: ExtensionInfo): InlineContent {
+    return extensionInfo.preRelease ? [' ', strong('pre-release')] : [];
 }
 
-function extensionListItem(url: string, extensionInfo: ExtensionInfo): ListItem {
+function extensionListItem(url: string, extensionInfo: ExtensionInfo): MDListItem {
     return listItem(
-        paragraph([
-            link(url, text(extensionInfo.displayNameShort)),
-            ...preReleaseMarker(extensionInfo),
-            text(` - ${extensionInfo.description}`),
-        ]),
+        link(extensionInfo.displayNameShort, url),
+        preReleaseMarker(extensionInfo),
+        ` - ${extensionInfo.description}`,
     );
 }
 
-function folderListItem(extensionInfo: ExtensionInfo): ListItem {
+function folderListItem(extensionInfo: ExtensionInfo): MDListItem {
     // Relative to `static/generated/`; inject-markdown rebases the link when injecting.
     return extensionListItem(`../../${extensionInfo.repoPath}#readme`, extensionInfo);
 }
 
-function marketplaceListItem(extensionInfo: ExtensionInfo): ListItem {
+function marketplaceListItem(extensionInfo: ExtensionInfo): MDListItem {
     const url = `https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.${extensionInfo.packageName}`;
     return extensionListItem(url, extensionInfo);
 }
@@ -67,18 +63,18 @@ function marketplaceListItem(extensionInfo: ExtensionInfo): ListItem {
 async function writeExtensionList(
     file: string,
     extensionsByCategory: Map<string, ExtensionInfo[]>,
-    makeItem: (extensionInfo: ExtensionInfo) => ListItem,
+    makeItem: (extensionInfo: ExtensionInfo) => MDListItem,
     headingOf: (category: string) => string | undefined = (category) => category,
 ): Promise<void> {
-    const content: RootContent[] = [];
+    const content: MDBlock[] = [];
     for (const [category, extensions] of extensionsByCategory) {
         const title = headingOf(category);
         if (!title) continue;
-        content.push(heading(3, text(title)), list('unordered', extensions.map(makeItem)));
+        content.push(heading(3, title), list(extensions.map(makeItem)));
     }
 
     await fs.mkdir(generatedDir, { recursive: true });
-    await fs.writeFile(path.join(generatedDir, file), toMarkdown(root(content), { bullet: '-' }), 'utf8');
+    await fs.writeFile(path.join(generatedDir, file), document(content).toString(), 'utf8');
 }
 
 /** The categories in the order their first extension appears. */

@@ -22,8 +22,7 @@
     "node": ">=24.11.0"
   },
   "dependencies": {
-    "@types/mdast": "^4.0.4",
-    "mdast-util-to-markdown": "^2.2.0"
+    "inject-markdown": "^6.3.0"
   },
   "scripts": {
     "test": "tsc --noEmit -p . && node --test"
