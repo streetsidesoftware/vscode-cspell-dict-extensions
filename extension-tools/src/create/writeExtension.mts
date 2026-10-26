@@ -2,6 +2,9 @@ import { constants } from 'node:fs';
 import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { comment, document, emphasis, heading, inlineCode, link, paragraph, strong } from 'inject-markdown/markdown';
+import type { MDComment } from 'inject-markdown/markdown';
+
 import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
 import { actions, commandSet, idSuffix, localeSuffix, scopes, standardCommand } from '../commandSets.mts';
 import type { Target } from '../commandSets.mts';
@@ -188,58 +191,72 @@ export function packageJson(answers: Answers): Record<string, unknown> {
     };
 }
 
-const codeSpellChecker =
-    '[Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)';
+const codeSpellChecker = link(
+    'Code Spell Checker',
+    'https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker',
+);
 
 /** An `@@inject` section, filled in by the sync. */
-function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): string {
-    return `<!--- @@${kind}: ${marker} --->\n<!--- @@inject-end: ${marker} --->\n`;
+function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): MDComment[] {
+    return [comment(`@@${kind}: ${marker}`), comment(`@@inject-end: ${marker}`)];
 }
 
 /** The starter README, with the `@@inject` sections the sync fills in. */
 export function readme(answers: Answers): string {
-    const title = `# ${displayName(answers)}\n`;
+    const title = heading(1, displayName(answers));
     const requirements = inject(
         '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
     );
-    const dictionaries = `## Dictionaries\n\n${inject('./static/dictionaries.json#markdown', 'inject-table')}\n${inject('../../static/dictionaries-columns.md')}`;
+    const dictionaries = [
+        heading(2, 'Dictionaries'),
+        inject('./static/dictionaries.json#markdown', 'inject-table'),
+        inject('../../static/dictionaries-columns.md'),
+    ];
     const footer = inject('../../static/footer.md');
+    const commands = [
+        paragraph('Run these commands with ', inlineCode('F1'), ' or ', emphasis('View -> Command Palette...'), ':'),
+        inject('./static/commands.json', 'inject-table'),
+    ];
     switch (answers.kind) {
         case 'language':
-            return [
+            return document(
                 title,
-                `Adds the ${answers.friendlyName} dictionary to ${codeSpellChecker}.\n`,
-                '## Installation\n',
-                'After this extension is installed, it is necessary to tell the spell checker to use it.\n',
-                '### Enable or Disable the Dictionary\n',
-                'Run these commands with `F1` or _View -> Command Palette..._:\n',
-                inject('./static/commands.json', 'inject-table'),
+                paragraph(`Adds the ${answers.friendlyName} dictionary to `, codeSpellChecker, '.'),
+                heading(2, 'Installation'),
+                paragraph('After this extension is installed, it is necessary to tell the spell checker to use it.'),
+                heading(3, 'Enable or Disable the Dictionary'),
+                commands,
                 inject('../../static/manual-settings.language.md#values-file=:./extension.config.json'),
                 dictionaries,
                 requirements,
                 footer,
-            ].join('\n');
+            ).toString();
         case 'wordList':
-            return [
+            return document(
                 title,
-                `Adds the ${answers.friendlyName} dictionary to ${codeSpellChecker}.\n`,
-                '## Installation\n',
-                '### Enable or Disable the Dictionary\n',
-                'Run these commands with `F1` or _View -> Command Palette..._:\n',
-                inject('./static/commands.json', 'inject-table'),
+                paragraph(`Adds the ${answers.friendlyName} dictionary to `, codeSpellChecker, '.'),
+                heading(2, 'Installation'),
+                heading(3, 'Enable or Disable the Dictionary'),
+                commands,
                 dictionaries,
                 requirements,
                 footer,
-            ].join('\n');
+            ).toString();
         case 'parser':
-            return [
+            return document(
                 title,
-                `${answers.description}\n`,
-                '## Installation\n',
-                'The parser is on while this extension is enabled. To turn it off, use **Disable** or **Disable (Workspace)** on this extension in the Extensions view.\n',
+                paragraph(answers.description),
+                heading(2, 'Installation'),
+                paragraph(
+                    'The parser is on while this extension is enabled. To turn it off, use ',
+                    strong('Disable'),
+                    ' or ',
+                    strong('Disable (Workspace)'),
+                    ' on this extension in the Extensions view.',
+                ),
                 requirements,
                 footer,
-            ].join('\n');
+            ).toString();
     }
 }
 
