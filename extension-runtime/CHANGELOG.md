@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/@internal/extension-runtime@1.0.0...@internal/extension-runtime@1.0.1) (2026-10-26)
+
+
+### Updates and Bug Fixes
+
+* explicit commands and names in every config, one dictionaries table ([#1742](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1742)) ([2119a43](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2119a43b03de920ac952bd062a63a9d1c16b9bb1))
+* package each extension's code as a single file ([#1749](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1749)) ([40872dd](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/40872dd7ff8ba2bad04f63ff9936ef4058eda2c7))
+
 ## 1.0.0 (2026-10-19)
 
 

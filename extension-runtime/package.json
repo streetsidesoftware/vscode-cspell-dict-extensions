@@ -1,6 +1,6 @@
 {
   "name": "@internal/extension-runtime",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The code shared by the extensions, and the type and schema of their config.",
   "private": true,
   "type": "module",

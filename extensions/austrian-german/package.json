@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-austrian-german",
   "displayName": "Austrian German - Code Spell Checker",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": true,
   "description": "Adds Austrian German (Österreichisches Deutsch) spell checking to Code Spell Checker.",
   "categories": [
