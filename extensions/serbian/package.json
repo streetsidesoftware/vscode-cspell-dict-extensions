@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-serbian",
   "displayName": "Serbian - Code Spell Checker",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "private": true,
   "description": "Adds Serbian (српски) spell checking to Code Spell Checker.",
   "categories": [

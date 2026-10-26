@@ -2,6 +2,16 @@
 
 All notable changes to the "code-spell-checker-win32" extension will be documented in this file.
 
+## [2.1.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-win32@2.1.0...code-spell-checker-win32@2.1.1) (2026-10-26)
+
+
+### Updates and Bug Fixes
+
+* explicit commands and names in every config, one dictionaries table ([#1742](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1742)) ([2119a43](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/2119a43b03de920ac952bd062a63a9d1c16b9bb1))
+* package each extension's code as a single file ([#1749](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1749)) ([40872dd](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/40872dd7ff8ba2bad04f63ff9936ef4058eda2c7))
+* show what each command changes in the README ([#1756](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1756)) ([28e9c29](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/28e9c296d790d7b96869782cea72b9710683fb37))
+* the README's dictionaries table lists each locale and file type, and explains itself after the table ([#1771](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1771)) ([4dff204](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/4dff204455c64cd4a25bde8ff6a2167bd30b257d))
+
 ## [2.1.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-win32@2.0.1...code-spell-checker-win32@2.1.0) (2026-10-21)
 
 
