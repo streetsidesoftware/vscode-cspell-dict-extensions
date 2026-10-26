@@ -4,6 +4,8 @@ import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { document, heading, paragraph } from 'inject-markdown/markdown';
+
 import { articleMarkdown } from '../wikipedia.mts';
 import type { Article } from '../wikipedia.mts';
 import type { Prompter } from './prompt.mts';
@@ -131,14 +133,13 @@ export const starterMarker = 'replacme';
 
 /** The sample of a word list or a parser, for the person to replace. */
 export function starterSample(friendlyName: string): Sample {
-    const text = [
-        `# ${friendlyName}`,
-        '',
-        'Replace this text with what the extension should check: words people write that the dictionary knows, or for a parser, code in its language.',
-        '',
-        `Until you do, the spell check fails on this misspelling: ${starterMarker}`,
-        '',
-    ].join('\n');
+    const text = document(
+        heading(1, friendlyName),
+        paragraph(
+            'Replace this text with what the extension should check: words people write that the dictionary knows, or for a parser, code in its language.',
+        ),
+        paragraph(`Until you do, the spell check fails on this misspelling: ${starterMarker}`),
+    ).toString();
     return { file: 'samples/sample.md', text };
 }
 

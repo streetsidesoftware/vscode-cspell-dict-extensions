@@ -4,7 +4,10 @@
  * Fetch a sample text from Wikipedia: the lead section of an article in a language.
  */
 
-export const wikipediaLicense = '[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)';
+import { document, heading, link, paragraph } from 'inject-markdown/markdown';
+import type { MDLink } from 'inject-markdown/markdown';
+
+export const wikipediaLicense: MDLink = link('CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0/');
 
 /** Fetch JSON. Rejects on a network error or an HTTP error status. */
 export type GetJson = (url: string) => Promise<unknown>;
@@ -37,14 +40,11 @@ export async function fetchArticle(
 
 /** An article as a Markdown sample, with its source and license at the end. */
 export function articleMarkdown(article: Article): string {
-    return [
-        `# ${article.title}`,
-        '',
-        article.text,
-        '',
-        `Source: [Wikipedia: ${article.title}](${article.url}), ${wikipediaLicense}`,
-        '',
-    ].join('\n');
+    return document(
+        heading(1, article.title),
+        article.text.split('\n\n').map((text) => paragraph(text)),
+        paragraph('Source: ', link(`Wikipedia: ${article.title}`, article.url), ', ', wikipediaLicense),
+    ).toString();
 }
 
 interface Found {

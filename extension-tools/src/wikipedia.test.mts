@@ -66,4 +66,13 @@ describe('articleMarkdown', () => {
                 '[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)\n',
         );
     });
+
+    it('escapes Markdown in the plain text of the article', () => {
+        const markdown = articleMarkdown({
+            title: 'C*',
+            url: 'https://en.wikipedia.org/wiki/C*',
+            text: '# Not a heading, *not emphasis*.\n\n1. Not a list.',
+        });
+        assert.match(markdown, /^# C\\\*\n\n\\# Not a heading, \\\*not emphasis\\\*\.\n\n1\\\. Not a list\.\n/);
+    });
 });
