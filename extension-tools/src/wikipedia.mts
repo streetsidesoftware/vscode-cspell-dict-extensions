@@ -4,8 +4,8 @@
  * Fetch a sample text from Wikipedia: the lead section of an article in a language.
  */
 
-import { document, heading, link, paragraph } from 'inject-markdown/markdown';
-import type { MDLink } from 'inject-markdown/markdown';
+import { document, heading, link, paragraph } from '@streetsidesoftware/markdown-toolkit';
+import type { MDLink } from '@streetsidesoftware/markdown-toolkit';
 
 export const wikipediaLicense: MDLink = link('CC BY-SA 4.0', 'https://creativecommons.org/licenses/by-sa/4.0/');
 
