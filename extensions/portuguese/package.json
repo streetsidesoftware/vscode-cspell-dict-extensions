@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-portuguese",
   "displayName": "Portuguese - Code Spell Checker",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "private": true,
   "description": "Adds Portuguese (português) spell checking to Code Spell Checker.",
   "categories": [
