@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-german",
   "displayName": "German - Code Spell Checker",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "private": true,
   "description": "Adds German (Deutsch) spell checking to Code Spell Checker.",
   "categories": [
