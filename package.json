@@ -52,6 +52,7 @@
     "@lerna-lite/exec": "^5.6.4",
     "@lerna-lite/run": "^5.6.4",
     "@streetsidesoftware/markdown-toolkit": "^2.1.0",
+    "@streetsidesoftware/unindent": "^1.0.1",
     "@tsconfig/node24": "^24.0.5",
     "@types/node": "^24.19.2",
     "@types/vscode": "1.125.0",
