@@ -21,9 +21,6 @@
   "engines": {
     "node": ">=24.11.0"
   },
-  "dependencies": {
-    "@streetsidesoftware/markdown-toolkit": "^2.1.0"
-  },
   "scripts": {
     "test": "tsc --noEmit -p . && node --test"
   },
