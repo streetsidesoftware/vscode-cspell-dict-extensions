@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { document, heading, paragraph } from 'inject-markdown/markdown';
+import { document, heading, paragraph } from '@streetsidesoftware/markdown-toolkit';
 
 import { articleMarkdown } from '../wikipedia.mts';
 import type { Article } from '../wikipedia.mts';

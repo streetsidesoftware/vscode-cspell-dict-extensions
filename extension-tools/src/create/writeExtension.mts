@@ -2,8 +2,17 @@ import { constants } from 'node:fs';
 import { copyFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { comment, document, emphasis, heading, inlineCode, link, paragraph, strong } from 'inject-markdown/markdown';
-import type { MDComment } from 'inject-markdown/markdown';
+import {
+    comment,
+    document,
+    emphasis,
+    heading,
+    inlineCode,
+    link,
+    paragraph,
+    strong,
+} from '@streetsidesoftware/markdown-toolkit';
+import type { MDComment } from '@streetsidesoftware/markdown-toolkit';
 
 import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
 import { actions, commandSet, idSuffix, localeSuffix, scopes, standardCommand } from '../commandSets.mts';

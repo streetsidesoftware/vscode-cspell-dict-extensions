@@ -11,8 +11,8 @@ import path from 'node:path';
 import { getExtensionInfo, listExtensionRepoPaths } from '../extension-tools/api.mts';
 import type { ExtensionInfo, ExtensionKind } from '../extension-tools/api.mts';
 
-import { document, heading, link, list, listItem, strong } from 'inject-markdown/markdown';
-import type { InlineContent, MDBlock, MDListItem } from 'inject-markdown/markdown';
+import { document, heading, link, list, listItem, strong } from '@streetsidesoftware/markdown-toolkit';
+import type { InlineContent, MDBlock, MDListItem } from '@streetsidesoftware/markdown-toolkit';
 import { repoRoot } from './lib/repo.mts';
 
 const generatedDir = path.join(repoRoot, 'static/generated');
@@ -39,11 +39,11 @@ function preReleaseMarker(extensionInfo: ExtensionInfo): InlineContent {
 }
 
 function extensionListItem(url: string, extensionInfo: ExtensionInfo): MDListItem {
-    return listItem(
+    return listItem([
         link(extensionInfo.displayNameShort, url),
         preReleaseMarker(extensionInfo),
         ` - ${extensionInfo.description}`,
-    );
+    ]);
 }
 
 function folderListItem(extensionInfo: ExtensionInfo): MDListItem {
