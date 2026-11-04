@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
+import { testEach } from '@streetsidesoftware/test-each';
+
 import { extensionsToTest } from './extensionsToTest.mts';
 
 const all = ['extensions/german', 'extensions/swedish', 'extensions/swiss-german'];
@@ -30,18 +32,17 @@ describe('extensionsToTest', () => {
         assert.deepEqual(extensionsToTest(changed, all), { extensions: [], shared: false });
     });
 
-    it('tests everything when a shared file changed', () => {
-        for (const file of [
-            'extension-runtime/src/entry.ts',
-            'extension-tools/templates/sync/tsdown.config.ts',
-            'package-lock.json',
-            '.github/workflows/test.yml',
-            'extensions/removed/package.json',
-        ]) {
-            assert.deepEqual(extensionsToTest(['extensions/german/README.md', file], all), {
-                extensions: all,
-                shared: true,
-            });
-        }
+    testEach`
+        file
+        ${'extension-runtime/src/entry.ts'}
+        ${'extension-tools/templates/sync/tsdown.config.ts'}
+        ${'package-lock.json'}
+        ${'.github/workflows/test.yml'}
+        ${'extensions/removed/package.json'}
+    `('tests everything when the shared file $file changed', ({ file }: { file: string }) => {
+        assert.deepEqual(extensionsToTest(['extensions/german/README.md', file], all), {
+            extensions: all,
+            shared: true,
+        });
     });
 });
