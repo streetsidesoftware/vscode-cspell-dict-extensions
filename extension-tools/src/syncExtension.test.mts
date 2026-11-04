@@ -6,6 +6,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
+import { unindent as markdown } from '@streetsidesoftware/unindent';
+
 import { clearCachedFiles } from 'cspell-lib';
 
 import { readExtensionConfigValidator } from './extensionSchema.mts';
@@ -50,15 +52,16 @@ const pkg = {
     dependencies: { '@cspell/dict-demo': '^1.0.0' },
 };
 
-const readme = `# Demo
+const readme = markdown`
+    # Demo
 
-Commands:
+    Commands:
 
-<!--- @@inject-table: ./static/commands.json --->
-<!--- @@inject-end: ./static/commands.json --->
+    <!--- @@inject-table: ./static/commands.json --->
+    <!--- @@inject-end: ./static/commands.json --->
 
-<!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
-<!--- @@inject-end: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+    <!--- @@inject: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
+    <!--- @@inject-end: ../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json --->
 `;
 
 const options = { vscodeEngine: '^1.125.0', validate: await readExtensionConfigValidator() };

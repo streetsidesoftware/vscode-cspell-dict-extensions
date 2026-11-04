@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
+import { unindent as markdown } from '@streetsidesoftware/unindent';
+
 import {
     dictionaryPackagesUrl,
     fetchCSpellPackages,
@@ -36,11 +38,11 @@ const dictionaries = JSON.stringify([
     },
 ]);
 
-const parsers = [
-    'Package,Languages,Tags',
-    '[`@cspell/parser-go-strings-comments`](../packages/parser-go-strings-comments),`go`,"`comment`, `string`"',
-    '[`@cspell/parser-javascript`](../packages/parser-javascript),"`javascript`, `javascriptreact`","`comment`, `jsx`"',
-].join('\n');
+const parsers = markdown`
+    Package,Languages,Tags
+    [\`@cspell/parser-go-strings-comments\`](../packages/parser-go-strings-comments),\`go\`,"\`comment\`, \`string\`"
+    [\`@cspell/parser-javascript\`](../packages/parser-javascript),"\`javascript\`, \`javascriptreact\`","\`comment\`, \`jsx\`"
+`;
 
 describe('cspellPackages', () => {
     it('reads the dictionaries, with their kind, locales and file types', () => {
