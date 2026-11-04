@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
+import { testEach } from '@streetsidesoftware/test-each';
+
 import { readExtensionConfigValidator } from './extensionSchema.mts';
 
 const swedish = {
@@ -49,11 +51,17 @@ describe('extension.config.json validation', () => {
         assert.throws(() => validate({ ...swedish, commands }, file), /\/commands\/0/);
     });
 
-    it('requires the ID, title and scope of a command, and the display name and description', () => {
-        for (const key of ['id', 'title', 'scope'] as const) {
-            const { [key]: _, ...command } = swedish.commands[0]!;
-            assert.throws(() => validate({ ...swedish, commands: [command] }, file), /\/commands\/0/);
-        }
+    testEach`
+        key
+        ${'id'}
+        ${'title'}
+        ${'scope'}
+    `('requires the $key of a command', ({ key }: { key: 'id' | 'title' | 'scope' }) => {
+        const { [key]: _, ...command } = swedish.commands[0]!;
+        assert.throws(() => validate({ ...swedish, commands: [command] }, file), /\/commands\/0/);
+    });
+
+    it('requires the display name and description', () => {
         const { displayName: _d, ...withoutDisplayName } = swedish;
         assert.throws(() => validate(withoutDisplayName, file), /doesn't match/);
         const { description: _e, ...withoutDescription } = swedish;

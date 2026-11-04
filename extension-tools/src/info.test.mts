@@ -4,6 +4,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
+import { testEach } from '@streetsidesoftware/test-each';
+
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
 import { starterMarker } from './create/sample.mts';
 import { pickExtension } from './extensionConfig.mts';
@@ -85,8 +87,16 @@ describe('pickExtension', () => {
         assert.equal((await pickExtension('swedish')).folder, 'swedish');
         assert.equal((await pickExtension(undefined, path.join(extensionsDir, 'swedish/samples'))).folder, 'swedish');
         await assert.rejects(pickExtension(undefined, os.tmpdir()), /Name the extension with -e <folder>/);
-        for (const name of ['nope', 'swedish/', './swedish', '..', '../extension-tools']) {
-            await assert.rejects(pickExtension(name), /isn't an extension/);
-        }
+    });
+
+    testEach`
+        name
+        ${'nope'}
+        ${'swedish/'}
+        ${'./swedish'}
+        ${'..'}
+        ${'../extension-tools'}
+    `('rejects $name, which is not an extension folder', async ({ name }: { name: string }) => {
+        await assert.rejects(pickExtension(name), /isn't an extension/);
     });
 });
