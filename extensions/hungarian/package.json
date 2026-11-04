@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-hungarian",
   "displayName": "Hungarian - Code Spell Checker",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": true,
   "description": "Adds Hungarian (magyar) spell checking to Code Spell Checker.",
   "categories": [

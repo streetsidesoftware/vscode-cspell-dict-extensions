@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-bulgarian",
   "displayName": "Bulgarian - Code Spell Checker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "Adds Bulgarian (български) spell checking to Code Spell Checker.",
   "categories": [
