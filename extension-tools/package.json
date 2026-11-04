@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@inquirer/prompts": "^8.7.5",
-    "@streetsidesoftware/markdown-toolkit": "^2.0.0",
+    "@streetsidesoftware/markdown-toolkit": "^2.1.0",
     "ajv": "^8.20.0",
     "commander": "^15.0.0",
     "cspell-lib": "^10.4.0",
