@@ -241,17 +241,19 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
  */
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
-    // Two settings can turn a dictionary on in the same way, such as a package's `dictionaries` and the extension's.
+    // Two settings can enable a dictionary in the same way, such as a package's `dictionaries` and the extension's.
     const rows = [
         ...new Map((await tableRows(extensionDir, config)).map((row) => [JSON.stringify(row), row])).values(),
     ];
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
 }
 
-/** The rows of the extension's dictionaries: those the settings name, then the rest. */
+/** The rows of the extension's dictionaries: those the settings name, then the disabled ones. */
 export async function tableRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
-    const off = await offDictionaries(extensionDir, config);
-    return [...(await namedRows(extensionDir, config)), ...off.map((name) => ({ ...row(name, {}), enabled: 'no' }))];
+    const states = await dictionaryStates(extensionDir, config);
+    const disabled = [...states].filter(([, state]) => state === 'disabled');
+    const rows = disabled.map(([name]) => ({ ...row(name, {}), enabled: 'no' }));
+    return [...(await namedRows(extensionDir, config)), ...rows];
 }
 
 /** The rows of the settings in every file cspell reads for the extension. */
@@ -273,18 +275,18 @@ function settingRows(where: string, ext: CSpellSettings): Row[] {
     ];
 }
 
-/** The top-level `dictionaries` are on for every file. */
+/** The top-level `dictionaries` are enabled for every file. */
 function dictionariesRows(where: string, dictionaries: string[] | undefined): Row[] {
     return names(where, dictionaries).map((name) => row(name, {}));
 }
 
-/** A language setting turns its dictionaries on for its locales and file types. */
+/** A language setting enables its dictionaries for its locales and file types. */
 function languageSettingRows(where: string, setting: LanguageSetting): Row[] {
     return names(where, setting.dictionaries).map((name) => row(name, setting));
 }
 
 /**
- * An override turns its dictionaries on for the files its `filename` matches. Its `language` and `languageId` set the
+ * An override enables its dictionaries for the files its `filename` matches. Its `language` and `languageId` set the
  * locale and file type of those files; they don't select them, so they have no column.
  */
 function overrideRows(where: string, override: OverrideSettings): Row[] {
@@ -299,10 +301,10 @@ function overrideRows(where: string, override: OverrideSettings): Row[] {
     return dictionaries.map((name) => row(name, { glob: globs }));
 }
 
-/** The dictionaries a setting names. A `!name` turns a dictionary off, which the table can't show. */
+/** The dictionaries a setting names. A `!name` disables a dictionary, which the table can't show. */
 function names(where: string, dictionaries: string[] | undefined): string[] {
     const negated = (dictionaries ?? []).filter((name) => name.startsWith('!'));
-    if (negated.length) throw new Error(`${where}: turning a dictionary off (${negated.join(', ')}) isn't supported.`);
+    if (negated.length) throw new Error(`${where}: disabling a dictionary (${negated.join(', ')}) isn't supported.`);
     return dictionaries ?? [];
 }
 
@@ -339,10 +341,22 @@ export async function dictionaryNames(extensionDir: string, config: ExtensionCon
     return sources.flatMap(({ ext }) => ext.dictionaryDefinitions ?? []).map(({ name }) => name);
 }
 
-/** The dictionaries no setting names, so they are off until a user turns them on. */
-export async function offDictionaries(extensionDir: string, config: ExtensionConfig): Promise<string[]> {
-    const on = new Set((await namedRows(extensionDir, config)).map((row) => row.Dictionary));
-    return (await dictionaryNames(extensionDir, config)).filter((name) => !on.has(code(name)));
+export type DictionaryState = 'enabled' | 'conditional' | 'disabled';
+
+/** The state of each dictionary the extension defines, from the settings that name it. */
+export async function dictionaryStates(
+    extensionDir: string,
+    config: ExtensionConfig,
+): Promise<Map<string, DictionaryState>> {
+    const rows = await namedRows(extensionDir, config);
+    const names = await dictionaryNames(extensionDir, config);
+    return new Map(names.map((name) => [name, dictionaryState(rows.filter((row) => row.Dictionary === code(name)))]));
+}
+
+/** A dictionary with an unconditional row is enabled, whatever its other rows say: it's used for every file. */
+function dictionaryState(rows: Row[]): DictionaryState {
+    if (!rows.length) return 'disabled';
+    return rows.some((row) => row.enabled === 'yes') ? 'enabled' : 'conditional';
 }
 
 function code(text: string): string {

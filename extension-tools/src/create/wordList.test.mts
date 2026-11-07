@@ -38,13 +38,13 @@ describe('setUpWordList', () => {
 
     afterEach(() => rm(destDir, { recursive: true, force: true }));
 
-    it('turns on the dictionaries for the samples when no setting does', async () => {
+    it('enables the disabled dictionaries for the samples', async () => {
         await setUpWordList(destDir, configOf({ dictionaryDefinitions }));
         const samples = await readFile(path.join(destDir, 'samples/cspell.json'), 'utf8');
         assert.deepEqual(JSON.parse(samples), { dictionaries: ['demo'] });
     });
 
-    it('leaves the samples alone when a setting turns the dictionaries on', async () => {
+    it('leaves the samples alone when no dictionary is disabled', async () => {
         await setUpWordList(destDir, configOf({ dictionaryDefinitions, dictionaries: ['demo'] }));
         await assert.rejects(access(path.join(destDir, 'samples/cspell.json')));
     });

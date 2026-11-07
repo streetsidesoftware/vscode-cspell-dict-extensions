@@ -267,7 +267,7 @@ describe('readme', () => {
 });
 
 describe('dictionaryCommands', () => {
-    it('turns one dictionary on and off, globally and in the workspace, with the plain IDs', () => {
+    it('enables and disables one dictionary, globally and in the workspace, with the plain IDs', () => {
         assert.deepEqual(dictionaryCommands({ name: 'vim', friendlyName: 'Vim' }, ['vim']), [
             {
                 id: 'cSpellExt_vim.enable',
@@ -326,7 +326,7 @@ describe('dictionaryCommands', () => {
 });
 
 describe('sampleConfig', () => {
-    it('turns on the locale of a language', () => {
+    it('enables the locale of a language', () => {
         assert.deepEqual(sampleConfig(swedish), { language: 'sv-SE,en' });
         assert.deepEqual(sampleConfig(medicalTerms), {});
     });

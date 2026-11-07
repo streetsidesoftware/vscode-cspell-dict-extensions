@@ -83,7 +83,7 @@ does: the config's `cspell` in memory, every file it imports, and the files thos
 
 The sync stops with an error on a dictionary setting that the README's table would show wrongly:
 
-- A `!name`, which turns a dictionary off.
+- A `!name`, which disables a dictionary.
 - An override that names dictionaries and sets `language` or `languageId`. These set the locale and file type of the
   files it matches. They don't select the files.
 
@@ -94,8 +94,8 @@ not the files the sync would change, because the workflow updates those after th
 rejects, and when a config says something its packages no longer back up. "Its packages" means the installed packages
 and the config's own `cspell`:
 
-- A command turns a dictionary on or off that none of them defines. cspell's built-in dictionaries don't count: an
-  extension turns on the dictionaries it brings.
+- A command enables or disables a dictionary that none of them defines. cspell's built-in dictionaries don't count: an
+  extension enables the dictionaries it brings.
 - A command, or `locale`, names a locale that no language setting declares. Locales compare as in cspell: `sv_SE` is
   `sv-SE`.
 

@@ -162,7 +162,7 @@ export function languageCommands(name: string, language: Language): CommandConfi
 }
 
 /**
- * Turn a word list's dictionaries on and off, globally and in the workspace. One dictionary gets the plain IDs and
+ * Enable and disable a word list's dictionaries, globally and in the workspace. One dictionary gets the plain IDs and
  * titles; with several, each gets its own, e.g. `cSpellExt_vim.enableVimScript` and `Enable vim-script Spell Checker
  * Dictionary`.
  * @param dictionaries - the dictionary names, e.g. `['vim']`.
@@ -273,7 +273,7 @@ export function readme(answers: Answers): string {
 }
 
 /**
- * The cspell config of the samples. For a language, it turns the locale on, so the tests check the sample in the
+ * The cspell config of the samples. For a language, it enables the locale, so the tests check the sample in the
  * language. (In an inline locale comment, text after the locales on the same line, such as an HTML comment's end, is
  * read as a locale, which breaks languages that use word segmentation, such as Thai.)
  */
