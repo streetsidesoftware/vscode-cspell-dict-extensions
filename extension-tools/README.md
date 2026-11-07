@@ -9,7 +9,7 @@ The tools that create and maintain the extensions in [`extensions/`](../extensio
   a command's options:
   - `sync [folder…]` (`npm run sync:extensions`): writes the files the sync maintains. See
     [Anatomy of an extension](../docs/extension-anatomy.md).
-  - `check [folder…]` (`npm run check:extensions`): changes nothing, and fails when an extension is out of date or its
+  - `check [folder…]` (`npm run check:extensions`): changes nothing, and fails when the sync rejects a config or a
     config has drifted from its packages. See [Checks](../docs/extension-anatomy.md#checks).
   - `packages [word…]` (`npm run list:packages`): lists the published dictionaries and parsers.
   - `fetch-sample <locale> [title]` (`npm run fetch:sample`): fetches a sample text from Wikipedia.

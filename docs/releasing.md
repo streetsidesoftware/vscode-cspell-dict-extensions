@@ -39,6 +39,14 @@ in the same commit. A `fix:` or `feat:` commit then releases each of those exten
 changelog line. A change that leaves every `extension.js` the same releases no extension. A `chore:` commit releases
 nothing. The changed `extension.js` files show the reviewer which extensions a pull request releases.
 
+## Releasing a change to shared files
+
+After a pull request merges, the " 🔄 Sync Extensions" workflow opens a
+`chore: update the extensions from shared files and packages` PR when the sync changes any file. A change to `static/`
+or the templates reaches the extensions in that PR, not in the pull request that made it. Its `chore:` title releases
+nothing, and the changes ship with each extension's next release. To release them now, retitle it `fix:` before merging.
+That releases every extension in its file list.
+
 ## Manual publishing
 
 Run the " 📢 Manual Publish" workflow from the Actions tab. Choose the ref to publish from, and one extension or `all`.

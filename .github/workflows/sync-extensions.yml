@@ -1,0 +1,60 @@
+name: " 🔄 Sync Extensions"
+
+# After a change lands on main, write the files the sync maintains and open a pull request with any change.
+# Run by hand on a branch, it does the same for that branch, with a pull request into it.
+# Its `chore:` title releases nothing. To release the extensions it changes, retitle it `fix:` before merging.
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Skip the install-time audit: a hung audit request can stall an install for 5 minutes.
+env:
+  NPM_CONFIG_AUDIT: false
+
+jobs:
+  sync-extensions:
+    if: github.repository_owner == 'streetsidesoftware'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Use Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .tool-versions
+          cache: npm
+
+      - run: npm ci
+      - run: npm run setup
+
+      - name: Sync
+        run: npm run sync:extensions
+
+      - name: PR Body
+        id: pr-body
+        uses: streetsidesoftware/actions/public/pr-body@v1
+        with:
+          title: "chore: update the extensions from shared files and packages"
+          message: |
+            Update the extensions after a change to shared files or packages. This title releases nothing. To release the extensions this changes, retitle it `fix:` before merging.
+
+      # Uses the automation app, so that the pull request's own workflows run, and format and build what the sync wrote.
+      - name: Create PR
+        uses: streetsidesoftware/actions/.github/actions/pr@v1
+        with:
+          commit-message: "chore: update the extensions from shared files and packages"
+          branch: sync-extensions-${{ github.ref_name }}
+          base: ${{ github.ref_name }}
+          title: "chore: update the extensions from shared files and packages"
+          body: ${{ steps.pr-body.outputs.body }}
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}

@@ -13,9 +13,10 @@ level: reads and writes the runtime, the scripts and the configs
 An extension holds only its data, its README text and its samples. The rest is generated from shared code and templates,
 so a change in one place reaches every extension.
 
-To change an extension, edit its `extension.config.json`, or the shared files in `extension-runtime/` and `static/`.
-Then run `npm run sync:extensions` and commit the result. On every pull request, a workflow runs the sync and pushes any
-change. `npm run check:extensions` fails when an extension is out of date.
+To change one extension, edit its `extension.config.json` with `npm run extension-tools`, which also writes that
+extension's files. Commit them. To change every extension, edit the shared files in `extension-runtime/` and `static/`,
+and commit only those. After the pull request merges, a workflow runs the sync and opens a pull request with the updated
+extensions.
 
 ## Files you edit
 
@@ -36,7 +37,7 @@ release-please keeps any text it finds before the first version heading.
 
 ## Files the sync writes
 
-Don't edit these; `npm run sync:extensions` overwrites them.
+Don't edit these; the sync overwrites them.
 
 - **Tool configs:** `tsdown.config.ts`, `.vscode/*` and `.gitignore`, copied from
   [`templates/sync/`](../extension-tools/templates/sync). Also `tsconfig.json`, but only when the extension has a
@@ -86,8 +87,10 @@ The sync stops with an error on a dictionary setting that the README's table wou
 
 ## Checks
 
-`npm run check:extensions` changes nothing. It fails when the sync would change a file, and when a config says something
-its packages no longer back up. "Its packages" means the installed packages and the config's own `cspell`:
+`npm run check:extensions` changes nothing, and CI runs it on every pull request. It reports what a person has to fix,
+not the files the sync would change, because the workflow updates those after the merge. It fails on a config the sync
+rejects, and when a config says something its packages no longer back up. "Its packages" means the installed packages
+and the config's own `cspell`:
 
 - A command turns a dictionary on or off that none of them defines. cspell's built-in dictionaries don't count: an
   extension turns on the dictionaries it brings.

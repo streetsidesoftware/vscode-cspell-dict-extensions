@@ -20,8 +20,6 @@ npm run setup                         # installs every package: npm ci in each
 npm run list:packages -- <word>...    # the published dictionaries and parsers, and the extension that includes each
 npm run create:extension -- <name> --package <@cspell/package> --yes   # create an extension
 npm run check:extension -- <name>     # an extension's build, sample, extension-tools check, Prettier and spell checks; --vscode adds the VS Code test
-npm run sync:extensions               # write the files the sync maintains, for every extension
-npm run check:extensions              # fail if an extension is out of date, or its config has drifted from its packages
 npm run extension-tools -- info -e <folder>   # one extension's packages, commands and samples; --json for JSON
 npm run extension-tools -- --help     # add/remove command, add/remove sample, set, remove extension
 npm run lint                          # cspell over the repo
@@ -40,8 +38,8 @@ npm run test:vscode    # VS Code integration test; downloads VS Code into .vscod
 
 Tooling packages (`scripts/`, `extension-runtime/`, `extension-tools/`) run `npm test` in their own directory.
 
-Before finishing, run `npm run lint`, `npm run check-types`, `npm run lint:code` and `npm run check:extensions` at the
-root, as CI does, and `npm run prettier:lint`. For each extension you changed, run `npm run check:extension -- <name>`.
+Before finishing, run `npm run lint`, `npm run check-types` and `npm run lint:code` at the root, as CI does, and
+`npm run prettier:lint`. For each extension you changed, run `npm run check:extension -- <name>`.
 
 ## Where things are
 
@@ -60,8 +58,8 @@ them.
 
 - **Synced extensions:** an extension with an `extension.config.json` is maintained centrally. Change that file with
   `npm run extension-tools -- add|remove|set …`, which checks it and runs the sync, rather than by hand. Or edit the
-  shared files in `extension-runtime/`, `extension-tools/templates/sync/` and `static/`, then run
-  `npm run sync:extensions` and commit the result. Never edit the files the sync writes;
+  shared files in `extension-runtime/`, `extension-tools/templates/sync/` and `static/`, and commit only those: a
+  workflow updates the extensions after the PR merges. Never edit the files the sync writes;
   [Files the sync writes](docs/extension-anatomy.md#files-the-sync-writes) lists them. `hunspell-syntax` and
   `timestamp-hover` are maintained by hand, except the shared `package.json` fields, which the sync writes.
 - **New extensions:** create them with the generator, never by copying an extension, by following the `new-extension`
