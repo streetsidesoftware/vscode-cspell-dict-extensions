@@ -1,6 +1,7 @@
 name: " 🔄 Sync Extensions"
 
 # After a change lands on main, write the files the sync maintains and open a pull request with any change.
+# Run by hand on a branch, it does the same for that branch, with a pull request into it.
 # Its `chore:` title releases nothing. To release the extensions it changes, retitle it `fix:` before merging.
 
 on:
@@ -51,8 +52,8 @@ jobs:
         uses: streetsidesoftware/actions/.github/actions/pr@v1
         with:
           commit-message: "chore: update the files the sync writes"
-          branch: sync-extensions
-          base: main
+          branch: sync-extensions-${{ github.ref_name }}
+          base: ${{ github.ref_name }}
           title: "chore: update the files the sync writes"
           body: ${{ steps.pr-body.outputs.body }}
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
