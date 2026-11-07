@@ -110,7 +110,7 @@ async function extensionFiles(
     files.set(cspellExtPath, JSON.stringify(await cspellExt(extensionDir, config), null, 4) + '\n');
     const commands = commandsTable(config);
     if (commands) files.set('static/commands.json', commands);
-    const dictionaries = await dictionariesTable(extensionDir, config);
+    const dictionaries = await generateDictionariesTable(extensionDir, config);
     if (dictionaries) files.set('static/dictionaries.json', dictionaries);
     const pkg = await readJson<PackageJson>(path.join(extensionDir, 'package.json'));
     const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
@@ -239,21 +239,20 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
  * Identical rows are shown once.
  * @returns `undefined` for a bundle, or when the extension has no dictionaries.
  */
-async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
+export async function generateDictionariesTable(
+    extensionDir: string,
+    config: ExtensionConfig,
+): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
-    // Two settings can enable a dictionary in the same way, such as a package's `dictionaries` and the extension's.
-    const rows = [
-        ...new Map((await dictionaryRows(extensionDir, config)).map((row) => [JSON.stringify(row), row])).values(),
-    ];
-    return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
-}
-
-/** The rows of the extension's dictionaries: those the settings name, then the disabled ones. */
-export async function dictionaryRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
     const states = await dictionaryStates(extensionDir, config);
     const disabled = [...states].filter(([, state]) => state === 'disabled');
-    const rows = disabled.map(([name]) => ({ ...row(name, {}), enabled: 'no' }));
-    return [...(await allSettingRows(extensionDir, config)), ...rows];
+    const allRows = [
+        ...(await allSettingRows(extensionDir, config)),
+        ...disabled.map(([name]) => ({ ...row(name, {}), enabled: 'no' })),
+    ];
+    // Two settings can enable a dictionary in the same way, such as a package's `dictionaries` and the extension's.
+    const rows = [...new Map(allRows.map((row) => [JSON.stringify(row), row])).values()];
+    return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
 }
 
 /** The rows of the settings in every file cspell reads for the extension. */
