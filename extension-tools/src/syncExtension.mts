@@ -243,21 +243,21 @@ async function dictionariesTable(extensionDir: string, config: ExtensionConfig):
     if (config.kind === 'bundle') return undefined;
     // Two settings can enable a dictionary in the same way, such as a package's `dictionaries` and the extension's.
     const rows = [
-        ...new Map((await tableRows(extensionDir, config)).map((row) => [JSON.stringify(row), row])).values(),
+        ...new Map((await dictionaryRows(extensionDir, config)).map((row) => [JSON.stringify(row), row])).values(),
     ];
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
 }
 
 /** The rows of the extension's dictionaries: those the settings name, then the disabled ones. */
-export async function tableRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
+export async function dictionaryRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
     const states = await dictionaryStates(extensionDir, config);
     const disabled = [...states].filter(([, state]) => state === 'disabled');
     const rows = disabled.map(([name]) => ({ ...row(name, {}), enabled: 'no' }));
-    return [...(await namedRows(extensionDir, config)), ...rows];
+    return [...(await allSettingRows(extensionDir, config)), ...rows];
 }
 
 /** The rows of the settings in every file cspell reads for the extension. */
-async function namedRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
+async function allSettingRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
     const where = extensionRepoPath(extensionDir);
     const sources = await readSources(extensionDir, config);
     return sources.flatMap(({ name, ext }) => settingRows(`${where}: ${name}`, ext));
@@ -348,7 +348,7 @@ export async function dictionaryStates(
     extensionDir: string,
     config: ExtensionConfig,
 ): Promise<Map<string, DictionaryState>> {
-    const rows = await namedRows(extensionDir, config);
+    const rows = await allSettingRows(extensionDir, config);
     const names = await dictionaryNames(extensionDir, config);
     return new Map(names.map((name) => [name, dictionaryState(rows.filter((row) => row.Dictionary === code(name)))]));
 }

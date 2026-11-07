@@ -9,7 +9,7 @@ import path from 'node:path';
 import { styleText } from 'node:util';
 
 import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
-import { dictionaryNames, dictionaryStates, tableRows } from '../syncExtension.mts';
+import { dictionaryNames, dictionaryStates, dictionaryRows } from '../syncExtension.mts';
 import { npmOutput } from './exec.mts';
 import { dictionaryCommands, json } from './writeExtension.mts';
 
@@ -42,7 +42,7 @@ async function enableForSamples(destDir: string, config: ExtensionConfig): Promi
  */
 export async function addNameWords(destDir: string, config: ExtensionConfig, repoRoot: string): Promise<void> {
     const packages = (config.cspell as { import?: string[] }).import ?? [];
-    const table = (await tableRows(destDir, config)).flatMap((row) => Object.values(row));
+    const table = (await dictionaryRows(destDir, config)).flatMap((row) => Object.values(row));
     const names = [...packages, ...(await dictionaryNames(destDir, config)), ...table];
     const unknown = unknownWords(destDir, repoRoot);
     if (!unknown) return;
