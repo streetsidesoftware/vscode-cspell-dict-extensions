@@ -76,9 +76,8 @@ the packages it suggests the extension name, such as `bengali` for `@cspell/dict
 that already has an extension can still get another one with `--package`. With several languages, as for Serbian, each
 also gets its own enable and disable commands. Each dictionary of a word list gets enable and disable commands. A
 dictionary can be off until a user turns it on, when no setting turns it on. Then `samples/cspell.json` turns it on for
-the tests, and with no dictionary on, the README has no Dictionaries section. The generator also adds the words of the
-package and dictionary names and the dictionaries table that cspell doesn't know, such as `elisp` and `vimrc`, to the
-extension's `cspell.config.yaml`.
+the tests. The generator also adds the words of the package and dictionary names and the dictionaries table that cspell
+doesn't know, such as `elisp` and `vimrc`, to the extension's `cspell.config.yaml`.
 
 It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`,
 a starter `package.json`, `README.md`, `LICENSE`, a sample and an empty `CHANGELOG.md` for release-please to fill. Then
@@ -153,8 +152,8 @@ npm run create:extension -- typescript-parser --package @cspell/parser-typescrip
 - `src/create/sample.mts` — chooses the samples: the files given, a language's Wikipedia article, or a starter file to
   replace.
 - `src/create/writeExtension.mts` — writes `extension.config.json` and the starter files.
-- `src/create/wordList.mts` — sets up a word list from its installed packages: the sample check, the commands, the
-  README sentence and the words from the package names.
+- `src/create/wordList.mts` — sets up a word list from its installed packages: the sample check, the commands and the
+  words from the package names.
 - `src/cspellPackages.mts`, `wikipedia.mts` and `existingExtensions.mts` — the package lists, the Wikipedia sample and
   the packages that already have an extension, shared with `npm run list:packages` and `fetch:sample`.
 - `src/create/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.

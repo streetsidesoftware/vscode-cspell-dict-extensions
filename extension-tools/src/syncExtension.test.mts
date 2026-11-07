@@ -166,16 +166,23 @@ describe('syncExtension', () => {
         await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
         await syncExtension(dir, options);
         assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
-            { Dictionary: '`always`', locale: '', languageId: '', glob: '' },
-            { Dictionary: '`c-only`', locale: '', languageId: '`c`, `cpp`', glob: '' },
-            { Dictionary: '`web`', locale: '', languageId: '`html`, `css`', glob: '' },
-            { Dictionary: '`any`', locale: '', languageId: '', glob: '' },
-            { Dictionary: '`lisp`', locale: '', languageId: '`elisp`', glob: '' },
-            { Dictionary: '`everywhere`', locale: '', languageId: '', glob: '' },
-            { Dictionary: '`lisp`', locale: '', languageId: '', glob: '`**/*.el`, `**/.emacs`' },
-            { Dictionary: '`off`', locale: '', languageId: '', glob: '`**/*.md`' },
+            { Dictionary: '`always`', enabled: 'yes', locale: '', languageId: '', glob: '' },
+            { Dictionary: '`c-only`', enabled: 'conditional', locale: '', languageId: '`c`, `cpp`', glob: '' },
+            { Dictionary: '`web`', enabled: 'conditional', locale: '', languageId: '`html`, `css`', glob: '' },
+            { Dictionary: '`any`', enabled: 'yes', locale: '', languageId: '', glob: '' },
+            { Dictionary: '`lisp`', enabled: 'conditional', locale: '', languageId: '`elisp`', glob: '' },
+            { Dictionary: '`everywhere`', enabled: 'yes', locale: '', languageId: '', glob: '' },
+            {
+                Dictionary: '`lisp`',
+                enabled: 'conditional',
+                locale: '',
+                languageId: '',
+                glob: '`**/*.el`, `**/.emacs`',
+            },
+            { Dictionary: '`off`', enabled: 'conditional', locale: '', languageId: '', glob: '`**/*.md`' },
+            { Dictionary: '`unused`', enabled: 'no', locale: '', languageId: '', glob: '' },
         ]);
-        // Off: no row. An override's glob turns `off` on.
+        // An override's glob turns `off` on.
         assert.deepEqual(await offDictionaries(dir, await readJson('extension.config.json')), ['unused']);
     });
 

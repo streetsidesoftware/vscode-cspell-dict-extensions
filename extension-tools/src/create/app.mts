@@ -111,7 +111,7 @@ async function generate(
     npm(['install', '-S', ...answers.packages], destDir);
     const config = extensionConfig(answers, firstSample.file);
     if (answers.kind === 'wordList') {
-        await setUpWordList(destDir, answers, config);
+        await setUpWordList(destDir, config);
     }
     npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     // The files the sync owns or derives, and the package.json fields every extension shares.

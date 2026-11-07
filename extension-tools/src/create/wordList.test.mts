@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, mkdir, mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
@@ -7,7 +7,7 @@ import { afterEach, beforeEach, describe, it } from 'node:test';
 import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
 import type { Answers } from './questions.mts';
 import { setUpWordList } from './wordList.mts';
-import { extensionConfig, readme } from './writeExtension.mts';
+import { extensionConfig } from './writeExtension.mts';
 
 const answers: Answers = {
     name: 'demo',
@@ -34,22 +34,18 @@ describe('setUpWordList', () => {
     beforeEach(async () => {
         destDir = await mkdtemp(path.join(tmpdir(), 'cspell-dict-word-list-'));
         await mkdir(path.join(destDir, 'samples'));
-        await writeFile(path.join(destDir, 'README.md'), readme(answers));
     });
 
     afterEach(() => rm(destDir, { recursive: true, force: true }));
 
-    it('leaves the dictionaries out of the README when no setting turns one on', async () => {
-        await setUpWordList(destDir, answers, configOf({ dictionaryDefinitions }));
-        const text = await readFile(path.join(destDir, 'README.md'), 'utf8');
-        assert.doesNotMatch(text, /dictionaries\.json/);
+    it('turns on the dictionaries for the samples when no setting does', async () => {
+        await setUpWordList(destDir, configOf({ dictionaryDefinitions }));
         const samples = await readFile(path.join(destDir, 'samples/cspell.json'), 'utf8');
         assert.deepEqual(JSON.parse(samples), { dictionaries: ['demo'] });
     });
 
-    it('keeps the dictionaries in the README when a setting turns one on', async () => {
-        await setUpWordList(destDir, answers, configOf({ dictionaryDefinitions, dictionaries: ['demo'] }));
-        const text = await readFile(path.join(destDir, 'README.md'), 'utf8');
-        assert.match(text, /dictionaries\.json/);
+    it('leaves the samples alone when a setting turns the dictionaries on', async () => {
+        await setUpWordList(destDir, configOf({ dictionaryDefinitions, dictionaries: ['demo'] }));
+        await assert.rejects(access(path.join(destDir, 'samples/cspell.json')));
     });
 });

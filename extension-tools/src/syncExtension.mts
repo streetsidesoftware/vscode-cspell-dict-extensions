@@ -231,12 +231,13 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
 }
 
 /**
- * The settings that name the extension's dictionaries, as table rows, injected into the README with
+ * The extension's dictionaries, as table rows, injected into the README with
  * `<!--- @@inject-table: ./static/dictionaries.json --->`. One row for each dictionary a setting names: the top-level
  * `dictionaries`, each language setting and each override, in every file cspell reads for the extension (the imported
- * files, with their own imports) and in the extension's `cspell`. Each locale, file type and glob is shown as code; an
- * empty cell is a field the setting doesn't set, or sets to `*`. Identical rows are shown once.
- * @returns `undefined` for a bundle, or when no setting names a dictionary.
+ * files, with their own imports) and in the extension's `cspell`. Then one row for each dictionary no setting names.
+ * Each locale, file type and glob is shown as code; an empty cell is a field the setting doesn't set, or sets to `*`.
+ * Identical rows are shown once.
+ * @returns `undefined` for a bundle, or when the extension has no dictionaries.
  */
 async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
@@ -247,8 +248,14 @@ async function dictionariesTable(extensionDir: string, config: ExtensionConfig):
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
 }
 
-/** The rows of every file cspell reads for the extension. */
+/** The rows of the extension's dictionaries: those the settings name, then the rest. */
 export async function tableRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
+    const off = await offDictionaries(extensionDir, config);
+    return [...(await namedRows(extensionDir, config)), ...off.map((name) => ({ ...row(name, {}), enabled: 'no' }))];
+}
+
+/** The rows of the settings in every file cspell reads for the extension. */
+async function namedRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
     const where = extensionRepoPath(extensionDir);
     const sources = await readSources(extensionDir, config);
     return sources.flatMap(({ name, ext }) => settingRows(`${where}: ${name}`, ext));
@@ -299,7 +306,7 @@ function names(where: string, dictionaries: string[] | undefined): string[] {
     return dictionaries ?? [];
 }
 
-type Row = Record<'Dictionary' | 'locale' | 'languageId' | 'glob', string>;
+type Row = Record<'Dictionary' | 'enabled' | 'locale' | 'languageId' | 'glob', string>;
 
 interface Cells {
     locale?: string | string[] | undefined;
@@ -308,13 +315,12 @@ interface Cells {
 }
 
 function row(name: string, cells: Cells): Row {
-    return {
-        Dictionary: code(name),
-        locale: codes(condition(cells.locale)),
-        languageId: codes(condition(cells.languageId)),
-        // Not split: a glob can have commas, as in `*.{adb,ads}`.
-        glob: codes([cells.glob ?? []].flat()),
-    };
+    const locale = codes(condition(cells.locale));
+    const languageId = codes(condition(cells.languageId));
+    // Not split: a glob can have commas, as in `*.{adb,ads}`.
+    const glob = codes([cells.glob ?? []].flat());
+    const enabled = locale || languageId || glob ? 'conditional' : 'yes';
+    return { Dictionary: code(name), enabled, locale, languageId, glob };
 }
 
 /** A locale or file type condition. cspell-lib treats `*` like no value: every locale or file type. */
@@ -333,9 +339,9 @@ export async function dictionaryNames(extensionDir: string, config: ExtensionCon
     return sources.flatMap(({ ext }) => ext.dictionaryDefinitions ?? []).map(({ name }) => name);
 }
 
-/** The dictionaries no setting turns on, so they have no row in the dictionaries table. */
+/** The dictionaries no setting names, so they are off until a user turns them on. */
 export async function offDictionaries(extensionDir: string, config: ExtensionConfig): Promise<string[]> {
-    const on = new Set((await tableRows(extensionDir, config)).map((row) => row.Dictionary));
+    const on = new Set((await namedRows(extensionDir, config)).map((row) => row.Dictionary));
     return (await dictionaryNames(extensionDir, config)).filter((name) => !on.has(code(name)));
 }
 

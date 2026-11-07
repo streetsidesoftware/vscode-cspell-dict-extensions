@@ -213,12 +213,8 @@ function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): MDP
     return [paragraph(comment(`@@${kind}: ${marker}`)), paragraph(comment(`@@inject-end: ${marker}`))];
 }
 
-/**
- * The starter README, with the `@@inject` sections the sync fills in.
- * @param options.dictionariesTable - false for a word list when no setting turns on a dictionary, which leaves the sync
- * no table to fill in. Only the installed packages can tell.
- */
-export function readme(answers: Answers, { dictionariesTable = true }: { dictionariesTable?: boolean } = {}): string {
+/** The starter README, with the `@@inject` sections the sync fills in. */
+export function readme(answers: Answers): string {
     const title = heading(1, displayName(answers));
     const requirements = inject(
         '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
@@ -254,7 +250,7 @@ export function readme(answers: Answers, { dictionariesTable = true }: { diction
                 heading(2, 'Installation'),
                 heading(3, 'Enable or Disable the Dictionary'),
                 commands,
-                dictionariesTable ? dictionaries : [],
+                dictionaries,
                 requirements,
                 footer,
             ).toString();

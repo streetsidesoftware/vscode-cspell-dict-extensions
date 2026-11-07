@@ -11,14 +11,12 @@ import { styleText } from 'node:util';
 import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
 import { dictionaryNames, offDictionaries, tableRows } from '../syncExtension.mts';
 import { npmOutput } from './exec.mts';
-import type { Answers } from './questions.mts';
-import { dictionaryCommands, json, readme } from './writeExtension.mts';
+import { dictionaryCommands, json } from './writeExtension.mts';
 
 /** Set up a word list once its packages are installed. */
-export async function setUpWordList(destDir: string, answers: Answers, config: ExtensionConfig): Promise<void> {
+export async function setUpWordList(destDir: string, config: ExtensionConfig): Promise<void> {
     await writeCommands(destDir, config);
     await turnOnForSamples(destDir, config);
-    await leaveOutEmptyTable(destDir, answers, config);
 }
 
 /** Commands to turn each dictionary on and off. */
@@ -33,12 +31,6 @@ async function turnOnForSamples(destDir: string, config: ExtensionConfig): Promi
     if (!off.length) return;
     console.log(`Off until turned on: ${off.join(', ')}`);
     await writeFile(path.join(destDir, 'samples/cspell.json'), json({ dictionaries: off }));
-}
-
-/** When no setting turns on a dictionary, the sync writes no dictionaries table, so the README can't ask for one. */
-async function leaveOutEmptyTable(destDir: string, answers: Answers, config: ExtensionConfig): Promise<void> {
-    if ((await tableRows(destDir, config)).length) return;
-    await writeFile(path.join(destDir, 'README.md'), readme(answers, { dictionariesTable: false }));
 }
 
 /**

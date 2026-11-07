@@ -250,9 +250,9 @@ describe('readme', () => {
         // extension's. No parser extension exists yet, and a parser's sections only need `static/cspell-ext.json`.
         testEach`
             answers         | folder             | filled
-            ${swedish}      | ${'swedish'}       | ${['| Command ', '### Manual Settings', '| Dictionary ', 'Each row is a setting', '## Requirements']}
-            ${serbian}      | ${'serbian'}       | ${['| Command ', '### Manual Settings', '| Dictionary ', 'Each row is a setting', '## Requirements']}
-            ${medicalTerms} | ${'medical-terms'} | ${['| Command ', '| Dictionary ', 'Each row is a setting', '## Requirements']}
+            ${swedish}      | ${'swedish'}       | ${['| Command ', '### Manual Settings', '| Dictionary ', 'The **enabled** column', '## Requirements']}
+            ${serbian}      | ${'serbian'}       | ${['| Command ', '### Manual Settings', '| Dictionary ', 'The **enabled** column', '## Requirements']}
+            ${medicalTerms} | ${'medical-terms'} | ${['| Command ', '| Dictionary ', 'The **enabled** column', '## Requirements']}
             ${parser}       | ${'swedish'}       | ${['## Requirements']}
         `(
             '$answers.name',
@@ -263,12 +263,6 @@ describe('readme', () => {
                 for (const text of filled) assert.ok(result.document.content.includes(text), text);
             },
         );
-    });
-
-    it('leaves out the dictionaries when a word list has no table', () => {
-        const text = readme(medicalTerms, { dictionariesTable: false });
-        assert.doesNotMatch(text, /Dictionaries|dictionaries/);
-        assert.match(text, /@@inject-table: \.\/static\/commands\.json/);
     });
 });
 
