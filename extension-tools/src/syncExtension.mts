@@ -248,7 +248,7 @@ async function dictionariesTable(extensionDir: string, config: ExtensionConfig):
 }
 
 /** The rows of every file cspell reads for the extension. */
-async function tableRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
+export async function tableRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
     const where = extensionRepoPath(extensionDir);
     const sources = await readSources(extensionDir, config);
     return sources.flatMap(({ name, ext }) => settingRows(`${where}: ${name}`, ext));

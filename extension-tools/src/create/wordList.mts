@@ -1,4 +1,4 @@
-// cspell:ignore elisp
+// cspell:ignore elisp vimrc
 
 /**
  * The parts of a word list that only its installed packages can tell: its dictionaries, and which are off.
@@ -9,14 +9,16 @@ import path from 'node:path';
 import { styleText } from 'node:util';
 
 import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
-import { dictionaryNames, offDictionaries } from '../syncExtension.mts';
+import { dictionaryNames, offDictionaries, tableRows } from '../syncExtension.mts';
 import { npmOutput } from './exec.mts';
-import { dictionaryCommands, json } from './writeExtension.mts';
+import type { Answers } from './questions.mts';
+import { dictionaryCommands, json, readme } from './writeExtension.mts';
 
 /** Set up a word list once its packages are installed. */
-export async function setUpWordList(destDir: string, config: ExtensionConfig): Promise<void> {
+export async function setUpWordList(destDir: string, answers: Answers, config: ExtensionConfig): Promise<void> {
     await writeCommands(destDir, config);
     await turnOnForSamples(destDir, config);
+    await leaveOutEmptyTable(destDir, answers, config);
 }
 
 /** Commands to turn each dictionary on and off. */
@@ -33,14 +35,22 @@ async function turnOnForSamples(destDir: string, config: ExtensionConfig): Promi
     await writeFile(path.join(destDir, 'samples/cspell.json'), json({ dictionaries: off }));
 }
 
+/** When no setting turns on a dictionary, the sync writes no dictionaries table, so the README can't ask for one. */
+async function leaveOutEmptyTable(destDir: string, answers: Answers, config: ExtensionConfig): Promise<void> {
+    if ((await tableRows(destDir, config)).length) return;
+    await writeFile(path.join(destDir, 'README.md'), readme(answers, { dictionariesTable: false }));
+}
+
 /**
- * Add the words of the package and dictionary names that cspell doesn't know, such as `elisp`, to `words` in the
- * extension's `cspell.config.yaml`, so its own spell check passes.
+ * Add the words that cspell doesn't know from the package names and dictionary names, such as `elisp`, and from the
+ * dictionaries table, such as `vimrc` in a glob, to `words` in the extension's `cspell.config.yaml`, so its own spell
+ * check passes.
  * @param repoRoot - where cspell runs, with the repository's config.
  */
 export async function addNameWords(destDir: string, config: ExtensionConfig, repoRoot: string): Promise<void> {
     const packages = (config.cspell as { import?: string[] }).import ?? [];
-    const names = [...packages, ...(await dictionaryNames(destDir, config))];
+    const table = (await tableRows(destDir, config)).flatMap((row) => Object.values(row));
+    const names = [...packages, ...(await dictionaryNames(destDir, config)), ...table];
     const unknown = unknownWords(destDir, repoRoot);
     if (!unknown) return;
     const words = nameWords(names, unknown);

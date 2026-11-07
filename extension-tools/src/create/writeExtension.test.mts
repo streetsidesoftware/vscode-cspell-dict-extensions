@@ -4,7 +4,12 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
+import { testEach } from '@streetsidesoftware/test-each';
+import { injectMarkdown } from 'inject-markdown';
+
 import { readExtensionConfigValidator } from '../extensionSchema.mts';
+import { injectProblems } from '../format.mts';
+import { repoRoot } from '../repo.mts';
 import type { Answers } from './questions.mts';
 import type { Sample } from './sample.mts';
 import {
@@ -238,6 +243,32 @@ describe('readme', () => {
         assert.ok(!markers(readme(parser)).includes('./static/dictionaries.json#markdown'));
         assert.match(readme(swedish), /^# Swedish - Code Spell Checker\n/);
         assert.match(readme({ ...swedish, displayName: 'Svenska' }), /^# Svenska\n/);
+    });
+
+    describe('fills in every section with inject-markdown', () => {
+        // The sections read the static files of the extension the README belongs to, so each one borrows a real
+        // extension's. No parser extension exists yet, and a parser's sections only need `static/cspell-ext.json`.
+        testEach`
+            answers         | folder             | filled
+            ${swedish}      | ${'swedish'}       | ${['| Command ', '### Manual Settings', '| Dictionary ', 'Each row is a setting', '## Requirements']}
+            ${serbian}      | ${'serbian'}       | ${['| Command ', '### Manual Settings', '| Dictionary ', 'Each row is a setting', '## Requirements']}
+            ${medicalTerms} | ${'medical-terms'} | ${['| Command ', '| Dictionary ', 'Each row is a setting', '## Requirements']}
+            ${parser}       | ${'swedish'}       | ${['## Requirements']}
+        `(
+            '$answers.name',
+            async ({ answers, folder, filled }: { answers: Answers; folder: string; filled: string[] }) => {
+                const file = `extensions/${folder}/README.md`;
+                const result = await injectMarkdown({ file, content: readme(answers) }, { cwd: repoRoot });
+                assert.deepEqual(injectProblems(result), []);
+                for (const text of filled) assert.ok(result.document.content.includes(text), text);
+            },
+        );
+    });
+
+    it('leaves out the dictionaries when a word list has no table', () => {
+        const text = readme(medicalTerms, { dictionariesTable: false });
+        assert.doesNotMatch(text, /Dictionaries|dictionaries/);
+        assert.match(text, /@@inject-table: \.\/static\/commands\.json/);
     });
 });
 
