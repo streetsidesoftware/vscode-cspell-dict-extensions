@@ -76,8 +76,9 @@ the packages it suggests the extension name, such as `bengali` for `@cspell/dict
 that already has an extension can still get another one with `--package`. With several languages, as for Serbian, each
 also gets its own enable and disable commands. Each dictionary of a word list gets enable and disable commands. A
 dictionary can be off until a user turns it on, when no setting turns it on. Then `samples/cspell.json` turns it on for
-the tests. The generator also adds the words of the package and dictionary names that cspell doesn't know, such as
-`elisp`, to the extension's `cspell.config.yaml`.
+the tests, and with no dictionary on, the README has no Dictionaries section. The generator also adds the words of the
+package and dictionary names and the dictionaries table that cspell doesn't know, such as `elisp` and `vimrc`, to the
+extension's `cspell.config.yaml`.
 
 It writes the files a person owns into `extensions/<name>` (the directory must not exist yet): `extension.config.json`,
 a starter `package.json`, `README.md`, `LICENSE`, a sample and an empty `CHANGELOG.md` for release-please to fill. Then
@@ -167,4 +168,4 @@ npm run check-types  # type check
 
 MIT © Street Side Software
 
-<!--- cspell:ignore elisp --->
+<!--- cspell:ignore elisp vimrc --->
