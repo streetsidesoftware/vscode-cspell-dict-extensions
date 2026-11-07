@@ -41,10 +41,11 @@ nothing. The changed `extension.js` files show the reviewer which extensions a p
 
 ## Releasing a change to shared files
 
-After a pull request merges, the " 🔄 Sync Extensions" workflow opens a `chore: update the files the sync writes` PR
-when the sync changes any file. A change to `static/` or the templates reaches the extensions in that PR, not in the
-pull request that made it. Its `chore:` title releases nothing, and the changes ship with each extension's next release.
-To release them now, retitle it `fix:` before merging. That releases every extension in its file list.
+After a pull request merges, the " 🔄 Sync Extensions" workflow opens a
+`chore: update the extensions from shared files and packages` PR when the sync changes any file. A change to `static/`
+or the templates reaches the extensions in that PR, not in the pull request that made it. Its `chore:` title releases
+nothing, and the changes ship with each extension's next release. To release them now, retitle it `fix:` before merging.
+That releases every extension in its file list.
 
 ## Manual publishing
 
