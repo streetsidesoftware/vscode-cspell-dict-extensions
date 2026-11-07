@@ -12,7 +12,7 @@ import {
     paragraph,
     strong,
 } from '@streetsidesoftware/markdown-toolkit';
-import type { MDComment } from '@streetsidesoftware/markdown-toolkit';
+import type { MDParagraph } from '@streetsidesoftware/markdown-toolkit';
 
 import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
 import { actions, commandSet, idSuffix, localeSuffix, scopes, standardCommand } from '../commandSets.mts';
@@ -205,13 +205,20 @@ const codeSpellChecker = link(
     'https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker',
 );
 
-/** An `@@inject` section, filled in by the sync. */
-function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): MDComment[] {
-    return [comment(`@@${kind}: ${marker}`), comment(`@@inject-end: ${marker}`)];
+/**
+ * An `@@inject` section, filled in by the sync. Each marker is a paragraph of its own, because inject-markdown reads
+ * only one marker from a line, and comments in the same array are written on one line.
+ */
+function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): MDParagraph[] {
+    return [paragraph(comment(`@@${kind}: ${marker}`)), paragraph(comment(`@@inject-end: ${marker}`))];
 }
 
-/** The starter README, with the `@@inject` sections the sync fills in. */
-export function readme(answers: Answers): string {
+/**
+ * The starter README, with the `@@inject` sections the sync fills in.
+ * @param options.dictionariesTable - false for a word list when no setting turns on a dictionary, which leaves the sync
+ * no table to fill in. Only the installed packages can tell.
+ */
+export function readme(answers: Answers, { dictionariesTable = true }: { dictionariesTable?: boolean } = {}): string {
     const title = heading(1, displayName(answers));
     const requirements = inject(
         '../../static/requirements.md#values-file=:../../static/engines.json&values-file=:./static/cspell-ext.json',
@@ -247,7 +254,7 @@ export function readme(answers: Answers): string {
                 heading(2, 'Installation'),
                 heading(3, 'Enable or Disable the Dictionary'),
                 commands,
-                dictionaries,
+                dictionariesTable ? dictionaries : [],
                 requirements,
                 footer,
             ).toString();
