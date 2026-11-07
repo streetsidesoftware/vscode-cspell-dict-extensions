@@ -206,11 +206,11 @@ const codeSpellChecker = link(
 );
 
 /**
- * An `@@inject` section, filled in by the sync. Each marker is a paragraph of its own, because inject-markdown reads
- * only one marker from a line, and comments in the same array are written on one line.
+ * An `@@inject` directive, which the sync fills in. It's a paragraph of its own, because inject-markdown reads only one
+ * directive from a line, and comments in the same array are written on one line.
  */
-function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): MDParagraph[] {
-    return [paragraph(comment(`@@${kind}: ${marker}`)), paragraph(comment(`@@inject-end: ${marker}`))];
+function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): MDParagraph {
+    return paragraph(comment(`@@${kind}: ${marker}`));
 }
 
 /** The starter README, with the `@@inject` sections the sync fills in. */
