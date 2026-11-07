@@ -38,16 +38,15 @@ program
 program
     .command('check')
     .description(
-        'Change nothing. Report the files the sync would change, and what the configs say that the installed ' +
-            'packages no longer back up. Exit with 1 if there is anything.',
+        'Change nothing. Report what a person has to fix: a config the sync rejects, and what the configs say that ' +
+            'the installed packages no longer back up. Files the sync would change are not reported: a workflow ' +
+            'updates them after a pull request merges. Exit with 1 if there is anything.',
     )
     .argument('[folder...]', 'folders in extensions/ (default: all of them)')
     .action(async (folders: string[]) => {
-        const { changes, drift, count } = await syncExtensions(folders, { check: true });
-        for (const { folder, file } of changes) console.log(`Out of date: extensions/${folder}/${file}`);
+        const { drift, count } = await syncExtensions(folders, { check: true });
         for (const { file, message } of drift) console.log(`${file}: ${message}`);
         console.log(`Checked ${plural(count, 'extension')}.`);
-        if (changes.length) error('Run `extension-tools/cli.mts sync` and commit the changes.');
         if (drift.length)
             error('Change the commands or the locale, or the packages, so that each is defined or declared.');
     });
