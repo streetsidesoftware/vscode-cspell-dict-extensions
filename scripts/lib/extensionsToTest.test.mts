@@ -32,10 +32,14 @@ describe('extensionsToTest', () => {
         assert.deepEqual(extensionsToTest(changed, all), { extensions: [], shared: false });
     });
 
+    it('skips extension-tools', () => {
+        const changed = ['extension-tools/src/syncExtension.mts', 'extension-tools/templates/sync/tsdown.config.ts'];
+        assert.deepEqual(extensionsToTest(changed, all), { extensions: [], shared: false });
+    });
+
     testEach`
         file
         ${'extension-runtime/src/entry.ts'}
-        ${'extension-tools/templates/sync/tsdown.config.ts'}
         ${'package-lock.json'}
         ${'.github/workflows/test.yml'}
         ${'extensions/removed/package.json'}
