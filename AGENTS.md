@@ -12,12 +12,15 @@ extension in `extensions/` includes published `@cspell/dict-*` packages from
 
 ## Commands
 
-A fresh clone has no `node_modules`. npm only: pnpm and yarn are blocked. Node.js version: `.tool-versions`.
+A fresh clone has no `node_modules`. After pulling `main`, run `npm ci` and `npm run setup` again: a script that fails
+with `ERR_MODULE_NOT_FOUND` usually needs a dependency that `main` added. npm only: pnpm and yarn are blocked. Node.js
+version: `.tool-versions`.
 
 ```sh
 npm ci                                # installs the root
 npm run setup                         # installs every package: npm ci in each
 npm run list:packages -- <word>...    # the published dictionaries and parsers, and the extension that includes each
+npm run list:packages -- --missing    # the packages no extension includes yet
 npm run create:extension -- <name> --package <@cspell/package> --yes   # create an extension
 npm run check:extension -- <name>     # an extension's build, sample, extension-tools check, Prettier and spell checks; --vscode adds the VS Code test
 npm run extension-tools -- info -e <folder>   # one extension's packages, commands and samples; --json for JSON
@@ -38,8 +41,9 @@ npm run test:vscode    # VS Code integration test; downloads VS Code into .vscod
 
 Tooling packages (`scripts/`, `extension-runtime/`, `extension-tools/`) run `npm test` in their own directory.
 
-Before finishing, run `npm run lint`, `npm run check-types` and `npm run lint:code` at the root, as CI does, and
-`npm run prettier:lint`. For each extension you changed, run `npm run check:extension -- <name>`.
+Before finishing a change outside `extensions/`, run `npm run lint`, `npm run check-types` and `npm run lint:code` at
+the root, as CI does, and `npm run prettier:lint`. For each extension you created or changed, run
+`npm run check:extension -- <name>`.
 
 ## Where things are
 
