@@ -1,0 +1,48 @@
+{
+    "$schema": "../../extension-runtime/extension.config.schema.json",
+    "name": "scottish-gaelic",
+    "kind": "language",
+    "friendlyName": "Scottish Gaelic",
+    "displayName": "Scottish Gaelic - Code Spell Checker",
+    "description": "Adds Scottish Gaelic (Gàidhlig) spell checking to Code Spell Checker.",
+    "nativeName": "Gàidhlig",
+    "locale": "gd",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-gd/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "id": "cSpellExt_scottish-gaelic.enable",
+            "title": "Enable Scottish Gaelic Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "gd",
+            "scope": "global"
+        },
+        {
+            "id": "cSpellExt_scottish-gaelic.disable",
+            "title": "Disable Scottish Gaelic Spell Checker Dictionary",
+            "action": "disable",
+            "toggle": "locale",
+            "value": "gd",
+            "scope": "global"
+        },
+        {
+            "id": "cSpellExt_scottish-gaelic.enableWorkspace",
+            "title": "Enable Scottish Gaelic Spell Checker Dictionary in Workspace",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "gd",
+            "scope": "workspace"
+        },
+        {
+            "id": "cSpellExt_scottish-gaelic.disableWorkspace",
+            "title": "Disable Scottish Gaelic Spell Checker Dictionary in Workspace",
+            "action": "disable",
+            "toggle": "locale",
+            "value": "gd",
+            "scope": "workspace"
+        }
+    ]
+}
