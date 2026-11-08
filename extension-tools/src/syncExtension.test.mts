@@ -278,6 +278,24 @@ describe('syncExtension', () => {
         assert.equal(await read('README.md'), readme);
     });
 
+    it('writes the locales in the config as BCP 47 tags', async () => {
+        const [enable, ...others] = config.commands;
+        await writeJson('extension.config.json', {
+            ...config,
+            locale: 'xx_yy',
+            commands: [{ ...enable, value: 'xx-yy,xx' }, ...others],
+        });
+        const changes = await syncExtension(dir, options);
+        assert.ok(files(changes, 'update').includes('extension.config.json'));
+        const written = await readJson('extension.config.json');
+        assert.equal(written.locale, 'xx-YY');
+        assert.deepEqual(
+            written.commands.map((command: { value: string }) => command.value),
+            ['xx-YY,xx', 'demo'],
+        );
+        assert.match(await read('README.md'), /\| xx-YY,xx \|/);
+    });
+
     it('names the package after the config, not the folder', async () => {
         await writeJson('extension.config.json', { ...config, name: 'other' });
         await syncExtension(dir, options);

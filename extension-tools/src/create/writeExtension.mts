@@ -15,6 +15,7 @@ import {
 import type { MDParagraph } from '@streetsidesoftware/markdown-toolkit';
 
 import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
+import { configFileName, writeConfig } from '../extensionConfig.mts';
 import { actions, commandSet, idSuffix, localeSuffix, scopes, standardCommand } from '../commandSets.mts';
 import type { Target } from '../commandSets.mts';
 import { defaultLicense } from './questions.mts';
@@ -49,7 +50,7 @@ export async function writeExtension(
     const log = options.log ?? (() => undefined);
     const written: string[] = [];
 
-    async function create(file: string, write: (dest: string) => Promise<void>): Promise<void> {
+    async function create(file: string, write: (dest: string) => Promise<unknown>): Promise<void> {
         const dest = path.join(destDir, file);
         await mkdir(path.dirname(dest), { recursive: true });
         await write(dest);
@@ -57,8 +58,8 @@ export async function writeExtension(
         written.push(file);
     }
 
+    await create(configFileName, () => writeConfig(destDir, extensionConfig(answers, samples[0].file)));
     const files: [string, string][] = [
-        ['extension.config.json', json(extensionConfig(answers, samples[0].file))],
         ['package.json', json(packageJson(answers))],
         ['README.md', readme(answers)],
         ...samples.map((sample): [string, string] => [sample.file, sample.text]),

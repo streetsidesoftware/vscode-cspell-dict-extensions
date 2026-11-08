@@ -1,5 +1,7 @@
-import { readdir, readFile } from 'node:fs/promises';
+import { readdir } from 'node:fs/promises';
 import path from 'node:path';
+
+import { hasConfig, readConfig } from './extensionConfig.mts';
 
 const regExpCSpellPackage = /@cspell\/(?:dict|parser)-[\w.-]+/g;
 
@@ -12,11 +14,9 @@ export async function findExistingExtensions(extensionsDir: string): Promise<Map
     const found = new Map<string, string>();
     const dirs = await readdir(extensionsDir, { withFileTypes: true }).catch(() => []);
     for (const dir of dirs) {
-        if (!dir.isDirectory()) continue;
-        const text = await readFile(path.join(extensionsDir, dir.name, 'extension.config.json'), 'utf8').catch(
-            () => '{}',
-        );
-        const imports = (JSON.parse(text) as { cspell?: { import?: string[] } }).cspell?.import ?? [];
+        const extensionDir = path.join(extensionsDir, dir.name);
+        if (!dir.isDirectory() || !(await hasConfig(extensionDir))) continue;
+        const imports = ((await readConfig(extensionDir)).cspell as { import?: string[] }).import ?? [];
         for (const [pkg] of imports.join('\n').matchAll(regExpCSpellPackage)) {
             if (!found.has(pkg)) found.set(pkg, dir.name);
         }

@@ -113,7 +113,6 @@ async function generate(
     if (answers.kind === 'wordList') {
         await setUpWordList(destDir, config);
     }
-    npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     // The files the sync owns or derives, and the package.json fields every extension shares.
     const { changes } = await syncExtensions([answers.name], { check: false });
     for (const { file } of changes) log(`sync ${file}`);

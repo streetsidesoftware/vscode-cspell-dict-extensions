@@ -6,8 +6,9 @@ import path from 'node:path';
 
 import { findDrift } from './drift.mts';
 import { readExtensionConfigValidator } from './extensionSchema.mts';
-import { exists, extensionsDir, listExtensionRepoPaths, readJson, readVscodeEngine } from './repo.mts';
-import { configFileName, readConfig } from './extensionConfig.mts';
+import type { ExtensionConfigValidator } from './extensionSchema.mts';
+import { extensionsDir, listExtensionRepoPaths, readVscodeEngine } from './repo.mts';
+import { configFileName, hasConfig, readConfig } from './extensionConfig.mts';
 import { syncExtension, syncPackageJson } from './syncExtension.mts';
 import type { FileChange } from './syncExtension.mts';
 
@@ -37,19 +38,19 @@ export async function syncExtensions(folders: string[], { check }: { check: bool
     for (const folder of folders) {
         if (!all.includes(folder)) throw new Error(`extensions/${folder}/package.json not found.`);
     }
-    await assertUniqueNames(all);
+    const validate = await readExtensionConfigValidator();
+    await assertUniqueNames(all, validate);
 
     const vscodeEngine = await readVscodeEngine();
-    const validate = await readExtensionConfigValidator();
     const result: SyncResult = { changes: [], drift: [], count: 0 };
     for (const folder of folders.length ? new Set(folders) : all) {
         const extensionDir = path.join(extensionsDir, folder);
-        const hasConfig = await exists(path.join(extensionDir, configFileName));
-        const changes = hasConfig
+        const configured = await hasConfig(extensionDir);
+        const changes = configured
             ? await syncExtension(extensionDir, { check, vscodeEngine, validate })
             : await syncPackageJson(extensionDir, { check, vscodeEngine });
         result.changes.push(...changes.map((change) => ({ ...change, folder })));
-        if (check && hasConfig) {
+        if (check && configured) {
             const file = `extensions/${folder}/${configFileName}`;
             const config = await readConfig(extensionDir, validate);
             result.drift.push(...(await findDrift(extensionDir, config)).map((message) => ({ file, message })));
@@ -60,12 +61,12 @@ export async function syncExtensions(folders: string[], { check }: { check: bool
 }
 
 /** Two configs with the same `name` would publish two packages called `code-spell-checker-<name>`. */
-async function assertUniqueNames(folders: string[]): Promise<void> {
+async function assertUniqueNames(folders: string[], validate: ExtensionConfigValidator): Promise<void> {
     const byName = new Map<string, string[]>();
     for (const folder of folders) {
-        const configFile = path.join(extensionsDir, folder, configFileName);
-        if (!(await exists(configFile))) continue;
-        const { name } = await readJson<{ name: string }>(configFile);
+        const extensionDir = path.join(extensionsDir, folder);
+        if (!(await hasConfig(extensionDir))) continue;
+        const { name } = await readConfig(extensionDir, validate);
         byName.set(name, [...(byName.get(name) ?? []), folder]);
     }
     const duplicates = [...byName].filter(([, named]) => named.length > 1);

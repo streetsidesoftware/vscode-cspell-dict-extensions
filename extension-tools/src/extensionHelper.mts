@@ -4,7 +4,8 @@ import path from 'node:path';
 import type { IPackageOptions } from '@vscode/vsce';
 
 import type { ExtensionKind } from '../../extension-runtime/api.ts';
-import { exists, readJson, repoRoot } from './repo.mts';
+import { hasConfig, readConfig } from './extensionConfig.mts';
+import { readJson, repoRoot } from './repo.mts';
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');
 const repositoryRawUrl = new URL(
@@ -57,9 +58,8 @@ export async function getExtensionInfo(repoPath: string): Promise<ExtensionInfo>
  * @returns `undefined` when the extension has no `extension.config.json`.
  */
 async function readExtensionKind(repoPath: string): Promise<ExtensionKind | undefined> {
-    const configFile = `${repoPath}/extension.config.json`;
-    if (!(await exists(configFile))) return undefined;
-    return (await readJson<{ kind: ExtensionKind }>(configFile)).kind;
+    if (!(await hasConfig(repoPath))) return undefined;
+    return (await readConfig(repoPath)).kind;
 }
 
 export interface PackageJson {

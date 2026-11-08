@@ -22,7 +22,8 @@ extensions.
 
 - `extension.config.json`: the extension's data. It's checked against
   [the schema](../extension-runtime/extension.config.schema.json), which the runtime's build generates from the
-  `ExtensionConfig` type in [`src/config.ts`](../extension-runtime/src/config.ts).
+  `ExtensionConfig` type in [`src/config.ts`](../extension-runtime/src/config.ts). The tools write each locale in it as
+  a BCP 47 tag, such as `de-AT` for `de-at` or `de_AT`.
 - `README.md`, except the sections between `@@inject` markers.
 - `samples/` and `images/`.
 - `LICENSE`: the license of the extension's own code, `GPL-3.0-or-later` unless the generator's `--license` set another.
@@ -49,10 +50,10 @@ Don't edit these; the sync overwrites them.
 - **`static/dictionaries.json`:** for the README's table, one row for each dictionary a setting names, with its
   `enabled` value and the setting's `locale`, `languageId` and `glob`. `enabled` is `yes` with no conditions, and
   `conditional` with any. A dictionary no setting names gets one row with `enabled` set to `no`. A comma list, such as
-  `c,cpp`, shows each item. A `locale` or `languageId` of `*` shows as an empty cell, since cspell treats it like no
-  value. Identical rows appear once. The settings are the top-level `dictionaries`, the language settings and the
-  overrides, read from the installed dictionaries and the extension's `cspell`. Removed when there are no dictionaries,
-  and never written for a bundle.
+  `c,cpp`, shows each item, and each locale shows as a BCP 47 tag. A `locale` or `languageId` of `*` shows as an empty
+  cell, since cspell treats it like no value. Identical rows appear once. The settings are the top-level `dictionaries`,
+  the language settings and the overrides, read from the installed dictionaries and the extension's `cspell`. Removed
+  when there are no dictionaries, and never written for a bundle.
 - **`package.json` fields:** `name`, `displayName`, `description`, `type`, `main`, `files`, `contributes.commands` and
   `scripts`.
 - **`package.json` `files`:** what vsce packages, besides `package.json` and `README.md`. It lists `LICENSE`,

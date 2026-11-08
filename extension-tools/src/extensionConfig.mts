@@ -2,14 +2,14 @@
  * `extension.config.json`: every read and write of it goes through here.
  */
 
-import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
+import { canonicalLocale } from './create/locales.mts';
 import { readExtensionConfigValidator } from './extensionSchema.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { format } from './format.mts';
-import { exists, extensionRepoPath, extensionsDir, listExtensionRepoPaths, readJson } from './repo.mts';
+import { exists, extensionRepoPath, extensionsDir, listExtensionRepoPaths, readJson, writeIfChanged } from './repo.mts';
 
 export const configFileName = 'extension.config.json';
 
@@ -45,17 +45,53 @@ function folderOf(cwd: string): string | undefined {
     return relative.split(path.sep)[0];
 }
 
-/** Read an extension's `extension.config.json`, checked against the schema. */
+/** Whether the extension has an `extension.config.json`. One maintained by hand has none. */
+export async function hasConfig(extensionDir: string): Promise<boolean> {
+    return exists(path.join(extensionDir, configFileName));
+}
+
+/** Read an extension's `extension.config.json`, checked against the schema, with its locales as BCP 47 tags. */
 export async function readConfig(extensionDir: string, validate?: ExtensionConfigValidator): Promise<ExtensionConfig> {
     const file = path.join(extensionDir, configFileName);
     const repoFile = `${extensionRepoPath(extensionDir)}/${configFileName}`;
     if (!(await exists(file))) throw new Error(`${repoFile} not found: the extension is maintained by hand.`);
-    return (validate ?? (await readExtensionConfigValidator()))(await readJson(file), repoFile);
+    return canonicalConfig((validate ?? (await readExtensionConfigValidator()))(await readJson(file), repoFile));
 }
 
-/** Write an extension's `extension.config.json`, after checking it against the schema. */
-export async function writeConfig(extensionDir: string, config: ExtensionConfig): Promise<void> {
+/**
+ * Write an extension's `extension.config.json`, after checking it against the schema, with its locales as BCP 47 tags.
+ * @param options - `check` only reports whether the file would change; `validate` checks it against the schema.
+ * @returns whether the file changed.
+ */
+export async function writeConfig(
+    extensionDir: string,
+    config: ExtensionConfig,
+    options: { check?: boolean | undefined; validate?: ExtensionConfigValidator } = {},
+): Promise<boolean> {
     const file = path.join(extensionDir, configFileName);
-    (await readExtensionConfigValidator())(config, `${extensionRepoPath(extensionDir)}/${configFileName}`);
-    await fs.writeFile(file, await format(file, JSON.stringify(config, null, 4) + '\n'));
+    (options.validate ?? (await readExtensionConfigValidator()))(
+        config,
+        `${extensionRepoPath(extensionDir)}/${configFileName}`,
+    );
+    const text = await format(file, JSON.stringify(canonicalConfig(config), null, 4) + '\n');
+    return writeIfChanged(file, text, options.check);
+}
+
+/**
+ * The config with each locale as a BCP 47 tag, such as `de-AT` for `de-at` or `de_AT`: in `locale` and in the commands
+ * that enable or disable a locale. cspell matches locales without regard to case or separator, so only the spelling
+ * changes.
+ */
+function canonicalConfig(config: ExtensionConfig): ExtensionConfig {
+    const commands = config.commands.map((command) =>
+        command.toggle === 'locale' ? { ...command, value: canonicalLocales(command.value) } : command,
+    );
+    return config.kind === 'language'
+        ? { ...config, locale: canonicalLocales(config.locale), commands }
+        : { ...config, commands };
+}
+
+/** A comma-separated list of locales, such as `sv-SE,sv`, each as a BCP 47 tag. */
+function canonicalLocales(locales: string): string {
+    return locales.split(',').map(canonicalLocale).join(',');
 }
