@@ -8,7 +8,7 @@ import { testEach } from '@streetsidesoftware/test-each';
 
 import type { ExtensionConfig } from '../../extension-runtime/api.ts';
 import { starterMarker } from './create/sample.mts';
-import { pickExtension } from './extensionConfig.mts';
+import { pickExtension } from './pickExtension.mts';
 import { factsText, readFacts } from './info.mts';
 import { extensionsDir } from './repo.mts';
 

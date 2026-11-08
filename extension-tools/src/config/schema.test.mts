@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 
 import { testEach } from '@streetsidesoftware/test-each';
 
-import { readExtensionConfigValidator } from './extensionSchema.mts';
+import { readExtensionConfigValidator } from './schema.mts';
 
 const swedish = {
     $schema: '../../extension-runtime/extension.config.schema.json',

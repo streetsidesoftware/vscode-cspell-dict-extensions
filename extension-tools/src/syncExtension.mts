@@ -25,12 +25,12 @@ import { injectMarkdown } from 'inject-markdown';
 import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
-import { canonicalLocale } from './create/locales.mts';
+import { canonicalLocale } from './locales.mts';
 import { readImports, readSources, splitList } from './dictionaries.mts';
 import { withSharedFields } from './extensionHelper.mts';
 import type { PackageJson } from './extensionHelper.mts';
-import type { ExtensionConfigValidator } from './extensionSchema.mts';
-import { readConfig } from './extensionConfig.mts';
+import type { ExtensionConfigValidator } from './config/index.mts';
+import { configFileName, readConfig, writeConfig } from './config/index.mts';
 import { format, injectProblems } from './format.mts';
 import { exists, extensionRepoPath, readJson, writeIfChanged } from './repo.mts';
 
@@ -75,6 +75,9 @@ export async function syncExtension(extensionDir: string, options: SyncOptions):
     const config = await readConfig(extensionDir, options.validate);
     const files = await extensionFiles(extensionDir, config, options.vscodeEngine);
     const changes = [
+        ...((await writeConfig(extensionDir, config, options))
+            ? [{ file: configFileName, action: 'update' as const }]
+            : []),
         ...(await writeFiles(extensionDir, files, options.check)),
         ...(await createMissingFiles(extensionDir, options.check)),
         ...(await removeUnusedFiles(extensionDir, files, options.check)),

@@ -3,7 +3,7 @@
  * caller writes it.
  */
 
-import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
 import { commandSet, idSuffix, localeSuffix } from './commandSets.mts';
 
 export interface CommandSetOptions {

@@ -9,6 +9,7 @@ import path from 'node:path';
 import { styleText } from 'node:util';
 
 import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
+import { writeConfig } from '../config/index.mts';
 import { dictionaryNames, dictionaryStates, generateDictionariesTable } from '../syncExtension.mts';
 import { npmOutput } from './exec.mts';
 import { dictionaryCommands, json } from './writeExtension.mts';
@@ -22,7 +23,7 @@ export async function setUpWordList(destDir: string, config: ExtensionConfig): P
 /** Commands to enable and disable each dictionary. */
 async function writeCommands(destDir: string, config: ExtensionConfig): Promise<void> {
     const commands = dictionaryCommands(config, await dictionaryNames(destDir, config));
-    await writeFile(path.join(destDir, 'extension.config.json'), json({ ...config, commands }));
+    await writeConfig(destDir, { ...config, commands });
 }
 
 /** Enable the disabled dictionaries in the samples' config, so the tests check the samples with them. */

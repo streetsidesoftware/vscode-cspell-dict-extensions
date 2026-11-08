@@ -13,8 +13,18 @@ describe('findExistingExtensions', () => {
         dir = await mkdtemp(path.join(tmpdir(), 'cspell-dict-ext-existing-'));
         const add = async (name: string, cspell?: unknown) => {
             await mkdir(path.join(dir, name));
-            if (cspell)
-                await writeFile(path.join(dir, name, 'extension.config.json'), JSON.stringify({ name, cspell }));
+            if (!cspell) return;
+            const config = {
+                name,
+                kind: 'wordList',
+                friendlyName: name,
+                displayName: `${name} - Code Spell Checker`,
+                description: `Adds ${name} to Code Spell Checker.`,
+                sample: 'samples/sample.md',
+                cspell,
+                commands: [],
+            };
+            await writeFile(path.join(dir, name, 'extension.config.json'), JSON.stringify(config));
         };
         await add('swedish', { import: ['@cspell/dict-sv/cspell-ext.json'] });
         await add('typescript-parser', { import: ['@cspell/parser-typescript/recommended'] });

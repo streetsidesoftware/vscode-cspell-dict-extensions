@@ -14,7 +14,7 @@ import { extensionsDir, repoRoot } from '../repo.mts';
 import { syncExtensions } from '../syncExtensions.mts';
 import { fetchArticle } from '../wikipedia.mts';
 import { npm } from './exec.mts';
-import { languageOf } from './locales.mts';
+import { languageOf } from '../locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
 import type { Prompter } from './prompt.mts';
 import { askQuestions, defaultLicense, kinds } from './questions.mts';
@@ -113,7 +113,6 @@ async function generate(
     if (answers.kind === 'wordList') {
         await setUpWordList(destDir, config);
     }
-    npm(['exec', '--', 'prettier', '--write', '--log-level', 'warn', 'extension.config.json'], destDir);
     // The files the sync owns or derives, and the package.json fields every extension shares.
     const { changes } = await syncExtensions([answers.name], { check: false });
     for (const { file } of changes) log(`sync ${file}`);

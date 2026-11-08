@@ -9,7 +9,7 @@ import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/api
 import { starterMarker } from './create/sample.mts';
 import { readSources } from './dictionaries.mts';
 import type { Source as ConfigSource } from './dictionaries.mts';
-import type { Extension } from './extensionConfig.mts';
+import type { Extension } from './pickExtension.mts';
 import type { PackageJson } from './extensionHelper.mts';
 import { readJson } from './repo.mts';
 import { listSamples } from './samples.mts';

@@ -10,7 +10,7 @@ import { unindent as markdown } from '@streetsidesoftware/unindent';
 
 import { clearCachedFiles } from 'cspell-lib';
 
-import { readExtensionConfigValidator } from './extensionSchema.mts';
+import { readExtensionConfigValidator } from './config/index.mts';
 import { dictionaryStates, generateDictionariesTable, syncExtension } from './syncExtension.mts';
 import type { FileChange } from './syncExtension.mts';
 
@@ -276,6 +276,24 @@ describe('syncExtension', () => {
         assert.ok(files(changes, 'update').includes('package.json'));
         assert.equal((await readJson('package.json')).name, 'old-name');
         assert.equal(await read('README.md'), readme);
+    });
+
+    it('writes the locales in the config as BCP 47 tags', async () => {
+        const [enable, ...others] = config.commands;
+        await writeJson('extension.config.json', {
+            ...config,
+            locale: 'xx_yy',
+            commands: [{ ...enable, value: 'xx-yy,xx' }, ...others],
+        });
+        const changes = await syncExtension(dir, options);
+        assert.ok(files(changes, 'update').includes('extension.config.json'));
+        const written = await readJson('extension.config.json');
+        assert.equal(written.locale, 'xx-YY');
+        assert.deepEqual(
+            written.commands.map((command: { value: string }) => command.value),
+            ['xx-YY,xx', 'demo'],
+        );
+        assert.match(await read('README.md'), /\| xx-YY,xx \|/);
     });
 
     it('names the package after the config, not the folder', async () => {

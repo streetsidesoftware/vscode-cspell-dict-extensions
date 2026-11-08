@@ -2,14 +2,11 @@
  * The validation of `extension.config.json`, against the schema the runtime builds from its `ExtensionConfig` type.
  */
 
-import { Ajv } from 'ajv';
-import type { ValidateFunction } from 'ajv';
-
-import type { ExtensionConfig } from '../../extension-runtime/api.ts';
-import { readJson } from './repo.mts';
+import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
+import { readJson } from '../repo.mts';
 
 /** The runtime's schema of `extension.config.json`, relative to the repository root. */
-export const schemaPath = 'extension-runtime/extension.config.schema.json';
+const schemaPath = 'extension-runtime/extension.config.schema.json';
 
 export type ExtensionConfigValidator = (data: unknown, file: string) => ExtensionConfig;
 
@@ -17,14 +14,9 @@ export type ExtensionConfigValidator = (data: unknown, file: string) => Extensio
  * Make a validator for `extension.config.json` files from the runtime's schema.
  */
 export async function readExtensionConfigValidator(): Promise<ExtensionConfigValidator> {
-    return createExtensionConfigValidator(await readJson(schemaPath));
-}
-
-/**
- * Make a validator for `extension.config.json` files.
- */
-export function createExtensionConfigValidator(schema: object): ExtensionConfigValidator {
-    const validate: ValidateFunction = new Ajv({ allErrors: true }).compile(schema);
+    // Loaded here, not at the top: workflows read configs without checking them before `npm ci` installs ajv.
+    const { Ajv } = await import('ajv');
+    const validate = new Ajv({ allErrors: true }).compile(await readJson<object>(schemaPath));
     return (data, file) => {
         if (!validate(data)) {
             const errors = validate.errors?.map((e) => `  ${e.instancePath || '/'} ${e.message ?? ''}`) ?? [];
@@ -42,7 +34,7 @@ export function createExtensionConfigValidator(schema: object): ExtensionConfigV
 /**
  * The command IDs used more than once. A schema can't express this.
  */
-export function duplicateCommandIds(config: ExtensionConfig): string[] {
+function duplicateCommandIds(config: ExtensionConfig): string[] {
     const seen = new Set<string>();
     const duplicates = new Set<string>();
     for (const { id } of config.commands) {
