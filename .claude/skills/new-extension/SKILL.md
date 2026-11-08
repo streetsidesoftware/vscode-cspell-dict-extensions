@@ -158,14 +158,15 @@ generator README lists them.
   `feat: add Scottish Gaelic extension`. Leave the root README lists, `release-please-config.json` and the workflow
   lists alone. A workflow updates them after the merge.
 - **Do,** as soon as the checks pass: push `new-extension/<name>`, and open the PR against `main`, titled with the
-  commit message. Don't wait for the user; they fix the title or description on the PR. The description says:
+  commit message. Don't wait for the user; they fix the title or description on the PR. If the user's own instructions
+  say to ask before pushing or opening a PR, follow those instead. The description says:
   - what the extension adds, and the packages it includes
   - when each dictionary is on, from `static/dictionaries.json`
   - the sample's source
   - the words on the sample's `words` and `ignore` lines
   - whether the VS Code test ran
-- **Several extensions in one request:** each gets its own branch from `origin/main` and its own PR. Open each PR before
-  you start the next extension.
+- **Several extensions in one request:** each gets its own branch from `origin/main` and its own PR. Finish each
+  extension through this step before you start the next.
 - **Done when** the PR is open and the user has its link.
 
 ## Not this skill
