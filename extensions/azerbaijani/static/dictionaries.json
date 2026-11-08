@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`az-az`",
+        "enabled": "conditional",
         "locale": "`az`, `az-AZ`",
         "languageId": "",
         "glob": ""

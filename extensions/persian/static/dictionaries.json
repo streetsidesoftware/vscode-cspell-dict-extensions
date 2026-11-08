@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`fa-ir`",
+        "enabled": "conditional",
         "locale": "`fa`, `fa-IR`",
         "languageId": "",
         "glob": ""

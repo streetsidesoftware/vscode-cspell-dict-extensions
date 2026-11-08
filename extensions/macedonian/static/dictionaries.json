@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`mk`",
+        "enabled": "conditional",
         "locale": "`mk`, `mk-cyrl`",
         "languageId": "",
         "glob": ""

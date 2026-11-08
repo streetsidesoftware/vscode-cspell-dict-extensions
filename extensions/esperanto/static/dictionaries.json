@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`eo`",
+        "enabled": "conditional",
         "locale": "`eo`",
         "languageId": "",
         "glob": ""
