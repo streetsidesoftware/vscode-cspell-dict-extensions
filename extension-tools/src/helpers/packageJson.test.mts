@@ -4,13 +4,13 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { after, before, describe, it } from 'node:test';
 
-import { writeExtensionPackageJson } from './packageJson.mts';
+import { writePackageJson } from './packageJson.mts';
 
-describe('writeExtensionPackageJson', () => {
+describe('writePackageJson', () => {
     let dir = '';
 
     before(async () => {
-        dir = await mkdtemp(path.join(tmpdir(), 'cspell-dict-ext-package-json-'));
+        dir = await mkdtemp(path.join(tmpdir(), 'cspell-dict-package-json-'));
     });
 
     after(async () => {
@@ -18,7 +18,7 @@ describe('writeExtensionPackageJson', () => {
     });
 
     it('writes the fields in a fixed order', async () => {
-        await writeExtensionPackageJson(dir, {
+        await writePackageJson(dir, {
             version: '1.0.0',
             vsce: { preRelease: true },
             name: 'x',
@@ -30,8 +30,8 @@ describe('writeExtensionPackageJson', () => {
     });
 
     it('writes unlisted fields last, in alphabetical order', async () => {
-        await writeExtensionPackageJson(dir, { zebra: 1, name: 'x', funding: 'y', version: '1.0.0' });
+        await writePackageJson(dir, { zebra: 1, name: 'x', allowScripts: {}, version: '1.0.0' });
         const text = await readFile(path.join(dir, 'package.json'), 'utf8');
-        assert.deepEqual(Object.keys(JSON.parse(text)), ['name', 'version', 'funding', 'zebra']);
+        assert.deepEqual(Object.keys(JSON.parse(text)), ['name', 'version', 'allowScripts', 'zebra']);
     });
 });

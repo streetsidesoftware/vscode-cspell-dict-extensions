@@ -10,6 +10,6 @@ export {
     mostSpecificLocale,
     nativeLanguageName,
 } from './locales.mts';
-export { readPackageJson, readVscodeEngine } from './packageJson.mts';
+export { readPackageJson, readVscodeEngine, writePackageJson } from './packageJson.mts';
 export type { PackageJson } from './packageJson.mts';
 export { exists, extensionRepoPath, extensionsDir, readJson, repoRoot, writeIfChanged } from './repo.mts';
