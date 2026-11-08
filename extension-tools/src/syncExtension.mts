@@ -25,6 +25,7 @@ import { injectMarkdown } from 'inject-markdown';
 import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
+import { canonicalLocale } from './create/locales.mts';
 import { readImports, readSources, splitList } from './dictionaries.mts';
 import { withSharedFields } from './extensionHelper.mts';
 import type { PackageJson } from './extensionHelper.mts';
@@ -316,7 +317,8 @@ interface Cells {
 }
 
 function row(name: string, cells: Cells): Row {
-    const locale = codes(condition(cells.locale));
+    // cspell matches locales without regard to case or separator, so `de_AT` and `de-at` are both shown as `de-AT`.
+    const locale = codes([...new Set(condition(cells.locale).map(canonicalLocale))]);
     const languageId = codes(condition(cells.languageId));
     // Not split: a glob can have commas, as in `*.{adb,ads}`.
     const glob = codes([cells.glob ?? []].flat());

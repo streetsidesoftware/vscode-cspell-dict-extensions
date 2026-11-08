@@ -11,7 +11,7 @@ import { unindent as markdown } from '@streetsidesoftware/unindent';
 import { clearCachedFiles } from 'cspell-lib';
 
 import { readExtensionConfigValidator } from './extensionSchema.mts';
-import { dictionaryStates, syncExtension } from './syncExtension.mts';
+import { dictionaryStates, generateDictionariesTable, syncExtension } from './syncExtension.mts';
 import type { FileChange } from './syncExtension.mts';
 
 const config = {
@@ -198,6 +198,16 @@ describe('syncExtension', () => {
         await clearCachedFiles();
         const states = await dictionaryStates(dir, await readJson('extension.config.json'));
         assert.equal(states.get('both'), 'enabled');
+    });
+
+    it('shows each locale as a BCP 47 tag, once', async () => {
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'demo' }],
+            languageSettings: [{ locale: 'de,de_AT,de-at', dictionaries: ['demo'] }],
+        });
+        await clearCachedFiles();
+        const table = await generateDictionariesTable(dir, await readJson('extension.config.json'));
+        assert.equal(JSON.parse(table ?? '[]')[0].locale, '`de`, `de-AT`');
     });
 
     it('fails on a setting the table would show wrongly', async () => {
