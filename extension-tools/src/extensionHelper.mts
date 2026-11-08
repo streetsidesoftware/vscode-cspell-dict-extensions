@@ -4,7 +4,7 @@ import path from 'node:path';
 import type { IPackageOptions } from '@vscode/vsce';
 
 import type { ExtensionKind } from '../../extension-runtime/api.ts';
-import { readConfigKind } from './config/extensionConfig.mts';
+import { readConfigKind } from './config/index.mts';
 import { readJson, repoRoot } from './repo.mts';
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');

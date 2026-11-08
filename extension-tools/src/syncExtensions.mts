@@ -5,10 +5,9 @@
 import path from 'node:path';
 
 import { findDrift } from './drift.mts';
-import { readExtensionConfigValidator } from './config/schema.mts';
-import type { ExtensionConfigValidator } from './config/schema.mts';
+import { configFileName, hasConfig, readConfig, readExtensionConfigValidator } from './config/index.mts';
+import type { ExtensionConfigValidator } from './config/index.mts';
 import { extensionsDir, listExtensionRepoPaths, readVscodeEngine } from './repo.mts';
-import { configFileName, hasConfig, readConfig } from './config/extensionConfig.mts';
 import { syncExtension, syncPackageJson } from './syncExtension.mts';
 import type { FileChange } from './syncExtension.mts';
 

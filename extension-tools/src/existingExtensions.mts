@@ -1,7 +1,7 @@
 import { readdir } from 'node:fs/promises';
 import path from 'node:path';
 
-import { hasConfig, readConfig } from './config/extensionConfig.mts';
+import { hasConfig, readConfig } from './config/index.mts';
 
 const regExpCSpellPackage = /@cspell\/(?:dict|parser)-[\w.-]+/g;
 

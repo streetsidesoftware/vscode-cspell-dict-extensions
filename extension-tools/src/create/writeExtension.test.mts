@@ -7,7 +7,7 @@ import { afterEach, beforeEach, describe, it } from 'node:test';
 import { testEach } from '@streetsidesoftware/test-each';
 import { injectMarkdown } from 'inject-markdown';
 
-import { readExtensionConfigValidator } from '../config/schema.mts';
+import { readExtensionConfigValidator } from '../config/index.mts';
 import { injectProblems } from '../format.mts';
 import { repoRoot } from '../repo.mts';
 import type { Answers } from './questions.mts';

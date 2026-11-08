@@ -15,9 +15,17 @@ import {
 import type { MDParagraph } from '@streetsidesoftware/markdown-toolkit';
 
 import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
-import { configFileName, writeConfig } from '../config/extensionConfig.mts';
-import { actions, commandSet, idSuffix, localeSuffix, scopes, standardCommand } from '../commandSets.mts';
-import type { Target } from '../commandSets.mts';
+import {
+    actions,
+    commandSet,
+    configFileName,
+    idSuffix,
+    localeSuffix,
+    scopes,
+    standardCommand,
+    writeConfig,
+} from '../config/index.mts';
+import type { Target } from '../config/index.mts';
 import { defaultLicense } from './questions.mts';
 import type { Answers, Language } from './questions.mts';
 import type { Sample } from './sample.mts';

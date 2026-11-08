@@ -149,7 +149,8 @@ npm run create:extension -- typescript-parser --package @cspell/parser-typescrip
 - `src/create/questions.mts` — the questions, their defaults, and `--yes`.
 - `src/create/names.mts` — turns a typed name into a directory name, and suggests the friendly name.
 - `src/locales.mts` — writes locales as BCP 47, and suggests a language's native and English names.
-- `src/config/` — `extension.config.json`: the only code that reads or writes it, and its schema check.
+- `src/config/` — `extension.config.json`: the only code that reads or writes it, its schema check, and the changes to
+  its commands and fields. Other code imports it through `src/config/index.mts`.
 - `src/create/sample.mts` — chooses the samples: the files given, a language's Wikipedia article, or a starter file to
   replace.
 - `src/create/writeExtension.mts` — writes `extension.config.json` and the starter files.

@@ -29,8 +29,8 @@ import { canonicalLocale } from './locales.mts';
 import { readImports, readSources, splitList } from './dictionaries.mts';
 import { withSharedFields } from './extensionHelper.mts';
 import type { PackageJson } from './extensionHelper.mts';
-import type { ExtensionConfigValidator } from './config/schema.mts';
-import { configFileName, readConfig, writeConfig } from './config/extensionConfig.mts';
+import type { ExtensionConfigValidator } from './config/index.mts';
+import { configFileName, readConfig, writeConfig } from './config/index.mts';
 import { format, injectProblems } from './format.mts';
 import { exists, extensionRepoPath, readJson, writeIfChanged } from './repo.mts';
 

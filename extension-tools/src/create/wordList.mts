@@ -9,7 +9,7 @@ import path from 'node:path';
 import { styleText } from 'node:util';
 
 import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
-import { writeConfig } from '../config/extensionConfig.mts';
+import { writeConfig } from '../config/index.mts';
 import { dictionaryNames, dictionaryStates, generateDictionariesTable } from '../syncExtension.mts';
 import { npmOutput } from './exec.mts';
 import { dictionaryCommands, json } from './writeExtension.mts';
