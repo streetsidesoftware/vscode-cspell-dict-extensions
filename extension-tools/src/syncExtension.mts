@@ -77,10 +77,11 @@ export interface FileChange {
  */
 export async function syncExtension(extensionDir: string, options: SyncOptions): Promise<FileChange[]> {
     const config = await readConfig(extensionDir, options.validate);
-    const files = await extensionFiles(extensionDir, config);
+    const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
+    const files = await extensionFiles(extensionDir, config, hasCustom);
     const pkg = await readExtensionPackageJson(extensionDir);
     const optional = await existingFiles(extensionDir, optionalPackagedFiles);
-    const derived = derivedPackageJson(config, pkg, await hasCustomCode(extensionDir), optional);
+    const derived = derivedPackageJson(config, pkg, hasCustom, optional);
     const changes = [
         ...((await writeConfig(extensionDir, config, options))
             ? [{ file: configFileName, action: 'update' as const }]
@@ -111,7 +112,11 @@ export async function syncPackageJson(
 /**
  * The files the sync owns or derives, by their path relative to the extension.
  */
-async function extensionFiles(extensionDir: string, config: ExtensionConfig): Promise<Map<string, string>> {
+async function extensionFiles(
+    extensionDir: string,
+    config: ExtensionConfig,
+    hasCustom: boolean,
+): Promise<Map<string, string>> {
     const files = new Map<string, string>(await readTemplateFiles());
     files.set(cspellExtPath, JSON.stringify(await cspellExt(extensionDir, config), null, 4) + '\n');
     const commands = commandsTable(config);
@@ -119,13 +124,8 @@ async function extensionFiles(extensionDir: string, config: ExtensionConfig): Pr
     const dictionaries = await generateDictionariesTable(extensionDir, config);
     if (dictionaries) files.set('static/dictionaries.json', dictionaries);
     // `tsconfig.json` only type-checks `src/custom.ts`; without it, tsc and VS Code report "No inputs were found".
-    if (!(await hasCustomCode(extensionDir))) files.delete('tsconfig.json');
+    if (!hasCustom) files.delete('tsconfig.json');
     return files;
-}
-
-/** Whether the extension has its own code, `src/custom.ts`. */
-async function hasCustomCode(extensionDir: string): Promise<boolean> {
-    return exists(path.join(extensionDir, 'src/custom.ts'));
 }
 
 /** Write the extension's `package.json` with the shared fields. */

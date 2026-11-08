@@ -1,5 +1,5 @@
 /**
- * An extension's `package.json`: the only code that reads or writes the file.
+ * An extension's `package.json`: its fields, the only code that writes it, and the fields every extension shares.
  */
 
 import path from 'node:path';
@@ -25,7 +25,7 @@ const defaultRepository: Repository = {
     url: repositoryUrl.href,
 };
 
-/** The order of the fields in an extension's `package.json`: the order `sort-package-json` gives them. */
+/** The order of the fields in an extension's `package.json`. A field that isn't listed can't be written. */
 const fieldOrder = [
     'name',
     'displayName',
@@ -104,7 +104,7 @@ function sortFields(pkg: Partial<ExtensionPackageJson>, repoFile: string): Parti
     const unknown = Object.keys(pkg).filter((field) => !fieldOrder.includes(field));
     if (unknown.length) {
         throw new Error(
-            `${repoFile}: ${unknown.map((field) => `"${field}"`).join(', ')} has no place in the field order. Add it to \`fieldOrder\` in extension-tools/src/extension/packageJson.mts.`,
+            `${repoFile}: ${unknown.map((field) => `"${field}"`).join(', ')} ${unknown.length > 1 ? 'have' : 'has'} no place in the field order. Add it to \`fieldOrder\` in extension-tools/src/extension/packageJson.mts.`,
         );
     }
     return Object.fromEntries(fieldOrder.filter((field) => field in pkg).map((field) => [field, pkg[field]]));

@@ -1,5 +1,6 @@
 /**
- * The extensions in `extensions/`: finding and picking them, their `package.json`, and removing one.
+ * The extensions in `extensions/`: listing and picking them, their `package.json` and pre-release mode, the facts the
+ * repository's README lists, the packages that already have one, and removing one.
  */
 
 export { findExistingExtensions } from './existing.mts';
