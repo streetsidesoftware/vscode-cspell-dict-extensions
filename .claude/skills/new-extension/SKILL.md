@@ -36,7 +36,10 @@ An extension includes a published package, unchanged. Find the one the request m
   ```sh
   npm run list:packages -- <word>...
   npm run list:packages -- gaelic irish --any
+  npm run list:packages -- --missing   # the packages no extension includes yet
   ```
+
+- **Go on** when the Extension column is empty: no extension includes the package yet.
 
 - **Stop and ask** when:
   - **Nothing matches.** The dictionary must be published first, in
@@ -101,6 +104,8 @@ generator README lists them.
 - **After it,** change the extension with `npm run extension-tools -- <command> -e <name>`, not by editing
   `extension.config.json`: `info` shows it, `add command`, `remove command`, `add sample`, `remove sample` and `set`
   change it. `--help` lists the options.
+- **To start over,** delete the extension with `npm run extension-tools -- remove extension <name> --yes`. Without
+  `--yes`, it asks for confirmation in the terminal.
 
 ### 6. Fix the sample
 
@@ -115,7 +120,8 @@ generator README lists them.
   sample.
 - **If the sample check fails** on words the dictionary doesn't know, add them to the sample itself. Leave
   `samples/cspell.json` as the generator wrote it.
-  - Put names, pieces of words and other non-words on an `ignore` line, such as `Siatail`.
+  - Put names, pieces of words and other non-words on an `ignore` line, such as `Siatail`. A typo in the article is a
+    non-word too: ignore it, and keep the article's text as written.
   - Put real words the dictionary lacks on a `words` line. They belong upstream in cspell-dicts, so list them for the
     user.
   - Each is one line at the end of the sample: an HTML comment in Markdown, a line comment in code. For example:

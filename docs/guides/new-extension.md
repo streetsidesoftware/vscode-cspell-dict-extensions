@@ -131,8 +131,8 @@ Follow these steps in order:
    For example, the last lines of a Markdown sample:
 
    ```markdown
-   <!-- cspell:words Seattleites -->
-   <!-- cspell:ignore Siatail Snohomish -->
+   <!--- cspell:words Seattleites --->
+   <!--- cspell:ignore Siatail Snohomish --->
    ```
 
    Markdown hides these comments on the page. In a code file, use the language's line comment instead, such as
