@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`id-id`",
+        "enabled": "conditional",
         "locale": "`id`, `id-ID`",
         "languageId": "",
         "glob": ""

@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`sk-sk`",
+        "enabled": "conditional",
         "locale": "`sk`",
         "languageId": "",
         "glob": ""
