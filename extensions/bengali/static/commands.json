@@ -1,0 +1,26 @@
+[
+    {
+        "Command": "Enable Bengali Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "bn",
+        "Scope": "global"
+    },
+    {
+        "Command": "Disable Bengali Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "bn",
+        "Scope": "global"
+    },
+    {
+        "Command": "Enable Bengali Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "bn",
+        "Scope": "workspace"
+    },
+    {
+        "Command": "Disable Bengali Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "bn",
+        "Scope": "workspace"
+    }
+]
