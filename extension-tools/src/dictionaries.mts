@@ -10,7 +10,7 @@ import { extractImportErrors, getSources, resolveConfigFileImports } from 'cspel
 import type { CSpellSettings } from 'cspell-lib';
 
 import type { CSpellExtPath, ExtensionConfig } from './extension-runtime-api.mts';
-import { extensionRepoPath, repoRoot } from './repo.mts';
+import { extensionRepoPath, repoRoot } from './helpers/index.mts';
 
 /** One config file cspell reads for the extension. */
 export interface Source {

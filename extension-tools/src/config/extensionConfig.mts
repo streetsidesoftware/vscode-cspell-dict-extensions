@@ -6,9 +6,7 @@
 import path from 'node:path';
 
 import type { ExtensionConfig, ExtensionKind } from '../extension-runtime-api.mts';
-import { format } from '../format.mts';
-import { canonicalLocale } from '../locales.mts';
-import { exists, extensionRepoPath, readJson, writeIfChanged } from '../repo.mts';
+import { canonicalLocale, exists, extensionRepoPath, format, readJson, writeIfChanged } from '../helpers/index.mts';
 import { readExtensionConfigValidator } from './schema.mts';
 import type { ExtensionConfigValidator } from './schema.mts';
 

@@ -148,17 +148,22 @@ npm run create:extension -- typescript-parser --package @cspell/parser-typescrip
 - `src/create/app.mts` — the command line and the steps to generate an extension.
 - `src/create/questions.mts` — the questions, their defaults, and `--yes`.
 - `src/create/names.mts` — turns a typed name into a directory name, and suggests the friendly name.
-- `src/locales.mts` — writes locales as BCP 47, and suggests a language's native and English names.
+- `src/helpers/` — what the tools share: repository paths, reading and writing files, formatting, and the locales,
+  written as BCP 47 with a language's native and English names.
 - `src/config/` — `extension.config.json`: the only code that reads or writes it, its schema check, and the changes to
-  its commands and fields. Other code imports it through `src/config/index.mts`.
+  its commands and fields.
+- `src/extension/` — the extensions in `extensions/`: listing and picking them, the only code that reads or writes their
+  `package.json`, and removing one.
 - `src/create/sample.mts` — chooses the samples: the files given, a language's Wikipedia article, or a starter file to
   replace.
 - `src/create/writeExtension.mts` — writes `extension.config.json` and the starter files.
 - `src/create/wordList.mts` — sets up a word list from its installed packages: the sample check, the commands and the
   words from the package names.
-- `src/cspellPackages.mts`, `wikipedia.mts` and `existingExtensions.mts` — the package lists, the Wikipedia sample and
-  the packages that already have an extension, shared with `npm run list:packages` and `fetch:sample`.
+- `src/cspellPackages.mts` and `wikipedia.mts` — the package lists and the Wikipedia sample, shared with
+  `npm run list:packages` and `fetch:sample`.
 - `src/create/exec.mts` — runs npm through Node with npm's own `npm-cli.js`, without a shell, also on Windows.
+
+Each folder in `src/` that has an `index.mts` is a module: other code imports it only through that file.
 
 ```bash
 npm test             # unit tests (node:test)

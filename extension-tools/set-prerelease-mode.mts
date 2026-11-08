@@ -11,7 +11,7 @@
  * Only `node:` modules: a workflow runs it before `npm ci`.
  */
 
-import { setPreRelease } from './src/preRelease.mts';
+import { setPreRelease } from './src/extension/index.mts';
 
 async function run(): Promise<void> {
     const [folder, mode, ...rest] = process.argv.slice(2);

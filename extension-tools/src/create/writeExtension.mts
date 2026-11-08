@@ -26,6 +26,8 @@ import {
     writeConfig,
 } from '../config/index.mts';
 import type { Target } from '../config/index.mts';
+import { writePackageJson } from '../extension/index.mts';
+import type { PackageJson } from '../extension/index.mts';
 import { defaultLicense } from './questions.mts';
 import type { Answers, Language } from './questions.mts';
 import type { Sample } from './sample.mts';
@@ -67,8 +69,8 @@ export async function writeExtension(
     }
 
     await create(configFileName, () => writeConfig(destDir, extensionConfig(answers, samples[0].file)));
+    await create('package.json', () => writePackageJson(destDir, packageJson(answers)));
     const files: [string, string][] = [
-        ['package.json', json(packageJson(answers))],
         ['README.md', readme(answers)],
         ...samples.map((sample): [string, string] => [sample.file, sample.text]),
         ['samples/cspell.json', json(sampleConfig(answers))],
@@ -192,7 +194,7 @@ export function dictionaryCommands(
  * The fields of `package.json` a person owns. `npm install` adds the dependency, and the sync fills
  * in the rest.
  */
-export function packageJson(answers: Answers): Record<string, unknown> {
+export function packageJson(answers: Answers): Partial<PackageJson> {
     return {
         name: `code-spell-checker-${answers.name}`,
         version: '0.0.1',

@@ -9,9 +9,8 @@ import type { CommandConfig, ExtensionConfig } from './extension-runtime-api.mts
 import { starterMarker } from './create/sample.mts';
 import { readSources } from './dictionaries.mts';
 import type { Source as ConfigSource } from './dictionaries.mts';
-import type { Extension } from './pickExtension.mts';
-import type { PackageJson } from './extensionHelper.mts';
-import { readJson } from './repo.mts';
+import type { Extension } from './extension/index.mts';
+import { readJson } from './helpers/index.mts';
 import { listSamples } from './samples.mts';
 
 export interface Facts {
@@ -63,7 +62,7 @@ export async function readFacts({ folder, dir }: Extension, config: ExtensionCon
 
 /** A file cspell reads, named by its package, with the package's installed version. */
 async function toSource({ name, package: pkg, ext }: ConfigSource): Promise<Source> {
-    const version = pkg && (await readJson<PackageJson>(path.join(pkg.dir, 'package.json'))).version;
+    const version = pkg && (await readJson<{ version?: string }>(path.join(pkg.dir, 'package.json'))).version;
     return {
         name: pkg?.name ?? name,
         ...(version ? { version } : {}),

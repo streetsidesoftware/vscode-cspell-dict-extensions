@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 
-import type { Extension } from './pickExtension.mts';
-import { readJson } from './repo.mts';
+import type { Extension } from './extensions.mts';
+import { readJson } from '../helpers/index.mts';
 
 const manifest = '.release-please-manifest.json';
 

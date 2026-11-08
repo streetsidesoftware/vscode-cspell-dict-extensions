@@ -7,7 +7,8 @@ import path from 'node:path';
 import { findDrift } from './drift.mts';
 import { configFileName, hasConfig, readConfig, readExtensionConfigValidator } from './config/index.mts';
 import type { ExtensionConfigValidator } from './config/index.mts';
-import { extensionsDir, listExtensionRepoPaths, readVscodeEngine } from './repo.mts';
+import { listExtensionRepoPaths } from './extension/index.mts';
+import { extensionsDir, readVscodeEngine } from './helpers/index.mts';
 import { syncExtension, syncPackageJson } from './syncExtension.mts';
 import type { FileChange } from './syncExtension.mts';
 

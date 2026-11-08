@@ -1,7 +1,7 @@
 import { fetchCSpellPackages, filterPackages, noExtensionReason } from './cspellPackages.mts';
 import type { CSpellPackage } from './cspellPackages.mts';
-import { findExistingExtensions } from './existingExtensions.mts';
-import { extensionsDir } from './repo.mts';
+import { findExistingExtensions } from './extension/index.mts';
+import { extensionsDir } from './helpers/index.mts';
 
 export interface ListedPackage extends CSpellPackage {
     /**
