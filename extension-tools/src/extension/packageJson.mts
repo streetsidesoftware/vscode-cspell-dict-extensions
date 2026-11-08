@@ -6,7 +6,7 @@ import path from 'node:path';
 
 import type { IPackageOptions } from '@vscode/vsce';
 
-import { extensionRepoPath, readPackageJson, writeIfChanged } from '../helpers/index.mts';
+import { readPackageJson, writeIfChanged } from '../helpers/index.mts';
 import type { PackageJson } from '../helpers/index.mts';
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');
@@ -25,7 +25,7 @@ const defaultRepository: Repository = {
     url: repositoryUrl.href,
 };
 
-/** The order of the fields in an extension's `package.json`. A field that isn't listed can't be written. */
+/** The order of the fields in an extension's `package.json`. Fields that aren't listed go after these. */
 const fieldOrder = [
     'name',
     'displayName',
@@ -95,19 +95,17 @@ export async function writeExtensionPackageJson(
     options: { check?: boolean | undefined } = {},
 ): Promise<boolean> {
     const file = path.join(extensionDir, 'package.json');
-    const text = JSON.stringify(sortFields(pkg, `${extensionRepoPath(extensionDir)}/package.json`), null, 2) + '\n';
+    const text = JSON.stringify(sortFields(pkg), null, 2) + '\n';
     return writeIfChanged(file, text, options.check);
 }
 
-/** The fields in the order of `fieldOrder`. */
-function sortFields(pkg: Partial<ExtensionPackageJson>, repoFile: string): Partial<ExtensionPackageJson> {
-    const unknown = Object.keys(pkg).filter((field) => !fieldOrder.includes(field));
-    if (unknown.length) {
-        throw new Error(
-            `${repoFile}: ${unknown.map((field) => `"${field}"`).join(', ')} ${unknown.length > 1 ? 'have' : 'has'} no place in the field order. Add it to \`fieldOrder\` in extension-tools/src/extension/packageJson.mts.`,
-        );
-    }
-    return Object.fromEntries(fieldOrder.filter((field) => field in pkg).map((field) => [field, pkg[field]]));
+/** The fields in the order of `fieldOrder`, then the unlisted ones in alphabetical order. */
+function sortFields(pkg: Partial<ExtensionPackageJson>): Partial<ExtensionPackageJson> {
+    const listed = fieldOrder.filter((field) => field in pkg);
+    const unlisted = Object.keys(pkg)
+        .filter((field) => !fieldOrder.includes(field))
+        .sort();
+    return Object.fromEntries([...listed, ...unlisted].map((field) => [field, pkg[field]]));
 }
 
 /**

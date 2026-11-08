@@ -29,7 +29,9 @@ describe('writeExtensionPackageJson', () => {
         assert.ok(text.startsWith('{\n  "name": "x",\n'));
     });
 
-    it('rejects a field with no place in the order', async () => {
-        await assert.rejects(writeExtensionPackageJson(dir, { name: 'x', funding: 'y' }), /"funding" has no place/);
+    it('writes unlisted fields last, in alphabetical order', async () => {
+        await writeExtensionPackageJson(dir, { zebra: 1, name: 'x', funding: 'y', version: '1.0.0' });
+        const text = await readFile(path.join(dir, 'package.json'), 'utf8');
+        assert.deepEqual(Object.keys(JSON.parse(text)), ['name', 'version', 'funding', 'zebra']);
     });
 });
