@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`de-at`",
+        "enabled": "conditional",
         "locale": "`de_AT`",
         "languageId": "",
         "glob": ""

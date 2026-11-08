@@ -1,7 +1,15 @@
 [
     {
         "Dictionary": "`nb-no`",
+        "enabled": "conditional",
         "locale": "`nb`, `nb-no`",
+        "languageId": "",
+        "glob": ""
+    },
+    {
+        "Dictionary": "`nb-no-alt`",
+        "enabled": "no",
+        "locale": "",
         "languageId": "",
         "glob": ""
     }

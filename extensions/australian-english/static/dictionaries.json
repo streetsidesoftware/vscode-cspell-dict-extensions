@@ -1,18 +1,21 @@
 [
     {
         "Dictionary": "`en-au`",
+        "enabled": "conditional",
         "locale": "`en-AU`",
         "languageId": "",
         "glob": ""
     },
     {
         "Dictionary": "`en-common-misspellings`",
+        "enabled": "conditional",
         "locale": "`en-AU`",
         "languageId": "",
         "glob": ""
     },
     {
         "Dictionary": "`en-gb-common-misspellings`",
+        "enabled": "conditional",
         "locale": "`en-AU`",
         "languageId": "",
         "glob": ""

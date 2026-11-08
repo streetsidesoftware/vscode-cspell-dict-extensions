@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`mn-mn`",
+        "enabled": "conditional",
         "locale": "`mn`, `mn-MN`",
         "languageId": "",
         "glob": ""

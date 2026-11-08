@@ -1,12 +1,14 @@
 [
     {
         "Dictionary": "`scientific-terms-us`",
+        "enabled": "yes",
         "locale": "",
         "languageId": "",
         "glob": ""
     },
     {
         "Dictionary": "`mathematics-terms-us`",
+        "enabled": "yes",
         "locale": "",
         "languageId": "",
         "glob": ""

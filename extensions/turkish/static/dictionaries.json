@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`tr-tr`",
+        "enabled": "conditional",
         "locale": "`tr`, `tr-TR`",
         "languageId": "",
         "glob": ""

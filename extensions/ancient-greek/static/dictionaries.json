@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`grc`",
+        "enabled": "conditional",
         "locale": "`grc`, `grc_GR`, `gr`, `el-GRC`",
         "languageId": "",
         "glob": ""
