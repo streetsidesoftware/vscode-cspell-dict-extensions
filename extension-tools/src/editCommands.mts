@@ -11,7 +11,7 @@ import path from 'node:path';
 import { Option } from 'commander';
 import type { Command } from 'commander';
 
-import type { ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { ExtensionConfig } from './extension-runtime-api.mts';
 import { inquirerPrompter } from './create/prompt.mts';
 import type { Choice, Prompter } from './create/prompt.mts';
 import { findDrift } from './drift.mts';

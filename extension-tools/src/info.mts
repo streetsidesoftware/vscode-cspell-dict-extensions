@@ -5,7 +5,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { CommandConfig, ExtensionConfig } from './extension-runtime-api.mts';
 import { starterMarker } from './create/sample.mts';
 import { readSources } from './dictionaries.mts';
 import type { Source as ConfigSource } from './dictionaries.mts';

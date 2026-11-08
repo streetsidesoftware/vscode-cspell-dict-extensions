@@ -14,7 +14,7 @@ import {
 } from '@streetsidesoftware/markdown-toolkit';
 import type { MDParagraph } from '@streetsidesoftware/markdown-toolkit';
 
-import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
+import type { CommandConfig, ExtensionConfig } from '../extension-runtime-api.mts';
 import {
     actions,
     commandSet,

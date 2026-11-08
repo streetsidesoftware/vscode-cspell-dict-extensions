@@ -2,7 +2,7 @@
  * The validation of `extension.config.json`, against the schema the runtime builds from its `ExtensionConfig` type.
  */
 
-import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
+import type { ExtensionConfig } from '../extension-runtime-api.mts';
 import { readJson } from '../repo.mts';
 
 /** The runtime's schema of `extension.config.json`, relative to the repository root. */

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
+import type { ExtensionConfig } from '../extension-runtime-api.mts';
 import { addCommandSet, removeCommands, setFields } from './edit.mts';
 
 const serbian: ExtensionConfig = {

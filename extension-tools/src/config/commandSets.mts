@@ -2,7 +2,7 @@
  * The standard commands: Enable and Disable, globally and in the workspace, for one locale or dictionary.
  */
 
-import type { CommandConfig } from '../../../extension-runtime/api.ts';
+import type { CommandConfig } from '../extension-runtime-api.mts';
 
 type Action = CommandConfig['action'];
 type Scope = CommandConfig['scope'];

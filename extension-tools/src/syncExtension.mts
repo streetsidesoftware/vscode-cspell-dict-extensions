@@ -24,7 +24,7 @@ import type { CSpellSettings, LanguageSetting, OverrideSettings } from 'cspell-l
 import { injectMarkdown } from 'inject-markdown';
 import { sortPackageJson } from 'sort-package-json';
 
-import type { CommandConfig, CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { CommandConfig, CSpellExtPath, ExtensionConfig } from './extension-runtime-api.mts';
 import { canonicalLocale } from './locales.mts';
 import { readImports, readSources, splitList } from './dictionaries.mts';
 import { withSharedFields } from './extensionHelper.mts';
