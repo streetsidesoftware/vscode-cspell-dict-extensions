@@ -22,7 +22,6 @@ import path from 'node:path';
 
 import type { CSpellSettings, LanguageSetting, OverrideSettings } from 'cspell-lib';
 import { injectMarkdown } from 'inject-markdown';
-import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from './extension-runtime-api.mts';
 import {
@@ -129,13 +128,13 @@ async function hasCustomCode(extensionDir: string): Promise<boolean> {
     return exists(path.join(extensionDir, 'src/custom.ts'));
 }
 
-/** Write the extension's `package.json` with the shared fields, sorted. */
+/** Write the extension's `package.json` with the shared fields. */
 async function writeSyncedPackageJson(
     extensionDir: string,
     pkg: PackageJson,
     options: Pick<SyncOptions, 'check' | 'vscodeEngine'>,
 ): Promise<FileChange[]> {
-    const synced = sortPackageJson(withSharedFields(extensionRepoPath(extensionDir), pkg, options.vscodeEngine));
+    const synced = withSharedFields(extensionRepoPath(extensionDir), pkg, options.vscodeEngine);
     return (await writePackageJson(extensionDir, synced, options)) ? [{ file: 'package.json', action: 'update' }] : [];
 }
 

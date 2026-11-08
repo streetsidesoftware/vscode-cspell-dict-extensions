@@ -6,7 +6,7 @@ import path from 'node:path';
 
 import type { IPackageOptions } from '@vscode/vsce';
 
-import { readJson, writeIfChanged } from '../helpers/index.mts';
+import { extensionRepoPath, readJson, writeIfChanged } from '../helpers/index.mts';
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');
 const repositoryRawUrl = new URL(
@@ -23,6 +23,39 @@ const defaultRepository: Repository = {
     type: 'git',
     url: repositoryUrl.href,
 };
+
+/** The order of the fields in an extension's `package.json`: the order `sort-package-json` gives them. */
+const fieldOrder = [
+    'name',
+    'displayName',
+    'version',
+    'private',
+    'description',
+    'categories',
+    'keywords',
+    'bugs',
+    'repository',
+    'license',
+    'qna',
+    'author',
+    'contributors',
+    'publisher',
+    'type',
+    'main',
+    'browser',
+    'files',
+    'scripts',
+    'contributes',
+    'activationEvents',
+    'dependencies',
+    'extensionDependencies',
+    'engines',
+    'icon',
+    'capabilities',
+    'extensionKind',
+    'sponsor',
+    'vsce',
+];
 
 export interface PackageJson {
     name: string;
@@ -41,7 +74,6 @@ export interface PackageJson {
     private: boolean;
     bugs?: { url: string };
     engines?: { [engine: string]: string };
-    devDependencies?: { [name: string]: string };
     /** The fields the tools don't read, which they keep as they are. */
     [field: string]: unknown;
 }
@@ -54,7 +86,7 @@ export async function readPackageJson(extensionDir: string): Promise<PackageJson
 }
 
 /**
- * Write an extension's `package.json`, with the fields in the order given.
+ * Write an extension's `package.json`, with its fields in a fixed order.
  * @param extensionDir - the extension's directory, as an absolute path or a repo path.
  * @param pkg - a new extension's starter has only some of the fields; the sync fills in the rest.
  * @param options - `check` only reports whether the file would change.
@@ -65,7 +97,20 @@ export async function writePackageJson(
     pkg: Partial<PackageJson>,
     options: { check?: boolean | undefined } = {},
 ): Promise<boolean> {
-    return writeIfChanged(path.join(extensionDir, 'package.json'), JSON.stringify(pkg, null, 2) + '\n', options.check);
+    const file = path.join(extensionDir, 'package.json');
+    const text = JSON.stringify(sortFields(pkg, `${extensionRepoPath(extensionDir)}/package.json`), null, 2) + '\n';
+    return writeIfChanged(file, text, options.check);
+}
+
+/** The fields in the order of `fieldOrder`. */
+function sortFields(pkg: Partial<PackageJson>, repoFile: string): Partial<PackageJson> {
+    const unknown = Object.keys(pkg).filter((field) => !fieldOrder.includes(field));
+    if (unknown.length) {
+        throw new Error(
+            `${repoFile}: ${unknown.map((field) => `"${field}"`).join(', ')} has no place in the field order. Add it to \`fieldOrder\` in extension-tools/src/extension/packageJson.mts.`,
+        );
+    }
+    return Object.fromEntries(fieldOrder.filter((field) => field in pkg).map((field) => [field, pkg[field]]));
 }
 
 /**
