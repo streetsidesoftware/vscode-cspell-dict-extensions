@@ -29,7 +29,7 @@ var extension_config_default = {
 			"title": "Enable Austrian German Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "de-at",
+			"value": "de-AT",
 			"scope": "global"
 		},
 		{
@@ -37,7 +37,7 @@ var extension_config_default = {
 			"title": "Disable Austrian German Spell Checker Dictionary",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "de-at",
+			"value": "de-AT",
 			"scope": "global"
 		},
 		{
@@ -45,7 +45,7 @@ var extension_config_default = {
 			"title": "Enable Austrian German Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "de-at",
+			"value": "de-AT",
 			"scope": "workspace"
 		},
 		{
@@ -53,7 +53,7 @@ var extension_config_default = {
 			"title": "Disable Austrian German Spell Checker Dictionary in Workspace",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "de-at",
+			"value": "de-AT",
 			"scope": "workspace"
 		}
 	]

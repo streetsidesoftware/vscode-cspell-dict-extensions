@@ -29,7 +29,7 @@ var extension_config_default = {
 			"title": "Enable Indonesian Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "id-id",
+			"value": "id-ID",
 			"scope": "global"
 		},
 		{
@@ -45,7 +45,7 @@ var extension_config_default = {
 			"title": "Enable Indonesian Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "id-id",
+			"value": "id-ID",
 			"scope": "workspace"
 		},
 		{

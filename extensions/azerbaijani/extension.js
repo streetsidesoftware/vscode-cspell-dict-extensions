@@ -29,7 +29,7 @@ var extension_config_default = {
 			"title": "Enable Azerbaijani Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "az-az",
+			"value": "az-AZ",
 			"scope": "global"
 		},
 		{
@@ -45,7 +45,7 @@ var extension_config_default = {
 			"title": "Enable Azerbaijani Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "az-az",
+			"value": "az-AZ",
 			"scope": "workspace"
 		},
 		{

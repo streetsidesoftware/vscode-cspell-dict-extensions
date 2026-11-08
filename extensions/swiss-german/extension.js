@@ -29,7 +29,7 @@ var extension_config_default = {
 			"title": "Enable Swiss German Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "de-ch",
+			"value": "de-CH",
 			"scope": "global"
 		},
 		{
@@ -45,7 +45,7 @@ var extension_config_default = {
 			"title": "Enable Swiss German Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "de-ch",
+			"value": "de-CH",
 			"scope": "workspace"
 		},
 		{

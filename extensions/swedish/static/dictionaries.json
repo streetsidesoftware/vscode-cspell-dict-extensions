@@ -2,7 +2,7 @@
     {
         "Dictionary": "`sv`",
         "enabled": "conditional",
-        "locale": "`sv`, `sv_SE`",
+        "locale": "`sv`, `sv-SE`",
         "languageId": "",
         "glob": ""
     }

@@ -17,9 +17,9 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                   | What   | Value    | Scope     |
 | --------------------------------------------------------- | ------ | -------- | --------- |
-| Enable Azerbaijani Spell Checker Dictionary               | locale | az-az    | global    |
+| Enable Azerbaijani Spell Checker Dictionary               | locale | az-AZ    | global    |
 | Disable Azerbaijani Spell Checker Dictionary              | locale | az-AZ,az | global    |
-| Enable Azerbaijani Spell Checker Dictionary in Workspace  | locale | az-az    | workspace |
+| Enable Azerbaijani Spell Checker Dictionary in Workspace  | locale | az-AZ    | workspace |
 | Disable Azerbaijani Spell Checker Dictionary in Workspace | locale | az-AZ,az | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->

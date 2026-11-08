@@ -29,7 +29,7 @@ var extension_config_default = {
 			"title": "Enable Bulgarian Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "bg_BG",
+			"value": "bg-BG",
 			"scope": "global"
 		},
 		{
@@ -45,7 +45,7 @@ var extension_config_default = {
 			"title": "Enable Bulgarian Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "bg_BG",
+			"value": "bg-BG",
 			"scope": "workspace"
 		},
 		{
@@ -61,7 +61,7 @@ var extension_config_default = {
 			"title": "Enable Bulgarian Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "bg_BG",
+			"value": "bg-BG",
 			"scope": "global",
 			"contributes": false,
 			"legacy": true,
@@ -83,7 +83,7 @@ var extension_config_default = {
 			"title": "Enable Bulgarian Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "bg_BG",
+			"value": "bg-BG",
 			"scope": "workspace",
 			"contributes": false,
 			"legacy": true,

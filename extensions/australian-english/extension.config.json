@@ -16,7 +16,7 @@
             "title": "Enable Australian English Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "en-au",
+            "value": "en-AU",
             "scope": "global"
         },
         {
@@ -24,7 +24,7 @@
             "title": "Disable Australian English Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "en-au",
+            "value": "en-AU",
             "scope": "global"
         },
         {
@@ -32,7 +32,7 @@
             "title": "Enable Australian English Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
-            "value": "en-au",
+            "value": "en-AU",
             "scope": "workspace"
         },
         {
@@ -40,7 +40,7 @@
             "title": "Disable Australian English Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
-            "value": "en-au",
+            "value": "en-AU",
             "scope": "workspace"
         }
     ]

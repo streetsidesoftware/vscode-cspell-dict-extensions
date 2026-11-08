@@ -2,7 +2,7 @@
     {
         "Dictionary": "`de-ch`",
         "enabled": "conditional",
-        "locale": "`de`, `de_CH`",
+        "locale": "`de`, `de-CH`",
         "languageId": "",
         "glob": ""
     }

@@ -17,9 +17,9 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                 | What   | Value    | Scope     |
 | ------------------------------------------------------- | ------ | -------- | --------- |
-| Enable Bulgarian Spell Checker Dictionary               | locale | bg_BG    | global    |
+| Enable Bulgarian Spell Checker Dictionary               | locale | bg-BG    | global    |
 | Disable Bulgarian Spell Checker Dictionary              | locale | bg-BG,bg | global    |
-| Enable Bulgarian Spell Checker Dictionary in Workspace  | locale | bg_BG    | workspace |
+| Enable Bulgarian Spell Checker Dictionary in Workspace  | locale | bg-BG    | workspace |
 | Disable Bulgarian Spell Checker Dictionary in Workspace | locale | bg-BG,bg | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->

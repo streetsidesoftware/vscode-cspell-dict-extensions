@@ -28,7 +28,7 @@ var extension_config_default = {
 			"title": "Enable British English -ise Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "en-gb",
+			"value": "en-GB",
 			"scope": "global"
 		},
 		{
@@ -36,7 +36,7 @@ var extension_config_default = {
 			"title": "Disable British English -ise Spell Checker Dictionary",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "en-gb",
+			"value": "en-GB",
 			"scope": "global"
 		},
 		{
@@ -44,7 +44,7 @@ var extension_config_default = {
 			"title": "Enable British English -ise Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "en-gb",
+			"value": "en-GB",
 			"scope": "workspace"
 		},
 		{
@@ -52,7 +52,7 @@ var extension_config_default = {
 			"title": "Disable British English -ise Spell Checker Dictionary in Workspace",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "en-gb",
+			"value": "en-GB",
 			"scope": "workspace"
 		}
 	]

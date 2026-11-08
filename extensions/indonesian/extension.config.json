@@ -17,7 +17,7 @@
             "title": "Enable Indonesian Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "id-id",
+            "value": "id-ID",
             "scope": "global"
         },
         {
@@ -33,7 +33,7 @@
             "title": "Enable Indonesian Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
-            "value": "id-id",
+            "value": "id-ID",
             "scope": "workspace"
         },
         {

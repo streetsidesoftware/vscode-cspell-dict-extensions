@@ -18,10 +18,10 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                            | What   | Value | Scope     |
 | ------------------------------------------------------------------ | ------ | ----- | --------- |
-| Enable British English -ise Spell Checker Dictionary               | locale | en-gb | global    |
-| Disable British English -ise Spell Checker Dictionary              | locale | en-gb | global    |
-| Enable British English -ise Spell Checker Dictionary in Workspace  | locale | en-gb | workspace |
-| Disable British English -ise Spell Checker Dictionary in Workspace | locale | en-gb | workspace |
+| Enable British English -ise Spell Checker Dictionary               | locale | en-GB | global    |
+| Disable British English -ise Spell Checker Dictionary              | locale | en-GB | global    |
+| Enable British English -ise Spell Checker Dictionary in Workspace  | locale | en-GB | workspace |
+| Disable British English -ise Spell Checker Dictionary in Workspace | locale | en-GB | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

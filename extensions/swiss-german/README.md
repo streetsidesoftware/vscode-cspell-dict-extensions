@@ -17,9 +17,9 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                    | What   | Value | Scope     |
 | ---------------------------------------------------------- | ------ | ----- | --------- |
-| Enable Swiss German Spell Checker Dictionary               | locale | de-ch | global    |
+| Enable Swiss German Spell Checker Dictionary               | locale | de-CH | global    |
 | Disable Swiss German Spell Checker Dictionary              | locale | de-CH | global    |
-| Enable Swiss German Spell Checker Dictionary in Workspace  | locale | de-ch | workspace |
+| Enable Swiss German Spell Checker Dictionary in Workspace  | locale | de-CH | workspace |
 | Disable Swiss German Spell Checker Dictionary in Workspace | locale | de-CH | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
@@ -47,7 +47,7 @@ Swiss German dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `de-ch`    | conditional | `de`, `de_CH` |            |      |
+| `de-ch`    | conditional | `de`, `de-CH` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

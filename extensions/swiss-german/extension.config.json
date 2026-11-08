@@ -17,7 +17,7 @@
             "title": "Enable Swiss German Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "de-ch",
+            "value": "de-CH",
             "scope": "global"
         },
         {
@@ -33,7 +33,7 @@
             "title": "Enable Swiss German Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
-            "value": "de-ch",
+            "value": "de-CH",
             "scope": "workspace"
         },
         {

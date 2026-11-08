@@ -29,7 +29,7 @@ var extension_config_default = {
 			"title": "Enable Mongolian Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "mn-mn",
+			"value": "mn-MN",
 			"scope": "global"
 		},
 		{
@@ -45,7 +45,7 @@ var extension_config_default = {
 			"title": "Enable Mongolian Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "mn-mn",
+			"value": "mn-MN",
 			"scope": "workspace"
 		},
 		{

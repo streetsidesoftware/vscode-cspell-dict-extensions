@@ -28,7 +28,7 @@ var extension_config_default = {
 			"title": "Enable Canadian English Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "en-ca",
+			"value": "en-CA",
 			"scope": "global"
 		},
 		{
@@ -36,7 +36,7 @@ var extension_config_default = {
 			"title": "Disable Canadian English Spell Checker Dictionary",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "en-ca",
+			"value": "en-CA",
 			"scope": "global"
 		},
 		{
@@ -44,7 +44,7 @@ var extension_config_default = {
 			"title": "Enable Canadian English Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "en-ca",
+			"value": "en-CA",
 			"scope": "workspace"
 		},
 		{
@@ -52,7 +52,7 @@ var extension_config_default = {
 			"title": "Disable Canadian English Spell Checker Dictionary in Workspace",
 			"action": "disable",
 			"toggle": "locale",
-			"value": "en-ca",
+			"value": "en-CA",
 			"scope": "workspace"
 		}
 	]
