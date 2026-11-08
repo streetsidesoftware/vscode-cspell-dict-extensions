@@ -4,7 +4,7 @@
 
 import { readConfigKind } from '../config/index.mts';
 import type { ExtensionKind } from '../extension-runtime-api.mts';
-import { readPackageJson } from './packageJson.mts';
+import { readExtensionPackageJson } from './packageJson.mts';
 
 export interface ExtensionInfo {
     packageName: string;
@@ -21,7 +21,7 @@ export interface ExtensionInfo {
 }
 
 export async function getExtensionInfo(repoPath: string): Promise<ExtensionInfo> {
-    const pkg = await readPackageJson(repoPath);
+    const pkg = await readExtensionPackageJson(repoPath);
     return {
         packageName: pkg.name,
         description: pkg.description,

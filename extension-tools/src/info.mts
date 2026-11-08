@@ -10,7 +10,7 @@ import { starterMarker } from './create/sample.mts';
 import { readSources } from './dictionaries.mts';
 import type { Source as ConfigSource } from './dictionaries.mts';
 import type { Extension } from './extension/index.mts';
-import { readJson } from './helpers/index.mts';
+import { readPackageJson } from './helpers/index.mts';
 import { listSamples } from './samples.mts';
 
 export interface Facts {
@@ -62,7 +62,7 @@ export async function readFacts({ folder, dir }: Extension, config: ExtensionCon
 
 /** A file cspell reads, named by its package, with the package's installed version. */
 async function toSource({ name, package: pkg, ext }: ConfigSource): Promise<Source> {
-    const version = pkg && (await readJson<{ version?: string }>(path.join(pkg.dir, 'package.json'))).version;
+    const version = pkg && (await readPackageJson(pkg.dir)).version;
     return {
         name: pkg?.name ?? name,
         ...(version ? { version } : {}),

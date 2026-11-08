@@ -33,8 +33,8 @@ import {
     writeIfChanged,
 } from './helpers/index.mts';
 import { readImports, readSources, splitList } from './dictionaries.mts';
-import { readPackageJson, withSharedFields, writePackageJson } from './extension/index.mts';
-import type { PackageJson } from './extension/index.mts';
+import { readExtensionPackageJson, withSharedFields, writeExtensionPackageJson } from './extension/index.mts';
+import type { ExtensionPackageJson } from './extension/index.mts';
 import type { ExtensionConfigValidator } from './config/index.mts';
 import { configFileName, readConfig, writeConfig } from './config/index.mts';
 
@@ -78,7 +78,7 @@ export interface FileChange {
 export async function syncExtension(extensionDir: string, options: SyncOptions): Promise<FileChange[]> {
     const config = await readConfig(extensionDir, options.validate);
     const files = await extensionFiles(extensionDir, config);
-    const pkg = await readPackageJson(extensionDir);
+    const pkg = await readExtensionPackageJson(extensionDir);
     const optional = await existingFiles(extensionDir, optionalPackagedFiles);
     const derived = derivedPackageJson(config, pkg, await hasCustomCode(extensionDir), optional);
     const changes = [
@@ -105,7 +105,7 @@ export async function syncPackageJson(
     extensionDir: string,
     options: Pick<SyncOptions, 'check' | 'vscodeEngine'>,
 ): Promise<FileChange[]> {
-    return writeSyncedPackageJson(extensionDir, await readPackageJson(extensionDir), options);
+    return writeSyncedPackageJson(extensionDir, await readExtensionPackageJson(extensionDir), options);
 }
 
 /**
@@ -131,11 +131,13 @@ async function hasCustomCode(extensionDir: string): Promise<boolean> {
 /** Write the extension's `package.json` with the shared fields. */
 async function writeSyncedPackageJson(
     extensionDir: string,
-    pkg: PackageJson,
+    pkg: ExtensionPackageJson,
     options: Pick<SyncOptions, 'check' | 'vscodeEngine'>,
 ): Promise<FileChange[]> {
     const synced = withSharedFields(extensionRepoPath(extensionDir), pkg, options.vscodeEngine);
-    return (await writePackageJson(extensionDir, synced, options)) ? [{ file: 'package.json', action: 'update' }] : [];
+    return (await writeExtensionPackageJson(extensionDir, synced, options))
+        ? [{ file: 'package.json', action: 'update' }]
+        : [];
 }
 
 async function existingFiles(extensionDir: string, files: string[]): Promise<string[]> {
@@ -398,7 +400,7 @@ function commandsTable(config: ExtensionConfig): string | undefined {
 /** The `package.json` fields derived from the config. */
 function derivedPackageJson(
     config: ExtensionConfig,
-    pkg: PackageJson,
+    pkg: ExtensionPackageJson,
     hasCustom: boolean,
     optionalFiles: string[],
 ): Record<string, unknown> {

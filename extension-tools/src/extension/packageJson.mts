@@ -6,7 +6,8 @@ import path from 'node:path';
 
 import type { IPackageOptions } from '@vscode/vsce';
 
-import { extensionRepoPath, readJson, writeIfChanged } from '../helpers/index.mts';
+import { extensionRepoPath, readPackageJson, writeIfChanged } from '../helpers/index.mts';
+import type { PackageJson } from '../helpers/index.mts';
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');
 const repositoryRawUrl = new URL(
@@ -57,10 +58,9 @@ const fieldOrder = [
     'vsce',
 ];
 
-export interface PackageJson {
-    name: string;
+/** An extension's `package.json`: the fields the tools read or write, and the rest as they are. */
+export interface ExtensionPackageJson extends PackageJson {
     displayName: string;
-    version: string;
     description: string;
     main: string;
     browser?: string;
@@ -73,16 +73,13 @@ export interface PackageJson {
     vsce?: IPackageOptions;
     private: boolean;
     bugs?: { url: string };
-    engines?: { [engine: string]: string };
-    /** The fields the tools don't read, which they keep as they are. */
-    [field: string]: unknown;
 }
 
 /**
  * @param extensionDir - the extension's directory, as an absolute path or a repo path.
  */
-export async function readPackageJson(extensionDir: string): Promise<PackageJson> {
-    return readJson(path.join(extensionDir, 'package.json'));
+export async function readExtensionPackageJson(extensionDir: string): Promise<ExtensionPackageJson> {
+    return readPackageJson<ExtensionPackageJson>(extensionDir);
 }
 
 /**
@@ -92,9 +89,9 @@ export async function readPackageJson(extensionDir: string): Promise<PackageJson
  * @param options - `check` only reports whether the file would change.
  * @returns whether the file changed.
  */
-export async function writePackageJson(
+export async function writeExtensionPackageJson(
     extensionDir: string,
-    pkg: Partial<PackageJson>,
+    pkg: Partial<ExtensionPackageJson>,
     options: { check?: boolean | undefined } = {},
 ): Promise<boolean> {
     const file = path.join(extensionDir, 'package.json');
@@ -103,7 +100,7 @@ export async function writePackageJson(
 }
 
 /** The fields in the order of `fieldOrder`. */
-function sortFields(pkg: Partial<PackageJson>, repoFile: string): Partial<PackageJson> {
+function sortFields(pkg: Partial<ExtensionPackageJson>, repoFile: string): Partial<ExtensionPackageJson> {
     const unknown = Object.keys(pkg).filter((field) => !fieldOrder.includes(field));
     if (unknown.length) {
         throw new Error(
@@ -118,7 +115,11 @@ function sortFields(pkg: Partial<PackageJson>, repoFile: string): Partial<Packag
  * @param repoPath - the extension's directory as a repo path, e.g. `extensions/swedish`.
  * @param vscodeEngine - the `engines.vscode` of the runtime.
  */
-export function withSharedFields(repoPath: string, pkg: PackageJson, vscodeEngine: string): PackageJson {
+export function withSharedFields(
+    repoPath: string,
+    pkg: ExtensionPackageJson,
+    vscodeEngine: string,
+): ExtensionPackageJson {
     const baseUrl = new URL(`${repoPath}/`, repositoryRawUrl).href;
     return {
         ...pkg,

@@ -148,11 +148,11 @@ npm run create:extension -- typescript-parser --package @cspell/parser-typescrip
 - `src/create/app.mts` — the command line and the steps to generate an extension.
 - `src/create/questions.mts` — the questions, their defaults, and `--yes`.
 - `src/create/names.mts` — turns a typed name into a directory name, and suggests the friendly name.
-- `src/helpers/` — what the tools share: repository paths, reading and writing files, formatting, and the locales,
-  written as BCP 47 with a language's native and English names.
+- `src/helpers/` — what the tools share: repository paths, reading and writing files, reading any package's
+  `package.json`, formatting, and the locales, written as BCP 47 with a language's native and English names.
 - `src/config/` — `extension.config.json`: the only code that reads or writes it, its schema check, and the changes to
   its commands and fields.
-- `src/extension/` — the extensions in `extensions/`: listing and picking them, the only code that reads or writes their
+- `src/extension/` — the extensions in `extensions/`: listing and picking them, the only code that writes their
   `package.json`, and removing one.
 - `src/create/sample.mts` — chooses the samples: the files given, a language's Wikipedia article, or a starter file to
   replace.
