@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-estonian",
   "displayName": "Estonian - Code Spell Checker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "Adds Estonian (eesti) spell checking to Code Spell Checker.",
   "categories": [
