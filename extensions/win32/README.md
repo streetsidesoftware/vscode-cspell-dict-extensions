@@ -34,13 +34,17 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject: ../../static/dictionaries-columns.md --->
 
-Each row is a setting that turns a dictionary on. The dictionary is on when all of the row's conditions match:
+The **enabled** column says when a dictionary is used:
+
+- **yes:** for every file.
+- **conditional:** when all of the row's conditions match. An empty cell is no condition.
+- **no:** only after you enable it, with its Enable command or in `cSpell.dictionaries`.
+
+The conditions:
 
 - **locale:** `cSpell.language` includes one of these locales.
 - **languageId:** the file is one of these types.
 - **glob:** the file's path matches one of these patterns.
-
-An empty cell is no condition.
 
 <!--- @@inject-end: ../../static/dictionaries-columns.md --->
 
