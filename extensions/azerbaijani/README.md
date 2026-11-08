@@ -45,9 +45,9 @@ Azerbaijani dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `az-az`    | `az`, `az-AZ` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `az-az`    | conditional | `az`, `az-AZ` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

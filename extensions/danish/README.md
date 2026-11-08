@@ -45,9 +45,9 @@ Danish dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `da-dk`    | `da`, `da-DK` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `da-dk`    | conditional | `da`, `da-DK` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -45,9 +45,9 @@ German dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `de-de`    | `de`, `de_DE` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `de-de`    | conditional | `de`, `de_DE` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

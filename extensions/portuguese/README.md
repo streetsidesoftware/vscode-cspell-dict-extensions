@@ -45,9 +45,9 @@ Portuguese dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `pt-pt`    | `pt`, `pt_PT` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `pt-pt`    | conditional | `pt`, `pt_PT` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -45,9 +45,10 @@ and Norwegian Bokmål dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `nb-no`    | `nb`, `nb-no` |            |      |
+| Dictionary  | enabled     | locale        | languageId | glob |
+| ----------- | ----------- | ------------- | ---------- | ---- |
+| `nb-no`     | conditional | `nb`, `nb-no` |            |      |
+| `nb-no-alt` | no          |               |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

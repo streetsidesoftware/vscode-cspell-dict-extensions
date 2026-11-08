@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`medical terms`",
+        "enabled": "yes",
         "locale": "",
         "languageId": "",
         "glob": ""

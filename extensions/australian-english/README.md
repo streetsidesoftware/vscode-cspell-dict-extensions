@@ -51,11 +51,11 @@ To accept both the American and the Australian English spellings:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary                  | locale  | languageId | glob |
-| --------------------------- | ------- | ---------- | ---- |
-| `en-au`                     | `en-AU` |            |      |
-| `en-common-misspellings`    | `en-AU` |            |      |
-| `en-gb-common-misspellings` | `en-AU` |            |      |
+| Dictionary                  | enabled     | locale  | languageId | glob |
+| --------------------------- | ----------- | ------- | ---------- | ---- |
+| `en-au`                     | conditional | `en-AU` |            |      |
+| `en-common-misspellings`    | conditional | `en-AU` |            |      |
+| `en-gb-common-misspellings` | conditional | `en-AU` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

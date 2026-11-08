@@ -45,9 +45,9 @@ Croatian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `hr-hr`    | `hr`, `hr-HR` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `hr-hr`    | conditional | `hr`, `hr-HR` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

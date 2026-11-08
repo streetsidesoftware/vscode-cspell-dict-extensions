@@ -64,10 +64,10 @@ dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale          | languageId | glob |
-| ---------- | --------------- | ---------- | ---- |
-| `sr-cyrl`  | `sr`, `sr-Cyrl` |            |      |
-| `sr-latn`  | `sr`, `sr-Latn` |            |      |
+| Dictionary | enabled     | locale          | languageId | glob |
+| ---------- | ----------- | --------------- | ---------- | ---- |
+| `sr-cyrl`  | conditional | `sr`, `sr-Cyrl` |            |      |
+| `sr-latn`  | conditional | `sr`, `sr-Latn` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

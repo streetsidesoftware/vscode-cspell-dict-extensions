@@ -56,9 +56,9 @@ dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale | languageId | glob |
-| ---------- | ------ | ---------- | ---- |
-| `he`       | `he`   |            |      |
+| Dictionary | enabled     | locale | languageId | glob |
+| ---------- | ----------- | ------ | ---------- | ---- |
+| `he`       | conditional | `he`   |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

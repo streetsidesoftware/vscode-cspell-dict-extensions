@@ -45,9 +45,9 @@ Italian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `it-it`    | `it`, `it-IT` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `it-it`    | conditional | `it`, `it-IT` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

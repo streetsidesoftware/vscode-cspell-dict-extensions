@@ -48,9 +48,9 @@ Belarusian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `be-by`    | `be`, `be-BY` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `be-by`    | conditional | `be`, `be-BY` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

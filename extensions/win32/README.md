@@ -26,9 +26,9 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale | languageId | glob |
-| ---------- | ------ | ---------- | ---- |
-| `win32`    |        | `c`, `cpp` |      |
+| Dictionary | enabled     | locale | languageId | glob |
+| ---------- | ----------- | ------ | ---------- | ---- |
+| `win32`    | conditional |        | `c`, `cpp` |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

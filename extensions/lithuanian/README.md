@@ -45,9 +45,9 @@ Lithuanian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `lt-lt`    | `lt`, `lt-LT` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `lt-lt`    | conditional | `lt`, `lt-LT` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -45,9 +45,9 @@ Ukrainian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale | languageId | glob |
-| ---------- | ------ | ---------- | ---- |
-| `uk-ua`    | `uk`   |            |      |
+| Dictionary | enabled     | locale | languageId | glob |
+| ---------- | ----------- | ------ | ---------- | ---- |
+| `uk-ua`    | conditional | `uk`   |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

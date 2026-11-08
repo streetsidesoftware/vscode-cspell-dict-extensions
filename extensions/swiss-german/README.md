@@ -45,9 +45,9 @@ Swiss German dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `de-ch`    | `de`, `de_CH` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `de-ch`    | conditional | `de`, `de_CH` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

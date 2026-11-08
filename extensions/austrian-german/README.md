@@ -45,9 +45,9 @@ and Austrian German dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale  | languageId | glob |
-| ---------- | ------- | ---------- | ---- |
-| `de-at`    | `de_AT` |            |      |
+| Dictionary | enabled     | locale  | languageId | glob |
+| ---------- | ----------- | ------- | ---------- | ---- |
+| `de-at`    | conditional | `de_AT` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

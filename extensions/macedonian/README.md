@@ -45,9 +45,9 @@ Macedonian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale          | languageId | glob |
-| ---------- | --------------- | ---------- | ---- |
-| `mk`       | `mk`, `mk-cyrl` |            |      |
+| Dictionary | enabled     | locale          | languageId | glob |
+| ---------- | ----------- | --------------- | ---------- | ---- |
+| `mk`       | conditional | `mk`, `mk-cyrl` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

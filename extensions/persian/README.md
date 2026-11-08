@@ -45,9 +45,9 @@ Persian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `fa-ir`    | `fa`, `fa-IR` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `fa-ir`    | conditional | `fa`, `fa-IR` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

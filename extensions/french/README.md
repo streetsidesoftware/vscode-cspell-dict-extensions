@@ -45,9 +45,9 @@ French dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `fr-fr`    | `fr`, `fr_FR` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `fr-fr`    | conditional | `fr`, `fr_FR` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -45,9 +45,9 @@ dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale | languageId | glob |
-| ---------- | ------ | ---------- | ---- |
-| `sk-sk`    | `sk`   |            |      |
+| Dictionary | enabled     | locale | languageId | glob |
+| ---------- | ----------- | ------ | ---------- | ---- |
+| `sk-sk`    | conditional | `sk`   |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

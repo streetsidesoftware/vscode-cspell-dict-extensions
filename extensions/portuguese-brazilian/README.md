@@ -45,9 +45,9 @@ English and Brazilian Portuguese dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `pt-br`    | `pt`, `pt_BR` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `pt-br`    | conditional | `pt`, `pt_BR` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

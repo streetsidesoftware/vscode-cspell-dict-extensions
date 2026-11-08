@@ -45,9 +45,9 @@ Bulgarian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `bg-bg`    | `bg`, `bg-BG` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `bg-bg`    | conditional | `bg`, `bg-BG` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

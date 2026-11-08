@@ -45,9 +45,9 @@ Swedish dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `sv`       | `sv`, `sv_SE` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `sv`       | conditional | `sv`, `sv_SE` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

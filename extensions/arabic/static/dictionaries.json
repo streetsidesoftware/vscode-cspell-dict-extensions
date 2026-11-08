@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`ar`",
+        "enabled": "conditional",
         "locale": "`ar`",
         "languageId": "",
         "glob": ""

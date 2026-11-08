@@ -45,9 +45,9 @@ Polish dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `pl-pl`    | `pl`, `pl_PL` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `pl-pl`    | conditional | `pl`, `pl_PL` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

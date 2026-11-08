@@ -45,9 +45,9 @@ Russian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `ru-ru`    | `ru`, `ru-ru` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `ru-ru`    | conditional | `ru`, `ru-ru` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

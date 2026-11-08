@@ -45,9 +45,9 @@ and Ancient Greek dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale                          | languageId | glob |
-| ---------- | ------------------------------- | ---------- | ---- |
-| `grc`      | `grc`, `grc_GR`, `gr`, `el-GRC` |            |      |
+| Dictionary | enabled     | locale                          | languageId | glob |
+| ---------- | ----------- | ------------------------------- | ---------- | ---- |
+| `grc`      | conditional | `grc`, `grc_GR`, `gr`, `el-GRC` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -35,9 +35,9 @@ Aristotelis P., which merges OpenMedSpel (R. Robinson, e-MedTools) and MTH-Med-S
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary      | locale | languageId | glob |
-| --------------- | ------ | ---------- | ---- |
-| `medical terms` |        |            |      |
+| Dictionary      | enabled | locale | languageId | glob |
+| --------------- | ------- | ------ | ---------- | ---- |
+| `medical terms` | yes     |        |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

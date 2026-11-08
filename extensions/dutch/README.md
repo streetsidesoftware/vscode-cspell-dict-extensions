@@ -45,9 +45,9 @@ dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `nl-nl`    | `nl`, `nl-NL` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `nl-nl`    | conditional | `nl`, `nl-NL` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

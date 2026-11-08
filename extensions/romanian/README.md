@@ -45,9 +45,9 @@ Romanian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `ro-ro`    | `ro`, `ro-RO` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `ro-ro`    | conditional | `ro`, `ro-RO` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

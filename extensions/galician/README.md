@@ -45,9 +45,9 @@ Galician dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `gl-es`    | `gl`, `gl_ES` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `gl-es`    | conditional | `gl`, `gl_ES` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

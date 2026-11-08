@@ -45,9 +45,9 @@ Turkish dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `tr-tr`    | `tr`, `tr-TR` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `tr-tr`    | conditional | `tr`, `tr-TR` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

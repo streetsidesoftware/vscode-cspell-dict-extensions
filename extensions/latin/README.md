@@ -45,9 +45,9 @@ dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `la`       | `la`, `la-VA` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `la`       | conditional | `la`, `la-VA` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

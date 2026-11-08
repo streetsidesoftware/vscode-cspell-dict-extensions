@@ -82,9 +82,9 @@ Mongolian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `mn-mn`    | `mn`, `mn-MN` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `mn-mn`    | conditional | `mn`, `mn-MN` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

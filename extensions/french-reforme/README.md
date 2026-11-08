@@ -45,9 +45,9 @@ English and French Réforme 90 dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale                 | languageId | glob |
-| ---------- | ---------------------- | ---------- | ---- |
-| `fr-fr-90` | `fr`, `fr-fr`, `fr-90` |            |      |
+| Dictionary | enabled     | locale                 | languageId | glob |
+| ---------- | ----------- | ---------------------- | ---------- | ---- |
+| `fr-fr-90` | conditional | `fr`, `fr-fr`, `fr-90` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -45,9 +45,9 @@ Indonesian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `id-id`    | `id`, `id-ID` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `id-id`    | conditional | `id`, `id-ID` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

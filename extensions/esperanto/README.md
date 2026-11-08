@@ -45,9 +45,9 @@ Esperanto dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale | languageId | glob |
-| ---------- | ------ | ---------- | ---- |
-| `eo`       | `eo`   |            |      |
+| Dictionary | enabled     | locale | languageId | glob |
+| ---------- | ----------- | ------ | ---------- | ---- |
+| `eo`       | conditional | `eo`   |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -45,9 +45,9 @@ Finnish dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `fi-fi`    | `fi`, `fi-fi` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `fi-fi`    | conditional | `fi`, `fi-fi` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

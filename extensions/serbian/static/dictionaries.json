@@ -1,12 +1,14 @@
 [
     {
         "Dictionary": "`sr-cyrl`",
+        "enabled": "conditional",
         "locale": "`sr`, `sr-Cyrl`",
         "languageId": "",
         "glob": ""
     },
     {
         "Dictionary": "`sr-latn`",
+        "enabled": "conditional",
         "locale": "`sr`, `sr-Latn`",
         "languageId": "",
         "glob": ""

@@ -43,9 +43,9 @@ Spanish dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `es-es`    | `es`, `es_ES` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `es-es`    | conditional | `es`, `es_ES` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

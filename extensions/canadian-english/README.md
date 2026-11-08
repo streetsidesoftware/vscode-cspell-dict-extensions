@@ -51,11 +51,11 @@ To accept both the American and the Canadian English spellings:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary                  | locale  | languageId | glob |
-| --------------------------- | ------- | ---------- | ---- |
-| `en-ca`                     | `en-CA` |            |      |
-| `en-common-misspellings`    | `en-CA` |            |      |
-| `en-gb-common-misspellings` | `en-CA` |            |      |
+| Dictionary                  | enabled     | locale  | languageId | glob |
+| --------------------------- | ----------- | ------- | ---------- | ---- |
+| `en-ca`                     | conditional | `en-CA` |            |      |
+| `en-common-misspellings`    | conditional | `en-CA` |            |      |
+| `en-gb-common-misspellings` | conditional | `en-CA` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

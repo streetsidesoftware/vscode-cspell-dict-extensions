@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`eu`",
+        "enabled": "conditional",
         "locale": "`eu`",
         "languageId": "",
         "glob": ""

@@ -45,9 +45,9 @@ Slovenian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `sl-si`    | `sl`, `sl-SI` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `sl-si`    | conditional | `sl`, `sl-SI` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -45,9 +45,9 @@ Vietnamese dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale | languageId | glob |
-| ---------- | ------ | ---------- | ---- |
-| `vi-vn`    | `vi`   |            |      |
+| Dictionary | enabled     | locale | languageId | glob |
+| ---------- | ----------- | ------ | ---------- | ---- |
+| `vi-vn`    | conditional | `vi`   |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

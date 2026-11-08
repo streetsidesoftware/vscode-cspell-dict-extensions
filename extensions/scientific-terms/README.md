@@ -34,10 +34,10 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary             | locale | languageId | glob |
-| ---------------------- | ------ | ---------- | ---- |
-| `scientific-terms-us`  |        |            |      |
-| `mathematics-terms-us` |        |            |      |
+| Dictionary             | enabled | locale | languageId | glob |
+| ---------------------- | ------- | ------ | ---------- | ---- |
+| `scientific-terms-us`  | yes     |        |            |      |
+| `mathematics-terms-us` | yes     |        |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

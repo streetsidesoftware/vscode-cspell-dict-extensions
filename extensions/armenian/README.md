@@ -45,9 +45,9 @@ Armenian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `hy_am`    | `hy`, `hy-AM` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `hy_am`    | conditional | `hy`, `hy-AM` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

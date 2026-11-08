@@ -52,9 +52,9 @@ To accept both the American and the British English -ise spellings:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale  | languageId | glob |
-| ---------- | ------- | ---------- | ---- |
-| `en-gb`    | `en-GB` |            |      |
+| Dictionary | enabled     | locale  | languageId | glob |
+| ---------- | ----------- | ------- | ---------- | ---- |
+| `en-gb`    | conditional | `en-GB` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -45,9 +45,9 @@ Estonian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `et-ee`    | `et`, `et-EE` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `et-ee`    | conditional | `et`, `et-EE` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

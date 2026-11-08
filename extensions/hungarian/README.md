@@ -48,9 +48,9 @@ Hungarian dictionaries:
 
 <!--- @@inject-table: ./static/dictionaries.json#markdown --->
 
-| Dictionary | locale        | languageId | glob |
-| ---------- | ------------- | ---------- | ---- |
-| `hu-hu`    | `hu`, `hu-hu` |            |      |
+| Dictionary | enabled     | locale        | languageId | glob |
+| ---------- | ----------- | ------------- | ---------- | ---- |
+| `hu-hu`    | conditional | `hu`, `hu-hu` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 
