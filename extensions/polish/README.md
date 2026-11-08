@@ -47,7 +47,7 @@ Polish dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `pl-pl`    | conditional | `pl`, `pl_PL` |            |      |
+| `pl-pl`    | conditional | `pl`, `pl-PL` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -2,7 +2,7 @@
     {
         "Dictionary": "`gl-es`",
         "enabled": "conditional",
-        "locale": "`gl`, `gl_ES`",
+        "locale": "`gl`, `gl-ES`",
         "languageId": "",
         "glob": ""
     }

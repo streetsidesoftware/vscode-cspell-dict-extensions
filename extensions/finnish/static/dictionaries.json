@@ -2,7 +2,7 @@
     {
         "Dictionary": "`fi-fi`",
         "enabled": "conditional",
-        "locale": "`fi`, `fi-fi`",
+        "locale": "`fi`, `fi-FI`",
         "languageId": "",
         "glob": ""
     }

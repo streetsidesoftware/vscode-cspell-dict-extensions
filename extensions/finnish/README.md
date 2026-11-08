@@ -47,7 +47,7 @@ Finnish dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `fi-fi`    | conditional | `fi`, `fi-fi` |            |      |
+| `fi-fi`    | conditional | `fi`, `fi-FI` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

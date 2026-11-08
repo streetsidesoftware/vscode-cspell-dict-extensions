@@ -47,7 +47,7 @@ German dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `de-de`    | conditional | `de`, `de_DE` |            |      |
+| `de-de`    | conditional | `de`, `de-DE` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

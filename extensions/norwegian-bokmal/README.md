@@ -47,7 +47,7 @@ and Norwegian Bokmål dictionaries:
 
 | Dictionary  | enabled     | locale        | languageId | glob |
 | ----------- | ----------- | ------------- | ---------- | ---- |
-| `nb-no`     | conditional | `nb`, `nb-no` |            |      |
+| `nb-no`     | conditional | `nb`, `nb-NO` |            |      |
 | `nb-no-alt` | no          |               |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->

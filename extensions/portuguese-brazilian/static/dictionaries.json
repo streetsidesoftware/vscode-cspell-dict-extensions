@@ -2,7 +2,7 @@
     {
         "Dictionary": "`pt-br`",
         "enabled": "conditional",
-        "locale": "`pt`, `pt_BR`",
+        "locale": "`pt`, `pt-BR`",
         "languageId": "",
         "glob": ""
     }
