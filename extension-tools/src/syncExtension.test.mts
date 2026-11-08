@@ -10,7 +10,7 @@ import { unindent as markdown } from '@streetsidesoftware/unindent';
 
 import { clearCachedFiles } from 'cspell-lib';
 
-import { readExtensionConfigValidator } from './extensionSchema.mts';
+import { readExtensionConfigValidator } from './config/schema.mts';
 import { dictionaryStates, generateDictionariesTable, syncExtension } from './syncExtension.mts';
 import type { FileChange } from './syncExtension.mts';
 

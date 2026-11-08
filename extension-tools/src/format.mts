@@ -1,7 +1,6 @@
 import path from 'node:path';
 
 import type { InjectMarkdownResult } from 'inject-markdown';
-import * as prettier from 'prettier';
 
 import { repoRoot } from './repo.mts';
 
@@ -10,6 +9,8 @@ import { repoRoot } from './repo.mts';
  * @param repoPath - where the file is in the repository, which picks the prettier options.
  */
 export async function format(repoPath: string, content: string): Promise<string> {
+    // Loaded here, not at the top: workflows import code that uses this module before `npm ci` installs prettier.
+    const prettier = await import('prettier');
     const info = await prettier.getFileInfo(repoPath, { ignorePath: path.join(repoRoot, '.prettierignore') });
     if (info.ignored || !info.inferredParser) return content;
     const options = await prettier.resolveConfig(repoPath, { editorconfig: true });

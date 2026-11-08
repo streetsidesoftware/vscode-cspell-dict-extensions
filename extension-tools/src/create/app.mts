@@ -14,7 +14,7 @@ import { extensionsDir, repoRoot } from '../repo.mts';
 import { syncExtensions } from '../syncExtensions.mts';
 import { fetchArticle } from '../wikipedia.mts';
 import { npm } from './exec.mts';
-import { languageOf } from './locales.mts';
+import { languageOf } from '../locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
 import type { Prompter } from './prompt.mts';
 import { askQuestions, defaultLicense, kinds } from './questions.mts';
