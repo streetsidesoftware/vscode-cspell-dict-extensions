@@ -110,9 +110,9 @@ generator README lists them.
   npm run check:extension -- <name>
   ```
 
-- **If the sample check fails on most of the dictionary's words,** the sample's file type may not turn the dictionary
-  on. The README's Dictionaries table lists the file types. Ask the user for a file of one of those types, and replace
-  the sample.
+- **If the sample check fails on most of the dictionary's words,** the sample's file type may not enable the dictionary.
+  The README's Dictionaries table lists the file types. Ask the user for a file of one of those types, and replace the
+  sample.
 - **If the sample check fails** on words the dictionary doesn't know, add them to the sample itself. Leave
   `samples/cspell.json` as the generator wrote it.
   - Put names, pieces of words and other non-words on an `ignore` line, such as `Siatail`.

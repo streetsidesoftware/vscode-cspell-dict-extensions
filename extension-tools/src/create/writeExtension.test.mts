@@ -4,7 +4,12 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
+import { testEach } from '@streetsidesoftware/test-each';
+import { injectMarkdown } from 'inject-markdown';
+
 import { readExtensionConfigValidator } from '../extensionSchema.mts';
+import { injectProblems } from '../format.mts';
+import { repoRoot } from '../repo.mts';
 import type { Answers } from './questions.mts';
 import type { Sample } from './sample.mts';
 import {
@@ -239,10 +244,30 @@ describe('readme', () => {
         assert.match(readme(swedish), /^# Swedish - Code Spell Checker\n/);
         assert.match(readme({ ...swedish, displayName: 'Svenska' }), /^# Svenska\n/);
     });
+
+    describe('fills in every section with inject-markdown', () => {
+        // The sections read the static files of the extension the README belongs to, so each one borrows a real
+        // extension's. No parser extension exists yet, and a parser's sections only need `static/cspell-ext.json`.
+        testEach`
+            answers         | folder             | filled
+            ${swedish}      | ${'swedish'}       | ${['| Command ', '### Manual Settings', '| Dictionary ', 'The **enabled** column', '## Requirements']}
+            ${serbian}      | ${'serbian'}       | ${['| Command ', '### Manual Settings', '| Dictionary ', 'The **enabled** column', '## Requirements']}
+            ${medicalTerms} | ${'medical-terms'} | ${['| Command ', '| Dictionary ', 'The **enabled** column', '## Requirements']}
+            ${parser}       | ${'swedish'}       | ${['## Requirements']}
+        `(
+            '$answers.name',
+            async ({ answers, folder, filled }: { answers: Answers; folder: string; filled: string[] }) => {
+                const file = `extensions/${folder}/README.md`;
+                const result = await injectMarkdown({ file, content: readme(answers) }, { cwd: repoRoot });
+                assert.deepEqual(injectProblems(result), []);
+                for (const text of filled) assert.ok(result.document.content.includes(text), text);
+            },
+        );
+    });
 });
 
 describe('dictionaryCommands', () => {
-    it('turns one dictionary on and off, globally and in the workspace, with the plain IDs', () => {
+    it('enables and disables one dictionary, globally and in the workspace, with the plain IDs', () => {
         assert.deepEqual(dictionaryCommands({ name: 'vim', friendlyName: 'Vim' }, ['vim']), [
             {
                 id: 'cSpellExt_vim.enable',
@@ -301,7 +326,7 @@ describe('dictionaryCommands', () => {
 });
 
 describe('sampleConfig', () => {
-    it('turns on the locale of a language', () => {
+    it('enables the locale of a language', () => {
         assert.deepEqual(sampleConfig(swedish), { language: 'sv-SE,en' });
         assert.deepEqual(sampleConfig(medicalTerms), {});
     });

@@ -12,7 +12,7 @@ import {
     paragraph,
     strong,
 } from '@streetsidesoftware/markdown-toolkit';
-import type { MDComment } from '@streetsidesoftware/markdown-toolkit';
+import type { MDParagraph } from '@streetsidesoftware/markdown-toolkit';
 
 import type { CommandConfig, ExtensionConfig } from '../../../extension-runtime/api.ts';
 import { actions, commandSet, idSuffix, localeSuffix, scopes, standardCommand } from '../commandSets.mts';
@@ -162,7 +162,7 @@ export function languageCommands(name: string, language: Language): CommandConfi
 }
 
 /**
- * Turn a word list's dictionaries on and off, globally and in the workspace. One dictionary gets the plain IDs and
+ * Enable and disable a word list's dictionaries, globally and in the workspace. One dictionary gets the plain IDs and
  * titles; with several, each gets its own, e.g. `cSpellExt_vim.enableVimScript` and `Enable vim-script Spell Checker
  * Dictionary`.
  * @param dictionaries - the dictionary names, e.g. `['vim']`.
@@ -205,9 +205,12 @@ const codeSpellChecker = link(
     'https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker',
 );
 
-/** An `@@inject` section, filled in by the sync. */
-function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): MDComment[] {
-    return [comment(`@@${kind}: ${marker}`), comment(`@@inject-end: ${marker}`)];
+/**
+ * An `@@inject` directive, which the sync fills in. It's a paragraph of its own, because inject-markdown reads only one
+ * directive from a line, and comments in the same array are written on one line.
+ */
+function inject(marker: string, kind: 'inject' | 'inject-table' = 'inject'): MDParagraph {
+    return paragraph(comment(`@@${kind}: ${marker}`));
 }
 
 /** The starter README, with the `@@inject` sections the sync fills in. */
@@ -270,7 +273,7 @@ export function readme(answers: Answers): string {
 }
 
 /**
- * The cspell config of the samples. For a language, it turns the locale on, so the tests check the sample in the
+ * The cspell config of the samples. For a language, it enables the locale, so the tests check the sample in the
  * language. (In an inline locale comment, text after the locales on the same line, such as an HTML comment's end, is
  * read as a locale, which breaks languages that use word segmentation, such as Thai.)
  */

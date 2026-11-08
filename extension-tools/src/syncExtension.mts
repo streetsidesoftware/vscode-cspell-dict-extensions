@@ -110,7 +110,7 @@ async function extensionFiles(
     files.set(cspellExtPath, JSON.stringify(await cspellExt(extensionDir, config), null, 4) + '\n');
     const commands = commandsTable(config);
     if (commands) files.set('static/commands.json', commands);
-    const dictionaries = await dictionariesTable(extensionDir, config);
+    const dictionaries = await generateDictionariesTable(extensionDir, config);
     if (dictionaries) files.set('static/dictionaries.json', dictionaries);
     const pkg = await readJson<PackageJson>(path.join(extensionDir, 'package.json'));
     const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
@@ -231,24 +231,32 @@ async function dictionaryEngines(extensionDir: string, config: ExtensionConfig):
 }
 
 /**
- * The settings that name the extension's dictionaries, as table rows, injected into the README with
+ * The extension's dictionaries, as table rows, injected into the README with
  * `<!--- @@inject-table: ./static/dictionaries.json --->`. One row for each dictionary a setting names: the top-level
  * `dictionaries`, each language setting and each override, in every file cspell reads for the extension (the imported
- * files, with their own imports) and in the extension's `cspell`. Each locale, file type and glob is shown as code; an
- * empty cell is a field the setting doesn't set, or sets to `*`. Identical rows are shown once.
- * @returns `undefined` for a bundle, or when no setting names a dictionary.
+ * files, with their own imports) and in the extension's `cspell`. Then one row for each dictionary no setting names.
+ * Each locale, file type and glob is shown as code; an empty cell is a field the setting doesn't set, or sets to `*`.
+ * Identical rows are shown once.
+ * @returns `undefined` for a bundle, or when the extension has no dictionaries.
  */
-async function dictionariesTable(extensionDir: string, config: ExtensionConfig): Promise<string | undefined> {
+export async function generateDictionariesTable(
+    extensionDir: string,
+    config: ExtensionConfig,
+): Promise<string | undefined> {
     if (config.kind === 'bundle') return undefined;
-    // Two settings can turn a dictionary on in the same way, such as a package's `dictionaries` and the extension's.
-    const rows = [
-        ...new Map((await tableRows(extensionDir, config)).map((row) => [JSON.stringify(row), row])).values(),
+    const states = await dictionaryStates(extensionDir, config);
+    const disabled = [...states].filter(([, state]) => state === 'disabled');
+    const allRows = [
+        ...(await allSettingRows(extensionDir, config)),
+        ...disabled.map(([name]) => ({ ...row(name, {}), enabled: 'no' })),
     ];
+    // Two settings can enable a dictionary in the same way, such as a package's `dictionaries` and the extension's.
+    const rows = [...new Map(allRows.map((row) => [JSON.stringify(row), row])).values()];
     return rows.length ? JSON.stringify(rows, null, 4) + '\n' : undefined;
 }
 
-/** The rows of every file cspell reads for the extension. */
-async function tableRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
+/** The rows of the settings in every file cspell reads for the extension. */
+async function allSettingRows(extensionDir: string, config: ExtensionConfig): Promise<Row[]> {
     const where = extensionRepoPath(extensionDir);
     const sources = await readSources(extensionDir, config);
     return sources.flatMap(({ name, ext }) => settingRows(`${where}: ${name}`, ext));
@@ -266,18 +274,18 @@ function settingRows(where: string, ext: CSpellSettings): Row[] {
     ];
 }
 
-/** The top-level `dictionaries` are on for every file. */
+/** The top-level `dictionaries` are enabled for every file. */
 function dictionariesRows(where: string, dictionaries: string[] | undefined): Row[] {
     return names(where, dictionaries).map((name) => row(name, {}));
 }
 
-/** A language setting turns its dictionaries on for its locales and file types. */
+/** A language setting enables its dictionaries for its locales and file types. */
 function languageSettingRows(where: string, setting: LanguageSetting): Row[] {
     return names(where, setting.dictionaries).map((name) => row(name, setting));
 }
 
 /**
- * An override turns its dictionaries on for the files its `filename` matches. Its `language` and `languageId` set the
+ * An override enables its dictionaries for the files its `filename` matches. Its `language` and `languageId` set the
  * locale and file type of those files; they don't select them, so they have no column.
  */
 function overrideRows(where: string, override: OverrideSettings): Row[] {
@@ -292,14 +300,14 @@ function overrideRows(where: string, override: OverrideSettings): Row[] {
     return dictionaries.map((name) => row(name, { glob: globs }));
 }
 
-/** The dictionaries a setting names. A `!name` turns a dictionary off, which the table can't show. */
+/** The dictionaries a setting names. A `!name` disables a dictionary, which the table can't show. */
 function names(where: string, dictionaries: string[] | undefined): string[] {
     const negated = (dictionaries ?? []).filter((name) => name.startsWith('!'));
-    if (negated.length) throw new Error(`${where}: turning a dictionary off (${negated.join(', ')}) isn't supported.`);
+    if (negated.length) throw new Error(`${where}: disabling a dictionary (${negated.join(', ')}) isn't supported.`);
     return dictionaries ?? [];
 }
 
-type Row = Record<'Dictionary' | 'locale' | 'languageId' | 'glob', string>;
+type Row = Record<'Dictionary' | 'enabled' | 'locale' | 'languageId' | 'glob', string>;
 
 interface Cells {
     locale?: string | string[] | undefined;
@@ -308,13 +316,12 @@ interface Cells {
 }
 
 function row(name: string, cells: Cells): Row {
-    return {
-        Dictionary: code(name),
-        locale: codes(condition(cells.locale)),
-        languageId: codes(condition(cells.languageId)),
-        // Not split: a glob can have commas, as in `*.{adb,ads}`.
-        glob: codes([cells.glob ?? []].flat()),
-    };
+    const locale = codes(condition(cells.locale));
+    const languageId = codes(condition(cells.languageId));
+    // Not split: a glob can have commas, as in `*.{adb,ads}`.
+    const glob = codes([cells.glob ?? []].flat());
+    const enabled = locale || languageId || glob ? 'conditional' : 'yes';
+    return { Dictionary: code(name), enabled, locale, languageId, glob };
 }
 
 /** A locale or file type condition. cspell-lib treats `*` like no value: every locale or file type. */
@@ -333,10 +340,22 @@ export async function dictionaryNames(extensionDir: string, config: ExtensionCon
     return sources.flatMap(({ ext }) => ext.dictionaryDefinitions ?? []).map(({ name }) => name);
 }
 
-/** The dictionaries no setting turns on, so they have no row in the dictionaries table. */
-export async function offDictionaries(extensionDir: string, config: ExtensionConfig): Promise<string[]> {
-    const on = new Set((await tableRows(extensionDir, config)).map((row) => row.Dictionary));
-    return (await dictionaryNames(extensionDir, config)).filter((name) => !on.has(code(name)));
+export type DictionaryState = 'enabled' | 'conditional' | 'disabled';
+
+/** The state of each dictionary the extension defines, from the settings that name it. */
+export async function dictionaryStates(
+    extensionDir: string,
+    config: ExtensionConfig,
+): Promise<Map<string, DictionaryState>> {
+    const rows = await allSettingRows(extensionDir, config);
+    const names = await dictionaryNames(extensionDir, config);
+    return new Map(names.map((name) => [name, dictionaryState(rows.filter((row) => row.Dictionary === code(name)))]));
+}
+
+/** A dictionary with an unconditional row is enabled, whatever its other rows say: it's used for every file. */
+function dictionaryState(rows: Row[]): DictionaryState {
+    if (!rows.length) return 'disabled';
+    return rows.some((row) => row.enabled === 'yes') ? 'enabled' : 'conditional';
 }
 
 function code(text: string): string {

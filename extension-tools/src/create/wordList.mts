@@ -1,7 +1,7 @@
-// cspell:ignore elisp
+// cspell:ignore elisp vimrc
 
 /**
- * The parts of a word list that only its installed packages can tell: its dictionaries, and which are off.
+ * The parts of a word list that only its installed packages can tell: its dictionaries and their states.
  */
 
 import { readFile, writeFile } from 'node:fs/promises';
@@ -9,38 +9,41 @@ import path from 'node:path';
 import { styleText } from 'node:util';
 
 import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
-import { dictionaryNames, offDictionaries } from '../syncExtension.mts';
+import { dictionaryNames, dictionaryStates, generateDictionariesTable } from '../syncExtension.mts';
 import { npmOutput } from './exec.mts';
 import { dictionaryCommands, json } from './writeExtension.mts';
 
 /** Set up a word list once its packages are installed. */
 export async function setUpWordList(destDir: string, config: ExtensionConfig): Promise<void> {
     await writeCommands(destDir, config);
-    await turnOnForSamples(destDir, config);
+    await enableForSamples(destDir, config);
 }
 
-/** Commands to turn each dictionary on and off. */
+/** Commands to enable and disable each dictionary. */
 async function writeCommands(destDir: string, config: ExtensionConfig): Promise<void> {
     const commands = dictionaryCommands(config, await dictionaryNames(destDir, config));
     await writeFile(path.join(destDir, 'extension.config.json'), json({ ...config, commands }));
 }
 
-/** Turn on the dictionaries that no setting turns on, so the tests check the samples with them. */
-async function turnOnForSamples(destDir: string, config: ExtensionConfig): Promise<void> {
-    const off = await offDictionaries(destDir, config);
-    if (!off.length) return;
-    console.log(`Off until turned on: ${off.join(', ')}`);
-    await writeFile(path.join(destDir, 'samples/cspell.json'), json({ dictionaries: off }));
+/** Enable the disabled dictionaries in the samples' config, so the tests check the samples with them. */
+async function enableForSamples(destDir: string, config: ExtensionConfig): Promise<void> {
+    const states = await dictionaryStates(destDir, config);
+    const disabled = [...states].filter(([, state]) => state === 'disabled').map(([name]) => name);
+    if (!disabled.length) return;
+    console.log(`Disabled by default: ${disabled.join(', ')}`);
+    await writeFile(path.join(destDir, 'samples/cspell.json'), json({ dictionaries: disabled }));
 }
 
 /**
- * Add the words of the package and dictionary names that cspell doesn't know, such as `elisp`, to `words` in the
- * extension's `cspell.config.yaml`, so its own spell check passes.
+ * Add the words that cspell doesn't know from the package names and dictionary names, such as `elisp`, and from the
+ * dictionaries table, such as `vimrc` in a glob, to `words` in the extension's `cspell.config.yaml`, so its own spell
+ * check passes.
  * @param repoRoot - where cspell runs, with the repository's config.
  */
 export async function addNameWords(destDir: string, config: ExtensionConfig, repoRoot: string): Promise<void> {
     const packages = (config.cspell as { import?: string[] }).import ?? [];
-    const names = [...packages, ...(await dictionaryNames(destDir, config))];
+    const table = (await generateDictionariesTable(destDir, config)) ?? '';
+    const names = [...packages, ...(await dictionaryNames(destDir, config)), table];
     const unknown = unknownWords(destDir, repoRoot);
     if (!unknown) return;
     const words = nameWords(names, unknown);

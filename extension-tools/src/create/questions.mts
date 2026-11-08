@@ -17,7 +17,7 @@ import type { Prompter } from './prompt.mts';
 /**
  * The `kind` in `extension.config.json`:
  * - `language`: a natural language, enabled by its locale.
- * - `wordList`: a word list, on for the file types its dictionaries name, or off until turned on with commands.
+ * - `wordList`: a word list, enabled for the file types its dictionaries name, or disabled until enabled with commands.
  * - `parser`: a cspell parser.
  */
 export type Kind = 'language' | 'wordList' | 'parser';
@@ -42,7 +42,7 @@ export interface Answers {
     packages: string[];
     /** A language's locale as a BCP 47 tag, e.g. `sv-SE`. Empty for other kinds. */
     locale: string;
-    /** Every locale the packages declare, e.g. `['sv', 'sv-SE']`. The disable commands turn them all off. */
+    /** Every locale the packages declare, e.g. `['sv', 'sv-SE']`. The disable commands disable them all. */
     locales: string[];
     /** The languages that get their own commands. Empty unless there are several. */
     languages: Language[];
@@ -275,7 +275,7 @@ async function askKind(packages: PackageKind[], options: Options, ctx: Context):
                 name: 'Word List',
                 value: 'wordList',
                 description:
-                    'Terms such as medical terms. On once installed, unless its dictionary is off until turned on.',
+                    'Terms such as medical terms. Enabled once installed, unless its dictionary is disabled by default.',
             },
         ],
         derived,

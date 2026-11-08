@@ -11,7 +11,7 @@ import { unindent as markdown } from '@streetsidesoftware/unindent';
 import { clearCachedFiles } from 'cspell-lib';
 
 import { readExtensionConfigValidator } from './extensionSchema.mts';
-import { offDictionaries, syncExtension } from './syncExtension.mts';
+import { dictionaryStates, syncExtension } from './syncExtension.mts';
 import type { FileChange } from './syncExtension.mts';
 
 const config = {
@@ -141,7 +141,7 @@ describe('syncExtension', () => {
                 { name: 'web' },
                 { name: 'any' },
                 { name: 'always' },
-                { name: 'off' },
+                { name: 'md-only' },
                 { name: 'lisp' },
                 { name: 'everywhere' },
                 { name: 'unused' },
@@ -156,7 +156,7 @@ describe('syncExtension', () => {
             ],
             overrides: [
                 { filename: ['**/*.el', '**/.emacs'], dictionaries: ['lisp'] },
-                { filename: '**/*.md', dictionaries: ['off'] },
+                { filename: '**/*.md', dictionaries: ['md-only'] },
                 // Sets the file type of the matching files, and names no dictionary: no row.
                 { filename: '**/*.mdx', languageId: 'markdown' },
             ],
@@ -166,24 +166,45 @@ describe('syncExtension', () => {
         await fs.writeFile(path.join(dir, 'README.md'), '# Demo\n');
         await syncExtension(dir, options);
         assert.deepEqual(JSON.parse(await read('static/dictionaries.json')), [
-            { Dictionary: '`always`', locale: '', languageId: '', glob: '' },
-            { Dictionary: '`c-only`', locale: '', languageId: '`c`, `cpp`', glob: '' },
-            { Dictionary: '`web`', locale: '', languageId: '`html`, `css`', glob: '' },
-            { Dictionary: '`any`', locale: '', languageId: '', glob: '' },
-            { Dictionary: '`lisp`', locale: '', languageId: '`elisp`', glob: '' },
-            { Dictionary: '`everywhere`', locale: '', languageId: '', glob: '' },
-            { Dictionary: '`lisp`', locale: '', languageId: '', glob: '`**/*.el`, `**/.emacs`' },
-            { Dictionary: '`off`', locale: '', languageId: '', glob: '`**/*.md`' },
+            { Dictionary: '`always`', enabled: 'yes', locale: '', languageId: '', glob: '' },
+            { Dictionary: '`c-only`', enabled: 'conditional', locale: '', languageId: '`c`, `cpp`', glob: '' },
+            { Dictionary: '`web`', enabled: 'conditional', locale: '', languageId: '`html`, `css`', glob: '' },
+            { Dictionary: '`any`', enabled: 'yes', locale: '', languageId: '', glob: '' },
+            { Dictionary: '`lisp`', enabled: 'conditional', locale: '', languageId: '`elisp`', glob: '' },
+            { Dictionary: '`everywhere`', enabled: 'yes', locale: '', languageId: '', glob: '' },
+            {
+                Dictionary: '`lisp`',
+                enabled: 'conditional',
+                locale: '',
+                languageId: '',
+                glob: '`**/*.el`, `**/.emacs`',
+            },
+            { Dictionary: '`md-only`', enabled: 'conditional', locale: '', languageId: '', glob: '`**/*.md`' },
+            { Dictionary: '`unused`', enabled: 'no', locale: '', languageId: '', glob: '' },
         ]);
-        // Off: no row. An override's glob turns `off` on.
-        assert.deepEqual(await offDictionaries(dir, await readJson('extension.config.json')), ['unused']);
+        const states = await dictionaryStates(dir, await readJson('extension.config.json'));
+        assert.equal(states.get('always'), 'enabled');
+        assert.equal(states.get('c-only'), 'conditional');
+        assert.equal(states.get('md-only'), 'conditional');
+        assert.equal(states.get('unused'), 'disabled');
+    });
+
+    it('calls a dictionary enabled when one of its rows has no condition', async () => {
+        await writeJson('node_modules/@cspell/dict-demo/cspell-ext.json', {
+            dictionaryDefinitions: [{ name: 'both' }],
+            dictionaries: ['both'],
+            languageSettings: [{ languageId: 'c', dictionaries: ['both'] }],
+        });
+        await clearCachedFiles();
+        const states = await dictionaryStates(dir, await readJson('extension.config.json'));
+        assert.equal(states.get('both'), 'enabled');
     });
 
     it('fails on a setting the table would show wrongly', async () => {
         const { locale: _locale, ...rest } = config;
         await writeJson('extension.config.json', { ...rest, kind: 'wordList', commands: [] });
         const unsupported: [object, RegExp][] = [
-            [{ dictionaries: ['!demo'] }, /turning a dictionary off \(!demo\) isn't supported/],
+            [{ dictionaries: ['!demo'] }, /disabling a dictionary \(!demo\) isn't supported/],
             [
                 { overrides: [{ filename: '**/*.md', languageId: 'markdown', dictionaries: ['demo'] }] },
                 /an override that names dictionaries and sets "language" or "languageId" isn't supported/,

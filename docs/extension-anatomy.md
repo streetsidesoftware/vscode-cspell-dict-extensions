@@ -46,11 +46,13 @@ Don't edit these; the sync overwrites them.
   Code Spell Checker.
 - **`static/commands.json`:** the commands, for the README's table: each command's title, what it changes (`locale` or
   `dictionary`), its value, and its scope. Removed when there are none.
-- **`static/dictionaries.json`:** for the README's table, one row for each dictionary a setting names, with the
-  setting's `locale`, `languageId` and `glob`. A comma list, such as `c,cpp`, shows each item. A `locale` or
-  `languageId` of `*` shows as an empty cell, since cspell treats it like no value. Identical rows appear once. The
-  settings are the top-level `dictionaries`, the language settings and the overrides, read from the installed
-  dictionaries and the extension's `cspell`. Removed when there are none, and never written for a bundle.
+- **`static/dictionaries.json`:** for the README's table, one row for each dictionary a setting names, with its
+  `enabled` value and the setting's `locale`, `languageId` and `glob`. `enabled` is `yes` with no conditions, and
+  `conditional` with any. A dictionary no setting names gets one row with `enabled` set to `no`. A comma list, such as
+  `c,cpp`, shows each item. A `locale` or `languageId` of `*` shows as an empty cell, since cspell treats it like no
+  value. Identical rows appear once. The settings are the top-level `dictionaries`, the language settings and the
+  overrides, read from the installed dictionaries and the extension's `cspell`. Removed when there are no dictionaries,
+  and never written for a bundle.
 - **`package.json` fields:** `name`, `displayName`, `description`, `type`, `main`, `files`, `contributes.commands` and
   `scripts`.
 - **`package.json` `files`:** what vsce packages, besides `package.json` and `README.md`. It lists `LICENSE`,
@@ -81,7 +83,7 @@ does: the config's `cspell` in memory, every file it imports, and the files thos
 
 The sync stops with an error on a dictionary setting that the README's table would show wrongly:
 
-- A `!name`, which turns a dictionary off.
+- A `!name`, which disables a dictionary.
 - An override that names dictionaries and sets `language` or `languageId`. These set the locale and file type of the
   files it matches. They don't select the files.
 
@@ -92,8 +94,8 @@ not the files the sync would change, because the workflow updates those after th
 rejects, and when a config says something its packages no longer back up. "Its packages" means the installed packages
 and the config's own `cspell`:
 
-- A command turns a dictionary on or off that none of them defines. cspell's built-in dictionaries don't count: an
-  extension turns on the dictionaries it brings.
+- A command enables or disables a dictionary that none of them defines. cspell's built-in dictionaries don't count: an
+  extension enables the dictionaries it brings.
 - A command, or `locale`, names a locale that no language setting declares. Locales compare as in cspell: `sv_SE` is
   `sv-SE`.
 
