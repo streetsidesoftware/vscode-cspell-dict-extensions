@@ -45,7 +45,7 @@ Spanish dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `es-es`    | conditional | `es`, `es_ES` |            |      |
+| `es-es`    | conditional | `es`, `es-ES` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

@@ -47,7 +47,7 @@ English and French Réforme 90 dictionaries:
 
 | Dictionary | enabled     | locale                 | languageId | glob |
 | ---------- | ----------- | ---------------------- | ---------- | ---- |
-| `fr-fr-90` | conditional | `fr`, `fr-fr`, `fr-90` |            |      |
+| `fr-fr-90` | conditional | `fr`, `fr-FR`, `fr-90` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

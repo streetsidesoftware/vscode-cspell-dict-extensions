@@ -47,7 +47,7 @@ English and Brazilian Portuguese dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `pt-br`    | conditional | `pt`, `pt_BR` |            |      |
+| `pt-br`    | conditional | `pt`, `pt-BR` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

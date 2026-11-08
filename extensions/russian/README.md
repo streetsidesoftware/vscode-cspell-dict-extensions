@@ -47,7 +47,7 @@ Russian dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `ru-ru`    | conditional | `ru`, `ru-ru` |            |      |
+| `ru-ru`    | conditional | `ru`, `ru-RU` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

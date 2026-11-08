@@ -47,7 +47,7 @@ Portuguese dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `pt-pt`    | conditional | `pt`, `pt_PT` |            |      |
+| `pt-pt`    | conditional | `pt`, `pt-PT` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 
