@@ -2,25 +2,25 @@
     {
         "Command": "Enable Canadian English Spell Checker Dictionary",
         "What": "locale",
-        "Value": "en-ca",
+        "Value": "en-CA",
         "Scope": "global"
     },
     {
         "Command": "Disable Canadian English Spell Checker Dictionary",
         "What": "locale",
-        "Value": "en-ca",
+        "Value": "en-CA",
         "Scope": "global"
     },
     {
         "Command": "Enable Canadian English Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "en-ca",
+        "Value": "en-CA",
         "Scope": "workspace"
     },
     {
         "Command": "Disable Canadian English Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "en-ca",
+        "Value": "en-CA",
         "Scope": "workspace"
     }
 ]

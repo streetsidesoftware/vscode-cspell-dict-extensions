@@ -2,25 +2,25 @@
     {
         "Command": "Enable Australian English Spell Checker Dictionary",
         "What": "locale",
-        "Value": "en-au",
+        "Value": "en-AU",
         "Scope": "global"
     },
     {
         "Command": "Disable Australian English Spell Checker Dictionary",
         "What": "locale",
-        "Value": "en-au",
+        "Value": "en-AU",
         "Scope": "global"
     },
     {
         "Command": "Enable Australian English Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "en-au",
+        "Value": "en-AU",
         "Scope": "workspace"
     },
     {
         "Command": "Disable Australian English Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "en-au",
+        "Value": "en-AU",
         "Scope": "workspace"
     }
 ]

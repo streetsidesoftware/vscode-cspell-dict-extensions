@@ -17,9 +17,9 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                | What   | Value    | Scope     |
 | ------------------------------------------------------ | ------ | -------- | --------- |
-| Enable Romanian Spell Checker Dictionary               | locale | ro-ro    | global    |
+| Enable Romanian Spell Checker Dictionary               | locale | ro-RO    | global    |
 | Disable Romanian Spell Checker Dictionary              | locale | ro-RO,ro | global    |
-| Enable Romanian Spell Checker Dictionary in Workspace  | locale | ro-ro    | workspace |
+| Enable Romanian Spell Checker Dictionary in Workspace  | locale | ro-RO    | workspace |
 | Disable Romanian Spell Checker Dictionary in Workspace | locale | ro-RO,ro | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->

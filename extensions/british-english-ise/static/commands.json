@@ -2,25 +2,25 @@
     {
         "Command": "Enable British English -ise Spell Checker Dictionary",
         "What": "locale",
-        "Value": "en-gb",
+        "Value": "en-GB",
         "Scope": "global"
     },
     {
         "Command": "Disable British English -ise Spell Checker Dictionary",
         "What": "locale",
-        "Value": "en-gb",
+        "Value": "en-GB",
         "Scope": "global"
     },
     {
         "Command": "Enable British English -ise Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "en-gb",
+        "Value": "en-GB",
         "Scope": "workspace"
     },
     {
         "Command": "Disable British English -ise Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "en-gb",
+        "Value": "en-GB",
         "Scope": "workspace"
     }
 ]

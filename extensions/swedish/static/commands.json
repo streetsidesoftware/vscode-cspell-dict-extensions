@@ -2,7 +2,7 @@
     {
         "Command": "Enable Swedish Spell Checker Dictionary",
         "What": "locale",
-        "Value": "sv_SE",
+        "Value": "sv-SE",
         "Scope": "global"
     },
     {
@@ -14,7 +14,7 @@
     {
         "Command": "Enable Swedish Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "sv_SE",
+        "Value": "sv-SE",
         "Scope": "workspace"
     },
     {

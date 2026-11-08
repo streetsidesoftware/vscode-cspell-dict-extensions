@@ -17,10 +17,10 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                       | What   | Value | Scope     |
 | ------------------------------------------------------------- | ------ | ----- | --------- |
-| Enable Austrian German Spell Checker Dictionary               | locale | de-at | global    |
-| Disable Austrian German Spell Checker Dictionary              | locale | de-at | global    |
-| Enable Austrian German Spell Checker Dictionary in Workspace  | locale | de-at | workspace |
-| Disable Austrian German Spell Checker Dictionary in Workspace | locale | de-at | workspace |
+| Enable Austrian German Spell Checker Dictionary               | locale | de-AT | global    |
+| Disable Austrian German Spell Checker Dictionary              | locale | de-AT | global    |
+| Enable Austrian German Spell Checker Dictionary in Workspace  | locale | de-AT | workspace |
+| Disable Austrian German Spell Checker Dictionary in Workspace | locale | de-AT | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 
@@ -47,7 +47,7 @@ and Austrian German dictionaries:
 
 | Dictionary | enabled     | locale  | languageId | glob |
 | ---------- | ----------- | ------- | ---------- | ---- |
-| `de-at`    | conditional | `de_AT` |            |      |
+| `de-at`    | conditional | `de-AT` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

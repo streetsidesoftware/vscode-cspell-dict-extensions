@@ -2,25 +2,25 @@
     {
         "Command": "Enable Austrian German Spell Checker Dictionary",
         "What": "locale",
-        "Value": "de-at",
+        "Value": "de-AT",
         "Scope": "global"
     },
     {
         "Command": "Disable Austrian German Spell Checker Dictionary",
         "What": "locale",
-        "Value": "de-at",
+        "Value": "de-AT",
         "Scope": "global"
     },
     {
         "Command": "Enable Austrian German Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "de-at",
+        "Value": "de-AT",
         "Scope": "workspace"
     },
     {
         "Command": "Disable Austrian German Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "de-at",
+        "Value": "de-AT",
         "Scope": "workspace"
     }
 ]

@@ -29,7 +29,7 @@ var extension_config_default = {
 			"title": "Enable Swedish Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "sv_SE",
+			"value": "sv-SE",
 			"scope": "global"
 		},
 		{
@@ -45,7 +45,7 @@ var extension_config_default = {
 			"title": "Enable Swedish Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "sv_SE",
+			"value": "sv-SE",
 			"scope": "workspace"
 		},
 		{
@@ -61,7 +61,7 @@ var extension_config_default = {
 			"title": "Enable Swedish Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "sv_SE",
+			"value": "sv-SE",
 			"scope": "global",
 			"contributes": false,
 			"legacy": true,
@@ -83,7 +83,7 @@ var extension_config_default = {
 			"title": "Enable Swedish Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "sv_SE",
+			"value": "sv-SE",
 			"scope": "workspace",
 			"contributes": false,
 			"legacy": true,

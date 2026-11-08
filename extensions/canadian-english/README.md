@@ -17,10 +17,10 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                        | What   | Value | Scope     |
 | -------------------------------------------------------------- | ------ | ----- | --------- |
-| Enable Canadian English Spell Checker Dictionary               | locale | en-ca | global    |
-| Disable Canadian English Spell Checker Dictionary              | locale | en-ca | global    |
-| Enable Canadian English Spell Checker Dictionary in Workspace  | locale | en-ca | workspace |
-| Disable Canadian English Spell Checker Dictionary in Workspace | locale | en-ca | workspace |
+| Enable Canadian English Spell Checker Dictionary               | locale | en-CA | global    |
+| Disable Canadian English Spell Checker Dictionary              | locale | en-CA | global    |
+| Enable Canadian English Spell Checker Dictionary in Workspace  | locale | en-CA | workspace |
+| Disable Canadian English Spell Checker Dictionary in Workspace | locale | en-CA | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
 

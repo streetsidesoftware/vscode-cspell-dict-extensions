@@ -45,9 +45,9 @@ Or run these commands:
 
 | Command                                                 | What   | Value    | Scope     |
 | ------------------------------------------------------- | ------ | -------- | --------- |
-| Enable Mongolian Spell Checker Dictionary               | locale | mn-mn    | global    |
+| Enable Mongolian Spell Checker Dictionary               | locale | mn-MN    | global    |
 | Disable Mongolian Spell Checker Dictionary              | locale | mn-MN,mn | global    |
-| Enable Mongolian Spell Checker Dictionary in Workspace  | locale | mn-mn    | workspace |
+| Enable Mongolian Spell Checker Dictionary in Workspace  | locale | mn-MN    | workspace |
 | Disable Mongolian Spell Checker Dictionary in Workspace | locale | mn-MN,mn | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->

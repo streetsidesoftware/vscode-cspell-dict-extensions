@@ -29,7 +29,7 @@ var extension_config_default = {
 			"title": "Enable Romanian Spell Checker Dictionary",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "ro-ro",
+			"value": "ro-RO",
 			"scope": "global"
 		},
 		{
@@ -45,7 +45,7 @@ var extension_config_default = {
 			"title": "Enable Romanian Spell Checker Dictionary in Workspace",
 			"action": "enable",
 			"toggle": "locale",
-			"value": "ro-ro",
+			"value": "ro-RO",
 			"scope": "workspace"
 		},
 		{

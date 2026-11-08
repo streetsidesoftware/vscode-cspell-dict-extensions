@@ -2,7 +2,7 @@
     {
         "Command": "Enable Swiss German Spell Checker Dictionary",
         "What": "locale",
-        "Value": "de-ch",
+        "Value": "de-CH",
         "Scope": "global"
     },
     {
@@ -14,7 +14,7 @@
     {
         "Command": "Enable Swiss German Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "de-ch",
+        "Value": "de-CH",
         "Scope": "workspace"
     },
     {

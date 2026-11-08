@@ -16,7 +16,7 @@
             "title": "Enable British English -ise Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "en-gb",
+            "value": "en-GB",
             "scope": "global"
         },
         {
@@ -24,7 +24,7 @@
             "title": "Disable British English -ise Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "en-gb",
+            "value": "en-GB",
             "scope": "global"
         },
         {
@@ -32,7 +32,7 @@
             "title": "Enable British English -ise Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
-            "value": "en-gb",
+            "value": "en-GB",
             "scope": "workspace"
         },
         {
@@ -40,7 +40,7 @@
             "title": "Disable British English -ise Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
-            "value": "en-gb",
+            "value": "en-GB",
             "scope": "workspace"
         }
     ]

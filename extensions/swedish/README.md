@@ -17,9 +17,9 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                               | What   | Value    | Scope     |
 | ----------------------------------------------------- | ------ | -------- | --------- |
-| Enable Swedish Spell Checker Dictionary               | locale | sv_SE    | global    |
+| Enable Swedish Spell Checker Dictionary               | locale | sv-SE    | global    |
 | Disable Swedish Spell Checker Dictionary              | locale | sv-SE,sv | global    |
-| Enable Swedish Spell Checker Dictionary in Workspace  | locale | sv_SE    | workspace |
+| Enable Swedish Spell Checker Dictionary in Workspace  | locale | sv-SE    | workspace |
 | Disable Swedish Spell Checker Dictionary in Workspace | locale | sv-SE,sv | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->
@@ -47,7 +47,7 @@ Swedish dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `sv`       | conditional | `sv`, `sv_SE` |            |      |
+| `sv`       | conditional | `sv`, `sv-SE` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

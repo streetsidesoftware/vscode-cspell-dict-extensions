@@ -2,7 +2,7 @@
     {
         "Command": "Enable Bulgarian Spell Checker Dictionary",
         "What": "locale",
-        "Value": "bg_BG",
+        "Value": "bg-BG",
         "Scope": "global"
     },
     {
@@ -14,7 +14,7 @@
     {
         "Command": "Enable Bulgarian Spell Checker Dictionary in Workspace",
         "What": "locale",
-        "Value": "bg_BG",
+        "Value": "bg-BG",
         "Scope": "workspace"
     },
     {

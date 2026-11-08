@@ -17,9 +17,9 @@ Run these commands with `F1` or _View -> Command Palette..._:
 
 | Command                                                  | What   | Value    | Scope     |
 | -------------------------------------------------------- | ------ | -------- | --------- |
-| Enable Indonesian Spell Checker Dictionary               | locale | id-id    | global    |
+| Enable Indonesian Spell Checker Dictionary               | locale | id-ID    | global    |
 | Disable Indonesian Spell Checker Dictionary              | locale | id-ID,id | global    |
-| Enable Indonesian Spell Checker Dictionary in Workspace  | locale | id-id    | workspace |
+| Enable Indonesian Spell Checker Dictionary in Workspace  | locale | id-ID    | workspace |
 | Disable Indonesian Spell Checker Dictionary in Workspace | locale | id-ID,id | workspace |
 
 <!--- @@inject-end: ./static/commands.json --->

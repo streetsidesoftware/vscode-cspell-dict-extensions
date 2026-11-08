@@ -17,7 +17,7 @@
             "title": "Enable Austrian German Spell Checker Dictionary",
             "action": "enable",
             "toggle": "locale",
-            "value": "de-at",
+            "value": "de-AT",
             "scope": "global"
         },
         {
@@ -25,7 +25,7 @@
             "title": "Disable Austrian German Spell Checker Dictionary",
             "action": "disable",
             "toggle": "locale",
-            "value": "de-at",
+            "value": "de-AT",
             "scope": "global"
         },
         {
@@ -33,7 +33,7 @@
             "title": "Enable Austrian German Spell Checker Dictionary in Workspace",
             "action": "enable",
             "toggle": "locale",
-            "value": "de-at",
+            "value": "de-AT",
             "scope": "workspace"
         },
         {
@@ -41,7 +41,7 @@
             "title": "Disable Austrian German Spell Checker Dictionary in Workspace",
             "action": "disable",
             "toggle": "locale",
-            "value": "de-at",
+            "value": "de-AT",
             "scope": "workspace"
         }
     ]
