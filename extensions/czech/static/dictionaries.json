@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`cs-cz`",
+        "enabled": "conditional",
         "locale": "`cs`",
         "languageId": "",
         "glob": ""

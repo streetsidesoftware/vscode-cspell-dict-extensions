@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`be-by`",
+        "enabled": "conditional",
         "locale": "`be`, `be-BY`",
         "languageId": "",
         "glob": ""

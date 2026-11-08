@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`ca`",
+        "enabled": "conditional",
         "locale": "`ca`",
         "languageId": "",
         "glob": ""

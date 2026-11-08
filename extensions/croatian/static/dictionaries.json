@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`hr-hr`",
+        "enabled": "conditional",
         "locale": "`hr`, `hr-HR`",
         "languageId": "",
         "glob": ""

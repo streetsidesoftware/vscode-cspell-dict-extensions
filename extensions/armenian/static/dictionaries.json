@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`hy_am`",
+        "enabled": "conditional",
         "locale": "`hy`, `hy-AM`",
         "languageId": "",
         "glob": ""

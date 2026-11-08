@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`la`",
+        "enabled": "conditional",
         "locale": "`la`, `la-VA`",
         "languageId": "",
         "glob": ""

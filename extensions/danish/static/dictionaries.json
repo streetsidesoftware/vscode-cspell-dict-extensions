@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`da-dk`",
+        "enabled": "conditional",
         "locale": "`da`, `da-DK`",
         "languageId": "",
         "glob": ""

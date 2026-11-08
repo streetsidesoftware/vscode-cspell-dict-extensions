@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`bg-bg`",
+        "enabled": "conditional",
         "locale": "`bg`, `bg-BG`",
         "languageId": "",
         "glob": ""

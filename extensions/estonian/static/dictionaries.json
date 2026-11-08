@@ -1,6 +1,7 @@
 [
     {
         "Dictionary": "`et-ee`",
+        "enabled": "conditional",
         "locale": "`et`, `et-EE`",
         "languageId": "",
         "glob": ""

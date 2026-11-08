@@ -1,18 +1,21 @@
 [
     {
         "Dictionary": "`en-ca`",
+        "enabled": "conditional",
         "locale": "`en-CA`",
         "languageId": "",
         "glob": ""
     },
     {
         "Dictionary": "`en-common-misspellings`",
+        "enabled": "conditional",
         "locale": "`en-CA`",
         "languageId": "",
         "glob": ""
     },
     {
         "Dictionary": "`en-gb-common-misspellings`",
+        "enabled": "conditional",
         "locale": "`en-CA`",
         "languageId": "",
         "glob": ""
