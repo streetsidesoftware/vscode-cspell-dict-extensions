@@ -101,11 +101,9 @@ export async function writeExtensionPackageJson(
 
 /** The fields in the order of `fieldOrder`, then the unlisted ones in alphabetical order. */
 function sortFields(pkg: Partial<ExtensionPackageJson>): Partial<ExtensionPackageJson> {
-    const listed = fieldOrder.filter((field) => field in pkg);
-    const unlisted = Object.keys(pkg)
-        .filter((field) => !fieldOrder.includes(field))
-        .sort();
-    return Object.fromEntries([...listed, ...unlisted].map((field) => [field, pkg[field]]));
+    const fields = new Set(fieldOrder.filter((field) => field in pkg));
+    const sorted = new Set(Object.keys(pkg).sort());
+    return Object.fromEntries([...fields.union(sorted)].map((field) => [field, pkg[field]]));
 }
 
 /**
