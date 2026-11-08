@@ -15,6 +15,8 @@ export interface ExtensionsToTest {
  * - A file in an extension's directory, its README and CHANGELOG included (`vsce package` checks them), tests that
  *   extension.
  * - A Markdown file outside `extensions/`, or a file in `.github/` other than the test workflow, tests nothing.
+ * - A file in `extension-tools/` tests nothing: the extensions don't use it, and it has its own workflow. A change to
+ *   the sync reaches the extensions in the sync's own commit after merge, which tests them.
  * - Any other file tests every extension.
  * @param changedFiles - the repo paths of the changed files.
  * @param extensionRepoPaths - the repo paths of all extensions, from `listExtensionRepoPaths`.
@@ -29,6 +31,7 @@ export function extensionsToTest(changedFiles: string[], extensionRepoPaths: str
         }
         if (file.startsWith('.github/') && file !== '.github/workflows/test.yml') continue;
         if (file.endsWith('.md') && !file.startsWith('extensions/')) continue;
+        if (file.startsWith('extension-tools/')) continue;
         return { extensions: extensionRepoPaths, shared: true };
     }
     return { extensions: extensionRepoPaths.filter((repoPath) => extensions.has(repoPath)), shared: false };

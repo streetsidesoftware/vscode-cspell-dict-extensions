@@ -50,7 +50,7 @@ Hungarian dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `hu-hu`    | conditional | `hu`, `hu-hu` |            |      |
+| `hu-hu`    | conditional | `hu`, `hu-HU` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

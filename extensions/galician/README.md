@@ -47,7 +47,7 @@ Galician dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `gl-es`    | conditional | `gl`, `gl_ES` |            |      |
+| `gl-es`    | conditional | `gl`, `gl-ES` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

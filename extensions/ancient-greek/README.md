@@ -47,7 +47,7 @@ and Ancient Greek dictionaries:
 
 | Dictionary | enabled     | locale                          | languageId | glob |
 | ---------- | ----------- | ------------------------------- | ---------- | ---- |
-| `grc`      | conditional | `grc`, `grc_GR`, `gr`, `el-GRC` |            |      |
+| `grc`      | conditional | `grc`, `grc-GR`, `gr`, `el-GRC` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

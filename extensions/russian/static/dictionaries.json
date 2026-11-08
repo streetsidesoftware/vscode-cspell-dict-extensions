@@ -2,7 +2,7 @@
     {
         "Dictionary": "`ru-ru`",
         "enabled": "conditional",
-        "locale": "`ru`, `ru-ru`",
+        "locale": "`ru`, `ru-RU`",
         "languageId": "",
         "glob": ""
     }

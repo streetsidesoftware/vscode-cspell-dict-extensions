@@ -47,7 +47,7 @@ French dictionaries:
 
 | Dictionary | enabled     | locale        | languageId | glob |
 | ---------- | ----------- | ------------- | ---------- | ---- |
-| `fr-fr`    | conditional | `fr`, `fr_FR` |            |      |
+| `fr-fr`    | conditional | `fr`, `fr-FR` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

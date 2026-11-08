@@ -47,7 +47,7 @@ Macedonian dictionaries:
 
 | Dictionary | enabled     | locale          | languageId | glob |
 | ---------- | ----------- | --------------- | ---------- | ---- |
-| `mk`       | conditional | `mk`, `mk-cyrl` |            |      |
+| `mk`       | conditional | `mk`, `mk-Cyrl` |            |      |
 
 <!--- @@inject-end: ./static/dictionaries.json#markdown --->
 

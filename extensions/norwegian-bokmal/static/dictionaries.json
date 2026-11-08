@@ -2,7 +2,7 @@
     {
         "Dictionary": "`nb-no`",
         "enabled": "conditional",
-        "locale": "`nb`, `nb-no`",
+        "locale": "`nb`, `nb-NO`",
         "languageId": "",
         "glob": ""
     },
