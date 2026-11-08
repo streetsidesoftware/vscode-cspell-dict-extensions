@@ -2,15 +2,15 @@
 name: new-extension
 description:
   'Creates a new dictionary extension in this repo, from request to one pull request: finds the published @cspell/dict-*
-  package, runs the generator, gets the sample and the checks passing, and, once the user agrees, opens the PR. Use when
-  asked to add or create an extension for a language, word list or dictionary, such as "add an extension for Thai".'
+  package, runs the generator, gets the sample and the checks passing, and opens the PR. Use when asked to add or create
+  an extension for a language, word list or dictionary, such as "add an extension for Thai".'
 ---
 
 # new-extension
 
-Takes a request such as "add an extension for Thai" to one pull request. The steps for contributors are in
-`docs/guides/new-extension.md`. The generator's options are in `extension-tools/README.md`. Read both first. This skill
-runs the generator without questions (`--yes`). It adds the points where you stop and ask the user.
+Takes a request such as "add an extension for Thai" to one pull request for each extension. The steps for contributors
+are in `docs/guides/new-extension.md`. The generator's options are in `extension-tools/README.md`. Read both first. This
+skill runs the generator without questions (`--yes`). It adds the points where you stop and ask the user.
 
 ## Workflow
 
@@ -152,19 +152,20 @@ generator README lists them.
   three times, so it's slow.
 - **Done when** every check passes, or only the VS Code test couldn't run and the user knows.
 
-### 9. Commit, ask, then open the PR
+### 9. Commit and open the PR
 
 - **Do:** commit the new folder with the message `feat: add <friendly name> extension`, such as
   `feat: add Scottish Gaelic extension`. Leave the root README lists, `release-please-config.json` and the workflow
   lists alone. A workflow updates them after the merge.
-- **Stop and ask** before pushing and opening the PR. Show the title and the description:
+- **Do,** as soon as the checks pass: push `new-extension/<name>`, and open the PR against `main`, titled with the
+  commit message. Don't wait for the user; they fix the title or description on the PR. The description says:
   - what the extension adds, and the packages it includes
   - when each dictionary is on, from `static/dictionaries.json`
   - the sample's source
   - the words on the sample's `words` and `ignore` lines
   - whether the VS Code test ran
-- **After the user agrees:** push `new-extension/<name>`. Open the PR against `main`, with the title and description you
-  showed.
+- **Several extensions in one request:** each gets its own branch from `origin/main` and its own PR. Open each PR before
+  you start the next extension.
 - **Done when** the PR is open and the user has its link.
 
 ## Not this skill
