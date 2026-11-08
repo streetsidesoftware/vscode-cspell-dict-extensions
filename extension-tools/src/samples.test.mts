@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
-import type { ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { ExtensionConfig } from './extension-runtime-api.mts';
 import { addSampleFiles, listSamples, removeSample } from './samples.mts';
 
 describe('samples', () => {

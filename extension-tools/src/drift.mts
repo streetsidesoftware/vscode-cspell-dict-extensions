@@ -4,7 +4,7 @@
 
 import type { CSpellSettings } from 'cspell-lib';
 
-import type { ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { ExtensionConfig } from './extension-runtime-api.mts';
 import { readSources } from './dictionaries.mts';
 
 /**

@@ -5,7 +5,7 @@
 
 import path from 'node:path';
 
-import type { ExtensionConfig, ExtensionKind } from '../../../extension-runtime/api.ts';
+import type { ExtensionConfig, ExtensionKind } from '../extension-runtime-api.mts';
 import { format } from '../format.mts';
 import { canonicalLocale } from '../locales.mts';
 import { exists, extensionRepoPath, readJson, writeIfChanged } from '../repo.mts';

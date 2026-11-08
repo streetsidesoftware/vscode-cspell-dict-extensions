@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import type { IPackageOptions } from '@vscode/vsce';
 
-import type { ExtensionKind } from '../../extension-runtime/api.ts';
+import type { ExtensionKind } from './extension-runtime-api.mts';
 import { readConfigKind } from './config/index.mts';
 import { readJson, repoRoot } from './repo.mts';
 

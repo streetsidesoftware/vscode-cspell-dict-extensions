@@ -6,7 +6,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import type { ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { ExtensionConfig } from './extension-runtime-api.mts';
 import { sampleFile } from './create/sample.mts';
 import { articleMarkdown, fetchArticle } from './wikipedia.mts';
 

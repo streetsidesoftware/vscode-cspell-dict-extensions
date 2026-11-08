@@ -9,7 +9,7 @@ import { pathToFileURL } from 'node:url';
 import { extractImportErrors, getSources, resolveConfigFileImports } from 'cspell-lib';
 import type { CSpellSettings } from 'cspell-lib';
 
-import type { CSpellExtPath, ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { CSpellExtPath, ExtensionConfig } from './extension-runtime-api.mts';
 import { extensionRepoPath, repoRoot } from './repo.mts';
 
 /** One config file cspell reads for the extension. */

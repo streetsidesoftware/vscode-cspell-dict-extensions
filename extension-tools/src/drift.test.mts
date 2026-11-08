@@ -4,7 +4,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
-import type { CommandConfig, ExtensionConfig } from '../../extension-runtime/api.ts';
+import type { CommandConfig, ExtensionConfig } from './extension-runtime-api.mts';
 import { findDrift } from './drift.mts';
 
 function command(toggle: 'locale' | 'dictionary', value: string): CommandConfig {

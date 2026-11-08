@@ -8,7 +8,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { styleText } from 'node:util';
 
-import type { ExtensionConfig } from '../../../extension-runtime/api.ts';
+import type { ExtensionConfig } from '../extension-runtime-api.mts';
 import { writeConfig } from '../config/index.mts';
 import { dictionaryNames, dictionaryStates, generateDictionariesTable } from '../syncExtension.mts';
 import { npmOutput } from './exec.mts';
