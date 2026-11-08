@@ -1,10 +1,11 @@
 /**
- * The extension a command works on, picked by its folder in `extensions/`.
+ * The extensions in `extensions/`: listing them, and picking the one a command works on.
  */
 
+import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { extensionsDir, listExtensionRepoPaths } from './repo.mts';
+import { extensionsDir } from '../helpers/index.mts';
 
 /** An extension in `extensions/`, picked by its folder. */
 export interface Extension {
@@ -12,6 +13,20 @@ export interface Extension {
     folder: string;
     /** The absolute path of the folder. */
     dir: string;
+}
+
+/**
+ * The repo paths of the extensions: the directories in `extensions/` that have a `package.json`, sorted.
+ *
+ * A repo path is relative to the repository root and always uses `/`, e.g. `extensions/swedish`. It works as a file
+ * path from the root, and as a path in a URL of the repository.
+ */
+export async function listExtensionRepoPaths(): Promise<string[]> {
+    const repoPaths: string[] = [];
+    for await (const pkgFile of fs.glob('*/package.json', { cwd: extensionsDir })) {
+        repoPaths.push(`extensions/${path.dirname(pkgFile)}`);
+    }
+    return repoPaths.sort();
 }
 
 /**

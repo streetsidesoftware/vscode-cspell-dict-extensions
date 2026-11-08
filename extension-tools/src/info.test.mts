@@ -8,9 +8,9 @@ import { testEach } from '@streetsidesoftware/test-each';
 
 import type { ExtensionConfig } from './extension-runtime-api.mts';
 import { starterMarker } from './create/sample.mts';
-import { pickExtension } from './pickExtension.mts';
+import { pickExtension } from './extension/index.mts';
 import { factsText, readFacts } from './info.mts';
-import { extensionsDir } from './repo.mts';
+import { extensionsDir } from './helpers/index.mts';
 
 const config: ExtensionConfig = {
     name: 'demo',

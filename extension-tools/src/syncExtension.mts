@@ -22,17 +22,21 @@ import path from 'node:path';
 
 import type { CSpellSettings, LanguageSetting, OverrideSettings } from 'cspell-lib';
 import { injectMarkdown } from 'inject-markdown';
-import { sortPackageJson } from 'sort-package-json';
 
 import type { CommandConfig, CSpellExtPath, ExtensionConfig } from './extension-runtime-api.mts';
-import { canonicalLocale } from './locales.mts';
+import {
+    canonicalLocale,
+    exists,
+    extensionRepoPath,
+    format,
+    injectProblems,
+    writeIfChanged,
+} from './helpers/index.mts';
 import { readImports, readSources, splitList } from './dictionaries.mts';
-import { withSharedFields } from './extensionHelper.mts';
-import type { PackageJson } from './extensionHelper.mts';
+import { readExtensionPackageJson, withSharedFields, writeExtensionPackageJson } from './extension/index.mts';
+import type { ExtensionPackageJson } from './extension/index.mts';
 import type { ExtensionConfigValidator } from './config/index.mts';
 import { configFileName, readConfig, writeConfig } from './config/index.mts';
-import { format, injectProblems } from './format.mts';
-import { exists, extensionRepoPath, readJson, writeIfChanged } from './repo.mts';
 
 const cspellExtPath: CSpellExtPath = 'static/cspell-ext.json';
 const templateDir = path.join(import.meta.dirname, '../templates/sync');
@@ -73,11 +77,16 @@ export interface FileChange {
  */
 export async function syncExtension(extensionDir: string, options: SyncOptions): Promise<FileChange[]> {
     const config = await readConfig(extensionDir, options.validate);
-    const files = await extensionFiles(extensionDir, config, options.vscodeEngine);
+    const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
+    const files = await extensionFiles(extensionDir, config, hasCustom);
+    const pkg = await readExtensionPackageJson(extensionDir);
+    const optional = await existingFiles(extensionDir, optionalPackagedFiles);
+    const derived = derivedPackageJson(config, pkg, hasCustom, optional);
     const changes = [
         ...((await writeConfig(extensionDir, config, options))
             ? [{ file: configFileName, action: 'update' as const }]
             : []),
+        ...(await writeSyncedPackageJson(extensionDir, { ...pkg, ...derived }, options)),
         ...(await writeFiles(extensionDir, files, options.check)),
         ...(await createMissingFiles(extensionDir, options.check)),
         ...(await removeUnusedFiles(extensionDir, files, options.check)),
@@ -97,9 +106,7 @@ export async function syncPackageJson(
     extensionDir: string,
     options: Pick<SyncOptions, 'check' | 'vscodeEngine'>,
 ): Promise<FileChange[]> {
-    const pkg = await readJson<PackageJson>(path.join(extensionDir, 'package.json'));
-    const files = new Map([['package.json', packageJsonText(extensionDir, pkg, options.vscodeEngine)]]);
-    return writeFiles(extensionDir, files, options.check);
+    return writeSyncedPackageJson(extensionDir, await readExtensionPackageJson(extensionDir), options);
 }
 
 /**
@@ -108,7 +115,7 @@ export async function syncPackageJson(
 async function extensionFiles(
     extensionDir: string,
     config: ExtensionConfig,
-    vscodeEngine: string,
+    hasCustom: boolean,
 ): Promise<Map<string, string>> {
     const files = new Map<string, string>(await readTemplateFiles());
     files.set(cspellExtPath, JSON.stringify(await cspellExt(extensionDir, config), null, 4) + '\n');
@@ -116,20 +123,21 @@ async function extensionFiles(
     if (commands) files.set('static/commands.json', commands);
     const dictionaries = await generateDictionariesTable(extensionDir, config);
     if (dictionaries) files.set('static/dictionaries.json', dictionaries);
-    const pkg = await readJson<PackageJson>(path.join(extensionDir, 'package.json'));
-    const hasCustom = await exists(path.join(extensionDir, 'src/custom.ts'));
     // `tsconfig.json` only type-checks `src/custom.ts`; without it, tsc and VS Code report "No inputs were found".
     if (!hasCustom) files.delete('tsconfig.json');
-    const optional = await existingFiles(extensionDir, optionalPackagedFiles);
-    files.set(
-        'package.json',
-        packageJsonText(
-            extensionDir,
-            { ...pkg, ...derivedPackageJson(config, pkg, hasCustom, optional) },
-            vscodeEngine,
-        ),
-    );
     return files;
+}
+
+/** Write the extension's `package.json` with the shared fields. */
+async function writeSyncedPackageJson(
+    extensionDir: string,
+    pkg: ExtensionPackageJson,
+    options: Pick<SyncOptions, 'check' | 'vscodeEngine'>,
+): Promise<FileChange[]> {
+    const synced = withSharedFields(extensionRepoPath(extensionDir), pkg, options.vscodeEngine);
+    return (await writeExtensionPackageJson(extensionDir, synced, options))
+        ? [{ file: 'package.json', action: 'update' }]
+        : [];
 }
 
 async function existingFiles(extensionDir: string, files: string[]): Promise<string[]> {
@@ -389,18 +397,10 @@ function commandsTable(config: ExtensionConfig): string | undefined {
     return JSON.stringify(rows, null, 4) + '\n';
 }
 
-/** An extension's `package.json` with the shared fields, sorted. */
-function packageJsonText(extensionDir: string, pkg: PackageJson, vscodeEngine: string): string {
-    return (
-        JSON.stringify(sortPackageJson(withSharedFields(extensionRepoPath(extensionDir), pkg, vscodeEngine)), null, 2) +
-        '\n'
-    );
-}
-
 /** The `package.json` fields derived from the config. */
 function derivedPackageJson(
     config: ExtensionConfig,
-    pkg: PackageJson,
+    pkg: ExtensionPackageJson,
     hasCustom: boolean,
     optionalFiles: string[],
 ): Record<string, unknown> {

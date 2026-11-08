@@ -1,4 +1,4 @@
-import { readExtensionPackageJson, writeExtensionPackageJson } from './extensionHelper.mts';
+import { readExtensionPackageJson, writeExtensionPackageJson } from './packageJson.mts';
 
 /**
  * Turn an extension's pre-release mode on or off: `vsce.preRelease` in its `package.json`.

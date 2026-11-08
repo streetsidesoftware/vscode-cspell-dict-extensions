@@ -10,7 +10,7 @@ import {
     languageOf,
     mostSpecificLocale,
     nativeLanguageName,
-} from '../locales.mts';
+} from '../helpers/index.mts';
 import { normalizeName, toFriendlyName } from './names.mts';
 import type { Prompter } from './prompt.mts';
 

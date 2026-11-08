@@ -17,10 +17,9 @@ import type { Choice, Prompter } from './create/prompt.mts';
 import { findDrift } from './drift.mts';
 import { addCommandSet, readConfig, removeCommands, setFields, writeConfig } from './config/index.mts';
 import type { Fields } from './config/index.mts';
-import { pickExtension } from './pickExtension.mts';
-import type { Extension } from './pickExtension.mts';
+import { pickExtension, removeExtension } from './extension/index.mts';
+import type { Extension } from './extension/index.mts';
 import { factsText, readFacts } from './info.mts';
-import { removeExtension } from './removeExtension.mts';
 import { addSampleArticles, addSampleFiles, listSamples, removeSample } from './samples.mts';
 import { syncExtensions } from './syncExtensions.mts';
 

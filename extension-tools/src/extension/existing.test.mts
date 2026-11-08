@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { after, before, describe, it } from 'node:test';
 
-import { findExistingExtensions } from './existingExtensions.mts';
+import { findExistingExtensions } from './existing.mts';
 
 describe('findExistingExtensions', () => {
     let dir = '';

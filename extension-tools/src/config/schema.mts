@@ -3,7 +3,7 @@
  */
 
 import type { ExtensionConfig } from '../extension-runtime-api.mts';
-import { readJson } from '../repo.mts';
+import { readJson } from '../helpers/index.mts';
 
 /** The runtime's schema of `extension.config.json`, relative to the repository root. */
 const schemaPath = 'extension-runtime/extension.config.schema.json';

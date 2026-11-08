@@ -2,40 +2,15 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 /*
- * Only `node:` modules here: `api-node-only.mts` exports from it.
+ * Only `node:` modules here: workflows load it before `npm ci`.
  */
 
-export const repoRoot: string = path.resolve(import.meta.dirname, '../..');
+export const repoRoot: string = path.resolve(import.meta.dirname, '../../..');
 export const extensionsDir: string = path.join(repoRoot, 'extensions');
-const runtimePackageJson = 'extension-runtime/package.json';
-
-/**
- * The repo paths of the extensions: the directories in `extensions/` that have a `package.json`, sorted.
- *
- * A repo path is relative to the repository root and always uses `/`, e.g. `extensions/swedish`. It works as a file
- * path from the root, and as a path in a URL of the repository.
- */
-export async function listExtensionRepoPaths(): Promise<string[]> {
-    const repoPaths: string[] = [];
-    for await (const pkgFile of fs.glob('*/package.json', { cwd: extensionsDir })) {
-        repoPaths.push(`extensions/${path.dirname(pkgFile)}`);
-    }
-    return repoPaths.sort();
-}
 
 /** An extension's directory as a repo path, e.g. `extensions/swedish`. */
 export function extensionRepoPath(extensionDir: string): string {
     return `extensions/${path.basename(extensionDir)}`;
-}
-
-/**
- * The `engines.vscode` of the runtime: the VS Code version its code needs, which every extension gets.
- */
-export async function readVscodeEngine(): Promise<string> {
-    const pkg = await readJson<{ engines?: { vscode?: string } }>(runtimePackageJson);
-    const vscodeEngine = pkg.engines?.vscode;
-    if (!vscodeEngine) throw new Error(`${runtimePackageJson}: "engines.vscode" is missing.`);
-    return vscodeEngine;
 }
 
 /**

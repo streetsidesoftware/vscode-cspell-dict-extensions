@@ -9,12 +9,11 @@ import { Command, Option } from 'commander';
 
 import { fetchCSpellPackages } from '../cspellPackages.mts';
 import type { CSpellPackage } from '../cspellPackages.mts';
-import { findExistingExtensions } from '../existingExtensions.mts';
-import { extensionsDir, repoRoot } from '../repo.mts';
+import { findExistingExtensions } from '../extension/index.mts';
+import { extensionsDir, languageOf, repoRoot } from '../helpers/index.mts';
 import { syncExtensions } from '../syncExtensions.mts';
 import { fetchArticle } from '../wikipedia.mts';
 import { npm } from './exec.mts';
-import { languageOf } from '../locales.mts';
 import { inquirerPrompter, noPrompter } from './prompt.mts';
 import type { Prompter } from './prompt.mts';
 import { askQuestions, defaultLicense, kinds } from './questions.mts';
