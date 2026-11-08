@@ -30,7 +30,8 @@ import { readImports, readSources, splitList } from './dictionaries.mts';
 import { withSharedFields } from './extensionHelper.mts';
 import type { PackageJson } from './extensionHelper.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
-import { configFileName, readConfig, writeConfig } from './extensionConfig.mts';
+import { configFileName } from './configFile.mts';
+import { readConfig, writeConfig } from './extensionConfig.mts';
 import { format, injectProblems } from './format.mts';
 import { exists, extensionRepoPath, readJson, writeIfChanged } from './repo.mts';
 

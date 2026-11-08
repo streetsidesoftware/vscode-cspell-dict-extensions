@@ -8,7 +8,8 @@ import { findDrift } from './drift.mts';
 import { readExtensionConfigValidator } from './extensionSchema.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { extensionsDir, listExtensionRepoPaths, readVscodeEngine } from './repo.mts';
-import { configFileName, hasConfig, readConfig } from './extensionConfig.mts';
+import { configFileName, hasConfig } from './configFile.mts';
+import { readConfig } from './extensionConfig.mts';
 import { syncExtension, syncPackageJson } from './syncExtension.mts';
 import type { FileChange } from './syncExtension.mts';
 

@@ -4,7 +4,7 @@ import path from 'node:path';
 import type { IPackageOptions } from '@vscode/vsce';
 
 import type { ExtensionKind } from '../../extension-runtime/api.ts';
-import { hasConfig, readConfig } from './extensionConfig.mts';
+import { hasConfig, readConfigJson } from './configFile.mts';
 import { readJson, repoRoot } from './repo.mts';
 
 const repositoryUrl = new URL('https://github.com/streetsidesoftware/vscode-cspell-dict-extensions');
@@ -59,7 +59,8 @@ export async function getExtensionInfo(repoPath: string): Promise<ExtensionInfo>
  */
 async function readExtensionKind(repoPath: string): Promise<ExtensionKind | undefined> {
     if (!(await hasConfig(repoPath))) return undefined;
-    return (await readConfig(repoPath)).kind;
+    // Unchecked: workflows read it before `npm ci`, without the schema checker.
+    return ((await readConfigJson(repoPath)) as { kind: ExtensionKind }).kind;
 }
 
 export interface PackageJson {

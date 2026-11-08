@@ -1,5 +1,7 @@
 /**
- * `extension.config.json`: every read and write of it goes through here.
+ * An extension's config, `extension.config.json`: checked against the schema, with its locales as BCP 47 tags, and
+ * formatted. The tools read and write it through here. The file itself is read and written by `configFile.mts`, which
+ * code that runs before `npm ci` reads directly.
  */
 
 import path from 'node:path';
@@ -9,9 +11,8 @@ import { canonicalLocale } from './create/locales.mts';
 import { readExtensionConfigValidator } from './extensionSchema.mts';
 import type { ExtensionConfigValidator } from './extensionSchema.mts';
 import { format } from './format.mts';
-import { exists, extensionRepoPath, extensionsDir, listExtensionRepoPaths, readJson, writeIfChanged } from './repo.mts';
-
-export const configFileName = 'extension.config.json';
+import { configFileName, hasConfig, readConfigJson, writeConfigText } from './configFile.mts';
+import { extensionRepoPath, extensionsDir, listExtensionRepoPaths } from './repo.mts';
 
 /** An extension in `extensions/`, picked by its folder. */
 export interface Extension {
@@ -45,17 +46,14 @@ function folderOf(cwd: string): string | undefined {
     return relative.split(path.sep)[0];
 }
 
-/** Whether the extension has an `extension.config.json`. One maintained by hand has none. */
-export async function hasConfig(extensionDir: string): Promise<boolean> {
-    return exists(path.join(extensionDir, configFileName));
-}
-
 /** Read an extension's `extension.config.json`, checked against the schema, with its locales as BCP 47 tags. */
 export async function readConfig(extensionDir: string, validate?: ExtensionConfigValidator): Promise<ExtensionConfig> {
-    const file = path.join(extensionDir, configFileName);
     const repoFile = `${extensionRepoPath(extensionDir)}/${configFileName}`;
-    if (!(await exists(file))) throw new Error(`${repoFile} not found: the extension is maintained by hand.`);
-    return canonicalConfig((validate ?? (await readExtensionConfigValidator()))(await readJson(file), repoFile));
+    if (!(await hasConfig(extensionDir)))
+        throw new Error(`${repoFile} not found: the extension is maintained by hand.`);
+    return canonicalConfig(
+        (validate ?? (await readExtensionConfigValidator()))(await readConfigJson(extensionDir), repoFile),
+    );
 }
 
 /**
@@ -74,7 +72,7 @@ export async function writeConfig(
         `${extensionRepoPath(extensionDir)}/${configFileName}`,
     );
     const text = await format(file, JSON.stringify(canonicalConfig(config), null, 4) + '\n');
-    return writeIfChanged(file, text, options.check);
+    return writeConfigText(extensionDir, text, options.check);
 }
 
 /**
