@@ -1,0 +1,48 @@
+{
+    "$schema": "../../extension-runtime/extension.config.schema.json",
+    "name": "norwegian-nynorsk",
+    "kind": "language",
+    "friendlyName": "Norwegian Nynorsk",
+    "displayName": "Norwegian Nynorsk - Code Spell Checker",
+    "description": "Adds Norwegian Nynorsk (norsk nynorsk) spell checking to Code Spell Checker.",
+    "nativeName": "norsk nynorsk",
+    "locale": "nn-NO",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-nn-no/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "id": "cSpellExt_norwegian-nynorsk.enable",
+            "title": "Enable Norwegian Nynorsk Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "nn-NO",
+            "scope": "global"
+        },
+        {
+            "id": "cSpellExt_norwegian-nynorsk.disable",
+            "title": "Disable Norwegian Nynorsk Spell Checker Dictionary",
+            "action": "disable",
+            "toggle": "locale",
+            "value": "nn,nn-NO",
+            "scope": "global"
+        },
+        {
+            "id": "cSpellExt_norwegian-nynorsk.enableWorkspace",
+            "title": "Enable Norwegian Nynorsk Spell Checker Dictionary in Workspace",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "nn-NO",
+            "scope": "workspace"
+        },
+        {
+            "id": "cSpellExt_norwegian-nynorsk.disableWorkspace",
+            "title": "Disable Norwegian Nynorsk Spell Checker Dictionary in Workspace",
+            "action": "disable",
+            "toggle": "locale",
+            "value": "nn,nn-NO",
+            "scope": "workspace"
+        }
+    ]
+}

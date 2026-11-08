@@ -1,0 +1,16 @@
+[
+    {
+        "Dictionary": "`nn-no`",
+        "enabled": "conditional",
+        "locale": "`nn`, `nn-NO`",
+        "languageId": "",
+        "glob": ""
+    },
+    {
+        "Dictionary": "`nn-no-alt`",
+        "enabled": "no",
+        "locale": "",
+        "languageId": "",
+        "glob": ""
+    }
+]
