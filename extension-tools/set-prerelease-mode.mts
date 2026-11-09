@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Turn an extension's pre-release mode on or off.
+ * Enable or disable an extension's pre-release mode.
  *
  * Usage: `set-prerelease-mode.mts <folder> <true|false>`
  *

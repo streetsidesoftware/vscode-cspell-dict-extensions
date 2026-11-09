@@ -12,15 +12,15 @@
 export type CSpellExtPath = 'static/cspell-ext.json';
 export const cspellExtPath: CSpellExtPath = 'static/cspell-ext.json';
 
-/** Turn the toggle on or off. */
+/** Enable or disable the toggle. */
 export type Action = 'enable' | 'disable';
 
 /** Where the setting is written. */
 export type Scope = 'global' | 'workspace';
 
-/** A command that turns a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`) on or off. */
+/** A command that enables or disables a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`). */
 export interface CommandConfig {
-    /** Turn the toggle on or off. */
+    /** Enable or disable the toggle. */
     action: Action;
     /** What the command changes: a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`). */
     toggle: 'locale' | 'dictionary';

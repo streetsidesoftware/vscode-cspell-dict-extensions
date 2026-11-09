@@ -70,7 +70,7 @@ describe('addCommandSet', () => {
         const config = addCommandSet(serbian, 'locale', 'sr');
         assert.throws(
             () => addCommandSet(config, 'locale', 'sr'),
-            /cSpellExt_serbian.enable already turns locale "sr"/,
+            /cSpellExt_serbian.enable already enables or disables locale "sr"/,
         );
         assert.throws(() => addCommandSet(serbian, 'locale', 'sr,sr-Latn'), /give one locale/);
     });

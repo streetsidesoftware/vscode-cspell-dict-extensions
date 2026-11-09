@@ -26,9 +26,9 @@ release PR publishes the first release.
 ## Pre-release mode
 
 While an extension's `package.json` has `"vsce": { "preRelease": true }`, every release of it is published as a
-pre-release. The " 👀 Set Prerelease" workflow opens a PR that turns the mode on or off for one extension. Turning it on
-is a `chore:` commit, so it releases nothing. The extension's next `feat:` or `fix:` release is then a pre-release.
-Turning it off is a `fix:` commit, so the next release is a stable version above the pre-releases.
+pre-release. The " 👀 Set Prerelease" workflow opens a PR that enables or disables the mode for one extension. Enabling
+it is a `chore:` commit, so it releases nothing. The extension's next `feat:` or `fix:` release is then a pre-release.
+Disabling it is a `fix:` commit, so the next release is a stable version above the pre-releases.
 
 ## Releasing a runtime change
 

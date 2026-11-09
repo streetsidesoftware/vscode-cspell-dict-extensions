@@ -38,7 +38,7 @@ export function packagesTable(listed: ListedPackage[]): string {
         pkg.packageName,
         pkg.name,
         pkg.kind,
-        // The list doesn't say whether a dictionary without file types is on for every file or off until turned on.
+        // The list doesn't say whether a dictionary without file types is enabled for every file or disabled until enabled.
         (pkg.locales.length ? pkg.locales : pkg.fileTypes).join(', '),
         pkg.extension,
     ]);

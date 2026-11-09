@@ -64,7 +64,7 @@ describe('findDrift', () => {
         assert.deepEqual(await findDrift(dir, config('qq', commands, cspell)), []);
     });
 
-    it("ignores a dictionary definition's locale, which turns nothing on", async () => {
+    it("ignores a dictionary definition's locale, which enables nothing", async () => {
         const cspell = { dictionaryDefinitions: [{ name: 'own', path: './own.txt', locale: 'qq' }] };
         assert.deepEqual(await findDrift(dir, config('qq', [], cspell)), [
             '"locale" is "qq", but no language setting declares it.',
@@ -79,8 +79,8 @@ describe('findDrift', () => {
     it('reports a dictionary and locales no package has', async () => {
         const commands = [command('dictionary', 'gone'), command('locale', 'xx,qq')];
         assert.deepEqual(await findDrift(dir, config('zz', commands)), [
-            'cSpellExt_demo.gone turns "gone" on or off, but nothing defines that dictionary.',
-            'cSpellExt_demo.xx,qq turns locale "qq" on or off, but no language setting declares it.',
+            'cSpellExt_demo.gone enables or disables "gone", but nothing defines that dictionary.',
+            'cSpellExt_demo.xx,qq enables or disables locale "qq", but no language setting declares it.',
             '"locale" is "zz", but no language setting declares it.',
         ]);
     });

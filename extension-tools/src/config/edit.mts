@@ -7,7 +7,7 @@ import type { CommandConfig, ExtensionConfig } from '../extension-runtime-api.mt
 import { commandSet, idSuffix, localeSuffix } from './commandSets.mts';
 
 export interface CommandSetOptions {
-    /** Names what the commands turn on in the titles. */
+    /** Names what the commands enable in the titles. */
     label?: string | undefined;
     /** Added to the IDs after the action. */
     suffix?: string | undefined;
@@ -30,7 +30,7 @@ export function addCommandSet(
         throw new Error(`--locale ${value}: give one locale. A command for a list of locales is edited in the config.`);
     }
     const existing = config.commands.find((command) => command.toggle === toggle && command.value === value);
-    if (existing) throw new Error(`${existing.id} already turns ${toggle} "${value}" on or off.`);
+    if (existing) throw new Error(`${existing.id} already enables or disables ${toggle} "${value}".`);
     // IDs are unique per extension: only the extension's first commands get the plain IDs.
     const first = config.commands.length === 0;
     const label = options.label ?? (first ? config.friendlyName : defaultLabel(toggle, value));

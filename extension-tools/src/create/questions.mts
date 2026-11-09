@@ -269,7 +269,7 @@ async function askKind(packages: PackageKind[], options: Options, ctx: Context):
             {
                 name: 'Natural Language',
                 value: 'language',
-                description: `Turned on by adding its locale${localeList} to cSpell.language.`,
+                description: `Enabled by adding its locale${localeList} to cSpell.language.`,
             },
             {
                 name: 'Word List',

@@ -138,9 +138,9 @@ generator README lists them.
 
 ### 7. Read the README
 
-- **Do:** read `extensions/<name>/README.md`. The generator writes it complete, including when each dictionary is on.
-  Add only what users should know, such as where the words come from. Keep the `@@inject` markers and the commands
-  section. The sync fills those sections in.
+- **Do:** read `extensions/<name>/README.md`. The generator writes it complete, including when each dictionary is
+  enabled. Add only what users should know, such as where the words come from. Keep the `@@inject` markers and the
+  commands section. The sync fills those sections in.
 
 ### 8. Run every check
 
@@ -167,7 +167,7 @@ generator README lists them.
   commit message. Don't wait for the user; they fix the title or description on the PR. If the user's own instructions
   say to ask before pushing or opening a PR, follow those instead. The description says:
   - what the extension adds, and the packages it includes
-  - when each dictionary is on, from `static/dictionaries.json`
+  - when each dictionary is enabled, from `static/dictionaries.json`
   - the sample's source
   - the words on the sample's `words` and `ignore` lines
   - whether the VS Code test ran

@@ -100,7 +100,7 @@
             "properties": {
                 "action": {
                     "$ref": "#/definitions/Action",
-                    "description": "Turn the toggle on or off."
+                    "description": "Enable or disable the toggle."
                 },
                 "toggle": {
                     "type": "string",
@@ -151,7 +151,7 @@
                 "title"
             ],
             "additionalProperties": false,
-            "description": "A command that turns a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`) on or off."
+            "description": "A command that enables or disables a locale (`cSpell.language`) or a dictionary (`cSpell.dictionaries`)."
         },
         "Action": {
             "type": "string",
@@ -159,7 +159,7 @@
                 "enable",
                 "disable"
             ],
-            "description": "Turn the toggle on or off."
+            "description": "Enable or disable the toggle."
         },
         "Scope": {
             "type": "string",

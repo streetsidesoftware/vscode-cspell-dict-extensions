@@ -10,11 +10,11 @@ type Scope = CommandConfig['scope'];
 export const scopes: readonly Scope[] = ['global', 'workspace'];
 export const actions: readonly Action[] = ['enable', 'disable'];
 
-/** What a set of commands turns on and off. */
+/** What a set of commands enables and disables. */
 export interface Target {
     /** The extension's `name`, which starts the ID. */
     name: string;
-    /** Names what the commands turn on in the title, e.g. `Serbian (Cyrillic)`. */
+    /** Names what the commands enable in the title, e.g. `Serbian (Cyrillic)`. */
     label: string;
     /** Added to the ID after the action, e.g. `Cyrl`. */
     suffix: string;
