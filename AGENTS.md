@@ -25,7 +25,7 @@ npm run create:extension -- <name> --package <@cspell/package> --yes   # create 
 npm run check:extension -- <name>     # an extension's build, sample, extension-tools check, Prettier and spell checks; --vscode adds the VS Code test
 npm run extension-tools -- info -e <folder>   # one extension's packages, commands and samples; --json for JSON
 npm run extension-tools -- --help     # add/remove command, add/remove sample, set, remove extension
-npm run lint                          # cspell over the repo
+npm run lint                          # cspell and the wording check (scripts/check-wording.mts) over the repo
 npm run check-types                   # type-check test-runner, extension-runtime and extension-tools
 npm run lint:code                     # oxlint, type-aware; warnings fail
 npm run prettier:lint                 # Prettier check; prettier:fix writes
