@@ -1,0 +1,26 @@
+[
+    {
+        "Command": "Enable Scottish Gaelic Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "gd",
+        "Scope": "global"
+    },
+    {
+        "Command": "Disable Scottish Gaelic Spell Checker Dictionary",
+        "What": "locale",
+        "Value": "gd",
+        "Scope": "global"
+    },
+    {
+        "Command": "Enable Scottish Gaelic Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "gd",
+        "Scope": "workspace"
+    },
+    {
+        "Command": "Disable Scottish Gaelic Spell Checker Dictionary in Workspace",
+        "What": "locale",
+        "Value": "gd",
+        "Scope": "workspace"
+    }
+]
