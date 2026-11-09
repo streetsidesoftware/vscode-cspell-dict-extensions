@@ -1,0 +1,48 @@
+{
+    "$schema": "../../extension-runtime/extension.config.schema.json",
+    "name": "bengali",
+    "kind": "language",
+    "friendlyName": "Bengali",
+    "displayName": "Bengali - Code Spell Checker",
+    "description": "Adds Bengali (বাংলা) spell checking to Code Spell Checker.",
+    "nativeName": "বাংলা",
+    "locale": "bn",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-bn/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "id": "cSpellExt_bengali.enable",
+            "title": "Enable Bengali Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "bn",
+            "scope": "global"
+        },
+        {
+            "id": "cSpellExt_bengali.disable",
+            "title": "Disable Bengali Spell Checker Dictionary",
+            "action": "disable",
+            "toggle": "locale",
+            "value": "bn",
+            "scope": "global"
+        },
+        {
+            "id": "cSpellExt_bengali.enableWorkspace",
+            "title": "Enable Bengali Spell Checker Dictionary in Workspace",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "bn",
+            "scope": "workspace"
+        },
+        {
+            "id": "cSpellExt_bengali.disableWorkspace",
+            "title": "Disable Bengali Spell Checker Dictionary in Workspace",
+            "action": "disable",
+            "toggle": "locale",
+            "value": "bn",
+            "scope": "workspace"
+        }
+    ]
+}

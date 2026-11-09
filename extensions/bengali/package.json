@@ -1,0 +1,102 @@
+{
+  "name": "code-spell-checker-bengali",
+  "displayName": "Bengali - Code Spell Checker",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Adds Bengali (বাংলা) spell checking to Code Spell Checker.",
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "Bengali",
+    "VS Code Extension",
+    "Spelling Checker",
+    "dictionary",
+    "spelling"
+  ],
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/vscode-cspell-dict-extensions",
+    "directory": "extensions/bengali"
+  },
+  "license": "GPL-3.0-or-later",
+  "qna": "marketplace",
+  "author": "Street Side Software <support@streetsidesoftware.nl>",
+  "contributors": [],
+  "publisher": "streetsidesoftware",
+  "type": "module",
+  "main": "./extension.js",
+  "files": [
+    "LICENSE",
+    "CHANGELOG.md",
+    "extension.js",
+    "images/SpellCheck.png",
+    "static/cspell-ext.json",
+    "node_modules/**"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "clean": "node ../../scripts/clean.mts",
+    "clean-build": "npm run clean && npm run build",
+    "pack-extension": "vsce package",
+    "publish-extension": "vsce publish",
+    "test": "npm run test:cspell && npm run test:vscode",
+    "test:cspell": "cspell -c static/cspell-ext.json samples",
+    "test:vscode": "node ../../test-runner/bin.mjs . --sample samples/seattle.md",
+    "vscode:prepublish": "npm run build",
+    "watch": "tsdown --watch"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "cSpellExt_bengali.enable",
+        "title": "Enable Bengali Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_bengali.disable",
+        "title": "Disable Bengali Spell Checker Dictionary"
+      },
+      {
+        "command": "cSpellExt_bengali.enableWorkspace",
+        "title": "Enable Bengali Spell Checker Dictionary in Workspace"
+      },
+      {
+        "command": "cSpellExt_bengali.disableWorkspace",
+        "title": "Disable Bengali Spell Checker Dictionary in Workspace"
+      }
+    ]
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "dependencies": {
+    "@cspell/dict-bn": "^1.0.6"
+  },
+  "extensionDependencies": [
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "icon": "images/SpellCheck.png",
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "sponsor": {
+    "url": "https://github.com/sponsors/streetsidesoftware"
+  },
+  "vsce": {
+    "baseContentUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/bengali/",
+    "baseImagesUrl": "https://raw.githubusercontent.com/streetsidesoftware/vscode-cspell-dict-extensions/refs/heads/main/extensions/bengali/"
+  }
+}
