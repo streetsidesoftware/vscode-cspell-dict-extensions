@@ -1,0 +1,7 @@
+{
+    "import": ["@cspell/dict-th-th/cspell-ext.json"],
+    "engines": {
+        "cspell": ">=10.3.5",
+        "code-spell-checker": ">=4.9.6"
+    }
+}

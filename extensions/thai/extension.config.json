@@ -1,0 +1,48 @@
+{
+    "$schema": "../../extension-runtime/extension.config.schema.json",
+    "name": "thai",
+    "kind": "language",
+    "friendlyName": "Thai",
+    "displayName": "Thai - Code Spell Checker",
+    "description": "Adds Thai (ไทย) spell checking to Code Spell Checker.",
+    "nativeName": "ไทย",
+    "locale": "th-TH",
+    "sample": "samples/seattle.md",
+    "cspell": {
+        "import": ["@cspell/dict-th-th/cspell-ext.json"]
+    },
+    "commands": [
+        {
+            "id": "cSpellExt_thai.enable",
+            "title": "Enable Thai Spell Checker Dictionary",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "th-TH",
+            "scope": "global"
+        },
+        {
+            "id": "cSpellExt_thai.disable",
+            "title": "Disable Thai Spell Checker Dictionary",
+            "action": "disable",
+            "toggle": "locale",
+            "value": "th,th-TH",
+            "scope": "global"
+        },
+        {
+            "id": "cSpellExt_thai.enableWorkspace",
+            "title": "Enable Thai Spell Checker Dictionary in Workspace",
+            "action": "enable",
+            "toggle": "locale",
+            "value": "th-TH",
+            "scope": "workspace"
+        },
+        {
+            "id": "cSpellExt_thai.disableWorkspace",
+            "title": "Disable Thai Spell Checker Dictionary in Workspace",
+            "action": "disable",
+            "toggle": "locale",
+            "value": "th,th-TH",
+            "scope": "workspace"
+        }
+    ]
+}
