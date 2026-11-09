@@ -40,7 +40,7 @@ export async function findDrift(extensionDir: string, config: ExtensionConfig): 
     return found;
 }
 
-/** The locales of a `cspell-ext.json`'s language settings: the only setting that turns a dictionary on by locale. */
+/** The locales of a `cspell-ext.json`'s language settings: the only setting that enables a dictionary by locale. */
 function declaredLocales(ext: CSpellSettings): string[] {
     return (ext.languageSettings ?? []).flatMap((setting) => [setting.locale ?? []].flat().flatMap(localeList));
 }
