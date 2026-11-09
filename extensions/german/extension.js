@@ -101,7 +101,7 @@ var extension_config_default = {
 			"notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
 		}
 	],
-	notes: "Disable removes only `de-DE`, not `de`: `de` is shared with Austrian and Swiss German, so a user who added `de` keeps this dictionary on."
+	notes: "Disable removes only `de-DE`, not `de`: `de` is shared with Austrian and Swiss German, so a user who added `de` keeps this dictionary enabled."
 };
 // ../../extension-runtime/src/noCustom.ts
 var noCustom_exports = /* @__PURE__ */ __exportAll({ activate: () => void 0 });
