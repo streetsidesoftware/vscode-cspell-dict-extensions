@@ -1,6 +1,6 @@
 /**
  * The cspell config an extension ships, read by cspell-lib: the config's own `cspell` and every file it imports, with
- * their imports. The dictionaries and the settings that turn them on.
+ * their imports. The dictionaries and the settings that enable them.
  */
 
 import path from 'node:path';

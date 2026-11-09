@@ -31,8 +31,8 @@ The tools that create and maintain the extensions in [`extensions/`](../extensio
   Each change is checked against the schema and against the installed packages, as `check` does, then written to
   `extension.config.json` and followed by the sync.
 
-- The `set-prerelease` workflow: [`set-prerelease-mode.mts`](./set-prerelease-mode.mts), which turns an extension's
-  pre-release mode on or off. It uses only `node:` modules, because the workflow runs it before `npm ci`.
+- The `set-prerelease` workflow: [`set-prerelease-mode.mts`](./set-prerelease-mode.mts), which enables or disables an
+  extension's pre-release mode. It uses only `node:` modules, because the workflow runs it before `npm ci`.
 
 ## API
 

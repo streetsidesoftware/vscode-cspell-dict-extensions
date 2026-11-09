@@ -10,7 +10,7 @@ import { readSources } from './dictionaries.mts';
 /**
  * The commands for a dictionary nothing defines, and the locales no language setting declares: in a command and in
  * `locale`. "Nothing" is the installed packages and the config's own `cspell`. cspell's built-in dictionaries don't
- * count: an extension turns on the dictionaries it brings.
+ * count: an extension enables the dictionaries it brings.
  * @returns one message for each.
  */
 export async function findDrift(extensionDir: string, config: ExtensionConfig): Promise<string[]> {
@@ -22,11 +22,13 @@ export async function findDrift(extensionDir: string, config: ExtensionConfig): 
     const found: string[] = [];
     for (const command of config.commands) {
         if (command.toggle === 'dictionary' && !dictionaries.has(command.value)) {
-            found.push(`${command.id} turns "${command.value}" on or off, but nothing defines that dictionary.`);
+            found.push(`${command.id} enables or disables "${command.value}", but nothing defines that dictionary.`);
         }
         if (command.toggle === 'locale') {
             for (const locale of undeclared(command.value)) {
-                found.push(`${command.id} turns locale "${locale}" on or off, but no language setting declares it.`);
+                found.push(
+                    `${command.id} enables or disables locale "${locale}", but no language setting declares it.`,
+                );
             }
         }
     }
@@ -38,7 +40,7 @@ export async function findDrift(extensionDir: string, config: ExtensionConfig): 
     return found;
 }
 
-/** The locales of a `cspell-ext.json`'s language settings: the only setting that turns a dictionary on by locale. */
+/** The locales of a `cspell-ext.json`'s language settings: the only setting that enables a dictionary by locale. */
 function declaredLocales(ext: CSpellSettings): string[] {
     return (ext.languageSettings ?? []).flatMap((setting) => [setting.locale ?? []].flat().flatMap(localeList));
 }

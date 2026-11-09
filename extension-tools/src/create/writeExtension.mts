@@ -271,7 +271,7 @@ export function readme(answers: Answers): string {
                 paragraph(answers.description),
                 heading(2, 'Installation'),
                 paragraph(
-                    'The parser is on while this extension is enabled. To turn it off, use ',
+                    'The parser is enabled while this extension is enabled. To disable it, use ',
                     strong('Disable'),
                     ' or ',
                     strong('Disable (Workspace)'),

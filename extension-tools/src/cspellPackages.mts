@@ -18,7 +18,7 @@ export interface CSpellPackage {
     name: string;
     description: string;
     kind: PackageKind;
-    /** The locales that turn a natural language on, i.e. `['th', 'th-th']`. */
+    /** The locales that enable a natural language, i.e. `['th', 'th-th']`. */
     locales: string[];
     /** The file types it is for. Empty when it is for every file type. */
     fileTypes: string[];

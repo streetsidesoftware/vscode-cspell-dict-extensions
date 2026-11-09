@@ -67,6 +67,8 @@ their answers, such as the generator's.
 - **Users**, not "people", for whoever installs the extensions.
 - An extension **includes** the package it adds. Not "wraps" or "bundles".
 - **Natural language** in prose, not "language". The `--kind` value stays `language`.
+- **Enable** and **disable**, not "turn on" and "turn off". **Enabled** and **disabled**, not "on" and "off". This holds
+  for dictionaries, natural languages, parsers, settings and modes alike.
 - No "sync" in docs for contributors. Say what happens, such as "the generator writes it". Docs for developers may say
   "sync".
 - `--yes` and other options without questions are for agents and experts. Guides for contributors use the questions.

@@ -1,8 +1,8 @@
 name: " 👀 Set Prerelease"
 
-# Opens a PR that turns an extension's pre-release mode on or off.
-# While it is on, every release of the extension is published as a pre-release.
-# Turning it off is a `fix:` commit, so the next release is a stable version above the pre-releases.
+# Opens a PR that enables or disables an extension's pre-release mode.
+# While it is enabled, every release of the extension is published as a pre-release.
+# Disabling it is a `fix:` commit, so the next release is a stable version above the pre-releases.
 # Modeled on `set-prerelease.yml` in streetsidesoftware/vscode-spell-checker.
 
 on:

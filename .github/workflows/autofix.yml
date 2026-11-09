@@ -3,7 +3,7 @@ name: autofix.ci
 # Fix what can be fixed on a pull request, and push it to the pull request with autofix.ci: each
 # extension's `extension.js`, the runtime's config schema, Prettier's formatting and oxlint's fixes. A
 # change that alters an extension's `extension.js` then releases that extension. The `no-autofix` label
-# turns it off.
+# disables it.
 
 on:
   pull_request:
