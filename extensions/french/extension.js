@@ -57,7 +57,7 @@ var extension_config_default = {
 			"scope": "workspace"
 		}
 	],
-	notes: "Enable uses `fr-FR`. French Réforme 90 declares `fr,fr-fr,fr-90`, so `fr-FR` also turns it on when it is installed; no locale is exclusive to classic French. Disable removes only `fr-FR`, not `fr`: `fr` is shared with other French variants and French Réforme 90, so a user who added `fr` keeps this dictionary on."
+	notes: "Enable uses `fr-FR`. French Réforme 90 declares `fr,fr-fr,fr-90`, so `fr-FR` also enables it when it is installed; no locale is exclusive to classic French. Disable removes only `fr-FR`, not `fr`: `fr` is shared with other French variants and French Réforme 90, so a user who added `fr` keeps this dictionary enabled."
 };
 // ../../extension-runtime/src/noCustom.ts
 var noCustom_exports = /* @__PURE__ */ __exportAll({ activate: () => void 0 });

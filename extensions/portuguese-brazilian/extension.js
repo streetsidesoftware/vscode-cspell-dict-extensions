@@ -101,7 +101,7 @@ var extension_config_default = {
 			"notes": "Original command ID, kept registered so existing keybindings and tasks keep working."
 		}
 	],
-	notes: "Disable removes only `pt-BR`, not `pt`: `pt` is shared with European Portuguese, so a user who added `pt` keeps this dictionary on."
+	notes: "Disable removes only `pt-BR`, not `pt`: `pt` is shared with European Portuguese, so a user who added `pt` keeps this dictionary enabled."
 };
 // ../../extension-runtime/src/noCustom.ts
 var noCustom_exports = /* @__PURE__ */ __exportAll({ activate: () => void 0 });

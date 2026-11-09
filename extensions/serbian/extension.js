@@ -89,7 +89,7 @@ var extension_config_default = {
 			"scope": "workspace"
 		}
 	],
-	notes: "Disable Cyrillic and Disable Latin remove only `sr-Cyrl` or `sr-Latn`, not `sr`: `sr` turns on both scripts, and the plain Disable commands remove all three."
+	notes: "Disable Cyrillic and Disable Latin remove only `sr-Cyrl` or `sr-Latn`, not `sr`: `sr` enables both scripts, and the plain Disable commands remove all three."
 };
 // ../../extension-runtime/src/noCustom.ts
 var noCustom_exports = /* @__PURE__ */ __exportAll({ activate: () => void 0 });

@@ -57,7 +57,7 @@ var extension_config_default = {
 			"scope": "workspace"
 		}
 	],
-	notes: "Disable removes only `de-CH`, not `de`: `de` is shared with German, so a user who added `de` keeps this dictionary on."
+	notes: "Disable removes only `de-CH`, not `de`: `de` is shared with German, so a user who added `de` keeps this dictionary enabled."
 };
 // ../../extension-runtime/src/noCustom.ts
 var noCustom_exports = /* @__PURE__ */ __exportAll({ activate: () => void 0 });
