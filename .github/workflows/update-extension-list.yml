@@ -68,7 +68,7 @@ jobs:
             README.md
             extension-runtime/extension.config.schema.json
 
-      # Uses the automation app because GITHUB_TOKEN cannot push changes to `.github/workflows/`.
+      # `gen:workflow` changes files in `.github/workflows/`. Only a GitHub App with the Workflows permission can commit them; GITHUB_TOKEN cannot.
       - name: Create PR
         uses: streetsidesoftware/actions/.github/actions/pr@v1
         with:
@@ -77,5 +77,5 @@ jobs:
           base: main
           title: "ci: Update README, Extension Lists and Config Schema"
           body: ${{ steps.pr-body.outputs.body }}
-          app_id: ${{ secrets.AUTOMATION_APP_ID }}
-          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+          app_id: ${{ secrets.WORKFLOW_APP_CLIENT_ID }}
+          app_private_key: ${{ secrets.WORKFLOW_APP_PRIVATE_KEY }}
