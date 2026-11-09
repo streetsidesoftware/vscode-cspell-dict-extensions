@@ -62,6 +62,8 @@ describe('isChecked', () => {
         ${'static/generated/dictionaries.md'}          | ${false}
         ${'extensions/french/extension.js'}            | ${false}
         ${'extensions/english/samples/seattle.md'}     | ${false}
+        ${'scripts/lib/wording.test.mts'}              | ${false}
+        ${'scripts/lib/repo.mts'}                      | ${true}
     `('$file: $checked', ({ file, checked }: { file: string; checked: boolean }) => {
         assert.equal(isChecked(file), checked);
     });

@@ -34,8 +34,10 @@ export const knownExceptions: readonly KnownException[] = [
  * - changelogs, which are history
  * - files built from files the check reads: lock files, `static/generated/` and each extension's `extension.js`
  * - the samples, which hold Wikipedia text
+ * - the check's own files, whose rules and tests are made of the phrases
  */
 const skipped: readonly RegExp[] = [
+    /^scripts\/(check-wording|lib\/wording(\.test)?)\.mts$/,
     /(^|\/)(LICENSE|COPYING)[^/]*$/,
     /(^|\/)CHANGELOG\.md$/,
     /(^|\/)package-lock\.json$/,
