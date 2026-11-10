@@ -37,6 +37,11 @@ describe('extensionsToTest', () => {
         assert.deepEqual(extensionsToTest(changed, all), { extensions: [], shared: false });
     });
 
+    it('skips the release-please config and the workspace', () => {
+        const changed = ['release-please-config.json', 'dict-extensions.code-workspace'];
+        assert.deepEqual(extensionsToTest(changed, all), { extensions: [], shared: false });
+    });
+
     testEach`
         file
         ${'extension-runtime/src/entry.ts'}
