@@ -10,6 +10,7 @@ export interface ExtensionsToTest {
 }
 
 const untestedFiles = new Set(['release-please-config.json', 'dict-extensions.code-workspace']);
+const untestedFolders = new Set(['.claude', '.vscode', 'docs', 'images', 'static']);
 
 /**
  * Which extensions a change needs to test.
@@ -20,6 +21,8 @@ const untestedFiles = new Set(['release-please-config.json', 'dict-extensions.co
  * - A file in `extension-tools/` tests nothing: the extensions don't use it, and it has its own workflow. A change to
  *   the sync reaches the extensions in the sync's own commit after merge, which tests them.
  * - The release-please config and the VS Code workspace test nothing: only release-please and VS Code read them.
+ * - A file in `.claude/`, `.vscode/`, `docs/`, `images/` or `static/` tests nothing: no build or test reads these
+ *   folders. A change in `static/` reaches the extensions in the sync's own commit after merge, which tests them.
  * - Any other file tests every extension.
  * @param changedFiles - the repo paths of the changed files.
  * @param extensionRepoPaths - the repo paths of all extensions, from `listExtensionRepoPaths`.
@@ -36,6 +39,7 @@ export function extensionsToTest(changedFiles: string[], extensionRepoPaths: str
         if (file.endsWith('.md') && !file.startsWith('extensions/')) continue;
         if (file.startsWith('extension-tools/')) continue;
         if (untestedFiles.has(file)) continue;
+        if (untestedFolders.has(file.split('/')[0])) continue;
         return { extensions: extensionRepoPaths, shared: true };
     }
     return { extensions: extensionRepoPaths.filter((repoPath) => extensions.has(repoPath)), shared: false };
