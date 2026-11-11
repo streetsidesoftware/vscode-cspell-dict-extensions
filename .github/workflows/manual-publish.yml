@@ -28,6 +28,7 @@ on:
           - extensions/azerbaijani
           - extensions/basque
           - extensions/belarusian
+          - extensions/bengali
           - extensions/british-english
           - extensions/british-english-ise
           - extensions/bulgarian
@@ -58,6 +59,7 @@ on:
           - extensions/medical-terms
           - extensions/mongolian
           - extensions/norwegian-bokmal
+          - extensions/norwegian-nynorsk
           - extensions/persian
           - extensions/polish
           - extensions/portuguese
@@ -65,12 +67,14 @@ on:
           - extensions/romanian
           - extensions/russian
           - extensions/scientific-terms
+          - extensions/scottish-gaelic
           - extensions/serbian
           - extensions/slovak
           - extensions/slovenian
           - extensions/spanish
           - extensions/swedish
           - extensions/swiss-german
+          - extensions/thai
           - extensions/timestamp-hover
           - extensions/turkish
           - extensions/ukrainian
