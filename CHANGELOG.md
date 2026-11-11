@@ -1,5 +1,20 @@
 # Changelog
 
+## [8.3.0](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@8.2.1...vscode-cspell-dict-extensions@8.3.0) (2026-11-11)
+
+
+### Features
+
+* add Bengali extension ([#1803](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1803)) ([0ac5df6](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/0ac5df604f8bf5ff1c46778c501bb51994358b36))
+* add Norwegian Nynorsk extension ([#1805](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1805)) ([3b694f7](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/3b694f7a8574ef828048b29004ac4851c352d9b1))
+* add Scottish Gaelic extension ([#1804](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1804)) ([6f14159](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/6f14159944b395d5746a7af7cbdf9f658864575d))
+* add Thai extension ([#1807](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1807)) ([5d5fada](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/5d5fada6f2a4576db2f477f400e9ab380fa5f637))
+
+
+### Updates and Bug Fixes
+
+* show the commands' locales as BCP 47 tags, such as de-AT ([#1796](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1796)) ([79c58f5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/79c58f5da6973c8962a48b6673c9c32aa5d46bd0))
+
 ## [8.2.1](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/vscode-cspell-dict-extensions@8.2.0...vscode-cspell-dict-extensions@8.2.1) (2026-11-08)
 
 

@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-australian-english" extension will be documented in this file.
 
+## [2.0.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-australian-english@2.0.2...code-spell-checker-australian-english@2.0.3) (2026-11-11)
+
+
+### Updates and Bug Fixes
+
+* show the commands' locales as BCP 47 tags, such as de-AT ([#1796](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1796)) ([79c58f5](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/79c58f5da6973c8962a48b6673c9c32aa5d46bd0))
+
 ## [2.0.2](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-australian-english@2.0.1...code-spell-checker-australian-english@2.0.2) (2026-11-08)
 
 

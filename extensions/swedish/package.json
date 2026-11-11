@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-swedish",
   "displayName": "Swedish - Code Spell Checker",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "private": true,
   "description": "Adds Swedish (svenska) spell checking to Code Spell Checker.",
   "categories": [
