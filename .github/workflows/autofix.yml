@@ -23,6 +23,7 @@ env:
 
 jobs:
   autofix:
+    if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
