@@ -1,7 +1,7 @@
 {
   "name": "code-spell-checker-scottish-gaelic",
   "displayName": "Scottish Gaelic - Code Spell Checker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "description": "Adds Scottish Gaelic (Gàidhlig) spell checking to Code Spell Checker.",
   "categories": [
