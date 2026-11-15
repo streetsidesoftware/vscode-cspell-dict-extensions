@@ -12,6 +12,7 @@
   Checker.
 - [Basque](../../extensions/basque#readme) - Adds Basque (euskara) spell checking to Code Spell Checker.
 - [Belarusian](../../extensions/belarusian#readme) - Adds Belarusian (беларуская) spell checking to Code Spell Checker.
+- [Bengali](../../extensions/bengali#readme) - Adds Bengali (বাংলা) spell checking to Code Spell Checker.
 - [British English](../../extensions/british-english#readme) - Adds British English spell checking to Code Spell
   Checker.
 - [British English](../../extensions/british-english-ise#readme) - Adds British English -ise spell checking to Code
@@ -44,6 +45,8 @@
 - [Mongolian](../../extensions/mongolian#readme) - Adds Mongolian (монгол) spell checking to Code Spell Checker.
 - [Norwegian Bokmål](../../extensions/norwegian-bokmal#readme) - Adds Norwegian Bokmål (norsk bokmål) spell checking to
   Code Spell Checker.
+- [Norwegian Nynorsk](../../extensions/norwegian-nynorsk#readme) - Adds Norwegian Nynorsk (norsk nynorsk) spell checking
+  to Code Spell Checker.
 - [Persian](../../extensions/persian#readme) - Adds Persian (فارسی) spell checking to Code Spell Checker.
 - [Polish](../../extensions/polish#readme) - Adds Polish (polski) spell checking to Code Spell Checker.
 - [Portuguese](../../extensions/portuguese#readme) - Adds Portuguese (português) spell checking to Code Spell Checker.
@@ -51,6 +54,8 @@
   brasileiro) spell checking to Code Spell Checker.
 - [Romanian](../../extensions/romanian#readme) - Adds Romanian (română) spell checking to Code Spell Checker.
 - [Russian](../../extensions/russian#readme) - Adds Russian (русский) spell checking to Code Spell Checker.
+- [Scottish Gaelic](../../extensions/scottish-gaelic#readme) - Adds Scottish Gaelic (Gàidhlig) spell checking to Code
+  Spell Checker.
 - [Serbian](../../extensions/serbian#readme) - Adds Serbian (српски) spell checking to Code Spell Checker.
 - [Slovak](../../extensions/slovak#readme) - Adds Slovak (slovenčina) spell checking to Code Spell Checker.
 - [Slovenian](../../extensions/slovenian#readme) - Adds Slovenian (slovenščina) spell checking to Code Spell Checker.
@@ -58,6 +63,7 @@
 - [Swedish](../../extensions/swedish#readme) - Adds Swedish (svenska) spell checking to Code Spell Checker.
 - [Swiss German](../../extensions/swiss-german#readme) - Adds Swiss German (Schweizer Hochdeutsch) spell checking to
   Code Spell Checker.
+- [Thai](../../extensions/thai#readme) - Adds Thai (ไทย) spell checking to Code Spell Checker.
 - [Turkish](../../extensions/turkish#readme) - Adds Turkish (Türkçe) spell checking to Code Spell Checker.
 - [Ukrainian](../../extensions/ukrainian#readme) - Adds Ukrainian (українська) spell checking to Code Spell Checker.
 - [Vietnamese](../../extensions/vietnamese#readme) - Adds Vietnamese (Tiếng Việt) spell checking to Code Spell Checker.

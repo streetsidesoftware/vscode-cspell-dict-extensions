@@ -31,6 +31,9 @@
             "path": "extensions/belarusian"
         },
         {
+            "path": "extensions/bengali"
+        },
+        {
             "path": "extensions/british-english"
         },
         {
@@ -121,6 +124,9 @@
             "path": "extensions/norwegian-bokmal"
         },
         {
+            "path": "extensions/norwegian-nynorsk"
+        },
+        {
             "path": "extensions/persian"
         },
         {
@@ -142,6 +148,9 @@
             "path": "extensions/scientific-terms"
         },
         {
+            "path": "extensions/scottish-gaelic"
+        },
+        {
             "path": "extensions/serbian"
         },
         {
@@ -158,6 +167,9 @@
         },
         {
             "path": "extensions/swiss-german"
+        },
+        {
+            "path": "extensions/thai"
         },
         {
             "path": "extensions/timestamp-hover"

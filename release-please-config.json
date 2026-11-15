@@ -108,6 +108,10 @@
             "component": "code-spell-checker-belarusian",
             "releaseType": "node"
         },
+        "extensions/bengali": {
+            "component": "code-spell-checker-bengali",
+            "releaseType": "node"
+        },
         "extensions/british-english": {
             "component": "code-spell-checker-british-english",
             "releaseType": "node"
@@ -228,6 +232,10 @@
             "component": "code-spell-checker-norwegian-bokmal",
             "releaseType": "node"
         },
+        "extensions/norwegian-nynorsk": {
+            "component": "code-spell-checker-norwegian-nynorsk",
+            "releaseType": "node"
+        },
         "extensions/persian": {
             "component": "code-spell-checker-persian",
             "releaseType": "node"
@@ -256,6 +264,10 @@
             "component": "code-spell-checker-scientific-terms",
             "releaseType": "node"
         },
+        "extensions/scottish-gaelic": {
+            "component": "code-spell-checker-scottish-gaelic",
+            "releaseType": "node"
+        },
         "extensions/serbian": {
             "component": "code-spell-checker-serbian",
             "releaseType": "node"
@@ -278,6 +290,10 @@
         },
         "extensions/swiss-german": {
             "component": "code-spell-checker-swiss-german",
+            "releaseType": "node"
+        },
+        "extensions/thai": {
+            "component": "code-spell-checker-thai",
             "releaseType": "node"
         },
         "extensions/timestamp-hover": {

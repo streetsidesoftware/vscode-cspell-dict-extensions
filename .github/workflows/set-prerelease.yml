@@ -22,6 +22,7 @@ on:
           - azerbaijani
           - basque
           - belarusian
+          - bengali
           - british-english
           - british-english-ise
           - bulgarian
@@ -52,6 +53,7 @@ on:
           - medical-terms
           - mongolian
           - norwegian-bokmal
+          - norwegian-nynorsk
           - persian
           - polish
           - portuguese
@@ -59,12 +61,14 @@ on:
           - romanian
           - russian
           - scientific-terms
+          - scottish-gaelic
           - serbian
           - slovak
           - slovenian
           - spanish
           - swedish
           - swiss-german
+          - thai
           - timestamp-hover
           - turkish
           - ukrainian
