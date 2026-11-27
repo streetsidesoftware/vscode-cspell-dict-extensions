@@ -80,7 +80,7 @@
     "onStartupFinished"
   ],
   "dependencies": {
-    "@cspell/dict-mn-mn": "^1.3.2"
+    "@cspell/dict-mn-mn": "^1.3.3"
   },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"

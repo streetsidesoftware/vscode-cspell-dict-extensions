@@ -74,7 +74,7 @@
     "onStartupFinished"
   ],
   "dependencies": {
-    "@cspell/dict-de-de": "^4.1.3"
+    "@cspell/dict-de-de": "^4.1.4"
   },
   "extensionDependencies": [
     "streetsidesoftware.code-spell-checker"
