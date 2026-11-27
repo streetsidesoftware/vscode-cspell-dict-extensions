@@ -2,6 +2,13 @@
 
 All notable changes to the "code-spell-checker-swiss-german" extension will be documented in this file.
 
+## [2.0.4](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-swiss-german@2.0.3...code-spell-checker-swiss-german@2.0.4) (2026-11-27)
+
+
+### Updates and Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#1825](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/issues/1825)) ([a33b918](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/commit/a33b918a93d9bbfae43832236eeb549f3008580d))
+
 ## [2.0.3](https://github.com/streetsidesoftware/vscode-cspell-dict-extensions/compare/code-spell-checker-swiss-german@2.0.2...code-spell-checker-swiss-german@2.0.3) (2026-11-15)
 
 
